@@ -1,9 +1,9 @@
 <?php
-class ControllerExtensionPaymentG2apay extends Controller {
+class ControllerExtensionPaymentG2APay extends Controller {
 	public function index() {
 		$this->load->language('extension/payment/g2apay');
 
-		$data['action'] = $this->url->link('extension/payment/g2apay/checkout', 'language=' . $this->config->get('config_language'));
+		$data['action'] = $this->url->link('extension/payment/g2apay/checkout', '', true);
 
 		return $this->load->view('extension/payment/g2apay', $data);
 	}
@@ -23,6 +23,13 @@ class ControllerExtensionPaymentG2apay extends Controller {
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
 
+		// Because __call can not keep var references so we put them into an array.
+		$total_data = array(
+			'totals' => &$totals,
+			'taxes'  => &$taxes,
+			'total'  => &$total
+		);
+
 		$i = 0;
 
 		$results = $this->model_setting_extension->getExtensions('total');
@@ -31,8 +38,8 @@ class ControllerExtensionPaymentG2apay extends Controller {
 			if ($this->config->get('total_' . $result['code'] . '_status')) {
 				$this->load->model('extension/total/' . $result['code']);
 
-				// __call can not pass-by-reference so we get PHP to call it as an anonymous function.
-				($this->{'model_extension_total_' . $result['code']}->getTotal)($totals, $taxes, $total);
+				// We have to put the totals in an array so that they pass by reference.
+				$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 
 				if (isset($order_data['totals'][$i])) {
 					if (strstr(strtolower($order_data['totals'][$i]['code']), 'total') === false) {
@@ -43,7 +50,7 @@ class ControllerExtensionPaymentG2apay extends Controller {
 						$item->qty = 1;
 						$item->id = $order_data['totals'][$i]['code'];
 						$item->price = $order_data['totals'][$i]['value'];
-						$item->url = $this->url->link('common/home', 'language=' . $this->config->get('config_language'));
+						$item->url = $this->url->link('common/home', '', true);
 						$items[] = $item;
 					}
 
@@ -62,7 +69,7 @@ class ControllerExtensionPaymentG2apay extends Controller {
 			$item->qty = $product['quantity'];
 			$item->id = $product['product_id'];
 			$item->price = $product['price'];
-			$item->url = $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . $product['product_id']);
+			$item->url = $this->url->link('product/product', 'product_id=' . $product['product_id'], true);
 			$items[] = $item;
 		}
 
@@ -83,8 +90,8 @@ class ControllerExtensionPaymentG2apay extends Controller {
 			'amount' => $order_total,
 			'currency' => $order_info['currency_code'],
 			'email' => $order_info['email'],
-			'url_failure' => $this->url->link('checkout/failure', 'language=' . $this->config->get('config_language')),
-			'url_ok' => $this->url->link('extension/payment/g2apay/success', 'language=' . $this->config->get('config_language')),
+			'url_failure' => $this->url->link('checkout/failure'),
+			'url_ok' => $this->url->link('extension/payment/g2apay/success'),
 			'items' => json_encode($items)
 		);
 
@@ -95,11 +102,11 @@ class ControllerExtensionPaymentG2apay extends Controller {
 		$this->model_extension_payment_g2apay->logger($fields);
 
 		if ($response_data === false) {
-			$this->response->redirect($this->url->link('checkout/failure', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('checkout/failure', '', true));
 		}
 
 		if (strtolower($response_data->status) != 'ok') {
-			$this->response->redirect($this->url->link('checkout/failure', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('checkout/failure', '', true));
 		}
 
 		$this->model_extension_payment_g2apay->addG2aOrder($order_info);
@@ -136,7 +143,7 @@ class ControllerExtensionPaymentG2apay extends Controller {
 			$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_g2apay_order_status_id'));
 		}
 
-		$this->response->redirect($this->url->link('checkout/success', 'language=' . $this->config->get('config_language')));
+		$this->response->redirect($this->url->link('checkout/success'));
 	}
 
 	public function ipn() {

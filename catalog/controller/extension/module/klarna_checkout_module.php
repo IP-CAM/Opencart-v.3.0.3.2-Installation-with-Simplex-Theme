@@ -6,14 +6,12 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 		// If Payment Method or Module is disabled
 		if (!$this->config->get('module_klarna_checkout_status') || !$this->config->get('klarna_checkout_status')) {
 			$this->model_extension_payment_klarna_checkout->log('Not shown due to Payment Method or Module being disabled');
-
 			return false;
 		}
 
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$this->model_extension_payment_klarna_checkout->log('Not shown due to empty cart');
-
 			return false;
 		}
 
@@ -31,7 +29,6 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 
 			if ($product['minimum'] > $product_total) {
 				$this->model_extension_payment_klarna_checkout->log('Not shown due to cart not meeting minimum quantity reqs.');
-
 				return false;
 			}
 		}
@@ -39,7 +36,6 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 		// Validate cart has recurring products
 		if ($this->cart->hasRecurringProducts()) {
 			$this->model_extension_payment_klarna_checkout->log('Not shown due to cart having recurring products.');
-
 			return false;
 		}
 
@@ -51,7 +47,6 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 
 		if ($this->model_extension_payment_klarna_checkout->checkForPaymentTaxes($products)) {
 			$this->model_extension_payment_klarna_checkout->log('Payment Address based taxes used.');
-
 			return false;
 		}
 
@@ -61,11 +56,10 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 
 		if (!$klarna_account || !$connector) {
 			$this->model_extension_payment_klarna_checkout->log('Couldn\'t secure connection to Klarna API.');
-
 			return false;
 		}
 
-		$data['klarna_checkout'] = $this->url->link('extension/payment/klarna_checkout', 'language=' . $this->config->get('config_language'));
+		$data['klarna_checkout'] = $this->url->link('extension/payment/klarna_checkout', '', true);
 
 		return $this->load->view('extension/module/klarna_checkout_module', $data);
 	}

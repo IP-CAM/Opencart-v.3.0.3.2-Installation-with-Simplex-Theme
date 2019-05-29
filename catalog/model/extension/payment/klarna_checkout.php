@@ -104,15 +104,15 @@ class ModelExtensionPaymentKlarnaCheckout extends Model {
 	}
 
 	public function addOrder($order_id, $order_ref, $data) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "klarna_checkout_order` SET `order_id` = '" . (int)$order_id . "', `order_ref` = '" . $this->db->escape($order_ref) . "', `data` = '" . $this->db->escape((string)$data) . "'");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "klarna_checkout_order` SET `order_id` = '" . (int)$order_id . "', `order_ref` = '" . $this->db->escape($order_ref) . "', `data` = '" . $this->db->escape($data) . "'");
 	}
 
 	public function updateOrder($order_id, $order_ref, $data) {
-		$this->db->query("UPDATE `" . DB_PREFIX . "klarna_checkout_order` SET `order_id` = '" . (int)$order_id . "', `data` = '" . $this->db->escape((string)$data) . "' WHERE `order_ref` = '" . $this->db->escape($order_ref) . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "klarna_checkout_order` SET `order_id` = '" . (int)$order_id . "', `data` = '" . $this->db->escape($data) . "' WHERE `order_ref` = '" . $this->db->escape($order_ref) . "'");
 	}
 
 	public function updateOcOrder($order_id, $data) {
-		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET `firstname` = '" . $this->db->escape((string)$data['firstname']) . "', `lastname` = '" . $this->db->escape((string)$data['lastname']) . "', `telephone` = '" . $this->db->escape((string)$data['telephone']) . "', `payment_firstname` = '" . $this->db->escape((string)$data['payment_firstname']) . "', `payment_lastname` = '" . $this->db->escape((string)$data['payment_lastname']) . "', `payment_address_1` = '" . $this->db->escape((string)$data['payment_address_1']) . "', `payment_address_2` = '" . $this->db->escape((string)$data['payment_address_2']) . "', `payment_city` = '" . $this->db->escape((string)$data['payment_city']) . "', `payment_postcode` = '" . $this->db->escape((string)$data['payment_postcode']) . "', `payment_zone` = '" . $this->db->escape((string)$data['payment_zone']) . "', `payment_zone_id` = '" . (int)$data['payment_zone_id'] . "', `payment_country` = '" . $this->db->escape((string)$data['payment_country']) . "', `payment_country_id` = '" . (int)$data['payment_country_id'] . "', `payment_address_format` = '" . $this->db->escape((string)$data['payment_address_format']) . "', `shipping_firstname` = '" . $this->db->escape((string)$data['shipping_firstname']) . "', `shipping_lastname` = '" . $this->db->escape((string)$data['shipping_lastname']) . "', `shipping_address_1` = '" . $this->db->escape((string)$data['shipping_address_1']) . "', `shipping_address_2` = '" . $this->db->escape((string)$data['shipping_address_2']) . "', `shipping_city` = '" . $this->db->escape((string)$data['shipping_city']) . "', `shipping_postcode` = '" . $this->db->escape((string)$data['shipping_postcode']) . "', `shipping_zone` = '" . $this->db->escape((string)$data['shipping_zone']) . "', `shipping_zone_id` = '" . (int)$data['shipping_zone_id'] . "', `shipping_country` = '" . $this->db->escape((string)$data['shipping_country']) . "', `shipping_country_id` = '" . (int)$data['shipping_country_id'] . "', `shipping_address_format` = '" . $this->db->escape((string)$data['shipping_address_format']) . "' WHERE `order_id` = '" . (int)$order_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET `firstname` = '" . $this->db->escape($data['firstname']) . "', `lastname` = '" . $this->db->escape($data['lastname']) . "', `telephone` = '" . $this->db->escape($data['telephone']) . "', `payment_firstname` = '" . $this->db->escape($data['payment_firstname']) . "', `payment_lastname` = '" . $this->db->escape($data['payment_lastname']) . "', `payment_address_1` = '" . $this->db->escape($data['payment_address_1']) . "', `payment_address_2` = '" . $this->db->escape($data['payment_address_2']) . "', `payment_city` = '" . $this->db->escape($data['payment_city']) . "', `payment_postcode` = '" . $this->db->escape($data['payment_postcode']) . "', `payment_zone` = '" . $this->db->escape($data['payment_zone']) . "', `payment_zone_id` = '" . (int)$data['payment_zone_id'] . "', `payment_country` = '" . $this->db->escape($data['payment_country']) . "', `payment_country_id` = '" . (int)$data['payment_country_id'] . "', `payment_address_format` = '" . $this->db->escape($data['payment_address_format']) . "', `shipping_firstname` = '" . $this->db->escape($data['shipping_firstname']) . "', `shipping_lastname` = '" . $this->db->escape($data['shipping_lastname']) . "', `shipping_address_1` = '" . $this->db->escape($data['shipping_address_1']) . "', `shipping_address_2` = '" . $this->db->escape($data['shipping_address_2']) . "', `shipping_city` = '" . $this->db->escape($data['shipping_city']) . "', `shipping_postcode` = '" . $this->db->escape($data['shipping_postcode']) . "', `shipping_zone` = '" . $this->db->escape($data['shipping_zone']) . "', `shipping_zone_id` = '" . (int)$data['shipping_zone_id'] . "', `shipping_country` = '" . $this->db->escape($data['shipping_country']) . "', `shipping_country_id` = '" . (int)$data['shipping_country_id'] . "', `shipping_address_format` = '" . $this->db->escape($data['shipping_address_format']) . "' WHERE `order_id` = '" . (int)$order_id . "'");
 	}
 
 	public function updateOcOrderEmail($order_id, $email) {
@@ -172,9 +172,8 @@ class ModelExtensionPaymentKlarnaCheckout extends Model {
 	}
 
 	public function log($data, $step = 6) {
-		if ($this->config->get('payment_klarna_checkout_debug')) {
+		if ($this->config->get('klarna_checkout_debug')) {
 			$backtrace = debug_backtrace();
-
 			$log = new Log('klarna_checkout.log');
 			$log->write('(' . $backtrace[$step]['class'] . '::' . $backtrace[$step]['function'] . ') - ' . print_r($data, true));
 		}
@@ -188,6 +187,13 @@ class ModelExtensionPaymentKlarnaCheckout extends Model {
 		$totals = array();
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
+
+		// Because __call can not keep var references so we put them into an array.
+		$total_data = array(
+			'totals' => &$totals,
+			'taxes'  => &$taxes,
+			'total'  => &$total
+		);
 
 		$this->load->model('setting/extension');
 
@@ -205,8 +211,8 @@ class ModelExtensionPaymentKlarnaCheckout extends Model {
 			if ($this->config->get('total_' . $result['code'] . '_status')) {
 				$this->load->model('extension/total/' . $result['code']);
 
-				// __call can not pass-by-reference so we get PHP to call it as an anonymous function.
-				($this->{'model_extension_total_' . $result['code']}->getTotal)($totals, $taxes, $total);
+				// We have to put the totals in an array so that they pass by reference.
+				$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 			}
 		}
 

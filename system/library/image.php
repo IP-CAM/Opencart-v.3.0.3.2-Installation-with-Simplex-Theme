@@ -171,9 +171,7 @@ class Image {
 		if ($this->mime == 'image/png') {
 			imagealphablending($this->image, false);
 			imagesavealpha($this->image, true);
-
 			$background = imagecolorallocatealpha($this->image, 255, 255, 255, 127);
-
 			imagecolortransparent($this->image, $background);
 		} else {
 			$background = imagecolorallocate($this->image, 255, 255, 255);
@@ -234,8 +232,8 @@ class Image {
 				break;
 		}
 		
-		imagealphablending( $this->image, true);
-		imagesavealpha( $this->image, true);
+		imagealphablending( $this->image, true );
+		imagesavealpha( $this->image, true );
 		imagecopy($this->image, $watermark->getImage(), $watermark_pos_x, $watermark_pos_y, 0, 0, $watermark->getWidth(), $watermark->getHeight());
 
 		imagedestroy($watermark->getImage());

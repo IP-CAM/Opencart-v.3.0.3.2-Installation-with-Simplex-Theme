@@ -20,8 +20,8 @@ class ControllerExtensionPaymentAlipayCross extends Controller {
 		$alipay_config = array (
 			'partner'              => $this->config->get('payment_alipay_cross_app_id'),
 			'key'                  => $this->config->get('payment_alipay_cross_merchant_private_key'),
-			'notify_url'           => HTTP_SERVER . "payment_callback/alipay_cross",
-			'return_url'           => $this->url->link('checkout/success', 'language=' . $this->config->get('config_language')),
+			'notify_url'           => HTTPS_SERVER . "payment_callback/alipay_cross",
+			'return_url'           => $this->url->link('checkout/success'),
 			'sign_type'            => strtoupper('MD5'),
 			'input_charset'        => strtolower('utf-8'),
 			'cacert'               => getcwd().'/cacert.pem',
@@ -70,11 +70,11 @@ class ControllerExtensionPaymentAlipayCross extends Controller {
 
 		if($verify_result) {//check successed
 			$this->log->write('Alipay cross check successed');
-			$order_id = $this->request->post['out_trade_no'];
-			if($this->request->post['trade_status'] == 'TRADE_FINISHED') {
+			$order_id = $_POST['out_trade_no'];
+			if($_POST['trade_status'] == 'TRADE_FINISHED') {
 				$this->load->model('checkout/order');
 				$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_alipay_cross_order_status_id'));
-			} else if ($this->request->post['trade_status'] == 'TRADE_SUCCESS') {
+			} else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
 			}
 			echo "success"; //Do not modified or deleted
 		} else {

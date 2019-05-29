@@ -11,7 +11,7 @@ class ControllerCheckoutLogin extends Controller {
 			$data['account'] = 'register';
 		}
 
-		$data['forgotten'] = $this->url->link('account/forgotten', 'language=' . $this->config->get('config_language'));
+		$data['forgotten'] = $this->url->link('account/forgotten', '', true);
 
 		$this->response->setOutput($this->load->view('checkout/login', $data));
 	}
@@ -22,11 +22,11 @@ class ControllerCheckoutLogin extends Controller {
 		$json = array();
 
 		if ($this->customer->isLogged()) {
-			$json['redirect'] = str_replace('&amp;', '&', $this->url->link('checkout/checkout', 'language=' . $this->config->get('config_language')));
+			$json['redirect'] = $this->url->link('checkout/checkout', '', true);
 		}
 
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
-			$json['redirect'] = str_replace('&amp;', '&', $this->url->link('checkout/cart', 'language=' . $this->config->get('config_language')));
+			$json['redirect'] = $this->url->link('checkout/cart');
 		}
 
 		if (!$json) {
@@ -83,10 +83,7 @@ class ControllerCheckoutLogin extends Controller {
 				}
 			}
 
-			// Log the IP info
-			$this->model_account_customer->addLogin($this->customer->getId(), $this->request->server['REMOTE_ADDR']);
-
-			$json['redirect'] = str_replace('&amp;', '&', $this->url->link('checkout/checkout', 'language=' . $this->config->get('config_language')));
+			$json['redirect'] = $this->url->link('checkout/checkout', '', true);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

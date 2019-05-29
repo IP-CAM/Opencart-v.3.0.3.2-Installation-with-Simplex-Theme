@@ -71,9 +71,9 @@ class ControllerApiPayment extends Controller {
 
 			foreach ($custom_fields as $custom_field) {
 				if ($custom_field['location'] == 'address') {
-					if ($custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['custom_field_id']])) {
+					if ($custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']])) {
 						$json['error']['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
-					} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && filter_var($this->request->post['custom_field'][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/' . html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8') . '/')))) {
+					} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !filter_var($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => $custom_field['validation'])))) {
 						$json['error']['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 					}
 				}
@@ -161,6 +161,13 @@ class ControllerApiPayment extends Controller {
 				$taxes = $this->cart->getTaxes();
 				$total = 0;
 
+				// Because __call can not keep var references so we put them into an array. 
+				$total_data = array(
+					'totals' => &$totals,
+					'taxes'  => &$taxes,
+					'total'  => &$total
+				);
+
 				$this->load->model('setting/extension');
 
 				$sort_order = array();
@@ -176,9 +183,9 @@ class ControllerApiPayment extends Controller {
 				foreach ($results as $result) {
 					if ($this->config->get('total_' . $result['code'] . '_status')) {
 						$this->load->model('extension/total/' . $result['code']);
-
-						// __call can not pass-by-reference so we get PHP to call it as an anonymous function.
-						($this->{'model_extension_total_' . $result['code']}->getTotal)($totals, $taxes, $total);
+						
+						// We have to put the totals in an array so that they pass by reference.
+						$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 					}
 				}
 

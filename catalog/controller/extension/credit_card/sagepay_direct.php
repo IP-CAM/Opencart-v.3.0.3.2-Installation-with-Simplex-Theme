@@ -2,9 +2,9 @@
 class ControllerExtensionCreditCardSagepayDirect extends Controller {
 	public function index() {
 		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language'));
+			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
 		$this->load->language('extension/credit_card/sagepay_direct');
@@ -17,12 +17,12 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('common/home')
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
-			'href' => $this->url->link('account/account', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('account/account', '', true)
 		);
 
 
@@ -42,7 +42,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		if ($this->config->get('payment_sagepay_direct_card')) {
 			$data['cards'] = $this->model_extension_payment_sagepay_direct->getCards($this->customer->getId());
-			$data['delete'] = $this->url->link('extension/credit_card/sagepay_direct/delete', 'language=' . $this->config->get('config_language') . '&card_id=');
+			$data['delete'] = $this->url->link('extension/credit_card/sagepay_direct/delete', 'card_id=', true);
 
 			if (isset($this->request->get['page'])) {
 				$page = $this->request->get['page'];
@@ -52,12 +52,13 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 			$cards_total = count($data['cards']);
 
-			$data['pagination'] = $this->load->controller('common/pagination', array(
-				'total' => $cards_total,
-				'page'  => $page,
-				'limit' => 10,
-				'url'   => $this->url->link('extension/credit_card/sagepay_direct', 'language=' . $this->config->get('config_language') . '&page={page}')
-			));
+			$pagination = new Pagination();
+			$pagination->total = $cards_total;
+			$pagination->page = $page;
+			$pagination->limit = 10;
+			$pagination->url = $this->url->link('extension/credit_card/sagepay_direct', 'page={page}', true);
+
+			$data['pagination'] = $pagination->render();
 
 			$data['results'] = sprintf($this->language->get('text_pagination'), ($cards_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($cards_total - 10)) ? $cards_total : ((($page - 1) * 10) + 10), $cards_total, ceil($cards_total / 10));
 		} else {
@@ -66,8 +67,8 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 			$data['results'] = false;
 		}
 
-		$data['back'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language'));
-		$data['add'] = $this->url->link('extension/credit_card/sagepay_direct/add', 'language=' . $this->config->get('config_language'));
+		$data['back'] = $this->url->link('account/account', '', true);
+		$data['add'] = $this->url->link('extension/credit_card/sagepay_direct/add', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -81,9 +82,9 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 	public function add() {
 		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language'));
+			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
 		$this->load->language('extension/credit_card/sagepay_direct');
@@ -96,16 +97,16 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('common/home')
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
-			'href' => $this->url->link('account/account', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('account/account', '', true)
 		);
 		
-		$data['add'] = $this->url->link('extension/credit_card/sagepay_direct/addCard', 'language=' . $this->config->get('config_language'));
-		$data['back'] = $this->url->link('extension/credit_card/sagepay_direct', 'language=' . $this->config->get('config_language'));
+		$data['add'] = $this->url->link('extension/credit_card/sagepay_direct/addCard', '', true);
+		$data['back'] = $this->url->link('extension/credit_card/sagepay_direct', '', true);
 
 		$data['cards'] = array();
 
@@ -224,7 +225,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 			$this->session->data['error_warning'] = $this->language->get('text_fail_card');
 		}
 		
-		$this->response->redirect($this->url->link('acredit_card/sagepay_direct', 'language=' . $this->config->get('config_language')));
+		$this->response->redirect($this->url->link('acredit_card/sagepay_direct', '', true));
 	}
 
 	public function addCard() {
@@ -267,6 +268,6 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 			$this->model_extension_payment_sagepay_direct->logger('Response data: ', $this->session->data['error_warning']);
 		}
 
-		$this->response->redirect($this->url->link('extension/credit_card/sagepay_direct', 'language=' . $this->config->get('config_language')));
+		$this->response->redirect($this->url->link('extension/credit_card/sagepay_direct', '', true));
 	}
 }

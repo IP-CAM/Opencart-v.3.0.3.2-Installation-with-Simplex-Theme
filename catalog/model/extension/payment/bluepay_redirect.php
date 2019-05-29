@@ -1,5 +1,5 @@
 <?php
-class ModelExtensionPaymentBluepayRedirect extends Model {
+class ModelExtensionPaymentBluePayRedirect extends Model {
 	public function getMethod($address, $total) {
 		$this->load->language('extension/payment/bluepay_redirect');
 

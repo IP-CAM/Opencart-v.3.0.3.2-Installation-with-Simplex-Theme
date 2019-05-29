@@ -35,13 +35,7 @@ class Language {
 	public function get($key) {
 		return (isset($this->data[$key]) ? $this->data[$key] : $key);
 	}
-
-	/**
-     * 
-     *
-     * @param	string	$key
-	 * @param	string	$value
-     */	
+	
 	public function set($key, $value) {
 		$this->data[$key] = $value;
 	}

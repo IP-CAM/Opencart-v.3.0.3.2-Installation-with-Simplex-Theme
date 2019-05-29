@@ -107,7 +107,7 @@ class ControllerApiVoucher extends Controller {
 				}
 
 				if (!$json) {
-					$code = token();
+					$code = mt_rand();
 
 					$this->session->data['vouchers'][$code] = array(
 						'code'             => $code,

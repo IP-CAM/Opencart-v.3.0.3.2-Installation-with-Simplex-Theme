@@ -40,8 +40,7 @@ class ModelExtensionPaymentPPStandard extends Model {
 			'TWD',
 			'THB',
 			'TRY',
-			'RUB',
-            'INR'
+			'RUB'
 		);
 
 		if (!in_array(strtoupper($this->session->data['currency']), $currencies)) {

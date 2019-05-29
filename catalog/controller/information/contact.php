@@ -17,26 +17,26 @@ class ControllerInformationContact extends Controller {
 			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
 			$mail->setTo($this->config->get('config_email'));
-			$mail->setFrom($this->request->post['email']);
+			$mail->setFrom($this->config->get('config_email'));
 			$mail->setReplyTo($this->request->post['email']);
 			$mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
 			$mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
 			$mail->setText($this->request->post['enquiry']);
 			$mail->send();
 
-			$this->response->redirect($this->url->link('information/contact/success', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('information/contact/success'));
 		}
 
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('common/home')
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('information/contact', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('information/contact')
 		);
 
 		if (isset($this->error['name'])) {
@@ -59,12 +59,12 @@ class ControllerInformationContact extends Controller {
 
 		$data['button_submit'] = $this->language->get('button_submit');
 
-		$data['action'] = $this->url->link('information/contact', 'language=' . $this->config->get('config_language'));
+		$data['action'] = $this->url->link('information/contact', '', true);
 
 		$this->load->model('tool/image');
 
 		if ($this->config->get('config_image')) {
-			$data['image'] = $this->model_tool_image->resize(html_entity_decode($this->config->get('config_image'), ENT_QUOTES, 'UTF-8'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_height'));
+			$data['image'] = $this->model_tool_image->resize($this->config->get('config_image'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_height'));
 		} else {
 			$data['image'] = false;
 		}
@@ -75,25 +75,10 @@ class ControllerInformationContact extends Controller {
 		$data['geocode_hl'] = $this->config->get('config_language');
 		$data['telephone'] = $this->config->get('config_telephone');
 		$data['fax'] = $this->config->get('config_fax');
-		//$data['open'] = nl2br($this->config->get('config_open'));
-        /* added by it-lab start */
-        if ($this->config->get('comment_and_open_language_enabled')){
-            $config_open = $this->config->get('config_open');
-            $data['open'] = isset($config_open[$this->config->get('config_language_id')])?htmlspecialchars_decode($config_open[$this->config->get('config_language_id')]):"";
-        } else {
-            $data['open'] = nl2br($this->config->get('config_open'));
-        }
-        /* added by it-lab end */
-		//$data['comment'] = $this->config->get('config_comment');
-        /* added by it-lab start */
-        if ($this->config->get('comment_and_open_language_enabled')){
-            $config_comment = $this->config->get('config_comment');
-            $data['comment'] = isset($config_comment[$this->config->get('config_language_id')])?htmlspecialchars_decode($config_comment[$this->config->get('config_language_id')]):"";
-        } else{
-            $data['comment'] = $this->config->get('config_comment');
-        }
-        /* added by it-lab end */
-        $data['locations'] = array();
+		$data['open'] = nl2br($this->config->get('config_open'));
+		$data['comment'] = $this->config->get('config_comment');
+
+		$data['locations'] = array();
 
 		$this->load->model('localisation/location');
 
@@ -101,10 +86,10 @@ class ControllerInformationContact extends Controller {
 			$location_info = $this->model_localisation_location->getLocation($location_id);
 
 			if ($location_info) {
-				if (is_file(DIR_IMAGE . html_entity_decode($location_info['image'], ENT_QUOTES, 'UTF-8'))) {
-					$image = $this->model_tool_image->resize(html_entity_decode($location_info['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_height'));
+				if ($location_info['image']) {
+					$image = $this->model_tool_image->resize($location_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_height'));
 				} else {
-					$image = '';
+					$image = false;
 				}
 
 				$data['locations'][] = array(
@@ -190,17 +175,15 @@ class ControllerInformationContact extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('common/home')
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('information/contact', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('information/contact')
 		);
 
-		$data['text_message'] = $this->language->get('text_message');
-
-		$data['continue'] = $this->url->link('common/home', 'language=' . $this->config->get('config_language'));
+		$data['continue'] = $this->url->link('common/home');
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');

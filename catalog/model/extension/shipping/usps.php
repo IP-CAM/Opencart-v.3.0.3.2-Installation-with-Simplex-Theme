@@ -355,11 +355,10 @@ class ModelExtensionShippingUsps extends Model {
 					$error = $dom->getElementsByTagName('Error')->item(0);
 
 					$firstclasses = array (
-						'First-Class Mail Parcel'              => '0',
-						'First-Class Package Service - Retail' => '0',
-						'First-Class Mail Large Envelope'      => '1',
-						'First-Class Mail Stamped Letter'      => '2',
-						'First-Class Mail Postcards'           => '3'
+						'First-Class Mail Parcel',
+						'First-Class Mail Large Envelope',
+						'First-Class Mail Stamped Letter',
+						'First-Class Mail Postcards'
 					);
 
 					if ($rate_response || $intl_rate_response) {
@@ -378,9 +377,9 @@ class ModelExtensionShippingUsps extends Model {
 										if ($classid == '0') {
 											$mailservice = $postage->getElementsByTagName('MailService')->item(0)->nodeValue;
 
-											foreach ($firstclasses as $serviceName => $serviceCode)  {
-												if ($serviceName == $mailservice) {
-													$classid = $classid . $serviceCode;
+											foreach ($firstclasses as $k => $firstclass)  {
+												if ($firstclass == $mailservice) {
+													$classid = $classid . $k;
 													break;
 												}
 											}

@@ -40,6 +40,13 @@ class ControllerExtensionPaymentKlarnaAccount extends Controller {
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
+			// Because __call can not keep var references so we put them into an array.
+			$total_data = array(
+				'totals' => &$totals,
+				'taxes'  => &$taxes,
+				'total'  => &$total
+			);
+
 			$this->load->model('setting/extension');
 
 			$sort_order = array();
@@ -59,9 +66,9 @@ class ControllerExtensionPaymentKlarnaAccount extends Controller {
 					$this->load->model('extension/total/' . $result['code']);
 
 					$taxes = array();
-
-					// __call can not pass-by-reference so we get PHP to call it as an anonymous function.
-					($this->{'model_extension_total_' . $result['code']}->getTotal)($totals, $taxes, $total);
+					
+					// We have to put the totals in an array so that they pass by reference.
+					$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 
 					$amount = 0;
 
@@ -528,7 +535,7 @@ class ControllerExtensionPaymentKlarnaAccount extends Controller {
 
 						$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $order_status, $comment, 1);
 
-						$json['redirect'] = $this->url->link('checkout/success', 'language=' . $this->config->get('config_language'));
+						$json['redirect'] = $this->url->link('checkout/success');
 					}
 				}
 

@@ -60,7 +60,11 @@ class ControllerExtensionTotalReward extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$json['redirect'] = $this->url->link('checkout/cart', 'language=' . $this->config->get('config_language'));
+			if (isset($this->request->post['redirect'])) {
+				$json['redirect'] = $this->url->link($this->request->post['redirect']);
+			} else {
+				$json['redirect'] = $this->url->link('checkout/cart');	
+			}
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

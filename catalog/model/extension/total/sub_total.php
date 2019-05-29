@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionTotalSubTotal extends Model {
-	public function getTotal(&$totals, &$taxes, &$total) {
+	public function getTotal($total) {
 		$this->load->language('extension/total/sub_total');
 
 		$sub_total = $this->cart->getSubTotal();
@@ -11,13 +11,13 @@ class ModelExtensionTotalSubTotal extends Model {
 			}
 		}
 
-		$totals[] = array(
+		$total['totals'][] = array(
 			'code'       => 'sub_total',
 			'title'      => $this->language->get('text_sub_total'),
 			'value'      => $sub_total,
-			'sort_order' => $this->config->get('total_sub_total_sort_order')
+			'sort_order' => $this->config->get('sub_total_sort_order')
 		);
 
-		$total += $sub_total;
+		$total['total'] += $sub_total;
 	}
 }

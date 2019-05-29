@@ -2,9 +2,9 @@
 class ControllerAccountWishList extends Controller {
 	public function index() {
 		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/wishlist', 'language=' . $this->config->get('config_language'));
+			$this->session->data['redirect'] = $this->url->link('account/wishlist', '', true);
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
 		$this->load->language('account/wishlist');
@@ -21,7 +21,7 @@ class ControllerAccountWishList extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_remove');
 
-			$this->response->redirect($this->url->link('account/wishlist', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/wishlist'));
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -30,17 +30,17 @@ class ControllerAccountWishList extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('common/home')
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
-			'href' => $this->url->link('account/account', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('account/account', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('account/wishlist', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('account/wishlist')
 		);
 
 		if (isset($this->session->data['success'])) {
@@ -60,7 +60,7 @@ class ControllerAccountWishList extends Controller {
 
 			if ($product_info) {
 				if ($product_info['image']) {
-					$image = $this->model_tool_image->resize(html_entity_decode($product_info['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_wishlist_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_wishlist_height'));
+					$image = $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_wishlist_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_wishlist_height'));
 				} else {
 					$image = false;
 				}
@@ -93,16 +93,15 @@ class ControllerAccountWishList extends Controller {
 					'stock'      => $stock,
 					'price'      => $price,
 					'special'    => $special,
-					'minimum'    => $product_info['minimum'] > 0 ? $product_info['minimum'] : 1,
-					'href'       => $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . $product_info['product_id']),
-					'remove'     => $this->url->link('account/wishlist', 'language=' . $this->config->get('config_language') . '&remove=' . $product_info['product_id'])
+					'href'       => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
+					'remove'     => $this->url->link('account/wishlist', 'remove=' . $product_info['product_id'])
 				);
 			} else {
 				$this->model_account_wishlist->deleteWishlist($result['product_id']);
 			}
 		}
 
-		$data['continue'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language'));
+		$data['continue'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -136,7 +135,7 @@ class ControllerAccountWishList extends Controller {
 
 				$this->model_account_wishlist->addWishlist($this->request->post['product_id']);
 
-				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . (int)$this->request->post['product_id']), $product_info['name'], $this->url->link('account/wishlist', 'language=' . $this->config->get('config_language')));
+				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'product_id=' . (int)$this->request->post['product_id']), $product_info['name'], $this->url->link('account/wishlist'));
 
 				$json['total'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
 			} else {
@@ -148,7 +147,7 @@ class ControllerAccountWishList extends Controller {
 
 				$this->session->data['wishlist'] = array_unique($this->session->data['wishlist']);
 
-				$json['success'] = sprintf($this->language->get('text_login'), $this->url->link('account/login', 'language=' . $this->config->get('config_language')), $this->url->link('account/register', 'language=' . $this->config->get('config_language')), $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . (int)$this->request->post['product_id']), $product_info['name'], $this->url->link('account/wishlist', 'language=' . $this->config->get('config_language')));
+				$json['success'] = sprintf($this->language->get('text_login'), $this->url->link('account/login', '', true), $this->url->link('account/register', '', true), $this->url->link('product/product', 'product_id=' . (int)$this->request->post['product_id']), $product_info['name'], $this->url->link('account/wishlist'));
 
 				$json['total'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
 			}
