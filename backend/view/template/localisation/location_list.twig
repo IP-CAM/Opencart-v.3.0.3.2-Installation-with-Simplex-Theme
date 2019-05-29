@@ -38,11 +38,13 @@
                     {% else %}
                       <a href="{{ sort_name }}">{{ column_name }}</a>
                     {% endif %}</td>
-                  <td class="text-left">{% if sort == 'address' %}
-                      <a href="{{ sort_address }}" class="{{ order|lower }}">{{ column_address }}</a>
-                    {% else %}
-                      <a href="{{ sort_address }}">{{ column_address }}</a>
-                    {% endif %}</td>
+{#                    /* added by it-lab* start */#}
+                      {#<td class="text-left">{% if sort == 'address' %}
+                        <a href="{{ sort_address }}" class="{{ order|lower }}">{{ column_address }}</a>
+                      {% else %}
+                        <a href="{{ sort_address }}">{{ column_address }}</a>
+                      {% endif %}</td>#}
+{#                    /* added by it-lab* start end */#}
                   <td class="text-right">{{ column_action }}</td>
                 </tr>
               </thead>
@@ -56,7 +58,7 @@
                           <input type="checkbox" name="selected[]" value="{{ locations.location_id }}"/>
                         {% endif %}</td>
                       <td class="text-left">{{ locations.name }}</td>
-                      <td class="text-left">{{ locations.address }}</td>
+{#                      <td class="text-left">{{ locations.address }}</td>#}
                       <td class="text-right"><a href="{{ locations.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>
                   {% endfor %}

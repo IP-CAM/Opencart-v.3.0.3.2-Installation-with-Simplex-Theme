@@ -1,0 +1,30 @@
+@function offset($offset-par) {
+	$left : 0;
+	$top : 0;
+	$bottom : 0;
+	$right : 0;
+	@for $i from 1 through length($offset-par) {
+		@if ($i % 2 != 0) {
+			@if (nth($offset-par, $i) == left) {
+				$i : $i+1;
+				$left : nth($offset-par, $i);
+			} @else if (nth($offset-par, $i) == right) {
+				$i : $i+1;
+				$right : nth($offset-par, $i);
+			} @else if (nth($offset-par, $i) == bottom) {
+				$i : $i+1;
+				$bottom : nth($offset-par, $i);
+			} @else if (nth($offset-par, $i) == top) {
+				$i : $i+1;
+				$top : nth($offset-par, $i);
+			}
+		}
+	}
+	$new-offsets : (
+			top: $top,
+			right: $right,
+			bottom: $bottom,
+			left: $left,
+	);
+	@return $new-offsets;
+}

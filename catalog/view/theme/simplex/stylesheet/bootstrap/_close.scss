@@ -1,0 +1,25 @@
+.close {
+	position : absolute;
+	right    : 25px;
+	top      : 35px
+}
+
+// Additional properties for button version
+// iOS requires the button element instead of an anchor tag.
+// If you want the anchor version, it requires `href="#"`.
+// See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+// stylelint-disable-next-line selector-no-qualifying-type
+button.close {
+	appearance       : none;
+	background-color : transparent;
+	border           : 0;
+	padding          : 0;
+}
+
+// Future-proof disabling of clicks on `<a>` elements
+
+// stylelint-disable-next-line selector-no-qualifying-type
+a.close.disabled {
+	pointer-events : none;
+}

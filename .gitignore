@@ -25,3 +25,5 @@
 ## Vqmod Log Files
 /vqmod/logs/*
 !/vqmod/logs/.gitkeep
+
+.idea

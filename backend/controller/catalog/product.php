@@ -1125,6 +1125,44 @@ class ControllerCatalogProduct extends Controller {
 				);
 			}
 		}
+        /* added by it-lab* start */
+        // Locations
+        $this->load->model('localisation/location');
+        $locations = $this->model_localisation_location->getLocations();
+        $locations2=array();
+        foreach ($locations as $location){
+            $locations2[$location['location_id']]=$location;
+        }
+        $locations=$locations2;
+
+        if (isset($this->request->post['product_location'])) {
+            $product_locations = $this->request->post['product_location'];
+        } elseif (!empty($product_info)) {
+            $product_locations = $this->model_catalog_product->getProductLocations($product_id);
+            $product_locations2 = array();
+            foreach ($product_locations as $product_location) {
+                $product_locations2[$product_location['location_id']] = $product_location;
+            }
+            $product_locations = $product_locations2;
+
+            $product_locations3 = array();
+            foreach ($locations as $key => $location) {
+                if (isset($product_locations[$key])) {
+                    $product_locations3[$key] = array('location_id' => $key, 'name' => $location['name'], 'quantity' => $product_locations[$key]["quantity"]);
+                } else {
+                    $product_locations3[$key] = array('location_id' => $location["location_id"], 'name' => $location['name'], 'quantity' => 1);
+                }
+            }
+            $product_locations = $product_locations3;
+        } else {
+            $product_locations = array();
+            foreach ($locations as $location) {
+                $product_locations[] = array('location_id' => $location["location_id"], 'name' => $location['name'], 'quantity' => 1);
+            }
+        }
+
+        $data["product_locations"] = $product_locations;
+        /* added by it-lab* start end */
 
 		// Related Products
 		if (isset($this->request->post['product_related'])) {

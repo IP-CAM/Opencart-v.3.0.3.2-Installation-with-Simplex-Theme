@@ -10,6 +10,29 @@ class ControllerSettingSetting extends Controller {
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+            /* added by it-lab* start */
+            if ($this->config->get('comment_and_open_language_enabled')){
+                $this->load->model("localisation/language");
+                $languages = $this->model_localisation_language->getLanguages();
+                foreach($languages as $language){
+                    $open = str_replace("<p>","",htmlspecialchars_decode($this->request->post['config_open'][$language['language_id']]));
+                    $open = str_replace("</p>","",$open);
+                    $open = str_replace("<br>","",$open);
+                    $open = trim($open);
+                    if (empty($open)){
+                        $this->request->post['config_open'][$language['language_id']] = "";
+                    }
+                    $comment = str_replace("<p>","",htmlspecialchars_decode($this->request->post['config_comment'][$language['language_id']]));
+                    $comment = str_replace("</p>","",$comment);
+                    $comment = str_replace("<br>","",$comment);
+                    $comment = trim($comment);
+                    if (empty($comment)){
+                        $this->request->post['config_comment'][$language['language_id']] = "";
+                    }
+
+                }
+            }
+            /* added by it-lab* start end */
 			$this->model_setting_setting->editSetting('config', $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -944,7 +967,9 @@ class ControllerSettingSetting extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
+        /* added by it-lab* start */
+		$data['comment_and_open_language'] = $this->config->get('comment_and_open_language_enabled');
+        /* added by it-lab* start end */
 		$this->response->setOutput($this->load->view('setting/setting', $data));
 	}
 

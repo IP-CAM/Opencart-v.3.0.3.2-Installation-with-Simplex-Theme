@@ -5,4 +5,21 @@ class ModelLocalisationLocation extends Model {
 
 		return $query->row;
 	}
+    /* added by it-lab* start */
+    public function getLocationDescriptions($location_id) {
+        $locationt_description_data = array();
+
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "location_description WHERE location__id = '" . (int)$location_id . "'");
+
+        foreach ($query->rows as $result) {
+            $locationt_description_data[$result['language_id']] = array(
+                'address'          => $result['address'],
+                'open'             => $result['open']
+            );
+        }
+
+        return $locationt_description_data;
+    }
+    /* added by it-lab* start end */
+
 }

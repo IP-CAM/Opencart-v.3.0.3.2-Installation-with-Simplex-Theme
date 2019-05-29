@@ -36,6 +36,7 @@
             <li class="nav-item"><a href="#tab-reward" data-toggle="tab" class="nav-link">{{ tab_reward }}</a></li>
             <li class="nav-item"><a href="#tab-seo" data-toggle="tab" class="nav-link">{{ tab_seo }}</a></li>
             <li class="nav-item"><a href="#tab-design" data-toggle="tab" class="nav-link">{{ tab_design }}</a></li>
+            <li class="nav-item"><a href="#tab-location" data-toggle="tab" class="nav-link">{{ tab_location }}</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -1589,6 +1590,32 @@
                               </div>
                             {% endif %}
                           </div>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="tab-location" class="tab-pane">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{{ entry_location }}</td>
+                      <td class="text-left">{{ entry_quantity }}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for location in product_locations %}
+                      <tr>
+                        <td class="text-left">
+                          <input type="hidden" name="product_location[{{ location['location_id'] }}][name]" value="{{ location['name'] }}" >
+                          <input type="hidden" name="product_location[{{ location['location_id'] }}][location_id]" value="{{ location['location_id'] }}" >
+                          {{ location['name'] }}
+                        </td>
+                        <td class="text-left">
+                          <input type="number" name="product_location[{{ location['location_id'] }}][quantity]" value="{{ location['quantity'] }}" >
                         </td>
                       </tr>
                     {% endfor %}

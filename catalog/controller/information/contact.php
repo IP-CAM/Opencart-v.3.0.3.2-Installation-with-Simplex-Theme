@@ -75,10 +75,25 @@ class ControllerInformationContact extends Controller {
 		$data['geocode_hl'] = $this->config->get('config_language');
 		$data['telephone'] = $this->config->get('config_telephone');
 		$data['fax'] = $this->config->get('config_fax');
-		$data['open'] = nl2br($this->config->get('config_open'));
-		$data['comment'] = $this->config->get('config_comment');
-
-		$data['locations'] = array();
+		//$data['open'] = nl2br($this->config->get('config_open'));
+        /* added by it-lab start */
+        if ($this->config->get('comment_and_open_language_enabled')){
+            $config_open = $this->config->get('config_open');
+            $data['open'] = isset($config_open[$this->config->get('config_language_id')])?htmlspecialchars_decode($config_open[$this->config->get('config_language_id')]):"";
+        } else {
+            $data['open'] = nl2br($this->config->get('config_open'));
+        }
+        /* added by it-lab end */
+		//$data['comment'] = $this->config->get('config_comment');
+        /* added by it-lab start */
+        if ($this->config->get('comment_and_open_language_enabled')){
+            $config_comment = $this->config->get('config_comment');
+            $data['comment'] = isset($config_comment[$this->config->get('config_language_id')])?htmlspecialchars_decode($config_comment[$this->config->get('config_language_id')]):"";
+        } else{
+            $data['comment'] = $this->config->get('config_comment');
+        }
+        /* added by it-lab end */
+        $data['locations'] = array();
 
 		$this->load->model('localisation/location');
 
