@@ -48,7 +48,7 @@ $rewriteController = false;
 $pathToController = DIR_SYSTEM . 'engine/controller.php';
 $searchLine = 'abstract class Controller {';
 $catalogPath = 'catalog/';
-$adminPath = 'admin/';
+$adminPath = 'backend/';
 $properties = array_filter(
     array_map(
         'trim',
