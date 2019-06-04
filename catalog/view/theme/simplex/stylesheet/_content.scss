@@ -1,0 +1,160 @@
+.content {
+	padding : 2.5rem 30px 0;
+	
+	> * {
+		margin-bottom : 2.5rem;
+	}
+	
+	//h1 {
+	//
+	//}
+	
+	h2 {
+		font-size   : 1.25rem;
+		font-weight : 800;
+		text-align  : center;
+	}
+	
+	h3 {
+		font-size   : 1.125rem;
+		font-weight : 600;
+	}
+	
+	p {
+		font-size   : 0.8125rem;
+		font-weight : 500;
+		line-height : 2.154;
+	}
+	
+	table {
+		font-size     : 0.8125rem;
+		font-weight   : 500;
+		margin-bottom : 0;
+		width         : 100%;
+		
+		&:last-child {
+			margin-bottom : 2.5rem;
+		}
+		
+		td {
+			vertical-align : middle;
+			
+			&:first-child {
+				color : #a4a4a4;
+			}
+		}
+		
+		td, th {
+			padding    : {
+				bottom : 1rem;
+				top    : 1rem;
+			}
+		}
+		
+		th {
+			@include border-radius;
+			background-color : #f5f4f2;
+			font-size        : 1.125rem;
+			text-align       : left;
+		}
+		
+		tr {
+			border-top : 1px dotted #d6d6d6;
+			
+			&:first-child {
+				border-top : 0;
+				
+				td {
+					padding-top : 1.5rem;
+				}
+			}
+		}
+	}
+	
+	ul {
+		li {
+			padding-left : 50px;
+			position     : relative;
+			
+			&:before {
+				@include absolute-center(right unset left 30px);
+				background : url($image_dir + "angle-right-solid.svg") center no-repeat;
+				content    : '';
+				height     : 1rem;
+				width      : 1rem;
+			}
+		}
+	}
+	
+	.file-list {
+		.file-item {
+			@include flex(none, between);
+			border-bottom : 1px dotted #d6d6d6;
+			max-width     : 740px;
+			padding       : 1.0875rem 0;
+			
+			.file {
+				font-size   : 0.875rem;
+				font-weight : 600;
+				line-height : 1.429;
+				
+				&.pdf:before {
+					background   : url($image_dir + "pdf.png") no-repeat center;
+					content      : '';
+					float        : left;
+					height       : 1.25rem;
+					margin-right : 1rem;
+					width        : 2.5rem;
+				}
+			}
+			
+			.file-size {
+				color       : #a4a4a4;
+				font-size   : 0.8125rem;
+				line-height : 1.429;
+			}
+		}
+	}
+}
+
+#availability {
+	table {
+		td, th {
+			padding   : {
+				left  : 1.25rem;
+				right : 1.25rem;
+			}
+			
+			&:first-child {
+				width : 112px;
+			}
+			
+			&:nth-child(3), &:nth-last-child(3) {
+				width : 125px;
+			}
+			&:nth-last-child(2) {
+				width : 146px;
+			}
+		}
+		
+		th {
+			font-size : 0.875rem;
+		}
+	}
+}
+
+#properties {
+	table {
+		max-width : 572px;
+		
+		td {
+			width : 50%;
+		}
+		
+		td, th {
+			&:first-child {
+				padding-left : 1.25rem;
+			}
+		}
+	}
+}

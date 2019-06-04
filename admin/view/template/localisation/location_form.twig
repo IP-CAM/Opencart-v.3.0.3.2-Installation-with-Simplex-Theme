@@ -82,9 +82,69 @@
               <textarea name="comment" rows="5" placeholder="{{ entry_comment }}" id="input-comment" class="form-control">{{ comment }}</textarea>
             </div>
           </div>
+{#          /* added by it-lab* start */#}
+
+          <ul class="nav nav-tabs" id="language">
+            {% for language in languages %}
+              <li class="nav-item"><a href="#language{{ language.language_id }}" data-toggle="tab" class="nav-link"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}"/> {{ language.name }}</a></li>
+            {% endfor %}
+          </ul>
+          <div class="tab-content">
+            {% for language in languages %}
+              <div class="tab-pane" id="language{{ language.language_id }}">
+                <div class="form-group row required">
+                  <label class="col-sm-2 col-form-label" for="input-name{{ language.language_id }}">{{ entry_address }}</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" name="location_description[{{ language.language_id }}][address]" value="{{ location_description[language.language_id] ? location_description[language.language_id].address }}" placeholder="{{ entry_address }}" id="input-name{{ language.language_id }}" class="form-control"/>
+                      {% if master_id %}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" name="" value="" id="input-variant-name{{ language.language_id }}" class="custom-control-input"><label class="custom-control-label" for="input-variant-name{{ language.language_id }}"></label>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                    {% if error_address[language.language_id] %}
+                      <div class="invalid-feedback">{{ error_address[language.language_id] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="form-group row required">
+                  <label class="col-sm-2 col-form-label" for="input-name{{ language.language_id }}">{{ entry_open }}</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" name="location_description[{{ language.language_id }}][open]" value="{{ location_description[language.language_id] ? location_description[language.language_id].open }}" placeholder="{{ entry_open }}" id="input-name{{ language.language_id }}" class="form-control"/>
+                      {% if master_id %}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" name="" value="" id="input-variant-name{{ language.language_id }}" class="custom-control-input"><label class="custom-control-label" for="input-variant-name{{ language.language_id }}"></label>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                    {% if error_address[language.language_id] %}
+                      <div class="invalid-feedback">{{ error_address[language.language_id] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+{#          /* added by it-lab end */#}
         </form>
       </div>
     </div>
   </div>
 </div>
+{#/* added by it-lab* start */#}
+<script type="text/javascript"><!--
+  $('#language li:first-child a').tab('show');
+  //--></script>
+{#/* added by it-lab* start end */#}
 {{ footer }}

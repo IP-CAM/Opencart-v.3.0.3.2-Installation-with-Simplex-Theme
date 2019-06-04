@@ -57,7 +57,15 @@ class ControllerCommonFooter extends Controller {
 		}
 
 		$data['scripts'] = $this->document->getScripts('footer');
-		
-		return $this->load->view('common/footer', $data);
+        /* added by it-lab start */
+        $this->load->model('extension/menu/megamenu');
+        $this->load->model('localisation/location');
+        $data['about']=$this->model_extension_menu_megamenu->getSubMenu('about');
+        $data['catalog'] = $this->model_extension_menu_megamenu->getSubMenu('catalog');
+        $data['telephone'] = $this->config->get('config_telephone');
+
+        $data['locations']=$this->model_localisation_location->getLocationDescriptions();
+        /* added by it-lab end */
+        return $this->load->view('common/footer', $data);
 	}
 }

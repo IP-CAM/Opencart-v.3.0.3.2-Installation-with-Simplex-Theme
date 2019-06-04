@@ -6,8 +6,12 @@ class ControllerExtensionModuleHTML extends Controller {
 		$this->load->language('extension/module/html');
 
 		$this->document->setTitle($this->language->get('heading_title'));
+        /* added by it-lab start */
+        $this->document->addScript('view/javascript/ckeditor/ckeditor.js');
+        $this->document->addScript('view/javascript/ckeditor/adapters/jquery.js');
+        /* added by it-lab end */
 
-		$this->load->model('setting/module');
+        $this->load->model('setting/module');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			if (!isset($this->request->get['module_id'])) {

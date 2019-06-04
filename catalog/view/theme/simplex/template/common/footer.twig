@@ -1,0 +1,128 @@
+</main>
+{#
+<footer>
+  <div class="container">
+    <div class="row">
+      {% if informations %}
+        <div class="col-sm-3">
+          <h5>{{ text_information }}</h5>
+          <ul class="list-unstyled">
+            {% for information in informations %}
+              <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      <div class="col-sm-3">
+        <h5>{{ text_service }}</h5>
+        <ul class="list-unstyled">
+          <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+          <li><a href="{{ return }}">{{ text_return }}</a></li>
+          {% if gdpr %}
+            <li><a href="{{ gdpr }}">{{ text_gdpr }}</a></li>
+          {% endif %}
+          <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h5>{{ text_extra }}</h5>
+        <ul class="list-unstyled">
+          <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
+          <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
+          <li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>
+          <li><a href="{{ special }}">{{ text_special }}</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h5>{{ text_account }}</h5>
+        <ul class="list-unstyled">
+          <li><a href="{{ account }}">{{ text_account }}</a></li>
+          <li><a href="{{ order }}">{{ text_order }}</a></li>
+          <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+          <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p>{{ powered }}</p>
+    <!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+  </div>
+</footer>
+#}
+<footer>
+  <div class="container-fluid">
+    <div id="footer">
+      <div class="about-list">
+        <h6>{{ about.title }}</h6>
+        <ul>
+          {% for menu in about.children %}
+            <li><a href="{{ menu.link }}">{{ menu.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="catalog-list">
+        <h6>{{ catalog.title }}</h6>
+        <ul>
+          {% for menu in catalog.children %}
+            <li><a href="{{ menu.link }}">{{ menu.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <ul class="contacts">
+        <li>
+          <h5 class="phone">
+            <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
+            <p>Putem să sunăm înapoi</p>
+          </h5>
+        </li>
+        <li>
+          <div class="offices">
+            <h6>Magazinaele noastre:</h6>
+            <ul>
+              {% for location in locations %}
+                <li><a href="#">{{ location.address }}</a></li>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <ul class="info">
+        <li>
+          <div class="copyright">
+            <p>&copy; 2019 Simplex.</p>
+            <p>Toate drepturile sunt rezervate</p>
+          </div>
+        </li>
+        <li>
+          <div class="follow-us">
+            <p>Urmați-ne: <a href="#"><img alt="Facebook" src="catalog/view/theme/simplex/assets/img/facebook.svg"></a></p>
+          </div>
+        </li>
+        <li>
+          <div class="pay-methods">
+            <ul>
+              <li><img alt="Mastercard" src="catalog/view/theme/simplex/assets/img/mastercard.png"></li>
+              <li><img alt="Visa" src="catalog/view/theme/simplex/assets/img/visa.png"></li>
+              <li><img alt="Cash" src="catalog/view/theme/simplex/assets/img/cash.png"></li>
+              <li><img alt="Bank" src="catalog/view/theme/simplex/assets/img/bank.png"></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script src="catalog/view/javascript/simplex/jquery-ui.min.js"></script>
+<script src="catalog/view/javascript/simplex/popper.min.js"></script>
+<script src="catalog/view/javascript/simplex/bootstrap.min.js"></script>
+<script src="catalog/view/javascript/simplex/slick.js"></script>
+<script src="catalog/view/javascript/simplex/grid-animate.js"></script>
+<script src="catalog/view/javascript/simplex/script.js"></script>
+{% for script in scripts %}
+  <script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+</body></html>

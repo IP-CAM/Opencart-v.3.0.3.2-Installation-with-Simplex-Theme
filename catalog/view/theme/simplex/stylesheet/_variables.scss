@@ -1,0 +1,34 @@
+/* Colors */
+
+$black : #000;
+$dark_gray : #2b2c30;
+$gray : #4c4d4d;
+$green : #92cf9b;
+$light_gray : #f5f4f2;
+$light_green : #92cf9b;
+$text_gray : #97a6ab;
+$white : #fff;
+$yellow : #ffca30;
+
+/* Image directory */
+
+$image_dir : "../assets/img/";
+
+/* Fonts directory */
+
+$font_dir : "../assets/fonts/";
+
+/* Variables */
+
+// Slick
+$slick-loader-path : "./" !default;
+$slick-arrow-color : white !default;
+$slick-dot-color : black !default;
+$slick-dot-color-active : $slick-dot-color !default;
+$slick-prev-character : "\2190" !default;
+$slick-next-character : "\2192" !default;
+$slick-dot-character : "\2022" !default;
+$slick-dot-size : 6px !default;
+$slick-opacity-default : .75 !default;
+$slick-opacity-on-hover : 1 !default;
+$slick-opacity-not-active : .25 !default;

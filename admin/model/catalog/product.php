@@ -93,7 +93,13 @@ class ModelCatalogProduct extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int)$product_id . "', filter_id = '" . (int)$filter_id . "'");
 			}
 		}
-
+        /* added by it-lab* start */
+        if (isset($data['product_location'])) {
+            foreach ($data['product_location'] as $location_id=>$product_location) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_to_location SET product_id = '" . (int)$product_id . "', location_id = '" . (int)$location_id . "', quantity = '" . (int)$product_location['quantity'] . "'");
+            }
+        }
+        /* added by it-lab* start end */
 		if (isset($data['product_related'])) {
 			foreach ($data['product_related'] as $related_id) {
 				$this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$product_id . "' AND related_id = '" . (int)$related_id . "'");
@@ -238,7 +244,16 @@ class ModelCatalogProduct extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = '" . (int)$product_id . "', category_id = '" . (int)$category_id . "'");
 			}
 		}
+        /* added by it-lab* start */
 
+        $this->db->query("DELETE FROM " . DB_PREFIX . "product_to_location WHERE product_id = '" . (int)$product_id . "'");
+
+        if (isset($data['product_location'])) {
+            foreach ($data['product_location'] as $location_id=>$product_location) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_to_location SET product_id = '" . (int)$product_id . "', location_id = '" . (int)$location_id . "', quantity = '" . (int)$product_location['quantity'] . "'");
+            }
+        }
+        /* added by it-lab* start end */
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_filter WHERE product_id = '" . (int)$product_id . "'");
 
 		if (isset($data['product_filter'])) {
@@ -588,7 +603,21 @@ class ModelCatalogProduct extends Model {
 
 		return $product_store_data;
 	}
-	
+    /* added by it-lab* start */
+
+    public function getProductLocations($product_id){
+        $product_location_data = array();
+
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_location WHERE product_id = '" . (int)$product_id . "'");
+
+        foreach ($query->rows as $result) {
+            $product_location_data[] = $result;
+        }
+
+        return $product_location_data;
+    }
+
+    /* added by it-lab* start end */
 	public function getProductSeoUrls($product_id) {
 		$product_seo_url_data = array();
 		

@@ -313,7 +313,23 @@ class ControllerLocalisationLocation extends Controller {
 		$data['user_token'] = $this->session->data['user_token'];
 
 		$this->load->model('setting/store');
+        /* added by it-lab* start */
+        $this->load->model('localisation/language');
 
+        $data['languages'] = $this->model_localisation_language->getLanguages();
+
+        $this->load->model('localisation/language');
+
+        $data['languages'] = $this->model_localisation_language->getLanguages();
+
+        if (isset($this->request->post['location_description'])) {
+            $data['location_description'] = $this->request->post['location_description'];
+        } elseif (!empty($location_info)) {
+            $data['location_description'] = $this->model_localisation_location->getLocationDescriptions($location_info['location_id']);
+        } else {
+            $data['location_description'] = array();
+        }
+        /* added by it-lab* start end */
 		if (isset($this->request->post['name'])) {
 			$data['name'] = $this->request->post['name'];
 		} elseif (!empty($location_info)) {

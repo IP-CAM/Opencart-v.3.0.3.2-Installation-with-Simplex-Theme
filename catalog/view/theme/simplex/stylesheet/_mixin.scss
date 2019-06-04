@@ -1,0 +1,225 @@
+@mixin absolute-center($offset : 0 0 0 0) {
+	position : absolute;
+	margin   : auto;
+	
+	$offsets : offset($offset);
+	
+	left     : map_get($offsets, left);
+	right    : map_get($offsets, right);
+	top      : map_get($offsets, top);
+	bottom   : map_get($offsets, bottom);
+}
+
+@mixin appearance($value: none) {
+	-webkit-appearance : $value;
+	-moz-appearance    : $value;
+	appearance         : $value;
+}
+
+@mixin background-gradient($color1, $color2) {
+	//background : -moz-linear-gradient(top, $color1, $color2); // FF 3.6+
+	//background : -webkit-gradient(linear, 0 0, 0 100%, from($color1), to($color2)); // Safari 4+, Chrome 2+
+	//background : -webkit-linear-gradient($color1, $color2); // Safari 5.1+, Chrome 10+
+	//background : -o-linear-gradient($color1, $color2); // Opera 11.10
+	background : linear-gradient(to bottom, $color1, $color2); // Standard, IE10
+}
+
+@mixin border-radius($b-rad: .25rem) {
+	-webkit-border-radius : $b-rad;
+	-moz-border-radius    : $b-rad;
+	border-radius         : $b-rad;
+}
+
+@mixin border-radius-right($b-rad: .25rem) {
+	-webkit-border-top-right-radius    : $b-rad;
+	-moz-border-radius-topright        : $b-rad;
+	border-top-right-radius            : $b-rad;
+	-webkit-border-bottom-right-radius : $b-rad;
+	-moz-border-radius-bottomright     : $b-rad;
+	border-bottom-right-radius         : $b-rad;
+}
+
+@mixin border-radius-left($b-rad: .25rem) {
+	-webkit-border-top-left-radius    : $b-rad;
+	-moz-border-radius-topleft        : $b-rad;
+	border-top-left-radius            : $b-rad;
+	-webkit-border-bottom-left-radius : $b-rad;
+	-moz-border-radius-bottomleft     : $b-rad;
+	border-bottom-left-radius         : $b-rad;
+}
+
+@mixin border-radius-bottom($b-rad: .25rem) {
+	-webkit-border-bottom-left-radius  : $b-rad;
+	-moz-border-radius-bottomleft      : $b-rad;
+	border-bottom-left-radius          : $b-rad;
+	-webkit-border-bottom-right-radius : $b-rad;
+	-moz-border-radius-bottomright     : $b-rad;
+	border-bottom-right-radius         : $b-rad;
+}
+
+@mixin border-radius-top($b-rad: .25rem) {
+	-webkit-border-top-left-radius  : $b-rad;
+	-moz-border-radius-topleft      : $b-rad;
+	border-top-left-radius          : $b-rad;
+	-webkit-border-top-right-radius : $b-rad;
+	-moz-border-radius-topright     : $b-rad;
+	border-top-right-radius         : $b-rad;
+}
+
+@mixin column-count($col_num) {
+	-moz-column-count    : $col_num;
+	-webkit-column-count : $col_num;
+	column-count         : $col_num;
+}
+
+@mixin column-width($col_w) {
+	-moz-column-width    : $col_w;
+	-webkit-column-width : $col_w;
+	column-width         : $col_w;
+}
+
+@mixin filter($filter, $value) {
+	$filter : $value;
+}
+
+@mixin grayscale($value: true) {
+	$val : 0;
+	@if ($value) {
+		$val : 1;
+	}
+	-ms-filter     : gray($val);
+	-webkit-filter : grayscale($val);
+	filter         : grayscale($val);
+}
+
+@mixin flex-align($dir: none, $pos_align_x: none, $pos_align_y: none, $wrap: none) {
+	@if ($dir == row) {
+		flex-direction : row;
+		@if ($pos_align_x == center) {
+			justify-content : center;
+		} @else if ($pos_align_x == start) {
+			justify-content : flex-start;
+		} @else if ($pos_align_x == end) {
+			justify-content : flex-end;
+		} @else if ($pos_align_x == between) {
+			justify-content : space-between;
+		} @else if ($pos_align_x == around) {
+			justify-content : space-around;
+		} @else if ($pos_align_x == start) {
+			justify-content : space-evenly;
+		} @else if ($pos_align_x != none) {
+			@error "You cannot apply to #{$dir} X position #{$pos_align_x}";
+		}
+		
+		@if ($pos_align_y == center) {
+			align-items : center;
+		} @else if ($pos_align_y == start) {
+			align-items : flex-start;
+		} @else if ($pos_align_y == end) {
+			align-items : flex-end;
+		} @else if ($pos_align_y == stretch) {
+			align-items : stretch;
+		} @else if ($pos_align_y != none) {
+			@error "You cannot apply to #{$dir} Y position #{$pos_align_y}";
+		}
+	} @else if ($dir == none) {
+		@if ($pos_align_x == center) {
+			justify-content : center;
+		} @else if ($pos_align_x == start) {
+			justify-content : flex-start;
+		} @else if ($pos_align_x == end) {
+			justify-content : flex-end;
+		} @else if ($pos_align_x == between) {
+			justify-content : space-between;
+		} @else if ($pos_align_x == around) {
+			justify-content : space-around;
+		} @else if ($pos_align_x == start) {
+			justify-content : space-evenly;
+		} @else if ($pos_align_x != none) {
+			@error "You cannot apply to #{$dir} X position #{$pos_align_x}";
+		}
+		
+		@if ($pos_align_y == center) {
+			align-items : center;
+		} @else if ($pos_align_y == start) {
+			align-items : flex-start;
+		} @else if ($pos_align_y == end) {
+			align-items : flex-end;
+			
+		} @else if ($pos_align_y == stretch) {
+			align-items : stretch;
+		} @else if ($pos_align_y != none) {
+			@error "You cannot apply to #{$dir} Y position #{$pos_align_y}";
+		}
+	} @else if ($dir == col) {
+		flex-direction : column;
+		@if ($pos_align_x == center) {
+			align-items : center;
+		} @else if ($pos_align_x == start) {
+			align-items : flex-start;
+		} @else if ($pos_align_x == end) {
+			align-items : flex-end;
+		} @else if ($pos_align_x == stretch) {
+			align-items : stretch;
+		} @else if ($pos_align_x != none) {
+			@error "You cannot apply to #{$dir} X position #{$pos_align_x}";
+		}
+		
+		@if ($pos_align_y == center) {
+			justify-content : center;
+		} @else if ($pos_align_y == start) {
+			justify-content : flex-start;
+		} @else if ($pos_align_y == end) {
+			justify-content : flex-end;
+		} @else if ($pos_align_y == between) {
+			justify-content : space-between;
+		} @else if ($pos_align_y == around) {
+			justify-content : space-around;
+		} @else if ($pos_align_y == start) {
+			justify-content : space-evenly;
+		} @else if ($pos_align_y != none) {
+			@error "You cannot apply to #{$dir} Y position #{$pos_align_y}";
+		}
+	}
+}
+
+@mixin flex-wrap($wrap) {
+	@if ($wrap != none) {
+		flex-wrap : $wrap;
+	}
+}
+
+@mixin flex($dir: none, $pos_align_x: none, $pos_align_y: none, $wrap: none) {
+	display : flex;
+	
+	@include flex-align($dir, $pos_align_x, $pos_align_y);
+	@include flex-wrap($wrap);
+}
+
+@mixin grid {
+	display : -ms-grid;
+	display : grid;
+}
+
+@mixin transform($transform) {
+	//-webkit-transform : $transform;
+	//-moz-transform    : $transform;
+	//-ms-transform     : $transform;
+	//-o-transform      : $transform;
+	transform         : $transform;
+}
+
+@mixin transition($transition) {
+	//-webkit-transition : $transition;
+	//-moz-transition    : $transition;
+	//-ms-transition     : $transition;
+	//-o-transition      : $transition;
+	transition         : $transition;
+}
+
+@mixin user-select($select : none) {
+	-moz-user-select    : none;
+	-ms-user-select     : none;
+	-webkit-user-select : none;
+	user-select         : none;
+}

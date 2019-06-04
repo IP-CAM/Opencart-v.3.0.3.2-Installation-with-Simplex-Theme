@@ -1,0 +1,38 @@
+{#
+ <nav class="mainmenu">
+ 	<div class="navbar navbar-expand-lg navbar-light">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-megamenu">
+		  	<i class="fa fa-bars"></i>
+		  </button>
+		</div>
+		<div class="collapse navbar-collapse">
+			{{ treemenu }}
+		</div>
+	</div>	
+</nav>#}
+{% for menu in tree %}
+	<li class="nav-item dropdown ">
+		<div id="{{ menu.menu_class }}">
+			{% if menu.children %}
+			<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+			   data-toggle="{{ menu.data_toogle }}"
+			   {% if menu.menu_class=='catalog' %}
+			   		 data-target="#categories"
+			   {% endif %}
+			   href="{{ menu.link }}" role="button">
+				{{ menu.title }}
+			</a>
+				{% if menu.data_toogle=='dropdown' %}
+				<div class="dropdown-menu">
+					{% for menu_child in menu.children %}
+					<a class="dropdown-item" href="{{ menu_child.link }}">{{ menu_child.title }}</a>
+					{% endfor %}
+				</div>
+					{% endif %}
+			{% else %}
+				<a class="nav-link" href="{{ menu.link }}">{{ menu.title }}</a>
+			{% endif %}
+		</div>
+	</li>
+	{% endfor %}
