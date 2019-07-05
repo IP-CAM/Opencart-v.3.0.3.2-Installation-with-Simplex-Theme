@@ -122,7 +122,6 @@ class ControllerExtensionModuleTfFilter extends Controller {
                 $this->dropData(); // Delete data
 
                 array_multisort(array_column($data['filters'], 'sort_order'), SORT_ASC, SORT_NUMERIC, $data['filters']);
-
                 if($data['filters']){
                     return $this->load->view('extension/module/tf_filter', $data);
                 }

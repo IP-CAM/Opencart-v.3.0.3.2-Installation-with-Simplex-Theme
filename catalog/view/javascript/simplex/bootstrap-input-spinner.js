@@ -10,7 +10,7 @@
 
     function CustomEvent(event, params) {
         params = params || {bubbles: false, cancelable: false, detail: null};
-        var evt = document.createEvent('CustomEvent');
+        let evt = document.createEvent('CustomEvent');
         evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
         return evt;
     }
@@ -23,8 +23,8 @@
 (function ($) {
     "use strict";
 
-    var spacePressed = false;
-    var originalVal = $.fn.val;
+    let spacePressed = false;
+    let originalVal = $.fn.val;
     $.fn.val = function (value) {
         if (arguments.length >= 1) {
             if (this[0]["bootstrap-input-spinner"] && this[0].setValue) {
@@ -35,7 +35,7 @@
     };
 
     $.fn.InputSpinner = $.fn.inputSpinner = function (options) {
-        var base = [
+        let base = [
                 {
                     decrementButton: "<strong>-</strong>", // button text
                     incrementButton: "<strong>+</strong>", // ..
@@ -57,7 +57,7 @@
                 return r;
             }, {});
 
-        var html = '<div class="input-group ' + config.groupClass + '">' +
+        let html = '<div class="input-group ' + config.groupClass + '">' +
             '<div class="input-group-prepend">' +
             '<button class="btn-decrement ' + config.buttonsClass + '" type="button">' + config.decrementButton + '</button>' +
             '</div>' +
@@ -67,36 +67,36 @@
             '</div>' +
             '</div>';
 
-        var locale = config.locale || navigator.language || "en-US";
+        let locale = config.locale || navigator.language || "en-US";
 
         this.each(function () {
 
-            var $original = $(this);
+            let $original = $(this);
             $original[0]["bootstrap-input-spinner"] = true;
             $original.hide();
 
-            var autoDelayHandler = null;
-            var autoIntervalHandler = null;
-            var autoMultiplier = config.boostMultiplier === "auto";
-            var boostMultiplier = autoMultiplier ? 1 : config.boostMultiplier;
+            let autoDelayHandler = null;
+            let autoIntervalHandler = null;
+            let autoMultiplier = config.boostMultiplier === "auto";
+            let boostMultiplier = autoMultiplier ? 1 : config.boostMultiplier;
 
-            var $inputGroup = $(html);
-            var $buttonDecrement = $inputGroup.find(".btn-decrement");
-            var $buttonIncrement = $inputGroup.find(".btn-increment");
-            var $input = $inputGroup.find("input");
+            let $inputGroup = $(html);
+            let $buttonDecrement = $inputGroup.find(".btn-decrement");
+            let $buttonIncrement = $inputGroup.find(".btn-increment");
+            let $input = $inputGroup.find("input");
 
-            var min = parseFloat($original.prop("min")) || 0;
-            var max = isNaN($original.prop("max")) || $original.prop("max") === "" ? Infinity : parseFloat($original.prop("max"));
-            var step = parseFloat($original.prop("step")) || 1;
-            var stepMax = parseInt($original.attr("data-step-max")) || 0;
-            var decimals = parseInt($original.attr("data-decimals")) || 0;
+            let min = parseFloat($original.prop("min")) || 0;
+            let max = isNaN($original.prop("max")) || $original.prop("max") === "" ? Infinity : parseFloat($original.prop("max"));
+            let step = parseFloat($original.prop("step")) || 1;
+            let stepMax = parseInt($original.attr("data-step-max")) || 0;
+            let decimals = parseInt($original.attr("data-decimals")) || 0;
 
-            var numberFormat = new Intl.NumberFormat(locale, {
+            let numberFormat = new Intl.NumberFormat(locale, {
                 minimumFractionDigits: decimals,
                 maximumFractionDigits: decimals
             });
-            var value = parseFloat($original[0].value);
-            var boostStepsCount = 0;
+            let value = parseFloat($original[0].value);
+            let boostStepsCount = 0;
 
             $original[0].setValue = function (newValue) {
                 setValue(newValue)
@@ -126,7 +126,7 @@
             }
 
             $input.on("paste keyup change", function () {
-                var inputValue = $input[0].value;
+                let inputValue = $input[0].value;
                 if (locale === "en-US" || locale === "en-GB" || locale === "th-TH") {
                     value = parseFloat(inputValue)
                 } else {
@@ -164,8 +164,8 @@
 
             function dispatchChangeEvents($element) {
                 setTimeout(function () {
-                    var changeEvent = new CustomEvent("change", {bubbles: true});
-                    var inputEvent = new CustomEvent("input", {bubbles: true});
+                    let changeEvent = new CustomEvent("change", {bubbles: true});
+                    let inputEvent = new CustomEvent("input", {bubbles: true});
                     $element[0].dispatchEvent(changeEvent);
                     $element[0].dispatchEvent(inputEvent)
                 })

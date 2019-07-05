@@ -145,6 +145,7 @@ $_['tab_action']                    = 'Action';
 $_['tab_google']                    = 'Google';
 /* added by it-lab* start */
 $_['tab_location']                  = 'Store Locations';
+$_['tab_count_limits']              = 'Availability Counters';
 /* added by it-lab* start end */
 // Error
 $_['error_exception']               = 'Error Code(%s): %s in %s on line %s';

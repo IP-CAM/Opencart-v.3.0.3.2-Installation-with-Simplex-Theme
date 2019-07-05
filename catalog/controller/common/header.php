@@ -48,11 +48,12 @@ class ControllerCommonHeader extends Controller {
 		// Wishlist
 		if ($this->customer->isLogged()) {
 			$this->load->model('account/wishlist');
-
 			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
+			$data['wishlist_count'] = $this->model_account_wishlist->getTotalWishlist();
 		} else {
 			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
-		}
+            $data['wishlist_count']=(isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0);
+        }
 
 		$data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', true), $this->customer->getFirstName(), $this->url->link('account/logout', '', true));
 		
@@ -77,38 +78,11 @@ class ControllerCommonHeader extends Controller {
 		$data['cart'] = $this->load->controller('common/cart');
 		$data['menu'] = $this->load->controller('common/menu');
         /* added by it-lab* start */
+
+        $data['cart_count'] = $this->cart->countProducts();
         $this->load->model('extension/menu/megamenu');
         $data['pavmegamenu'] = $this->load->controller('extension/module/pavmegamenu');
         $data['catalog'] = $this->model_extension_menu_megamenu->getSubMenu('catalog');
-        /*foreach ($categories as $category) {
-            if ($category['top']) {
-                // Level 2
-                $children_data = array();
-
-                $children = $this->model_catalog_category->getCategories($category['category_id']);
-
-                foreach ($children as $child) {
-                    $filter_data = array(
-                        'filter_category_id'  => $child['category_id'],
-                        'filter_sub_category' => true
-                    );
-
-                    $children_data[] = array(
-                        'name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
-                        'href'  => $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $category['category_id'] . '_' . $child['category_id'])
-                    );
-                }
-
-                // Level 1
-                $data['categories'][] = array(
-                    'name'     => $category['name'],
-                    'children' => $children_data,
-                    'column'   => $category['column'] ? $category['column'] : 1,
-                    'href'     => $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $category['category_id']),
-                    'image'    => $category['image']
-                );
-            }
-        }*/
         /* added by it-lab* start end */
 		return $this->load->view('common/header', $data);
 	}

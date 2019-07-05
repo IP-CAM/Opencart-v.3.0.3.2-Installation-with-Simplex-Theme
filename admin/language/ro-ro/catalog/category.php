@@ -31,6 +31,9 @@ $_['entry_column']           = 'Număr Coloane';
 $_['entry_sort_order']       = 'Ordine Sortare';
 $_['entry_status']           = 'Status';
 $_['entry_layout']           = 'Rescriere Layout';
+$_['entry_count_few']        = 'Few';
+$_['entry_count_medium']     = 'Medium';
+$_['entry_count_lot']        = 'Manu';
 
 // Help
 $_['help_filter']            = '(Completare automată)';

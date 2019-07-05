@@ -27,15 +27,15 @@
 
 }(function ($) {
     'use strict';
-    var Slick = window.Slick || {};
+    let Slick = window.Slick || {};
 
     Slick = (function () {
 
-        var instanceUid = 0;
+        let instanceUid = 0;
 
         function Slick(element, settings) {
 
-            var _ = this, dataSettings;
+            let _ = this, dataSettings;
 
             _.defaults = {
                 accessibility: true,
@@ -189,7 +189,7 @@
     }());
 
     Slick.prototype.activateADA = function () {
-        var _ = this;
+        let _ = this;
 
         _.$slideTrack.find('.slick-active').attr({
             'aria-hidden': 'false'
@@ -201,7 +201,7 @@
 
     Slick.prototype.addSlide = Slick.prototype.slickAdd = function (markup, index, addBefore) {
 
-        var _ = this;
+        let _ = this;
 
         if (typeof (index) === 'boolean') {
             addBefore = index;
@@ -245,9 +245,9 @@
     };
 
     Slick.prototype.animateHeight = function () {
-        var _ = this;
+        let _ = this;
         if (_.options.slidesToShow === 1 && _.options.adaptiveHeight === true/* && _.options.vertical === false*/) {
-            var targetHeight = _.$slides.eq(_.currentSlide).outerHeight(true);
+            let targetHeight = _.$slides.eq(_.currentSlide).outerHeight(true);
             _.$list.animate({
                 height: targetHeight
             }, _.options.speed);
@@ -256,7 +256,7 @@
 
     Slick.prototype.animateSlide = function (targetLeft, callback) {
 
-        var animProps = {},
+        let animProps = {},
             _ = this;
 
         _.animateHeight();
@@ -336,7 +336,7 @@
 
     Slick.prototype.getNavTarget = function () {
 
-        var _ = this,
+        let _ = this,
             asNavFor = _.options.asNavFor;
 
         if (asNavFor && asNavFor !== null) {
@@ -349,12 +349,12 @@
 
     Slick.prototype.asNavFor = function (index) {
 
-        var _ = this,
+        let _ = this,
             asNavFor = _.getNavTarget();
 
         if (asNavFor !== null && typeof asNavFor === 'object') {
             asNavFor.each(function () {
-                var target = $(this).slick('getSlick');
+                let target = $(this).slick('getSlick');
                 if (!target.unslicked) {
                     target.slideHandler(index, true);
                 }
@@ -365,7 +365,7 @@
 
     Slick.prototype.applyTransition = function (slide) {
 
-        var _ = this,
+        let _ = this,
             transition = {};
 
         if (_.options.fade === false) {
@@ -384,7 +384,7 @@
 
     Slick.prototype.autoPlay = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.autoPlayClear();
 
@@ -396,7 +396,7 @@
 
     Slick.prototype.autoPlayClear = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.autoPlayTimer) {
             clearInterval(_.autoPlayTimer);
@@ -406,7 +406,7 @@
 
     Slick.prototype.autoPlayIterator = function () {
 
-        var _ = this,
+        let _ = this,
             slideTo = _.currentSlide + _.options.slidesToScroll;
 
         if (!_.paused && !_.interrupted && !_.focussed) {
@@ -435,7 +435,7 @@
 
     Slick.prototype.buildArrows = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.arrows === true) {
 
@@ -479,7 +479,7 @@
 
     Slick.prototype.buildDots = function () {
 
-        var _ = this,
+        let _ = this,
             i, dot;
 
         if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
@@ -502,7 +502,7 @@
 
     Slick.prototype.buildOut = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.$slides =
             _.$slider
@@ -552,7 +552,7 @@
 
     Slick.prototype.buildRows = function () {
 
-        var _ = this, a, b, c, newSlides, numOfSlides, originalSlides, slidesPerSection;
+        let _ = this, a, b, c, newSlides, numOfSlides, originalSlides, slidesPerSection;
 
         newSlides = document.createDocumentFragment();
         originalSlides = _.$slider.children();
@@ -565,11 +565,11 @@
             );
 
             for (a = 0; a < numOfSlides; a++) {
-                var slide = document.createElement('div');
+                let slide = document.createElement('div');
                 for (b = 0; b < _.options.rows; b++) {
-                    var row = document.createElement('div');
+                    let row = document.createElement('div');
                     for (c = 0; c < _.options.slidesPerRow; c++) {
-                        var target = (a * slidesPerSection + ((b * _.options.slidesPerRow) + c));
+                        let target = (a * slidesPerSection + ((b * _.options.slidesPerRow) + c));
                         if (originalSlides.get(target)) {
                             row.appendChild(originalSlides.get(target));
                         }
@@ -592,10 +592,10 @@
 
     Slick.prototype.checkResponsive = function (initial, forceUpdate) {
 
-        var _ = this,
+        let _ = this,
             breakpoint, targetBreakpoint, respondToWidth, triggerBreakpoint = false;
-        var sliderWidth = _.$slider.width();
-        var windowWidth = window.innerWidth || $(window).width();
+        let sliderWidth = _.$slider.width();
+        let windowWidth = window.innerWidth || $(window).width();
 
         if (_.respondTo === 'window') {
             respondToWidth = windowWidth;
@@ -680,7 +680,7 @@
 
     Slick.prototype.changeSlide = function (event, dontAnimate) {
 
-        var _ = this,
+        let _ = this,
             $target = $(event.currentTarget),
             indexOffset, slideOffset, unevenOffset;
 
@@ -714,7 +714,7 @@
                 break;
 
             case 'index':
-                var index = event.data.index === 0 ? 0 :
+                let index = event.data.index === 0 ? 0 :
                     event.data.index || $target.index() * _.options.slidesToScroll;
 
                 _.slideHandler(_.checkNavigable(index), false, dontAnimate);
@@ -729,7 +729,7 @@
 
     Slick.prototype.checkNavigable = function (index) {
 
-        var _ = this,
+        let _ = this,
             navigables, prevNavigable;
 
         navigables = _.getNavigableIndexes();
@@ -737,7 +737,7 @@
         if (index > navigables[navigables.length - 1]) {
             index = navigables[navigables.length - 1];
         } else {
-            for (var n in navigables) {
+            for (let n in navigables) {
                 if (index < navigables[n]) {
                     index = prevNavigable;
                     break;
@@ -751,7 +751,7 @@
 
     Slick.prototype.cleanUpEvents = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.dots && _.$dots !== null) {
 
@@ -808,7 +808,7 @@
 
     Slick.prototype.cleanUpSlideEvents = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.$list.off('mouseenter.slick', $.proxy(_.interrupt, _, true));
         _.$list.off('mouseleave.slick', $.proxy(_.interrupt, _, false));
@@ -817,7 +817,7 @@
 
     Slick.prototype.cleanUpRows = function () {
 
-        var _ = this, originalSlides;
+        let _ = this, originalSlides;
 
         if (_.options.rows > 0) {
             originalSlides = _.$slides.children().children();
@@ -829,7 +829,7 @@
 
     Slick.prototype.clickHandler = function (event) {
 
-        var _ = this;
+        let _ = this;
 
         if (_.shouldClick === false) {
             event.stopImmediatePropagation();
@@ -841,7 +841,7 @@
 
     Slick.prototype.destroy = function (refresh) {
 
-        var _ = this;
+        let _ = this;
 
         _.autoPlayClear();
 
@@ -915,7 +915,7 @@
 
     Slick.prototype.disableTransition = function (slide) {
 
-        var _ = this,
+        let _ = this,
             transition = {};
 
         transition[_.transitionType] = '';
@@ -930,7 +930,7 @@
 
     Slick.prototype.fadeSlide = function (slideIndex, callback) {
 
-        var _ = this;
+        let _ = this;
 
         if (_.cssTransitions === false) {
 
@@ -966,7 +966,7 @@
 
     Slick.prototype.fadeSlideOut = function (slideIndex) {
 
-        var _ = this;
+        let _ = this;
 
         if (_.cssTransitions === false) {
 
@@ -990,7 +990,7 @@
 
     Slick.prototype.filterSlides = Slick.prototype.slickFilter = function (filter) {
 
-        var _ = this;
+        let _ = this;
 
         if (filter !== null) {
 
@@ -1010,7 +1010,7 @@
 
     Slick.prototype.focusHandler = function () {
 
-        var _ = this;
+        let _ = this;
 
         // If any child element receives focus within the slider we need to pause the autoplay
         _.$slider
@@ -1018,8 +1018,8 @@
             .on(
                 'focus.slick',
                 '*',
-                function (event) {
-                    var $sf = $(this);
+                function () {
+                    let $sf = $(this);
 
                     setTimeout(function () {
                         if (_.options.pauseOnFocus) {
@@ -1033,8 +1033,8 @@
             ).on(
             'blur.slick',
             '*',
-            function (event) {
-                var $sf = $(this);
+            function () {
+                $(this);
 
                 // When a blur occurs on any elements within the slider we become unfocused
                 if (_.options.pauseOnFocus) {
@@ -1047,18 +1047,18 @@
 
     Slick.prototype.getCurrent = Slick.prototype.slickCurrentSlide = function () {
 
-        var _ = this;
+        let _ = this;
         return _.currentSlide;
 
     };
 
     Slick.prototype.getDotCount = function () {
 
-        var _ = this;
+        let _ = this;
 
-        var breakPoint = 0;
-        var counter = 0;
-        var pagerQty = 0;
+        let breakPoint = 0;
+        let counter = 0;
+        let pagerQty = 0;
 
         if (_.options.infinite === true) {
             if (_.slideCount <= _.options.slidesToShow) {
@@ -1088,7 +1088,7 @@
 
     Slick.prototype.getLeft = function (slideIndex) {
 
-        var _ = this,
+        let _ = this,
             targetLeft,
             verticalHeight,
             verticalOffset = 0,
@@ -1154,8 +1154,8 @@
             }
 
             if (_.options.infinite === true) {
-                var $slideCounts = Array.prototype.slice.call(_.$slideTrack[0].children);
-                for (var i = 0; i < $slideCounts.length; i++) {
+                let $slideCounts = Array.prototype.slice.call(_.$slideTrack[0].children);
+                for (let i = 0; i < $slideCounts.length; i++) {
                     if ($slideCounts[i].dataset.slickIndex < 0) {
                         verticalOffset += $($slideCounts[i]).outerHeight(true);
                     }
@@ -1210,7 +1210,7 @@
 
     Slick.prototype.getOption = Slick.prototype.slickGetOption = function (option) {
 
-        var _ = this;
+        let _ = this;
 
         return _.options[option];
 
@@ -1218,7 +1218,7 @@
 
     Slick.prototype.getNavigableIndexes = function () {
 
-        var _ = this,
+        let _ = this,
             breakPoint = 0,
             counter = 0,
             indexes = [],
@@ -1250,7 +1250,7 @@
 
     Slick.prototype.getSlideCount = function () {
 
-        var _ = this,
+        let _ = this,
             slidesTraversed, swipedSlide, swipeTarget, centerOffset;
 
         centerOffset = _.options.centerMode === true ? Math.floor(_.$list.width() / 2) : 0;
@@ -1260,7 +1260,7 @@
 
             _.$slideTrack.find('.slick-slide').each(function (index, slide) {
 
-                var slideOuterWidth, slideOffset, slideRightBoundary;
+                let slideOuterWidth, slideOffset, slideRightBoundary;
                 slideOuterWidth = $(slide).outerWidth();
                 slideOffset = slide.offsetLeft;
                 if (_.options.centerMode !== true) {
@@ -1287,7 +1287,7 @@
 
     Slick.prototype.goTo = Slick.prototype.slickGoTo = function (slide, dontAnimate) {
 
-        var _ = this;
+        let _ = this;
 
         _.changeSlide({
             data: {
@@ -1300,7 +1300,7 @@
 
     Slick.prototype.init = function (creation) {
 
-        var _ = this;
+        let _ = this;
 
         if (!$(_.$slider).hasClass('slick-initialized')) {
 
@@ -1337,7 +1337,7 @@
     };
 
     Slick.prototype.initADA = function () {
-        var _ = this,
+        let _ = this,
             numDotGroups = Math.ceil(_.slideCount / _.options.slidesToShow),
             tabControlIndexes = _.getNavigableIndexes().filter(function (val) {
                 return (val >= 0) && (val < _.slideCount);
@@ -1352,7 +1352,7 @@
 
         if (_.$dots !== null) {
             _.$slides.not(_.$slideTrack.find('.slick-cloned')).each(function (i) {
-                var slideControlIndex = tabControlIndexes.indexOf(i);
+                let slideControlIndex = tabControlIndexes.indexOf(i);
 
                 $(this).attr({
                     'role': 'tabpanel',
@@ -1361,7 +1361,7 @@
                 });
 
                 if (slideControlIndex !== -1) {
-                    var ariaButtonControl = 'slick-slide-control' + _.instanceUid + slideControlIndex;
+                    let ariaButtonControl = 'slick-slide-control' + _.instanceUid + slideControlIndex;
                     if ($('#' + ariaButtonControl).length) {
                         $(this).attr({
                             'aria-describedby': ariaButtonControl
@@ -1371,7 +1371,7 @@
             });
 
             _.$dots.attr('role', 'tablist').find('li').each(function (i) {
-                var mappedSlideIndex = tabControlIndexes[i];
+                let mappedSlideIndex = tabControlIndexes[i];
 
                 $(this).attr({
                     'role': 'presentation'
@@ -1392,7 +1392,7 @@
             }).end();
         }
 
-        for (var i = _.currentSlide, max = i + _.options.slidesToShow; i < max; i++) {
+        for (let i = _.currentSlide, max = i + _.options.slidesToShow; i < max; i++) {
             if (_.options.focusOnChange) {
                 _.$slides.eq(i).attr({'tabindex': '0'});
             } else {
@@ -1406,7 +1406,7 @@
 
     Slick.prototype.initArrowEvents = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
             _.$prevArrow
@@ -1430,7 +1430,7 @@
 
     Slick.prototype.initDotEvents = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
             $('li', _.$dots).on('click.slick', {
@@ -1454,7 +1454,7 @@
 
     Slick.prototype.initSlideEvents = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.pauseOnHover) {
 
@@ -1467,7 +1467,7 @@
 
     Slick.prototype.initializeEvents = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.initArrowEvents();
 
@@ -1512,7 +1512,7 @@
 
     Slick.prototype.initUI = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
 
@@ -1531,7 +1531,7 @@
 
     Slick.prototype.keyHandler = function (event) {
 
-        var _ = this;
+        let _ = this;
         //Dont slide if the cursor is inside the form fields and arrow keys are pressed
         if (!event.target.tagName.match('TEXTAREA|INPUT|SELECT')) {
             if (event.keyCode === 37 && _.options.accessibility === true) {
@@ -1553,14 +1553,14 @@
 
     Slick.prototype.lazyLoad = function () {
 
-        var _ = this,
+        let _ = this,
             loadRange, cloneRange, rangeStart, rangeEnd;
 
         function loadImages(imagesScope) {
 
             $('img[data-lazy]', imagesScope).each(function () {
 
-                var image = $(this),
+                let image = $(this),
                     imageSource = $(this).attr('data-lazy'),
                     imageSrcSet = $(this).attr('data-srcset'),
                     imageSizes = $(this).attr('data-sizes') || _.$slider.attr('data-sizes'),
@@ -1630,11 +1630,11 @@
         loadRange = _.$slider.find('.slick-slide').slice(rangeStart, rangeEnd);
 
         if (_.options.lazyLoad === 'anticipated') {
-            var prevSlide = rangeStart - 1,
+            let prevSlide = rangeStart - 1,
                 nextSlide = rangeEnd,
                 $slides = _.$slider.find('.slick-slide');
 
-            for (var i = 0; i < _.options.slidesToScroll; i++) {
+            for (let i = 0; i < _.options.slidesToScroll; i++) {
                 if (prevSlide < 0) prevSlide = _.slideCount - 1;
                 loadRange = loadRange.add($slides.eq(prevSlide));
                 loadRange = loadRange.add($slides.eq(nextSlide));
@@ -1660,7 +1660,7 @@
 
     Slick.prototype.loadSlider = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.setPosition();
 
@@ -1680,7 +1680,7 @@
 
     Slick.prototype.next = Slick.prototype.slickNext = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.changeSlide({
             data: {
@@ -1692,7 +1692,7 @@
 
     Slick.prototype.orientationChange = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.checkResponsive();
         _.setPosition();
@@ -1701,7 +1701,7 @@
 
     Slick.prototype.pause = Slick.prototype.slickPause = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.autoPlayClear();
         _.paused = true;
@@ -1710,7 +1710,7 @@
 
     Slick.prototype.play = Slick.prototype.slickPlay = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.autoPlay();
         _.options.autoplay = true;
@@ -1722,7 +1722,7 @@
 
     Slick.prototype.postSlide = function (index) {
 
-        var _ = this;
+        let _ = this;
 
         if (!_.unslicked) {
 
@@ -1744,7 +1744,7 @@
                 _.initADA();
 
                 if (_.options.focusOnChange) {
-                    var $currentSlide = $(_.$slides.get(_.currentSlide));
+                    let $currentSlide = $(_.$slides.get(_.currentSlide));
                     $currentSlide.attr('tabindex', 0).focus();
                 }
             }
@@ -1755,7 +1755,7 @@
 
     Slick.prototype.prev = Slick.prototype.slickPrev = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.changeSlide({
             data: {
@@ -1775,7 +1775,7 @@
 
         tryCount = tryCount || 1;
 
-        var _ = this,
+        let _ = this,
             $imgsToLoad = $('img[data-lazy]', _.$slider),
             image,
             imageSource,
@@ -1857,7 +1857,7 @@
 
     Slick.prototype.refresh = function (initializing) {
 
-        var _ = this, currentSlide, lastVisibleIndex;
+        let _ = this, currentSlide, lastVisibleIndex;
 
         lastVisibleIndex = _.slideCount - _.options.slidesToShow;
 
@@ -1896,7 +1896,7 @@
 
     Slick.prototype.registerBreakpoints = function () {
 
-        var _ = this, breakpoint, currentBreakpoint, l,
+        let _ = this, breakpoint, currentBreakpoint, l,
             responsiveSettings = _.options.responsive || null;
 
         if ($.type(responsiveSettings) === 'array' && responsiveSettings.length) {
@@ -1936,7 +1936,7 @@
 
     Slick.prototype.reinit = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.$slides =
             _.$slideTrack
@@ -1986,7 +1986,7 @@
 
     Slick.prototype.resize = function () {
 
-        var _ = this;
+        let _ = this;
 
         if ($(window).width() !== _.windowWidth) {
             clearTimeout(_.windowDelay);
@@ -2002,7 +2002,7 @@
 
     Slick.prototype.removeSlide = Slick.prototype.slickRemove = function (index, removeBefore, removeAll) {
 
-        var _ = this;
+        let _ = this;
 
         if (typeof (index) === 'boolean') {
             removeBefore = index;
@@ -2037,7 +2037,7 @@
 
     Slick.prototype.setCSS = function (position) {
 
-        var _ = this,
+        let _ = this,
             positionProps = {},
             x, y;
 
@@ -2066,7 +2066,7 @@
 
     Slick.prototype.setDimensions = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.vertical === false) {
             if (_.options.centerMode === true) {
@@ -2098,14 +2098,14 @@
             _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.children('.slick-slide').length)));
         }
 
-        var offset = _.$slides.first().outerWidth(true) - _.$slides.first().width();
+        let offset = _.$slides.first().outerWidth(true) - _.$slides.first().width();
         if (_.options.variableWidth === false) _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
 
     };
 
     Slick.prototype.setFade = function () {
 
-        var _ = this,
+        let _ = this,
             targetLeft;
 
         _.$slides.each(function (index, element) {
@@ -2138,10 +2138,10 @@
 
     Slick.prototype.setHeight = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.slidesToShow === 1 && _.options.adaptiveHeight === true/* && _.options.vertical === false*/) {
-            var targetHeight = _.$slides.eq(_.currentSlide).outerHeight(true);
+            let targetHeight = _.$slides.eq(_.currentSlide).outerHeight(true);
             _.$list.css('height', targetHeight);
         }
 
@@ -2163,7 +2163,7 @@
              *     .slick("setOption", { 'option': value, ... }, refresh )
              */
 
-            var _ = this, l, item, option, value, refresh = false, type;
+            let _ = this, l, item, option, value, refresh = false, type;
 
             if ($.type(arguments[0]) === 'object') {
 
@@ -2247,7 +2247,7 @@
 
     Slick.prototype.setPosition = function () {
 
-        var _ = this;
+        let _ = this;
 
         _.setDimensions();
 
@@ -2265,7 +2265,7 @@
 
     Slick.prototype.setProps = function () {
 
-        var _ = this,
+        let _ = this,
             bodyStyle = document.body.style;
 
         _.positionProp = _.options.vertical === true ? 'top' : 'left';
@@ -2329,7 +2329,7 @@
 
     Slick.prototype.setSlideClasses = function (index) {
 
-        var _ = this,
+        let _ = this,
             centerOffset, allSlides, indexOffset, remainder;
 
         allSlides = _.$slider
@@ -2343,7 +2343,7 @@
 
         if (_.options.centerMode === true) {
 
-            var evenCoef = _.options.slidesToShow % 2 === 0 ? 1 : 0;
+            let evenCoef = _.options.slidesToShow % 2 === 0 ? 1 : 0;
 
             centerOffset = Math.floor(_.options.slidesToShow / 2);
 
@@ -2432,7 +2432,7 @@
 
     Slick.prototype.setupInfinite = function () {
 
-        var _ = this,
+        let _ = this,
             i, slideIndex, infiniteCount;
 
         if (_.options.fade === true) {
@@ -2476,7 +2476,7 @@
 
     Slick.prototype.interrupt = function (toggle) {
 
-        var _ = this;
+        let _ = this;
 
         if (!toggle) {
             _.autoPlay();
@@ -2487,14 +2487,14 @@
 
     Slick.prototype.selectHandler = function (event) {
 
-        var _ = this;
+        let _ = this;
 
-        var targetElement =
+        let targetElement =
             $(event.target).is('.slick-slide') ?
                 $(event.target) :
                 $(event.target).parents('.slick-slide');
 
-        var index = parseInt(targetElement.attr('data-slick-index'));
+        let index = parseInt(targetElement.attr('data-slick-index'));
 
         if (!index) index = 0;
 
@@ -2511,7 +2511,7 @@
 
     Slick.prototype.slideHandler = function (index, sync, dontAnimate) {
 
-        var targetSlide, animSlide, oldSlide, slideLeft, targetLeft = null,
+        let targetSlide, animSlide, oldSlide, slideLeft, targetLeft = null,
             _ = this, navTarget;
 
         sync = sync || false;
@@ -2631,7 +2631,7 @@
 
     Slick.prototype.startLoad = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
 
@@ -2652,7 +2652,7 @@
 
     Slick.prototype.swipeDirection = function () {
 
-        var xDist, yDist, r, swipeAngle, _ = this;
+        let xDist, yDist, r, swipeAngle, _ = this;
 
         xDist = _.touchObject.startX - _.touchObject.curX;
         yDist = _.touchObject.startY - _.touchObject.curY;
@@ -2684,9 +2684,9 @@
 
     };
 
-    Slick.prototype.swipeEnd = function (event) {
+    Slick.prototype.swipeEnd = function () {
 
-        var _ = this,
+        let _ = this,
             slideCount,
             direction;
 
@@ -2767,7 +2767,7 @@
 
     Slick.prototype.swipeHandler = function (event) {
 
-        var _ = this;
+        let _ = this;
 
         if ((_.options.swipe === false) || ('ontouchend' in document && _.options.swipe === false)) {
             return;
@@ -2797,7 +2797,7 @@
                 break;
 
             case 'end':
-                _.swipeEnd(event);
+                _.swipeEnd();
                 break;
 
         }
@@ -2806,8 +2806,7 @@
 
     Slick.prototype.swipeMove = function (event) {
 
-        var _ = this,
-            edgeWasHit = false,
+        let _ = this,
             curLeft, swipeDirection, swipeLength, positionOffset, touches, verticalSwipeLength;
 
         touches = event.originalEvent !== undefined ? event.originalEvent.touches : null;
@@ -2884,7 +2883,7 @@
 
     Slick.prototype.swipeStart = function (event) {
 
-        var _ = this,
+        let _ = this,
             touches;
 
         _.interrupted = true;
@@ -2907,7 +2906,7 @@
 
     Slick.prototype.unfilterSlides = Slick.prototype.slickUnfilter = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.$slidesCache !== null) {
 
@@ -2925,7 +2924,7 @@
 
     Slick.prototype.unload = function () {
 
-        var _ = this;
+        let _ = this;
 
         $('.slick-cloned', _.$slider).remove();
 
@@ -2950,7 +2949,7 @@
 
     Slick.prototype.unslick = function (fromBreakpoint) {
 
-        var _ = this;
+        let _ = this;
         _.$slider.trigger('unslick', [_, fromBreakpoint]);
         _.destroy();
 
@@ -2958,7 +2957,7 @@
 
     Slick.prototype.updateArrows = function () {
 
-        var _ = this,
+        let _ = this,
             centerOffset;
 
         centerOffset = Math.floor(_.options.slidesToShow / 2);
@@ -2993,7 +2992,7 @@
 
     Slick.prototype.updateDots = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.$dots !== null) {
 
@@ -3013,7 +3012,7 @@
 
     Slick.prototype.visibility = function () {
 
-        var _ = this;
+        let _ = this;
 
         if (_.options.autoplay) {
 
@@ -3024,7 +3023,7 @@
     };
 
     $.fn.slick = function () {
-        var _ = this,
+        let _ = this,
             opt = arguments[0],
             args = Array.prototype.slice.call(arguments, 1),
             l = _.length,

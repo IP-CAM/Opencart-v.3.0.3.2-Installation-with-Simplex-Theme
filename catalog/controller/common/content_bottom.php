@@ -38,7 +38,7 @@ class ControllerCommonContentBottom extends Controller {
 		if (!$layout_id) {
 			$layout_id = $this->config->get('config_layout_id');
 		}
-
+//var_dump($layout_id);
 		$this->load->model('setting/module');
 
 		$data['modules'] = array();

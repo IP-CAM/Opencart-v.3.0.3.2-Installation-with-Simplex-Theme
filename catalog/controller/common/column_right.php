@@ -60,7 +60,12 @@ class ControllerCommonColumnRight extends Controller {
 				$setting_info = $this->model_setting_module->getModule($part[1]);
 
 				if ($setting_info && $setting_info['status']) {
-					$output = $this->load->controller('extension/module/' . $part[0], $setting_info);
+                    /* added by it-lab* start */
+                    if($part[0]=='special'){
+                        $setting_info['template']="special_right";
+                    }
+                    /* added by it-lab* start end */
+                    $output = $this->load->controller('extension/module/' . $part[0], $setting_info);
 
 					if ($output) {
 						$data['modules'][] = $output;

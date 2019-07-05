@@ -1,0 +1,84 @@
+{{ header }}
+<main class="job-item-bg" xmlns="http://www.w3.org/1999/html">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+        <div class="page-title centered">
+            <h1>{{ heading_title }}</h1>
+            <hr>
+        </div>
+        <div class="container-fluid">
+            <div class="item-container job-item-container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="content">
+                            {{ description }}
+                            <button type="submit" class="poppup" target="#contact-form">
+                                {{ text_send_cv }}
+                                <span class="image-container"></span>
+                            </button>
+                            <p>
+                                {{ telefon_fax }}: <span style="font-weight: 800;">022 74 74 34</span>
+                            </p>
+                            <p style="color:#a4a4a4">
+                                {{ interview_conditions }}.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 offset-md-1 order-md-1">
+                        <div class="main-image-container">
+                            <img alt="" src="{{ thumb }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="share">
+                    <div class="back">
+                        <a href="{{ archive_link }}">{{ text_archive_link }}</a>
+                    </div>
+                    <div class="social">
+                        <p>{{ share_information }}:</p>
+                        <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                        <script src="https://yastatic.net/share2/share.js"></script>
+                        <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter"></div>
+
+                    </div>
+                </div>
+                <div id="contact-form" style="opacity: 0">
+                    <a class="close" role="button">
+                        <img alt="Close" src="catalog/view/theme/simplex/assets/img/x.png">
+                    </a>
+                    <h3>{{ text_contact }}</h3>
+                    <form action="{{ action }}" method="post" action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
+                        <label class="required" for="name">{{ entry_name }}</label><input id="name"  name="name" value="{{ name }}" required type="text">
+                        <label class="required" for="mail">{{ entry_email }}</label><input id="mail" name="email" value="{{ email }}" required type="text">
+                        <label for="subject">{{ entry_subject }}</label><input id="subject" name="subject" type="text">
+                        <label class="required" for="message">{{ entry_enquiry }}</label><textarea id="message"  name="enquiry" rows="10" id="input-enquiry"
+                                                                                                   required>{{ enquiry }}</textarea>
+                        <hr>
+                        <label for="file">{{ entry_file }}</label><label class="upload">{{ text_browse_file }}<input id="file" name="file"  type="file"></label>
+                        <hr>
+                        <div class="submit">
+                            <button class="form-submit" type="submit" value="{{ button_submit }}">
+                                {{ button_submit }}
+                                <span class="image-container"></span>
+                            </button>
+                            <p><span style="color:#b73232">*</span> – {{ text_required_fields }}</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+{{ footer }}

@@ -35,10 +35,10 @@
         }, r.o = function (t, n) {
             return Object.prototype.hasOwnProperty.call(t, n)
         }, r.p = "", r(r.s = 14)
-    }([function (t, n) {
+    }([function (t) {
         t.exports = function (t) {
             var n = typeof t;
-            return null != t && ("object" == n || "function" == n)
+            return null != t && ("object" === n || "function" === n)
         }
     }, function (t, n, r) {
         var e = r(4), o = r(0), i = "Expected a function";
@@ -52,12 +52,10 @@
             })
         }
     }, function (t, n, r) {
-        var e = r(6), o = "object" == typeof self && self && self.Object === Object && self,
-            i = e || o || Function("return this")();
-        t.exports = i
+        var e = r(6), o = "object" == typeof self && self && self.Object === Object && self;
+        t.exports = e || o || Function("return this")()
     }, function (t, n, r) {
-        var e = r(2).Symbol;
-        t.exports = e
+        t.exports = r(2).Symbol;
     }, function (t, n, r) {
         var e = r(0), o = r(5), i = r(8), u = "Expected a function", a = Math.max, c = Math.min;
         t.exports = function (t, n, r) {
@@ -111,10 +109,9 @@
         }
     }, function (t, n, r) {
         (function (n) {
-            var r = "object" == typeof n && n && n.Object === Object && n;
-            t.exports = r
+            t.exports = "object" == typeof n && n && n.Object === Object && n
         }).call(this, r(7))
-    }, function (t, n) {
+    }, function (t) {
         var r;
         r = function () {
             return this
@@ -143,7 +140,7 @@
     }, function (t, n, r) {
         var e = r(10), o = r(13), i = "[object Symbol]";
         t.exports = function (t) {
-            return "symbol" == typeof t || o(t) && e(t) == i
+            return "symbol" == typeof t || o(t) && e(t) === i
         }
     }, function (t, n, r) {
         var e = r(3), o = r(11), i = r(12), u = "[object Null]", a = "[object Undefined]",
@@ -163,12 +160,12 @@
             var o = u.call(t);
             return e && (n ? t[a] = r : delete t[a]), o
         }
-    }, function (t, n) {
+    }, function (t) {
         var r = Object.prototype.toString;
         t.exports = function (t) {
             return r.call(t)
         }
-    }, function (t, n) {
+    }, function (t) {
         t.exports = function (t) {
             return null != t && "object" == typeof t
         }
@@ -274,6 +271,9 @@
             return r
         }
 
+        /**
+         * @return {number}
+         */
         var B = function () {
                 return (B = Object.assign || function (t) {
                     for (var n, r = 1, e = arguments.length; r < e; r++) for (var o in n = arguments[r]) Object.prototype.hasOwnProperty.call(n, o) && (t[o] = n[o]);
@@ -304,7 +304,7 @@
                     }
                 }
             }), D = z("deg"), K = z("%"), H = z("px"), J = z("vh"), Q = z("vw"), Z = W(0, 255),
-            tt = /^(#[0-9a-f]{3}|#(?:[0-9a-f]{2}){2,4}|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d\.]+%?\))$/i,
+            tt = /^(#[0-9a-f]{3}|#(?:[0-9a-f]{2}){2,4}|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d.]+%?\))$/i,
             nt = function (t) {
                 return void 0 !== t.red
             }, rt = function (t) {
@@ -360,8 +360,8 @@
                 }, transform: function (t) {
                     return nt(t) ? ut.transform(t) : rt(t) ? ct.transform(t) : t
                 }
-            }, pt = /(-)?(\d[\d\.]*)/g,
-            lt = /(#[0-9a-f]{6}|#[0-9a-f]{3}|#(?:[0-9a-f]{2}){2,4}|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d\.]+%?\))/gi,
+            }, pt = /(-)?(\d[\d.]*)/g,
+            lt = /(#[0-9a-f]{6}|#[0-9a-f]{3}|#(?:[0-9a-f]{2}){2,4}|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d.]+%?\))/gi,
             dt = function (t) {
                 if ("string" != typeof t || !isNaN(t)) return !1;
                 var n = 0, r = t.match(pt), e = t.match(lt);
@@ -463,13 +463,13 @@
                         return t(r(n))
                     }
                 })
-            }, t.prototype.while = function (t) {
+            }, (function (t) {
                 return this.applyMiddleware(function (n, r) {
                     return function (e) {
                         return t(e) ? n(e) : r()
                     }
                 })
-            }, t.prototype.filter = function (t) {
+            }), t.prototype.filter = function (t) {
                 return this.applyMiddleware(function (n) {
                     return function (r) {
                         return t(r) && n(r)
@@ -693,16 +693,10 @@
                 return F(), {
                     isActive: function () {
                         return Y
-                    }, getElapsed: function () {
-                        return yt(0, u, O)
-                    }, getProgress: function () {
-                        return X
                     }, stop: function () {
                         G()
                     }, pause: function () {
                         return G(), this
-                    }, resume: function () {
-                        return Y || F(), this
                     }, seek: function (t) {
                         return O = wt(0, u, t), R.update(_, !1, !0), this
                     }, reverse: function () {
@@ -864,7 +858,7 @@
                         });
                         s.push(O), fn(r, b, {immediate: !0});
                         var x = function () {
-                            var t = Zt({
+                            y.stopTween = Zt({
                                 from: b,
                                 to: {translateX: 0, translateY: 0, scaleX: 1, scaleY: 1},
                                 duration: e,
@@ -876,7 +870,6 @@
                                     })
                                 }, complete: w
                             }).stop;
-                            y.stopTween = t
                         };
                         if ("number" != typeof i) x(); else {
                             var j = setTimeout(function () {
@@ -893,9 +886,7 @@
             }, g = new MutationObserver(m);
             g.observe(t, {childList: !0, attributes: !0, subtree: !0, attributeFilter: ["class"]});
             return {
-                unwrapGrid: function () {
-                    window.removeEventListener("resize", v), t.removeEventListener("scroll", h), g.disconnect()
-                }, forceGridAnimation: function () {
+                forceGridAnimation: function () {
                     return m("forceGridAnimation")
                 }
             }

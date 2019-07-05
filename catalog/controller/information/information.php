@@ -2,6 +2,7 @@
 class ControllerInformationInformation extends Controller {
 	public function index() {
 		$this->load->language('information/information');
+		$this->load->language('information/contact');
 
 		$this->load->model('catalog/information');
 
@@ -43,7 +44,23 @@ class ControllerInformationInformation extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
-			$this->response->setOutput($this->load->view('information/information', $data));
+            /* added by it-lab start */
+            $data['action'] = $this->url->link('information/contact', '', true);
+
+            $data["archive_link"] = $this->url->link('product/gallery_album');
+            $main_category_info = $this->model_catalog_category->getCategory($main_category);
+            $data["archive_link"] = $this->url->link('information/category&path='.$main_category);
+            $data['thumb'] ='image/' . $information_info['image'];
+            if(!empty($main_category_info['template']) ){
+
+                $template='information/'.$main_category_info['template'];
+                return $this->response->setOutput($this->load->view($template , $data));
+
+            }else {
+                return $this->response->setOutput($this->load->view('information/information_vacancy', $data));
+            }
+            /* added by it-lab end */
+            //$this->response->setOutput($this->load->view('information/information_vacancy', $data));
 		} else {
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_error'),

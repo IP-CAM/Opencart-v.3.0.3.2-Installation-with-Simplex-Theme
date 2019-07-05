@@ -40,7 +40,11 @@ class ControllerExtensionModuleSpecial extends Controller {
                     /* added by it-lab end */
 				} else {
 					$special = false;
-				}
+                    /* added by it-lab start */
+                    $special_percentage = false;
+                    $economy = false;
+                    /* added by it-lab end */
+                }
 
 				if ($this->config->get('config_tax')) {
 					$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
@@ -72,6 +76,9 @@ class ControllerExtensionModuleSpecial extends Controller {
 			}
             /* added by it-lab start */
             $data['currency'] = $this->session->data['currency'];
+            if(isset($setting["template"])){
+                return $this->load->view('extension/module/'.$setting["template"], $data);
+            }
             /* added by it-lab end */
 			return $this->load->view('extension/module/special', $data);
 		}

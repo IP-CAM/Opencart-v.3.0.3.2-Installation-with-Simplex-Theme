@@ -1,0 +1,9 @@
+{% if modules %}
+</aside><aside class="d-lg-block d-none">
+    <div class="accordion filters">
+        {% for module in modules %}
+            {{ module }}
+        {% endfor %}
+    </div>
+</aside>
+{% endif %}

@@ -31,6 +31,9 @@ $_['entry_column']           = 'Columns';
 $_['entry_sort_order']       = 'Sort Order';
 $_['entry_status']           = 'Status';
 $_['entry_layout']           = 'Layout Override';
+$_['entry_count_few']        = 'Few';
+$_['entry_count_medium']     = 'Medium';
+$_['entry_count_lot']        = 'Many';
 
 // Help
 $_['help_filter']            = '(Autocomplete)';

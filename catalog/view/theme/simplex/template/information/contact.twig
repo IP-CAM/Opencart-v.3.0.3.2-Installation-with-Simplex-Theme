@@ -1,0 +1,209 @@
+{{ header }}
+<main class="contacts-bg">
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+      {% if loop.first %}
+        <li><a href="{{ breadcrumb.href }}"><img alt="Home" src="catalog/view/theme/simplex/assets/img/home.svg"></a></li>
+      {% else %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+  </ul>
+    <div class="page-title centered">
+      <h1>{{ heading_title }}</h1>
+      <hr>
+    </div>
+    <div class="item-container">
+      <h4>
+          {{ text_asteptam_in_magazinele }}
+      </h4>
+      <div id="contacts-buttons">
+        <a id="form-link" role="button" target="#contact-form">
+          <svg viewBox="0 0 139 89" xmlns="http://www.w3.org/2000/svg">
+            <path d="M99.854,6.359 C115.045,6.359 123.298,6.359 123.298,6.359 C127.314,6.359 130.570,9.567 130.570,13.525 L130.570,72.449 C130.570,76.406 127.314,79.614 123.298,79.614 L13.929,79.614 C9.913,79.614 6.657,76.406 6.657,72.449 L6.657,13.525 C6.657,9.567 9.913,6.359 13.929,6.359 C13.929,6.359 20.889,6.359 35.224,6.359 C43.627,6.359 90.699,6.359 99.854,6.359 Z"
+                  fill="none" fill-rule="evenodd" stroke="#000"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="6px"></path>
+            <path d="M7.118,11.940 C7.118,11.940 54.056,51.030 68.027,51.030 C81.997,51.030 130.609,12.222 130.609,12.222 "
+                  fill="none" fill-rule="evenodd" stroke="#000"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="6px"></path>
+            <path d="M7.377,75.326 L43.326,39.372 " fill="none" fill-rule="evenodd" stroke="#000"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="6px"></path>
+            <path d="M130.639,75.326 L95.692,39.114 " fill="none" fill-rule="evenodd" stroke="#000"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="6px"></path>
+          </svg>
+          Trimite mesaj online
+        </a>
+        <a href="#">
+          <svg width="9px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.430,8.260 L2.430,14.699 L5.564,14.699 L5.564,8.290 L7.701,8.290 L8.220,5.619 L5.591,5.619 C5.591,5.619 5.591,4.360 5.591,3.655 C5.591,3.386 5.734,3.024 6.170,3.024 C6.848,3.024 7.695,3.024 7.695,3.024 L7.695,0.301 C7.695,0.301 6.317,0.301 4.847,0.301 C3.870,0.301 2.428,1.510 2.428,2.791 C2.428,4.117 2.428,5.540 2.428,5.540 L0.780,5.540 L0.780,8.246 L2.430,8.260 Z"
+                  fill="#000"
+                  fill-rule="evenodd"></path>
+          </svg>
+          Facebook
+        </a>
+      </div>
+      <div id="stores">
+        {% for location in locations %}
+          <div class="card">
+            <a class="anchor-link" role="button" target="#location-{{ location.location_id }}">
+              <div class="image-container">
+                <img alt="" src="{{ location.image }}">
+              </div>
+              <div class="card-body">
+                <p>{{ location.city }} {{ location.district }}</p>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+        <div id="locations">
+          {% for location in locations %}
+          <div id="location-{{ location.location_id }}" class="card">
+            <div class="title">
+              <div class="city">
+                {{ location.city }}
+              </div>
+              <h3>{{ location.address }}</h3>
+            </div>
+            <div class="image-container">
+              <iframe src="{{ location.geocode }}"
+                      style="border:0"></iframe>
+            </div>
+            <div class="card-body">
+              <h4>{{ text_address }}</h4>
+              <p>{{ location.address }}, {{ location.city }}, {{ location.country }}</p>
+              <h4>{{ text_telephone }}</h4>
+              <h5>Fix</h5>
+              <p>{{ location.telephone }}</p>
+              <h5>{{ text_telephone_consilier_termo }}</h5>
+              <p>{{ location.telephone1 }}</p>
+              <h5>{{ text_telephone_consilier_obiecte }}</h5>
+              <p>{{ location.telephone2 }}</p>
+              <h4>{{ entry_email }}</h4>
+              <p><a href="mailto:info@simplex.md">{{ location.email }}</a></p>
+              <h4>{{ text_open }}</h4>
+              {{ location.open }}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      <div id="contact-form">
+        <a class="close" role="button">
+          <img alt="Close" src="catalog/view/theme/simplex/assets/img/x.png">
+        </a>
+        <h3>{{ text_contact }}</h3>
+        <form action="{{ action }}" method="post" action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
+          <label class="required" for="name">{{ entry_name }}</label><input id="name"  name="name" value="{{ name }}" required type="text">
+          <label class="required" for="mail">{{ entry_email }}</label><input id="mail" name="email" value="{{ email }}" required type="text">
+          <label for="subject">{{ entry_subject }}</label><input id="subject" name="subject" type="text">
+          <label class="required" for="message">{{ entry_enquiry }}</label><textarea id="message"  name="enquiry" rows="10" id="input-enquiry"
+                                                                             required>{{ enquiry }}</textarea>
+          <hr>
+          <label for="file">{{ entry_file }}</label><label class="upload">{{ text_browse_file }}...<input id="file" name="file"  type="file"></label>
+          <hr>
+          <div class="submit">
+            <button class="form-submit" type="submit" value="{{ button_submit }}">
+              {{ button_submit }}
+               <span class="image-container"></span>
+            </button>
+            <p><span style="color:#b73232">*</span> – {{ text_required_fields }}</p>
+          </div>
+        </form>
+      </div>
+</div>
+
+    <script type="text/javascript"><!--
+
+      $('.upload').on('click', function() {
+        var node = this;
+
+        $('#form-upload').remove();
+
+        $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+
+      //  $('#form-upload input[name=\'file\']').trigger('click');
+
+        $('#form-upload input[name=\'file\']').on('change', function() {
+          $.ajax({
+            url: 'index.php?route=information/contact/upload',
+            type: 'post',
+            dataType: 'json',
+            data: new FormData($(this).parent()[0]),
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+              $(node).button('loading');
+            },
+            complete: function() {
+              $(node).button('reset');
+            },
+            success: function(json) {
+              $('.text-danger').remove();
+
+              if (json['error']) {
+                $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+              }
+
+              if (json['success']) {
+                alert(json['success']);
+                $(node).parent().find('.success').html(json['file']);
+                $(node).parent().find('input').attr('value', json['file']);
+              }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+          });
+        });
+      });
+      //--></script>
+  </div>
+</main>
+{{ content_bottom }}
+     {# <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <fieldset>
+              <legend>{{ text_contact }}</legend>
+              <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="name" value="{{ name }}" id="input-name" class="form-control" />
+                      {% if error_name %}
+                          <div class="text-danger">{{ error_name }}</div>
+                      {% endif %}
+                  </div>
+              </div>
+              <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="email" value="{{ email }}" id="input-email" class="form-control" />
+                      {% if error_email %}
+                          <div class="text-danger">{{ error_email }}</div>
+                      {% endif %}
+                  </div>
+              </div>
+              <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-enquiry">{{ entry_enquiry }}</label>
+                  <div class="col-sm-10">
+                      <textarea name="enquiry" rows="10" id="input-enquiry" class="form-control">{{ enquiry }}</textarea>
+                      {% if error_enquiry %}
+                          <div class="text-danger">{{ error_enquiry }}</div>
+                      {% endif %}
+                  </div>
+              </div>
+              {{ captcha }}
+          </fieldset>
+          <div class="buttons">
+              <div class="pull-right">
+                  <input class="btn btn-primary" type="submit" value="{{ button_submit }}" />
+              </div>
+          </div>
+      </form>#}
+
+      {{ footer }}

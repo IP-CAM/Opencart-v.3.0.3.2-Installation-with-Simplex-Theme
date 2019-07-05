@@ -148,6 +148,14 @@ class ControllerProductCategory extends Controller {
 			}
 
 			$data['products'] = array();
+            /* added by it-lab start */
+            if(isset($this->request->get['method']) && $this->request->get['method']=="load_all"){
+                $num_pages=$this->request->get['num_pages'];
+                $limit_to_end=($num_pages-$page+1)*$limit;
+            }else{
+                $limit_to_end=$limit;
+            }
+            /* added by it-lab end */
 
 			$filter_data = array(
 				'filter_category_id' => $category_id,
@@ -155,7 +163,7 @@ class ControllerProductCategory extends Controller {
 				'sort'               => $sort,
 				'order'              => $order,
 				'start'              => ($page - 1) * $limit,
-				'limit'              => $limit
+				'limit'              => $limit_to_end
 			);
 
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
@@ -177,8 +185,16 @@ class ControllerProductCategory extends Controller {
 
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                    /* added by it-lab start */
+                    $special_percentage = round(100 - (($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'))*100) / $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'))));
+                    $economy= $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')) - $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+                    /* added by it-lab end */
 				} else {
 					$special = false;
+                    /* added by it-lab start */
+                    $special_percentage = false;
+                    $economy = false;
+                    /* added by it-lab end */
 				}
 
 				if ($this->config->get('config_tax')) {
@@ -200,13 +216,19 @@ class ControllerProductCategory extends Controller {
 					'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
 					'special'     => $special,
+                    /* added by it-lab start */
+                    'special_percentage' => $special_percentage,
+                    'economy'     => $economy,
+                    /* added by it-lab end */
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $result['rating'],
 					'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
 				);
 			}
-
+            /* added by it-lab start */
+            $data['currency'] = $this->session->data['currency'];
+            /* added by it-lab end */
 			$url = '';
 
 			if (isset($this->request->get['filter'])) {
@@ -291,7 +313,7 @@ class ControllerProductCategory extends Controller {
 
 			$data['limits'] = array();
 
-			$limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
+			$limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'),2,3,4,6, 8, 16, 24, 32));
 
 			sort($limits);
 
@@ -329,7 +351,7 @@ class ControllerProductCategory extends Controller {
 
 			$data['pagination'] = $pagination->render();
 
-			$data['results'] = sprintf($this->language->get('text_pagination'), ($product_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($product_total - $limit)) ? $product_total : ((($page - 1) * $limit) + $limit), $product_total, ceil($product_total / $limit));
+			//$data['results'] = sprintf($this->language->get('text_pagination'), ($product_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($product_total - $limit)) ? $product_total : ((($page - 1) * $limit) + $limit), $product_total, ceil($product_total / $limit));
 
 			// http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html
 			if ($page == 1) {
@@ -349,8 +371,17 @@ class ControllerProductCategory extends Controller {
 			$data['sort'] = $sort;
 			$data['order'] = $order;
 			$data['limit'] = $limit;
+            /* added by it-lab start */
+            $data['product_total'] = $product_total;
+            if(!isset($this->request->get['method']) || $this->request->get['method'] != "load_all") {
+                $num_pages = ceil($product_total / $limit);
+                $data['num_pages'] = $num_pages;
+            }
+            $data['page'] = $page;
+            /* added by it-lab end */
 
-			$data['continue'] = $this->url->link('common/home');
+
+            $data['continue'] = $this->url->link('common/home');
 
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
@@ -359,7 +390,13 @@ class ControllerProductCategory extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
-			$this->response->setOutput($this->load->view('product/category', $data));
+            /* added by it-lab start */
+            if(isset($this->request->get['method'])){
+                $this->response->setOutput($this->load->view('product/load_more', $data));
+            }else {
+                /* added by it-lab end */
+                $this->response->setOutput($this->load->view('product/category', $data));
+            }
 		} else {
 			$url = '';
 

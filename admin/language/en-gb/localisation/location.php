@@ -21,10 +21,20 @@ $_['entry_name']       = 'Store Name';
 $_['entry_address']    = 'Address';
 $_['entry_geocode']    = 'Geocode';
 $_['entry_telephone']  = 'Telephone';
+$_['entry_telephone1'] = 'Consilier termo/hidro';
+$_['entry_telephone2'] = 'Consilier obiecte sanitare';
 $_['entry_fax']        = 'Fax';
 $_['entry_image']      = 'Image';
 $_['entry_open']       = 'Opening Times';
 $_['entry_comment']    = 'Comment';
+$_['entry_country']    = 'Country';
+$_['entry_city']       = 'City';
+$_['entry_district']   = 'District';
+$_['entry_email']      = 'Email';
+$_['entry_image_geo']  = 'Image geo';
+$_['entry_order']      = 'Order';
+$_['entry_is_online']  = 'Is online';
+
 
 // Help
 $_['help_geocode']     = 'Please enter your store location geocode manually.';

@@ -15,7 +15,7 @@
 	<li class="nav-item dropdown ">
 		<div id="{{ menu.menu_class }}">
 			{% if menu.children %}
-			<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+			<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle {{ menu.active ? "active" }}"
 			   data-toggle="{{ menu.data_toogle }}"
 			   {% if menu.menu_class=='catalog' %}
 			   		 data-target="#categories"
@@ -26,12 +26,12 @@
 				{% if menu.data_toogle=='dropdown' %}
 				<div class="dropdown-menu">
 					{% for menu_child in menu.children %}
-					<a class="dropdown-item" href="{{ menu_child.link }}">{{ menu_child.title }}</a>
+					<a class="dropdown-item {{ menu_child.active ? "active" }}" href="{{ menu_child.link }}">{{ menu_child.title }}</a>
 					{% endfor %}
 				</div>
 					{% endif %}
 			{% else %}
-				<a class="nav-link" href="{{ menu.link }}">{{ menu.title }}</a>
+				<a class="nav-link {{ menu.active ? "active" }}" href="{{ menu.link }}">{{ menu.title }}</a>
 			{% endif %}
 		</div>
 	</li>

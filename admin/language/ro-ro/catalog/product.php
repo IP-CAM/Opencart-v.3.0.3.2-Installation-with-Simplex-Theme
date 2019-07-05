@@ -80,6 +80,7 @@ $_['entry_tag']          	 = 'Etichete Produs';
 $_['entry_reward']           = 'Puncte Recompensă';
 $_['entry_layout']           = 'Rescriere Lay-out';
 $_['entry_recurring']        = 'Abonament';
+$_['entry_garanty']          = 'Garanty';
 
 // Help
 $_['help_keyword']           = 'Nu folosii spații, in schimb inlocuiește spațiile cu - si asigură-te că acest cuvânt este unic global.';

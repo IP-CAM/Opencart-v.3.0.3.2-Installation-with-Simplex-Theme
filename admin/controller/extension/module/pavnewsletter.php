@@ -2205,7 +2205,10 @@ class ControllerExtensionModulePavnewsletter extends Controller {
 		);
 		$this->mdata['layoutmodes'] = $layoutmodes;
 		$modes = array(
-			'default' => $this->language->get( 'txt_none'), 
+			'default' => $this->language->get( 'txt_none'),
+			/* added by it-lab* start */
+			'aside' => "Aside",
+			/* added by it-lab* start end */
 			'flybot' => $this->language->get( 'txt_flybot'),
 			'popup' => $this->language->get( 'txt_popup'),
 		);

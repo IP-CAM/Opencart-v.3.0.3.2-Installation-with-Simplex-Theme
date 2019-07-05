@@ -16,7 +16,6 @@ class ControllerExtensionModuleInformation extends Controller {
 
 		$data['contact'] = $this->url->link('information/contact');
 		$data['sitemap'] = $this->url->link('information/sitemap');
-
 		return $this->load->view('extension/module/information', $data);
 	}
 }

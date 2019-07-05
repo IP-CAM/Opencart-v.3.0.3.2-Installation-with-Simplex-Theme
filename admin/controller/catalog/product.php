@@ -16,8 +16,11 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('catalog/product');
+        /* added by it-lab start */
+        $this->document->addScript('view/javascript/ckeditor/ckeditor.js');
+        $this->document->addScript('view/javascript/ckeditor/adapters/jquery.js');
+        /* added by it-lab end */
+        $this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_catalog_product->addProduct($this->request->post);
@@ -68,7 +71,10 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
+        /* added by it-lab start */
+        $this->document->addScript('view/javascript/ckeditor/ckeditor.js');
+        $this->document->addScript('view/javascript/ckeditor/adapters/jquery.js');
+        /* added by it-lab end */
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
@@ -1130,6 +1136,17 @@ class ControllerCatalogProduct extends Controller {
         }
 
         $data["product_locations"] = $product_locations;
+
+
+        if (isset($this->request->post['garanty'])) {
+            $data['garanty'] = $this->request->post['garanty'];
+        } elseif (!empty($product_info)) {
+            $data['garanty'] = $product_info['garanty'];
+        } else {
+            $data['garanty'] = 12;
+        }
+
+
         /* added by it-lab* start end */
 		$data['product_downloads'] = array();
 

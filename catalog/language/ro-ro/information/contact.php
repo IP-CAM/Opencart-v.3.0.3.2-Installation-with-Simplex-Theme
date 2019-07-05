@@ -6,12 +6,18 @@ $_['heading_title']  = 'Contactează-ne';
 $_['text_location']  = 'Locația noastră';
 $_['text_store']     = 'Magazinele noastre fizice';
 $_['text_contact']   = 'Formular de contact';
-$_['text_address']   = 'Adresă:';
-$_['text_telephone'] = 'Telefon:';
-$_['text_fax']       = 'Fax:';
+$_['text_address']   = 'Adresă';
+$_['text_telephone'] = 'Telefon';
+$_['text_fax']       = 'Fax';
 $_['text_open']      = 'Program magazin';
 $_['text_comment']   = 'Comentarii';
 $_['text_success']   = '<p>Mesajul tău a fost trimis cu succes către administratorul magazinului!</p>';
+$_['text_telephone_fix']                = 'fix';
+$_['text_required_fields']              = 'Cimpuri obligatoare';
+$_['text_telephone_consilier_termo']    = 'Consilier termo/hidro';
+$_['text_telephone_consilier_obiecte']  = 'Consilier obiecte sanitar';
+$_['text_asteptam_in_magazinele']       = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
+        Suntem întotdeauna bucuroși să vă vedem!';
 
 // Entry
 $_['entry_name']     = 'Nume';

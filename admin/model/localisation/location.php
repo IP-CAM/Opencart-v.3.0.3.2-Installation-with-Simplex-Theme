@@ -1,12 +1,12 @@
 <?php
 class ModelLocalisationLocation extends Model {
 	public function addLocation($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "location SET name = '" . $this->db->escape($data['name']) . "', address = '" . $this->db->escape($data['address']) . "', geocode = '" . $this->db->escape($data['geocode']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', image = '" . $this->db->escape($data['image']) . "', open = '" . $this->db->escape($data['open']) . "', comment = '" . $this->db->escape($data['comment']) . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "location SET name = '" . $this->db->escape($data['name']) . "', address = '" . $this->db->escape($data['address']) . "', geocode = '" . $this->db->escape($data['geocode']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', telephone1 = '" . $this->db->escape($data['telephone1']).  "', telephone2 = '" . $this->db->escape($data['telephone2']). "' , email = '". $this->db->escape($data['email']) ."',  fax = '" . $this->db->escape($data['fax']) . "', image = '" . $this->db->escape($data['image']) . "', image_geo = '" . $this->db->escape($data['image_geo']) . "',location_order='" . $this->db->escape($data['location_order']) ."', is_online = '" . $this->db->escape($data['is_online']) . "', open = '" . $this->db->escape($data['open']) . "', comment = '" . $this->db->escape($data['comment']) . "'");
         /* added by it-lab* start */
         $location_id = $this->db->getLastId();
 
         foreach ($data['location_description'] as $language_id => $value) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "location_description SET location_id = '" . (int)$location_id . "', language_id = '" . (int)$language_id . "', address = '" . $this->db->escape($value['address']) . "', open = '" . $this->db->escape($value['open'])."'" );
+            $this->db->query("INSERT INTO " . DB_PREFIX . "location_description SET location_id = '" . (int)$location_id . "', language_id = '" . (int)$language_id . "', address = '" . $this->db->escape($value['address']) . "', open = '" . $this->db->escape($value['open']). "', country = '" . $this->db->escape($value['country']) . "', city = '" . $this->db->escape($value['city']) . "', district = '" . $this->db->escape($value['district'])."'" );
         }
         return $location_id;
         /* added by it-lab* start end */
@@ -14,12 +14,12 @@ class ModelLocalisationLocation extends Model {
 	}
 
 	public function editLocation($location_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "location SET name = '" . $this->db->escape($data['name']) . "', address = '" . $this->db->escape($data['address']) . "', geocode = '" . $this->db->escape($data['geocode']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', image = '" . $this->db->escape($data['image']) . "', open = '" . $this->db->escape($data['open']) . "', comment = '" . $this->db->escape($data['comment']) . "' WHERE location_id = '" . (int)$location_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "location SET name = '" . $this->db->escape($data['name']) . "', address = '" . $this->db->escape($data['address']) . "', geocode = '" . $this->db->escape($data['geocode']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', telephone1 = '" . $this->db->escape($data['telephone1']).  "', telephone2 = '" . $this->db->escape($data['telephone2']). "' , email = '". $this->db->escape($data['email']) . "', fax = '" . $this->db->escape($data['fax']) . "', image = '" . $this->db->escape($data['image']) ."', image_geo = '" . $this->db->escape($data['image_geo']) . "',location_order='" . $this->db->escape($data['location_order']) ."', is_online = '" . $this->db->escape($data['is_online']) ."', open = '" . $this->db->escape($data['open']) . "', comment = '" . $this->db->escape($data['comment']) . "'  WHERE location_id = '" . (int)$location_id . "'");
         /* added by it-lab* start */
         $this->db->query("DELETE FROM " . DB_PREFIX . "location_description WHERE location_id = '" . (int)$location_id . "'");
 
-        foreach ($data['product_description'] as $language_id => $value) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "location_description SET location_id = '" . (int)$location_id . "', language_id = '" . (int)$language_id . "', address = '" . $this->db->escape($value['address']) . "', open = '" . $this->db->escape($value['open'])."'" );
+        foreach ($data['location_description'] as $language_id => $value) {
+            $this->db->query("INSERT INTO " . DB_PREFIX . "location_description SET location_id = '" . (int)$location_id . "', language_id = '" . (int)$language_id . "', address = '" . $this->db->escape($value['address']) . "', open = '" . $this->db->escape($value['open']). "', country = '" . $this->db->escape($value['country']) . "', city = '" . $this->db->escape($value['city']) . "', district = '" . $this->db->escape($value['district'])."'" );
         }
         /* added by it-lab* start end */
 	}
@@ -35,7 +35,7 @@ class ModelLocalisationLocation extends Model {
 	}
 
 	public function getLocations($data = array()) {
-		$sql = "SELECT location_id, name, address FROM " . DB_PREFIX . "location";
+		$sql = "SELECT location_id, name, address, location_order FROM " . DB_PREFIX . "location";
 
 		$sort_data = array(
 			'name',
@@ -85,6 +85,9 @@ class ModelLocalisationLocation extends Model {
         foreach ($query->rows as $result) {
             $location_description_data[$result['language_id']] = array(
                 'address'          => $result['address'],
+                'country'          => $result['country'],
+                'city'             => $result['city'],
+                'district'         => $result['district'],
                 'open'             => $result['open']
             );
         }
@@ -100,6 +103,9 @@ class ModelLocalisationLocation extends Model {
         foreach ($query->rows as $result) {
             $location_description_data = array(
                 'address'          => $result['address'],
+                'country'          => $result['country'],
+                'city'             => $result['city'],
+                'district'         => $result['district'],
                 'open'             => $result['open']
             );
             break;

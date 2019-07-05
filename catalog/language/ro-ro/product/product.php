@@ -30,6 +30,11 @@ $_['text_week']                               = 'săptămână';
 $_['text_semi_month']                         = 'jumătate de lună';
 $_['text_month']                              = 'lună';
 $_['text_year']                               = 'An';
+$_['text_sku']                                = 'Cod produs:';
+$_['text_garanty']                            = 'Garanție:';
+$_['text_available_online']                   = 'Disponibil online';
+$_['text_available_in_stores']                = 'Si in magazine';
+$_['text_not_available']                      = 'Indisponibil';
 
 // Entry
 $_['entry_qty']                               = 'Cantitate';
@@ -44,6 +49,8 @@ $_['entry_captcha']                           = 'Introdu codul din imagine:';
 $_['tab_description']                         = 'Descriere';
 $_['tab_attribute']                           = 'Specificaţii';
 $_['tab_review']                              = 'Opinii (%s)';
+$_['tab_documentation']                       = 'Documentație';
+
 
 // Error
 $_['error_name']                              = 'Eroare: Numele trebuie să conțină între 3 și 32 de caractere!';

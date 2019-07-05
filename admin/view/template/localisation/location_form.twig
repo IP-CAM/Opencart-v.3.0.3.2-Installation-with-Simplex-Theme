@@ -58,6 +58,57 @@
               {% endif %}
             </div>
           </div>
+          {#          /* added by it-lab* start */#}
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-telephone">{{ entry_telephone1 }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="telephone1" value="{{ telephone1 }}" placeholder="{{ entry_telephone1 }}" id="input-telephone1" class="form-control" />
+              {% if error_telephone1 %}
+                <div class="text-danger">{{ error_telephone1 }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-telephone">{{ entry_telephone2 }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="telephone2" value="{{ telephone1 }}" placeholder="{{ entry_telephone2 }}" id="input-telephone2" class="form-control" />
+              {% if error_telephone1 %}
+                <div class="text-danger">{{ error_telephone2 }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-telephone">{{ entry_email }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control" />
+              {% if error_email %}
+                <div class="text-danger">{{ error_email }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-telephone">{{ entry_order }}</label>
+            <div class="col-sm-10">
+              <input type="number" name="location_order" value="{{ location_order }}" placeholder="{{ entry_order }}" id="input-order" class="form-control" />
+              {% if error_location_order %}
+                <div class="text-danger">{{ error_location_order }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-telephone">Is online</label>
+            <div class="col-sm-10">
+              <input type="checkbox" name="is_online"  {% if is_online %} checked {% endif %} value="{{ is_online }}" placeholder="{{ entry_is_online }}" id="input-is_online" class="form-control" />
+              {% if error_is_online %}
+                <div class="text-danger">{{ error_is_online }}</div>
+              {% endif %}
+            </div>
+          </div>
+          {#          /* added by it-lab* end */#}
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-telephone">{{ entry_fax }}</label>
             <div class="col-sm-10">
@@ -70,6 +121,14 @@
               <input type="hidden" name="image" value="{{ image }}" id="input-image" />
             </div>
           </div>
+          {#          /* added by it-lab* start */#}
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-image_geo">{{ entry_image_geo }}</label>
+            <div class="col-sm-10"><a href="" id="thumb-image_geo" data-toggle="image" class="img-thumbnail"><img src="{{ thumb_geo }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+              <input type="hidden" name="image_geo" value="{{ image_geo }}" id="input-image_geo" />
+            </div>
+          </div>
+          {#          /* added by it-lab* end */#}
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-open"><span data-toggle="tooltip" data-container="#content" title="{{ help_open }}">{{ entry_open }}</span></label>
             <div class="col-sm-10">
@@ -114,10 +173,74 @@
                 </div>
 
                 <div class="form-group row required">
+                  <label class="col-sm-2 col-form-label" for="input-name{{ language.language_id }}">{{ entry_country }}</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" name="location_description[{{ language.language_id }}][country]" value="{{ location_description[language.language_id] ? location_description[language.language_id].country }}" placeholder="{{ entry_country }}" id="input-name{{ language.language_id }}" class="form-control"/>
+                      {% if master_id %}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" name="" value="" id="input-variant-name{{ language.language_id }}" class="custom-control-input"><label class="custom-control-label" for="input-variant-name{{ language.language_id }}"></label>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                    {% if error_address[language.language_id] %}
+                      <div class="invalid-feedback">{{ error_address[language.language_id] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="form-group row required">
+                  <label class="col-sm-2 col-form-label" for="input-name{{ language.language_id }}">{{ entry_city }}</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" name="location_description[{{ language.language_id }}][city]" value="{{ location_description[language.language_id] ? location_description[language.language_id].city }}" placeholder="{{ entry_city }}" id="input-name{{ language.language_id }}" class="form-control"/>
+                      {% if master_id %}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" name="" value="" id="input-variant-name{{ language.language_id }}" class="custom-control-input"><label class="custom-control-label" for="input-variant-name{{ language.language_id }}"></label>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                    {% if error_address[language.language_id] %}
+                      <div class="invalid-feedback">{{ error_address[language.language_id] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="form-group row required">
+                  <label class="col-sm-2 col-form-label" for="input-name{{ language.language_id }}">{{ entry_district }}</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" name="location_description[{{ language.language_id }}][district]" value="{{ location_description[language.language_id] ? location_description[language.language_id].district }}" placeholder="{{ entry_district }}" id="input-name{{ language.language_id }}" class="form-control"/>
+                      {% if master_id %}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" name="" value="" id="input-variant-name{{ language.language_id }}" class="custom-control-input"><label class="custom-control-label" for="input-variant-name{{ language.language_id }}"></label>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                    {% if error_address[language.language_id] %}
+                      <div class="invalid-feedback">{{ error_address[language.language_id] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+
+                <div class="form-group row required">
                   <label class="col-sm-2 col-form-label" for="input-name{{ language.language_id }}">{{ entry_open }}</label>
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="text" name="location_description[{{ language.language_id }}][open]" value="{{ location_description[language.language_id] ? location_description[language.language_id].open }}" placeholder="{{ entry_open }}" id="input-name{{ language.language_id }}" class="form-control"/>
+                      <textarea type="text"  name="location_description[{{ language.language_id }}][open]"  data-toggle="summernote" placeholder="{{ entry_open }}" id="input-name{{ language.language_id }}" class="form-control">{{ location_description[language.language_id] ? location_description[language.language_id].open }}</textarea>
                       {% if master_id %}
                         <div class="input-group-append">
                           <div class="input-group-text">

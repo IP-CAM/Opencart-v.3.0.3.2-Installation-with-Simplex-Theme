@@ -90,36 +90,6 @@
               {{ language }}
             </li>
             {{ pavmegamenu }}
-            {#<li class="nav-item dropdown active">
-              <div id="catalog">
-                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
-                   data-toggle="dropdown"
-                   href="#" role="button">
-                  Catalog
-                </a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#"><!--TODO: Catalog--></a>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div id="about_us">
-                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
-                   data-toggle="dropdown"
-                   href="#" role="button">
-                  Despre Simplex
-                </a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#"><!--TODO: About Simplex--></a>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Noutăți</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contacte</a>
-            </li>#}
           </ul>
           <!--TODO: Collapsed menu-->
         </div>
@@ -138,12 +108,24 @@
         <div class="nav-button" id="profile">
           <div class="dropdown">
             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
-               href="#"
+               href="{{ account }}"
                role="button">
               <img alt="Profile" src="catalog/view/theme/simplex/assets/img/profile.png">
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#"><!--TODO: Profile--></a>
+              <ul>
+              {% if logged %}
+                <li><a href="{{ account }}">{{ text_account }}</a></li>
+                <li><a href="{{ order }}">{{ text_order }}</a></li>
+                <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+                <li><a href="{{ download }}">{{ text_download }}</a></li>
+                <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+              {% else %}
+                <li><a href="{{ register }}">{{ text_register }}</a></li>
+                <li><a href="{{ login }}">{{ text_login }}</a></li>
+              {% endif %}
+              </ul>
+             {# <a class="dropdown-item" href="#"><!--TODO: Profile--></a>#}
             </div>
           </div>
         </div>
@@ -151,10 +133,10 @@
           <a href="#"><img alt="Compare" src="catalog/view/theme/simplex/assets/img/compare.png"></a>
         </div>
         <div class="nav-button" id="favorite">
-          <a href="#"><img alt="Favorites" src="catalog/view/theme/simplex/assets/img/favorites.png"></a>
+          <a id="wishlist-total"  title="{{ text_wishlist }}" href="{{ wishlist }}"><img alt="Favorites" src="catalog/view/theme/simplex/assets/img/favorites.png"><span  class="quantity">{{ wishlist_count }}</span></a>
         </div>
         <div class="nav-button" id="cart">
-          <a href="#"><img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png"><span class="quantity">0</span></a>
+          <a href="{{ shopping_cart }}"><img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png"><span  class="quantity">{{ cart_count }}</span></a>
           <!--TODO: Cart poppup-->
         </div>
         <div class="phone">
@@ -170,9 +152,9 @@
       <nav class="menu">
         <ul>
             {% for category in catalog.children %}
-                <li class="menu-item"><a class="menu-link" href="{{ category.link }}" class="nav-link">
-                        {% if category.image !='' %}
-                          <img src='image/{{ category.image }}' >
+                <li class="menu-item {{ category.active?'active'}}"><a class="menu-link" href="{{ category.link }}" >
+                        {% if category.image_svg !='' %}
+                          {{ category.image_svg }}
                         {% endif %}
                         {{ category.title }}
                     </a>

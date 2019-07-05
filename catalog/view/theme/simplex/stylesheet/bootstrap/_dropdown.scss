@@ -1,10 +1,4 @@
 // The dropdown wrapper (`<div>`)
-.dropup,
-.dropright,
-.dropdown,
-.dropleft {
-	position : relative;
-}
 
 .dropdown-toggle {
 	white-space : nowrap;
@@ -53,54 +47,6 @@
 
 // Allow for dropdowns to go bottom up (aka, dropup-menu)
 // Just add .dropup after the standard .dropdown class and you're set.
-.dropup {
-	.dropdown-menu {
-		bottom        : 100%;
-		margin-bottom : $dropdown-spacer;
-		margin-top    : 0;
-		top           : auto;
-	}
-	
-	.dropdown-toggle {
-		@include caret(up);
-	}
-}
-
-.dropright {
-	.dropdown-menu {
-		left        : 100%;
-		margin-left : $dropdown-spacer;
-		margin-top  : 0;
-		right       : auto;
-		top         : 0;
-	}
-	
-	.dropdown-toggle {
-		@include caret(right);
-		
-		&::after {
-			vertical-align : 0;
-		}
-	}
-}
-
-.dropleft {
-	.dropdown-menu {
-		left         : auto;
-		margin-right : $dropdown-spacer;
-		margin-top   : 0;
-		right        : 100%;
-		top          : 0;
-	}
-	
-	.dropdown-toggle {
-		@include caret(left);
-		
-		&::before {
-			vertical-align : 0;
-		}
-	}
-}
 
 // When enabled Popper.js, reset basic dropdown position
 // stylelint-disable-next-line no-duplicate-selectors
@@ -115,9 +61,6 @@
 }
 
 // Dividers (basically an `<hr>`) within the dropdown
-.dropdown-divider {
-	@include nav-divider($dropdown-divider-bg, $dropdown-divider-margin-y);
-}
 
 // Links, buttons, and more within the dropdown menu
 //

@@ -1,0 +1,18 @@
+<div id="subscribe-card"  class="newsletter_{{ id }}">
+    <form method="post" class="formNewLestter newsletter-bg" action="{{ action }}"  data-mode="default">
+        <label for="email"><p>{{ description }}</p></label>
+        <p>{{ social }}</p>
+        <input name="email" class="inputNew" id="email" placeholder="Adresa dvs. e-mail" type="email">
+        <button class="newsletter_{{ id }}" type="submit" name="submitNewsletter">
+            {{ button_subscribe }}
+            <span class="image-container"></span>
+        </button>
+        <input type="hidden" value="1" name="action">
+        <div class="valid"></div>
+    </form>
+</div>
+<script><!--
+    $(".newsletter_{{ id }}").pavoNewsletter({
+        message: '{{ valid_email }}'
+    });//.work(  '{{ valid_email }}' );
+// --></script>

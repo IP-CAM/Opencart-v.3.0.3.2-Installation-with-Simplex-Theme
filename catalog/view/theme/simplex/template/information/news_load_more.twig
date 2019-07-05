@@ -1,0 +1,14 @@
+{% for information in informations %}
+        <div class="item">
+            <div class="card">
+                <a href="{{ information.href }}"><img alt="New 1" class="card-img-top"
+                                                      src="{{ information.thumb }}"></a>
+                <div class="card-body">
+                    <div class="card-text">
+                        <a href="{{ information.href }}">{{ information.title }}</a>
+                    </div>
+                    <span class="card-date">{{ information.date_added }}</span>
+                </div>
+            </div>
+        </div>
+{% endfor %}

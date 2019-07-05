@@ -21,10 +21,19 @@ $_['entry_name']       = 'Nume magazin';
 $_['entry_address']    = 'Adresă';
 $_['entry_geocode']    = 'Geocod';
 $_['entry_telephone']  = 'Telefon';
+$_['entry_telephone1'] = 'Consilier termo/hidro';
+$_['entry_telephone2'] = 'Consilier obiecte sanitare';
 $_['entry_fax']        = 'Fax';
 $_['entry_image']      = 'imagine';
 $_['entry_open']       = 'Program de Lucru';
 $_['entry_comment']    = 'Comentariu';
+$_['entry_country']    = 'Country';
+$_['entry_city']       = 'City';
+$_['entry_district']   = 'District';
+$_['entry_email']      = 'Email';
+$_['entry_image_geo']  = 'Image geo';
+$_['entry_order']      = 'Order';
+$_['entry_is_online']  = 'Is online';
 
 // Help
 $_['help_geocode']     = 'Introdu geocodul locației magazinului manual.';

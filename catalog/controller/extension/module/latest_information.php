@@ -57,7 +57,7 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 			$data['date'] = $setting['date'];
 			$data['review'] = $setting['review'];
 			$data['rating'] = $setting['rating'];
-            $data['href_category'] = $this->url->link('product/category', 'path=' . $setting['category_id']);
+            $data['href_category'] = $this->url->link('information/category', 'path=' . $setting['category_id']);
 			return $this->load->view('extension/module/latest_information', $data);
 		}
 	}

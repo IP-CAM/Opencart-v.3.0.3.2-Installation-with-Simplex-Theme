@@ -439,7 +439,40 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->load->model('tool/image');
 
-		if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
+        /* added by it-lab start */
+        if (isset($this->request->post['template'])) {
+            $data['template'] = $this->request->post['template'];
+        } elseif (!empty($category_info)) {
+            $data['template'] = $category_info['template'];
+        } else {
+            $data['template'] = '';
+        }
+        if (isset($this->request->post['template'])) {
+            $data['count_few'] = $this->request->post['count_few'];
+        } elseif (!empty($category_info)) {
+            $data['count_few'] = $category_info['count_few'];
+        } else {
+            $data['count_few'] = '';
+        }
+
+        if (isset($this->request->post['template'])) {
+            $data['count_medium'] = $this->request->post['count_medium'];
+        } elseif (!empty($category_info)) {
+            $data['count_medium'] = $category_info['count_medium'];
+        } else {
+            $data['count_medium'] = '';
+        }
+
+        if (isset($this->request->post['template'])) {
+            $data['count_lot'] = $this->request->post['count_lot'];
+        } elseif (!empty($category_info)) {
+            $data['count_lot'] = $category_info['count_lot'];
+        } else {
+            $data['count_lot'] = '';
+        }
+        /* added by it-lab end */
+
+        if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
 			$data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
 		} elseif (!empty($category_info) && is_file(DIR_IMAGE . $category_info['image'])) {
 			$data['thumb'] = $this->model_tool_image->resize($category_info['image'], 100, 100);

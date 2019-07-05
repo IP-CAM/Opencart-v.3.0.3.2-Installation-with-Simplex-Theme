@@ -143,7 +143,10 @@ $_['tab_activity']                  = 'Activitate Recentă';
 $_['tab_recurring']                 = 'Abonamente';
 $_['tab_action']                    = 'Acțiuni';
 $_['tab_google']                    = 'Google';
-
+/* added by it-lab* start */
+$_['tab_location']                  = 'Store Locations';
+$_['tab_count_limits']              = 'Availability Counters';
+/* added by it-lab* start end */
 // Error
 $_['error_exception']               = 'Cod Eroare(%s): %s în %s pe linia %s';
 $_['error_upload_1']                = 'Avertizare: Fișierul încărcat depașește directiva upload_max_filesize din php.ini!';

@@ -30,6 +30,9 @@
             <li><a href="#tab-data" data-toggle="tab">{{ tab_data }}</a></li>
             <li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>
             <li><a href="#tab-design" data-toggle="tab">{{ tab_design }}</a></li>
+{#            /* added by it-lab start */#}
+            <li><a href="#tab-count-limits" data-toggle="tab">{{ tab_count_limits }}</a></li>
+{#            /* added by it-lab end */#}
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -171,6 +174,12 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-sort-order">Template</label>
+                <div class="col-sm-10">
+                  <input type="text" name="template" value="{{ template }}" placeholder="{{ entry_template }}" id="input-template" class="form-control" />
+                </div>
+              </div>
             </div>
             <div class="tab-pane" id="tab-seo">
               <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_keyword }}</div>
@@ -231,6 +240,28 @@
                 </table>
               </div>
             </div>
+{#            /* added by it-lab start */#}
+            <div class="tab-pane" id="tab-count-limits">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_count_few }}</label>
+                <div class="col-sm-10">
+                  <input type="number" name="count_few" value="{{ count_few }}" placeholder="{{ entry_count_few }}" id="input-count-few" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_count_medium }}</label>
+                <div class="col-sm-10">
+                  <input type="number" name="count_medium" value="{{ count_medium }}" placeholder="{{ entry_count_medium }}" id="input-count-medium" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group" style="display: none">
+                <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_count_lot }}</label>
+                <div class="col-sm-10">
+                  <input type="number" name="count_lot" value="1000" placeholder="{{ entry_count_lot }}" id="input-count-medium" class="form-control" />
+                </div>
+              </div>
+            </div>
+{#            /* added by it-lab start */#}
           </div>
         </form>
       </div>

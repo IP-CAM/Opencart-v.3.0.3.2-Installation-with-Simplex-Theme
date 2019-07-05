@@ -30,6 +30,11 @@ $_['text_week']                = 'week';
 $_['text_semi_month']          = 'half-month';
 $_['text_month']               = 'month';
 $_['text_year']                = 'year';
+$_['text_sku']                 = 'SKU:';
+$_['text_garanty']             = 'Garanty:';
+$_['text_available_online']    = 'Available online';
+$_['text_available_in_stores'] = 'also in stores';
+$_['text_not_available']       = 'Not available';
 
 // Entry
 $_['entry_qty']                = 'Qty';
@@ -43,6 +48,7 @@ $_['entry_bad']                = 'Bad';
 $_['tab_description']          = 'Description';
 $_['tab_attribute']            = 'Specification';
 $_['tab_review']               = 'Reviews (%s)';
+$_['tab_documentation']        = 'Documentation';
 
 // Error
 $_['error_name']               = 'Warning: Review Name must be between 3 and 25 characters!';

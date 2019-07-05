@@ -80,7 +80,6 @@ class ControllerExtensionModulePavnewsletter extends Controller {
 		$this->mdata['module']      = rand();
 		$this->mdata['name']   		= isset($setting['name']) ? $setting['name'] : '';
 		$this->mdata['id']	 = uniqid();
-
 		$template = 'extension/module/pavnewsletter/'.$this->mdata['mode'];
 
 

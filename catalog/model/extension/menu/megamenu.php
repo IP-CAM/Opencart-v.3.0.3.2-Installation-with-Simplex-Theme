@@ -6,7 +6,15 @@
  * @copyright	Copyright (C) September 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
  * @license		GNU General Public License version 2
 *******************************************************/
+function endsWith($haystack, $needle)
+{
+    $length = strlen($needle);
+    if ($length == 0) {
+        return true;
+    }
 
+    return (substr($haystack, -$length) === $needle);
+}
 class ModelExtensionMenuMegamenu extends Model {
 
 	private $output = false;
@@ -65,6 +73,7 @@ class ModelExtensionMenuMegamenu extends Model {
 	private $tree=null;
     public function getTreeData( $parent=1 , $edit=false, $params, $store_id = 0)
     {
+        $url = $_SERVER["REQUEST_URI"];
         if(is_null($this->tree)) {
             $tree = array();
         }else{
@@ -113,8 +122,9 @@ class ModelExtensionMenuMegamenu extends Model {
             // render menu at level 0
             foreach ($data as $menu) {
                 $menu["link"]=$this->getLink( $menu );
-                $tree[$menu['megamenu_id']] = $menu;
 
+
+                $tree[$menu['megamenu_id']] = $menu;
                 if ($this->hasChild($menu['megamenu_id']) ) {
                     $child_nodes = $this->getNodes($menu['megamenu_id']);
                     if($menu['menu_class']=='catalog'){
@@ -123,14 +133,38 @@ class ModelExtensionMenuMegamenu extends Model {
                         $tree[$menu['megamenu_id']]['data_toogle']='dropdown';
                     }
                     $tree[$menu['megamenu_id']]['children'] = array();
-                    foreach ($child_nodes as $child_node) {
+                    foreach ($child_nodes as &$child_node) {
                         $child_node["link"]=$this->getLink( $child_node );
+                        $link=htmlspecialchars_decode ($child_node["link"]);
+
+                        if(endsWith($link,$url) || endsWith("/".$link,$url)){
+                            $child_node["active"]=true;
+                            $tree[$menu['megamenu_id']]["active"]=true;
+                        }else{
+                            $child_node["active"]=false;
+
+                        }
+                        if(!isset( $tree[$menu['megamenu_id']]["active"])) {
+                            $tree[$menu['megamenu_id']]["active"] = false;
+                        }
+                        if(!empty($child_node['image']) & file_exists('image/'.$child_node['image'])){
+                            $child_node['image_svg']=file_get_contents('image/'.$child_node['image']);
+                        }else{
+                            $child_node['image_svg'] = '';
+                        }
                         $tree[$menu['megamenu_id']]['children'][] = $child_node;
+
                     }
 
                 }else{
                     $tree[$menu['megamenu_id']]['children']=false;
                     $tree[$menu['megamenu_id']]['data_toogle']='';
+                    $link=htmlspecialchars_decode ($menu["link"]);
+                    if(endsWith($link,$url)|| endsWith("/".$link,$url)){
+                        $tree[$menu['megamenu_id']]["active"]=true;
+                    }else{
+                        $tree[$menu['megamenu_id']]["active"]=false;
+                    }
                 }
             }
         }
@@ -440,7 +474,7 @@ class ModelExtensionMenuMegamenu extends Model {
 	}
 
 	public function getParentCategory($id_child){
-		$result = $this->db->query("SELECT `parent_id` FROM `" . DB_PREFIX . "category` WHERE `category_id` = '".$id_child."'");
+		$result = $this->db->query("SELECT `parent_id`,`information` FROM `" . DB_PREFIX . "category` WHERE `category_id` = '".$id_child."'");
  		return $result->row;
 	}
 
@@ -448,24 +482,27 @@ class ModelExtensionMenuMegamenu extends Model {
 	 *
 	 */
 	public function getLink( $menu ){
-		$id = (int)$menu['item'];
-		switch( $menu['type'] ){
-			case 'category':
-				$parent = $this->getParentCategory($id);
-				if( $parent && isset($parent['parent_id']) && $parent['parent_id'] ){
-					$id = $parent['parent_id'].'_'.$id;
-				}
-				return $this->url->link('product/category', 'path=' . $id,'SSL');
-			case 'product':
-				return  $this->url->link('product/product', 'product_id=' . $id,'SSL');
-			case 'information':
-				return   $this->url->link('information/information', 'information_id=' . $id,'SSL');
-			case 'manufacturer':
-				return  $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $id,'SSL');
-			default:
-				return $menu['url'];
-		}
-	}
+        $id = (int)$menu['item'];
+        switch( $menu['type'] ){
+            case 'category':
+                $parent = $this->getParentCategory($id);
+                if( $parent && isset($parent['parent_id']) && $parent['parent_id'] ){
+                    $id = $parent['parent_id'].'_'.$id;
+                }
+                if($parent && isset($parent['information']) && $parent['information'] ){
+                    return $this->url->link('information/category', 'path=' . $id,'SSL');
+                }
+                return $this->url->link('product/category', 'path=' . $id,'SSL');
+            case 'product':
+                return  $this->url->link('product/product', 'product_id=' . $id,'SSL');
+            case 'information':
+                return   $this->url->link('information/information', 'information_id=' . $id,'SSL');
+            case 'manufacturer':
+                return  $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $id,'SSL');
+            default:
+                return $menu['url'];
+        }
+    }
 
 	/**
 	 *

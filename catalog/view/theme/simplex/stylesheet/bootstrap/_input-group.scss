@@ -5,57 +5,15 @@
 //
 
 .input-group {
-	@include flex(none, none, stretch, wrap); // For form validation feedback
+	@include inline-flex(none, none, center); // For form validation feedback
 	position : relative;
-	width    : 100%;
-	
-	> .form-control,
-	> .form-control-plaintext,
-	> .custom-select,
-	> .custom-file {
-		flex          : 1 1 auto;
-		margin-bottom : 0;
-		// Add width 1% and flex-basis auto to ensure that button will not wrap out
-		// the column. Applies to IE Edge+ and Firefox. Chrome does not require this.
-		position      : relative; // For focus state's z-index
-		width         : 1%;
-		
-		+ .form-control,
-		+ .custom-select,
-		+ .custom-file {
-			margin-left : -$input-border-width;
-		}
-	}
 	
 	// Bring the "active" form control to the top of surrounding elements
-	> .form-control:focus,
-	> .custom-select:focus,
-	> .custom-file .custom-file-input:focus ~ .custom-file-label {
-		z-index : 3;
-	}
 	
 	// Bring the custom file input above the label
-	> .custom-file .custom-file-input:focus {
-		z-index : 4;
-	}
-	
-	> .form-control,
-	> .custom-select {
-		&:not(:last-child) { @include border-right-radius(0); }
-		
-		&:not(:first-child) { @include border-left-radius(0); }
-	}
 	
 	// Custom file inputs have more complex markup, thus requiring different
 	// border-radius overrides.
-	> .custom-file {
-		@include flex(none, none, center);
-		
-		&:not(:last-child) .custom-file-label,
-		&:not(:last-child) .custom-file-label::after { @include border-right-radius(0); }
-		
-		&:not(:first-child) .custom-file-label { @include border-left-radius(0); }
-	}
 }
 
 
@@ -81,12 +39,6 @@
 		}
 	}
 	
-	.btn + .btn,
-	.btn + .input-group-text,
-	.input-group-text + .input-group-text,
-	.input-group-text + .btn {
-		margin-left : -$input-border-width;
-	}
 }
 
 .input-group-prepend { margin-right : -$input-border-width; }
@@ -99,72 +51,11 @@
 // Serves as a catch-all element for any text or radio/checkbox input you wish
 // to prepend or append to an input.
 
-.input-group-text {
-	align-items      : center;
-	background-color : $input-group-addon-bg;
-	border           : $input-border-width solid $input-group-addon-border-color;
-	color            : $input-group-addon-color;
-	@include font-size($input-font-size); // Match inputs
-	display          : flex;
-	font-weight      : $font-weight-normal;
-	line-height      : $input-line-height;
-	margin-bottom    : 0; // Allow use of <label> elements by overriding our default margin-bottom
-	padding          : $input-padding-y $input-padding-x;
-	text-align       : center;
-	white-space      : nowrap;
-	@include border-radius($input-border-radius);
-	
-	// Nuke default margins from checkboxes and radios to vertically center within.
-	input[type="radio"],
-	input[type="checkbox"] {
-		margin-top : 0;
-	}
-}
-
 
 // Sizing
 //
 // Remix the default form control sizing classes into new ones for easier
 // manipulation.
-
-.input-group-lg > .form-control:not(textarea),
-.input-group-lg > .custom-select {
-	height : $input-height-lg;
-}
-
-.input-group-lg > .form-control,
-.input-group-lg > .custom-select,
-.input-group-lg > .input-group-prepend > .input-group-text,
-.input-group-lg > .input-group-append > .input-group-text,
-.input-group-lg > .input-group-prepend > .btn,
-.input-group-lg > .input-group-append > .btn {
-	line-height : $input-line-height-lg;
-	@include font-size($input-font-size-lg);
-	padding     : $input-padding-y-lg $input-padding-x-lg;
-	@include border-radius($input-border-radius-lg);
-}
-
-.input-group-sm > .form-control:not(textarea),
-.input-group-sm > .custom-select {
-	height : $input-height-sm;
-}
-
-.input-group-sm > .form-control,
-.input-group-sm > .custom-select,
-.input-group-sm > .input-group-prepend > .input-group-text,
-.input-group-sm > .input-group-append > .input-group-text,
-.input-group-sm > .input-group-prepend > .btn,
-.input-group-sm > .input-group-append > .btn {
-	line-height : $input-line-height-sm;
-	@include font-size($input-font-size-sm);
-	padding     : $input-padding-y-sm $input-padding-x-sm;
-	@include border-radius($input-border-radius-sm);
-}
-
-.input-group-lg > .custom-select,
-.input-group-sm > .custom-select {
-	padding-right : $custom-select-padding-x + $custom-select-indicator-padding;
-}
 
 
 // Prepend and append rounded corners
@@ -174,20 +65,3 @@
 // with the `.input-group >` part, but without it, we cannot override the sizing.
 
 
-.input-group > .input-group-prepend > .btn,
-.input-group > .input-group-prepend > .input-group-text,
-.input-group > .input-group-append:not(:last-child) > .btn,
-.input-group > .input-group-append:not(:last-child) > .input-group-text,
-.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
-.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
-	@include border-right-radius(0);
-}
-
-.input-group > .input-group-append > .btn,
-.input-group > .input-group-append > .input-group-text,
-.input-group > .input-group-prepend:not(:first-child) > .btn,
-.input-group > .input-group-prepend:not(:first-child) > .input-group-text,
-.input-group > .input-group-prepend:first-child > .btn:not(:first-child),
-.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
-	@include border-left-radius(0);
-}

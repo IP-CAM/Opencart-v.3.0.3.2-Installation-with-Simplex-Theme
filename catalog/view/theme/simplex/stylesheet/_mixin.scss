@@ -196,6 +196,13 @@
 	@include flex-wrap($wrap);
 }
 
+@mixin inline-flex($dir: none, $pos_align_x: none, $pos_align_y: none, $wrap: none) {
+	display : inline-flex;
+	
+	@include flex-align($dir, $pos_align_x, $pos_align_y);
+	@include flex-wrap($wrap);
+}
+
 @mixin grid {
 	display : -ms-grid;
 	display : grid;
@@ -206,7 +213,7 @@
 	//-moz-transform    : $transform;
 	//-ms-transform     : $transform;
 	//-o-transform      : $transform;
-	transform         : $transform;
+	transform : $transform;
 }
 
 @mixin transition($transition) {
@@ -214,7 +221,7 @@
 	//-moz-transition    : $transition;
 	//-ms-transition     : $transition;
 	//-o-transition      : $transition;
-	transition         : $transition;
+	transition : $transition;
 }
 
 @mixin user-select($select : none) {

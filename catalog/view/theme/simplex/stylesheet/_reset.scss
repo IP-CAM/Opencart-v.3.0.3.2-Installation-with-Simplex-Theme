@@ -63,6 +63,10 @@ q:before, q:after {
 	content : '';
 }
 
+svg {
+	shape-rendering : geometricPrecision;
+}
+
 table {
 	border-collapse : collapse;
 	border-spacing  : 0;

@@ -17,6 +17,12 @@ class ControllerLocalisationLocation extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
+        /* added by it-lab start */
+        $this->document->addScript('view/javascript/summernote/summernote.js');
+        $this->document->addScript('view/javascript/summernote/opencart.js');
+        $this->document->addStyle('view/javascript/summernote/summernote.css');
+        /* added by it-lab end */
+
 		$this->load->model('localisation/location');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
@@ -48,7 +54,11 @@ class ControllerLocalisationLocation extends Controller {
 		$this->load->language('localisation/location');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
+        /* added by it-lab start */
+        $this->document->addScript('view/javascript/summernote/summernote.js');
+        $this->document->addScript('view/javascript/summernote/opencart.js');
+        $this->document->addStyle('view/javascript/summernote/summernote.css');
+        /* added by it-lab end */
 		$this->load->model('localisation/location');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
@@ -176,7 +186,10 @@ class ControllerLocalisationLocation extends Controller {
 				'location_id' => $result['location_id'],
 				'name'        => $result['name'],
 				'address'     => $result['address'],
-				'edit'        => $this->url->link('localisation/location/edit', 'user_token=' . $this->session->data['user_token'] . '&location_id=' . $result['location_id'] . $url, true)
+                /* added by it-lab start */
+                'location_order'=> $result['location_order'],
+                /* added by it-lab end */
+                'edit'        => $this->url->link('localisation/location/edit', 'user_token=' . $this->session->data['user_token'] . '&location_id=' . $result['location_id'] . $url, true)
 			);
 		}
 
@@ -361,7 +374,52 @@ class ControllerLocalisationLocation extends Controller {
 		} else {
 			$data['telephone'] = '';
 		}
-		
+
+        /* added by it-lab start */
+
+        if (isset($this->request->post['telephone1'])) {
+            $data['telephone1'] = $this->request->post['telephone1'];
+        } elseif (!empty($location_info)) {
+            $data['telephone1'] = $location_info['telephone1'];
+        } else {
+            $data['telephone1'] = '';
+        }
+
+        if (isset($this->request->post['telephone2'])) {
+            $data['telephone2'] = $this->request->post['telephone2'];
+        } elseif (!empty($location_info)) {
+            $data['telephone2'] = $location_info['telephone2'];
+        } else {
+            $data['telephone2'] = '';
+        }
+
+        if (isset($this->request->post['email'])) {
+            $data['email'] = $this->request->post['email'];
+        } elseif (!empty($location_info)) {
+            $data['email'] = $location_info['email'];
+        } else {
+            $data['email'] = '';
+        }
+
+        if (isset($this->request->post['order'])) {
+            $data['location_order'] = $this->request->post['location_order'];
+        } elseif (!empty($location_info)) {
+            $data['location_order'] = $location_info['location_order'];
+        } else {
+            $data['location_order'] = '1';
+        }
+
+        if (isset($this->request->post['is_online'])) {
+            $data['is_online'] = $this->request->post['is_online'];
+        } elseif (!empty($location_info)) {
+            $data['is_online'] = $location_info['is_online'];
+        } else {
+            $data['is_online'] = 0;
+        }
+
+
+        /* added by it-lab end */
+
 		if (isset($this->request->post['fax'])) {
 			$data['fax'] = $this->request->post['fax'];
 		} elseif (!empty($location_info)) {
@@ -388,7 +446,27 @@ class ControllerLocalisationLocation extends Controller {
 			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 		}
 
-		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+        /* added by it-lab start */
+
+        if (isset($this->request->post['image_geo'])) {
+            $data['image_geo'] = $this->request->post['image_geo'];
+        } elseif (!empty($location_info)) {
+            $data['image_geo'] = $location_info['image_geo'];
+        } else {
+            $data['image_geo'] = '';
+        }
+
+        if (isset($this->request->post['image_geo']) && is_file(DIR_IMAGE . $this->request->post['image_geo'])) {
+            $data['thumb_geo'] = $this->model_tool_image->resize($this->request->post['image_geo'], 100, 100);
+        } elseif (!empty($location_info) && is_file(DIR_IMAGE . $location_info['image_geo'])) {
+            $data['thumb_geo'] = $this->model_tool_image->resize($location_info['image_geo'], 100, 100);
+        } else {
+            $data['thumb_geo'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+        }
+        /* added by it-lab end */
+
+
+        $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
 		if (isset($this->request->post['open'])) {
 			$data['open'] = $this->request->post['open'];

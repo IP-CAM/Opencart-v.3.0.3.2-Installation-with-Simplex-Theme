@@ -2,10 +2,11 @@
 
 $black : #000;
 $dark_gray : #2b2c30;
+$dark_yellow : #dda80e;
 $gray : #4c4d4d;
 $green : #92cf9b;
 $light_gray : #f5f4f2;
-$light_green : #92cf9b;
+//$light_green : #92cf9b;
 $text_gray : #97a6ab;
 $white : #fff;
 $yellow : #ffca30;
@@ -22,8 +23,8 @@ $font_dir : "../assets/fonts/";
 
 // Slick
 $slick-loader-path : "./" !default;
-$slick-arrow-color : white !default;
-$slick-dot-color : black !default;
+$slick-arrow-color : #fff !default;
+$slick-dot-color : #000 !default;
 $slick-dot-color-active : $slick-dot-color !default;
 $slick-prev-character : "\2190" !default;
 $slick-next-character : "\2192" !default;
@@ -32,3 +33,5 @@ $slick-dot-size : 6px !default;
 $slick-opacity-default : .75 !default;
 $slick-opacity-on-hover : 1 !default;
 $slick-opacity-not-active : .25 !default;
+
+$transition : 'all .25s linear' !default;

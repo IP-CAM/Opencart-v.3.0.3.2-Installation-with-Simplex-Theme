@@ -241,6 +241,64 @@ class ControllerProductProduct extends Controller {
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+            /* added by it-lab* start */
+            if(!isset($category_info)){
+                $product_categories = $this->model_catalog_product->getCategories($product_id);
+                if($product_categories) {
+                    $category_info = $this->model_catalog_category->getCategory($product_categories[0]['category_id']);
+                }
+            }
+
+
+            $data['sku'] = $product_info['sku'];
+            $data['garanty'] = $product_info['garanty'];
+            $data['documentation'] = html_entity_decode($product_info['documentation'], ENT_QUOTES, 'UTF-8');
+            $this->load->model('catalog/product');
+            $downloads = $this->model_catalog_product->getProductDownloads($product_id);
+            foreach($downloads as $download ){
+                if (file_exists(DIR_DOWNLOAD . $download['filename'])) {
+                    $size = filesize(DIR_DOWNLOAD . $download['filename']);
+
+                }
+                $data['downloads'][] = array(
+                    'name' => $download['name'],
+                    'href' => $this->url->link('product/product/download', 'product_id='. $this->request->get['product_id']. '&download_id=' . $download['download_id']),
+                    'size' => self::fileSizeConvert($size)
+                );
+            }
+            $this->load->model('localisation/location');
+            $location_descriptions= $this->model_localisation_location->getLocationDescriptions();
+            $product_locations=$this->model_catalog_product->getProductLocations($product_id);
+            $product_locations_ids = array_keys($product_locations);
+            $available_in_stores = false;
+            $total_count=0;
+            foreach ($location_descriptions as $location_id =>&$ld){
+                if(in_array($location_id,$product_locations_ids)){
+                    $ld['count']=$product_locations[$location_id]['quantity'];
+                }else{
+                    $ld["count"]=0;
+                }
+                $ld['open']=html_entity_decode($location_descriptions[$location_id]['open'], ENT_QUOTES, 'UTF-8');
+                if(!empty($ld['image_geo'])) {
+                    $ld['image_geo'] = 'image/' . $ld['image_geo'];
+                }else {
+                    $ld['image_geo'] = false;
+                }
+
+                if($ld['is_online']){
+                    $online_ld_id=$location_id;
+                }else {
+                    $available_in_stores = true;
+                    $total_count += $ld['count'];
+                    $ld["availability_level"] = self::getAwailabilityLevel($ld['count'],$category_info);
+                }
+
+            }
+            $location_descriptions[$online_ld_id]["availability_level"] = self::getAwailabilityLevel($total_count,$category_info);
+            $data['location_descriptions'] = $location_descriptions;
+            $data["availability_level"] = self::getAwailabilityLevel($total_count,$category_info);
+
+            /* added by it-lab* start end */
 
 			if ($product_info['quantity'] <= 0) {
 				$data['stock'] = $product_info['stock_status'];
@@ -283,10 +341,17 @@ class ControllerProductProduct extends Controller {
 
 			if ((float)$product_info['special']) {
 				$data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                /* added by it-lab start */
+                $data['special_percentage'] = round(100 - (($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax'))*100) / $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax'))));
+                $data['economy']= $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')) - $this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax'));
+                /* added by it-lab end */
 			} else {
 				$data['special'] = false;
+                /* added by it-lab start */
+                $data['special_percentage'] = false;
+                $data['economy'] = false;
+                /* added by it-lab end */
 			}
-
 			if ($this->config->get('config_tax')) {
 				$data['tax'] = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price'], $this->session->data['currency']);
 			} else {
@@ -392,8 +457,16 @@ class ControllerProductProduct extends Controller {
 
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                    /* added by it-lab start */
+                    $special_percentage = round(100 - (($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'))*100) / $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'))));
+                    $economy= $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')) - $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+                    /* added by it-lab end */
 				} else {
 					$special = false;
+                    /* added by it-lab start */
+                    $special_percentage = false;
+                    $economy = false;
+                    /* added by it-lab end */
 				}
 
 				if ($this->config->get('config_tax')) {
@@ -415,12 +488,79 @@ class ControllerProductProduct extends Controller {
 					'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
 					'special'     => $special,
+                    /* added by it-lab start */
+                    'special_percentage' => $special_percentage,
+                    'economy'     => $economy,
+                    /* added by it-lab end */
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $rating,
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
 				);
 			}
+
+            /* added by it-lab start */
+            if ($category_info) {
+                //var_dump($category_info['category_id']);
+                $results = $this->model_catalog_product->getRandomProductsFromCategory($category_info["category_id"],$product_id,10);
+                foreach ($results as $result) {
+                    if ($result['image']) {
+                        $image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+                    } else {
+                        $image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+                    }
+
+                    if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+                        $price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                    } else {
+                        $price = false;
+                    }
+
+                    if ((float)$result['special']) {
+                        $special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                        /* added by it-lab start */
+                        $special_percentage = round(100 - (($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')) * 100) / $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'))));
+                        $economy = $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')) - $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+                        /* added by it-lab end */
+                    } else {
+                        $special = false;
+                        /* added by it-lab start */
+                        $special_percentage = false;
+                        $economy = false;
+                        /* added by it-lab end */
+                    }
+
+                    if ($this->config->get('config_tax')) {
+                        $tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+                    } else {
+                        $tax = false;
+                    }
+
+                    if ($this->config->get('config_review_status')) {
+                        $rating = (int)$result['rating'];
+                    } else {
+                        $rating = false;
+                    }
+
+                    $data['products_asemenea'][] = array(
+                        'product_id' => $result['product_id'],
+                        'thumb' => $image,
+                        'name' => $result['name'],
+                        'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
+                        'price' => $price,
+                        'special' => $special,
+                        /* added by it-lab start */
+                        'special_percentage' => $special_percentage,
+                        'economy' => $economy,
+                        /* added by it-lab end */
+                        'tax' => $tax,
+                        'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,
+                        'rating' => $rating,
+                        'href' => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+                    );
+                }
+            }
+            /* added by it-lab end */
 
 			$data['tags'] = array();
 
@@ -434,7 +574,9 @@ class ControllerProductProduct extends Controller {
 					);
 				}
 			}
-
+            /* added by it-lab start */
+            $data['currency'] = $this->session->data['currency'];
+            /* added by it-lab end */
 			$data['recurrings'] = $this->model_catalog_product->getProfiles($this->request->get['product_id']);
 
 			$this->model_catalog_product->updateViewed($this->request->get['product_id']);
@@ -659,4 +801,96 @@ class ControllerProductProduct extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+    /* added by it-lab* start */
+    public function download() {
+        $this->load->model('catalog/product');
+
+        if (isset($this->request->get['download_id'])) {
+            $download_id = $this->request->get['download_id'];
+        } else {
+            $download_id = 0;
+        }
+
+        $download_info = $this->model_catalog_product->getDownload($download_id);
+
+        if ($download_info) {
+            $file = DIR_DOWNLOAD . $download_info['filename'];
+            $mask = basename($download_info['mask']);
+
+            if (!headers_sent()) {
+                if (file_exists($file)) {
+                    header('Content-Type: application/octet-stream');
+                    header('Content-Disposition: attachment; filename="' . ($mask ? $mask : basename($file)) . '"');
+                    header('Expires: 0');
+                    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                    header('Pragma: public');
+                    header('Content-Length: ' . filesize($file));
+
+                    if (ob_get_level()) {
+                        ob_end_clean();
+                    }
+
+                    readfile($file, 'rb');
+
+                    exit();
+                } else {
+                    exit('Error: Could not find file ' . $file . '!');
+                }
+            } else {
+                exit('Error: Headers already sent out!');
+            }
+        } else {
+            $this->response->redirect($this->url->link('account/download', '', true));
+        }
+    }
+
+    static function fileSizeConvert($bytes)
+    {
+        $bytes = floatval($bytes);
+        $arBytes = array(
+            0 => array(
+                "UNIT" => "Tb",
+                "VALUE" => pow(1024, 4)
+            ),
+            1 => array(
+                "UNIT" => "Gb",
+                "VALUE" => pow(1024, 3)
+            ),
+            2 => array(
+                "UNIT" => "Mb",
+                "VALUE" => pow(1024, 2)
+            ),
+            3 => array(
+                "UNIT" => "Kb",
+                "VALUE" => 1024
+            ),
+            4 => array(
+                "UNIT" => "B",
+                "VALUE" => 1
+            ),
+        );
+
+        foreach($arBytes as $arItem)
+        {
+            if($bytes >= $arItem["VALUE"])
+            {
+                $result = $bytes / $arItem["VALUE"];
+                $result = str_replace(".", "," , strval(round($result, 2)))." ".$arItem["UNIT"];
+                break;
+            }
+        }
+        return $result;
+    }
+
+    static function getAwailabilityLevel($count,$category_info){
+        if($count === 0){
+            return 0;
+        }elseif ($count<$category_info['count_few']){
+            return 1;
+        }elseif ($count<$category_info['count_medium']){
+            return 2;
+        }
+        return 3;
+    }
+    /* added by it-lab* end */
 }

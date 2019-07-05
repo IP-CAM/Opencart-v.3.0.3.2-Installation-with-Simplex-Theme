@@ -15,15 +15,9 @@
 	}
 	
 	> .list-group:first-child {
-		.list-group-item:first-child {
-			@include border-top-radius($card-border-radius);
-		}
 	}
 	
 	> .list-group:last-child {
-		.list-group-item:last-child {
-			@include border-bottom-radius($card-border-radius);
-		}
 	}
 }
 
@@ -37,11 +31,6 @@
 
 .card-title {
 	margin-bottom : $card-spacer-y;
-}
-
-.card-subtitle {
-	margin-bottom : 0;
-	margin-top    : -$card-spacer-y / 2;
 }
 
 .card-text:last-child {
@@ -74,9 +63,6 @@
 	}
 	
 	+ .list-group {
-		.list-group-item:first-child {
-			border-top : 0;
-		}
 	}
 }
 
@@ -95,27 +81,7 @@
 // Header navs
 //
 
-.card-header-tabs {
-	border-bottom : 0;
-	margin-bottom : -$card-spacer-y;
-	margin-left   : -$card-spacer-x / 2;
-	margin-right  : -$card-spacer-x / 2;
-}
-
-.card-header-pills {
-	margin-left  : -$card-spacer-x / 2;
-	margin-right : -$card-spacer-x / 2;
-}
-
 // Card image
-.card-img-overlay {
-	bottom   : 0;
-	left     : 0;
-	padding  : $card-img-overlay-padding;
-	position : absolute;
-	right    : 0;
-	top      : 0;
-}
 
 .card-img {
 	@include border-radius($card-inner-border-radius);
@@ -128,127 +94,18 @@
 	width : 100%; // Required because we use flexbox and this inherently applies align-self: stretch
 }
 
-.card-img-bottom {
-	@include border-bottom-radius($card-inner-border-radius);
-	width : 100%; // Required because we use flexbox and this inherently applies align-self: stretch
-}
-
 
 // Card deck
-
-.card-deck {
-	@include flex(col);
-	
-	.card {
-		margin-bottom : $card-deck-margin;
-	}
-	
-	@include media-breakpoint-up(sm) {
-		@include flex-align(row);
-		@include flex-wrap(wrap);
-		margin-left  : -$card-deck-margin;
-		margin-right : -$card-deck-margin;
-		
-		.card {
-			@include flex(col);
-			// Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
-			flex          : 1 0 0;
-			margin-bottom : 0; // Override the default
-			margin-left   : $card-deck-margin;
-			margin-right  : $card-deck-margin;
-		}
-	}
-}
 
 
 //
 // Card groups
 //
 
-.card-group {
-	@include flex(col);
-	
-	// The child selector allows nested `.card` within `.card-group`
-	// to display properly.
-	> .card {
-		margin-bottom : $card-group-margin;
-	}
-	
-	@include media-breakpoint-up(sm) {
-		@include flex-align(row);
-		@include flex-wrap(wrap);
-		// The child selector allows nested `.card` within `.card-group`
-		// to display properly.
-		> .card {
-			// Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
-			flex          : 1 0 0;
-			margin-bottom : 0;
-			
-			+ .card {
-				border-left : 0;
-				margin-left : 0;
-			}
-			
-			// Handle rounded corners
-			@if $enable-rounded {
-				&:not(:last-child) {
-					@include border-right-radius(0);
-					
-					.card-img-top,
-					.card-header {
-						// stylelint-disable-next-line property-blacklist
-						border-top-right-radius : 0;
-					}
-					
-					.card-img-bottom,
-					.card-footer {
-						// stylelint-disable-next-line property-blacklist
-						border-bottom-right-radius : 0;
-					}
-				}
-				
-				&:not(:first-child) {
-					@include border-left-radius(0);
-					
-					.card-img-top,
-					.card-header {
-						// stylelint-disable-next-line property-blacklist
-						border-top-left-radius : 0;
-					}
-					
-					.card-img-bottom,
-					.card-footer {
-						// stylelint-disable-next-line property-blacklist
-						border-bottom-left-radius : 0;
-					}
-				}
-			}
-		}
-	}
-}
-
 
 //
 // Columns
 //
-
-.card-columns {
-	.card {
-		margin-bottom : $card-columns-margin;
-	}
-	
-	@include media-breakpoint-up(sm) {
-		column-count : $card-columns-count;
-		column-gap   : $card-columns-gap;
-		orphans      : 1;
-		widows       : 1;
-		
-		.card {
-			display : inline-block; // Don't let them vertically span multiple columns
-			width   : 100%; // Don't let their width change
-		}
-	}
-}
 
 
 //

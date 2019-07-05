@@ -43,6 +43,10 @@ class ControllerAccountOrder extends Controller {
 		$data['orders'] = array();
 
 		$this->load->model('account/order');
+        /* added by it-lab start */
+        $this->load->model('tool/image');
+        /* added by it-lab end */
+
 
 		$order_total = $this->model_account_order->getTotalOrders();
 
@@ -101,7 +105,9 @@ class ControllerAccountOrder extends Controller {
 		}
 
 		$this->load->model('account/order');
-
+        /* added by it-lab start */
+        $this->load->model('tool/image');
+        /* added by it-lab end */
 		$order_info = $this->model_account_order->getOrder($order_id);
 
 		if ($order_info) {
@@ -271,9 +277,18 @@ class ControllerAccountOrder extends Controller {
 				} else {
 					$reorder = '';
 				}
-
+                /* added by it-lab start */
+				if($product_info){
+				    $image=$this->model_tool_image->resize($product_info['image'],93,93);
+                }else{
+				    $image="";
+                }
+                /* added by it-lab start */
 				$data['products'][] = array(
-					'name'     => $product['name'],
+                    /* added by it-lab start */
+                    'image'    => $image,
+                    /* added by it-lab end */
+                    'name'     => $product['name'],
 					'model'    => $product['model'],
 					'option'   => $option_data,
 					'quantity' => $product['quantity'],

@@ -1,0 +1,31 @@
+{% for category in categories %}
+    {% if category.category_id == category_id %}
+        {% if category.children %}
+            <div class="card">
+                <button aria-controls="collapseOne" aria-expanded="true" class="collapsed"
+                        data-target="#collapseOne" data-toggle="collapse" type="button">
+                    Subcategorii
+                </button>
+
+                {% if category.children %}
+                    <div aria-labelledby="headingOne" class="collapse show" data-parent=""
+                         id="collapseOne">
+                        <div class="card-body">
+                            <div class="links">
+                                <ul>
+                                    {% for child in category.children %}
+                                        {% if child.category_id == child_id %}
+                                            <li class="active"><a href="{{ child.href }}"> {{ child.name }}</a></li>
+                                        {% else %}
+                                            <li><a href="{{ child.href }}"> {{ child.name }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endfor %}

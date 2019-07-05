@@ -1,8 +1,85 @@
 <?php
 class ControllerInformationContact extends Controller {
 	private $error = array();
+    /* added by it-lab* start */
+    public function upload() {
+        $this->load->language('tool/upload');
 
-	public function index() {
+        $json = array();
+
+        if (!empty($this->request->files['file']['name']) && is_file($this->request->files['file']['tmp_name'])) {
+            // Sanitize the filename
+            $filename = $this->request->files['file']['name'];
+
+            // Validate the filename length
+            if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 64)) {
+                $json['error'] = $this->language->get('error_filename');
+            }
+
+            // Allowed file extension types
+            $allowed = array();
+
+            $extension_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_ext_allowed'));
+
+            $filetypes = explode("\n", $extension_allowed);
+
+            foreach ($filetypes as $filetype) {
+                $allowed[] = trim($filetype);
+            }
+
+            if (!in_array(strtolower(substr(strrchr($filename, '.'), 1)), $allowed)) {
+                $json['error'] = $this->language->get('error_filetype');
+            }
+
+            // Allowed file mime types
+            $allowed = array();
+
+            $mime_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_mime_allowed'));
+
+            $filetypes = explode("\n", $mime_allowed);
+
+            foreach ($filetypes as $filetype) {
+                $allowed[] = trim($filetype);
+            }
+
+            if (!in_array($this->request->files['file']['type'], $allowed)) {
+                $json['error'] = $this->language->get('error_filetype');
+            }
+
+            // Check to see if any PHP files are trying to be uploaded
+            $content = file_get_contents($this->request->files['file']['tmp_name']);
+
+            if (preg_match('/\<\?php/i', $content)) {
+                $json['error'] = $this->language->get('error_filetype');
+            }
+
+            // Return any upload error
+            if ($this->request->files['file']['error'] != UPLOAD_ERR_OK) {
+                $json['error'] = $this->language->get('error_upload_' . $this->request->files['file']['error']);
+            }
+        } else {
+            $json['error'] = $this->language->get('error_upload');
+        }
+
+        if (!$json) {
+            $json['file'] = $file = $filename;
+
+            move_uploaded_file($this->request->files['file']['tmp_name'], DIR_UPLOAD . $file);
+
+            // Hide the uploaded file name so people can not link to it directly.
+            $this->load->model('tool/upload');
+
+            $json['code'] = $this->model_tool_upload->addUpload($filename, $file);
+
+            $json['success'] = $this->language->get('text_upload');
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+    /* added by it-lab* end */
+
+    public function index() {
 		$this->load->language('information/contact');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -20,7 +97,82 @@ class ControllerInformationContact extends Controller {
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setReplyTo($this->request->post['email']);
 			$mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
-			$mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
+            /* added by it-lab start */
+            $mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['subject']), ENT_QUOTES, 'UTF-8'));
+            if (!empty($this->request->files['file']['name']) && is_file($this->request->files['file']['tmp_name'])) {
+                // Sanitize the filename
+                $filename = $this->request->files['file']['name'];
+                var_dump($this->request->files['file']);
+                // Validate the filename length
+                if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 64)) {
+                    $json['error'] = $this->language->get('error_filename');
+                }
+
+                // Allowed file extension types
+                $allowed = array();
+
+                $extension_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_ext_allowed'));
+
+                $filetypes = explode("\n", $extension_allowed);
+
+                foreach ($filetypes as $filetype) {
+                    $allowed[] = trim($filetype);
+                }
+
+                if (!in_array(strtolower(substr(strrchr($filename, '.'), 1)), $allowed)) {
+                    $json['error'] = $this->language->get('error_filetype');
+                }
+
+                // Allowed file mime types
+                $allowed = array();
+
+                $mime_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_mime_allowed'));
+
+                $filetypes = explode("\n", $mime_allowed);
+
+                foreach ($filetypes as $filetype) {
+                    $allowed[] = trim($filetype);
+                }
+
+                if (!in_array($this->request->files['file']['type'], $allowed)) {
+                    $json['error'] = $this->language->get('error_filetype');
+                }
+
+                // Check to see if any PHP files are trying to be uploaded
+                $content = file_get_contents($this->request->files['file']['tmp_name']);
+
+                if (preg_match('/\<\?php/i', $content)) {
+                    $json['error'] = $this->language->get('error_filetype');
+                }
+
+                // Return any upload error
+                if ($this->request->files['file']['error'] != UPLOAD_ERR_OK) {
+                    $json['error'] = $this->language->get('error_upload_' . $this->request->files['file']['error']);
+                }
+            } else {
+                $json['error'] = $this->language->get('error_upload');
+            }
+
+            if (!$json) {
+                $json['file'] = $file = $filename;
+
+                move_uploaded_file($this->request->files['file']['tmp_name'], DIR_UPLOAD . $file);
+
+                // Hide the uploaded file name so people can not link to it directly.
+                $this->load->model('tool/upload');
+
+                $json['code'] = $this->model_tool_upload->addUpload($filename, $file);
+
+                $json['success'] = $this->language->get('text_upload');
+            }
+
+
+            if(isset($this->request->post['file'])){
+                $mail->addAttachment(DIR_UPLOAD . $file);
+            }
+            var_dump(DIR_UPLOAD . $file);
+
+     /* added by it-lab end */
 			$mail->setText($this->request->post['enquiry']);
 			$mail->send();
 
@@ -81,31 +233,39 @@ class ControllerInformationContact extends Controller {
 		$data['locations'] = array();
 
 		$this->load->model('localisation/location');
-
-		foreach((array)$this->config->get('config_location') as $location_id) {
-			$location_info = $this->model_localisation_location->getLocation($location_id);
-
+        $locations = $this->model_localisation_location->getLocations();
+        $location_descriptions = $this->model_localisation_location->getLocationDescriptions();
+/*        var_dump($locations);*/
+        foreach($locations as $location_info) {
+			//$location_info = $this->model_localisation_location->getLocation($location_id);
+            $location_id=$location_info["location_id"];
 			if ($location_info) {
 				if ($location_info['image']) {
 					$image = $this->model_tool_image->resize($location_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_height'));
-				} else {
+                    $image = "image/".$location_info['image'];
+
+                } else {
 					$image = false;
 				}
 
 				$data['locations'][] = array(
 					'location_id' => $location_info['location_id'],
 					'name'        => $location_info['name'],
-					'address'     => nl2br($location_info['address']),
+					'address'     => nl2br($location_descriptions[$location_id]['address']),
+					'country'     => nl2br($location_descriptions[$location_id]['country']),
+					'city'        => nl2br($location_descriptions[$location_id]['city']),
+					'district'    => nl2br($location_descriptions[$location_id]['district']),
 					'geocode'     => $location_info['geocode'],
 					'telephone'   => $location_info['telephone'],
+					'telephone1'  => $location_info['telephone1'],
+					'telephone2'  => $location_info['telephone2'],
 					'fax'         => $location_info['fax'],
 					'image'       => $image,
-					'open'        => nl2br($location_info['open']),
+                    'open'        => html_entity_decode($location_descriptions[$location_id]['open'], ENT_QUOTES, 'UTF-8'),
 					'comment'     => $location_info['comment']
 				);
 			}
 		}
-
 		if (isset($this->request->post['name'])) {
 			$data['name'] = $this->request->post['name'];
 		} else {
