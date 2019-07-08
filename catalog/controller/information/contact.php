@@ -239,7 +239,7 @@ class ControllerInformationContact extends Controller {
         foreach($locations as $location_info) {
 			//$location_info = $this->model_localisation_location->getLocation($location_id);
             $location_id=$location_info["location_id"];
-			if ($location_info) {
+			if ($location_info & !$location_info['is_online']) {
 				if ($location_info['image']) {
 					$image = $this->model_tool_image->resize($location_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_location_height'));
                     $image = "image/".$location_info['image'];

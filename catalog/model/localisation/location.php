@@ -18,7 +18,7 @@ class ModelLocalisationLocation extends Model {
         return $locationt_description_data;
     }
     public function getLocations() {
-        $query = $this->db->query("SELECT location_id, name, address, geocode, telephone, telephone1, telephone2, fax, image, open, comment FROM " . DB_PREFIX . "location" . " ORDER BY l.location_order");
+        $query = $this->db->query("SELECT location_id, name, address, geocode, telephone, telephone1, telephone2, fax, image, open, comment, is_online FROM " . DB_PREFIX . "location" . " ORDER BY location_order");
 
         return $query->rows;
     }

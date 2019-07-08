@@ -3,7 +3,7 @@ class ControllerExtensionModuleGalleryAlbum extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('extension/module/gallery_album');
+        $this->load->language('extension/module/gallery_album');
 
 		$this->document->setTitle($this->language->get('heading_title'));
         /* added by it-lab start */
@@ -12,7 +12,6 @@ class ControllerExtensionModuleGalleryAlbum extends Controller {
         var_dump("22222");
         /* added by it-lab end */
         var_dump("jkljfd");
-        die(400);
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {

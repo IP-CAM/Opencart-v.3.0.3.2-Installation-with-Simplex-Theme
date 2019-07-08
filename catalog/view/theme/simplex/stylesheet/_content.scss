@@ -150,6 +150,23 @@
 
 #availability {
 	table {
+		table {
+			margin-bottom : 0;
+			
+			td {
+				color   : $black;
+				padding : 0 1.25rem;
+				
+				&:first-child {
+					text-align : right;
+				}
+			}
+			
+			tr {
+				border : 0;
+			}
+		}
+		
 		td, th {
 			padding   : {
 				left  : 1.25rem;
