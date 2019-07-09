@@ -345,6 +345,25 @@
 				background-image : none;
 				min-width        : 220px;
 				padding          : 20px;
+				
+				&.inline {
+					grid-column-gap    : 0.5rem;
+					grid-template-rows : repeat(2, 1fr);
+					
+					h4, > img {
+						grid-row-end   : 3;
+						grid-row-start : 1;
+					}
+					
+					> img {
+						height : 120px;
+					}
+					
+					.phone {
+						grid-column-end   : 5;
+						grid-column-start : 3;
+					}
+				}
 			}
 		}
 		
@@ -739,6 +758,10 @@
 		.card {
 			margin-bottom : 30px;
 			
+			> img {
+				display : none;
+			}
+			
 			&.about {
 				@include flex-align(none, none, center);
 				background-color        : #2b2c30;
@@ -757,6 +780,21 @@
 			&.choose {
 				align-items : center;
 				text-align  : center;
+				
+				&.inline {
+					@include flex;
+					padding : 2rem !important;
+					
+					h4 {
+						margin-bottom : 1.25rem;
+					}
+					
+					.offices {
+						ul {
+							display : block;
+						}
+					}
+				}
 				
 				> p {
 					margin-bottom : 25px;

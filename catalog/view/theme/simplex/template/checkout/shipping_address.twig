@@ -1,95 +1,100 @@
-<form>
-    <label>
-        <input checked="checked" name="shipping_address" type="radio" value="existing"><span class="radio"></span>
-        {{ text_address_existing }}</label>
-    <label>
-        <input name="payment_address" type="radio" value="new">
-        <span class="radio"></span>{{ text_address_new }}</label>
+<div class="card-body">
+    <form>
+        <label>
+            <input checked="checked" name="shipping_address" type="radio" value="existing"><span class="radio"></span>
+            {{ text_address_existing }}</label>
+        <label>
+            <input name="payment_address" type="radio" value="new">
+            <span class="radio"></span>{{ text_address_new }}</label>
 
-    <select class="form-element" id="payment-existing" name="address_id">
-        {% for address in addresses %}
-            {% if address['address_id'] == address_id %}
-                <option value="{{ address.address_id }}"
-                        selected="selected">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}
-                    , {{ address.city }}, {{ address.zone }}, {{ address.country }}</option>
-            {% else %}
-                <option value="{{ address.address_id }}">{{ address.firstname }} {{ address.lastname }}
-                    , {{ address.address_1 }}, {{ address.city }}, {{ address.zone }}, {{ address.country }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
-    <div class="form-element hide" id="payment-new" style="display: none">
-        <div class="form-group required">
-            <label class=" control-label" for="input-shipping-firstname">
-                {{ entry_firstname }}</label>
-            <input class="form-control" id="input-shipping-firstname" name="firstname"
-                   placeholder="{{ entry_firstname }}"
-                   type="text" value="">
+        <select class="form-element" id="payment-existing" name="address_id">
+            {% for address in addresses %}
+                {% if address['address_id'] == address_id %}
+                    <option value="{{ address.address_id }}"
+                            selected="selected">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}
+                        , {{ address.city }}, {{ address.zone }}, {{ address.country }}</option>
+                {% else %}
+                    <option value="{{ address.address_id }}">{{ address.firstname }} {{ address.lastname }}
+                        , {{ address.address_1 }}, {{ address.city }}, {{ address.zone }}
+                        , {{ address.country }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <div class="form-element hide" id="payment-new" style="display: none">
+            <div class="form-group required">
+                <label class=" control-label" for="input-shipping-firstname">
+                    {{ entry_firstname }}</label>
+                <input class="form-control" id="input-shipping-firstname" name="firstname"
+                       placeholder="{{ entry_firstname }}"
+                       type="text" value="">
+            </div>
+            <div class="form-group required">
+                <label class=" control-label" for="input-shipping-lastname">
+                    {{ entry_lastname }}</label>
+                <input class="form-control" id="input-shipping-lastname" name="lastname"
+                       placeholder="{{ entry_lastname }}"
+                       type="text" value="">
+            </div>
+            <div class="form-group">
+                <label class=" control-label"
+                       for="input-shipping-company">{{ entry_company }}</label>
+                <input class="form-control" id="input-shipping-company" name="company"
+                       placeholder="{{ entry_company }}"
+                       type="text" value="">
+            </div>
+            <div class="form-group required">
+                <label class=" control-label" for="input-shipping-address-1">{{ entry_address_1 }}</label>
+                <input class="form-control" id="input-shipping-address-1" name="address_1"
+                       placeholder="Address 1"
+                       type="text" value="">
+            </div>
+            <div class="form-group">
+                <label class=" control-label" for="input-shipping-address-2">{{ entry_address_2 }}</label>
+                <input class="form-control" id="input-shipping-address-2" name="address_2"
+                       placeholder="{{ entry_address_2 }}"
+                       type="text" value="">
+            </div>
+            <div class="form-group required">
+                <label class=" control-label" for="input-shipping-city">{{ entry_city }}</label>
+                <input class="form-control" id="input-shipping-city" name="city"
+                       placeholder="{{ entry_city }}"
+                       type="text" value="">
+            </div>
+            <div class="form-group required">
+                <label class=" control-label" for="input-shipping-postcode">{{ entry_postcode }}</label>
+                <input class="form-control" id="input-shipping-postcode" name="postcode"
+                       placeholder="{{ entry_postcode }}"
+                       type="text" value="">
+            </div>
+            <div class="form-group required">
+                <label class=" control-label"
+                       for="input-shipping-country">{{ entry_country }}</label>
+                <select class="form-control" id="input-shipping-country" name="country_id">
+                    <option value="">{{ text_select }}</option>
+                    {% for country in countries %}
+                        {% if country.country_id == country_id %}
+                            <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+                        {% else %}
+                            <option value="{{ country.country_id }}">{{ country.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group required">
+                <label class="control-label" for="input-shipping-zone">{{ entry_zone }}</label>
+                <select class="form-control" id="input-payment-zone" name="zone_id">
+                </select>
+            </div>
         </div>
-        <div class="form-group required">
-            <label class=" control-label" for="input-shipping-lastname">
-                {{ entry_lastname }}</label>
-            <input class="form-control" id="input-shipping-lastname" name="lastname"
-                   placeholder="{{ entry_lastname }}"
-                   type="text" value="">
-        </div>
-        <div class="form-group">
-            <label class=" control-label"
-                   for="input-shipping-company">{{ entry_company }}</label>
-            <input class="form-control" id="input-shipping-company" name="company"
-                   placeholder="{{ entry_company }}"
-                   type="text" value="">
-        </div>
-        <div class="form-group required">
-            <label class=" control-label" for="input-shipping-address-1">{{ entry_address_1 }}</label>
-            <input class="form-control" id="input-shipping-address-1" name="address_1"
-                   placeholder="Address 1"
-                   type="text" value="">
-        </div>
-        <div class="form-group">
-            <label class=" control-label" for="input-shipping-address-2">{{ entry_address_2 }}</label>
-            <input class="form-control" id="input-shipping-address-2" name="address_2"
-                   placeholder="{{ entry_address_2 }}"
-                   type="text" value="">
-        </div>
-        <div class="form-group required">
-            <label class=" control-label" for="input-shipping-city">{{ entry_city }}</label>
-            <input class="form-control" id="input-shipping-city" name="city"
-                   placeholder="{{ entry_city }}"
-                   type="text" value="">
-        </div>
-        <div class="form-group required">
-            <label class=" control-label" for="input-shipping-postcode">{{ entry_postcode }}</label>
-            <input class="form-control" id="input-shipping-postcode" name="postcode"
-                   placeholder="{{ entry_postcode }}"
-                   type="text" value="">
-        </div>
-        <div class="form-group required">
-            <label class=" control-label"
-                   for="input-shipping-country">{{ entry_country }}</label>
-            <select class="form-control" id="input-shipping-country" name="country_id">
-                <option value="">{{ text_select }}</option>
-                {% for country in countries %}
-                    {% if country.country_id == country_id %}
-                        <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
-                    {% else %}
-                        <option value="{{ country.country_id }}">{{ country.name }}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group required">
-            <label class="control-label" for="input-shipping-zone">{{ entry_zone }}</label>
-            <select class="form-control" id="input-payment-zone" name="zone_id">
+    </form>
+</div>
 
-            </select>
-        </div>
-    </div>
-
-</form>
-
-
-
+<div class="card-submit">
+    <button class="next" type="submit" id="button-shipping-address" data-loading-text="{{ text_loading }}">
+        {{ button_continue }}
+        <span class="image-container"></span>
+    </button>
+</div>
 <script type="text/javascript">
 
     $('input[name="shipping_address"]').on('change', function () {
@@ -106,17 +111,17 @@
 </script>
 
 <script type="text/javascript"><!--
-    $('#collapse-shipping-address-address select[name="country_id"]').on('change', function() {
+    $('#shipping-address select[name="country_id"]').on('change', function () {
         $.ajax({
             url: 'index.php?route=checkout/checkout/country&country_id=' + this.value,
             dataType: 'json',
-            beforeSend: function() {
+            beforeSend: function () {
                 $('#collapse-payment-address select[name="country_id"]').prop('disabled', true);
             },
-            complete: function() {
+            complete: function () {
                 $('#collapse-payment-address select[name="country_id"]').prop('disabled', false);
             },
-            success: function(json) {
+            success: function (json) {
                 if (json['postcode_required'] == '1') {
                     $('#collapse-payment-address input[name="postcode"]').parent().parent().addClass('required');
                 } else {
@@ -141,12 +146,12 @@
 
                 $('#collapse-payment-address select[name="zone_id"]').html(html);
             },
-            error: function(xhr, ajaxOptions, thrownError) {
+            error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
     });
 
-    $('#collapse-payment-address select[name="country_id"]').trigger('change');
+    $('#shipping-address select[name="country_id"]').trigger('change');
     //--></script>
 

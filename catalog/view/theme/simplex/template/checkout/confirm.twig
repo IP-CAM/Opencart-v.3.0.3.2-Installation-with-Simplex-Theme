@@ -1,0 +1,40 @@
+{% if not redirect %}
+    <div class="card-body">
+        <div class="product-table">
+            <table>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td style="width: 110px;">
+                            <img src="{{ product.thumb }}" alt="">
+                        </td>
+                        <td>
+                            <a href="{{ product.href }}"><p>{{ product.name }}</p>
+                            </a></td>
+                        <td style="width: 134px;text-align: right;"><span>{{ product.price }} x</span></td>
+                        <td style="width: 120px;padding-left: 12px"><p>{{ product.quantity }}
+                                <span>=</span> {{ product.total }}</p></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                {% for total in totals %}
+                    <tr>
+                        <td style="width: 110px;"></td>
+                        <td></td>
+                        <td style="width: 134px;text-align: right;padding-right: 25px; padding-top: 0.75rem;padding-bottom: 0.75rem;">
+                            <span>{{ total.title }}</span></td>
+                        <td style="width: 120px;padding-top: 0.75rem;padding-bottom: 0.75rem;">{{ total.text }}</td>
+                    </tr>
+                {% endfor %}
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    {{ payment }}
+    {{ dump(payment) }}
+{% else %}
+    <script type="text/javascript"><!--
+        location = '{{ redirect }}';
+        //--></script>
+{% endif %} 

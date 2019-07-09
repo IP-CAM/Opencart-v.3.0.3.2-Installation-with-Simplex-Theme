@@ -5,6 +5,7 @@ $('.product-slider').slick({
     speed: 300,
     slidesToShow: 5,
     slidesToScroll: 5,
+    adaptiveHeight: true,
     prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
         '        xmlns="http://www.w3.org/2000/svg"\n' +
         '        width="14px" height="22px">\n' +
