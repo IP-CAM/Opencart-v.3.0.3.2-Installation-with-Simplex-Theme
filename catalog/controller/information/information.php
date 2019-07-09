@@ -1,6 +1,9 @@
 <?php
 class ControllerInformationInformation extends Controller {
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
 		$this->load->language('information/information');
 		$this->load->language('information/contact');
 
@@ -45,20 +48,28 @@ class ControllerInformationInformation extends Controller {
 			$data['header'] = $this->load->controller('common/header');
 
             /* added by it-lab start */
+            $this->load->model('catalog/category');
+
             $data['action'] = $this->url->link('information/contact', '', true);
 
             $data["archive_link"] = $this->url->link('product/gallery_album');
-            $main_category_info = $this->model_catalog_category->getCategory($main_category);
-            $data["archive_link"] = $this->url->link('information/category&path='.$main_category);
-            $data['thumb'] ='image/' . $information_info['image'];
-            if(!empty($main_category_info['template']) ){
+            $categories = $this->model_catalog_information->getCategories($information_id);
+            if(is_array($categories) & count($categories)>0){
+                $category=$categories[0]["category_id"];
+                $data["archive_link"] = $this->url->link('information/category&path='.$category);
+                $data['thumb'] ='image/' . $information_info['image'];
+                $category = $this->model_catalog_category->getCategory($category);
+                if(!empty($category['template']) ){
+                    $template='information/information_'.$category['template'];
+                    return $this->response->setOutput($this->load->view($template , $data));
 
-                $template='information/'.$main_category_info['template'];
-                return $this->response->setOutput($this->load->view($template , $data));
-
+                }else {
+                    return $this->response->setOutput($this->load->view('information/information', $data));
+                }
             }else {
-                return $this->response->setOutput($this->load->view('information/information_vacancy', $data));
+                return $this->response->setOutput($this->load->view('information/information', $data));
             }
+
             /* added by it-lab end */
             //$this->response->setOutput($this->load->view('information/information_vacancy', $data));
 		} else {

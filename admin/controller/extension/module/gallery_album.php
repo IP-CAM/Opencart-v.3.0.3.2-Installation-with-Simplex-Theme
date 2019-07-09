@@ -9,9 +9,7 @@ class ControllerExtensionModuleGalleryAlbum extends Controller {
         /* added by it-lab start */
         $this->document->addScript('view/javascript/ckeditor/ckeditor.js');
         $this->document->addScript('view/javascript/ckeditor/adapters/jquery.js');
-        var_dump("22222");
         /* added by it-lab end */
-        var_dump("jkljfd");
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {

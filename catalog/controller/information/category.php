@@ -1,6 +1,8 @@
 <?php
-class ControllerInformationCategory extends Controller {
-	public function index()
+
+class ControllerInformationCategory extends Controller
+{
+    public function index()
     {
         $this->load->model('catalog/information');
         $this->load->model('catalog/category');
@@ -50,7 +52,7 @@ class ControllerInformationCategory extends Controller {
         } else {
             $category_id = 0;
         }
-        $limit=$this->getLimit();
+        $limit = $this->getLimit();
         $start = $this->getStart();
 
         $category_info = $this->model_catalog_category->getCategory($category_id);
@@ -103,11 +105,11 @@ class ControllerInformationCategory extends Controller {
                 );
             }
         }
-        $data["limit"]=$limit;
-        $data["start"]=$start+count($results);
-        if($total <=$start+count($results)){
+        $data["limit"] = $limit;
+        $data["start"] = $start + count($results);
+        if ($total <= $start + count($results)) {
             $data["show_load_more_button"] = false;
-        }else{
+        } else {
             $data["show_load_more_button"] = true;
         }
         $data['href_category'] = $this->url->link('product/category', 'path=' . $category_id);
@@ -118,17 +120,16 @@ class ControllerInformationCategory extends Controller {
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
         /* added by it-lab start */
+        if($category_info['template']) {
+            $template = 'information/category_' . $category_info['template'];
 
-        if($category_id==60){
-             return $this->response->setOutput($this->load->view('information/category_project', $data));
-        }elseif ($category_id==59){
-            return $this->response->setOutput($this->load->view('information/category_news', $data));
-        }elseif ($category_id==61) {
             $category_info["description"] = trim(htmlspecialchars_decode($category_info["description"]), '"');
             $data["category"] = $category_info;
-            $data['pozitions_numeral'] =$this->getNumeral(count($results));
+            $data['pozitions_numeral'] = $this->getNumeral(count($results));
 
-            return $this->response->setOutput($this->load->view('information/category_vacancies', $data));
+            return $this->response->setOutput($this->load->view($template, $data));
+        }else{
+            return $this->response->setOutput($this->load->view('information/category', $data));
         }
         /* added by it-lab end */
 
@@ -235,14 +236,6 @@ class ControllerInformationCategory extends Controller {
             }
         }
 
-       /* $data['href_category'] = $this->url->link('product/category', 'path=' . $category_id);
-        $data['column_left'] = $this->load->controller('common/column_left');
-        $data['column_right'] = $this->load->controller('common/column_right');
-        $data['content_top'] = $this->load->controller('common/content_top');
-        $data['content_bottom'] = $this->load->controller('common/content_bottom');
-        $data['footer'] = $this->load->controller('common/footer');
-        $data['header'] = $this->load->controller('common/header');*/
-
         $response=[];
         $response["start"]=$start+count($results);
         if($total <= $start+count($results)){
@@ -250,11 +243,10 @@ class ControllerInformationCategory extends Controller {
         }else{
             $response['displayed_all']=false;
         }
-        if($category_id==60) {
-            $response['items'] = $this->load->view('information/project_load_more', $data);
-        }elseif ($category_id==59){
-            $response['items'] = $this->load->view('information/news_load_more', $data);
-        }
+        $template = 'information/category_' . $category_info['template'] . '_load_more';
+
+        $response['items'] = $this->load->view($template, $data);
+
         //return $this->response->setOutput($this->load->view('information/category', $data));
         return $this->response->setOutput(json_encode($response));
     }

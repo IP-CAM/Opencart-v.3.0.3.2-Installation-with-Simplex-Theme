@@ -2,12 +2,29 @@
     <div class="container-fluid">
         <div id="footer">
             <div class="about-list">
-                <h6>{{ about.title }}</h6>
+               {# <h6>{{ about.title }}</h6>
                 <ul>
                     {% for menu in about.children %}
                         <li><a href="{{ menu.link }}">{{ menu.title }}</a></li>
                     {% endfor %}
-                </ul>
+
+                </ul>#}
+                {% if footer_titles %}
+                    {% for footer_title in footer_titles %}
+                            <h6>{{ footer_title.title }}</h6>
+                            {% if footer_title.sub_title %}
+                                <ul>
+                                    {% for subtitle in footer_title.sub_title  %}
+                                        {% if subtitle.href %}
+                                            <li><a href="{{ subtitle.href }}">{{ subtitle.title }}</a></li>
+                                        {% else %}
+                                            <li><a href="{{ subtitle.link }}">{{ subtitle.title }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
             <div class="catalog-list">
                 <h6>{{ catalog.title }}</h6>
@@ -29,7 +46,7 @@
                         <h6>Magazinaele noastre:</h6>
                         <ul>
                             {% for location in locations %}
-                                <li><a href="#">{{ location.address }}</a></li>
+                                <li><a href="{{ location.contacts_link }}">{{ location.address }}</a></li>
                             {% endfor %}
 
                         </ul>
@@ -115,6 +132,45 @@
       wishlist.remove('all');
     })
 </script>
+
+<script>
+    cart.add = function(product_id, quantity) {
+            $.ajax({
+                url: 'index.php?route=checkout/cart/add',
+                type: 'post',
+                data: 'product_id=' + product_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
+                dataType: 'json',
+                beforeSend: function() {
+                    $('#cart > button').button('loading');
+                },
+                complete: function() {
+                    $('#cart > button').button('reset');
+                },
+                success: function(json) {
+                    $('.alert-dismissible, .text-danger').remove();
+
+                    if (json['redirect']) {
+                        location = json['redirect'];
+                    }
+
+                    if (json['success']) {
+                        $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                        // Need to set timeout otherwise it wont update the total
+
+
+                        $('html, body').animate({ scrollTop: 0 }, 'slow');
+
+                        $('#cart .quantity').text(json['cart_count']);
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
+</script>
+
 
 <script src="catalog/view/javascript/simplex/script.js"></script>
 {% for script in scripts %}

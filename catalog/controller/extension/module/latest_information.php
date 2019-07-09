@@ -42,11 +42,12 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 					'description'    => !empty($result['short_description']) ? trim(html_entity_decode($result['short_description'], ENT_QUOTES, 'UTF-8')) : utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('information_description_length')) . '..',
 					'user_id'        => $result['user_id'],
 					'author'         => $result['author'],
-					'date_added'     => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+					'date_added'     => self::getDateWithMonth($result['date_added'],$this->language->get('code')),
 					'reviews'        => sprintf($this->language->get('text_review'), $result['reviews']),
 					'rating'         => $result['rating'],
 					'href'           => $this->url->link('information/information', '&information_id=' . $result['information_id'])
 				);
+				self::getDateWithMonth($result['date_added'],$this->language->get('code'));
 			}
 
 			if ($setting['title'][$this->config->get('config_language_id')]) {
@@ -61,4 +62,23 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 			return $this->load->view('extension/module/latest_information', $data);
 		}
 	}
+
+	public static function getDateWithMonth($date,$lang){
+	    $date=strtotime($date);
+        $mon = date("n", $date);
+        $day = date("d", $date);
+        $year = date("Y", $date);
+
+
+        $months = array(
+            "ro" => ["ianuarie", "febuarie", "martie", "aprilie", "mai", "iunie", "iulie", "august", "septembrie", "octombrie", "noembrie", "decembrie"],
+            "ru" => ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
+            "en" => ["january", "february", "march", "april ", "may", "june ", "july ", "august ", "september ", "october ", "november", "december"]
+        );
+
+        $mon_=$months[$lang][$mon-1];
+        $date_str = "$day $mon_ $year";
+        return $date_str;
+
+    }
 }

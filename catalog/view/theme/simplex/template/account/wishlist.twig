@@ -56,9 +56,6 @@
                             </button>
 
                             <div class="float-buttons">
-                                <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');"><img alt=""
-                                                                                                                  src="catalog/view/theme/simplex/assets/img/favorites.png">
-                                </button>
                                 <button class="compare" href="#" onclick="compare.add('{{ product.product_id }}');"><img
                                             alt=""
                                             src="catalog/view/theme/simplex/assets/img/compare.png">
@@ -99,11 +96,8 @@
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
-    },
-    $('.delete').click(function () {
-        var product_id = $(this).data('product_id');
-        wishlist.remove(product_id);
-    });
+    }
+
 </script>
 {{ content_bottom }}
 {{ footer }}

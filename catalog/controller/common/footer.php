@@ -64,7 +64,14 @@ class ControllerCommonFooter extends Controller {
         $data['catalog'] = $this->model_extension_menu_megamenu->getSubMenu('catalog');
         $data['telephone'] = $this->config->get('config_telephone');
 
-        $data['locations']=$this->model_localisation_location->getLocationDescriptions();
+        //$data['locations']=$this->model_localisation_location->getLocationDescriptions();
+        $locations = $this->model_localisation_location->getLocationDescriptions();
+        foreach ($locations as &$location){
+            if(!$location['is_online']){
+                $location['contacts_link']=$data['contact']."#location-{$location['location_id']}";
+                $data['locations'][]=$location;
+            }
+        }
         /* added by it-lab end */
         return $this->load->view('common/footer', $data);
 	}
