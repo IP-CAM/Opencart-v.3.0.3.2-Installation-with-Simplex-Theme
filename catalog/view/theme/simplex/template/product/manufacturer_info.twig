@@ -1,0 +1,508 @@
+{{ header }}
+<main>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                   src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+          </li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="catalog-wrapper">
+      {{ column_left }}
+      <div class="products-wrapper">
+        <div class="control">
+          <div class="left">
+            <div class="sort-by">
+              <select id="sort" onchange="location = this.value;">
+                {% for sorts in sorts %}
+                  {% if sorts.value == '%s-%s'|format(sort, order) %}
+                    <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+                  {% else %}
+                    <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+              <label for="sort"></label>
+            </div>
+            <div class="show-num">
+              <select id="show-num" onchange="location = this.value;">
+                {% for limits in limits %}
+                  {% if limits.value == limit %}
+                    <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
+                  {% else %}
+                    <option value="{{ limits.href }}">{{ limits.text }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+              <label for="show-num">pe pagina</label>
+            </div>
+          </div>
+          <div class="right">
+            <div class="button-group">
+              <button class="grid active">
+                <svg baseProfile="tiny" version="1.2"
+                     viewBox="0 0 22 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                     y="0px">
+                                    <path d="M12,12h4v4h-4V12z M6,12h4v4H6V12z M0,12h4v4H0V12z M12,6h4v4h-4V6z M6,6h4v4H6V6z M0,6h4v4H0V6z M12,0h4v4
+                                    h-4V0z M6,0h4v4H6V0z M0,0h4v4H0V0z"></path>
+                  <path d="M18,12h4v4h-4V12z M12,12h4v4h-4V12z M6,12h4v4H6V12z M18,6h4v4h-4V6z M12,6h4v4h-4V6z M6,6h4v4H6V6z M18,0
+                                    h4v4h-4V0z M12,0h4v4h-4V0z M6,0h4v4H6V0z"></path>
+                                </svg>
+              </button>
+              <button class="inline">
+                <svg height="7" viewBox="0 0 11.938 7" width="11.938"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path d="M89.279,70V69h11.944v1H89.279m0,3V72h11.944v1H89.279m0,3V75h11.944v1H89.279"
+                        transform="translate(-89.281 -69)"></path>
+                </svg>
+
+              </button>
+            </div>
+            <div class="filter d-lg-none d-block">
+              <button aria-controls="collapseExample" aria-expanded="false" class="dropdown-button"
+                      data-target="#collapseExample" data-toggle="collapse"
+                      type="button">
+                <img alt="Filter" src="catalog/view/theme/simplex/assets/img/filter.svg">
+              </button>
+              <div class="accordion filters collapse" id="collapseExample">
+                {#<div class="card">
+                    <button aria-controls="collapseOne" aria-expanded="false" class="collapsed"
+                            data-target="#collapseOne" data-toggle="collapse" type="button">
+                        Subcategorii
+                    </button>
+                    <div aria-labelledby="headingOne" class="collapse" data-parent=""
+                         id="collapseOne">
+                        <div class="card-body">
+                            <div class="links">
+                                <ul>
+                                    <li>
+                                        <a href="#">Centrale termice BAXI</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">Microcentrale termice cu condensare</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Cazane pe combustibil solid Metal-Fach</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Microcentrale electrice</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Cazane pe combustibil solid</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Sisteme solare</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Radiatoare</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Termostate</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Incălzire în pardoseală</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <button aria-controls="collapseTwo" aria-expanded="false" class="collapsed"
+                            data-target="#collapseTwo" data-toggle="collapse" type="button">
+                        Preț
+                    </button>
+                    <div aria-labelledby="headingTwo" class="collapse" data-parent=""
+                         id="collapseTwo">
+                        <div class="card-body">
+                            <div class="input-range">
+                                <div class="range"></div>
+                                <div class="input-min">
+                                    <input id="minprice-xl" max="19000" min="11000" name="minprice"
+                                           step="10"
+                                           type="number"
+                                           value="11000">
+                                    <label for="minprice-xl">de la</label>
+                                </div>
+                                <p style="line-height:2.25">&ndash;</p>
+                                <div class="input-max">
+                                    <input id="maxprice-xl" max="19000" min="11000" name="maxprice"
+                                           step="10"
+                                           type="number"
+                                           value="14280">
+                                    <label for="maxprice-xl">pînă la</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <button aria-controls="collapseThree" aria-expanded="false" class="collapsed"
+                            data-target="#collapseThree" data-toggle="collapse"
+                            type="button">
+                        Brand
+                    </button>
+                    <div aria-labelledby="headingThree" class="collapse" data-parent=""
+                         id="collapseThree">
+                        <div class="card-body">
+                            <ul class="checkbox-list">
+                                <li>
+                                    <label>
+                                        <input name="Buderus" type="checkbox">
+                                        <span class="checkbox"></span>
+                                        Buderus
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input name="BOSCH" type="checkbox">
+                                        <span class="checkbox"></span>
+                                        BOSCH
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input name="Demrad" type="checkbox">
+                                        <span class="checkbox"></span>
+                                        Demrad
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <button aria-controls="collapseFour" aria-expanded="false" class="collapsed"
+                            data-target="#collapseFour" data-toggle="collapse"
+                            type="button">
+                        Puterea termica
+                    </button>
+                    <div aria-labelledby="headingThree" class="collapse" data-parent=""
+                         id="collapseFour">
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <button aria-controls="collapseFive" aria-expanded="false" class="collapsed"
+                            data-target="#collapseFive" data-toggle="collapse"
+                            type="button">
+                        Debit ACM
+                    </button>
+                    <div aria-labelledby="headingThree" class="collapse" data-parent=""
+                         id="collapseFive">
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="link-group">
+                            <a class="apply" href="#">
+                                <p>filtrare</p>
+                                <span class="image-container"></span>
+                            </a>
+                            <a class="reset" href="#">Anulează filtre</a>
+                        </div>
+                    </div>
+                </div>#}
+                {{ content_top }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if products %}
+          <div class="products grid">
+            {% for product in products %}
+              {% if loop.index == '7' %}
+                {{ column_right }}
+              {% endif %}
+
+              <div class="product-column">
+                <div class="product">
+                  <a href="{{ product.href }}">
+                    <ul class="sticker">
+                      {% if product.special_percentage %}
+                        <li>
+                          <span class="stock">%</span>
+                        </li>
+                      {% endif %}
+                      {% if product.is_new %}
+                        <li>
+                          <span class="new">new</span>
+                        </li>
+                      {% endif %}
+                    </ul>
+                    <div class="image-container">
+                      <img alt="" src="{{ product.thumb }}">
+                    </div>
+                    <div class="product-body">
+                      <h5 class="title">{{ product.name }}</h5>
+
+                      <div class="discount">
+                        {% if product.special %}
+                          <p class="old-price">{{ product.price }}.-</p>
+                          <p class="discount-percent">-{{ product.special_percentage }}%</p>
+                          <p class="discount-val">-{{ product.economy }}</p>
+                        {% endif %}
+                      </div>
+                      {% if product.special %}
+                        <p class="price">{{ product.special }}.-</p>
+                      {% else %}
+                        <p class="price">{{ product.price }}.-</p>
+                      {% endif %}
+                      <p class="currency">{{ currency }}</p>
+                    </div>
+                  </a>
+                  <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                    <p>{{ button_cart }}</p>
+                    <span class="image-container">
+                                                <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
+                                          </span>
+                  </button>
+                  <div class="float-buttons">
+                    <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
+                      <img
+                              alt=""
+                              src="catalog/view/theme/simplex/assets/img/favorites.png">
+                    </button>
+                    <button class="compare" href="#"
+                            onclick="compare.add('{{ product.product_id }}');">
+                      <img
+                              alt=""
+                              src="catalog/view/theme/simplex/assets/img/compare.png">
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            {% endfor %}
+            {% if products|length < 7 %}
+              {{ column_right }}
+            {% endif %}
+          </div>
+          <div id="pager">
+            <div class="total">
+              <p>Total: {{ product_total }} poziții</p>
+            </div>
+            <div class="show-more">
+              {% if num_pages>1 %}
+                <button id="show-more-button" type="button" data-page="{{ page }}"
+                        data-num_pages="{{ num_pages }}">
+                  <span class="image-container"></span>
+                  <p>Arată încă {{ limit }} poziții</p>
+                </button>
+              {% endif %}
+            </div>
+            <div class="all">
+              <a id="show-all" href="#">Arată toate</a>
+            </div>
+          </div>
+        {% else %}
+          <div class="container-fluid">
+            <div id="success">
+              <h1>{{ text_empty }}</h1>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+</main>
+{{ content_bottom }}
+{#
+  <div class="container-fluid">
+    <div class="catalog-wrapper">
+      {{ column_left }}
+<div id="product-manufacturer" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h2>{{ heading_title }}</h2>
+      {% if products %}
+      <div class="row">
+        <div class="col-md-2 col-sm-6 hidden-xs">
+          <div class="btn-group btn-group-sm">
+            <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="{{ button_list }}"><i class="fa fa-th-list"></i></button>
+            <button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title="{{ button_grid }}"><i class="fa fa-th"></i></button>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="form-group"> <a href="{{ compare }}" id="compare-total" class="btn btn-link">{{ text_compare }}</a> </div>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <div class="form-group input-group input-group-sm">
+            <label class="input-group-addon" for="input-sort">{{ text_sort }}</label>
+            <select id="input-sort" class="form-control" onchange="location = this.value;">
+              
+              {% for sorts in sorts %}
+              {% if sorts.value == '%s-%s'|format(sort, order) %}
+              
+              <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+              
+              {% else %}
+              
+              <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+              
+              {% endif %}
+              {% endfor %}
+            
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3 col-xs-6">
+          <div class="form-group input-group input-group-sm">
+            <label class="input-group-addon" for="input-limit">{{ text_limit }}</label>
+            <select id="input-limit" class="form-control" onchange="location = this.value;">
+              
+              {% for limits in limits %}
+              {% if limits.value == limit %}
+              
+              <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
+              
+              {% else %}
+              
+              <option value="{{ limits.href }}">{{ limits.text }}</option>
+              
+              {% endif %}
+              {% endfor %}
+            
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row"> {% for product in products %}
+        <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb">
+            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+            <div>
+              <div class="caption">
+                <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                <p>{{ product.description }}</p>
+                {% if product.price %}
+                <p class="price"> {% if not product.special %}
+                  {{ product.price }}
+                  {% else %} <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}
+                  {% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} </p>
+                {% endif %}
+                {% if product.rating %}
+                <div class="rating">
+                  {% for i in 1..5 %}
+                  {% if product.rating < i %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> {% endif %}
+                  {% endfor %} </div>
+                {% endif %} </div>
+              <div class="button-group">
+                <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+                <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+                <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %} </div>
+      <div class="row">
+        <div class="col-sm-6 text-left">{{ pagination }}</div>
+        <div class="col-sm-6 text-right">{{ results }}</div>
+      </div>
+      {% else %}
+      <p>{{ text_empty }}</p>
+      <div class="buttons">
+        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      </div>
+      {% endif %}
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+#}
+<script>
+  function urlParam(link, name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(link);
+    if (results == null) {
+      return null
+    }
+    return results[1] || null;
+  }
+
+  $("#show-more-button").click(function () {
+    var $show_more_button = $(this);
+    var link = window.location.href;
+    var page = urlParam(link, 'page');
+    var params = {method: "load_more",};
+    link += '&' + jQuery.param(params);
+    var page = $(this).data("page");
+    var page_num = $(this).data("num_pages");
+    if (page <= page_num) {
+      var url = new URL(link);
+      var query_string = url.search;
+      var search_params = new URLSearchParams(query_string);
+      page = page + 1;
+      search_params.set('page', page);
+      url.search = search_params.toString();
+      link = url.toString();
+      $.ajax({
+        url: link,
+        success: function (data) {
+          $(".products").append(data);
+          $show_more_button.data("page", page);
+          if (page == page_num) {
+            $show_more_button.hide();
+            $("#show-all").hide();
+          }
+        }
+      });
+    }
+  })
+  $("#show-all").click(function (e) {
+
+    var $show_all = $(this);
+    var link = window.location.href;
+    var page = urlParam(link, 'page');
+    var params = {method: "load_all",};
+    link += '&' + jQuery.param(params);
+    var page = $("#show-more-button").data("page");
+    var page_num = $("#show-more-button").data("num_pages");
+    var url = new URL(link);
+    var query_string = url.search;
+    var search_params = new URLSearchParams(query_string);
+    page = page + 1;
+    search_params.set('page', page);
+    search_params.set('num_pages', page_num);
+    url.search = search_params.toString();
+    link = url.toString();
+
+    $.ajax({
+      url: link,
+      success: function (data) {
+        $(".products").append(data);
+        $("#show-more-button").data("page", page);
+        $("#show-more-button").hide();
+        $("#show-all").hide();
+      }
+    });
+    return false;
+  })
+</script>
+{{ footer }}
