@@ -10,6 +10,10 @@ class ControllerAccountNewsletter extends Controller {
 		$this->load->language('account/newsletter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
+        /* added by it-lab start */
+        $this->language->load('extension/module/pavnewsletter');
+        $this->load->model('account/customer');
+        $this->load->model('extension/pavnewsletter/subscribe');
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			$this->load->model('account/customer');
@@ -17,6 +21,34 @@ class ControllerAccountNewsletter extends Controller {
 			$this->model_account_customer->editNewsletter($this->request->post['newsletter']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
+
+            /* added by it-lab start */
+            $customer=$this->model_account_customer->getCustomer($this->customer->getId());
+            $data                = array();
+            $data['store_id']    = $this->config->get('config_store_id');
+            $data['customer_id'] = $customer['customer_id'];
+            $data['email']       = $customer['email'];
+            var_dump($data);
+            if($this->request->post['newsletter']){
+                if (!$this->model_extension_pavnewsletter_subscribe->checkExists($customer['email'])) {
+                    if ($customer = $this->model_account_customer->getCustomerByEmail($customer['email'])) {
+                        $data['customer_id'] = $customer['customer_id'];
+                    }
+                    var_dump($data);
+
+                    $this->model_extension_pavnewsletter_subscribe->storeSubscribe($data);
+                }
+            }else{
+                $this->load->model('extension/pavnewsletter/subscribe');
+                $subscribe_id=$this->model_extension_pavnewsletter_subscribe->getSubscribeId($customer['email']);
+                if($subscribe_id){
+                    $this->model_extension_pavnewsletter_subscribe->updateAction($subscribe_id, 0);
+                }
+            }
+
+
+
+
 
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}

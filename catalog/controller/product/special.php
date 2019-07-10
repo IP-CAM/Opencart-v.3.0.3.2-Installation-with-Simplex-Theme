@@ -68,13 +68,22 @@ class ControllerProductSpecial extends Controller {
 		$data['compare'] = $this->url->link('product/compare');
 
 		$data['products'] = array();
-
-		$filter_data = array(
-			'sort'  => $sort,
-			'order' => $order,
-			'start' => ($page - 1) * $limit,
-			'limit' => $limit
-		);
+        /* added by it-lab start */
+        if(isset($this->request->get['method']) && $this->request->get['method']=="load_all"){
+            $num_pages=$this->request->get['num_pages'];
+            $limit_to_end = ($num_pages-$page+1)*$limit;
+        }else{
+            $limit_to_end = $limit;
+        }
+        /* added by it-lab end */
+        $filter_data = array(
+            'sort'  => $sort,
+            'order' => $order,
+            'start' => ($page - 1) * $limit,
+            /* added by it-lab start */
+            'limit'                  => $limit_to_end
+            /* added by it-lab end */
+        );
 
 		$product_total = $this->model_catalog_product->getTotalProductSpecials();
 
@@ -95,8 +104,16 @@ class ControllerProductSpecial extends Controller {
 
 			if ((float)$result['special']) {
 				$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                /* added by it-lab start */
+                $special_percentage = round(100 - (($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'))*100) / $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'))));
+                $economy= $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')) - $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+                /* added by it-lab end */
 			} else {
 				$special = false;
+                /* added by it-lab start */
+                $special_percentage = false;
+                $economy = false;
+                /* added by it-lab end */
 			}
 
 			if ($this->config->get('config_tax')) {
@@ -118,13 +135,19 @@ class ControllerProductSpecial extends Controller {
 				'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 				'price'       => $price,
 				'special'     => $special,
+                /* added by it-lab start */
+                'special_percentage' => $special_percentage,
+                'economy'     => $economy,
+                /* added by it-lab end */
 				'tax'         => $tax,
 				'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 				'rating'      => $result['rating'],
 				'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 			);
 		}
-
+        /* added by it-lab start */
+        $data['currency'] = $this->session->data['currency'];
+        /* added by it-lab end */
 		$url = '';
 
 		if (isset($this->request->get['limit'])) {
@@ -153,14 +176,14 @@ class ControllerProductSpecial extends Controller {
 
 		$data['sorts'][] = array(
 			'text'  => $this->language->get('text_price_asc'),
-			'value' => 'ps.price-ASC',
-			'href'  => $this->url->link('product/special', 'sort=ps.price&order=ASC' . $url)
+			'value' => 'p.price-ASC',
+			'href'  => $this->url->link('product/special', 'sort=p.price&order=ASC' . $url)
 		);
 
 		$data['sorts'][] = array(
 			'text'  => $this->language->get('text_price_desc'),
-			'value' => 'ps.price-DESC',
-			'href'  => $this->url->link('product/special', 'sort=ps.price&order=DESC' . $url)
+			'value' => 'p.price-DESC',
+			'href'  => $this->url->link('product/special', 'sort=p.price&order=DESC' . $url)
 		);
 
 		if ($this->config->get('config_review_status')) {
@@ -188,6 +211,19 @@ class ControllerProductSpecial extends Controller {
 			'value' => 'p.model-DESC',
 			'href'  => $this->url->link('product/special', 'sort=p.model&order=DESC' . $url)
 		);
+        /* added by it-lab start */
+
+        $data['sorts'][] = array(
+            'text'  => $this->language->get('text_date_added_desc'),
+            'value' => 'p.date_added-DESC',
+            'href'  => $this->url->link('product/special', 'sort=p.date_added&order=DESC' . $url)
+        );
+        $data['sorts'][] = array(
+            'text'  => $this->language->get("text_popular_desc"),
+            'value' => 'order_quantity-DESC',
+            'href'  => $this->url->link('product/special',  'sort=order_quantity&order=DESC' . $url)
+        );
+        /* added by it-lab end */
 
 		$url = '';
 
@@ -255,7 +291,14 @@ class ControllerProductSpecial extends Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 		$data['limit'] = $limit;
-
+        /* added by it-lab start */
+        $data['product_total'] = $product_total;
+        if(!isset($this->request->get['method']) || $this->request->get['method'] != "load_all") {
+            $num_pages = ceil($product_total / $limit);
+            $data['num_pages'] = $num_pages;
+        }
+        $data['page'] = $page;
+        /* added by it-lab end */
 		$data['continue'] = $this->url->link('common/home');
 
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -264,7 +307,12 @@ class ControllerProductSpecial extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
-		$this->response->setOutput($this->load->view('product/special', $data));
+        /* added by it-lab start */
+        if(isset($this->request->get['method'])){
+            $this->response->setOutput($this->load->view('product/load_more', $data));
+        }else {
+            $this->response->setOutput($this->load->view('product/special', $data));
+        }
+        /* added by it-lab end */
 	}
 }

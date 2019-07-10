@@ -70,10 +70,12 @@ class ControllerExtensionModuleSlideshow extends Controller {
                     }else{
                         $banner['manufacturer_img'] = false;
                     }
-                    $banner['link_product'] = $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . $product_id );
+                    $banner['link_product'] = $this->url->link('product/product', '&product_id=' . $product_id );
                 }
             }
         }
+        $data['link_specials'] = $this->url->link('product/special');
+
         $data['currency'] = $this->session->data['currency'];
         /* added by it-lab* end */
 

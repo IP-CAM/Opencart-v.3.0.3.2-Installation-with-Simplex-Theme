@@ -284,6 +284,20 @@ class ControllerProductManufacturer extends Controller {
 				'value' => 'p.model-DESC',
 				'href'  => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'] . '&sort=p.model&order=DESC' . $url)
 			);
+            /* added by it-lab start */
+
+            $data['sorts'][] = array(
+                'text'  => $this->language->get('text_date_added_desc'),
+                'value' => 'p.date_added-DESC',
+                'href'  => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'] .  '&sort=p.date_added&order=DESC' . $url)
+            );
+
+            $data['sorts'][] = array(
+                'text'  => $this->language->get("text_popular_desc"),
+                'value' => 'total_ordered-DESC',
+                'href'  => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'] . '&sort=total_ordered&order=DESC' . $url)
+            );
+            /* added by it-lab end */
 
 			$url = '';
 

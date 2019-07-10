@@ -237,6 +237,7 @@ class ControllerInformationContact extends Controller {
         $location_descriptions = $this->model_localisation_location->getLocationDescriptions();
 /*        var_dump($locations);*/
         foreach($locations as $location_info) {
+            var_dump($location_info);
 			//$location_info = $this->model_localisation_location->getLocation($location_id);
             $location_id=$location_info["location_id"];
 			if ($location_info & !$location_info['is_online']) {
@@ -259,6 +260,7 @@ class ControllerInformationContact extends Controller {
 					'telephone'   => $location_info['telephone'],
 					'telephone1'  => $location_info['telephone1'],
 					'telephone2'  => $location_info['telephone2'],
+					'email'       => $location_info['email'],
 					'fax'         => $location_info['fax'],
 					'image'       => $image,
                     'open'        => html_entity_decode($location_descriptions[$location_id]['open'], ENT_QUOTES, 'UTF-8'),

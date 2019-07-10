@@ -1,9 +1,9 @@
 <?php
+// Heading
+$_['heading_title']     = 'Nou la simplex';
+
 // Text
-$_['text_refine']       = 'Refine Search';
-$_['text_product']      = 'Products';
-$_['text_error']        = 'Category not found!';
-$_['text_empty']        = 'There are no products to list in this category.';
+$_['text_empty']        = 'There are no latest products to list.';
 $_['text_quantity']     = 'Qty:';
 $_['text_manufacturer'] = 'Brand:';
 $_['text_model']        = 'Product Code:';
@@ -22,5 +22,5 @@ $_['text_rating_desc']  = 'Rating (Highest)';
 $_['text_model_asc']    = 'Model (A - Z)';
 $_['text_model_desc']   = 'Model (Z - A)';
 $_['text_limit']        = 'Show:';
-$_['text_date_added_desc'] = 'New';
-$_['text_popular_desc'] = 'Popular';
+$_['text_date_added_desc'] = 'Noutati';
+$_['text_popular_desc'] = 'Populare';

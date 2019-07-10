@@ -27,30 +27,9 @@
                         <label class="required" for="mail">{{ entry_email }}</label><input type="email" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" type="text" required >
                         <label class="required" for="telephone">{{ entry_telephone }}</label><input type="tel" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone">
                         <label class="required" for="input-password">{{ entry_password }}</label><input  type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password">
-{#
-                        <label class="required" for="input-password">{{ entry_confirm }}</label><input  type="password" name="confirm" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password">
-#}
+
                         <input  type="hidden" name="agree" value="1" checked="checked" />
-{#                        {% if text_agree %}
-                            <div class="pull-right">{{ text_agree }}
-                                {% if agree %}
-                                    <input  type="hidden" name="agree" value="1" checked="checked" />
-                                {% else %}
-                                    <input type="hidden" name="agree" value="1" />
-                                {% endif %}
-                            </div>
-                        <div class="submit">
-                            <button class="form-submit" type="submit">
-                                {{ button_continue }}<span class="image-container"></span>
-                            </button>
-                        </div>
-                        {% else %}
-                        <div class="submit">
-                            <button class="form-submit" type="submit">
-                                {{ button_continue }}<span class="image-container"></span>
-                            </button>
-                        </div>
-                        {% endif %}#}
+
                         <div class="submit">
                             <button class="form-submit" type="submit">
                                 {{ button_continue }}<span class="image-container"></span>
