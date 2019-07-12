@@ -8,7 +8,7 @@ class ModelDesignBanner extends Model {
 		if (isset($data['banner_image'])) {
 			foreach ($data['banner_image'] as $language_id => $value) {
 				foreach ($value as $banner_image) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "banner_image SET banner_id = '" . (int)$banner_id . "', language_id = '" . (int)$language_id . "', title = '" .  $this->db->escape($banner_image['title']) . "', link = '" .  $this->db->escape($banner_image['link']) . "', image = '" .  $this->db->escape($banner_image['image']) . "', sort_order = '" .  (int)$banner_image['sort_order'] . "'");
+					$this->db->query("INSERT INTO " . DB_PREFIX . "banner_image SET banner_id = '" . (int)$banner_id . "', language_id = '" . (int)$language_id . "', title = '" .  $this->db->escape($banner_image['title']) . "', link = '" .  $this->db->escape($banner_image['link']) ."', description = '" .  $this->db->escape($banner_image['description']) . "', product = '" .  $this->db->escape($banner_image['product']). "', product_id = '" .  $this->db->escape($banner_image['product_id']). "', image = '" .  $this->db->escape($banner_image['image']) . "', sort_order = '" .  (int)$banner_image['sort_order'] . "'");
 				}
 			}
 		}
@@ -24,7 +24,7 @@ class ModelDesignBanner extends Model {
 		if (isset($data['banner_image'])) {
 			foreach ($data['banner_image'] as $language_id => $value) {
 				foreach ($value as $banner_image) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "banner_image SET banner_id = '" . (int)$banner_id . "', language_id = '" . (int)$language_id . "', title = '" .  $this->db->escape($banner_image['title']) . "', link = '" .  $this->db->escape($banner_image['link']) . "', image = '" .  $this->db->escape($banner_image['image']) . "', sort_order = '" . (int)$banner_image['sort_order'] . "'");
+					$this->db->query("INSERT INTO " . DB_PREFIX . "banner_image SET banner_id = '" . (int)$banner_id . "', language_id = '" . (int)$language_id . "', title = '" .  $this->db->escape($banner_image['title']) . "', link = '" .  $this->db->escape($banner_image['link']) . "', description = '" .  $this->db->escape($banner_image['description']) . "', product = '" .  $this->db->escape($banner_image['product']). "', product_id = '" .  $this->db->escape($banner_image['product_id']). "', image = '" .  $this->db->escape($banner_image['image']) . "', sort_order = '" . (int)$banner_image['sort_order'] . "'");
 				}
 			}
 		}
@@ -87,7 +87,12 @@ class ModelDesignBanner extends Model {
 			$banner_image_data[$banner_image['language_id']][] = array(
 				'title'      => $banner_image['title'],
 				'link'       => $banner_image['link'],
-				'image'      => $banner_image['image'],
+                /* added by it-lab start */
+                'description'=> $banner_image['description'],
+                'product'    => $banner_image['product'],
+				'product_id' => $banner_image['product_id'],
+                /* added by it-lab end */
+                'image'      => $banner_image['image'],
 				'sort_order' => $banner_image['sort_order']
 			);
 		}

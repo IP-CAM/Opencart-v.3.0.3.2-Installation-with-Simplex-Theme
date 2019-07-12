@@ -251,28 +251,31 @@
                     </div>
                     <div class="product-body">
                       <h5 class="title">{{ product.name }}</h5>
-
-                      <div class="discount">
+                      {% if product.hide_price %}
+                        <div class="discount">
+                          {% if product.special %}
+                            <p class="old-price">{{ product.price }}.-</p>
+                            <p class="discount-percent">-{{ product.special_percentage }}%</p>
+                            <p class="discount-val">-{{ product.economy }}</p>
+                          {% endif %}
+                        </div>
                         {% if product.special %}
-                          <p class="old-price">{{ product.price }}.-</p>
-                          <p class="discount-percent">-{{ product.special_percentage }}%</p>
-                          <p class="discount-val">-{{ product.economy }}</p>
+                          <p class="price">{{ product.special }}.-</p>
+                        {% else %}
+                          <p class="price">{{ product.price }}.-</p>
                         {% endif %}
-                      </div>
-                      {% if product.special %}
-                        <p class="price">{{ product.special }}.-</p>
-                      {% else %}
-                        <p class="price">{{ product.price }}.-</p>
+                        <p class="currency">{{ currency }}</p>
                       {% endif %}
-                      <p class="currency">{{ currency }}</p>
                     </div>
                   </a>
-                  <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                    <p>{{ button_cart }}</p>
-                    <span class="image-container">
+                  {% if product.hide_price %}
+                    <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                      <p>{{ button_cart }}</p>
+                      <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
-                  </button>
+                    </button>
+                  {% endif %}
                   <div class="float-buttons">
                     <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
                       <img
@@ -287,7 +290,6 @@
                     </button>
                   </div>
                 </div>
-
               </div>
             {% endfor %}
             {% if products|length < 7 %}

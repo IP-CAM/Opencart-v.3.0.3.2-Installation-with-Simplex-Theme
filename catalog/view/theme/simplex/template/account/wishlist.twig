@@ -30,6 +30,7 @@
                                 <div class="product-body">
                                     <h5 class="title">{{ product.name }}</h5>
                                     <div class="price-container">
+                                        {% if product.hide_price %}
                                         <div class="discount">
                                             {% if product.special %}
                                                 <p class="old-price">{{ product.price }}.-</p>
@@ -43,6 +44,7 @@
                                             <p class="price">{{ product.price }}.-</p>
                                         {% endif %}
                                         <p class="currency">{{ currency }}</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </a>

@@ -9,7 +9,7 @@
 		}
 	}
 	
-	.product-slider, .related-slider, .news {
+	.product-slider, .related-slider, .news, .interesting {
 		.slick-next, .slick-prev {
 			display : none !important;
 		}
@@ -28,19 +28,11 @@
 				}
 				
 				&.tel:before {
-					content : none;
-				}
-				
-				&:after {
 					background : url($image_dir + "phone.svg");
-					content    : '';
+					border     : 0;
 					display    : block;
 					height     : 23px;
 					width      : 25px;
-				}
-				
-				&:before {
-					content : none;
 				}
 			}
 		}
@@ -270,7 +262,7 @@
 	}
 	
 	#categories {
-		display : none;
+		position : static;
 	}
 	
 	#item-card {
@@ -427,7 +419,7 @@
 		}
 	}
 	
-	.newest, .job-card {
+	.newest, .job-card, .project-card, .news-card {
 		margin-bottom : 1.125rem;
 	}
 	
@@ -439,6 +431,17 @@
 	
 	.products, .slideshow-nav .slick-track {
 		grid-template-columns : repeat(3, 1fr);
+	}
+	
+	.used-products {
+		.address-list, .brands {
+			margin-left  : 0;
+			margin-right : 0;
+		}
+		
+		.items {
+			grid-gap : 1rem;
+		}
 	}
 	
 	.wrapper {
@@ -521,6 +524,20 @@
 		
 		.slick-prev {
 			left : -15px;
+		}
+	}
+	
+	#cart-wrapper {
+		.panel .panel-heading {
+			@include flex-align(col, start);
+			
+			label, p {
+				margin-left : 0;
+			}
+			
+			> *, h5 {
+				margin-bottom : 1rem;
+			}
 		}
 	}
 	
@@ -851,6 +868,20 @@
 		};
 	}
 	
+	.content blockquote {
+		padding-bottom : 2rem;
+		padding-top    : 2rem;
+		text-align     : center;
+		
+		&:before {
+			display      : block;
+			float        : none;
+			font-size    : 76px;
+			line-height  : 0.75;
+			margin-right : 0;
+		}
+	}
+	
 	.gallery-list .slick-slide {
 		height : auto;
 	}
@@ -879,7 +910,7 @@
 		}
 	}
 	
-	.job-card {
+	.job-card, .project-card, .news-card {
 		.card {
 			flex-direction : column;
 			
@@ -893,9 +924,8 @@
 				flex : 0 0 auto;
 			}
 			
-			.card-date {
+			.card-foot {
 				margin-bottom : 0;
-				margin-top    : 1.25rem;
 				text-align    : center;
 			}
 		}
@@ -968,7 +998,7 @@
 				padding : 1.25rem 0;
 			}
 			
-			.card-date {
+			.card-foot {
 				margin-bottom : 0;
 				margin-top    : 20px;
 			}
@@ -978,6 +1008,12 @@
 	.news-wrapper {
 		.news-grid {
 			grid-template-columns : 1fr 1fr;
+		}
+		
+		.projects-list {
+			.card {
+				max-width : 225px;
+			}
 		}
 	}
 	
@@ -1000,7 +1036,7 @@
 		}
 	}
 	
-	.product-slider, .related-slider, .news {
+	.product-slider, .related-slider, .news, .interesting {
 		.slick-next, .slick-prev {
 			display : inline-block !important;
 			
@@ -1032,11 +1068,19 @@
 		}
 	}
 	
+	.project-card, .news-card {
+		.card .card-foot {
+			margin-bottom : 1.5rem;
+			margin-top    : -1.25rem;
+			padding-top   : 1rem;
+		}
+	}
+	
 	.share {
 		line-height : 54px;
 		
 		.back {
-			border-right : 0
+			border-right : 0;
 		}
 		
 		.social {
@@ -1055,6 +1099,18 @@
 	
 	.tab-content button {
 		display : block;
+	}
+	
+	.used-products {
+		@include flex(col, center);
+		
+		.address-list {
+			max-width : 280px;
+		}
+		
+		.items {
+			order : 1;
+		}
 	}
 	
 	.wrapper {
@@ -1148,6 +1204,12 @@
 		}
 	}
 	
+	#slides-counter p {
+		margin-left  : 0;
+		margin-right : 0;
+		text-align   : center;
+	}
+	
 	#subscribe {
 		button {
 			flex-grow   : 0;
@@ -1193,6 +1255,17 @@
 		}
 	}
 	
+	.content {
+		.address-list {
+			margin-right : 0;
+			width        : 100%;
+			
+			ul {
+				padding-right : 0;
+			}
+		}
+	}
+	
 	.control {
 		padding : 0;
 		
@@ -1203,9 +1276,31 @@
 			width           : 100%;
 		}
 		
+		.search {
+			@include flex-align(col);
+			
+			> * {
+				margin  : 0 0 1rem 0;
+				padding : 0;
+			}
+		}
+		
 		.right {
 			margin-bottom : 20px;
 			order         : 0;
+		}
+	}
+	
+	.cookies {
+		
+		.cookies-politic-block {
+			flex-wrap       : wrap;
+			justify-content : center;
+			text-align      : center;
+			
+			.btn-accept-cookies-policy {
+				margin : 1rem auto;
+			}
 		}
 	}
 	
@@ -1343,6 +1438,20 @@
 		}
 	}
 	
+	.slideshow .slick-arrow {
+		margin : auto;
+		
+		&.slick-next {
+			left  : 2.75rem;
+			right : 0;
+		}
+		
+		&.slick-prev {
+			left  : 0;
+			right : 2.75rem;
+		}
+	}
+	
 	.wrapper.wish-wrapper #delete-all {
 		padding : 0.5rem;
 		top     : -60px;
@@ -1394,6 +1503,16 @@
 		
 		.warranty-item {
 			flex : 100%
+		}
+	}
+}
+
+@media (max-width : 400px) {
+	.control .left {
+		@include flex-align(col, center);
+		
+		.sort-by {
+			margin-right : 0;
 		}
 	}
 }

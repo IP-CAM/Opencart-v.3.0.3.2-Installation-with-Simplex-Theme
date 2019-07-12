@@ -205,8 +205,16 @@ class ControllerProductSearch extends Controller {
 
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                    /* added by it-lab start */
+                    $special_percentage = round(100 - (($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'))*100) / $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'))));
+                    $economy= $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')) - $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+                    /* added by it-lab end */
 				} else {
 					$special = false;
+                    /* added by it-lab start */
+                    $special_percentage = false;
+                    $economy = false;
+                    /* added by it-lab end */
 				}
 
 				if ($this->config->get('config_tax')) {
@@ -228,6 +236,11 @@ class ControllerProductSearch extends Controller {
 					'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
 					'special'     => $special,
+                    /* added by it-lab start */
+                    'special_percentage' => $special_percentage,
+                    'economy'     => $economy,
+                    'hide_price'  => $result['hide_price']?false:true,
+                    /* added by it-lab end */
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $result['rating'],

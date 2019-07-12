@@ -43,7 +43,39 @@ $('.product-slider').slick({
         }
     ]
 });
-
+$('.interesting .projects-list').slick({
+    slidesToShow: 4,
+    dots: false,
+    arrows: true,
+    prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+    nextArrow: '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+    infinite: false,
+    responsive: [
+        {
+            breakpoint: 1260,
+            settings: {
+                slidesToShow: 3,
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                variableWidth: true,
+                slidesToShow: 1,
+            }
+        }
+    ]
+});
 $('.related-slider').slick({
     dots: true,
     infinite: false,
@@ -86,8 +118,7 @@ $('.related-slider').slick({
             }
         }
     ]
-})
-
+});
 $('.nav-tabs .nav-link').click(function () {
     if ($(this).attr('href') === '#relative') {
         setTimeout(function () {
@@ -275,7 +306,7 @@ $('.gallery-images').slick({
         }
     ]
 });
-$('.slideshow').slick({
+$('.gallery-item-container .slideshow').slick({
     infinite: false,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -295,13 +326,54 @@ $('.slideshow').slick({
         '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
         '</svg></button>',
 });
+
+$('.project-wrapper .slideshow').slick({
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: true,
+    prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+    nextArrow: '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+});
+
+$('.news-wrapper .slideshow').slick({
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: true,
+    prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+    nextArrow: '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+});
+
 $('.slideshow-nav').slick({
     infinite: false,
     slidesToShow: $('.slideshow-nav .image').length,
     slidesToScroll: 1,
     arrows: false,
     focusOnSelect: true,
-    asNavFor: '.slideshow',
+    asNavFor: '.gallery-item-container .slideshow',
     adaptiveHeight: true,
     variableWidth: true,
 });
@@ -435,4 +507,3 @@ $('.poppup').click(function () {
 });
 $('input[type="radio"]').after('<span class="radio"></span>');
 $('input[type="checkbox"]').after('<span class="checkbox"></span>');
-//$('label').prepend('<span class="radio"></span>');

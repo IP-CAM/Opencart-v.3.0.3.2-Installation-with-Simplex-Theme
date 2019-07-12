@@ -1100,6 +1100,8 @@ class ControllerCatalogProduct extends Controller {
 			$product_downloads = array();
 		}
         /* added by it-lab* start */
+
+
         // Locations
         $this->load->model('localisation/location');
         $locations = $this->model_localisation_location->getLocations();
@@ -1148,6 +1150,24 @@ class ControllerCatalogProduct extends Controller {
 
 
         /* added by it-lab* start end */
+        if (isset($this->request->post['hide_price'])) {
+            /*if(array_key_exists('hide_price',$this->request->post)){
+                $data['hide_price']=$this->request->post['hide_price'];
+            }else{
+                $data['hide_price']=0;
+
+            }*/
+            $data['hide_price'] = $this->request->post['hide_price'];
+
+           // $data['hide_price']=1;
+        } elseif (!empty($product_info)) {
+            $data['hide_price'] = $product_info['hide_price'];
+        } else {
+            $data['hide_price'] = 0;
+        }
+        var_dump($this->request->post['hide_price']);
+        var_dump($data["hide_price"]);
+
 		$data['product_downloads'] = array();
 
 		foreach ($product_downloads as $download_id) {

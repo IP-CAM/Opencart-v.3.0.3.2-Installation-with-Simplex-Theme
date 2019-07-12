@@ -116,6 +116,15 @@ class ControllerExtensionModuleSlideshow extends Controller {
 		} else {
 			$data['height'] = '';
 		}
+        /* added by it-lab start */
+        if (isset($this->request->post['interval'])) {
+            $data['interval'] = $this->request->post['interval'];
+        } elseif (!empty($module_info)) {
+            $data['interval'] = $module_info['interval'];
+        } else {
+            $data['interval'] = '';
+        }
+        /* added by it-lab end */
 
 		if (isset($this->request->post['status'])) {
 			$data['status'] = $this->request->post['status'];

@@ -60,6 +60,7 @@ class ModelCatalogProduct extends Model {
                 /* added by it-lab* start */
                 'documentation'    => $query->row['documentation'],
                 'garanty'          => $query->row['garanty'],
+                'hide_price'       => $query->row['hide_price'],
                 /* added by it-lab* start end */
                 'product_id'       => $query->row['product_id'],
 				'name'             => $query->row['name'],

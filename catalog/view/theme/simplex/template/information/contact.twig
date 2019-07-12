@@ -99,18 +99,18 @@
         </a>
         <h3>{{ text_contact }}</h3>
         <form action="{{ action }}" method="post" action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
-          <label class="required" for="name">{{ entry_name }}</label><input id="name"  name="name" value="{{ name }}" required type="text">
-          <label class="required" for="mail">{{ entry_email }}</label><input id="mail" name="email" value="{{ email }}" required type="text">
-          <label for="subject">{{ entry_subject }}</label><input id="subject" name="subject" type="text">
-          <label class="required" for="message">{{ entry_enquiry }}</label><textarea id="message"  name="enquiry" rows="10" id="input-enquiry"
-                                                                             required>{{ enquiry }}</textarea>
+          <label class="required" for="name">{{ entry_name }}</label><input id="name" class="{{ error_name?"has-error" }}"  name="name" placeholder="{{ error_name?error_name }}"  value="{{ name }}" required type="text">
+          <label class="required" for="mail">{{ entry_email }}</label><input id="mail" name="email" class="{{ error_email?"has-error" }}"  name="name" placeholder="{{ error_email?error_email }}" value="{{ email }}"  required type="text">
+          <label for="subject">{{ entry_subject }}</label><input id="subject" value="{{ subject }}" name="subject" type="text">
+          <label class="required" for="message">{{ entry_enquiry }}</label><textarea  id="message" placeholder="{{ error_enquiry?error_enquiry }}" class="{{ error_enquiry?"has-error" }}" name="enquiry" rows="10" id="input-enquiry"
+                                                                                      required>{{ enquiry }}</textarea>
           <hr>
           <label for="file">{{ entry_file }}</label><label class="upload">{{ text_browse_file }}...<input id="file" name="file"  type="file"></label>
           <hr>
           <div class="submit">
             <button class="form-submit" type="submit" value="{{ button_submit }}">
               {{ button_submit }}
-               <span class="image-container"></span>
+              <span class="image-container"></span>
             </button>
             <p><span style="color:#b73232">*</span> – {{ text_required_fields }}</p>
           </div>

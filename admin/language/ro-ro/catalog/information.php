@@ -27,6 +27,7 @@ $_['entry_bottom']           = 'Afisează Jos';
 $_['entry_status']           = 'Status';
 $_['entry_sort_order']       = 'Ordine Sortare';
 $_['entry_layout']           = 'Rescriere Layout';
+$_['entry_description_additional'] = 'Additional description';
 
 // Help
 $_['help_keyword']           = 'Nu folosii spații, in schimb inlocuiește spațiile cu - si asigură-te că acest cuvânt este unic global.';

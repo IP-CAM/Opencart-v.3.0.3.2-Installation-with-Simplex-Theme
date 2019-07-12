@@ -169,13 +169,14 @@ class ControllerInformationContact extends Controller {
 
             if(isset($this->request->post['file'])){
                 $mail->addAttachment(DIR_UPLOAD . $file);
+                var_dump("cdsfldskaf;ldskf;ldskaf;ldsakfl;dskaf;lkdsa;lfkds;laf");
             }
-            var_dump(DIR_UPLOAD . $file);
-
      /* added by it-lab end */
 			$mail->setText($this->request->post['enquiry']);
-			$mail->send();
+            var_dump($mail);
 
+            $mail->send();
+            var_dump(DIR_UPLOAD . $file);
 			$this->response->redirect($this->url->link('information/contact/success'));
 		}
 
@@ -237,7 +238,6 @@ class ControllerInformationContact extends Controller {
         $location_descriptions = $this->model_localisation_location->getLocationDescriptions();
 /*        var_dump($locations);*/
         foreach($locations as $location_info) {
-            var_dump($location_info);
 			//$location_info = $this->model_localisation_location->getLocation($location_id);
             $location_id=$location_info["location_id"];
 			if ($location_info & !$location_info['is_online']) {

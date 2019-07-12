@@ -5,24 +5,46 @@
 	
 	// Generate the caret automatically
 	@include caret;
+	
+	&, &:after, svg path {
+		@include transition(all .125s linear);
+	}
+	
+	svg {
+		path {
+			stroke : #b2b5b6
+		}
+	}
+	
+	&[aria-expanded="true"], &:hover {
+		background-color : #f5f4f2;
+		
+		&:after {
+			color : $black;
+		}
+		
+		svg {
+			path {
+				stroke : #000;
+			}
+		}
+	}
 }
 
 // The dropdown menu
 .dropdown-menu {
-	@include border-radius($dropdown-border-radius);
-	@include box-shadow($dropdown-box-shadow);
+	@include border-radius-bottom;
 	@include font-size($dropdown-font-size);
 	background-clip  : padding-box;
 	background-color : $dropdown-bg;
-	border           : $dropdown-border-width solid $dropdown-border-color;
+	border           : $dropdown-border-width solid #f4f4f4;
 	color            : $dropdown-color;
 	display          : none; // none by default, but block on "open" of the menu
 	float            : left;
 	left             : 0;
 	list-style       : none;
-	margin           : $dropdown-spacer 0 0; // override default ul
-	min-width        : $dropdown-min-width;
-	padding          : $dropdown-padding-y 0;
+	margin           : 0; // override default ul
+	padding          : 0.625rem 1.25rem;
 	position         : absolute;
 	text-align       : left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
 	top              : 100%;
@@ -66,16 +88,19 @@
 //
 // `<button>`-specific styles are denoted with `// For <button>s`
 .dropdown-item {
-	background-color : transparent; // For `<button>`s
-	border           : 0; // For `<button>`s
-	clear            : both;
-	color            : $dropdown-link-color;
-	display          : block;
-	font-weight      : $font-weight-normal;
-	padding          : $dropdown-item-padding-y $dropdown-item-padding-x;
-	text-align       : inherit; // For `<button>`s
-	white-space      : nowrap; // prevent links from randomly breaking onto new lines
-	width            : 100%; // For `<button>`s
+	@include transition(color .125s linear);
+	border      : 0; // For `<button>`s
+	clear       : both;
+	color       : #000;
+	display     : block;
+	font-size   : 0.875rem;
+	font-weight : 600;
+	line-height : 2.857;
+	padding     : 0;
+	text-align  : inherit; // For `<button>`s
+	white-space : nowrap; // prevent links from randomly breaking onto new lines
+	width       : 100%; // For `<button>`s
+	
 	
 	// Prevent dropdown overflow if there's no padding
 	// See https://github.com/twbs/bootstrap/pull/27703
@@ -90,9 +115,8 @@
 	}
 	
 	@include hover-focus {
-		color           : $dropdown-link-hover-color;
+		color           : $yellow;
 		text-decoration : none;
-		@include gradient-bg($dropdown-link-hover-bg);
 	}
 	
 	&.active,

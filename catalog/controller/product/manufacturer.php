@@ -211,6 +211,7 @@ class ControllerProductManufacturer extends Controller {
                     /* added by it-lab start */
                     'special_percentage' => $special_percentage,
                     'economy'     => $economy,
+                    'hide_price'  => $result['hide_price']?false:true,
                     /* added by it-lab end */
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
