@@ -95,10 +95,16 @@ class ControllerInformationContact extends Controller {
 
 			$mail->setTo($this->config->get('config_email'));
 			$mail->setFrom($this->config->get('config_email'));
-			$mail->setReplyTo($this->request->post['email']);
-			$mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
+			if(!isset($this->request->post['customer_phone'])) {
+                $mail->setReplyTo($this->request->post['email']);
+                $mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
+                $mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['subject']), ENT_QUOTES, 'UTF-8'));
+
+            }else{
+                $mail->setSender(html_entity_decode($this->request->post['customer_phone'], ENT_QUOTES, 'UTF-8'));
+                $mail->setSubject(html_entity_decode($this->language->get('text_telephone')." : ", ENT_QUOTES, 'UTF-8'));
+            }
             /* added by it-lab start */
-            $mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['subject']), ENT_QUOTES, 'UTF-8'));
             if (!empty($this->request->files['file']['name']) && is_file($this->request->files['file']['tmp_name'])) {
                 // Sanitize the filename
                 $filename = $this->request->files['file']['name'];
@@ -170,12 +176,20 @@ class ControllerInformationContact extends Controller {
             if(isset($this->request->post['file'])){
                 $mail->addAttachment(DIR_UPLOAD . $file);
             }
-            var_dump(DIR_UPLOAD . $file);
-
      /* added by it-lab end */
-			$mail->setText($this->request->post['enquiry']);
-			$mail->send();
+            if(!isset($this->request->post['customer_phone'])) {
+                $mail->setText($this->request->post['enquiry']);
+                $mail->send();
+                $this->response->redirect($this->url->link('information/contact/success'));
+            }else{
+                $mail->setText($this->language->get('text_telephone')." : ",$this->request->post['customer_phone']);
+                $mail->send();
+                $json['phone_success'] = $this->language->get('text_upload');
+                return $this->response->setOutput(json_encode($json));
+            }
 
+
+            $mail->send();
 			$this->response->redirect($this->url->link('information/contact/success'));
 		}
 
@@ -259,6 +273,7 @@ class ControllerInformationContact extends Controller {
 					'telephone'   => $location_info['telephone'],
 					'telephone1'  => $location_info['telephone1'],
 					'telephone2'  => $location_info['telephone2'],
+					'email'       => $location_info['email'],
 					'fax'         => $location_info['fax'],
 					'image'       => $image,
                     'open'        => html_entity_decode($location_descriptions[$location_id]['open'], ENT_QUOTES, 'UTF-8'),
@@ -302,18 +317,23 @@ class ControllerInformationContact extends Controller {
 	}
 
 	protected function validate() {
-		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
-			$this->error['name'] = $this->language->get('error_name');
-		}
+        if(!isset($this->request->post['customer_phone'])) {
+            if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
+                $this->error['name'] = $this->language->get('error_name');
+            }
 
-		if (!filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
-			$this->error['email'] = $this->language->get('error_email');
-		}
+            if (!filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
+                $this->error['email'] = $this->language->get('error_email');
+            }
 
-		if ((utf8_strlen($this->request->post['enquiry']) < 10) || (utf8_strlen($this->request->post['enquiry']) > 3000)) {
-			$this->error['enquiry'] = $this->language->get('error_enquiry');
-		}
-
+            if ((utf8_strlen($this->request->post['enquiry']) < 10) || (utf8_strlen($this->request->post['enquiry']) > 3000)) {
+                $this->error['enquiry'] = $this->language->get('error_enquiry');
+            }
+        }/*else{
+            if ((utf8_strlen($this->request->post['customer_phone']) < 3) || (utf8_strlen($this->request->post['customer_phone']) > 32)) {
+                $this->error['customer_phone'] = $this->language->get('error_customer_phone');
+            }
+        }*/
 		// Captcha
 		if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
 			$captcha = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha') . '/validate');

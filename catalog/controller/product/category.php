@@ -219,6 +219,7 @@ class ControllerProductCategory extends Controller {
                     /* added by it-lab start */
                     'special_percentage' => $special_percentage,
                     'economy'     => $economy,
+                    'hide_price'  => $result['hide_price']?false:true,
                     /* added by it-lab end */
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
@@ -296,6 +297,21 @@ class ControllerProductCategory extends Controller {
 				'value' => 'p.model-DESC',
 				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)
 			);
+
+            /* added by it-lab start */
+
+            $data['sorts'][] = array(
+                'text'  => $this->language->get('text_date_added_desc'),
+                'value' => 'p.date_added-DESC',
+                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.date_added&order=DESC' . $url)
+            );
+
+            $data['sorts'][] = array(
+                'text'  => $this->language->get("text_popular_desc"),
+                'value' => 'order_quantity-DESC',
+                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=order_quantity&order=DESC' . $url)
+            );
+            /* added by it-lab end */
 
 			$url = '';
 

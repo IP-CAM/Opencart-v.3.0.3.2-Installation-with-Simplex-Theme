@@ -24,9 +24,27 @@
 	stroke : #e7e7e7;
 }
 
-.product-slider, .related-slider, .news {
+.product-slider, .related-slider, .news, .interesting {
 	svg path {
 		stroke : #000;
+	}
+	
+	.float-buttons {
+		a {
+			svg {
+				display : block;
+				margin  : auto;
+				
+				path {
+					@include transition(all .125s linear);
+					stroke : #b2b5b6;
+				}
+			}
+			
+			&:hover svg path {
+				stroke : $black;
+			}
+		}
 	}
 	
 	.slick-disabled {

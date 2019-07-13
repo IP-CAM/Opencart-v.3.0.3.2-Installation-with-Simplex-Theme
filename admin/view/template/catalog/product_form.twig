@@ -390,6 +390,14 @@
                   <input type="text" name="sort_order" value="{{ sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control"/>
                 </div>
               </div>
+              {#              /* added by it-lab start */#}
+              <div class="form-group ">
+                <label class="col-sm-2 control-label" for="input-model">Hide price</label>
+                <div class="col-sm-10">
+                  <input type="number"  min="0" max="1" {% if hide_price %} checked="checked" {% endif %} name="hide_price" value="{{ hide_price }}"  id="input-hide-price" class="form-control"/>
+                </div>
+              </div>
+              {#              /* added by it-lab end */#}
             </div>
             <div class="tab-pane" id="tab-links">
               <div class="form-group">

@@ -10,6 +10,7 @@ $_['text_add']             = 'Adresa a fost adaugată';
 $_['text_edit']            = 'Adresa a fost actualizată';
 $_['text_delete']          = 'Adresa a fost stearsă';
 $_['text_empty']           = 'Nu ai nicio adresă înregistrată in contul tău.';
+$_['text_address']         = 'Address';
 
 // Entry
 $_['entry_firstname']      = 'Prenume';

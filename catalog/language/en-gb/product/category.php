@@ -22,3 +22,5 @@ $_['text_rating_desc']  = 'Rating (Highest)';
 $_['text_model_asc']    = 'Model (A - Z)';
 $_['text_model_desc']   = 'Model (Z - A)';
 $_['text_limit']        = 'Show:';
+$_['text_date_added_desc'] = 'New';
+$_['text_popular_desc'] = 'Popular';

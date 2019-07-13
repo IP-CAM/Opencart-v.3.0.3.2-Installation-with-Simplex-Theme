@@ -38,6 +38,7 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 				$data['informations'][] = array(
 					'information_id' => $result['information_id'],
 					'thumb'          => $image,
+					'original_image' => "image/".$result['image'],
 					'title'          => $result['title'],
 					'description'    => !empty($result['short_description']) ? trim(html_entity_decode($result['short_description'], ENT_QUOTES, 'UTF-8')) : utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('information_description_length')) . '..',
 					'user_id'        => $result['user_id'],

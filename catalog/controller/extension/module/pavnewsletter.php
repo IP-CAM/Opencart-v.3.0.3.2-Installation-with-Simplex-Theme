@@ -118,8 +118,16 @@ class ControllerExtensionModulePavnewsletter extends Controller {
 
 			$json['redirect'] = $this->url->link('common/home', '', 'SSL');
 		} else {
-			$json['error'] = $this->language->get('error_post');
-		}
+            /* added by it-lab start */
+
+            $subscribe_id = $this->model_extension_pavnewsletter_subscribe->getSubscribeId($this->request->post['email']);
+            if($subscribe_id){
+                $this->model_extension_pavnewsletter_subscribe->updateAction($subscribe_id,1);
+            }
+            $json['success'] = $this->language->get('success_post');
+            $json['redirect'] = $this->url->link('common/home', '', 'SSL');
+            /* added by it-lab end */
+        }
 		$this->response->setOutput(json_encode($json));
 	}
 

@@ -46,7 +46,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </select>
-                            <label for="show-num">pe pagina</label>
+                            <label for="show-num">{{ text_items_on_page }}</label>
                         </div>
                     </div>
                     <div class="right">
@@ -252,7 +252,7 @@
                                         </div>
                                         <div class="product-body">
                                             <h5 class="title">{{ product.name }}</h5>
-
+                                            {% if product.hide_price %}
                                             <div class="discount">
                                                 {% if product.special %}
                                                     <p class="old-price">{{ product.price }}.-</p>
@@ -266,14 +266,17 @@
                                                 <p class="price">{{ product.price }}.-</p>
                                             {% endif %}
                                             <p class="currency">{{ currency }}</p>
+                                            {% endif %}
                                         </div>
                                     </a>
+                                    {% if product.hide_price %}
                                     <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
                                         <p>{{ button_cart }}</p>
                                         <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
                                     </button>
+                                    {% endif %}
                                     <div class="float-buttons">
                                         <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
                                             <img
@@ -296,19 +299,19 @@
                     </div>
                     <div id="pager">
                         <div class="total">
-                            <p>Total: {{ product_total }} poziții</p>
+                            <p>{{ text_total }} {{ product_total }} {{ text_pozitions }}</p>
                         </div>
                         <div class="show-more">
                             {% if num_pages>1 %}
                                 <button id="show-more-button" type="button" data-page="{{ page }}"
                                         data-num_pages="{{ num_pages }}">
                                     <span class="image-container"></span>
-                                    <p>Arată încă {{ limit }} poziții</p>
+                                    <p>{{ text_show_more }} {{ limit }} {{ text_pozitions }}</p>
                                 </button>
                             {% endif %}
                         </div>
                         <div class="all">
-                            <a id="show-all" href="#">Arată toate</a>
+                            <a id="show-all" href="#">{{ text_show_all }}</a>
                         </div>
                     </div>
                 {% else %}

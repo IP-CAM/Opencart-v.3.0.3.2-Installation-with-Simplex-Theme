@@ -109,9 +109,13 @@
                         $(".success_inline, .warning_inline, .error").remove();
                         if (json['error']) {
                             _form.find('.valid').html("<div class=\"warning_inline alert alert-danger\">"+json['error']+"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button></div>");
+                            $("#subscribe .done .msg").text(json['success']);
+                            $("#subscribe .done").css('display', 'flex');
                         }
                         if (json['success']) {
-                            _form.find('.valid').html("<div class=\"success_inline alert alert-success\">"+json['success']+"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button></div>");
+                            _form.find('.valid').html("<div class=\"success_inline alert alert-success\">" + json['success'] + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button></div>");
+                            $("#subscribe .done .msg").text(json['success']);
+                            $("#subscribe .done").css('display', 'flex');
                         }
                     }
                 });

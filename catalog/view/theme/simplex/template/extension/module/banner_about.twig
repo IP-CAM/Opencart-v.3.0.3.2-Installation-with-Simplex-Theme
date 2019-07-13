@@ -1,0 +1,16 @@
+<hr>
+<div id="about-us">
+  <div class="container-fluid">
+    <div class="cards">
+      {% for banner in banners %}
+      <div class="mini-card">
+        <div class="image-container">
+          <img alt="" src="{{ banner.image_original }}">
+        </div>
+        <p>{{ banner.title }}</p>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ $_['text_add']           = 'Your address has been successfully added';
 $_['text_edit']          = 'Your address has been successfully updated';
 $_['text_delete']        = 'Your address has been successfully deleted';
 $_['text_empty']         = 'You have no addresses in your account.';
+$_['text_address']         = 'Address';
 
 // Entry
 $_['entry_firstname']    = 'First Name';
@@ -35,3 +36,4 @@ $_['error_city']         = 'City must be between 2 and 128 characters!';
 $_['error_country']      = 'Please select a country!';
 $_['error_zone']         = 'Please select a region / state!';
 $_['error_custom_field'] = '%s required!';
+
