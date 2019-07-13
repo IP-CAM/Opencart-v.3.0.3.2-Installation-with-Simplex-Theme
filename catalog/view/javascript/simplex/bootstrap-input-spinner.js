@@ -20,6 +20,7 @@
     window.CustomEvent = CustomEvent;
 })();
 
+
 (function ($) {
     "use strict";
 

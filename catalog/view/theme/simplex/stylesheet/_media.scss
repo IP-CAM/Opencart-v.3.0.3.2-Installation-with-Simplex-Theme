@@ -20,7 +20,6 @@
 	header {
 		.phone {
 			a {
-				display       : block;
 				padding-right : 15px;
 				
 				span {
@@ -222,6 +221,10 @@
 		}
 	}
 	
+	.phone a.tel:before {
+		margin : 0;
+	}
+	
 	.products {
 		grid-template-columns : repeat(3, 1fr);
 		
@@ -270,6 +273,30 @@
 		
 		.page-title h1, .item-price-block .price {
 			font-size : 1.875rem;
+		}
+	}
+	
+	#lang-switcher {
+		.dropdown-item {
+			@include border-radius(.375rem);
+			@include flex(none, none, center);
+			@include transition(all .125s linear);
+			font-size    : .8125rem;
+			height       : 40px;
+			margin-right : .75rem;
+			padding      : .75rem 1rem;
+			
+			&:hover, &.active {
+				color : $yellow;
+			}
+			
+			&.active {
+				border : 1px solid #f4f4f4;
+			}
+		}
+		
+		.dropdown-toggle {
+			display : none;
 		}
 	}
 	
@@ -388,19 +415,86 @@
 		}
 	}
 	
-	.navbar .navbar-brand {
-		margin-right : auto;
+	.menu .menu-link {
+		color           : $black;
+		justify-content : flex-start;
+		padding         : 0;
+		
+		svg {
+			display : none;
+		}
+		
+		&:hover {
+			color : $yellow;
+		}
+	}
+	
+	.navbar {
+		.navbar-brand {
+			margin-right : auto;
+		}
+		
+		.nav-link {
+			line-height : 2.5rem;
+			
+			&:hover, &[aria-expanded="true"] {
+				background-color : $white;
+			}
+		}
 	}
 	
 	.navbar-collapse {
-		background-color : #fff;
+		background-color : $white;
 		left             : 0;
 		margin           : auto;
-		max-width        : 640px;
 		position         : absolute;
 		right            : 0;
 		top              : 100%;
 		z-index          : 10;
+	}
+	
+	.navbar-nav {
+		border      : 1px solid #f4f4f4;
+		line-height : 2.5rem;
+		
+		#catalog {
+			grid-column : 2;
+			grid-row    : 1 / 4;
+			order       : 1;
+		}
+		
+		#lang {
+			grid-column : 3;
+			grid-row    : 1;
+		}
+		
+		#contacts, #news-menu {
+			grid-column : 1;
+		}
+		
+		.nav-button a, .nav-item a, .nav-button a:not(.dropdown-item), .nav-item a:not(.dropdown-item) {
+			padding : 0;
+		}
+		
+		.dropdown-toggle {
+			font-weight : 700;
+		}
+		
+		.follow-us {
+			a {
+				margin : 0 1rem;
+				
+				svg path {
+					@include transition(all .125s linear);
+				}
+				
+				&:hover {
+					svg path {
+						fill : $yellow;
+					}
+				}
+			}
+		}
 	}
 	
 	.nav-tabs .nav-link {
@@ -527,6 +621,18 @@
 		}
 	}
 	
+	#catalog .dropdown-toggle {
+		font-weight : 600;
+		
+		&:after {
+			content : '';
+		}
+		
+		&[aria-expanded="true"], &:hover, &:hover:after {
+			color : #dda80e
+		}
+	}
+	
 	#cart-wrapper {
 		.panel .panel-heading {
 			@include flex-align(col, start);
@@ -541,8 +647,40 @@
 		}
 	}
 	
-	#compare, #favorite, #profile {
-		display : none;
+	#buttons {
+		@include flex(none, center, center, wrap-reverse);
+		order   : -1;
+		padding : 1.25rem 0;
+		
+		a {
+			line-height : 1;
+		}
+		
+		span {
+			color       : #a4a4a4;
+			display     : inline !important;
+			font-size   : .875rem;
+			font-weight : 500;
+			line-height : 2.375rem;
+		}
+		
+		.dropdown-toggle {
+			line-height : 1;
+		}
+		
+		.nav-button {
+			@include border-radius(0.375rem);
+			@include flex(none, none, center, wrap);
+			@include transition(all .125s linear);
+			border  : 1px solid #f4f4f4;
+			height  : 2.5rem;
+			margin  : .75rem;
+			padding : 0 1rem 0 .8125rem;
+		}
+		
+		.quantity {
+			display : none !important;
+		}
 	}
 	
 	#contacts-buttons {
@@ -665,6 +803,14 @@
 		}
 	}
 	
+	#lang-switcher {
+		.dropdown-menu {
+			@include flex;
+			border  : 0;
+			padding : 0;
+		}
+	}
+	
 	#locations .card {
 		iframe {
 			height : 220px;
@@ -699,8 +845,29 @@
 		display : block;
 	}
 	
-	.order-md-1 {
-		order : -1;
+	#profile {
+		font-size : 0.875rem;
+		order     : 1;
+		
+		.dropdown-toggle {
+			line-height : 2.5rem;
+			
+			&[aria-expanded=true] {
+				background-color : $white;
+			}
+			
+			svg {
+				display : none;
+			}
+			
+			span {
+				display : inline;
+			}
+			
+			&:after {
+				color : $black;
+			}
+		}
 	}
 	
 	#slider {
@@ -961,6 +1128,51 @@
 				flex      : 0 0 7.25rem;
 				max-width : 16rem;
 				padding   : 0.75rem;
+			}
+		}
+	}
+	
+	.navbar-nav {
+		text-align : center;
+		
+		#lang {
+			@include flex(none, center);
+			order   : 2;
+			padding : 2.25rem 0;
+		}
+		
+		#contacts, #news-menu {
+			order   : 1;
+			padding : 0.75rem 0;
+		}
+		
+		.dropdown-item, .menu-link {
+			justify-content : center;
+			text-align      : center;
+		}
+		
+		.dropdown-menu.show {
+			background-color : #f4f4f4;
+		}
+		
+		.dropdown-toggle {
+			font-weight : 600;
+			padding     : 0.75rem 0 !important;
+			
+			&:hover, &[aria-expanded=true] {
+				&, &:after {
+					color : #dda80e;
+				}
+			}
+		}
+		
+		.nav-item {
+			border-bottom : 1px solid #f4f4f4;
+		}
+		
+		.nav-link {
+			&[aria-expanded="true"] {
+				box-shadow : 3.776px 4.663px 12.09px 0.91px rgba(0, 0, 0, 0.04);
 			}
 		}
 	}
@@ -1292,7 +1504,6 @@
 	}
 	
 	.cookies {
-		
 		.cookies-politic-block {
 			flex-wrap       : wrap;
 			justify-content : center;
@@ -1321,7 +1532,7 @@
 			height         : 7.5rem;
 			padding-bottom : 0;
 			
-			> a {
+			> a:not(.add-to-cart) {
 				align-items : flex-start;
 				padding     : .75rem 3.75rem 1.5rem 1rem;
 				
@@ -1334,15 +1545,8 @@
 					margin : 0 1.375rem 0 0;
 				}
 				
-				.add-to-cart {
-					bottom   : 1rem;
-					left     : unset;
-					position : absolute;
-					right    : 0.75rem;
-				}
-				
 				> .image-container {
-					height : 68px;
+					//height : 68px;
 				}
 				
 				.price-container {
@@ -1353,6 +1557,13 @@
 					align-items    : flex-start;
 					flex-direction : column;
 				}
+			}
+			
+			.add-to-cart {
+				bottom   : -1.5rem;
+				left     : unset;
+				position : absolute;
+				right    : 0.75rem;
 			}
 			
 			.float-buttons {
@@ -1467,6 +1678,41 @@
 		}
 	}
 	
+	#cart .quantity, #favorite .quantity {
+		top : 0.75rem;
+	}
+	
+	#slider {
+		padding : 0;
+	}
+	
+	.dropdown-toggle, .nav-button > a {
+		line-height   : 60px;
+		padding-left  : 1rem;
+		padding-right : 1rem;
+	}
+	
+	.nav-button a:not(.dropdown-item), .nav-item a:not(.dropdown-item) {
+		padding-left  : 1rem;
+		padding-right : 1rem;
+	}
+	
+	.navbar-nav {
+		#buttons .nav-button {
+			margin : 0.25rem;
+		}
+		
+		#lang {
+			padding-left  : 1.25rem;
+			padding-right : 1.25rem;
+		}
+	}
+	
+	.navbar-toggler {
+		height      : 60px;
+		margin-left : 0.5rem;
+	}
+	
 	.share .social {
 		padding-bottom : 1.25rem;
 		
@@ -1474,6 +1720,7 @@
 			padding-left : .75rem;
 		}
 	}
+	
 }
 
 @media (max-width : 449.98px) {
@@ -1508,11 +1755,113 @@
 }
 
 @media (max-width : 400px) {
+	#cart .dropdown-menu {
+		left     : 0;
+		margin   : auto;
+		position : fixed;
+		right    : 0;
+		top      : 60px;
+	}
 	.control .left {
 		@include flex-align(col, center);
 		
 		.sort-by {
 			margin-right : 0;
 		}
+	}
+}
+
+@media (min-width : 768px) and (max-width : 991.98px) {
+	.navbar-nav {
+		@include grid;
+		grid-template-columns : repeat(2, 2fr) 1fr;
+		line-height           : 2.5rem;
+		padding               : 45px 60px;
+		
+		.dropdown-menu {
+			border  : 0;
+			display : inline-block;
+			padding : 0;
+		}
+		
+		.dropdown-toggle:after {
+			content : none;
+		}
+	}
+}
+
+@media (min-width : 992px) {
+	
+	#catalog {
+		border-left  : 1px solid #f4f4f4;
+		border-right : 1px solid #f4f4f4;
+		
+		.dropdown-toggle {
+			&:before {
+				background     : url($image_dir + 'catalog.svg') no-repeat center;
+				content        : '';
+				display        : inline-block;
+				height         : 12px;
+				margin-right   : 10px;
+				vertical-align : middle;
+				width          : 18px;
+			}
+		}
+	}
+	
+	#categories {
+		@include transition(all .25s linear);
+		background-color : $dark_gray;
+		border           : 0;
+		left             : 0;
+		padding          : 0;
+		position         : fixed;
+		top              : 85px;
+		width            : 100%;
+		
+		.menu ul {
+			@include flex(none, between);
+			
+			.menu-item {
+				color          : $white;
+				flex           : 1 1 auto;
+				text-transform : capitalize;
+				
+				&.active {
+					background-color : $white;
+					
+					.menu-link {
+						color : $black;
+					}
+				}
+			}
+		}
+	}
+	
+	.menu .menu-link {
+		&.deals, &:hover, &.active {
+			background-color : $yellow;
+			color            : $black;
+			
+			svg {
+				opacity : 1;
+				
+				path {
+					stroke : #000;
+				}
+				
+				tspan {
+					fill : #000;
+				}
+			}
+		}
+		
+		&:hover, &.active {
+			background-color : $white !important;
+		}
+	}
+	
+	.navbar-nav .follow-us {
+		display : none;
 	}
 }

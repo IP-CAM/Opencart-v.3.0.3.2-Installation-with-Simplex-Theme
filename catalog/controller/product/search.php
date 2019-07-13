@@ -172,7 +172,14 @@ class ControllerProductSearch extends Controller {
 		}
 
 		$data['products'] = array();
-
+        /* added by it-lab start */
+        if(isset($this->request->get['method']) && $this->request->get['method']=="load_all"){
+            $num_pages=$this->request->get['num_pages'];
+            $limit_to_end = ($num_pages-$page+1)*$limit;
+        }else{
+            $limit_to_end = $limit;
+        }
+        /* added by it-lab end */
 		if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {
 			$filter_data = array(
 				'filter_name'         => $search,
@@ -183,7 +190,9 @@ class ControllerProductSearch extends Controller {
 				'sort'                => $sort,
 				'order'               => $order,
 				'start'               => ($page - 1) * $limit,
-				'limit'               => $limit
+                /* added by it-lab start */
+                'limit'                  => $limit_to_end
+                /* added by it-lab end */
 			);
 
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
@@ -331,7 +340,20 @@ class ControllerProductSearch extends Controller {
 				'value' => 'p.model-DESC',
 				'href'  => $this->url->link('product/search', 'sort=p.model&order=DESC' . $url)
 			);
+            /* added by it-lab start */
 
+            $data['sorts'][] = array(
+                'text'  => $this->language->get('text_date_added_desc'),
+                'value' => 'p.date_added-DESC',
+                'href'  => $this->url->link('product/search', '&sort=p.date_added&order=DESC' . $url)
+            );
+
+            $data['sorts'][] = array(
+                'text'  => $this->language->get("text_popular_desc"),
+                'value' => 'total_ordered-DESC',
+                'href'  => $this->url->link('product/search', '&sort=total_ordered&order=DESC' . $url)
+            );
+            /* added by it-lab end */
 			$url = '';
 
 			if (isset($this->request->get['search'])) {
@@ -447,6 +469,14 @@ class ControllerProductSearch extends Controller {
 
 				$this->model_account_search->addSearch($search_data);
 			}
+            /* added by it-lab start */
+            $data['product_total'] = $product_total;
+            if(!isset($this->request->get['method']) || $this->request->get['method'] != "load_all") {
+                $num_pages = ceil($product_total / $limit);
+                $data['num_pages'] = $num_pages;
+            }
+            $data['page'] = $page;
+            /* added by it-lab end */
 		}
 
 		$data['search'] = $search;
@@ -464,7 +494,12 @@ class ControllerProductSearch extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
-		$this->response->setOutput($this->load->view('product/search', $data));
+        /* added by it-lab start */
+        if(isset($this->request->get['method'])){
+            $this->response->setOutput($this->load->view('product/load_more', $data));
+        }else {
+            $this->response->setOutput($this->load->view('product/search', $data));
+        }
+        /* added by it-lab end */
 	}
 }

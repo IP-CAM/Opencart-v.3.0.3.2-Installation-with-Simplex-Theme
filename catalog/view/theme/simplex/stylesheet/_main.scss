@@ -315,6 +315,7 @@ footer {
 		a {
 			color        : $white;
 			font-size    : 1.125rem;
+			height       : auto;
 			padding-left : 0;
 		}
 		
@@ -624,7 +625,7 @@ select {
 	margin-bottom : 70px;
 }
 
-#cart {
+#cart, #favorite {
 	position : relative;
 	
 	.quantity {
@@ -778,46 +779,182 @@ select {
 	}
 }
 
-#catalog {
-	border-left  : 1px solid #f4f4f4;
-	border-right : 1px solid #f4f4f4;
-	
-	.dropdown-toggle {
-		&:before {
-			background     : url($image_dir + 'catalog.svg') no-repeat center;
-			content        : '';
-			display        : inline-block;
-			height         : 12px;
-			margin-right   : 10px;
-			vertical-align : middle;
-			width          : 18px;
+#cart {
+	.product {
+		h5 {
+			flex          : 1 1 0;
+			margin-bottom : 0;
+			margin-right  : auto;
+		}
+		
+		.discount {
+			flex          : none;
+			font-size     : 0.625rem;
+			margin-bottom : 0;
+			margin-right  : 0.75rem;
+			
+			.discount-percent {
+				font-weight  : 800;
+				margin-right : 5px;
+			}
+			
+			.discount-val {
+				@include border-radius();
+				background-color : $green;
+				color            : $white;
+				font-weight      : 800;
+				line-height      : 1.7;
+				padding   : {
+					left  : 8px;
+					right : 8px;
+				}
+			}
+			
+			.old-price {
+				color           : #bababa;
+				font-weight     : 500;
+				margin-right    : 5px;
+				text-decoration : line-through;
+			}
+		}
+		
+		.price {
+			margin-top : 0;
+		}
+		
+		.price-container {
+			@include flex(none, none, none, wrap);
+			flex            : 1 0 0;
+			justify-content : flex-end;
+		}
+		
+		.product-body {
+			align-items : center;
+			display     : flex;
+			flex        : 1 1 0;
 		}
 	}
-}
-
-#categories {
-	@include transition(all .25s linear);
-	background-color : $dark_gray;
-	border           : 0;
-	left             : 0;
-	padding          : 0;
-	position         : fixed;
-	top              : 85px;
-	width            : 100%;
 	
-	.menu ul {
-		@include flex(none, between);
+	.product {
+		@include border-radius(0);
+		border-bottom  : 1px dotted #dedede;
+		border-left    : 0;
+		border-right   : 0;
+		border-top     : 0;
+		height         : 5.25rem;
+		padding-bottom : 0;
 		
-		.menu-item {
-			color          : $white;
-			flex           : 1 1 auto;
-			text-transform : capitalize;
+		> a:not(.add-to-cart) {
+			align-items : center;
+			padding     : 0;
 			
-			&.active {
-				background-color : $white;
+			h5 {
+				font-size     : 0.75rem;
+				margin-bottom : 0.5rem;
+			}
+			
+			img {
+				height : 50px;
+			}
+			
+			.image-container {
+				margin-right : 2rem;
+			}
+			
+			.price {
+				font-size   : 0.8125rem;
+				font-weight : 600;
 				
-				.menu-link {
-					color : $black;
+				span {
+					color : #a4a4a4
+				}
+			}
+			
+			.price-container {
+				justify-content : flex-start;
+			}
+			
+			.product-body {
+				align-items    : flex-start;
+				flex-direction : column;
+			}
+		}
+		
+		&:hover {
+			box-shadow : none;
+		}
+		
+		.delete {
+			@include transform(scale(0.75))
+		}
+	}
+	
+	.dropdown-menu {
+		border : 0;
+		width  : 300px;
+	}
+	
+	.total {
+		@include flex(none, between, center);
+		line-height : 1.25;
+		padding     : 1.25rem 0;
+		
+		button {
+			@include border-radius;
+			@include flex(none, between, center);
+			@include transition(all .25s linear);
+			background-color : $yellow;
+			border           : 0;
+			cursor           : pointer;
+			font-size        : .8125rem;
+			font-weight      : 700;
+			height           : 35px;
+			line-height      : 35px;
+			overflow         : hidden;
+			padding          : 0 10px 0 20px;
+			z-index          : 10;
+			
+			.image-container {
+				@include border-radius(50%);
+				background-color : $white;
+				display          : block;
+				height           : 20px;
+				margin-left      : 0.5rem;
+				position         : relative;
+				width            : 20px;
+				
+				&:after {
+					@include border-radius(50%);
+					background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
+					-webkit-background-size : 6px;
+					background-size         : 6px;
+					content                 : "";
+					display                 : block;
+					padding                 : 10px;
+				}
+			}
+			
+			&:hover {
+				background-color : #2b2c30;
+				color            : #fff;
+			}
+		}
+		
+		p {
+			span {
+				color     : #a4a4a4;
+				font-size : 0.8125rem;
+				
+				&.price {
+					color       : $black;
+					font-size   : 1.25rem;
+					font-weight : 800;
+					
+					.currency {
+						color       : $black;
+						font-size   : 0.625rem;
+						font-weight : 500;
+					}
 				}
 			}
 		}
@@ -1004,10 +1141,17 @@ select {
 	}
 }
 
+#compare, #favorite {
+	span {
+		display : none;
+	}
+}
+
 #compare-table {
 	button {
 		@include border-radius;
 		@include flex(none, between, center);
+		@include transition(all .25s linear);
 		background-color : $yellow;
 		border           : 0;
 		cursor           : pointer;
@@ -1047,6 +1191,11 @@ select {
 				text-align  : center;
 				width       : 100%;
 			}
+		}
+		
+		&:hover {
+			background-color : #2b2c30;
+			color            : #fff;
 		}
 		
 		&.remove {
@@ -1137,7 +1286,7 @@ select {
 		}
 		
 		input {
-			line-height : 2.375rem;
+			line-height : 0.375rem;
 		}
 		
 		label {
@@ -1598,6 +1747,10 @@ select {
 }
 
 #profile {
+	span {
+		display : none;
+	}
+	
 	.dropdown-toggle {
 		&:after {
 			color : #b2b5b6;
@@ -2017,6 +2170,7 @@ select {
 	button {
 		@include border-radius();
 		@include flex(none, between, center);
+		@include transition(all .25s linear);
 		background-color : $yellow;
 		border           : 0;
 		cursor           : pointer;
@@ -2059,6 +2213,11 @@ select {
 				display                 : block;
 				padding                 : 10px;
 			}
+		}
+		
+		&:hover {
+			background-color : #2b2c30;
+			color            : #fff;
 		}
 	}
 	
@@ -2113,6 +2272,7 @@ select {
 	button {
 		@include border-radius;
 		@include flex(none, between, center);
+		@include transition(all .25s linear);
 		background-color : #ffca30;
 		border           : 0;
 		cursor           : pointer;
@@ -2142,6 +2302,11 @@ select {
 				display                 : block;
 				padding                 : 10px;
 			}
+		}
+		
+		&:hover {
+			background-color : #2b2c30;
+			color            : #fff;
 		}
 	}
 	
@@ -2595,6 +2760,7 @@ select {
 				
 				a {
 					font-size    : 1.125rem;
+					height       : auto;
 					padding-left : 0;
 				}
 				
@@ -3463,6 +3629,34 @@ select {
 	}
 }
 
+.cross {
+	bottom   : 0;
+	height   : 12px;
+	margin   : auto;
+	opacity  : .3;
+	position : absolute;
+	right    : 1.25rem;
+	top      : 0;
+	width    : 12px;
+	z-index  : 10000;
+}
+
+.cross:before {
+	transform : rotate(45deg);
+}
+
+.cross:before, .cross:after {
+	background-color : #dadada;
+	content          : '';
+	height           : 15px;
+	position         : absolute;
+	width            : 2px;
+}
+
+.cross:after {
+	transform : rotate(-45deg);
+}
+
 .main-image-container img {
 	width : 100%;
 }
@@ -3476,27 +3670,6 @@ select {
 		font-weight : 600;
 		height      : 100%;
 		padding     : 30px 10px;
-		
-		&.deals, &:hover, &.active {
-			background-color : $yellow;
-			color            : $black;
-			
-			svg {
-				opacity : 1;
-				
-				path {
-					stroke : #000;
-				}
-				
-				tspan {
-					fill : #000;
-				}
-			}
-		}
-		
-		&:hover, &.active {
-			background-color : $white !important;
-		}
 		
 		svg {
 			margin-right : 10px;
@@ -3533,9 +3706,49 @@ select {
 	}
 	
 	#search {
+		position : relative;
+		
+		.search-form {
+			height    : 100%;
+			max-width : 432px;
+			position  : absolute;
+			right     : 0;
+			top       : 0;
+			width     : 100vw;
+			
+			input {
+				@include border-radius(0);
+				background-color : #f5f4f2;
+				border           : 0;
+				height           : 100%;
+			}
+		}
+		
+		button {
+			line-height : 85px;
+			padding     : 0 20px;
+			
+			&.search-button {
+				img, &.collapsed .cross {
+					opacity : 0;
+				}
+				
+				&.collapsed img, .cross {
+					opacity : 1;
+				}
+			}
+		}
+		
 		img {
-			height : 18px;
-			width  : 18px;
+			height         : 18px;
+			vertical-align : sub;
+			width          : 18px;
+		}
+		
+		form button {
+			left     : 0;
+			position : absolute;
+			z-index  : 100;
 		}
 	}
 	
@@ -3831,34 +4044,156 @@ select {
 }
 
 .phone {
-	a {
-		@include flex(none, none, center);
-		font-size : 0.875rem;
-		padding   : {
-			left  : 15px;
-			right : 5px;
+	&, &-poppup {
+		
+		a {
+			@include flex(none, none, center);
+			font-size : 0.875rem;
+			height    : 85px;
+			padding   : {
+				left  : 15px;
+				right : 5px;
+			}
+			
+			&.tel:before {
+				@include border-radius(50%);
+				border       : 3px solid #4dd160;
+				content      : '';
+				display      : inline-block;
+				margin-right : 10px;
+			}
+			
+			&.tel:after {
+				content : none;
+			}
 		}
 		
-		&.tel:before {
-			@include border-radius(50%);
-			border       : 3px solid #4dd160;
-			content      : '';
-			display      : inline-block;
-			margin-right : 10px;
+		p a {
+			border-bottom : 1px dotted;
+			display       : inline;
+			font-size     : 0.75rem;
+			font-weight   : 500;
+			line-height   : 1.5;
+			margin-left   : 10px;
 		}
 		
-		&.tel:after {
-			content : none;
+		.dropdown-menu {
+			box-shadow : 0 18px 18.69px 2.31px rgba(0, 0, 0, 0.03);
+		}
+		
+		.input-telephone {
+			padding-bottom : 1rem;
+			
+			h6 {
+				color       : #2b2c30;
+				font-size   : 0.9375rem;
+				font-weight : 600;
+				
+				&:before {
+					background   : url($image_dir + "phone-gray.svg") no-repeat top center;
+					content      : '';
+					float        : left;
+					height       : 25px;
+					margin-right : 1rem;
+					width        : 23px;
+				}
+			}
+			
+			button {
+				@include border-radius;
+				@include flex(none, between, center);
+				@include transition(all .25s linear);
+				background-color : $yellow;
+				border           : 0;
+				cursor           : pointer;
+				font-size        : .8125rem;
+				font-weight      : 700;
+				height           : 35px;
+				line-height      : 35px;
+				margin-top       : 1rem;
+				overflow         : hidden;
+				padding          : 0 10px 0 20px;
+				z-index          : 10;
+				
+				.image-container {
+					@include border-radius(50%);
+					background-color : $white;
+					display          : block;
+					height           : 20px;
+					margin-left      : 0.5rem;
+					position         : relative;
+					width            : 20px;
+					
+					&:after {
+						@include border-radius(50%);
+						background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
+						-webkit-background-size : 6px;
+						background-size         : 6px;
+						content                 : "";
+						display                 : block;
+						padding                 : 10px;
+					}
+				}
+				
+				&:hover {
+					background-color : #2b2c30;
+					color            : #fff;
+				}
+			}
+		}
+		
+		.timetable {
+			border-bottom  : 1px dotted #dedede;
+			margin-bottom  : 1.25rem;
+			padding-bottom : 2rem;
+			padding-top    : 1rem;
+			
+			&:before {
+				background   : url($image_dir + "clocks.svg") no-repeat top center;
+				content      : '';
+				float        : left;
+				height       : 22px;
+				margin-right : 1rem;
+				width        : 22px;
+			}
+			
+			table tr td {
+				font-size     : 0.8125rem;
+				font-weight   : 500;
+				line-height   : 1.538;
+				padding-right : 1rem;
+				
+				&:first-child {
+					color : #a4a4a4;
+				}
+			}
 		}
 	}
 	
-	p a {
-		border-bottom : 1px dotted;
-		display       : inline;
-		font-size     : 0.75rem;
-		font-weight   : 500;
-		line-height   : 1.5;
-		margin-left   : 10px;
+	&-poppup {
+		@include border-radius-bottom;
+		background-color : $white;
+		border           : 1px solid #f4f4f4;
+		box-shadow       : 0 18px 18.69px 2.31px rgba(0, 0, 0, 0.03);
+		display          : none;
+		padding-left     : 1.25rem;
+		padding-right    : 1.25rem;
+		position         : absolute;
+		z-index          : 9999;
+		
+		.delete {
+			position : absolute;
+			right    : 0.5rem;
+			top      : 0.75rem;
+			
+			a {
+				height : auto;
+			}
+		}
+		
+		.timetable {
+			padding-top : 1.5rem;
+		}
 	}
 }
 
@@ -3868,6 +4203,7 @@ select {
 	@include transition(all .25s linear, transform 0s);
 	background-color : $white;
 	border           : 1px solid #f4f4f4;
+	height           : 100%;
 	position         : relative;
 	width            : 100%;
 	
@@ -4284,7 +4620,7 @@ select {
 	}
 }
 
-.product-slider, .related-slider {
+.product-slider, .related-slider, .projects-list {
 	padding-bottom : 20px;
 	
 	.slick-slide {
@@ -4399,8 +4735,15 @@ select {
 	
 	.item {
 		@include border-radius;
-		overflow : hidden;
-		position : relative;
+		height     : 100%;
+		max-height : 320px;
+		overflow   : hidden;
+		position   : relative;
+		
+		a, .image {
+			height : 100%;
+			width  : 100%;
+		}
 		
 		.overlay {
 			@include flex(col, start, end);

@@ -126,7 +126,7 @@ class ControllerAccountWishList extends Controller {
                     /* added by it-lab start */
                     'special_percentage' => $special_percentage,
                     'economy'     => $economy,
-                    'hide_price'  => $result['hide_price']?false:true,
+                    'hide_price'  => $product_info['hide_price']?false:true,
                     /* added by it-lab end */
 					'href'       => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
 					'remove'     => $this->url->link('account/wishlist', 'remove=' . $product_info['product_id'])

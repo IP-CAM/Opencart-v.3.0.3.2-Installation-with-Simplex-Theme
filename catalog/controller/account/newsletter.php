@@ -31,12 +31,14 @@ class ControllerAccountNewsletter extends Controller {
             var_dump($data);
             if($this->request->post['newsletter']){
                 if (!$this->model_extension_pavnewsletter_subscribe->checkExists($customer['email'])) {
-                    if ($customer = $this->model_account_customer->getCustomerByEmail($customer['email'])) {
-                        $data['customer_id'] = $customer['customer_id'];
-                    }
-                    var_dump($data);
-
+                    $customer = $this->model_account_customer->getCustomerByEmail($customer['email']);
+                    $data['customer_id'] = $customer['customer_id'];
                     $this->model_extension_pavnewsletter_subscribe->storeSubscribe($data);
+                }else{
+                    $subscribe_id=$this->model_extension_pavnewsletter_subscribe->getSubscribeId($customer['email']);
+                    if($subscribe_id){
+                        $this->model_extension_pavnewsletter_subscribe->updateAction($subscribe_id, 1);
+                    }
                 }
             }else{
                 $this->load->model('extension/pavnewsletter/subscribe');
