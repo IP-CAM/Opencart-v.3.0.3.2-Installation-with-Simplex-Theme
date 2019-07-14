@@ -8,7 +8,10 @@ class ControllerExtensionModuleBanner extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/module');
-
+        /* added by it-lab start */
+        $this->load->model('localisation/language');
+        $languages=$data['languages'] = $this->model_localisation_language->getLanguages();
+        /* added by it-lab end */
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			if (!isset($this->request->get['module_id'])) {
 				$this->model_setting_module->addModule('banner', $this->request->post);
@@ -124,7 +127,82 @@ class ControllerExtensionModuleBanner extends Controller {
 		} else {
 			$data['status'] = '';
 		}
+        /* added by it-lab start */
+        if (isset($this->request->post['link'])) {
+            $data['link'] = $this->request->post['link'];
+        } elseif (!empty($module_info)) {
+            $data['link'] = $module_info['link'];
+        } else {
+            $data['link'] = '';
+        }
 
+        if (isset($this->request->post['phone'])) {
+            $data['phone'] = $this->request->post['phone'];
+        } elseif (!empty($module_info)) {
+            $data['phone'] = !empty($module_info['phone'])?$module_info['phone']:'';
+        } else {
+            $data['phone'] = '';
+        }
+        if (isset($this->request->post['banner_type'])) {
+            $data['banner_type'] = $this->request->post['banner_type'];
+        } elseif (!empty($module_info)) {
+            $data['banner_type'] = !empty($module_info['banner_type'])?$module_info['banner_type']:'';
+        } else {
+            $data['banner_type'] = 'none';
+        }
+        $banner_types=[];
+        $banner_types[]=['type'=>'none','name'=>"Not specified"];
+        $banner_types[]=['type'=>'about','name'=>"About"];
+        $banner_types[]=['type'=>'steps','name'=>"Steps"];
+        $banner_types[]=['type'=>'despre_noi','name'=>"Despre noi"];
+        $banner_types[]=['type'=>'showroom','name'=>"Showroom"];
+        $banner_types[]=['type'=>'greu','name'=>"Greu Sa Alegi"];
+
+        $data["banner_types"] = $banner_types;
+
+        foreach ($languages as $language){
+            $title_language="title{$language['language_id']}";
+            $description_language="description{$language['language_id']}";
+            $link_language="link{$language['language_id']}";
+            var_dump($title_language);
+            var_dump($description_language);
+            if (isset($this->request->post[$title_language])) {
+                $data[$title_language] = $this->request->post[$title_language];
+            } elseif (!empty($module_info)) {
+               if(!empty( $module_info[$title_language])){
+                    $data[$title_language] = $module_info[$title_language];
+               }else{
+                   $data[$title_language] = '';
+               }
+            } else {
+                $data[$title_language] = '';
+            }
+            if (isset($this->request->post[$description_language])) {
+                $data[$description_language] = $this->request->post[$description_language];
+            } elseif (!empty($module_info)) {
+                if(!empty( $module_info[$description_language])){
+                    $data[$description_language] = $module_info[$description_language];
+                }else{
+                    $data[$description_language] = '';
+                }
+            } else {
+                $data[$description_language] = '';
+            }
+
+            if (isset($this->request->post[$link_language])) {
+                $data[$link_language] = $this->request->post[$link_language];
+            } elseif (!empty($module_info)) {
+                if(!empty( $module_info[$link_language])){
+                    $data[$link_language] = $module_info[$link_language];
+                }else{
+                    $data[$link_language] = '';
+                }
+            } else {
+                $data[$link_language] = '';
+            }
+        }
+
+        /* added by it-lab end */
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');

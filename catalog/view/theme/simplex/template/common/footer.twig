@@ -2,27 +2,23 @@
     <div class="container-fluid">
         <div id="footer">
             <div class="about-list">
-               {# <h6>{{ about.title }}</h6>
-                <ul>
-                    {% for menu in about.children %}
-                        <li><a href="{{ menu.link }}">{{ menu.title }}</a></li>
-                    {% endfor %}
-
-                </ul>#}
                 {% if footer_titles %}
                     {% for footer_title in footer_titles %}
-                            <h6>{{ footer_title.title }}</h6>
-                            {% if footer_title.sub_title %}
-                                <ul>
-                                    {% for subtitle in footer_title.sub_title  %}
-                                        {% if subtitle.href %}
-                                            <li><a href="{{ subtitle.href }}">{{ subtitle.title }}</a></li>
-                                        {% else %}
-                                            <li><a href="{{ subtitle.link }}">{{ subtitle.title }}</a></li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
+                        <h6>{{ footer_title.title }}</h6>
+                        {% if footer_title.sub_title %}
+                            <ul>
+                                {% for subtitle in footer_title.sub_title %}
+                                    {% if subtitle.href %}
+                                        <li><a href="{{ subtitle.href }}">
+                                                {{ subtitle.title }}</a></li>
+                                    {% else %}
+                                        <li><a href="{{ subtitle.link }}">
+                                                {{ subtitle.title }}</a></li>
+                                        </a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
             </div>
@@ -30,7 +26,13 @@
                 <h6>{{ catalog.title }}</h6>
                 <ul>
                     {% for menu in catalog.children %}
-                        <li><a href="{{ menu.link }}">{{ menu.title }}</a></li>
+                        <li><a href="{{ menu.link }}">
+                        {% if menu.description %}
+                            {{ menu.description }}
+                        {% else %}
+                            {{ menu.title }}</a></li>
+                        {% endif %}
+                        </a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -38,7 +40,7 @@
                 <li>
                     <h5 class="phone">
                         <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
-                        <p>Putem să sunăm înapoi</p>
+                        <p><a href="#">Putem să sunăm înapoi</a></p>
                     </h5>
                 </li>
                 <li>
@@ -46,7 +48,8 @@
                         <h6>Magazinaele noastre:</h6>
                         <ul>
                             {% for location in locations %}
-                                <li><a href="{{ location.contacts_link }}">{{ location.address }}</a></li>
+                                <li><a href="{{ location.contacts_link }}">{{ location.city }}
+                                        , {{ location.address }}</a></li>
                             {% endfor %}
 
                         </ul>
@@ -80,6 +83,44 @@
         </div>
     </div>
 </footer>
+<div class="phone-poppup">
+    <span class="delete">
+        <a href="#">
+            <svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
+                      stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
+                <path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
+                      stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
+            </svg>
+        </a>
+    </span>
+    <div class="timetable">
+        <table>
+            <tbody>
+            <tr>
+                <td>Luni - Vineri</td>
+                <td>08:00 - 18:00</td>
+            </tr>
+            <tr>
+                <td>Simbata</td>
+                <td>08:00 - 16:00</td>
+            </tr>
+            <tr>
+                <td>Duminica</td>
+                <td>zi libera</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="input-telephone">
+        <h6>Putem să sunăm înapoi</h6>
+        <label><input id="customer_phone" placeholder="Telefonul dvs." type="text"></label>
+        <button id="button-call-back" type="submit">
+            Sunaţi înapoi
+            <span class="image-container"></span>
+        </button>
+    </div>
+</div>
 <script src="catalog/view/javascript/simplex/jquery-ui.min.js"></script>
 <script src="catalog/view/javascript/simplex/popper.min.js"></script>
 <script src="catalog/view/javascript/simplex/bootstrap.min.js"></script>
@@ -129,46 +170,91 @@
         wishlist.remove(product_id);
     });
     $('.delete-all-from-wishlist').click(function () {
-      wishlist.remove('all');
+        wishlist.remove('all');
     })
+</script>
+<script>
+    $('#search input[name=\'search\']').on('keydown', function (e) {
+        if (e.keyCode == 13) {
+            $('header #search button.button-search').trigger('click');
+        }
+    });
+    $('#search button.button-search').on('click', function () {
+        var url = $('base').attr('href') + 'index.php?route=product/search';
+        var value = $('header #search input[name=\'search\']').val();
+        if (value) {
+            url += '&search=' + encodeURIComponent(value);
+        }
+        location = url;
+    });
 </script>
 
 <script>
-    cart.add = function(product_id, quantity) {
+    $("#button-call-back").click(function () {
+
+        var url = $('base').attr('href') + 'index.php?route=information/contact';
+        var phone=$("#customer_phone").val();
+        if(phone.length>3) {
+
             $.ajax({
-                url: 'index.php?route=checkout/cart/add',
+                url: url,
                 type: 'post',
-                data: 'product_id=' + product_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
+                data: 'customer_phone=' + phone.trim(),
                 dataType: 'json',
-                beforeSend: function() {
-                    $('#cart > button').button('loading');
+                beforeSend: function () {
                 },
-                complete: function() {
-                    $('#cart > button').button('reset');
+                complete: function () {
                 },
-                success: function(json) {
-                    $('.alert-dismissible, .text-danger').remove();
+                success: function (json) {
+                    alert(json);
 
-                    if (json['redirect']) {
-                        location = json['redirect'];
-                    }
-
-                    if (json['success']) {
-                        $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
-                        // Need to set timeout otherwise it wont update the total
-
-
-                        $('html, body').animate({ scrollTop: 0 }, 'slow');
-
-                        $('#cart .quantity').text(json['cart_count']);
-                    }
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
+                error: function (xhr, ajaxOptions, thrownError) {
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                 }
             });
         }
+
+    });
+</script>
+
+
+<script>
+    cart.add = function (product_id, quantity) {
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: 'product_id=' + product_id + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
+            dataType: 'json',
+            beforeSend: function () {
+                $('#cart > button').button('loading');
+            },
+            complete: function () {
+                $('#cart > button').button('reset');
+            },
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+
+                if (json['success']) {
+                    $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                    // Need to set timeout otherwise it wont update the total
+
+
+                    $('html, body').animate({scrollTop: 0}, 'slow');
+
+                    $('#cart .quantity').text(json['cart_count']);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
 </script>
 
 

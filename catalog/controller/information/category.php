@@ -10,6 +10,12 @@ class ControllerInformationCategory extends Controller
         $this->load->model('tool/image');
 
         $data['informations'] = array();
+        /* added by it-lab start */
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_home'),
+            'href' =>$this->url->link('common/home')
+        );
+        /* added by it-lab end */
 
 
         if (isset($this->request->get['path'])) {

@@ -1,0 +1,67 @@
+{{ header }}
+<main>
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <div class="page-title">
+            <h1>{{ heading_title }}</h1>
+        </div>
+        <div class="container-fluid">
+            <div id="account">
+                <div class="card">
+                    <h4><strong>{{ entry_newsletter }}</strong></h4>
+                    <div id="account-form">
+                        <form action="{{ action }}" method="post">
+                            {% if newsletter %}
+                                <div>
+                                    <label>
+                                        <input type="radio" name="newsletter" value="1" checked="checked"/>
+                                        {{ text_yes }}
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="radio" name="newsletter" value="0"/>
+                                        {{ text_no }}
+                                    </label>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <label>
+                                        <input type="radio" name="newsletter" value="1" />
+                                        {{ text_yes }}
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="radio" name="newsletter" value="0" checked="checked"/>
+                                        {{ text_no }}
+                                    </label>
+                                </div>
+                            {% endif %}
+                            <div class="submit">
+                                <button class="form-submit" type="submit">
+                                    {{ button_continue }}<span class="image-container"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <a class="back" href="{{ back }}">{{ button_back }}</a>
+
+            </div>
+        </div>
+    </div>
+</main>
+{{ content_bottom }}
+{{ footer }}

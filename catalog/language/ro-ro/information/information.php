@@ -6,5 +6,6 @@ $_['interview_conditions'] = 'Doar candidații selectați vor fi contactați pen
 $_['telefon_fax']="Tel./Fax";
 $_['share_information']="Împărtăşiți în rețelele de socializare";
 $_['text_archive_link']="Înapoi la arhiva";
-
+$_['text_installed']="Au fost instalate:";
+$_['text_used_brands']="Branduri folosite:";
 

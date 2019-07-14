@@ -18,6 +18,7 @@ $_['text_telephone_consilier_termo']    = 'Consilier termo/hidro';
 $_['text_telephone_consilier_obiecte']  = 'Consilier obiecte sanitar';
 $_['text_asteptam_in_magazinele']       = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
         Suntem întotdeauna bucuroși să vă vedem!';
+$_['text_phone_succes']="Trlrphon obtinut";
 
 // Entry
 $_['entry_name']     = 'Nume';
@@ -33,3 +34,4 @@ $_['error_name']     = 'Numele trebuie să conțină între 1 și 32 de caracter
 $_['error_email']    = 'Adresa de e-mail nu este validă!';
 $_['error_enquiry']  = 'Mesajul trebuie să conțină între 10 și 3000 de caractere!';
 $_['error_captcha']  = 'Codul de verificare este greșit!';
+$_['error_customer_phone']  = 'Telefonul incorrect';

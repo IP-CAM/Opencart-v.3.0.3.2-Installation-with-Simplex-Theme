@@ -56,4 +56,12 @@ class ModelCatalogManufacturer extends Model {
 			return $manufacturer_data;
 		}
 	}
+
+	public function getManufacturersByIds($manufacturer_ids){
+        $manufacturer_ids_str=implode(',',$manufacturer_ids);
+        $sql = "SELECT * FROM " . DB_PREFIX . "manufacturer m LEFT JOIN " . DB_PREFIX . "manufacturer_to_store m2s ON (m.manufacturer_id = m2s.manufacturer_id) WHERE m2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND m.manufacturer_id IN (".$manufacturer_ids_str.")";
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
 }

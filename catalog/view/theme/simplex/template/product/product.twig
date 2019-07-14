@@ -64,7 +64,10 @@
                         {{ button_compare }}
                     </button>
                 </div>
+
                 <div class="item-price-block">
+                    {% if hide_price %}
+
                     {% if product.special %}
                         <p class="old-price">{{ price }}.-</p>
                         <p class="discount-percent">{{ special_percentage }}%</p>
@@ -75,8 +78,11 @@
                     {% else %}
                         <p class="price">{{ price }}.-<span class="currency">{{ currency }}</span></p>
                     {% endif %}
+                    {% endif %}
                 </div>
                 <div class="cart-wrapper">
+                    {% if hide_price %}
+
                     <div class="quantity">
                         <label><input id="quantity" name="quantity" max="100" min="1" step="1" type="text"
                                       value="1"></label>
@@ -84,8 +90,8 @@
                             <span
                                     class="image-container"></span></button>
                         <input type="hidden" name="product_id" value="{{ product_id }}"/>
-
                     </div>
+                    {% endif %}
                 </div>
                 <div id="seller-warranties">
                     <div class="warranties">
@@ -349,28 +355,31 @@
                                         </div>
                                         <div class="product-body">
                                             <h5 class="title">{{ product.name }}</h5>
-
-                                            <div class="discount">
+                                            {% if product.hide_price %}
+                                                <div class="discount">
+                                                    {% if product.special %}
+                                                        <p class="old-price">{{ product.price }}.-</p>
+                                                        <p class="discount-percent">-{{ product.special_percentage }}%</p>
+                                                        <p class="discount-val">-{{ product.economy }}</p>
+                                                    {% endif %}
+                                                </div>
                                                 {% if product.special %}
-                                                    <p class="old-price">{{ product.price }}.-</p>
-                                                    <p class="discount-percent">-{{ product.special_percentage }}%</p>
-                                                    <p class="discount-val">-{{ product.economy }}</p>
+                                                    <p class="price">{{ product.special }}.-</p>
+                                                {% else %}
+                                                    <p class="price">{{ product.price }}.-</p>
                                                 {% endif %}
-                                            </div>
-                                            {% if product.special %}
-                                                <p class="price">{{ product.special }}.-</p>
-                                            {% else %}
-                                                <p class="price">{{ product.price }}.-</p>
+                                                <p class="currency">{{ currency }}</p>
                                             {% endif %}
-                                            <p class="currency">{{ currency }}</p>
                                         </div>
                                     </a>
-                                    <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                                        <p>{{ button_cart }}</p>
-                                        <span class="image-container">
+                                    {% if product.hide_price %}
+                                        <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                                            <p>{{ button_cart }}</p>
+                                            <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
-                                    </button>
+                                        </button>
+                                    {% endif %}
                                     <div class="float-buttons">
                                         <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
                                             <img
@@ -421,34 +430,39 @@
                         </div>
                         <div class="product-body">
                             <h5 class="title">{{ product.name }}</h5>
-
-                            <div class="discount">
+                            {% if product.hide_price %}
+                                <div class="discount">
+                                    {% if product.special %}
+                                        <p class="old-price">{{ product.price }}.-</p>
+                                        <p class="discount-percent">-{{ product.special_percentage }}%</p>
+                                        <p class="discount-val">-{{ product.economy }}</p>
+                                    {% endif %}
+                                </div>
                                 {% if product.special %}
-                                    <p class="old-price">{{ product.price }}.-</p>
-                                    <p class="discount-percent">-{{ product.special_percentage }}%</p>
-                                    <p class="discount-val">-{{ product.economy }}</p>
+                                    <p class="price">{{ product.special }}.-</p>
+                                {% else %}
+                                    <p class="price">{{ product.price }}.-</p>
                                 {% endif %}
-                            </div>
-                            {% if product.special %}
-                                <p class="price">{{ product.special }}.-</p>
-                            {% else %}
-                                <p class="price">{{ product.price }}.-</p>
+                                <p class="currency">{{ currency }}</p>
                             {% endif %}
-                            <p class="currency">{{ currency }}</p>
                         </div>
                     </a>
-                    <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                        <p>{{ button_cart }}</p>
-                        <span class="image-container">
+                    {% if product.hide_price %}
+                        <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                            <p>{{ button_cart }}</p>
+                            <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
-                    </button>
+                        </button>
+                    {% endif %}
                     <div class="float-buttons">
-                        <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');"><img
+                        <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
+                            <img
                                     alt=""
                                     src="catalog/view/theme/simplex/assets/img/favorites.png">
                         </button>
-                        <button class="compare" href="#" onclick="compare.add('{{ product.product_id }}');">
+                        <button class="compare" href="#"
+                                onclick="compare.add('{{ product.product_id }}');">
                             <img
                                     alt=""
                                     src="catalog/view/theme/simplex/assets/img/compare.png">

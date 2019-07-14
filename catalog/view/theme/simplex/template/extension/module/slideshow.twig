@@ -18,7 +18,7 @@
 <div id="slider">
   <!--TODO: Solve problems with slide image on 320px screen width-->
   <div class="container-fluid">
-    <div class="main-slider">
+    <div class="main-slider" data-interval="{{ interval }}" >
       {% for banner in banners %}
         <div class="item">
           <div class="category">
@@ -28,7 +28,7 @@
             <h1>{{ banner.title }}</h1>
           </div>
           <div class="link">
-            <a href="{{ banner.link_product }}">
+            <a href="{{ link_specials }}">
               <p>Vezi oferte speciale</p>
               <span class="image-container">
                             </span>
@@ -36,7 +36,7 @@
           </div>
           {% if banner.manufacturer_img %}
             <div class="brand">
-              <a href="#">
+              <a href="{{  banner.manufacturer_link  }}">
                 <img style="max-width: 80px;max-height: 50px" alt="Roca" src="image/{{ banner.manufacturer_img }}">
               </a>
             </div>

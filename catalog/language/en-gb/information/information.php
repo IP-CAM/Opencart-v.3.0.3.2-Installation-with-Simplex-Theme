@@ -6,3 +6,5 @@ $_['interview_conditions'] = 'Only selected candidates will be contacted to be i
 $_['telefon_fax']="Tel./Fax";
 $_['share_information']="Împărtăşiți în rețelele de socializare";
 $_['text_archive_link']="Back to archive";
+$_['text_installed']="Were installed:";
+$_['text_used_brands']="Used brands:";

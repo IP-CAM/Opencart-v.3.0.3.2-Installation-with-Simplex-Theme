@@ -43,7 +43,40 @@ $('.product-slider').slick({
         }
     ]
 });
-
+$('.interesting .projects-list').slick({
+    slidesToShow: 4,
+    dots: false,
+    arrows: true,
+    prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+    nextArrow: '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+    infinite: false,
+    adaptiveHeight: true,
+    responsive: [
+        {
+            breakpoint: 1260,
+            settings: {
+                slidesToShow: 3,
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                variableWidth: true,
+                slidesToShow: 1,
+            }
+        }
+    ]
+});
 $('.related-slider').slick({
     dots: true,
     infinite: false,
@@ -86,8 +119,7 @@ $('.related-slider').slick({
             }
         }
     ]
-})
-
+});
 $('.nav-tabs .nav-link').click(function () {
     if ($(this).attr('href') === '#relative') {
         setTimeout(function () {
@@ -169,13 +201,17 @@ $('#slider .main-slider').slick({
     adaptiveHeight: true,
     asNavFor: '.slider-nav',
     arrows: true,
-    prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+    autoplay: true,
+    autoplaySpeed: $('#slider .main-slider').data('interval'),
+    prevArrow:
+        '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
         '        xmlns="http://www.w3.org/2000/svg"\n' +
         '        width="14px" height="22px">\n' +
         '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
         '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
         '</svg></button>',
-    nextArrow: '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+    nextArrow:
+        '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
         '        xmlns="http://www.w3.org/2000/svg"\n' +
         '        width="14px" height="22px">\n' +
         '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
@@ -238,6 +274,7 @@ $('.gallery-list').slick({
     adaptiveHeight: true,
     asNavFor: '.gallery-images',
     arrows: false,
+    waitForAnimate: true,
     responsive: [
         {
             breakpoint: 768,
@@ -254,6 +291,7 @@ $('.gallery-images').slick({
     dots: false,
     focusOnSelect: true,
     vertical: true,
+    waitForAnimate: true,
     responsive: [
         {
             breakpoint: 1260,
@@ -275,7 +313,7 @@ $('.gallery-images').slick({
         }
     ]
 });
-$('.slideshow').slick({
+$('.gallery-item-container .slideshow').slick({
     infinite: false,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -295,18 +333,55 @@ $('.slideshow').slick({
         '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
         '</svg></button>',
 });
+$('.project-wrapper .slideshow').slick({
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: true,
+    prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+    nextArrow: '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+});
+$('.news-wrapper .slideshow').slick({
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: true,
+    prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+    nextArrow: '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+        '        xmlns="http://www.w3.org/2000/svg"\n' +
+        '        width="14px" height="22px">\n' +
+        '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+        '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+        '</svg></button>',
+});
 $('.slideshow-nav').slick({
     infinite: false,
     slidesToShow: $('.slideshow-nav .image').length,
     slidesToScroll: 1,
     arrows: false,
     focusOnSelect: true,
-    asNavFor: '.slideshow',
+    asNavFor: '.gallery-item-container .slideshow',
     adaptiveHeight: true,
     variableWidth: true,
 });
 /* End Slick */
-
 $("input#quantity").inputSpinner({
     decrementButton: "-",
     incrementButton: "+",
@@ -419,7 +494,7 @@ $('.delete').click(function () {
         $(this).remove();
     });
 });
-$('#delete-all').click(function () {
+$('.delete-all').click(function () {
     $('.wish.products').animate({
         opacity: 0,
     }, 500, function () {
@@ -435,4 +510,72 @@ $('.poppup').click(function () {
 });
 $('input[type="radio"]').after('<span class="radio"></span>');
 $('input[type="checkbox"]').after('<span class="checkbox"></span>');
-//$('label').prepend('<span class="radio"></span>');
+if ($(window).width() < 768) {
+    if ($('.navbar-nav #buttons').length === 0) {
+        $('.navbar-nav').append('<div class="nav-item" id="buttons"></div>');
+    }
+    $('#compare, #favorite').prependTo('#buttons');
+    $('#profile').appendTo('.navbar-nav').addClass('nav-item');
+}
+$(window).resize(function () {
+    let screen = $(window);
+    if (screen.width() < 768) {
+        if ($('.navbar-nav #buttons').length === 0) {
+            $('.navbar-nav').append('<div class="nav-item" id="buttons"></div>');
+        }
+        $('#compare, #favorite').appendTo('#buttons');
+        $('#profile').appendTo('.navbar-nav').addClass('nav-item');
+    } else {
+        $('#compare, #favorite').insertAfter('#search').removeClass('nav-item');
+        $('#profile').insertAfter('#search');
+        $('.navbar-nav #buttons').remove();
+
+    }
+});
+$('.product .add-to-cart, .product .favorite').click(function () {
+    let width_product = $(this).parent().parent().width();
+    let width_poppup = document.getElementById('success-poppup').offsetWidth;
+    let div = $(this).parent().parent().find('.add-to-cart');
+    let offset_poppup = (width_poppup - width_product) / 2;
+    let divOffset = $(div).offset();
+    $('#success-poppup').css('left', divOffset.left - 20 - offset_poppup).css('top', divOffset.top + 48).css('display', 'block');
+});
+$('.phone a:not(.tel)').click(function (e) {
+    e.preventDefault();
+    let div = $(this);
+    let divOffset = $(div).offset();
+    console.log(div);
+    console.log(divOffset);
+    $('.phone-poppup').css('left', divOffset.left).css('top', divOffset.top - 282).css('display', 'block');
+});
+
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+let accept_cookies = getCookie("accept-cookies");
+if (accept_cookies === "1") {
+    $(".cookies-politic-block").hide();
+} else {
+    $(".cookies-politic-block").show().css("display", "flex");
+}
+$(".btn-accept-cookies-policy").click(function () {
+    $(".cookies-politic-block").hide(50);
+    document.cookie = "accept-cookies=1;  path=/;";
+    return false;
+});
+$('.done .delete a').click(function () {
+    $(this).parent().parent().remove();
+});
+$('#search .search-button').click(function () {
+    $(this).parent().toggleClass('active');
+});
+$('.phone-poppup .delete').click(function (e) {
+    e.preventDefault();
+    $(this).parent().css('display', 'none');
+});
+
+$('#catalog').append($('#categories'));

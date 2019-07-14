@@ -1,0 +1,70 @@
+{{ header }}
+<main class="gallery-bg">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+        <div class="page-title centered">
+            <h1>
+                {{ heading_title }}
+            </h1>
+        </div>
+        <div class="news-wrapper">
+            <div class="news-card">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-foot">{{ date_added }}</span>
+                    </div>
+                    <a href="#"><img alt="Newest" class="card-img-top" src="{{ thumb }}"></a>
+                </div>
+            </div>
+            <div class="content heading">
+                <p>
+                    {{ short_description}}
+                </p>
+            </div>
+
+            <div class="content">
+                {{ description }}
+            </div>
+            {% if original_images %}
+                <div class="slideshow">
+                    {% for image in original_images %}
+                        <div class="image">
+                            <img alt="Main" src="{{ image.popup }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="slides-counter"></div>
+            {% endif %}
+            <div class="content">
+                {{ description_additional }}
+            </div>
+        </div>
+
+        <div class="share">
+            <div class="back">
+                <a href="{{ archive_link }}">{{ text_archive_link }}</a>
+            </div>
+            <div class="social">
+                <p>{{ share_information }}:</p>
+                <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                <script src="https://yastatic.net/share2/share.js"></script>
+                <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter"></div>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+{{ content_bottom }}
+{{ footer }}
