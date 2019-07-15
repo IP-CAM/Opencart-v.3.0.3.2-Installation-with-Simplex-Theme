@@ -21,11 +21,19 @@ $_['entry_name']       = 'Название магазина';
 $_['entry_address']    = 'Адрес';
 $_['entry_geocode']    = 'Geocode';
 $_['entry_telephone']  = 'Телефон';
+$_['entry_telephone1'] = 'Consilier termo/hidro';
+$_['entry_telephone2'] = 'Consilier obiecte sanitare';
 $_['entry_fax']        = 'Факс';
 $_['entry_image']      = 'Изображение';
 $_['entry_open']       = 'Режим работы';
 $_['entry_comment']    = 'Дополнительная информация';
-
+$_['entry_country']    = 'Страна';
+$_['entry_city']       = 'Город';
+$_['entry_district']   = 'Район';
+$_['entry_email']      = 'Email';
+$_['entry_image_geo']  = 'Image geo';
+$_['entry_order']      = 'Order';
+$_['entry_is_online']  = 'Is online';
 // Help
 $_['help_geocode']     = 'Пожалуйста, введите ваше местонахождение как GeoCode.';
 $_['help_open']        = 'Режим работы вашего магазина.';

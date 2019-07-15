@@ -1,4 +1,34 @@
+{% if is_home or is_catalog %}
 <div class="card choose">
+  {% if is_catalog %}
+    <a class="close" role="button">
+      <img alt="Close" src="catalog/view/theme/simplex/assets/img/x.png">
+    </a>
+  {% endif %}
+    <h4>{{ title }}</h4>
+    {% for banner in banners %}
+    <img alt="Choose" src="{{ banner.image_original }}">
+    <div class="phone">
+      <a class="tel" href="tel:{{ telephone_link }}">{{ telephone }}</a>
+      <p><a href="#">{{ description }}</a></p>
+    </div>
+
+    <p>{{ banner.description }}</p>
+    <div class="offices">
+      <h6>{{ banner.title }}</h6>
+      {% endfor %}
+      <ul>
+        {% for location in locations %}
+          <li><a href="{{ location.contacts_link }}">{{ location.city }}, {{ location.address }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% else %}
+<div class="card choose inline">
+  <a class="close" role="button">
+    <img alt="Close" src="catalog/view/theme/simplex/assets/img/x.png">
+  </a>
   <h4>{{ title }}</h4>
   {% for banner in banners %}
   <img alt="Choose" src="{{ banner.image_original }}">
@@ -19,6 +49,9 @@
     </ul>
   </div>
 </div>
+{% endif %}
+{% if is_home %}
 </div>
 </div>
 </div>
+{% endif %}

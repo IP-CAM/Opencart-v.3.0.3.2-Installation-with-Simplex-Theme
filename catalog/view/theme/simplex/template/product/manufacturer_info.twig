@@ -228,7 +228,9 @@
           <div class="products grid">
             {% for product in products %}
               {% if loop.index == '7' %}
-                {{ column_right }}
+                <div class="cards">
+                  {{ column_right }}
+                </div>
               {% endif %}
 
               <div class="product-column">
