@@ -109,6 +109,7 @@
                                   stroke-dasharray="1, 4" stroke-linecap="round"
                                   stroke-width="2px"></path>
                         </svg>
+                        <span class="quantity">{{ compare_count }}</span>
                         <span>Comparație</span>
                     </a>
                 </div>
@@ -132,7 +133,9 @@
                     {{ cart }}
                 </div>
                 <div class="phone">
-                    <a class="tel" href="tel:{{ telephone }}"><span>{{ telephone }}</span></a>
+                    <a class="tel dropdown-toggle" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
+                       href="#"
+                       role="button"><span>{{ telephone }}</span></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="timetable">
                             <table>

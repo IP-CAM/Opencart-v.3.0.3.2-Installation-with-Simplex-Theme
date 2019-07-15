@@ -4,10 +4,10 @@
             <input checked="checked" name="shipping_address" type="radio" value="existing"><span class="radio"></span>
             {{ text_address_existing }}</label>
         <label>
-            <input name="payment_address" type="radio" value="new">
+            <input name="shipping_address" type="radio" value="new">
             <span class="radio"></span>{{ text_address_new }}</label>
 
-        <select class="form-element" id="payment-existing" name="address_id">
+        <select class="form-element" id="shipping-existing" name="address_id">
             {% for address in addresses %}
                 {% if address['address_id'] == address_id %}
                     <option value="{{ address.address_id }}"
@@ -20,56 +20,56 @@
                 {% endif %}
             {% endfor %}
         </select>
-        <div class="form-element hide" id="payment-new" style="display: none">
+        <div class="form-element hide" id="shipping-new" style="display: none">
             <div class="form-group required">
                 <label class=" control-label" for="input-shipping-firstname">
                     {{ entry_firstname }}</label>
-                <input class="form-control" id="input-shipping-firstname" name="firstname"
+                <input  id="input-shipping-firstname" name="firstname"
                        placeholder="{{ entry_firstname }}"
                        type="text" value="">
             </div>
             <div class="form-group required">
                 <label class=" control-label" for="input-shipping-lastname">
                     {{ entry_lastname }}</label>
-                <input class="form-control" id="input-shipping-lastname" name="lastname"
+                <input  id="input-shipping-lastname" name="lastname"
                        placeholder="{{ entry_lastname }}"
                        type="text" value="">
             </div>
             <div class="form-group">
                 <label class=" control-label"
                        for="input-shipping-company">{{ entry_company }}</label>
-                <input class="form-control" id="input-shipping-company" name="company"
+                <input  id="input-shipping-company" name="company"
                        placeholder="{{ entry_company }}"
                        type="text" value="">
             </div>
             <div class="form-group required">
                 <label class=" control-label" for="input-shipping-address-1">{{ entry_address_1 }}</label>
-                <input class="form-control" id="input-shipping-address-1" name="address_1"
+                <input  id="input-shipping-address-1" name="address_1"
                        placeholder="Address 1"
                        type="text" value="">
             </div>
             <div class="form-group">
                 <label class=" control-label" for="input-shipping-address-2">{{ entry_address_2 }}</label>
-                <input class="form-control" id="input-shipping-address-2" name="address_2"
+                <input  id="input-shipping-address-2" name="address_2"
                        placeholder="{{ entry_address_2 }}"
                        type="text" value="">
             </div>
             <div class="form-group required">
                 <label class=" control-label" for="input-shipping-city">{{ entry_city }}</label>
-                <input class="form-control" id="input-shipping-city" name="city"
+                <input  id="input-shipping-city" name="city"
                        placeholder="{{ entry_city }}"
                        type="text" value="">
             </div>
             <div class="form-group required">
                 <label class=" control-label" for="input-shipping-postcode">{{ entry_postcode }}</label>
-                <input class="form-control" id="input-shipping-postcode" name="postcode"
+                <input  id="input-shipping-postcode" name="postcode"
                        placeholder="{{ entry_postcode }}"
                        type="text" value="">
             </div>
             <div class="form-group required">
                 <label class=" control-label"
                        for="input-shipping-country">{{ entry_country }}</label>
-                <select class="form-control" id="input-shipping-country" name="country_id">
+                <select  id="input-shipping-country" name="country_id">
                     <option value="">{{ text_select }}</option>
                     {% for country in countries %}
                         {% if country.country_id == country_id %}
@@ -82,7 +82,7 @@
             </div>
             <div class="form-group required">
                 <label class="control-label" for="input-shipping-zone">{{ entry_zone }}</label>
-                <select class="form-control" id="input-payment-zone" name="zone_id">
+                <select  id="input-payment-zone" name="zone_id">
                 </select>
             </div>
         </div>
@@ -100,12 +100,12 @@
     $('input[name="shipping_address"]').on('change', function () {
 
         var value = $('input[name="shipping_address"]:checked').val();
-        if (value == 'new') {
-            $('#payment-existing').hide();
-            $('#payment-new').show();
+        if (value === 'new') {
+            $('#shipping-existing').hide();
+            $('#shipping-new').show();
         } else {
-            $('#payment-existing').show();
-            $('#payment-new').hide();
+            $('#shipping-existing').show();
+            $('#shipping-new').hide();
         }
     });
 </script>
@@ -150,8 +150,6 @@
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
-    });
-
-    $('#shipping-address select[name="country_id"]').trigger('change');
+    }).trigger('change');
     //--></script>
 

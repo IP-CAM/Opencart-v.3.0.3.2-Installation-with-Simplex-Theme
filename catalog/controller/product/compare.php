@@ -166,8 +166,9 @@ class ControllerProductCompare extends Controller {
 			}
 
 			$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']), $product_info['name'], $this->url->link('product/compare'));
-
-			$json['total'] = sprintf($this->language->get('text_compare'), (isset($this->session->data['compare']) ? count($this->session->data['compare']) : 0));
+			// IT-LAB
+			//$json['total'] = sprintf($this->language->get('text_compare'), (isset($this->session->data['compare']) ? count($this->session->data['compare']) : 0));
+			$json['total'] = count($this->session->data['compare']);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

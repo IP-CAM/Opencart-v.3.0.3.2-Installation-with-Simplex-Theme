@@ -16,7 +16,7 @@
             <h1>{{ heading_title }}</h1>
         </div>
         <div id="cart-wrapper">
-            <a class="delete-all" role="button">Sterge toate</a>
+            <a class="delete-all delete-all-from-cart" role="button">{{ delete_all }}</a>
             {% if attention %}
                 <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -89,83 +89,91 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="6" style="text-align: right"><span>Sub-Total</span></td>
-                        <td colspan="2">
-                            <h5 style="margin-bottom: 0;">26 600.-
+                        <td colspan="6" style="text-align: right"><span>{{ totals[0].title }}:</span></td>
+                        <td colspan="2"><h5 style="margin-bottom: 0;">{{ totals[0].text }}
                                 <small style="font-size: .625rem;font-weight: 500;">MDL</small>
-                            </h5>
-                        </td>
+                            </h5></td>
                     </tr>
                     </tfoot>
                 </table>
             </div>
             {% if modules %}
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h5>{{ text_next }}</h5>
-                        <label>
-                            <input checked="checked" name="payment_address" type="radio" value="ridicare">
-                            Ridicare din magazin</label>
-                        <label>
-                            <input name="payment_address" type="radio" value="livrare">
-                            Livrare</label>
-                    </div>
                     {% for module in modules %}
                         {{ module }}
                     {% endfor %}
                 </div>
             {% endif %}
-
-        </div>
-    </div>
-    <hr>
-    <div id="about-us">
-        <div class="container-fluid">
-            <div class="cards">
-                <div class="mini-card">
-                    <div class="image-container">
-                        <img alt="" src="catalog/view/theme/simplex/assets/img/minicard1.png">
+            <div class="checkout">
+                <div class="total">
+                    <span>{{ total }}</span>
+                    <div class="price">
+                        <h5>
+                            <small>MDL</small>
+                        </h5>
                     </div>
-                    <p>Branduri celebre, calitate recunoscută</p>
                 </div>
-                <div class="mini-card">
-                    <div class="image-container">
-                        <img alt="" src="catalog/view/theme/simplex/assets/img/minicard2.png">
-                    </div>
-                    <p>Garanție la toate produsele</p>
-                </div>
-                <div class="mini-card">
-                    <div class="image-container">
-                        <img alt="" src="catalog/view/theme/simplex/assets/img/minicard3.png">
-                    </div>
-                    <p>Tot ce aveți nevoie într-un singur loc</p>
-                </div>
-                <div class="mini-card">
-                    <div class="image-container">
-                        <img alt="" src="catalog/view/theme/simplex/assets/img/minicard4.png">
-                    </div>
-                    <p>Consultanța tehnică competentă</p>
-                </div>
-                <div class="mini-card">
-                    <div class="image-container">
-                        <img alt="" src="catalog/view/theme/simplex/assets/img/minicard5.png">
-                    </div>
-                    <p>Livrare atentă a doua zi</p>
-                </div>
+                <a href="{{ checkout }}" class="btn btn-primary">{{ button_checkout }}<span
+                            class="image-container"></span></a>
             </div>
         </div>
     </div>
-    <div id="subscribe">
-        <div class="container-fluid">
-            <form action="#" id="abonate">
-                <label for="email"><p>Subscrieţi! Produse noi, reduceri, oferte!</p></label>
-                <input id="email" placeholder="Adresa dvs. e-mail" type="email">
-                <button type="submit">
-                    Subscrieţi la newsletter
-                    <span class="image-container"></span>
-                </button>
-            </form>
-        </div>
-    </div>
+    <hr>
+    {{ content_bottom }}
 </main>
-{{ footer }} 
+{{ footer }}
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: 'index.php?route=extension/total/shipping/quote',
+            type: 'post',
+            data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
+            dataType: 'json',
+            beforeSend: function () {
+                $('#button-quote').button('loading');
+            },
+            complete: function () {
+                $('#button-quote').button('reset');
+            },
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+                if (json['error']) {
+                    if (json['error']['warning']) {
+                        $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                        $('html, body').animate({scrollTop: 0}, 'slow');
+                    }
+
+                    if (json['error']['country']) {
+                        $('select[name=\'country_id\']').addClass('has-error');
+                    }
+
+                    if (json['error']['zone']) {
+                        $('select[name=\'zone_id\']').addClass('has-error');
+                    }
+
+                    if (json['error']['postcode']) {
+                        $('input[name=\'postcode\']').addClass('has-error');
+                    }
+                }
+                if (json['shipping_method']) {
+                    for (i in json['shipping_method']) {
+                        if (!json['shipping_method'][i]['error']) {
+                            for (j in json['shipping_method'][i]['quote']) {
+                                if (json['shipping_method'][i]['quote'][j]['code'] === $('input[name="shipping_method"]').val()) {
+                                    $('.checkout .price h5').prepend(parseInt({{ totals[0].text }}) + parseInt(json['shipping_method'][i]['quote'][j]['cost']));
+                                }
+                            }
+                        }
+                    }
+
+
+                    $('input[type="radio"]').after('<span class="radio"></span>');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+</script>
