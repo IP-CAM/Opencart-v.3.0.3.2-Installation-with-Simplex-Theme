@@ -1,7 +1,7 @@
 ## Config and Htaccess Files
 /.htaccess
 /config.php
-/backend/config.php
+/admin/config.php
 
 
 ## Image Cache Files

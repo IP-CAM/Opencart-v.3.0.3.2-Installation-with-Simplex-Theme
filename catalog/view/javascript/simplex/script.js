@@ -44,7 +44,7 @@ $('.product-slider').slick({
     ]
 });
 $('.interesting .projects-list').slick({
-    slidesToShow: 4,
+    slidesToShow: 3,
     dots: false,
     arrows: true,
     prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
@@ -455,7 +455,7 @@ $('.tab-content > button').click(function () {
 let current_slide = 1;
 let total_slides = $('.slideshow .slick-slide').length;
 $('#slides-counter').prepend('<p>' + current_slide + '/' + total_slides + '</p>');
-$('.slick-arrow').click(function () {
+$('.slick-arrow, .slick-slide').click(function () {
     current_slide = parseInt($('.slideshow .slick-active').attr('data-slick-index')) + 1;
     $('#slides-counter p').remove();
     $('#slides-counter').prepend('<p>' + current_slide + '/' + total_slides + '</p>');
@@ -546,7 +546,7 @@ $('.phone a:not(.tel)').click(function (e) {
     let divOffset = $(div).offset();
     console.log(div);
     console.log(divOffset);
-    $('.phone-poppup').css('left', divOffset.left).css('top', divOffset.top - 282).css('display', 'block');
+    $('.phone-poppup').css('left', divOffset.left - 130).css('top', divOffset.top - 282).css('display', 'block');
 });
 
 function getCookie(name) {
@@ -579,3 +579,7 @@ $('.phone-poppup .delete').click(function (e) {
 });
 
 $('#catalog').append($('#categories'));
+$('.upload').change(function (e) {
+    let fileName = e.target.files[0].name;
+    $('<p style="color: #868686;font-size: .8125rem;font-weight: 500;align-self: center; margin-left: 1rem">' + fileName + '</p>').insertAfter(this);
+});

@@ -35,8 +35,7 @@
 	}
 	
 	h2 {
-		font-size  : 1.25rem;
-		text-align : center;
+		font-size : 1.25rem;
 	}
 	
 	h3 {
@@ -60,16 +59,18 @@
 			
 			&:before {
 				@include border-radius(50%);
-				border       : 1px solid $black;
+				border       : 1px solid #000;
 				content      : counter(count);
 				display      : inline-block;
-				flex         : 0 0 1.375rem;
-				font-size    : 0.625rem;
+				flex         : 0 0 calc(1.375rem + 1px);
+				font-size    : .625rem;
 				font-weight  : 600;
-				line-height  : 1.25rem;
-				margin-right : 0.75rem;
-				margin-top   : 0.25rem;
+				line-height  : calc(1.25rem + 1px);
+				margin-right : .75rem;
+				margin-top   : .25rem;
+				padding-left : 1px;
 				text-align   : center;
+				
 			}
 		}
 	}
@@ -159,6 +160,7 @@
 	.address-list {
 		background-color : #eaf5f6;
 		float            : left;
+		margin-bottom    : 5rem;
 		margin-right     : 2rem;
 		padding          : 1.5rem 1.75rem;
 		
@@ -166,13 +168,18 @@
 			padding-right : 4.5rem;
 			
 			li {
-				padding-left : 2rem;
+				margin-bottom : 0.25em;
+				padding-left  : 2rem;
 				
 				&:before {
 					left : 0;
 				}
 			}
 		}
+	}
+	
+	& + .content {
+		padding-top : 0;
 	}
 	
 	.file-list {
@@ -252,6 +259,12 @@
 
 #availability {
 	table {
+		line-height : 1.5;
+		
+		tr td:nth-child(2) {
+			font-weight : 600;
+		}
+		
 		table {
 			margin-bottom : 0;
 			
@@ -260,7 +273,12 @@
 				padding : 0 1.25rem;
 				
 				&:first-child {
+					color      : #a4a4a4;
 					text-align : right;
+				}
+				
+				&:nth-child(2) {
+					font-weight : 500;
 				}
 			}
 			

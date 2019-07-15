@@ -1,0 +1,56 @@
+{{ header }}
+<main class="gallery-bg">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="jobs-wrapper wrapper">
+            <div class="job-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-text">
+                            <a href="#">{{ heading_title }}</a>
+                        </div>
+                        <span class="card-date">{{ informations|length }} {{ pozitions_numeral }}</span>
+                    </div>
+                    <a href="#"><img alt="Newest" class="card-img-top" src="image/{{ category.image }}"></a>
+                </div>
+            </div>
+            <div class="jobs">
+                <div class="pers-dev">
+                    <h4>
+                        {{ category.short_description }}
+                    </h4>
+                    <svg viewBox="0 0 2120 2170" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1965 2159 c-16 -10 -267 -243 -572 -532 l-41 -40 -94 46 c-133 66 -242 91 -398 90 -150 -1 -242 -22 -375 -87 -234 -112 -395 -314 -461 -576 -26 -107 -25 -297 4 -405 85 -323 325 -556 649 -632 111 -25 300 -23 408 6 217 58 400 193 518 382 94 151 133 304 124 493 -8 186 -54 321 -161 469 l-53 74 246 231 c361 339 356 334 356 387 0 35 -6 50 -26 71 -30 29 -93 41 -124 23z m-947 -660 c26 -6 78 -25 115 -42 l69 -31 -7 -35 c-10 -52 -38 -101 -82 -142 -52 -49 -81 -65 -148 -85 -188 -54 -407 57 -438 222 -6 29 -3 33 41 56 133 71 300 92 450 57z m-583 -377 c62 -69 145 -124 233 -154 97 -33 287 -33 384 0 125 43 260 154 305 252 10 21 22 38 27 37 18 -6 84 -128 107 -199 33 -102 34 -280 2 -383 -62 -197 -220 -358 -422 -429 -77 -27 -98 -30 -201 -29 -97 0 -128 4 -195 26 -183 60 -328 189 -405 360 -41 93 -55 161 -54 272 2 117 31 222 90 322 l37 63 21 -42 c12 -23 44 -66 71 -96z"
+                              fill="#f5f3ee"></path>
+                        <path d="M740 899 c-60 -27 -117 -83 -146 -144 -19 -39 -24 -67 -24 -125 0 -88 22 -145 78 -204 57 -59 122 -86 212 -86 90 0 155 27 212 86 56 59 78 116 78 204 0 90 -27 155 -86 212 -59 56 -116 78 -204 78 -54 0 -88 -6 -120 -21z m177 -211 c51 -48 15 -138 -56 -138 -47 0 -81 32 -81 79 0 72 84 109 137 59z"
+                              fill="#f5f3ee"></path>
+                    </svg>
+                    <p>
+                        {{ category.description|trim('"') }}
+                    </p>
+                </div>
+                <ul class="job-list">
+                    {% for information in informations %}
+                        <li>
+                            <a href="{{ information.href }}">
+                                {{ information.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+
+
+
+    </div>
+</main>
+
+
+{{ content_bottom }}
+{{ footer }} 

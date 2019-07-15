@@ -1,0 +1,18 @@
+{% for information in informations %}
+    <div class="item">
+        <div class="image" style="height: 100%">
+            <img alt="{{ information.title }}" src="{{ information.thumb }}">
+        </div>
+        <div class="overlay">
+            <div class="city">
+                {{ information.description }}
+            </div>
+            <a href="{{ information.href }}">
+                <div class="title">
+                    {{ information.title }}
+                </div>
+            </a>
+            <hr>
+        </div>
+    </div>
+{% endfor %}
