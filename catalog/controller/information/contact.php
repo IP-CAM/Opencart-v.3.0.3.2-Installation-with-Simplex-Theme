@@ -101,8 +101,18 @@ class ControllerInformationContact extends Controller {
                 $mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['subject']), ENT_QUOTES, 'UTF-8'));
 
             }else{
-                $mail->setSender(html_entity_decode($this->request->post['customer_phone'], ENT_QUOTES, 'UTF-8'));
-                $mail->setSubject(html_entity_decode($this->language->get('text_telephone')." : ", ENT_QUOTES, 'UTF-8'));
+			    if($this->validatePhoneNumber()) {
+                    $mail->setSender(html_entity_decode($this->request->post['customer_phone'], ENT_QUOTES, 'UTF-8'));
+                    $mail->setSubject(html_entity_decode($this->language->get('text_telephone') . " : ", ENT_QUOTES, 'UTF-8'));
+                    $mail->setText($this->language->get('text_customer_telephone') . " : " . html_entity_decode($this->request->post['customer_phone'], ENT_QUOTES, 'UTF-8'));
+                    $mail->send();
+                    $json["result"] = $this->language->get('text_phone_succes');
+                }else{
+			        $json['phone_error']=true;
+			        $json["result"] = $this->language->get('text_phone_error');
+                }
+                return $this->response->setOutput(json_encode($json));
+
             }
             /* added by it-lab start */
             if (!empty($this->request->files['file']['name']) && is_file($this->request->files['file']['tmp_name'])) {
@@ -153,7 +163,7 @@ class ControllerInformationContact extends Controller {
 
                 // Return any upload error
                 if ($this->request->files['file']['error'] != UPLOAD_ERR_OK) {
-                    $json['error'] = $this->language->get('error_upload_' . $this->request->files['file']['error']);
+                    $json['error'] = $this->language->get('error_upload' . $this->request->files['file']['error']);
                 }
             } else {
                 $json['error'] = $this->language->get('error_upload');
@@ -176,17 +186,10 @@ class ControllerInformationContact extends Controller {
             if(isset($this->request->post['file'])){
                 $mail->addAttachment(DIR_UPLOAD . $file);
             }
-     /* added by it-lab end */
-            if(!isset($this->request->post['customer_phone'])) {
+
                 $mail->setText($this->request->post['enquiry']);
                 $mail->send();
                 $this->response->redirect($this->url->link('information/contact/success'));
-            }else{
-                $mail->setText($this->language->get('text_telephone')." : ",$this->request->post['customer_phone']);
-                $mail->send();
-                $json['phone_success'] = $this->language->get('text_upload');
-                return $this->response->setOutput(json_encode($json));
-            }
 
 
             $mail->send();
@@ -329,11 +332,7 @@ class ControllerInformationContact extends Controller {
             if ((utf8_strlen($this->request->post['enquiry']) < 10) || (utf8_strlen($this->request->post['enquiry']) > 3000)) {
                 $this->error['enquiry'] = $this->language->get('error_enquiry');
             }
-        }/*else{
-            if ((utf8_strlen($this->request->post['customer_phone']) < 3) || (utf8_strlen($this->request->post['customer_phone']) > 32)) {
-                $this->error['customer_phone'] = $this->language->get('error_customer_phone');
-            }
-        }*/
+        }
 		// Captcha
 		if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
 			$captcha = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha') . '/validate');
@@ -345,6 +344,15 @@ class ControllerInformationContact extends Controller {
 
 		return !$this->error;
 	}
+
+    protected function validatePhoneNumber()
+    {
+        if ((utf8_strlen($this->request->post['customer_phone']) < 3) || (utf8_strlen($this->request->post['customer_phone']) > 32)) {
+            $this->error['customer_phone'] = $this->language->get('error_customer_phone');
+            return false;
+        }
+        return true;
+    }
 
 	public function success() {
 		$this->load->language('information/contact');

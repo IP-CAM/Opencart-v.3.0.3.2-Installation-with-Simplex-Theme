@@ -14,6 +14,18 @@ class ControllerExtensionModuleBanner extends Controller {
 
 		$results = $this->model_design_banner->getBanner($setting['banner_id']);
         /* added by it-lab start */
+        if(isset($this->request->get['route'])) {
+            if ($this->request->get['route'] == 'common/home') {
+                $data['is_home'] = true;
+            } else {
+                $data['is_home'] = false;
+            }
+            if ($this->request->get['route'] == 'product/category') {
+                $data['is_catalog'] = true;
+            }
+        }else{
+            $data['is_home']=true;
+        }
         $language_id = $this->config->get('config_language_id');
         $data['title']=array_key_exists('title'.$language_id,$setting)?$setting['title'.$language_id]:'';
         $data['description']=array_key_exists('description'.$language_id,$setting)?html_entity_decode($setting['description'.$language_id]):'';
