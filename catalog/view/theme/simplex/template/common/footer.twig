@@ -42,12 +42,12 @@
                 <li>
                     <h5 class="phone">
                         <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
-                        <p>Putem să sunăm înapoi</p>
+                        <p>{{ text_phone_callback }}</p>
                     </h5>
                 </li>
                 <li>
                     <div class="offices">
-                        <h6>Magazinaele noastre:</h6>
+                        <h6>{{ text_our_stores }}</h6>
                         <ul>
                             {% for location in locations %}
                                 <li><a href="{{ location.contacts_link }}">{{ location.city }}
@@ -61,8 +61,7 @@
             <ul class="info">
                 <li>
                     <div class="copyright">
-                        <p>&copy; 2019 Simplex.</p>
-                        <p>Toate drepturile sunt rezervate</p>
+                        {{ text_copyright }}
                     </div>
                 </li>
                 <li>
@@ -113,28 +112,13 @@
         </a>
     </span>
     <div class="timetable">
-        <table>
-            <tbody>
-            <tr>
-                <td>Luni - Vineri</td>
-                <td>08:00 - 18:00</td>
-            </tr>
-            <tr>
-                <td>Simbata</td>
-                <td>08:00 - 16:00</td>
-            </tr>
-            <tr>
-                <td>Duminica</td>
-                <td>zi libera</td>
-            </tr>
-            </tbody>
-        </table>
+        {{ open }}
     </div>
     <div class="input-telephone">
-        <h6>Putem să sunăm înapoi</h6>
-        <label><input id="customer_phone" placeholder="Telefonul dvs." type="text"></label>
+        <h6>{{ text_phone_callback }}</h6>
+        <label><input id="customer_phone" placeholder="{{ text_your_phone }}" type="text"></label>
         <button id="button-call-back" type="submit">
-            Sunaţi înapoi
+            {{ text_callback }}
             <span class="image-container"></span>
         </button>
     </div>
@@ -208,6 +192,7 @@
 </script>
 
 <script>
+    $(".timetable table").attr("style",'');
     $(".input-telephone input , #subscribe #email").on("input",function () {
         $(this).removeClass('has-error');
     });

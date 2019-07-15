@@ -81,7 +81,7 @@ class ControllerInformationCategory extends Controller
             'sort' => 'i.date_added',
             'order' => 'DESC',
             'start' => 0,
-            'limit' => 2
+            'limit' => $limit
         );
         $results = $this->model_catalog_information->getInformations($filter_data);
         $total = $this->model_catalog_information->getTotalInformations($filter_data);
@@ -96,12 +96,13 @@ class ControllerInformationCategory extends Controller
                 } else {
                     $image = false;
                 }
-
+                $result_full=$this->model_catalog_information->getInformationFull($result['information_id']);
                 $data['informations'][] = array(
                     'information_id' => $result['information_id'],
                     'thumb' => $image,
                     'title' => $result['title'],
                     'description' => !empty($result['short_description']) ? trim(html_entity_decode($result['short_description'], ENT_QUOTES, 'UTF-8')) : utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('information_description_length')) . '..',
+                    'city' => $result_full['city'],
                     'user_id' => $result['user_id'],
                     'author' => $result['author'],
                     'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
@@ -226,12 +227,13 @@ class ControllerInformationCategory extends Controller
                 } else {
                     $image = false;
                 }
-
+                $result_full=$this->model_catalog_information->getInformationFull($result['information_id']);
                 $data['informations'][] = array(
                     'information_id' => $result['information_id'],
                     'thumb' => $image,
                     'title' => $result['title'],
                     'description' => !empty($result['short_description']) ? trim(html_entity_decode($result['short_description'], ENT_QUOTES, 'UTF-8')) : utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('information_description_length')) . '..',
+                    'city' => $result_full['city'],
                     'user_id' => $result['user_id'],
                     'author' => $result['author'],
                     'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),

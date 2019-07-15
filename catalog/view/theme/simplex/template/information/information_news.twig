@@ -24,7 +24,9 @@
                     <div class="card-body">
                         <span class="card-foot">{{ date_added }}</span>
                     </div>
-                    <a href="#"><img alt="Newest" class="card-img-top" src="{{ thumb }}"></a>
+                    {% if thumb %}
+                        <a href="#"><img alt="Newest" class="card-img-top" src="{{ thumb }}"></a>
+                    {% endif %}
                 </div>
             </div>
             <div class="content heading">
@@ -52,9 +54,11 @@
         </div>
 
         <div class="share">
+            {% if archive_link %}
             <div class="back">
                 <a href="{{ archive_link }}">{{ text_archive_link }}</a>
             </div>
+            {% endif %}
             <div class="social">
                 <p>{{ share_information }}:</p>
                 <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>

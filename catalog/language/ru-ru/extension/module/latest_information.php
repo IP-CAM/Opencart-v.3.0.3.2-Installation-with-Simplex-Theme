@@ -13,3 +13,4 @@ $_['heading_title'] = 'Новые статьи';
 // Text
 $_['text_read']     = 'Подробнее..';
 $_['text_review']   = 'Отзывов (%s)';
+$_['text_all_news']   = 'Все новости';

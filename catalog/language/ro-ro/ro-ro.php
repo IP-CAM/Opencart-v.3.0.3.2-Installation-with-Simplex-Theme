@@ -24,6 +24,7 @@ $_['text_items_on_page']    = 'pe pagina';
 $_['text_pozitions']        = 'poziții';
 $_['text_show_more']        = 'Arată încă';
 $_['text_total']            = 'Total:';
+$_['text_view_oferts']      = 'Vezi oferte speciale:';
 
 
 // Buttons

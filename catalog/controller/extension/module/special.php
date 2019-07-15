@@ -17,7 +17,9 @@ class ControllerExtensionModuleSpecial extends Controller {
 		);
 
 		$results = $this->model_catalog_product->getProductSpecials($filter_data);
-
+        /* added by it-lab start */
+        $latest_products=$this->model_catalog_product->getLatestProducts(10);
+        /* added by it-lab end */
 		if ($results) {
 			foreach ($results as $result) {
 				if ($result['image']) {
@@ -57,6 +59,7 @@ class ControllerExtensionModuleSpecial extends Controller {
 				} else {
 					$rating = false;
 				}
+                $is_new=array_key_exists($result['product_id'],$latest_products);
 
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
@@ -68,6 +71,8 @@ class ControllerExtensionModuleSpecial extends Controller {
                     /* added by it-lab start */
                     'special_percentage' => $special_percentage,
                     'economy'     => $economy,
+                    'hide_price'  => $result['hide_price']?false:true,
+                    'is_new'      => $is_new,
                     /* added by it-lab end */
 					'tax'         => $tax,
 					'rating'      => $rating,
