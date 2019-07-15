@@ -1,118 +1,191 @@
 <!DOCTYPE html>
 <html dir="{{ direction }}" lang="{{ lang }}">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ title }}</title>
-  <base href="{{ base }}"/>
-  {% if description %}
-    <meta name="description" content="{{ description }}"/>
-  {% endif %}
-  {% if keywords %}
-    <meta name="keywords" content="{{ keywords }}"/>
-  {% endif %}
-  <script src="catalog/view/javascript/simplex/jquery.min.js" type="text/javascript"></script>
-{#  <link href="catalog/view/theme/default/stylesheet/bootstrap.css" rel="stylesheet" media="screen"/>#}
-  <link href="catalog/view/theme/simplex/stylesheet/style.min.css" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ title }}</title>
+    <base href="{{ base }}"/>
+    {% if description %}
+        <meta name="description" content="{{ description }}"/>
+    {% endif %}
+    {% if keywords %}
+        <meta name="keywords" content="{{ keywords }}"/>
+    {% endif %}
+    <script src="catalog/view/javascript/simplex/jquery.min.js" type="text/javascript"></script>
+    {#  <link href="catalog/view/theme/default/stylesheet/bootstrap.css" rel="stylesheet" media="screen"/>#}
+    <link href="catalog/view/theme/simplex/stylesheet/style.min.css" rel="stylesheet">
 
-{#  <link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">#}
-  {% for style in styles %}
-    <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
-  {% endfor %}
-  {% for script in scripts %}
-    <script src="{{ script }}" type="text/javascript"></script>
-  {% endfor %}
-  <script src="catalog/view/javascript/common.js" type="text/javascript"></script>
-  {% for link in links %}
-    <link href="{{ link.href }}" rel="{{ link.rel }}"/>
-  {% endfor %}
-  {% for analytic in analytics %}
-    {{ analytic }}
-  {% endfor %}
+    {#  <link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">#}
+    {% for style in styles %}
+        <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
+    {% endfor %}
+    {% for script in scripts %}
+        <script src="{{ script }}" type="text/javascript"></script>
+    {% endfor %}
+    <script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+    {% for link in links %}
+        <link href="{{ link.href }}" rel="{{ link.rel }}"/>
+    {% endfor %}
+    {% for analytic in analytics %}
+        {{ analytic }}
+    {% endfor %}
 </head>
 <body>
 {% if cookie %}
-  {{ cookie }}
+    {{ cookie }}
 {% endif %}
 
 <header>
-  <div id="navigation">
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="{{ home }}">
-          <img alt="Logo" src="{{ logo }}">
-        </a>
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                class="navbar-toggler collapsed" data-target="#navbarCollapse" data-toggle="collapse"
-                type="button">
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-text">menu</span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              {{ language }}
-            </li>
-            {{ pavmegamenu }}
-          </ul>
-          <!--TODO: Collapsed menu-->
-        </div>
-        {{ search }}
-        <div class="nav-button" id="profile">
-          <div class="dropdown">
-            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
-               href="{{ account }}"
-               role="button">
-              <img alt="Profile" src="catalog/view/theme/simplex/assets/img/profile.png">
-            </a>
-            <div class="dropdown-menu dropdown-menu-md-right">
-
-              {% if logged %}
-                <a class="dropdown-item" href="{{ account }}">{{ text_account }}</a>
-                <a class="dropdown-item" href="{{ order }}">{{ text_order }}</a>
-                <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
-              {% else %}
-                <a class="dropdown-item"  href="{{ register }}">{{ text_register }}</a>
-                <a class="dropdown-item" href="{{ login }}">{{ text_login }}</a>
-              {% endif %}
-             {# <a class="dropdown-item" href="#"><!--TODO: Profile--></a>#}
-            </div>
-          </div>
-        </div>
-        <div class="nav-button" id="compare">
-          <a href="#"><img alt="Compare" src="catalog/view/theme/simplex/assets/img/compare.png"></a>
-        </div>
-        <div class="nav-button" id="favorite">
-          <a id="wishlist-total"  title="{{ text_wishlist }}" href="{{ wishlist }}"><img alt="Favorites" src="catalog/view/theme/simplex/assets/img/favorites.png"><span  class="quantity">{{ wishlist_count }}</span></a>
-        </div>
-        <div class="nav-button" id="cart">
-          <a href="{{ shopping_cart }}"><img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png"><span  class="quantity">{{ cart_count }}</span></a>
-          <!--TODO: Cart poppup-->
-        </div>
-        <div class="phone">
-          <a class="tel" href="tel:{{ telephone }}"><span>{{ telephone }}</span></a>
-        </div>
-        <!--TODO: Min screen width 410px. Reordering, resizing or disabling smth. on <410px -->
-      </nav>
-    </div>
-  </div>
-  <div id="categories" class="collapse">
-    <!--TODO: SVG icons for categories -->
-    <div class="container-fluid">
-      <nav class="menu">
-        <ul>
-            {% for category in catalog.children %}
-                <li class="menu-item {{ category.active?'active'}} "><a class="menu-link {{ category.menu_class }}" href="{{ category.link }}" >
-                        {% if category.image_svg !='' %}
-                          {{ category.image_svg }}
-                        {% endif %}
-                        {{ category.title }}
+    <div id="navigation">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="{{ home }}">
+                    <img alt="Logo" src="{{ logo }}">
+                </a>
+                <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler collapsed" data-target="#navbarCollapse" data-toggle="collapse"
+                        type="button">
+                    <span class="navbar-toggler-icon">
+                        <svg viewBox="0 0 20 15" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.000,1.000 L14.000,1.000 " fill="none" fill-rule="evenodd"
+                                  stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2px"></path>
+                            <path d="M2.000,6.000 L18.000,6.000 " fill="none" fill-rule="evenodd"
+                                  stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2px"></path>
+                            <path d="M2.000,11.000 L14.000,11.000 " fill="none" fill-rule="evenodd"
+                                  stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2px"></path>
+                        </svg>
+                    </span>
+                    <span class="navbar-toggler-text">menu</span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <div class="nav-item" id="lang">
+                            {{ language }}
+                        </div>
+                        {{ pavmegamenu }}
+                    </div>
+                    <!--TODO: Collapsed menu-->
+                </div>
+                {{ search }}
+                <div class="nav-button" id="profile">
+                    <div class="dropdown">
+                        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
+                           href="{{ account }}"
+                           role="button">
+                            <svg baseProfile="tiny" height="21" version="1.2" viewBox="0 0 21 21" width="21"
+                                 xml:space="preserve"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.5,1C13,1,15,3.1,15,5.5S13,10,10.5,10S6,8,6,5.5S8,1,10.5,1z" fill="none"
+                                      stroke-width="2"></path>
+                                <path d="M1,21c0-4.7,4.3-8.5,9.5-8.5S20,16.3,20,21" fill="none" stroke-width="2"></path>
+                            </svg>
+                            <span>{{ text_account }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            {% if logged %}
+                                <a class="dropdown-item" href="{{ account }}">{{ text_account }}</a>
+                                <a class="dropdown-item" href="{{ order }}">{{ text_order }}</a>
+                                <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
+                            {% else %}
+                                <a class="dropdown-item" href="{{ register }}">{{ text_register }}</a>
+                                <a class="dropdown-item" href="{{ login }}">{{ text_login }}</a>
+                            {% endif %}
+                            {# <a class="dropdown-item" href="#"><!--TODO: Profile--></a>#}
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-button" id="compare">
+                    <a href="{{ compare }}">
+                        <svg height="28px" viewBox="5 -5 22 30" width="35px" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
+                                  fill="none" fill-rule="evenodd"
+                                  stroke-width="2px"></path>
+                            <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
+                                  fill="none" fill-rule="evenodd"
+                                  stroke-dasharray="1, 4" stroke-linecap="round"
+                                  stroke-width="2px"></path>
+                        </svg>
+                        <span>Comparație</span>
                     </a>
-                </li>
-            {% endfor %}
-        </ul>
-      </nav>
+                </div>
+                <div class="nav-button" id="favorite">
+                    <a id="wishlist-total" title="{{ text_wishlist }}" href="{{ wishlist }}">
+                        <svg height="20" viewBox="0 0 23 24" width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
+                                  fill="none" fill-rule="evenodd"
+                                  stroke-width="2px"></path>
+                        </svg>
+                        <span class="quantity">{{ wishlist_count }}</span>
+                        <span>Favorite</span>
+                    </a>
+                </div>
+                <div class="nav-button" id="cart">
+                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
+                       href="#" role="button">
+                        <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.svg">
+                        <span id="cart-total" class="quantity">{{ cart_count }}</span>
+                    </a>
+                    {{ cart }}
+                </div>
+                <div class="phone">
+                    <a class="tel" href="tel:{{ telephone }}"><span>{{ telephone }}</span></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="timetable">
+                            <table>
+                                <tr>
+                                    <td>Luni - Vineri</td>
+                                    <td>08:00 - 18:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Simbata</td>
+                                    <td>08:00 - 16:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Duminica</td>
+                                    <td>zi libera</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="input-telephone">
+                            <h6>Putem să sunăm înapoi</h6>
+                            <label><input placeholder="Telefonul dvs." type="text"></label>
+                            <button type="submit">
+                                Sunaţi înapoi
+                                <span class="image-container"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
-  </div>
+
+    <div class="dropdown-menu" id="categories">
+        <div class="container-fluid">
+            <nav class="menu">
+                <!--TODO: SVG icons for categories -->
+                <div class="container-fluid">
+                    <nav class="menu">
+                        <ul>
+                            {% for category in catalog.children %}
+                                <li class="menu-item {{ category.active?'active' }} "><a
+                                            class="menu-link {{ category.menu_class }}"
+                                            href="{{ category.link }}">
+                                        {% if category.image_svg !='' %}
+                                            {{ category.image_svg }}
+                                        {% endif %}
+                                        {{ category.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+    </div>
 </header>

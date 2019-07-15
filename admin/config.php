@@ -1,18 +1,18 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://simplex2.dev.it-lab.md/admin/');
-define('HTTP_CATALOG', 'http://simplex2.dev.it-lab.md/');
+define('HTTP_SERVER', 'http://simplex.dev.it-lab.md/admin/');
+define('HTTP_CATALOG', 'http://simplex.dev.it-lab.md/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://simplex2.dev.it-lab.md/admin/');
-define('HTTPS_CATALOG', 'http://simplex2.dev.it-lab.md/');
+define('HTTPS_SERVER', 'http://simplex.dev.it-lab.md/admin/');
+define('HTTPS_CATALOG', 'http://simplex.dev.it-lab.md/');
 
 // DIR
-define('DIR_APPLICATION', '/var/www/simplex2/data/www/simplex2.dev.it-lab.md/admin/');
-define('DIR_SYSTEM', '/var/www/simplex2/data/www/simplex2.dev.it-lab.md/system/');
-define('DIR_IMAGE', '/var/www/simplex2/data/www/simplex2.dev.it-lab.md/image/');
-define('DIR_STORAGE', '/var/www/simplex2/data/www/storage/');
-define('DIR_CATALOG', '/var/www/simplex2/data/www/simplex2.dev.it-lab.md/catalog/');
+define('DIR_APPLICATION', '/var/www/simplex/data/www/simplex.dev.it-lab.md/admin/');
+define('DIR_SYSTEM', '/var/www/simplex/data/www/simplex.dev.it-lab.md/system/');
+define('DIR_IMAGE', '/var/www/simplex/data/www/simplex.dev.it-lab.md/image/');
+define('DIR_STORAGE', '/var/www/simplex/data/www/storage/');
+define('DIR_CATALOG', '/var/www/simplex/data/www/simplex.dev.it-lab.md/catalog/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');

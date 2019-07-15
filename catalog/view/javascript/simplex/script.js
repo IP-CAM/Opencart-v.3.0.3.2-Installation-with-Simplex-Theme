@@ -494,7 +494,7 @@ $('.delete').click(function () {
         $(this).remove();
     });
 });
-$('#delete-all').click(function () {
+$('.delete-all').click(function () {
     $('.wish.products').animate({
         opacity: 0,
     }, 500, function () {
@@ -517,7 +517,6 @@ if ($(window).width() < 768) {
     $('#compare, #favorite').prependTo('#buttons');
     $('#profile').appendTo('.navbar-nav').addClass('nav-item');
 }
-
 $(window).resize(function () {
     let screen = $(window);
     if (screen.width() < 768) {
@@ -533,7 +532,6 @@ $(window).resize(function () {
 
     }
 });
-
 $('.product .add-to-cart, .product .favorite').click(function () {
     let width_product = $(this).parent().parent().width();
     let width_poppup = document.getElementById('success-poppup').offsetWidth;
@@ -542,8 +540,8 @@ $('.product .add-to-cart, .product .favorite').click(function () {
     let divOffset = $(div).offset();
     $('#success-poppup').css('left', divOffset.left - 20 - offset_poppup).css('top', divOffset.top + 48).css('display', 'block');
 });
-
-$('.phone a:not(.tel)').click(function () {
+$('.phone a:not(.tel)').click(function (e) {
+    e.preventDefault();
     let div = $(this);
     let divOffset = $(div).offset();
     console.log(div);
@@ -552,24 +550,32 @@ $('.phone a:not(.tel)').click(function () {
 });
 
 function getCookie(name) {
-    var matches = document.cookie.match(new RegExp(
+    let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-var accept_cookies = getCookie("accept-cookies");
+let accept_cookies = getCookie("accept-cookies");
 if (accept_cookies === "1") {
     $(".cookies-politic-block").hide();
 } else {
     $(".cookies-politic-block").show().css("display", "flex");
 }
-$(".btn-accept-cookies-policy").click(function (e) {
+$(".btn-accept-cookies-policy").click(function () {
     $(".cookies-politic-block").hide(50);
     document.cookie = "accept-cookies=1;  path=/;";
     return false;
 });
-
 $('.done .delete a').click(function () {
     $(this).parent().parent().remove();
 });
+$('#search .search-button').click(function () {
+    $(this).parent().toggleClass('active');
+});
+$('.phone-poppup .delete').click(function (e) {
+    e.preventDefault();
+    $(this).parent().css('display', 'none');
+});
+
+$('#catalog').append($('#categories'));
