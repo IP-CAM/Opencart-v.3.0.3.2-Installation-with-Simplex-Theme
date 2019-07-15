@@ -707,6 +707,10 @@ select {
 					font-size   : 0.8125rem;
 					font-weight : 500;
 					margin-left : 1.75rem;
+					
+					&.semi-bold {
+						font-weight : 600;
+					}
 				}
 				
 				p {
@@ -899,7 +903,7 @@ select {
 		line-height : 1.25;
 		padding     : 1.25rem 0;
 		
-		button {
+		a {
 			@include border-radius;
 			@include flex(none, between, center);
 			@include transition(all .25s linear);
@@ -1209,8 +1213,27 @@ select {
 	}
 	
 	table {
+		text-align : center;
+		
+		a:not(.delete-all) {
+			&, * {
+				color : #057f9e;
+			}
+			
+			&:hover {
+				&, * {
+					color : $yellow;
+				}
+			}
+		}
+		
 		td:first-child {
 			width : 135px;
+			
+			&, * {
+				color      : #a4a4a4;
+				text-align : left;
+			}
 		}
 		
 		td:only-child {
@@ -1229,6 +1252,12 @@ select {
 			font-size   : 1.25em;
 			font-weight : 800;
 		}
+	}
+	
+	.delete-all {
+		padding  : 0.5rem 1rem;
+		border   : 0;
+		position : static;
 	}
 }
 
@@ -1381,7 +1410,7 @@ select {
 	}
 }
 
-#delete-all, #add {
+.delete-all, #add {
 	@include border-radius(0.375rem);
 	border    : 1px solid #f4f4f4;
 	color     : #a4a4a4;
@@ -1603,7 +1632,7 @@ select {
 			
 			h4 {
 				font-size  : 1.125rem;
-				margin     : 0 0 0.6875rem 0;
+				margin     : 0 0 0.6875rem;
 				text-align : left;
 			}
 			
@@ -2421,6 +2450,33 @@ select {
 	}
 }
 
+#success-poppup {
+	@include border-radius;
+	background-color : $white;
+	border           : 1px solid #fdfdfd;
+	box-shadow       : 3.776px 4.663px 12.09px 0.91px rgba(0, 0, 0, 0.04);
+	display          : none;
+	font-size        : 0.8125rem;
+	font-weight      : 500;
+	line-height      : 50px;
+	padding-left     : 2.5rem;
+	padding-right    : 1.25rem;
+	position         : absolute;
+	z-index          : 9999;
+	
+	&:before {
+		background : url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSI1IDEgMjggMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogICAgPHBhdGggZD0iTTcuNjQ2LDE1LjA2NiBMMTYuNDAxLDIzLjg2OCBMMzAuOTkzLDMuMzMwICIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIg0KICAgICAgICAgIHN0cm9rZT0iIzkyY2Y5YiINCiAgICAgICAgICBzdHJva2Utd2lkdGg9IjZweCIvPg0KPC9zdmc+") no-repeat center;
+		bottom     : 0;
+		content    : '';
+		height     : 0.625rem;
+		left       : 1rem;
+		margin     : auto;
+		position   : absolute;
+		top        : 0;
+		width      : 0.625rem;
+	}
+}
+
 #wishlist {
 	&.page-title {
 		h1 {
@@ -3050,6 +3106,34 @@ select {
 	}
 }
 
+.cross {
+	bottom   : 0;
+	height   : 0.75rem;
+	margin   : auto;
+	position : absolute;
+	right    : 1.25rem;
+	top      : 0;
+	width    : 0.75rem;
+	z-index  : 10000;
+	
+	
+	&:after {
+		@include transform(rotate(-55deg));
+	}
+	
+	&:before {
+		@include transform(rotate(55deg));
+	}
+	
+	&:before, &:after {
+		background-color : #b4b4b4;
+		content          : '';
+		height           : 1rem;
+		position         : absolute;
+		width            : 0.125rem;
+	}
+}
+
 .delete {
 	a svg path {
 		@include transition(all .125s linear);
@@ -3610,51 +3694,12 @@ select {
 	}
 }
 
-//.overlay {
-//	background-color : #000;
-//	height           : 100%;
-//	left             : 0;
-//	opacity          : 0.5;
-//	position         : fixed;
-//	top              : 0;
-//	width            : 100%;
-//	z-index          : 1002;
-//}
-
 .lang-switcher {
 	.dropdown-toggle {
 		&:after {
 			color : $text_gray
 		}
 	}
-}
-
-.cross {
-	bottom   : 0;
-	height   : 12px;
-	margin   : auto;
-	opacity  : .3;
-	position : absolute;
-	right    : 1.25rem;
-	top      : 0;
-	width    : 12px;
-	z-index  : 10000;
-}
-
-.cross:before {
-	transform : rotate(45deg);
-}
-
-.cross:before, .cross:after {
-	background-color : #dadada;
-	content          : '';
-	height           : 15px;
-	position         : absolute;
-	width            : 2px;
-}
-
-.cross:after {
-	transform : rotate(-45deg);
 }
 
 .main-image-container img {
@@ -3709,18 +3754,27 @@ select {
 		position : relative;
 		
 		.search-form {
-			height    : 100%;
-			max-width : 432px;
-			position  : absolute;
-			right     : 0;
-			top       : 0;
-			width     : 100vw;
+			background-color : #f5f4f2;
+			max-width        : 432px;
+			position         : absolute;
+			right            : 0;
+			top              : 0;
+			width            : 100vw;
+			
+			&.collapse.show {
+				display : flex;
+			}
+			
+			label {
+				flex : 100%;
+			}
 			
 			input {
 				@include border-radius(0);
-				background-color : #f5f4f2;
 				border           : 0;
 				height           : 100%;
+				background-color : transparent;
+				padding          : 0.75rem 2rem 0.75rem 1.125rem;
 			}
 		}
 		
@@ -3743,12 +3797,6 @@ select {
 			height         : 18px;
 			vertical-align : sub;
 			width          : 18px;
-		}
-		
-		form button {
-			left     : 0;
-			position : absolute;
-			z-index  : 100;
 		}
 	}
 	
@@ -3961,7 +4009,7 @@ select {
 		color       : #057f9e;
 		font-size   : 0.75rem;
 		font-weight : 500;
-		line-height : 2;
+		line-height : 1.5;
 		
 		&:before {
 			background   : url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -4005,14 +4053,14 @@ select {
 	padding-top   : 2rem;
 	
 	h1 {
-		@include flex(none, center, center, wrap);
+		@include flex(none, none, center, wrap);
 		font-size     : 2.625rem;
 		font-weight   : 800;
 		margin-bottom : 0;
 	}
 	
 	&.centered {
-		@include flex(col, center);
+		@include flex(col, center, center);
 		padding-bottom : 1rem;
 		padding-top    : 1.5rem;
 		
@@ -4213,6 +4261,7 @@ select {
 		height   : 100%;
 		padding  : 35px 25px;
 		position : relative;
+		width    : 100%;
 	}
 	
 	h2 {
@@ -4559,33 +4608,6 @@ select {
 				opacity : 1;
 			}
 		}
-	}
-}
-
-#success-poppup {
-	@include border-radius;
-	background-color : $white;
-	border           : 1px solid #fdfdfd;
-	box-shadow       : 3.776px 4.663px 12.09px 0.91px rgba(0, 0, 0, 0.04);
-	display          : none;
-	font-size        : 0.8125rem;
-	font-weight      : 500;
-	line-height      : 50px;
-	padding-left     : 2.5rem;
-	padding-right    : 1.25rem;
-	position         : absolute;
-	z-index          : 9999;
-	
-	&:before {
-		background : url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSI1IDEgMjggMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogICAgPHBhdGggZD0iTTcuNjQ2LDE1LjA2NiBMMTYuNDAxLDIzLjg2OCBMMzAuOTkzLDMuMzMwICIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIg0KICAgICAgICAgIHN0cm9rZT0iIzkyY2Y5YiINCiAgICAgICAgICBzdHJva2Utd2lkdGg9IjZweCIvPg0KPC9zdmc+") no-repeat center;
-		bottom     : 0;
-		content    : '';
-		height     : 0.625rem;
-		left       : 1rem;
-		margin     : auto;
-		position   : absolute;
-		top        : 0;
-		width      : 0.625rem;
 	}
 }
 

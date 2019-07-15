@@ -243,7 +243,7 @@
 		padding   : 1rem;
 	}
 	
-	.wrapper.wish-wrapper #delete-all {
+	.wrapper.wish-wrapper .delete-all {
 		padding : 0.75rem;
 		top     : -66px;
 	}
@@ -441,6 +441,10 @@
 				background-color : $white;
 			}
 		}
+		
+		#search .search-form {
+			max-width : calc(100vw - 289px);
+		}
 	}
 	
 	.navbar-collapse {
@@ -621,32 +625,6 @@
 		}
 	}
 	
-	#catalog .dropdown-toggle {
-		font-weight : 600;
-		
-		&:after {
-			content : '';
-		}
-		
-		&[aria-expanded="true"], &:hover, &:hover:after {
-			color : #dda80e
-		}
-	}
-	
-	#cart-wrapper {
-		.panel .panel-heading {
-			@include flex-align(col, start);
-			
-			label, p {
-				margin-left : 0;
-			}
-			
-			> *, h5 {
-				margin-bottom : 1rem;
-			}
-		}
-	}
-	
 	#buttons {
 		@include flex(none, center, center, wrap-reverse);
 		order   : -1;
@@ -680,6 +658,32 @@
 		
 		.quantity {
 			display : none !important;
+		}
+	}
+	
+	#catalog .dropdown-toggle {
+		font-weight : 600;
+		
+		&:after {
+			content : '';
+		}
+		
+		&[aria-expanded="true"], &:hover, &:hover:after {
+			color : #dda80e
+		}
+	}
+	
+	#cart-wrapper {
+		.panel .panel-heading {
+			@include flex-align(col, start);
+			
+			label, p {
+				margin-left : 0;
+			}
+			
+			> *, h5 {
+				margin-bottom : 1rem;
+			}
 		}
 	}
 	
@@ -823,6 +827,7 @@
 			
 			h4 {
 				text-align : center;
+				margin     : auto auto .6875rem;
 			}
 			
 			table {
@@ -1130,6 +1135,10 @@
 				padding   : 0.75rem;
 			}
 		}
+	}
+	
+	.navbar #search .search-form {
+		max-width : calc(100vw - 125px);
 	}
 	
 	.navbar-nav {
@@ -1600,6 +1609,24 @@
 		}
 	}
 	
+	.navbar #search {
+		z-index : 1;
+		
+		button {
+			line-height : 60px;
+		}
+		
+		&.active {
+			position : absolute;
+			right    : 0;
+			width    : 100%;
+		}
+		
+		.search-form {
+			max-width : 100%;
+		}
+	}
+	
 	.news-wrapper {
 		.news-grid {
 			grid-template-columns : 1fr;
@@ -1615,6 +1642,12 @@
 			h1 {
 				font-size : 1.875rem;
 			}
+		}
+	}
+	
+	.phone {
+		a, &-poppup a {
+			height : 60px;
 		}
 	}
 	
@@ -1663,7 +1696,7 @@
 		}
 	}
 	
-	.wrapper.wish-wrapper #delete-all {
+	.wrapper.wish-wrapper .delete-all {
 		padding : 0.5rem;
 		top     : -60px;
 	}
@@ -1791,7 +1824,6 @@
 }
 
 @media (min-width : 992px) {
-	
 	#catalog {
 		border-left  : 1px solid #f4f4f4;
 		border-right : 1px solid #f4f4f4;
@@ -1836,6 +1868,10 @@
 				}
 			}
 		}
+	}
+	
+	#lang-switcher .dropdown-menu .active {
+		display : none;
 	}
 	
 	.menu .menu-link {
