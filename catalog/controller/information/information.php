@@ -182,7 +182,7 @@ class ControllerInformationInformation extends Controller {
 
 
             $categories = $this->model_catalog_information->getCategories($information_id);
-            if(is_array($categories) & count($categories)>0){
+            if(is_array($categories) && count($categories)>0){
                 $category=$categories[0]["category_id"];
                 $data["archive_link"] = $this->url->link('information/category&path='.$category);
                 $data['thumb'] ='image/' . $information_info['image'];
@@ -233,7 +233,7 @@ class ControllerInformationInformation extends Controller {
                     return $this->response->setOutput($this->load->view($template , $data));
 
                 }else {
-                    return $this->response->setOutput($this->load->view('information/information', $data));
+                    return $this->response->setOutput($this->load->view('information/information_news', $data));
                 }
             }else {
                 $data['breadcrumbs'][] = array(
@@ -241,7 +241,7 @@ class ControllerInformationInformation extends Controller {
                     'href' => $this->url->link('information/information', 'information_id=' .  $information_id)
                 );
 
-                return $this->response->setOutput($this->load->view('information/information', $data));
+                return $this->response->setOutput($this->load->view('information/information_news', $data));
             }
 
             /* added by it-lab end */
