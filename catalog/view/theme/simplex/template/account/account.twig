@@ -17,9 +17,12 @@
         </div>
     </div>
     <div class="container-fluid">
+        {% if success %}
+            <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+        {% endif %}
         <div id="account">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card">
                         <h5>{{ text_my_account }}</h5>
                         <ul>
@@ -27,39 +30,14 @@
                             <li><a href="{{ password }}">{{ text_password }}</a></li>
                             <li><a href="{{ address }}">{{ text_address }}</a></li>
                             <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                {% if credit_cards %}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <h5>text_credit_card</h5>
-                            <ul>
-                                {% for credit_card in credit_cards %}
-                                    <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-
-                {% endif %}
-                <div class="col-md-4">
-                    <div class="card">
-                        <h5>{{ text_my_orders }}</h5>
-                        <ul>
                             <li><a href="{{ order }}">{{ text_order }}</a></li>
-                            <li><a href="{{ download }}">{{ text_download }}</a></li>
-                            {% if reward %}
-                                <li><a href="{{ reward }}">{{ text_reward }}</a></li>
-                            {% endif %}
-                            <li><a href="{{ return }}">{{ text_return }}</a></li>
-                            <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-                            <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4">
+
+
+                <div class="col-md-6">
                     <div class="card">
                         <h5>{{ text_my_newsletter }}</h5>
                         <ul>

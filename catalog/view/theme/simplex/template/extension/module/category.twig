@@ -1,5 +1,5 @@
 {% for category in categories %}
-    {% if category.category_id == category_id %}
+{#    {% if category.category_id == category_id %}#}
         {% if category.children %}
             <div class="card">
                 <button aria-controls="collapseOne" aria-expanded="true" class="collapsed"
@@ -27,5 +27,5 @@
                 {% endif %}
             </div>
         {% endif %}
-    {% endif %}
+{#    {% endif %}#}
 {% endfor %}

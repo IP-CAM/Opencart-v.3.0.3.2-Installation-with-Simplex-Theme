@@ -1,0 +1,24 @@
+<div class="card choose">
+  <h4>{{ title }}</h4>
+  {% for banner in banners %}
+  <img alt="Choose" src="{{ banner.image_original }}">
+  <div class="phone">
+    <a class="tel" href="tel:{{ telephone_link }}">{{ telephone }}</a>
+    <p>{{ description }}</p>
+  </div>
+
+  <p>{{ banner.description }}</p>
+  <div class="offices">
+    <h6>{{ banner.title }}</h6>
+  {% endfor %}
+
+    <ul>
+      {% for location in locations %}
+        <li><a href="{{ location.contacts_link }}">{{ location.city }}, {{ location.address }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+</div>

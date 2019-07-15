@@ -242,6 +242,7 @@ class ControllerProductProduct extends Controller {
 			$data['points'] = $product_info['points'];
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
             /* added by it-lab* start */
+            $data['hide_price'] = $product_info['hide_price']?false:true;
             if(!isset($category_info)){
                 $product_categories = $this->model_catalog_product->getCategories($product_id);
                 if($product_categories) {
@@ -491,6 +492,7 @@ class ControllerProductProduct extends Controller {
                     /* added by it-lab start */
                     'special_percentage' => $special_percentage,
                     'economy'     => $economy,
+                    'hide_price'  => $result['hide_price']?false:true,
                     /* added by it-lab end */
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
@@ -552,6 +554,7 @@ class ControllerProductProduct extends Controller {
                         /* added by it-lab start */
                         'special_percentage' => $special_percentage,
                         'economy' => $economy,
+                        'hide_price'  => $result['hide_price']?false:true,
                         /* added by it-lab end */
                         'tax' => $tax,
                         'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,

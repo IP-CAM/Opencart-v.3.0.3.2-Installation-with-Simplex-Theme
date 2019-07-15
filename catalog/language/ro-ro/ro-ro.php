@@ -19,6 +19,12 @@ $_['text_all_zones']        = 'Toate Zonele';
 $_['text_pagination']       = 'Afişare %d - %d din %d (%d pagini)';
 $_['text_loading']          = 'Încărcare...';
 $_['text_no_results']       = 'Nu sunt rezultate!';
+$_['text_show_all']         = 'Arată toate';
+$_['text_items_on_page']    = 'pe pagina';
+$_['text_pozitions']        = 'poziții';
+$_['text_show_more']        = 'Arată încă';
+$_['text_total']            = 'Total:';
+
 
 // Buttons
 $_['button_address_add']    = 'Adaugă Adresă';

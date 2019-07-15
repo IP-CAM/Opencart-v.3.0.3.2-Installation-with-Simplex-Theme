@@ -19,6 +19,12 @@ $_['text_all_zones']        = 'All Zones';
 $_['text_pagination']       = 'Showing %d to %d of %d (%d Pages)';
 $_['text_loading']          = 'Loading...';
 $_['text_no_results']       = 'No results!';
+$_['text_show_all']         = 'Show all';
+$_['text_items_on_page']    = 'on page';
+$_['text_pozitions']        = 'pozitions';
+$_['text_show_more']        = 'Show';
+$_['text_total']            = 'Total:';
+
 
 // Buttons
 $_['button_address_add']    = 'Add Address';

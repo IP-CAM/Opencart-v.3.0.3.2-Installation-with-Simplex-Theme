@@ -126,6 +126,7 @@ class ControllerAccountWishList extends Controller {
                     /* added by it-lab start */
                     'special_percentage' => $special_percentage,
                     'economy'     => $economy,
+                    'hide_price'  => $product_info['hide_price']?false:true,
                     /* added by it-lab end */
 					'href'       => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
 					'remove'     => $this->url->link('account/wishlist', 'remove=' . $product_info['product_id'])
@@ -178,8 +179,8 @@ class ControllerAccountWishList extends Controller {
 
 				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'product_id=' . (int)$this->request->post['product_id']), $product_info['name'], $this->url->link('account/wishlist'));
 
-				$json['total'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
-				$json['total_count'] = $this->model_account_wishlist->getTotalWishlist();
+				$json['total_msd'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
+				$json['total'] = $this->model_account_wishlist->getTotalWishlist();
 
 
 			} else {
@@ -193,7 +194,7 @@ class ControllerAccountWishList extends Controller {
 
 				//$json['success'] = sprintf($this->language->get('text_login'), $this->url->link('account/login', '', true), $this->url->link('account/register', '', true), $this->url->link('product/product', 'product_id=' . (int)$this->request->post['product_id']), $product_info['name'], $this->url->link('account/wishlist'));
 
-				$json['total'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
+				$json['total_msg'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
 
                 $json['total'] =  (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0);
 

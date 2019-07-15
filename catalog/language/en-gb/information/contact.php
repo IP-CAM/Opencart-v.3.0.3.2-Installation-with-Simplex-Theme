@@ -19,6 +19,7 @@ $_['text_telephone_consilier_obiecte'] = 'Consilier obiecte sanitar';
 $_['text_asteptam_in_magazinele'] = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
         Suntem întotdeauna bucuroși să vă vedem!';
 $_['text_browse_file']="Browse";
+$_['text_phone_succes']="Phone received";
 
 // Entry
 $_['entry_name']     = 'Your Name';
@@ -44,3 +45,4 @@ $_['email_subject']  = 'Enquiry %s';
 $_['error_name']     = 'Name must be between 3 and 32 characters!';
 $_['error_email']    = 'E-Mail Address does not appear to be valid!';
 $_['error_enquiry']  = 'Enquiry must be between 10 and 3000 characters!';
+$_['error_customer_phone']  = 'Incorrect phone number';

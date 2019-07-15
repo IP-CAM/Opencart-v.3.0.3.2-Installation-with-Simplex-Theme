@@ -3,7 +3,7 @@
 	<div class="container-fluid">
 		<form id="abonare"  method="post" action="{{ action }}" class="formNewLestter newsletter-bg"	>
 		<label for="email"><p>{{ description }}</p></label>
-			<input id="email"  name="email" type="text" class="form-control input-md inputNew" {% if customer_email is not defined %} onblur="javascript:if(this.value=='')this.value='{{ default_input_text }}';" onfocus="javascript:if(this.value=='{{ default_input_text }}')this.value='';"{% endif %} value="{{ customer_email? customer_email : default_input_text }}"  type="email">
+			<input id="email"  name="email" type="text" class="form-control input-md inputNew" {% if customer_email is not defined %} onblur="javascript:if(this.value=='')this.value='{{ default_input_text }}';" onfocus="javascript:if(this.value=='{{ default_input_text }}')this.value='';"{% endif %} placeholder="{{ default_input_text }}"  type="email">
 			<button type="submit" name="submitNewsletter">
 				{{ button_subscribe }}
 				<span class="image-container"></span>
@@ -13,6 +13,22 @@
 
 
 		</form>
+		<div class="done" style="display:none">
+			<div id="ok">
+				<svg height="17" viewBox="5 1 29 29" width="17" xmlns="http://www.w3.org/2000/svg">
+					<path d="M7.646,15.066 L16.401,23.868 L30.993,3.330 " fill="none" fill-rule="evenodd" stroke="rgb(221, 168, 14)" stroke-width="6px"></path>
+				</svg>
+			</div>
+			<p class="msg">Ați înscris cu succes la newsletter-ul nostru!</p>
+			<div class="delete">
+				<a href="#">
+					<svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
+						<path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
+						<path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
+					</svg>
+				</a>
+			</div>
+		</div>
 	</div>
 </div>
 

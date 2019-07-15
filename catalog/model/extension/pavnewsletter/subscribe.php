@@ -59,6 +59,22 @@ class ModelExtensionPavnewsletterSubscribe extends Model {
 		}
 		return false;
 	}
+    /* added by it-lab start */
+
+    public function getSubscribeId($email = ""){
+        if(!empty($email)){
+            $query = $this->db->query("SELECT `subscribe_id` FROM ".DB_PREFIX."pavnewsletter_subscribe WHERE `email`='".$this->db->escape($email)."'");
+            if($query->num_rows > 0)
+                return $query->row["subscribe_id"];
+        }
+        return false;
+    }
+    public function updateAction($subscribe_id, $action = 1){
+        $query = $this->db->query("UPDATE ".DB_PREFIX."pavnewsletter_subscribe SET `action`=".(int)$action." WHERE subscribe_id=".$subscribe_id);
+        return true;
+    }
+    /* added by it-lab end */
+
 	public function storeSubscribe($data = array()){
 		if(!empty($data)){
 			if(!$this->checkExists($data['email'])){

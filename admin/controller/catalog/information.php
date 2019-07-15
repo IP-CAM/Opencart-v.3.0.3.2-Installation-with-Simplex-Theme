@@ -13,6 +13,10 @@ class ControllerCatalogInformation extends Controller {
 	}
 
 	public function add() {
+        /* added by it-lab start */
+        $this->document->addScript('view/javascript/ckeditor/ckeditor.js');
+        $this->document->addScript('view/javascript/ckeditor/adapters/jquery.js');
+        /* added by it-lab end */
 		$this->load->language('catalog/information');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -45,7 +49,14 @@ class ControllerCatalogInformation extends Controller {
 	}
 
 	public function edit() {
-		$this->load->language('catalog/information');
+        /* added by it-lab start */
+        $this->document->addScript('view/javascript/ckeditor/ckeditor.js');
+        $this->document->addScript('view/javascript/ckeditor/adapters/jquery.js');
+        /* added by it-lab end */
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+
+        $this->load->language('catalog/information');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 

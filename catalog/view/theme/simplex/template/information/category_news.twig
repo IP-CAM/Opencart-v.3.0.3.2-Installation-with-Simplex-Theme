@@ -3,8 +3,15 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
-                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
             {% endfor %}
+
         </ul>
         <div class="page-title" id="news-title">
             <h1>{{ heading_title }}</h1>
@@ -17,9 +24,9 @@
                         <div class="card-text">
                             <a href="{{ first.href }}">{{ first.title }}</a>
                         </div>
-                        <span class="card-date">{{ first.date_added }}</span>
+                        <span class="card-foot">{{ first.date_added }}</span>
                     </div>
-                    <a href="{{ first.image }}"><img alt="Newest" class="card-img-top" src="{{ first.thumb }}"></a>
+                    <a href="{{ first.href }}"><img alt="Newest" class="card-img-top" src="{{ first.thumb }}"></a>
                 </div>
             </div>
             <div class="news" >
@@ -34,7 +41,7 @@
                                 <div class="card-text">
                                     <a href="{{ information.href }}">{{ information.title }}</a>
                                 </div>
-                                <span class="card-date">{{ information.date_added }}</span>
+                                <span class="card-foot">{{ information.date_added }}</span>
                             </div>
                         </div>
                     </div>
@@ -46,7 +53,7 @@
                         <div class="show-more">
                             <button id="show-more-button" data-limit="{{ limit }}" data-start="{{ start }}" type="button">
                                 <span class="image-container"></span>
-                                <p>Arată încă {{ limit }} noutați</p>
+                                <p>{{ text_show_more }} {{ limit }} noutați</p>
                             </button>
                         </div>
                     {% endif %}

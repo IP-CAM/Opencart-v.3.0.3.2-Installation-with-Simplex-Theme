@@ -19,6 +19,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
 				$data['banners'][] = array(
 					'title' => $result['title'],
 					'link'  => $result['link'],
+					'product_id'  => $result['product_id'],
 					'image' => $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height'])
 				);
 			}
@@ -32,9 +33,9 @@ class ControllerExtensionModuleSlideshow extends Controller {
         $this->load->model('catalog/manufacturer');
         $this->load->model('tool/image');
         foreach ($data["banners"] as &$banner){
-            if(!empty($banner['description'])){
-                if(is_numeric($banner['description'])) {
-                    $product_id = (int)$banner["description"];
+            if(!empty($banner['product_id'])){
+                if(is_numeric($banner['product_id']   ) ) {
+                    $product_id = (int)$banner["product_id"];
                     $product = $this->model_catalog_product->getProduct($product_id);
                     //  var_dump($product);
                     if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -64,17 +65,21 @@ class ControllerExtensionModuleSlideshow extends Controller {
                             'href' => $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $categories_info["category_id"])
                         );
                     }
-                    $manufacturer_image = $this->model_catalog_manufacturer->getManufacturer($product['manufacturer_id']);
-                    if($manufacturer_image){
-                        $banner['manufacturer_img'] = $manufacturer_image['image'];
+                    $manufacturer = $this->model_catalog_manufacturer->getManufacturer($product['manufacturer_id']);
+                    if($manufacturer){
+                        $banner['manufacturer_img'] = $manufacturer['image'];
                     }else{
                         $banner['manufacturer_img'] = false;
                     }
-                    $banner['link_product'] = $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . $product_id );
+                    $banner['manufacturer_link']=$this->url->link('product/manufacturer/info', '&manufacturer_id=' . $manufacturer['manufacturer_id'] );
+                    $banner['link_product'] = $this->url->link('product/product', '&product_id=' . $product_id );
                 }
             }
         }
+        $data['link_specials'] = $this->url->link('product/special');
+
         $data['currency'] = $this->session->data['currency'];
+        $data['interval']=$setting["interval"];
         /* added by it-lab* end */
 
 		return $this->load->view('extension/module/slideshow', $data);
