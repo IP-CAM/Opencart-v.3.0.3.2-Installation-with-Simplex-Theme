@@ -5,21 +5,21 @@
                 {% if footer_titles %}
                     {% for footer_title in footer_titles %}
                         {% if loop.first %}
-                        <h6>{{ footer_title.title }}</h6>
-                        {% if footer_title.sub_title %}
-                            <ul>
-                                {% for subtitle in footer_title.sub_title %}
-                                    {% if subtitle.href %}
-                                        <li><a href="{{ subtitle.href }}">
-                                                {{ subtitle.title }}</a></li>
-                                    {% else %}
-                                        <li><a href="{{ subtitle.link }}">
-                                                {{ subtitle.title }}</a></li>
-                                        </a></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
+                            <h6>{{ footer_title.title }}</h6>
+                            {% if footer_title.sub_title %}
+                                <ul>
+                                    {% for subtitle in footer_title.sub_title %}
+                                        {% if subtitle.href %}
+                                            <li><a href="{{ subtitle.href }}">
+                                                    {{ subtitle.title }}</a></li>
+                                        {% else %}
+                                            <li><a href="{{ subtitle.link }}">
+                                                    {{ subtitle.title }}</a></li>
+                                            </a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endif %}
@@ -42,7 +42,7 @@
                 <li>
                     <h5 class="phone">
                         <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
-                        <p>Putem să sunăm înapoi</p>
+                        <p><a href="#">Putem să sunăm înapoi</a></p>
                     </h5>
                 </li>
                 <li>
@@ -72,12 +72,12 @@
                                 {% if loop.index==2 %}
                                     {% if footer_title.sub_title %}
                                         <p>
-                                        {% for subtitle in footer_title.sub_title %}
+                                            {% for subtitle in footer_title.sub_title %}
 
                                                 <a href="{{ subtitle.link }}">
-                                                    <img  height="16" alt="{{ subtitle.title }}"
-                                                          src="catalog/view/theme/simplex/assets/img/{{ subtitle.title }}.svg"></a>
-                                        {% endfor %}
+                                                    <img height="16" alt="{{ subtitle.title }}"
+                                                         src="catalog/view/theme/simplex/assets/img/{{ subtitle.title }}.svg"></a>
+                                            {% endfor %}
                                         </p>
 
                                     {% endif %}
@@ -173,6 +173,10 @@
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 }
 
+                if (json['total'] === 0) {
+                    location.reload();
+                }
+
                 $('#wishlist-total span').html(json['total']);
                 $('#wishlist-total').attr('title', json['total']);
 
@@ -193,7 +197,7 @@
 </script>
 <script>
     $('#search input[name=\'search\']').on('keydown', function (e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             $('header #search button.button-search').trigger('click');
         }
     });
@@ -206,16 +210,15 @@
         location = url;
     });
 </script>
-
 <script>
-    $(".input-telephone input , #subscribe #email").on("input",function () {
+    $(".input-telephone input , #subscribe #email").on("input", function () {
         $(this).removeClass('has-error');
     });
     $("#button-call-back").click(function () {
 
         var url = $('base').attr('href') + 'index.php?route=information/contact';
-        var phone=$("#customer_phone").val();
-        if(phone.length>3) {
+        var phone = $("#customer_phone").val();
+        if (phone.length > 3) {
 
             $.ajax({
                 url: url,
@@ -227,15 +230,19 @@
                 complete: function () {
                 },
                 success: function (json) {
-                    if(json["error_upload"]){
+                    if (json["error_upload"]) {
                         $(".input-telephone input").addClass('has-error');
-                    }else {
+                    } else {
                         //$(".phone-poppup table").hide(300);
                         $(".input-telephone input").removeClass('has-error');
                         $(".input-telephone h6").text(json["result"]);
                         $(".input-telephone input").hide();
-                        setTimeout(function () { $('.phone-poppup').style("opacity",0);},1000);
-                        setTimeout(function () { $('.phone-poppup .delete').trigger('click'); }, 2000);
+                        setTimeout(function () {
+                            $('.phone-poppup').style("opacity", 0);
+                        }, 1000);
+                        setTimeout(function () {
+                            $('.phone-poppup .delete').trigger('click');
+                        }, 2000);
                     }
 
                 },
@@ -247,7 +254,32 @@
 
     });
 </script>
+<script>
+    compare.add = function (product_id) {
+        $.ajax({
+            url: 'index.php?route=product/compare/add',
+            type: 'post',
+            data: 'product_id=' + product_id,
+            dataType: 'json',
+            success: function (json) {
+                $('.alert-dismissible').remove();
 
+                if (json['success']) {
+                    $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                    $('#compare-total').html(json['total']);
+                    console.log(json['total']);
+                    $('#compare .quantity').html(json['total']);
+
+                    $('html, body').animate({scrollTop: 0}, 'slow');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+</script>
 
 <script>
     cart.add = function (product_id, quantity) {
@@ -286,6 +318,46 @@
             }
         });
     }
+    cart.remove = function (key) {
+        $.ajax({
+            url: 'index.php?route=checkout/cart/remove',
+            type: 'post',
+            data: 'key=' + key,
+            dataType: 'json',
+            beforeSend: function () {
+                $('#cart > button').button('loading');
+            },
+            complete: function () {
+                $('#cart > button').button('reset');
+            },
+            success: function (json) {
+                // Need to set timeout otherwise it wont update the total
+                setTimeout(function () {
+                    $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+                }, 100);
+                $('#cart-total').html(json['count']);
+
+
+
+                if (json['count'] === 0) {
+                    location.reload();
+                }
+
+                if (getURLVar('route') === 'checkout/cart' || getURLVar('route') === 'checkout/checkout') {
+                    location = 'index.php?route=checkout/cart';
+                } else {
+                    $('#cart > ul').load('index.php?route=common/cart/info ul li');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    };
+
+    $('.delete-all-from-cart').click(function () {
+        cart.remove('all');
+    })
 </script>
 
 

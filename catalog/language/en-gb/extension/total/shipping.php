@@ -18,3 +18,7 @@ $_['error_country']        = 'Please select a country!';
 $_['error_zone']           = 'Please select a region / state!';
 $_['error_shipping']       = 'Warning: Shipping method required!';
 $_['error_no_shipping']    = 'Warning: No Shipping options are available. Please <a href="%s">contact us</a> for assistance!';
+
+$_['shipping_cost']        = 'Shipping price';
+$_['text_shipping']        = 'Shipping is free for orders over 300 leis';
+$_['text_shipping_time']        = 'We can deliver tomorrow during the day';

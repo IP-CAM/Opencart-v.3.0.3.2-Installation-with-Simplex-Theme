@@ -12,7 +12,7 @@
                             <a href="{{ product.href }}"><p>{{ product.name }}</p>
                             </a></td>
                         <td style="width: 134px;text-align: right;"><span>{{ product.price }} x</span></td>
-                        <td style="width: 120px;padding-left: 12px"><p>{{ product.quantity }}
+                        <td style="width: 120px;padding-left: 12px"><p style="font-weight: 600">{{ product.quantity }}
                                 <span>=</span> {{ product.total }}</p></td>
                     </tr>
                 {% endfor %}
@@ -23,8 +23,8 @@
                         <td style="width: 110px;"></td>
                         <td></td>
                         <td style="width: 134px;text-align: right;padding-right: 25px; padding-top: 0.75rem;padding-bottom: 0.75rem;">
-                            <span>{{ total.title }}</span></td>
-                        <td style="width: 120px;padding-top: 0.75rem;padding-bottom: 0.75rem;">{{ total.text }}</td>
+                            <span style="font-weight: 500">{{ total.title }}</span></td>
+                        <td style="width: 120px;padding-top: 0.75rem;padding-bottom: 0.75rem;font-weight: 800; font-size: 1rem;">{{ total.text }}</td>
                     </tr>
                 {% endfor %}
                 </tfoot>
@@ -32,7 +32,6 @@
         </div>
     </div>
     {{ payment }}
-    {{ dump(payment) }}
 {% else %}
     <script type="text/javascript"><!--
         location = '{{ redirect }}';
