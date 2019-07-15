@@ -105,7 +105,7 @@ class ControllerInformationCategory extends Controller
                     'city' => $result_full['city'],
                     'user_id' => $result['user_id'],
                     'author' => $result['author'],
-                    'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+                    'date_added' => $this->model_catalog_information->getDateWithMonth(( $result['date_added']),$this->language->get('code')),
                     'reviews' => sprintf($this->language->get('text_review'), $result['reviews']),
                     'rating' => $result['rating'],
                     'href' => $this->url->link('information/information', '&information_id=' . $result['information_id'])
