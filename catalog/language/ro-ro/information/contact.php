@@ -18,7 +18,9 @@ $_['text_telephone_consilier_termo']    = 'Consilier termo/hidro';
 $_['text_telephone_consilier_obiecte']  = 'Consilier obiecte sanitar';
 $_['text_asteptam_in_magazinele']       = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
         Suntem întotdeauna bucuroși să vă vedem!';
-$_['text_phone_succes']="Trlrphon obtinut";
+$_['text_phone_succes']="Telephon obtinut";
+$_['text_customer_telephone']="Customer phone for recall";
+$_['text_phone_error']="Telegonul greșit ";
 
 // Entry
 $_['entry_name']     = 'Nume';

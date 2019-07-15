@@ -20,6 +20,8 @@ $_['text_asteptam_in_magazinele'] = 'Vă așteptăm în magazinele noastre din C
         Suntem întotdeauna bucuroși să vă vedem!';
 $_['text_browse_file']="Browse";
 $_['text_phone_succes']="Phone received";
+$_['text_customer_telephone']="Customer phone for recall";
+$_['text_phone_error']="Phone number incorrect ";
 
 // Entry
 $_['entry_name']     = 'Your Name';
