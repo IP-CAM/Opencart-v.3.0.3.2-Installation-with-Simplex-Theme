@@ -68,12 +68,12 @@ input {
 	}
 	
 	&[type="radio"] {
-		height  : 1rem;
-		margin  : 0 0.5rem 0 0;
-		opacity : 0;
-		width   : 1rem;
-		z-index : 1;
-		
+		height         : 1rem;
+		margin         : 0 0.5rem 0 0;
+		opacity        : 0;
+		vertical-align : middle;
+		width          : 1rem;
+		z-index        : 1;
 		
 		& + .radio {
 			background-color : $white;
@@ -133,6 +133,7 @@ input {
 
 label {
 	font-weight   : 500;
+	line-height   : 1rem;
 	padding-right : 0.25rem;
 	position      : relative;
 	
@@ -367,6 +368,8 @@ select {
 }
 
 #account, #cart-wrapper, #compare-table {
+	position : relative;
+	
 	h5 {
 		font-weight : 800;
 	}
@@ -752,6 +755,7 @@ select {
 						color         : #a4a4a4;
 						font-size     : .8125rem;
 						font-weight   : 500;
+						line-height   : 1rem;
 						margin-bottom : 1rem;
 						padding-left  : 1.75rem;
 						position      : relative;
@@ -1046,8 +1050,8 @@ select {
 			button {
 				display     : block;
 				font-weight : 600;
-				margin      : -.75rem -1.25rem -.75rem -2.5rem;
-				padding     : .75rem 0 .75rem 2.5rem;
+				margin      : -1rem -1.25rem -1rem -2.5rem;
+				padding     : 1rem 0 1rem 2.5rem;
 				text-align  : left;
 				width       : calc(100% + 2.5rem);
 				
@@ -1069,7 +1073,7 @@ select {
 			border           : 1px solid #d4d4d4;
 			
 			&:before {
-				background : url($image_dir + "ok.svg") no-repeat center;
+				background : url("data:image/svg+xml;base64,PHN2Zw0KICAgICAgICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciDQogICAgICAgIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KICAgICAgICB3aWR0aD0iMTQiIGhlaWdodD0iMTAiPg0KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgIHN0cm9rZT0icmdiKDI1NSwgMjAyLCA0OCkiIHN0cm9rZS13aWR0aD0iMnB4IiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZmlsbD0ibm9uZSINCiAgICAgICAgICBkPSJNMy4wMDAsNS4wMDAgTDYuMDAwLDguMDAwIEwxMS4wMDAsMS4wMDAgIi8+DQo8L3N2Zz4=") no-repeat center;
 				bottom     : 0;
 				content    : '';
 				height     : 0.625rem;
@@ -1255,8 +1259,8 @@ select {
 	}
 	
 	.delete-all {
-		padding  : 0.5rem 1rem;
 		border   : 0;
+		padding  : 0.5rem 1rem;
 		position : static;
 	}
 }
@@ -1351,7 +1355,6 @@ select {
 				font-weight      : 500;
 				height           : 40px;
 				line-height      : 38px;
-				margin-bottom    : 1.5rem;
 				padding          : 0;
 				text-align       : center;
 			}
@@ -1449,6 +1452,7 @@ select {
 	.add-to-cart {
 		@include border-radius(.375rem);
 		@include flex(none, between, center);
+		@include transition(all .125s linear);
 		background-color : $yellow;
 		border           : 0;
 		cursor           : pointer;
@@ -1469,6 +1473,11 @@ select {
 			display                 : block;
 			margin-left             : 1.25rem;
 			padding                 : 10px;
+		}
+		
+		&:hover {
+			background-color : #2b2c30;
+			color            : $white;
 		}
 	}
 	
@@ -1597,7 +1606,7 @@ select {
 	}
 }
 
-#lang-switcher {
+#form-language {
 	.dropdown-toggle {
 		color     : $text_gray;
 		font-size : 0.875rem;
@@ -1883,7 +1892,8 @@ select {
 					a {
 						@include border-radius();
 						@include flex(none, between, center);
-						background-color : #ffca30;
+						@include transition(background .125s linear);
+						background-color : $yellow;
 						border           : 0;
 						flex             : 1 1 20%;
 						font-size        : 0.8125rem;
@@ -1893,6 +1903,18 @@ select {
 						overflow         : hidden;
 						padding          : 0 10px 0 20px;
 						z-index          : 10;
+						
+						p {
+							@include transition(color .125s linear);
+						}
+						
+						&:hover {
+							background-color : #2b2c30;
+							
+							p {
+								color : $white;
+							}
+						}
 					}
 					
 					.image-container {
@@ -1900,7 +1922,7 @@ select {
 						
 						&:after {
 							@include border-radius(50%);
-							background              : #fff url($image_dir + "angle-right-solid.svg") no-repeat center;
+							background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
 							-webkit-background-size : 6px;
 							background-size         : 6px;
 							content                 : "";
@@ -2039,7 +2061,6 @@ select {
 }
 
 #slides-counter {
-	margin    : auto;
 	max-width : 940px;
 	
 	p {
@@ -2162,6 +2183,7 @@ select {
 			flex        : 0 0 20%;
 			font-weight : 700;
 			line-height : 1.625;
+			margin-top  : 185px;
 		}
 	}
 }
@@ -2801,14 +2823,6 @@ select {
 				width       : 135px;
 			}
 			
-			.offices {
-				width : 185px;
-				
-				h6 {
-					width : 135px;
-				}
-			}
-			
 			.phone {
 				@include flex;
 				flex-wrap   : wrap;
@@ -2833,18 +2847,19 @@ select {
 				}
 			}
 			
-			&.inline {
-				align-items    : center;
-				display        : grid;
-				grid-auto-flow : column;
-				height         : auto;
-				margin-bottom  : 1.5rem;
-				max-width      : 100% !important;
-				padding        : 0 1.5rem !important;
+			&.inline, .inline & {
+				align-items           : center;
+				display               : grid;
+				grid-template-columns : auto auto 185px repeat(2, auto);
+				height                : auto;
+				margin-bottom         : 1.5rem;
+				max-width             : 100% !important;
+				padding               : 0 1.5rem !important;
 				
 				h4 {
-					font-size : 1.125rem;
-					margin    : 0;
+					font-size   : 1.125rem;
+					margin      : 0;
+					white-space : nowrap;
 				}
 				
 				> img {
@@ -2853,7 +2868,8 @@ select {
 				}
 				
 				p {
-					width : auto;
+					padding-right : 1rem;
+					width         : auto;
 				}
 				
 				.offices {
@@ -2935,6 +2951,72 @@ select {
 	justify-content : center;
 }
 
+.checkout {
+	@include border-radius;
+	@include flex(none, center);
+	background-color : #f5f4f2;
+	margin-top       : 2.5rem;
+	padding-bottom   : 1rem;
+	padding-top      : 1rem;
+	
+	button {
+		@include border-radius;
+		@include flex(none, between, center);
+		@include transition(all .125s linear);
+		background-color : $yellow;
+		border           : 0;
+		cursor           : pointer;
+		font-size        : .8125rem;
+		font-weight      : 700;
+		height           : 35px;
+		line-height      : 35px;
+		overflow         : hidden;
+		padding          : 0 10px 0 20px;
+		z-index          : 10;
+		
+		.image-container {
+			@include border-radius(50%);
+			background-color : $white;
+			display          : block;
+			height           : 20px;
+			margin-left      : 1rem;
+			position         : relative;
+			width            : 20px;
+			
+			&:after {
+				@include border-radius(50%);
+				background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
+				-webkit-background-size : 6px;
+				background-size         : 6px;
+				content                 : "";
+				display                 : block;
+				padding                 : 10px;
+			}
+		}
+	}
+	
+	.total {
+		@include flex(none, end, center);
+		margin-right : 2rem;
+		
+		> span {
+			color       : #a4a4a4;
+			font-size   : .8125rem;
+			font-weight : 500;
+		}
+		
+		h5 {
+			margin-bottom : 0;
+			margin-left   : 1rem;
+		}
+		
+		small {
+			font-size   : .625rem;
+			font-weight : 500;
+		}
+	}
+}
+
 .checkbox-list {
 	li {
 		position : relative;
@@ -2953,8 +3035,8 @@ select {
 }
 
 .city {
-	background    : linear-gradient(41deg, transparent 10%, #222327 11%);
 	@include border-radius;
+	background    : linear-gradient(41deg, transparent 10%, #222327 11%);
 	color         : #c3c3c3;
 	font-size     : 0.8125rem;
 	line-height   : 2;
@@ -2991,6 +3073,7 @@ select {
 		background  : url($image_dir + "arrow_down.svg") no-repeat center right 15px;
 		border      : 1px solid #d4d4d4;
 		cursor      : pointer;
+		flex        : 1;
 		font-size   : 0.8125rem;
 		font-weight : 600;
 	}
@@ -3045,21 +3128,48 @@ select {
 		width         : 100%;
 		
 		label {
-			font-size : 0.8125rem;
+			font-size    : 0.8125rem;
+			margin-right : 1rem;
+			
+			&.search-field {
+				flex : auto;
+				
+				button {
+					bottom   : 0;
+					left     : 6px;
+					position : absolute;
+					top      : 4px;
+					
+					img {
+						width : 1.25rem;
+					}
+				}
+				
+				input {
+					padding-left : 2.5rem;
+				}
+			}
 		}
 	}
 	
 	.show-num {
+		@include flex(none, none, center, wrap);
+		
 		label {
-			color       : #a4a4a4;
-			font-size   : 0.8125rem;
-			font-weight : 500;
-			margin-left : 10px;
+			color         : #a4a4a4;
+			font-size     : 0.8125rem;
+			font-weight   : 500;
+			margin-bottom : 0.5rem;
+			margin-left   : 10px;
+			margin-top    : 0.5rem;
 		}
 	}
 	
 	.sort-by {
-		margin-right : 20px;
+		@include flex(none, none, center, wrap);
+		margin-bottom : 0.5rem;
+		margin-right  : 20px;
+		margin-top    : 0.5rem;
 	}
 }
 
@@ -3456,6 +3566,10 @@ select {
 		max-width : 380px;
 		width     : 100%;
 	}
+	
+	.projects-list .card {
+		max-width : 100%;
+	}
 }
 
 .item-container {
@@ -3637,10 +3751,6 @@ select {
 			display : block;
 		}
 		
-		h3 {
-			margin-bottom : 0;
-		}
-		
 		form {
 			padding-top : 0.75rem;
 			
@@ -3649,24 +3759,11 @@ select {
 				margin-top    : 1.5rem;
 			}
 			
-			input, textarea {
-				margin-bottom : 0;
-			}
-			
 			label {
 				&.required {
 					&:after {
 						position : relative;
 					}
-				}
-				
-				&:not(.upload) {
-					flex       : 0 0 100%;
-					text-align : center;
-				}
-				
-				&.upload {
-					margin : auto;
 				}
 			}
 			
@@ -3694,7 +3791,7 @@ select {
 	}
 }
 
-.lang-switcher {
+.form-language {
 	.dropdown-toggle {
 		&:after {
 			color : $text_gray
@@ -3771,9 +3868,9 @@ select {
 			
 			input {
 				@include border-radius(0);
+				background-color : transparent;
 				border           : 0;
 				height           : 100%;
-				background-color : transparent;
 				padding          : 0.75rem 2rem 0.75rem 1.125rem;
 			}
 		}
@@ -3849,7 +3946,7 @@ select {
 }
 
 .nav-button, .nav-item {
-	a:not(.dropdown-item) {
+	a:not(.dropdown-item):not(.menu-link) {
 		padding   : {
 			left  : 20px;
 			right : 20px;
@@ -3909,6 +4006,13 @@ select {
 	}
 }
 
+.news-card {
+	.card {
+		.card-foot {
+			margin-top : 150px;
+		}
+	}
+}
 
 .newest, .job-card, .project-card, .news-card {
 	flex          : 100% !important;
@@ -4031,6 +4135,10 @@ select {
 		line-height   : 1.692;
 		margin-bottom : 1.25rem;
 	}
+	
+	li {
+		margin-bottom : 0.5rem;
+	}
 }
 
 .online {
@@ -4122,7 +4230,7 @@ select {
 			font-size     : 0.75rem;
 			font-weight   : 500;
 			line-height   : 1.5;
-			margin-left   : 10px;
+			margin-left   : 1rem;
 		}
 		
 		.dropdown-menu {
@@ -4361,7 +4469,7 @@ select {
 		padding          : 0;
 		position         : absolute;
 		right            : 0.75rem;
-		top              : 0.75rem;
+		top              : 1.25rem;
 		width            : 22px;
 		
 		&:after {
@@ -4740,6 +4848,10 @@ select {
 			border-bottom : 1px dotted #dedede;
 		}
 	}
+	
+	.image img {
+		display : block;
+	}
 }
 
 .products-wrapper {
@@ -5026,9 +5138,14 @@ select {
 		border  : 1px solid #f4f4f4;
 		padding : 1rem;
 		
+		.slick-slide > div {
+			height : 100%;
+		}
+		
 		.image {
 			@include border-radius;
 			cursor   : pointer;
+			height   : 100%;
 			overflow : hidden;
 			
 			img {
@@ -5170,7 +5287,7 @@ select {
 			font-size   : 0.8125rem;
 			font-weight : 500;
 			line-height : 1.385;
-			padding     : 1.25rem 1.5rem;
+			padding     : 1.25rem 1.5rem 0;
 			text-align  : center;
 			
 			.image-container {
@@ -5214,7 +5331,7 @@ select {
 		flex         : auto;
 		max-width    : 170px;
 		min-width    : 140px;
-		padding      : 1.25rem;
+		padding      : 0.5rem 1.25rem 1.25rem;
 		text-align   : center;
 		
 		&:last-child {

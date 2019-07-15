@@ -227,10 +227,10 @@
             data: 'product_id=' + product_id + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
             dataType: 'json',
             beforeSend: function () {
-                $('#cart > button').button('loading');
+                $('#cart > a').button('loading');
             },
             complete: function () {
-                $('#cart > button').button('reset');
+                $('#cart > a').button('reset');
             },
             success: function (json) {
                 $('.alert-dismissible, .text-danger').remove();
@@ -244,10 +244,11 @@
 
                     // Need to set timeout otherwise it wont update the total
 
-
                     $('html, body').animate({scrollTop: 0}, 'slow');
 
                     $('#cart .quantity').text(json['cart_count']);
+
+                    $('#cart > ul').load('index.php?route=common/cart/info ul li');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {

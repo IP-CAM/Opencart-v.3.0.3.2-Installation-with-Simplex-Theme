@@ -61,7 +61,7 @@
 		position         : relative;
 		
 		&.active {
-			padding-right : (8rem / 3);
+			padding-right : (8rem / 3) !important;
 			
 			&:after {
 				@include transform(scale(.5));
