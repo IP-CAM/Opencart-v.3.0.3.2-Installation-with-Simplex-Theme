@@ -40,3 +40,6 @@ $_['error_minimum']          = 'Cantitate minimă de comandat pentru %s este de 
 $_['error_required']         = '%s este obligatoriu!';
 $_['error_product']          = 'Atenție: Coșul de cumpărături este gol!';
 $_['error_recurring_required'] = 'Selectează un abonament!';
+
+$_['delete_all']               = 'Sterge totul';
+$_['total'] = 'Total';

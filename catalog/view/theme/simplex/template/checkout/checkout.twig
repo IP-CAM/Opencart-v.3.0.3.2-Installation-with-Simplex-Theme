@@ -21,8 +21,6 @@
         <div class="page-title">
             <h1>{{ heading_title }}</h1>
         </div>
-    </div>
-    <div class="container-fluid">
         <div id="checkout">
             <div class="card">
                 <div class="card-header waiting" id="headingCheckoutOption">
@@ -100,8 +98,8 @@
                 </div>
             </div>
         </div>
-        {{ content_bottom }}
     </div>
+    {{ content_bottom }}
 </main>
 
 
@@ -421,8 +419,7 @@
                             url: 'index.php?route=checkout/payment_address',
                             dataType: 'html',
                             success: function (html) {
-                                $('#payment-address').parent().find('.card-header').addClass('success');
-                                $('#payment-address').html(html);
+                                $('#payment-address').html(html).parent().find('.card-header').addClass('success');
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
                                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

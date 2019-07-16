@@ -18,3 +18,7 @@ $_['error_country']        = 'Selectează o țară!';
 $_['error_zone']           = 'Selectează un județ!';
 $_['error_shipping']       = 'Eroare: Selectează o metodă de livrare!';
 $_['error_no_shipping']    = 'Nicio metodă de livrare disponibilă. Te rugăm să <a href="%s">ne contactezi</a> pentru asistență!';
+
+$_['shipping_cost']        = 'Costul livrarii';
+$_['text_shipping']        = 'Livrare este gratuita pentru comenzi de peste 300 de lei';
+$_['text_shipping_time']        = 'Putem livra mâine în timpul zilei';
