@@ -80,6 +80,8 @@ class ControllerInformationContact extends Controller {
     /* added by it-lab* end */
 
     public function index() {
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
 		$this->load->language('information/contact');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -315,9 +317,13 @@ class ControllerInformationContact extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
+        /* added by it-lab start */
+        $this->load->model('catalog/information');
+        $data['footer_titles'] = $this->model_catalog_information->getFotterTitle();
 		$this->response->setOutput($this->load->view('information/contact', $data));
-	}
+        /* added by it-lab end */
+
+    }
 
 	protected function validate() {
         if(!isset($this->request->post['customer_phone'])) {
@@ -347,7 +353,7 @@ class ControllerInformationContact extends Controller {
 
     protected function validatePhoneNumber()
     {
-        if ((utf8_strlen($this->request->post['customer_phone']) < 3) || (utf8_strlen($this->request->post['customer_phone']) > 32)) {
+        if ((utf8_strlen($this->request->post['customer_phone']) <6) || (utf8_strlen($this->request->post['customer_phone']) > 15)) {
             $this->error['customer_phone'] = $this->language->get('error_customer_phone');
             return false;
         }

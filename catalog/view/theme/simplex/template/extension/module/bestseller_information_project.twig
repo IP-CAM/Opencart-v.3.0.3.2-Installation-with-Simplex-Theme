@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <div class="interesting">
-    <h4>{{ heading_title }}</h4>
+    <h4>{{ text_other_projects }}</h4>
     <div class="projects-list">
       {% for information in informations %}
-        <div class="item" style="width: 100%; display: inline-flex;">
+        <div class="item">
         <a href="{{ information.link }}">
           <div class="image">
             <img alt="1" src="{{ information.original_image}}">

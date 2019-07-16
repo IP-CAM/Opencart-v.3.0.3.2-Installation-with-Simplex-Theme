@@ -10,6 +10,7 @@ $_['text_login']    = 'Trebuie să <a href="%s">te autentifici</a> sau <a href="
 $_['text_success']  = 'Succes: Ai adăugat <a href="%s">%s</a> în <a href="%s">wish list</a>!';
 $_['text_remove']   = 'Succes: Ai modificat produsele din wish list!';
 $_['text_empty']    = 'Nu ai produse în wish list';
+$_['text_success_message']     = 'Adăugat cu succes în wish list';
 
 // Column
 $_['column_image']  = 'Imagine';

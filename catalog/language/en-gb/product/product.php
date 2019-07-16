@@ -30,12 +30,16 @@ $_['text_day']                 = 'day';
 $_['text_week']                = 'week';
 $_['text_semi_month']          = 'half-month';
 $_['text_month']               = 'month';
+$_['text_months']               = 'months';
 $_['text_year']                = 'year';
 $_['text_sku']                 = 'SKU:';
 $_['text_garanty']             = 'Garanty:';
 $_['text_available_online']    = 'Available online';
 $_['text_available_in_stores'] = 'also in stores';
 $_['text_not_available']       = 'Not available';
+$_['text_livrarea_miine']      = 'Livrăm maine';
+$_['text_gratuit']             = 'gratuit';
+$_['text_professional_installation'] = 'Ai nevoie de instalare profesională?';
 
 // Entry
 $_['entry_qty']                = 'Qty';
@@ -50,6 +54,14 @@ $_['tab_description']          = 'Description';
 $_['tab_attribute']            = 'Specification';
 $_['tab_review']               = 'Reviews (%s)';
 $_['tab_documentation']        = 'Documentation';
+$_['tab_availability_in_stocks'] = 'Availability in stocks';
+
+// columns
+$_['column_map']                              = 'Map';
+$_['column_address']                          = 'Adsress';
+$_['column_open']                             = 'Work times';
+$_['column_telefon']                          = 'Phone';
+$_['column_availability']                     = 'Availability';
 
 // Error
 $_['error_name']               = 'Warning: Review Name must be between 3 and 25 characters!';

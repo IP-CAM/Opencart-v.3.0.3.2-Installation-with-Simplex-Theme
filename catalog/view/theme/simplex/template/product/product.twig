@@ -76,35 +76,33 @@
                         {{ button_compare }}
                     </button>
                 </div>
+                {% if hide_price %}
+                    <div class="item-price-block">
 
-                <div class="item-price-block">
-                    {% if hide_price %}
 
-                    {% if special %}
-                        <p class="old-price">{{ price }}.-</p>
-                        <p class="discount-percent">{{ special_percentage }}%</p>
-                        <p class="discount-val">-{{ economy }}</p>
-                    {% endif %}
-                    {% if special %}
-                        <p class="price">{{ special }}.-<span class="currency">{{ currency }}</span></p>
-                    {% else %}
-                        <p class="price">{{ price }}.-<span class="currency">{{ currency }}</span></p>
-                    {% endif %}
-                    {% endif %}
-                </div>
-                <div class="cart-wrapper">
-                    {% if hide_price %}
-
-                    <div class="quantity">
-                        <label><input id="quantity" name="quantity" max="100" min="1" step="1" type="text"
-                                      value="1"></label>
-                        <button id="button-cart" class="add-to-cart" role="button" type="submit">{{ button_cart }}
-                            <span
-                                    class="image-container"></span></button>
-                        <input type="hidden" name="product_id" value="{{ product_id }}"/>
+                        {% if special %}
+                            <p class="old-price">{{ price }}.-</p>
+                            <p class="discount-percent">{{ special_percentage }}%</p>
+                            <p class="discount-val">-{{ economy }}</p>
+                        {% endif %}
+                        {% if special %}
+                            <p class="price">{{ special }}.-<span class="currency">{{ currency }}</span></p>
+                        {% else %}
+                            <p class="price">{{ price }}.-<span class="currency">{{ currency }}</span></p>
+                        {% endif %}
                     </div>
-                    {% endif %}
-                </div>
+                    <div class="cart-wrapper">
+
+                        <div class="quantity">
+                            <label><input id="quantity" name="quantity" max="100" min="1" step="1" type="text"
+                                          value="1"></label>
+                            <button id="button-cart" class="add-to-cart" role="button" type="submit">{{ button_cart }}
+                                <span
+                                        class="image-container"></span></button>
+                            <input type="hidden" name="product_id" value="{{ product_id }}"/>
+                        </div>
+                    </div>
+                {% endif %}
                 <div id="seller-warranties">
                     <div class="warranties">
                         <div class="warranty-item">
@@ -124,7 +122,7 @@
                                 <p>
                                     {{ text_available_online }}
                                 </p>
-                                <a href="#">
+                                <a id="to-availability" >
                                     {{ text_available_in_stores }}
                                 </a>
                             {% else %}
@@ -137,22 +135,22 @@
                         <div class="warranty-item">
                             <img alt="" src="catalog/view/theme/simplex/assets/img/car.png">
                             <p>
-                                Livrăm maine
+                                {{ text_livrarea_miine }}
                             </p>
-                            <span>gratuit</span>
+                            <span>{{ text_gratuit }}</span>
                         </div>
                         <div class="warranty-item">
                             <img alt="" src="catalog/view/theme/simplex/assets/img/warranty.png">
                             <p>
-                                Garanție
+                                {{ text_garanty }}
                             </p>
-                            <span>{{ garanty }} luni</span>
+                            <span>{{ garanty }} {{ text_months }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="prof-help">
                     <img alt="" src="catalog/view/theme/simplex/assets/img/step4.png">
-                    <p>Ai nevoie de instalare profesională?</p>
+                    <p>{{ text_professional_installation }}</p>
                 </div>
                 <div class="product-code">
                     {% if sku %}
@@ -181,14 +179,14 @@
                     <li class="nav-item">
                         <a aria-selected="false" class="nav-link" data-toggle="tab" href="#documentation"
                            id="documentation-tab"
-                           role="tab">Documentație</a>
+                           role="tab">{{ tab_documentation }}</a>
                     </li>
                 {% endif %}
 
                 <li class="nav-item">
                     <a aria-selected="false" class="nav-link" data-toggle="tab" href="#availability"
                        id="availability-tab"
-                       role="tab">Disponibilitate în magazine</a>
+                       role="tab">{{ tab_availability_in_stocks }}</a>
                 </li>
                 {% if products %}
                     <li class="nav-item">
@@ -284,22 +282,22 @@
                 <button aria-controls="availability" aria-expanded="false" class="collapsed"
                         data-target="#availability"
                         data-toggle="collapse" type="button">
-                    Disponibilitate în magazine
+                    {{ tab_availability_in_stocks }}
                 </button>
                 <div aria-labelledby="availability-tab" class="tab-pane fade collapse"
                      data-parent="#productAccordion"
                      id="availability" role="tabpanel">
                     <div class="content">
-                        <h2>Disponibilitate în magazine</h2>
+                        <h2>{{ tab_availability_in_stocks }}</h2>
                         <div style="overflow: auto">
                             <table>
                                 <thead>
                                 <tr>
-                                    <th style="text-align: center">Harta</th>
-                                    <th>Adresa</th>
-                                    <th colspan="2" style="text-align: center;">Orele de lucru</th>
-                                    <th style="text-align: center;">Telefon</th>
-                                    <th style="text-align: center;">Disponibilitate</th>
+                                    <th style="text-align: center">{{ column_map }}</th>
+                                    <th>{{ column_address }}</th>
+                                    <th colspan="2" style="text-align: center;">{{ column_open }}</th>
+                                    <th style="text-align: center;">{{ column_telefon }}</th>
+                                    <th style="text-align: center;">{{ column_availability }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -379,22 +377,21 @@
                                                     {% endif %}
                                                 </div>
                                                 {% if product.special %}
-                                                    <p class="price">{{ product.special }}.-</p>
+                                                    <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
                                                 {% else %}
-                                                    <p class="price">{{ product.price }}.-</p>
+                                                    <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
                                                 {% endif %}
-                                                <p class="currency">{{ currency }}</p>
+
                                             {% endif %}
                                         </div>
                                     </a>
-                                    {% if product.hide_price %}
-                                        <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                                            <p>{{ button_cart }}</p>
-                                            <span class="image-container">
+
+                                    <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                                        <p>{{ button_cart }}</p>
+                                        <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
-                                        </button>
-                                    {% endif %}
+                                    </button>
                                     <div class="float-buttons">
                                         <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
                                             <img
@@ -454,22 +451,21 @@
                                     {% endif %}
                                 </div>
                                 {% if product.special %}
-                                    <p class="price">{{ product.special }}.-</p>
+                                    <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
                                 {% else %}
-                                    <p class="price">{{ product.price }}.-</p>
+                                    <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
                                 {% endif %}
-                                <p class="currency">{{ currency }}</p>
+
                             {% endif %}
                         </div>
                     </a>
-                    {% if product.hide_price %}
-                        <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                            <p>{{ button_cart }}</p>
-                            <span class="image-container">
+
+                    <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                        <p>{{ button_cart }}</p>
+                        <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
-                        </button>
-                    {% endif %}
+                    </button>
                     <div class="float-buttons">
                         <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
                             <img
@@ -493,6 +489,19 @@
 
 {{ column_right }}
     {{ content_bottom }}
+<script>
+    $(document).ready(function() {
+        $(".nav-tabs a:first").trigger('click');
+    });
+$("#to-availability").click(function(e) {
+    e.preventDefault();
+    $("#availability-tab").trigger('click');
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#availability-tab").offset().top
+    }, 500);
+    return false;
+});
+</script>
 <script type="text/javascript"><!--
     $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
         $.ajax({

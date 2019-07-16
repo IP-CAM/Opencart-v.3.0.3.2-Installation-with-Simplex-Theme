@@ -533,13 +533,29 @@ $(window).resize(function () {
     }
 });
 $('.product .add-to-cart, .product .favorite').click(function () {
-    let width_product = $(this).parent().parent().width();
+   /* let width_product = $(this).parent().parent().width();
     let width_poppup = document.getElementById('success-poppup').offsetWidth;
     let div = $(this).parent().parent().find('.add-to-cart');
     let offset_poppup = (width_poppup - width_product) / 2;
     let divOffset = $(div).offset();
     $('#success-poppup').css('left', divOffset.left - 20 - offset_poppup).css('top', divOffset.top + 48).css('display', 'block');
-});
+*/});
+function show_succes_popup(product_id,message){
+    var button_product_id_selector="button[data-product_id='"+product_id+"']";
+    $button=$(button_product_id_selector);
+    let width_product = $button.parent().parent().width();
+    $("#success-poppup").css('display', 'block');
+    let width_poppup = document.getElementById('success-poppup').offsetWidth;
+    let div = $button.parent();//.find('.add-to-cart');
+    let offset_poppup = (width_poppup - width_product) / 2;
+    let divOffset = $(div).offset();
+    let divHeight=$(div).height();
+    $("#success-poppup .message").html(message);
+    $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight+24).css('display', 'block');
+    setTimeout(function () {
+        $('#success-poppup').css('display', 'none');
+    }, 2000);
+}
 $('.phone a:not(.tel)').click(function (e) {
     e.preventDefault();
     let div = $(this);
