@@ -50,6 +50,18 @@
                             {% endif %}
                         </ul>
                     {% endif %}
+                    <ul class="sticker">
+                        {% if special_percentage %}
+                            <li>
+                                <span class="stock">%</span>
+                            </li>
+                        {% endif %}
+                        {% if is_new %}
+                            <li>
+                                <span class="new">new</span>
+                            </li>
+                        {% endif %}
+                    </ul>
                 </div>
                 <div class="page-title">
                     <h1>{{ heading_title }}</h1>
@@ -68,12 +80,12 @@
                 <div class="item-price-block">
                     {% if hide_price %}
 
-                    {% if product.special %}
+                    {% if special %}
                         <p class="old-price">{{ price }}.-</p>
                         <p class="discount-percent">{{ special_percentage }}%</p>
                         <p class="discount-val">-{{ economy }}</p>
                     {% endif %}
-                    {% if product.special %}
+                    {% if special %}
                         <p class="price">{{ special }}.-<span class="currency">{{ currency }}</span></p>
                     {% else %}
                         <p class="price">{{ price }}.-<span class="currency">{{ currency }}</span></p>
@@ -148,6 +160,9 @@
                     {% endif %}
                 </div>
             </div>
+            <div class="cards">
+                {{ content_top }}
+            </div>
             <ul class="nav nav-tabs" id="productTabs" role="tablist">
                 {% if description %}
                     <li class="nav-item">
@@ -178,7 +193,7 @@
                 {% if products %}
                     <li class="nav-item">
                         <a aria-selected="false" class="nav-link" data-toggle="tab" href="#relative" id="relative-tab"
-                           role="tab">Produse relative</a>
+                           role="tab">{{ text_related }}</a>
                     </li>
                 {% endif %}
             </ul>
@@ -330,7 +345,7 @@
                     <button aria-controls="relative" aria-expanded="false" class="collapsed"
                             data-target="#relative"
                             data-toggle="collapse" type="button">
-                        Produse relative
+                        {{ text_related }}
                     </button>
                     <div aria-labelledby="relative-tab" class="tab-pane fade collapse" data-parent="#productAccordion"
                          id="relative" role="tabpanel">
@@ -407,7 +422,7 @@
     <hr>
     <div class="container-fluid">
         <div class="block-title centered">
-            <h2>Produse asemănătoare</h2>
+            <h2>{{ text_similar }}</h2>
         </div>
         <div class="product-slider">
             {% for product in products_asemenea %}

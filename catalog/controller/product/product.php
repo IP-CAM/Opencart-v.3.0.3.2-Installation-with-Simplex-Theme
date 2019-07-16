@@ -242,6 +242,9 @@ class ControllerProductProduct extends Controller {
 			$data['points'] = $product_info['points'];
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
             /* added by it-lab* start */
+
+            $latest_products=$this->model_catalog_product->getLatestProducts(10);
+            $data['is_new']=array_key_exists($product_id,$latest_products);
             $data['hide_price'] = $product_info['hide_price']?false:true;
             if(!isset($category_info)){
                 $product_categories = $this->model_catalog_product->getCategories($product_id);
@@ -481,6 +484,7 @@ class ControllerProductProduct extends Controller {
 				} else {
 					$rating = false;
 				}
+                $is_new=array_key_exists($result['product_id'],$latest_products);
 
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
@@ -493,6 +497,7 @@ class ControllerProductProduct extends Controller {
                     'special_percentage' => $special_percentage,
                     'economy'     => $economy,
                     'hide_price'  => $result['hide_price']?false:true,
+                    'is_new'      => $is_new,
                     /* added by it-lab end */
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
@@ -543,7 +548,7 @@ class ControllerProductProduct extends Controller {
                     } else {
                         $rating = false;
                     }
-
+                    $is_new=array_key_exists($result['product_id'],$latest_products);
                     $data['products_asemenea'][] = array(
                         'product_id' => $result['product_id'],
                         'thumb' => $image,
@@ -555,6 +560,7 @@ class ControllerProductProduct extends Controller {
                         'special_percentage' => $special_percentage,
                         'economy' => $economy,
                         'hide_price'  => $result['hide_price']?false:true,
+                        'is_new'      => $is_new,
                         /* added by it-lab end */
                         'tax' => $tax,
                         'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,

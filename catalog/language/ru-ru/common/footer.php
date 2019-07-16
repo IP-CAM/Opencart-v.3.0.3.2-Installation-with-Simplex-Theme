@@ -15,4 +15,9 @@ $_['text_order']        = 'История заказов';
 $_['text_wishlist']     = 'Закладки';
 $_['text_newsletter']   = 'Рассылка';
 $_['text_powered']      = 'Работает на <a href="https://ocmod.net/moduli/">OpenCart</a><br /> %s &copy; %s';
-
+$_['text_phone_callback'] = 'Мы можем вам позвонить';
+$_['text_callback']     = 'Звоните обратно';
+$_['text_our_stores']   = 'Наши магазины:';
+$_['text_your_phone']   = 'Ваш телефон';
+$_['text_copyright']    = '<p>© 2019 Simplex.</p>
+                        <p>Все права защищенны</p>';

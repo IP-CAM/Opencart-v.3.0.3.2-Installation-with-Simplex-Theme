@@ -42,12 +42,12 @@
                 <li>
                     <h5 class="phone">
                         <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
-                        <p>Putem să sunăm înapoi</p>
+                        <p><a href="#">{{ text_phone_callback }}</a></p>
                     </h5>
                 </li>
                 <li>
                     <div class="offices">
-                        <h6>Magazinaele noastre:</h6>
+                        <h6>{{ text_our_stores }}</h6>
                         <ul>
                             {% for location in locations %}
                                 <li><a href="{{ location.contacts_link }}">{{ location.city }}
@@ -61,8 +61,7 @@
             <ul class="info">
                 <li>
                     <div class="copyright">
-                        <p>&copy; 2019 Simplex.</p>
-                        <p>Toate drepturile sunt rezervate</p>
+                        {{ text_copyright }}
                     </div>
                 </li>
                 <li>
@@ -75,9 +74,9 @@
                                         {% for subtitle in footer_title.sub_title %}
 
                                                 <a href="{{ subtitle.link }}">
-                                                    <img  height="16" alt="{{ subtitle.title }}"
-                                                          src="catalog/view/theme/simplex/assets/img/{{ subtitle.title }}.svg"></a>
-                                        {% endfor %}
+                                                    <img height="16" alt="{{ subtitle.title }}"
+                                                         src="catalog/view/theme/simplex/assets/img/{{ subtitle.title }}.svg"></a>
+                                            {% endfor %}
                                         </p>
 
                                     {% endif %}
@@ -113,28 +112,13 @@
         </a>
     </span>
     <div class="timetable">
-        <table>
-            <tbody>
-            <tr>
-                <td>Luni - Vineri</td>
-                <td>08:00 - 18:00</td>
-            </tr>
-            <tr>
-                <td>Simbata</td>
-                <td>08:00 - 16:00</td>
-            </tr>
-            <tr>
-                <td>Duminica</td>
-                <td>zi libera</td>
-            </tr>
-            </tbody>
-        </table>
+        {{ open }}
     </div>
     <div class="input-telephone">
-        <h6>Putem să sunăm înapoi</h6>
-        <label><input id="customer_phone" placeholder="Telefonul dvs." type="text"></label>
+        <h6>{{ text_phone_callback }}</h6>
+        <label><input id="customer_phone" placeholder="{{ text_your_phone }}" type="text"></label>
         <button id="button-call-back" type="submit">
-            Sunaţi înapoi
+            {{ text_callback }}
             <span class="image-container"></span>
         </button>
     </div>
@@ -173,6 +157,10 @@
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 }
 
+                if (json['total'] === 0) {
+                    location.reload();
+                }
+
                 $('#wishlist-total span').html(json['total']);
                 $('#wishlist-total').attr('title', json['total']);
 
@@ -193,7 +181,7 @@
 </script>
 <script>
     $('#search input[name=\'search\']').on('keydown', function (e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             $('header #search button.button-search').trigger('click');
         }
     });
@@ -208,14 +196,15 @@
 </script>
 
 <script>
+    $(".timetable table").attr("style",'');
     $(".input-telephone input , #subscribe #email").on("input",function () {
         $(this).removeClass('has-error');
     });
     $("#button-call-back").click(function () {
 
         var url = $('base').attr('href') + 'index.php?route=information/contact';
-        var phone=$("#customer_phone").val();
-        if(phone.length>3) {
+        var phone = $("#customer_phone").val();
+        if (phone.length > 3) {
 
             $.ajax({
                 url: url,
@@ -227,15 +216,19 @@
                 complete: function () {
                 },
                 success: function (json) {
-                    if(json["error_upload"]){
+                    if (json["error_upload"]) {
                         $(".input-telephone input").addClass('has-error');
-                    }else {
+                    } else {
                         //$(".phone-poppup table").hide(300);
                         $(".input-telephone input").removeClass('has-error');
                         $(".input-telephone h6").text(json["result"]);
                         $(".input-telephone input").hide();
-                        setTimeout(function () { $('.phone-poppup').style("opacity",0);},1000);
-                        setTimeout(function () { $('.phone-poppup .delete').trigger('click'); }, 2000);
+                        setTimeout(function () {
+                            $('.phone-poppup').css({ 'opacity': '0'});
+                        }, 1000);
+                        setTimeout(function () {
+                            $('.phone-poppup .delete').trigger('click');
+                        }, 2000);
                     }
 
                 },
@@ -244,10 +237,34 @@
                 }
             });
         }
-
     });
 </script>
+<script>
+    compare.add = function (product_id) {
+        $.ajax({
+            url: 'index.php?route=product/compare/add',
+            type: 'post',
+            data: 'product_id=' + product_id,
+            dataType: 'json',
+            success: function (json) {
+                $('.alert-dismissible').remove();
 
+                if (json['success']) {
+                    $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                    $('#compare-total').html(json['total']);
+                    console.log(json['total']);
+                    $('#compare .quantity').html(json['total']);
+
+                    $('html, body').animate({scrollTop: 0}, 'slow');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+</script>
 
 <script>
     cart.add = function (product_id, quantity) {
@@ -286,6 +303,46 @@
             }
         });
     }
+    cart.remove = function (key) {
+        $.ajax({
+            url: 'index.php?route=checkout/cart/remove',
+            type: 'post',
+            data: 'key=' + key,
+            dataType: 'json',
+            beforeSend: function () {
+                $('#cart > button').button('loading');
+            },
+            complete: function () {
+                $('#cart > button').button('reset');
+            },
+            success: function (json) {
+                // Need to set timeout otherwise it wont update the total
+                setTimeout(function () {
+                    $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+                }, 100);
+                $('#cart-total').html(json['count']);
+
+
+
+                if (json['count'] === 0) {
+                    location.reload();
+                }
+
+                if (getURLVar('route') === 'checkout/cart' || getURLVar('route') === 'checkout/checkout') {
+                    location = 'index.php?route=checkout/cart';
+                } else {
+                    $('#cart > ul').load('index.php?route=common/cart/info ul li');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    };
+
+    $('.delete-all-from-cart').click(function () {
+        cart.remove('all');
+    })
 </script>
 
 

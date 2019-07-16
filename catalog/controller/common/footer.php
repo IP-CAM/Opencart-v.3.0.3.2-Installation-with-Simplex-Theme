@@ -70,7 +70,10 @@ class ControllerCommonFooter extends Controller {
             if(!$location['is_online']){
                 $location['contacts_link']=$data['contact']."#location-{$location['location_id']}";
                 $data['locations'][]=$location;
+            }else{
+                $data['open'] = html_entity_decode($location['open'], ENT_QUOTES, 'UTF-8');
             }
+
         }
         /* added by it-lab end */
         return $this->load->view('common/footer', $data);

@@ -18,7 +18,8 @@ $_['text_login']                              = '<a href="%s">Autentifică-te</a
 $_['text_no_reviews']                         = 'Nu sunt opinii despre acest produs.';
 $_['text_note']                               = '<span style="color: #FF0000;">Notă:</span> Codul HTML este citit ca şi text!';
 $_['text_success']                            = 'Îţi mulţumim pentru opinie. Aceasta a fost trimisă către aprobare.';
-$_['text_related']                            = 'Produse asemănătoare';
+$_['text_related']                            = 'Produse relative';
+$_['text_similar']                            = 'Produse asemănătoare';
 $_['text_tags']                               = 'Etichete:';
 $_['text_error']                              = 'Produsul nu a fost găsit!';
 $_['text_payment_recurring']                    = 'Abonament';
