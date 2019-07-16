@@ -198,7 +198,9 @@ class ControllerProductSearch extends Controller {
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
-
+            /* added by it-lab start */
+            $latest_products=$this->model_catalog_product->getLatestProducts(10);
+            /* added by it-lab end */
 			foreach ($results as $result) {
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
@@ -237,6 +239,7 @@ class ControllerProductSearch extends Controller {
 				} else {
 					$rating = false;
 				}
+                $is_new=array_key_exists($result['product_id'],$latest_products);
 
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
@@ -249,6 +252,7 @@ class ControllerProductSearch extends Controller {
                     'special_percentage' => $special_percentage,
                     'economy'     => $economy,
                     'hide_price'  => $result['hide_price']?false:true,
+                    'is_new'      => $is_new,
                     /* added by it-lab end */
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,

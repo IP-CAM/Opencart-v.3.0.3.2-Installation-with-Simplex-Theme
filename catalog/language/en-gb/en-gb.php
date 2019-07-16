@@ -24,6 +24,7 @@ $_['text_items_on_page']    = 'on page';
 $_['text_pozitions']        = 'pozitions';
 $_['text_show_more']        = 'Show';
 $_['text_total']            = 'Total:';
+$_['text_view_oferts']      = 'View special offerts:';
 
 
 // Buttons

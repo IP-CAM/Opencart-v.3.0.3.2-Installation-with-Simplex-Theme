@@ -15,3 +15,9 @@ $_['text_order']        = 'Istoric comenzi';
 $_['text_wishlist']     = 'Wish List';
 $_['text_newsletter']   = 'Newsletter';
 $_['text_powered']      = '%s &copy; %s';
+$_['text_phone_callback'] = 'Putem să sunăm înapoi';
+$_['text_callback']     = 'Sunaţi înapoi';
+$_['text_your_phone']   = 'Telefonul dvs.';
+$_['text_our_stores']   = 'Magazinele noastre:';
+$_['text_copyright']    = '<p>© 2019 Simplex.</p>
+                        <p>Toate drepturile sunt rezervate</p>';

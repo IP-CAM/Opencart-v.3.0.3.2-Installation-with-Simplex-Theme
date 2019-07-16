@@ -164,8 +164,7 @@ class ControllerExtensionModuleBanner extends Controller {
             $title_language="title{$language['language_id']}";
             $description_language="description{$language['language_id']}";
             $link_language="link{$language['language_id']}";
-            var_dump($title_language);
-            var_dump($description_language);
+
             if (isset($this->request->post[$title_language])) {
                 $data[$title_language] = $this->request->post[$title_language];
             } elseif (!empty($module_info)) {

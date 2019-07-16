@@ -5,21 +5,21 @@
                 {% if footer_titles %}
                     {% for footer_title in footer_titles %}
                         {% if loop.first %}
-                            <h6>{{ footer_title.title }}</h6>
-                            {% if footer_title.sub_title %}
-                                <ul>
-                                    {% for subtitle in footer_title.sub_title %}
-                                        {% if subtitle.href %}
-                                            <li><a href="{{ subtitle.href }}">
-                                                    {{ subtitle.title }}</a></li>
-                                        {% else %}
-                                            <li><a href="{{ subtitle.link }}">
-                                                    {{ subtitle.title }}</a></li>
-                                            </a></li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
+                        <h6>{{ footer_title.title }}</h6>
+                        {% if footer_title.sub_title %}
+                            <ul>
+                                {% for subtitle in footer_title.sub_title %}
+                                    {% if subtitle.href %}
+                                        <li><a href="{{ subtitle.href }}">
+                                                {{ subtitle.title }}</a></li>
+                                    {% else %}
+                                        <li><a href="{{ subtitle.link }}">
+                                                {{ subtitle.title }}</a></li>
+                                        </a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endif %}
@@ -42,12 +42,12 @@
                 <li>
                     <h5 class="phone">
                         <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
-                        <p><a href="#">Putem să sunăm înapoi</a></p>
+                        <p><a href="#">{{ text_phone_callback }}</a></p>
                     </h5>
                 </li>
                 <li>
                     <div class="offices">
-                        <h6>Magazinaele noastre:</h6>
+                        <h6>{{ text_our_stores }}</h6>
                         <ul>
                             {% for location in locations %}
                                 <li><a href="{{ location.contacts_link }}">{{ location.city }}
@@ -61,8 +61,7 @@
             <ul class="info">
                 <li>
                     <div class="copyright">
-                        <p>&copy; 2019 Simplex.</p>
-                        <p>Toate drepturile sunt rezervate</p>
+                        {{ text_copyright }}
                     </div>
                 </li>
                 <li>
@@ -72,7 +71,7 @@
                                 {% if loop.index==2 %}
                                     {% if footer_title.sub_title %}
                                         <p>
-                                            {% for subtitle in footer_title.sub_title %}
+                                        {% for subtitle in footer_title.sub_title %}
 
                                                 <a href="{{ subtitle.link }}">
                                                     <img height="16" alt="{{ subtitle.title }}"
@@ -113,28 +112,13 @@
         </a>
     </span>
     <div class="timetable">
-        <table>
-            <tbody>
-            <tr>
-                <td>Luni - Vineri</td>
-                <td>08:00 - 18:00</td>
-            </tr>
-            <tr>
-                <td>Simbata</td>
-                <td>08:00 - 16:00</td>
-            </tr>
-            <tr>
-                <td>Duminica</td>
-                <td>zi libera</td>
-            </tr>
-            </tbody>
-        </table>
+        {{ open }}
     </div>
     <div class="input-telephone">
-        <h6>Putem să sunăm înapoi</h6>
-        <label><input id="customer_phone" placeholder="Telefonul dvs." type="text"></label>
+        <h6>{{ text_phone_callback }}</h6>
+        <label><input id="customer_phone" placeholder="{{ text_your_phone }}" type="text"></label>
         <button id="button-call-back" type="submit">
-            Sunaţi înapoi
+            {{ text_callback }}
             <span class="image-container"></span>
         </button>
     </div>
@@ -210,8 +194,10 @@
         location = url;
     });
 </script>
+
 <script>
-    $(".input-telephone input , #subscribe #email").on("input", function () {
+    $(".timetable table").attr("style",'');
+    $(".input-telephone input , #subscribe #email").on("input",function () {
         $(this).removeClass('has-error');
     });
     $("#button-call-back").click(function () {
@@ -238,7 +224,7 @@
                         $(".input-telephone h6").text(json["result"]);
                         $(".input-telephone input").hide();
                         setTimeout(function () {
-                            $('.phone-poppup').style("opacity", 0);
+                            $('.phone-poppup').css({ 'opacity': '0'});
                         }, 1000);
                         setTimeout(function () {
                             $('.phone-poppup .delete').trigger('click');
@@ -251,7 +237,6 @@
                 }
             });
         }
-
     });
 </script>
 <script>

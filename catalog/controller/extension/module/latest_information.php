@@ -27,7 +27,6 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 		);
 
 		$results = $this->model_catalog_information->getInformations($filter_data);
-
 		if($results) {
 			foreach($results as $result) {
 				if($result['image']) {
@@ -35,6 +34,7 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 				} else {
 					$image = false;
 				}
+                $result_full=$this->model_catalog_information->getInformationFull($result['information_id']);
 
 				$data['informations'][] = array(
 					'information_id' => $result['information_id'],
@@ -42,7 +42,8 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 					'original_image' => "image/" . $result['image'],
 					'title'          => $result['title'],
 					'description'    => !empty($result['short_description']) ? trim(html_entity_decode($result['short_description'], ENT_QUOTES, 'UTF-8')) : utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('information_description_length')) . '..',
-					'user_id'        => $result['user_id'],
+                    'city' => $result_full['city'],
+                    'user_id'        => $result['user_id'],
 					'author'         => $result['author'],
 					'date_added'     => self::getDateWithMonth($result['date_added'], $this->language->get('code')),
 					'reviews'        => sprintf($this->language->get('text_review'), $result['reviews']),
@@ -50,12 +51,15 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 					'href'           => $this->url->link('information/information', '&information_id=' . $result['information_id'])
 				);
 
-				self::getDateWithMonth($result['date_added'], $this->language->get('code'));
+				//self::getDateWithMonth($result['date_added'], $this->language->get('code'));
 			}
+
 
 			if($setting['title'][$this->config->get('config_language_id')]) {
 				$data['heading_title'] = html_entity_decode($setting['title'][$this->config->get('config_language_id')]);
-			}
+			}else{
+			    $data['heading_title']='';
+            }
 
 			$data['author'] = $setting['author'];
 			$data['date'] = $setting['date'];

@@ -168,6 +168,7 @@ class ControllerInformationInformation extends Controller {
 
 			$data['description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
 			$data['description_additional'] = html_entity_decode($information_info_full['description_additional'], ENT_QUOTES, 'UTF-8');
+			$data['city'] = html_entity_decode($information_info_full['city'], ENT_QUOTES, 'UTF-8');
 			$data['continue'] = $this->url->link('common/home');
 
 			$data['column_left'] = $this->load->controller('common/column_left');
