@@ -21,3 +21,4 @@ $_['text_our_stores']   = 'Наши магазины:';
 $_['text_your_phone']   = 'Ваш телефон';
 $_['text_copyright']    = '<p>© 2019 Simplex.</p>
                         <p>Все права защищенны</p>';
+$_['text_follow_us']   = 'Следите за нами:';

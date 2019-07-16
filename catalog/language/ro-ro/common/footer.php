@@ -21,3 +21,4 @@ $_['text_your_phone']   = 'Telefonul dvs.';
 $_['text_our_stores']   = 'Magazinele noastre:';
 $_['text_copyright']    = '<p>© 2019 Simplex.</p>
                         <p>Toate drepturile sunt rezervate</p>';
+$_['text_follow_us']   = 'Urmați-ne:';

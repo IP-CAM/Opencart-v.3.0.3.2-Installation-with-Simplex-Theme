@@ -20,3 +20,4 @@ $_['text_compare']      = 'Comparare produse (%s)';
 $_['text_success']      = 'Succes: Ai adăugat produsul <a href="%s">%s</a> la <a href="%s">comparare produse</a>!';
 $_['text_remove']       = 'Succes: Ai modificat compararea produselor!';
 $_['text_empty']        = 'Nu ai ales produse pe care să le compari.';
+$_['text_success_message']     = 'Adăugat la comparare produselor';

@@ -3,9 +3,9 @@
  * @package Pav Megamenu module for Opencart 3.x
  * @version 2.0
  * @author http://www.pavothemes.com
- * @copyright	Copyright (C) September 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
- * @license		GNU General Public License version 2
-*******************************************************/
+ * @copyright    Copyright (C) September 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
+ * @license        GNU General Public License version 2
+ *******************************************************/
 function endsWith($haystack, $needle)
 {
     $length = strlen($needle);
@@ -15,96 +15,104 @@ function endsWith($haystack, $needle)
 
     return (substr($haystack, -$length) === $needle);
 }
-class ModelExtensionMenuMegamenu extends Model {
 
-	private $output = false;
-	/**
-	 *
-	 */
-	private $_editString = '';
+class ModelExtensionMenuMegamenu extends Model
+{
 
-	/**
-	 *
-	 */
-	private $children;
+    private $output = false;
+    /**
+     *
+     */
+    private $_editString = '';
 
-	/**
-	 *
-	 */
-	private $shopUrl ;
+    /**
+     *
+     */
+    private $children;
 
-	/**
-	 *
-	 */
-	private $megaConfig = array();
+    /**
+     *
+     */
+    private $shopUrl;
 
-	private $_editStringCol = '';
+    /**
+     *
+     */
+    private $megaConfig = array();
 
-	private $_isLiveEdit = true;
-	/**
-	 *
-	 */
-	public function getChilds( $id=null, $store_id=0 ){
-		$sql = ' SELECT m.*, md.title,md.description FROM ' . DB_PREFIX . 'megamenu m LEFT JOIN '
-								.DB_PREFIX.'megamenu_description md ON m.megamenu_id=md.megamenu_id AND language_id='.(int)$this->config->get('config_language_id') ;
-		$sql .= ' WHERE m.`published`=1 ';
-                $sql .= ' AND store_id='.(int)$store_id;
-		if( $id != null ) {
-			$sql .= ' AND parent_id='.(int)$id;
-		}
-		$sql .= ' ORDER BY `position`  ';
-		$query = $this->db->query( $sql );
-		return $query->rows;
-	}
+    private $_editStringCol = '';
 
-	/**
-	 *
-	 */
-	public function hasChild( $id ){
-		return isset($this->children[$id]);
-	}
+    private $_isLiveEdit = true;
 
-	/**
-	 *
-	 */
-	public function getNodes( $id ){
-		return $this->children[$id];
-	}
-	private $tree=null;
-    public function getTreeData( $parent=1 , $edit=false, $params, $store_id = 0)
+    /**
+     *
+     */
+    public function getChilds($id = null, $store_id = 0)
+    {
+        $sql = ' SELECT m.*, md.title,md.description FROM ' . DB_PREFIX . 'megamenu m LEFT JOIN '
+            . DB_PREFIX . 'megamenu_description md ON m.megamenu_id=md.megamenu_id AND language_id=' . (int)$this->config->get('config_language_id');
+        $sql .= ' WHERE m.`published`=1 ';
+        $sql .= ' AND store_id=' . (int)$store_id;
+        if ($id != null) {
+            $sql .= ' AND parent_id=' . (int)$id;
+        }
+        $sql .= ' ORDER BY `position`  ';
+        $query = $this->db->query($sql);
+        return $query->rows;
+    }
+
+    /**
+     *
+     */
+    public function hasChild($id)
+    {
+        return isset($this->children[$id]);
+    }
+
+    /**
+     *
+     */
+    public function getNodes($id)
+    {
+        return $this->children[$id];
+    }
+
+    private $tree = null;
+
+    public function getTreeData($parent = 1, $edit = false, $params, $store_id = 0)
     {
         $url = $_SERVER["REQUEST_URI"];
-        if(is_null($this->tree)) {
+        if (is_null($this->tree)) {
             $tree = array();
-        }else{
+        } else {
             return $this->tree;
         }
 
-        if ( $this->output !== false ) {
+        if ($this->output !== false) {
             return $this->output;
         }
 
         $this->load->language("menu/megamenu");
 
-        if( !$this->isInstalled() ){
+        if (!$this->isInstalled()) {
             return 'Please install datasample for this module';
         }
 
         //	$this->parserMegaConfig( $params );
-        if( $edit ){
-            $this->_editString  = ' data-id="%s" data-group="%s"  data-cols="%s" ';
+        if ($edit) {
+            $this->_editString = ' data-id="%s" data-group="%s"  data-cols="%s" ';
         }
-        $this->_editStringCol = ' data-colwidth="%s" data-class="%s" ' ;
+        $this->_editStringCol = ' data-colwidth="%s" data-class="%s" ';
 
 
-        $childs = $this->getChilds( null, $store_id );
-        foreach($childs as $child ){
+        $childs = $this->getChilds(null, $store_id);
+        foreach ($childs as $child) {
 
             $this->children[$child['parent_id']][] = $child;
         }
 
 
-        $parent = 1 ;
+        $parent = 1;
         $this->load->model('catalog/category');
         $this->load->model('catalog/product');
         $this->load->model('tool/image');
@@ -112,75 +120,82 @@ class ModelExtensionMenuMegamenu extends Model {
 
 
         if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-            $this->shopUrl = $this->config->get('config_ssl') ;
+            $this->shopUrl = $this->config->get('config_ssl');
         } else {
-            $this->shopUrl = $this->config->get('config_url') ;
+            $this->shopUrl = $this->config->get('config_url');
         }
-        $output  = '';
-        if( $this->hasChild($parent) ) {
+        $output = '';
+        if ($this->hasChild($parent)) {
             $data = $this->getNodes($parent);
             // render menu at level 0
             foreach ($data as $menu) {
-                $menu["link"]=$this->getLink( $menu );
+                $menu["link"] = $this->getLink($menu);
 
 
                 $tree[$menu['megamenu_id']] = $menu;
-                if ($this->hasChild($menu['megamenu_id']) ) {
+                if ($this->hasChild($menu['megamenu_id'])) {
                     $child_nodes = $this->getNodes($menu['megamenu_id']);
-                    if($menu['menu_class']=='catalog'){
-                        $tree[$menu['megamenu_id']]['data_toogle']='collapse';
-                    }else{
-                        $tree[$menu['megamenu_id']]['data_toogle']='dropdown';
+                    if ($menu['menu_class'] == 'catalog') {
+                        $tree[$menu['megamenu_id']]['data_toogle'] = 'collapse';
+                    } else {
+                        $tree[$menu['megamenu_id']]['data_toogle'] = 'dropdown';
                     }
                     $tree[$menu['megamenu_id']]['children'] = array();
                     foreach ($child_nodes as &$child_node) {
-                        $child_node["link"]=$this->getLink( $child_node );
-                        $link=htmlspecialchars_decode ($child_node["link"]);
-
-                        if(endsWith($link,$url) || endsWith("/".$link,$url)){
-                            $child_node["active"]=true;
-                            $tree[$menu['megamenu_id']]["active"]=true;
-                        }else{
-                            $child_node["active"]=false;
+                        $child_node["link"] = $this->getLink($child_node);
+                        $link = htmlspecialchars_decode($child_node["link"]);
+                        //var_dump($link);
+                        if ($menu['menu_class'] == 'catalog') {
+                            if (strpos($url, '&tf_')) {
+                                $url = substr_replace($url, '', strpos($url, '&tf_'));
+                            }
+                        }
+                        //var_dump($url);
+                        if (endsWith($link, $url) || endsWith($link, '/' . $url)) {
+                            $child_node["active"] = true;
+                            $tree[$menu['megamenu_id']]["active"] = true;
+                        } else {
+                            $child_node["active"] = false;
 
                         }
-                        if(!isset( $tree[$menu['megamenu_id']]["active"])) {
+                        if (!isset($tree[$menu['megamenu_id']]["active"])) {
                             $tree[$menu['megamenu_id']]["active"] = false;
                         }
-                        if(!empty($child_node['image']) & file_exists('image/'.$child_node['image'])){
-                            $child_node['image_svg']=file_get_contents('image/'.$child_node['image']);
-                        }else{
+                        if (!empty($child_node['image']) & file_exists('image/' . $child_node['image'])) {
+                            $child_node['image_svg'] = file_get_contents('image/' . $child_node['image']);
+                        } else {
                             $child_node['image_svg'] = '';
                         }
                         $tree[$menu['megamenu_id']]['children'][] = $child_node;
 
                     }
 
-                }else{
-                    $tree[$menu['megamenu_id']]['children']=false;
-                    $tree[$menu['megamenu_id']]['data_toogle']='';
-                    $link=htmlspecialchars_decode ($menu["link"]);
-                    if(endsWith($link,$url)|| endsWith("/".$link,$url)){
-                        $tree[$menu['megamenu_id']]["active"]=true;
-                    }else{
-                        $tree[$menu['megamenu_id']]["active"]=false;
+                } else {
+                    $tree[$menu['megamenu_id']]['children'] = false;
+                    $tree[$menu['megamenu_id']]['data_toogle'] = '';
+                    $link = htmlspecialchars_decode($menu["link"]);
+                    if (endsWith($link, $url) || endsWith("/" . $link, $url)) {
+                        $tree[$menu['megamenu_id']]["active"] = true;
+                    } else {
+                        $tree[$menu['megamenu_id']]["active"] = false;
                     }
                 }
             }
         }
-        $this->tree=$tree;
+        $this->tree = $tree;
         return $this->tree;
     }
 
-    public function getSubMenu($class){
-        $params = $this->config->get( 'params' );
+    public function getSubMenu($class)
+    {
+        $params = $this->config->get('params');
 
         $this->load->model('setting/setting');
-        $params = $this->model_setting_setting->getSetting( 'pavmegamenu_params' );
+        $params = $this->model_setting_setting->getSetting('pavmegamenu_params');
 
 
-        if( isset($params['pavmegamenu_params']) && !empty($params['pavmegamenu_params']) ){
-            $params = json_decode( $params['pavmegamenu_params'] );
+        if (isset($params['pavmegamenu_params']) && !empty($params['pavmegamenu_params'])) {
+            $params = json_decode($params['pavmegamenu_params']);
         }
 
         //get store
@@ -188,342 +203,361 @@ class ModelExtensionMenuMegamenu extends Model {
 
 
         $parent = '1';
-        $tree= $this->getTreeData( $parent , true, $params, $store_id );
-	    $catalog = array();
-        foreach($tree as $key=>$menu){
-           if($menu['menu_class']==$class){
-               $catalog = $menu;
-               break;
-           }
+        $tree = $this->getTreeData($parent, true, $params, $store_id);
+        $catalog = array();
+        foreach ($tree as $key => $menu) {
+            if ($menu['menu_class'] == $class) {
+                $catalog = $menu;
+                break;
+            }
         }
         return $catalog;
     }
-	/**
-	 *
-	 */
-	public function getTree( $parent=1 , $edit=false, $params, $store_id = 0){
 
-		if ( $this->output !== false ) {
-			return $this->output;
-		}
+    /**
+     *
+     */
+    public function getTree($parent = 1, $edit = false, $params, $store_id = 0)
+    {
 
-		$this->load->language("menu/megamenu");
+        if ($this->output !== false) {
+            return $this->output;
+        }
 
-		if( !$this->isInstalled() ){
-			return 'Please install datasample for this module';
-		}
+        $this->load->language("menu/megamenu");
 
-
-
-
-	//	$this->parserMegaConfig( $params );
-		if( $edit ){
-			$this->_editString  = ' data-id="%s" data-group="%s"  data-cols="%s" ';
-		}
-		$this->_editStringCol = ' data-colwidth="%s" data-class="%s" ' ;
+        if (!$this->isInstalled()) {
+            return 'Please install datasample for this module';
+        }
 
 
-		$childs = $this->getChilds( null, $store_id );
-		foreach($childs as $child ){
-
-			$this->children[$child['parent_id']][] = $child;
-		}
-
-
-		$parent = 1 ;
-		$this->load->model('catalog/category');
-		$this->load->model('catalog/product');
-		$this->load->model('tool/image');
-		$this->load->model('setting/module');
+        //	$this->parserMegaConfig( $params );
+        if ($edit) {
+            $this->_editString = ' data-id="%s" data-group="%s"  data-cols="%s" ';
+        }
+        $this->_editStringCol = ' data-colwidth="%s" data-class="%s" ';
 
 
-		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-			$this->shopUrl = $this->config->get('config_ssl') ;
-		} else {
-			$this->shopUrl = $this->config->get('config_url') ;
-		}
-	 	$output  = '';
-		if( $this->hasChild($parent) ){
-			$data = $this->getNodes( $parent );
-			// render menu at level 0
-			$output = '<ul class="nav navbar-nav megamenu">';
-			foreach( $data as $menu ){
+        $childs = $this->getChilds(null, $store_id);
+        foreach ($childs as $child) {
 
-				// set width align ment
-				if( isset($menu['width']) && !empty($menu['width']) ){
-                    $menu['menu_class'] .= ' '.$menu['width'];
+            $this->children[$child['parent_id']][] = $child;
+        }
+
+
+        $parent = 1;
+        $this->load->model('catalog/category');
+        $this->load->model('catalog/product');
+        $this->load->model('tool/image');
+        $this->load->model('setting/module');
+
+
+        if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+            $this->shopUrl = $this->config->get('config_ssl');
+        } else {
+            $this->shopUrl = $this->config->get('config_url');
+        }
+        $output = '';
+        if ($this->hasChild($parent)) {
+            $data = $this->getNodes($parent);
+            // render menu at level 0
+            $output = '<ul class="nav navbar-nav megamenu">';
+            foreach ($data as $menu) {
+
+                // set width align ment
+                if (isset($menu['width']) && !empty($menu['width'])) {
+                    $menu['menu_class'] .= ' ' . $menu['width'];
                 }
 
-				if( $this->hasChild($menu['megamenu_id']) || $menu['type_submenu'] == 'html' ||  $menu['type_submenu'] == 'blkbuilder' ){
+                if ($this->hasChild($menu['megamenu_id']) || $menu['type_submenu'] == 'html' || $menu['type_submenu'] == 'blkbuilder') {
 
-					$output .= '<li class="parent dropdown '.$menu['menu_class'].'" '.$this->renderAttrs($menu).'>';
+                    $output .= '<li class="parent dropdown ' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
 
-					$output .= '<a class="dropdown-toggle" href="'.$this->getLink( $menu ).'">';
+                    $output .= '<a class="dropdown-toggle" href="' . $this->getLink($menu) . '">';
 
-					if (isset($menu['badges']) && !empty($menu['badges'])) {
-						$output .= '<span class="badges '.$menu['badges'].'">'.$this->language->get($menu['badges']).'</span>';
-					}
+                    if (isset($menu['badges']) && !empty($menu['badges'])) {
+                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                    }
 
-					if( $menu['image'] ) {
-					 	$output .= '<span class="menu-icon" style="background:url(\''.$this->shopUrl."image/".$menu['image'].'\') no-repeat;">';
-					} else if (!empty($menu['icon'])) {
-						$output .= '<span class="'.$menu['icon'].'"></span>';
-					}
-					if($menu['show_title']) {
-						if (isset($menu['badges']) && !empty($menu['badges'])) {
-							$output .= '<span class="badges '.$menu['badges'].'">'.$this->language->get($menu['badges']).'</span>';
-						}
-						$output .= '<span class="menu-title">'.$menu['title']."</span>";
-					}
-					if( $menu['description'] ){
-						$output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
-					}
-					if( $menu['image']){  $output .= '</span>'; }
-					$output .= "<b class=\"caret\"></b>";
-					$output .= '</a>';
-					if($menu['megamenu_id'] > 1) {
-						$output .= $this->genTree( $menu['megamenu_id'], 1, $menu );
-					}
+                    if ($menu['image']) {
+                        $output .= '<span class="menu-icon" style="background:url(\'' . $this->shopUrl . "image/" . $menu['image'] . '\') no-repeat;">';
+                    } else if (!empty($menu['icon'])) {
+                        $output .= '<span class="' . $menu['icon'] . '"></span>';
+                    }
+                    if ($menu['show_title']) {
+                        if (isset($menu['badges']) && !empty($menu['badges'])) {
+                            $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                        }
+                        $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
+                    }
+                    if ($menu['description']) {
+                        $output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
+                    }
+                    if ($menu['image']) {
+                        $output .= '</span>';
+                    }
+                    $output .= "<b class=\"caret\"></b>";
+                    $output .= '</a>';
+                    if ($menu['megamenu_id'] > 1) {
+                        $output .= $this->genTree($menu['megamenu_id'], 1, $menu);
+                    }
 
-					$output .= '</li>';
-				} elseif($menu['type'] == 'html'){
-					$output .= '<li class="'.$menu['menu_class'].'" '.$this->renderAttrs($menu).'>';
+                    $output .= '</li>';
+                } elseif ($menu['type'] == 'html') {
+                    $output .= '<li class="' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
 
-					if (isset($menu['badges']) && !empty($menu['badges'])) {
-						$output .= '<span class="badges '.$menu['badges'].'">'.$this->language->get($menu['badges']).'</span>';
-					}
+                    if (isset($menu['badges']) && !empty($menu['badges'])) {
+                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                    }
 
-					if( $menu['image'] ) {
-					 	$output .= '<span class="menu-icon" style="background:url(\''.$this->shopUrl."image/".$menu['image'].'\') no-repeat;">';
-					} else if (!empty($menu['icon'])) {
-						$output .= '<span class="'.$menu['icon'].'"></span>';
-					}
+                    if ($menu['image']) {
+                        $output .= '<span class="menu-icon" style="background:url(\'' . $this->shopUrl . "image/" . $menu['image'] . '\') no-repeat;">';
+                    } else if (!empty($menu['icon'])) {
+                        $output .= '<span class="' . $menu['icon'] . '"></span>';
+                    }
 
-					if($menu['show_title']) {
-
-
-						$output .= '<span class="menu-title">'.$menu['title']."</span>";
-					}
-
-					if( $menu['description'] ){
-						$output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
-					}
-					if( $menu['image']){ $output .= '</span>';	}
-					$output .= '</li>';
-				}else {
-					$output .= '<li class="'.$menu['menu_class'].'" '.$this->renderAttrs($menu).'>';
-
-					$output .= '<a href="'.$this->getLink( $menu ).'">';
-
-					if (isset($menu['badges']) && !empty($menu['badges'])) {
-						$output .= '<span class="badges '.$menu['badges'].'">'.$this->language->get($menu['badges']).'</span>';
-					}
-
-					if( $menu['image'] ) {
-					 	$output .= '<span class="menu-icon" style="background:url(\''.$this->shopUrl."image/".$menu['image'].'\') no-repeat;">';
-					} else if (!empty($menu['icon'])) {
-						$output .= '<span class="'.$menu['icon'].'"></span>';
-					}
-
-					if($menu['show_title']) {
-
-						$output .= '<span class="menu-title">'.$menu['title']."</span>";
-					}
-
-					if( $menu['description'] ){
-						$output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
-					}
-					if( $menu['image']){ $output .= '</span>';	}
-					$output .= '</a></li>';
-				}
-			}
-			$output .= '</ul>';
-
-		}
-
-		return $this->output = $output;
-
-	}
-
-	public function renderBlockbuilder( $id ){
-
-		if ( isset($id) ) {
-			$setting_info = $this->model_setting_module->getModule( $id );
-			if ($setting_info && $setting_info['status'] && !isset($setting_info['absolute']) ) {
-				$output = $this->load->controller('extension/module/pavobuilder' , $setting_info);
-			 	return $output;
-			}
-		}
-	}
-	/**
-	 *
-	 */
-	public function genTree( $parentId, $level,$parent, $store_id = 0){
+                    if ($menu['show_title']) {
 
 
-		$attrw = '';
-		$class = $parent['is_group']?"dropdown-mega":"dropdown-menu";
+                        $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
+                    }
 
-		if( isset($parent['submenu_width']) &&  (int)$parent['submenu_width'] ){
-			$attrw .= ' style="width:'.(int)$parent['submenu_width'] .'px"' ;
-		}
+                    if ($menu['description']) {
+                        $output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
+                    }
+                    if ($menu['image']) {
+                        $output .= '</span>';
+                    }
+                    $output .= '</li>';
+                } else {
+                    $output .= '<li class="' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
 
-		if( $parent['type_submenu'] == 'blkbuilder' ){
-			$output = '<div class="'.$class.'" '.$attrw.'><div class="dropdown-menu-inner content-blockbuilder">';
-			$output .= $this->renderBlockbuilder( $parent['widget_id'] );
-			$output .= '</div></div>';
-			return $output;
-		}
+                    $output .= '<a href="' . $this->getLink($menu) . '">';
 
-		if( $parent['type_submenu'] == 'html' ){
-			$output = '<div class="'.$class.'"><div class="menu-content content-html">';
-			$output .= html_entity_decode($parent['submenu_content']);
-			$output .= '</div></div>';
-			return $output;
-		} elseif ( $this->hasChild($parentId) ) {
+                    if (isset($menu['badges']) && !empty($menu['badges'])) {
+                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                    }
 
-			$data = $this->getNodes( $parentId );
+                    if ($menu['image']) {
+                        $output .= '<span class="menu-icon" style="background:url(\'' . $this->shopUrl . "image/" . $menu['image'] . '\') no-repeat;">';
+                    } else if (!empty($menu['icon'])) {
+                        $output .= '<span class="' . $menu['icon'] . '"></span>';
+                    }
 
-			$failse = false;
+                    if ($menu['show_title']) {
 
-			$output = '<div class="'.$class.' level'.$level.'" '.$attrw.' ><div class="dropdown-menu-inner">';
-			$row = '<ul>';
-			foreach( $data as $menu ){
-				if( $level == 1 ){
+                        $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
+                    }
 
-				}
-				$row .= $this->renderMenuContent( $menu , $level+1 );
-			}
-			$row .= '</ul></div></div>';
+                    if ($menu['description']) {
+                        $output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
+                    }
+                    if ($menu['image']) {
+                        $output .= '</span>';
+                    }
+                    $output .= '</a></li>';
+                }
+            }
+            $output .= '</ul>';
 
-			$output .= $row;
+        }
 
-			return $output;
+        return $this->output = $output;
 
-		}
-		return ;
-	}
+    }
 
-	/**
-	 *
-	 */
-	public function renderAttrs( $menu ){
+    public function renderBlockbuilder($id)
+    {
 
-	}
+        if (isset($id)) {
+            $setting_info = $this->model_setting_module->getModule($id);
+            if ($setting_info && $setting_info['status'] && !isset($setting_info['absolute'])) {
+                $output = $this->load->controller('extension/module/pavobuilder', $setting_info);
+                return $output;
+            }
+        }
+    }
 
-	/**
-	 *
-	 */
-	public function renderMenuContent( $menu , $level ){
+    /**
+     *
+     */
+    public function genTree($parentId, $level, $parent, $store_id = 0)
+    {
 
-		$output = '';
-		$class = $menu['is_group']?"mega-group":"";
-		$menu['menu_class'] = ' '.$class;
-		if( $menu['type'] == 'html' ){
-			$output .= '<li class="'.$menu['menu_class'].'" '.$this->renderAttrs($menu).'>';
-			$output .= '<div class="menu-content">'.html_entity_decode($menu['content_text']).'</div>';
-			$output .= '</li>';
-			return $output;
-		}
-		if( $this->hasChild($menu['megamenu_id']) ){
 
-			$output .= '<li class="parent dropdown-submenu'.$menu['menu_class'].'" '.$this->renderAttrs($menu). '>';
-			if( $menu['show_title'] ){
-				$output .= '<a class="dropdown-toggle" data-toggle="dropdown" href="'.$this->getLink( $menu ).'">';
-				$t = '%s';
-				if( $menu['image']){ $output .= '<span class="menu-icon" style="background:url(\''.$this->shopUrl."image/".$menu['image'].'\') no-repeat;">';	}
+        $attrw = '';
+        $class = $parent['is_group'] ? "dropdown-mega" : "dropdown-menu";
 
-				if (isset($menu['badges']) && !empty($menu['badges'])) {
-					$output .= '<span class="badges '.$menu['badges'].'">'.$this->language->get($menu['badges']).'</span>';
-				}
+        if (isset($parent['submenu_width']) && (int)$parent['submenu_width']) {
+            $attrw .= ' style="width:' . (int)$parent['submenu_width'] . 'px"';
+        }
 
-				$output .= '<span class="menu-title">'.$menu['title']."</span>";
-				if( $menu['description'] ){
-					$output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
-				}
-				$output .= "<b class=\"caret\"></b>";
-				if( $menu['image']){
-					$output .= '</span>';
-				}
-				$output .= '</a>';
-			}
-			if($menu['megamenu_id'] > 1) {
-				$output .= $this->genTree( $menu['megamenu_id'], $level, $menu );
-			}
-			$output .= '</li>';
+        if ($parent['type_submenu'] == 'blkbuilder') {
+            $output = '<div class="' . $class . '" ' . $attrw . '><div class="dropdown-menu-inner content-blockbuilder">';
+            $output .= $this->renderBlockbuilder($parent['widget_id']);
+            $output .= '</div></div>';
+            return $output;
+        }
 
-		} else {
-			$output .= '<li class="'.$menu['menu_class'].'" '.$this->renderAttrs($menu).'>';
-			if( $menu['show_title'] ){
-				$output .= '<a href="'.$this->getLink( $menu ).'">';
+        if ($parent['type_submenu'] == 'html') {
+            $output = '<div class="' . $class . '"><div class="menu-content content-html">';
+            $output .= html_entity_decode($parent['submenu_content']);
+            $output .= '</div></div>';
+            return $output;
+        } elseif ($this->hasChild($parentId)) {
 
-				if( $menu['image']){ $output .= '<span class="menu-icon" style="background:url(\''.$this->shopUrl."image/".$menu['image'].'\') no-repeat;">';	}
-				$output .= '<span class="menu-title">'.$menu['title']."</span>";
-				if( $menu['description'] ){
-					$output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
-				}
-				if( $menu['image']){
-					$output .= '</span>';
-				}
+            $data = $this->getNodes($parentId);
 
-				$output .= '</a>';
-			}
-			$output .= '</li>';
-		}
-		return $output;
-	}
+            $failse = false;
 
-	public function getParentCategory($id_child){
-		$result = $this->db->query("SELECT `parent_id`,`information` FROM `" . DB_PREFIX . "category` WHERE `category_id` = '".$id_child."'");
- 		return $result->row;
-	}
+            $output = '<div class="' . $class . ' level' . $level . '" ' . $attrw . ' ><div class="dropdown-menu-inner">';
+            $row = '<ul>';
+            foreach ($data as $menu) {
+                if ($level == 1) {
 
-	/**
-	 *
-	 */
-	public function getLink( $menu ){
+                }
+                $row .= $this->renderMenuContent($menu, $level + 1);
+            }
+            $row .= '</ul></div></div>';
+
+            $output .= $row;
+
+            return $output;
+
+        }
+        return;
+    }
+
+    /**
+     *
+     */
+    public function renderAttrs($menu)
+    {
+
+    }
+
+    /**
+     *
+     */
+    public function renderMenuContent($menu, $level)
+    {
+
+        $output = '';
+        $class = $menu['is_group'] ? "mega-group" : "";
+        $menu['menu_class'] = ' ' . $class;
+        if ($menu['type'] == 'html') {
+            $output .= '<li class="' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
+            $output .= '<div class="menu-content">' . html_entity_decode($menu['content_text']) . '</div>';
+            $output .= '</li>';
+            return $output;
+        }
+        if ($this->hasChild($menu['megamenu_id'])) {
+
+            $output .= '<li class="parent dropdown-submenu' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
+            if ($menu['show_title']) {
+                $output .= '<a class="dropdown-toggle" data-toggle="dropdown" href="' . $this->getLink($menu) . '">';
+                $t = '%s';
+                if ($menu['image']) {
+                    $output .= '<span class="menu-icon" style="background:url(\'' . $this->shopUrl . "image/" . $menu['image'] . '\') no-repeat;">';
+                }
+
+                if (isset($menu['badges']) && !empty($menu['badges'])) {
+                    $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                }
+
+                $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
+                if ($menu['description']) {
+                    $output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
+                }
+                $output .= "<b class=\"caret\"></b>";
+                if ($menu['image']) {
+                    $output .= '</span>';
+                }
+                $output .= '</a>';
+            }
+            if ($menu['megamenu_id'] > 1) {
+                $output .= $this->genTree($menu['megamenu_id'], $level, $menu);
+            }
+            $output .= '</li>';
+
+        } else {
+            $output .= '<li class="' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
+            if ($menu['show_title']) {
+                $output .= '<a href="' . $this->getLink($menu) . '">';
+
+                if ($menu['image']) {
+                    $output .= '<span class="menu-icon" style="background:url(\'' . $this->shopUrl . "image/" . $menu['image'] . '\') no-repeat;">';
+                }
+                $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
+                if ($menu['description']) {
+                    $output .= '<span class="menu-desc">' . $menu['description'] . "</span>";
+                }
+                if ($menu['image']) {
+                    $output .= '</span>';
+                }
+
+                $output .= '</a>';
+            }
+            $output .= '</li>';
+        }
+        return $output;
+    }
+
+    public function getParentCategory($id_child)
+    {
+        $result = $this->db->query("SELECT `parent_id`,`information` FROM `" . DB_PREFIX . "category` WHERE `category_id` = '" . $id_child . "'");
+        return $result->row;
+    }
+
+    /**
+     *
+     */
+    public function getLink($menu)
+    {
         $id = (int)$menu['item'];
-        switch( $menu['type'] ){
+        switch ($menu['type']) {
             case 'category':
                 $parent = $this->getParentCategory($id);
-                if( $parent && isset($parent['parent_id']) && $parent['parent_id'] ){
-                    $id = $parent['parent_id'].'_'.$id;
+                if ($parent && isset($parent['parent_id']) && $parent['parent_id']) {
+                    $id = $parent['parent_id'] . '_' . $id;
                 }
-                if($parent && isset($parent['information']) && $parent['information'] ){
-                    return $this->url->link('information/category', 'path=' . $id,'SSL');
+                if ($parent && isset($parent['information']) && $parent['information']) {
+                    return $this->url->link('information/category', 'path=' . $id, 'SSL');
                 }
-                return $this->url->link('product/category', 'path=' . $id,'SSL');
+                return $this->url->link('product/category', 'path=' . $id, 'SSL');
             case 'product':
-                return  $this->url->link('product/product', 'product_id=' . $id,'SSL');
+                return $this->url->link('product/product', 'product_id=' . $id, 'SSL');
             case 'information':
-                return   $this->url->link('information/information', 'information_id=' . $id,'SSL');
+                return $this->url->link('information/information', 'information_id=' . $id, 'SSL');
             case 'manufacturer':
-                return  $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $id,'SSL');
+                return $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $id, 'SSL');
             default:
                 return $menu['url'];
         }
     }
 
-	/**
-	 *
-	 */
-	public function getResponsiveTree(){
+    /**
+     *
+     */
+    public function getResponsiveTree()
+    {
 
-	}
+    }
 
-	public function isInstalled() {
-		$sql = " SHOW TABLES LIKE '".DB_PREFIX."megamenu'";
-		$query = $this->db->query( $sql );
-		if( count($query->rows) <=0 ){
-			$file = dirname(DIR_APPLICATION).'/admin/model/sample/module.php';
-			if( file_exists($file) ){
-				require_once( $file );
-		 		$sample = new ModelSampleModule( $this->registry );
-		 	    $result = $sample->installSampleQuery( $this->config->get('theme_default_directory'),'pavmegamenu', true );
-		 	    return true;
-			}
-		}
-		return true;
-	}
+    public function isInstalled()
+    {
+        $sql = " SHOW TABLES LIKE '" . DB_PREFIX . "megamenu'";
+        $query = $this->db->query($sql);
+        if (count($query->rows) <= 0) {
+            $file = dirname(DIR_APPLICATION) . '/admin/model/sample/module.php';
+            if (file_exists($file)) {
+                require_once($file);
+                $sample = new ModelSampleModule($this->registry);
+                $result = $sample->installSampleQuery($this->config->get('theme_default_directory'), 'pavmegamenu', true);
+                return true;
+            }
+        }
+        return true;
+    }
 
 }

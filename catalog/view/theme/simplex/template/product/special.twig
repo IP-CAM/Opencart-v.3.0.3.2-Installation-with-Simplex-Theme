@@ -111,22 +111,21 @@
                           {% endif %}
                         </div>
                         {% if product.special %}
-                          <p class="price">{{ product.special }}.-</p>
+                          <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
                         {% else %}
-                          <p class="price">{{ product.price }}.-</p>
+                          <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
                         {% endif %}
-                        <p class="currency">{{ currency }}</p>
+
                       {% endif %}
                     </div>
                   </a>
-                  {% if product.hide_price %}
-                    <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                      <p>{{ button_cart }}</p>
-                      <span class="image-container">
+
+                  <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                    <p>{{ button_cart }}</p>
+                    <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
-                    </button>
-                  {% endif %}
+                  </button>
                   <div class="float-buttons">
                     <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
                       <img

@@ -30,7 +30,16 @@ $_['text_day']                 = 'день';
 $_['text_week']                = 'недели';
 $_['text_semi_month']          = 'полмесяца';
 $_['text_month']               = 'месяц';
+$_['text_months']              = 'месяцев';
 $_['text_year']                = 'год';
+$_['text_sku']                 = 'SKU:';
+$_['text_garanty']             = 'Гарантия:';
+$_['text_available_online']    = 'Доступен онлайн';
+$_['text_available_in_stores'] = 'также в магазинах';
+$_['text_not_available']       = 'Не доступен';
+$_['text_livrarea_miine']      = 'Доствка завтра';
+$_['text_gratuit']             = 'бесплатно';
+$_['text_professional_installation']  = 'Необходима профессиональная установка?';
 
 // Entry
 $_['entry_qty']                = 'Количество';
@@ -44,6 +53,16 @@ $_['entry_bad']                = 'Плохо';
 $_['tab_description']          = 'Описание';
 $_['tab_attribute']            = 'Характеристики';
 $_['tab_review']               = 'Отзывов (%s)';
+$_['tab_documentation']        = 'Документация';
+$_['tab_availability_in_stocks'] = 'Доступность в магазинах';
+
+//columns
+$_['column_map']                              = 'Карта';
+$_['column_address']                          = 'Аддресс';
+$_['column_open']                             = 'График работы';
+$_['column_telefon']                          = 'Телефон';
+$_['column_availability']                     = 'Доступность';
+
 
 // Error
 $_['error_name']               = 'Имя должно быть от 3 до 25 символов!';

@@ -10,6 +10,7 @@
 class ControllerExtensionModuleBestSellerInformation extends Controller {
 	public function index($setting) {
 		$this->load->language('extension/module/bestseller_information');
+		$this->load->language('information/information');
 
 		$this->load->model('catalog/information');
 		$this->load->model('catalog/category');
