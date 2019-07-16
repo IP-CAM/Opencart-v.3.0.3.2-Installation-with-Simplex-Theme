@@ -71,7 +71,7 @@
                             </button>
                         </div>
                         <div class="filter d-lg-none d-block">
-                            <button aria-controls="collapseExample" aria-expanded="false" class="dropdown-button"
+                            <button  aria-controls="collapseExample" aria-expanded="false" class="dropdown-button"
                                     data-target="#collapseExample" data-toggle="collapse"
                                     type="button">
                                 <img alt="Filter" src="catalog/view/theme/simplex/assets/img/filter.svg">
@@ -263,22 +263,21 @@
                                                 {% endif %}
                                             </div>
                                             {% if product.special %}
-                                                <p class="price">{{ product.special }}.-</p>
+                                                <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
                                             {% else %}
-                                                <p class="price">{{ product.price }}.-</p>
+                                                <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
                                             {% endif %}
-                                            <p class="currency">{{ currency }}</p>
+
                                             {% endif %}
                                         </div>
                                     </a>
-                                    {% if product.hide_price %}
-                                    <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+
+                                    <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
                                         <p>{{ button_cart }}</p>
                                         <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
                                     </button>
-                                    {% endif %}
                                     <div class="float-buttons">
                                         <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
                                             <img
@@ -296,7 +295,9 @@
                             </div>
                         {% endfor %}
                         {% if products|length < 7 %}
+                        <div class="cards">
                             {{ column_right }}
+                        </div>
                         {% endif %}
                     </div>
                     <div id="pager">
@@ -312,9 +313,11 @@
                                 </button>
                             {% endif %}
                         </div>
+                        {% if products|length == limit %}
                         <div class="all">
                             <a id="show-all" href="#">{{ text_show_all }}</a>
                         </div>
+                        {% endif %}
                     </div>
                 {% else %}
                     <div class="container-fluid">

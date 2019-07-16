@@ -344,7 +344,7 @@ select, textarea, input:not([type=checkbox]):not([type=radio]):not(.form-control
 }
 
 select {
-	.has-error &, &.has-error {
+	.has-error & {
 		background   : #b7323240 !important;
 		border-color : #b73232 !important;
 		color        : #b73232 !important;
@@ -1940,7 +1940,7 @@ select {
 				
 				.price {
 					@include flex(none, none, start, wrap);
-					max-width : 15rem;
+					max-width : 215px;
 					
 					p {
 						text-align : right;
@@ -2420,18 +2420,10 @@ select {
 	}
 	
 	p {
-		font-size   : 0.8125rem;
-		font-weight : 500;
-		line-height : 2.154;
-		
-		a {
-			@include transition(color .125s linear);
-			color : $blue;
-			
-			&:hover {
-				color : $yellow;
-			}
-		}
+		font-size     : 0.8125rem;
+		font-weight   : 500;
+		line-height   : 2.154;
+		margin-bottom : 2.75rem;
 	}
 	
 	#back, #history {
@@ -2443,7 +2435,7 @@ select {
 		font-weight : 700;
 		height      : 40px;
 		line-height : 40px;
-		margin      : 2.75rem 0.75rem 0.75rem;
+		margin      : 0.75rem;
 		overflow    : hidden;
 		padding     : 0 10px 0 20px;
 		z-index     : 10;
@@ -2978,7 +2970,7 @@ select {
 	padding-bottom   : 1rem;
 	padding-top      : 1rem;
 	
-	button, a {
+	button {
 		@include border-radius;
 		@include flex(none, between, center);
 		@include transition(all .125s linear);

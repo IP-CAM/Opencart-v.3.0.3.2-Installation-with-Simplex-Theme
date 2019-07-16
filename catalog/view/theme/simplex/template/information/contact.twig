@@ -19,8 +19,8 @@
       <h4>
           {{ text_asteptam_in_magazinele }}
       </h4>
-      <div id="contacts-buttons">
-        <a id="form-link" role="button" target="#contact-form">
+      <div id="contacts-buttons" style="max-width: 40rem">
+        <a  id="form-link" role="button" target="#contact-form" ">
           <svg viewBox="0 0 139 89" xmlns="http://www.w3.org/2000/svg">
             <path d="M99.854,6.359 C115.045,6.359 123.298,6.359 123.298,6.359 C127.314,6.359 130.570,9.567 130.570,13.525 L130.570,72.449 C130.570,76.406 127.314,79.614 123.298,79.614 L13.929,79.614 C9.913,79.614 6.657,76.406 6.657,72.449 L6.657,13.525 C6.657,9.567 9.913,6.359 13.929,6.359 C13.929,6.359 20.889,6.359 35.224,6.359 C43.627,6.359 90.699,6.359 99.854,6.359 Z"
                   fill="none" fill-rule="evenodd" stroke="#000"
@@ -39,14 +39,40 @@
           </svg>
           Trimite mesaj online
         </a>
-        <a href="#">
+        {% if footer_titles %}
+          {% for footer_title in footer_titles %}
+            {% if loop.index==2 %}
+              {% if footer_title.sub_title %}
+                  {% for subtitle in footer_title.sub_title %}
+
+                    <a target="_blank" href="{{ subtitle.link }}" style="text-transform: capitalize">
+                      {% if subtitle.title=='facebook' %}
+                        <svg width="9px" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M2.430,8.260 L2.430,14.699 L5.564,14.699 L5.564,8.290 L7.701,8.290 L8.220,5.619 L5.591,5.619 C5.591,5.619 5.591,4.360 5.591,3.655 C5.591,3.386 5.734,3.024 6.170,3.024 C6.848,3.024 7.695,3.024 7.695,3.024 L7.695,0.301 C7.695,0.301 6.317,0.301 4.847,0.301 C3.870,0.301 2.428,1.510 2.428,2.791 C2.428,4.117 2.428,5.540 2.428,5.540 L0.780,5.540 L0.780,8.246 L2.430,8.260 Z"
+                                fill="#000"
+                                fill-rule="evenodd"></path>
+                        </svg>
+                      {% endif %}
+                      {% if subtitle.title=='instagram' %}
+                        <img style="margin-right: 16px" height="16" alt="{{ subtitle.title }}"
+                             src="catalog/view/theme/simplex/assets/img/instagram_black.svg"> {{ ' ' }}
+                      {% endif %}
+                      {{ subtitle.title }}</a>
+                  {% endfor %}
+
+              {% endif %}
+            {% endif %}
+
+          {% endfor %}
+        {% endif %}
+        {#<a href="#">
           <svg width="9px" xmlns="http://www.w3.org/2000/svg">
             <path d="M2.430,8.260 L2.430,14.699 L5.564,14.699 L5.564,8.290 L7.701,8.290 L8.220,5.619 L5.591,5.619 C5.591,5.619 5.591,4.360 5.591,3.655 C5.591,3.386 5.734,3.024 6.170,3.024 C6.848,3.024 7.695,3.024 7.695,3.024 L7.695,0.301 C7.695,0.301 6.317,0.301 4.847,0.301 C3.870,0.301 2.428,1.510 2.428,2.791 C2.428,4.117 2.428,5.540 2.428,5.540 L0.780,5.540 L0.780,8.246 L2.430,8.260 Z"
                   fill="#000"
                   fill-rule="evenodd"></path>
           </svg>
           Facebook
-        </a>
+        </a>#}
       </div>
       <div id="stores">
         {% for location in locations %}

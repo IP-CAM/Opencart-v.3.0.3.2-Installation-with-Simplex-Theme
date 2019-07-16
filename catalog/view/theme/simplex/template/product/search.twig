@@ -21,8 +21,12 @@
         <div class="catalog-wrapper">
             <div class="products-wrapper">
                 <div class="control">
-                    <div class="search" style="justify-content: space-between">
-                        <label><input id="input-search" name="search" placeholder="{{ text_keyword }}" type="text" value="{{ search }}"></label>
+                    <div class="search">
+                        <label class="search-field">
+                            <button id="button-search" type="submit"><img alt="Search" src="catalog/view/theme/simplex/assets/img/search.svg"></button>
+
+                            <input id="input-search" name="search" placeholder="{{ text_keyword }}" type="text" value="{{ search }}">
+                        </label>
                         <label><select name="category_id">
                                 <option value="0">{{ text_category }}</option>
                                 {% for category_1 in categories %}
@@ -47,11 +51,11 @@
                                     {% endfor %}
                                 {% endfor %}
                             </select></label>
-                        <button  type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary" >{{ button_search }}</button>
+{#                        <button  type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary" >{{ button_search }}</button>#}
                         {% if sub_category %}
-                            <label style="justify-self: flex-end"><input name="sub_category" type="checkbox" checked="checked" value="1">{{ text_sub_category }}</label>
+                            <label ><input name="sub_category" type="checkbox" checked="checked" value="1">{{ text_sub_category }}</label>
                         {% else %}
-                            <label style="justify-self: flex-end"><input name="sub_category" type="checkbox"  value="1">{{ text_sub_category }}</label>
+                            <label ><input name="sub_category" type="checkbox"  value="1">{{ text_sub_category }}</label>
                         {% endif %}
                     </div>
                     {% if products %}
@@ -142,22 +146,21 @@
                                                     {% endif %}
                                                 </div>
                                                 {% if product.special %}
-                                                    <p class="price">{{ product.special }}.-</p>
+                                                    <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
                                                 {% else %}
-                                                    <p class="price">{{ product.price }}.-</p>
+                                                    <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
                                                 {% endif %}
-                                                <p class="currency">{{ currency }}</p>
+
                                             {% endif %}
                                         </div>
                                     </a>
-                                    {% if product.hide_price %}
-                                        <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                                            <p>{{ button_cart }}</p>
-                                            <span class="image-container">
+
+                                    <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                                        <p>{{ button_cart }}</p>
+                                        <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
-                                        </button>
-                                    {% endif %}
+                                    </button>
                                     <div class="float-buttons">
                                         <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
                                             <img

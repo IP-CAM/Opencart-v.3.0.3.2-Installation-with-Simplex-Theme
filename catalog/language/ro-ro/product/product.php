@@ -30,12 +30,17 @@ $_['text_day']                                = 'zi';
 $_['text_week']                               = 'săptămână';
 $_['text_semi_month']                         = 'jumătate de lună';
 $_['text_month']                              = 'lună';
+$_['text_months']                             = 'luni';
 $_['text_year']                               = 'An';
 $_['text_sku']                                = 'Cod produs:';
 $_['text_garanty']                            = 'Garanție:';
 $_['text_available_online']                   = 'Disponibil online';
-$_['text_available_in_stores']                = 'Si in magazine';
+$_['text_available_in_stores']                = 'Și in magazine';
 $_['text_not_available']                      = 'Indisponibil';
+$_['text_livrarea_miine']                     = 'Livrăm maine';
+$_['text_gratuit']                            = 'gratuit';
+$_['text_professional_installation']          = 'Ai nevoie de instalare profesională?';
+
 
 // Entry
 $_['entry_qty']                               = 'Cantitate';
@@ -51,6 +56,14 @@ $_['tab_description']                         = 'Descriere';
 $_['tab_attribute']                           = 'Specificaţii';
 $_['tab_review']                              = 'Opinii (%s)';
 $_['tab_documentation']                       = 'Documentație';
+$_['tab_availability_in_stocks']              = 'Disponibilitate în magazine';
+
+// columns
+$_['column_map']                              = 'Harta';
+$_['column_address']                          = 'Adresa';
+$_['column_open']                             = 'Orele de lucru';
+$_['column_telefon']                          = 'Telefon';
+$_['column_availability']                     = 'Disponibilitate';
 
 
 // Error

@@ -157,21 +157,21 @@ class ControllerInformationInformation extends Controller {
         /* added by it-lab end */
 
 		$information_info = $this->model_catalog_information->getInformation($information_id);
-        $information_info_full=$this->model_catalog_information->getInformationFull($information_id);
-		if ($information_info) {
+        if ($information_info) {
 			$this->document->setTitle($information_info['meta_title']);
 			$this->document->setDescription($information_info['meta_description']);
 			$this->document->setKeywords($information_info['meta_keyword']);
 
 
 			$data['heading_title'] = $information_info['title'];
-
+            $information_info_full=$this->model_catalog_information->getInformationFull($information_id);
 			$data['description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
 			$data['description_additional'] = html_entity_decode($information_info_full['description_additional'], ENT_QUOTES, 'UTF-8');
 			$data['city'] = html_entity_decode($information_info_full['city'], ENT_QUOTES, 'UTF-8');
 			$data['continue'] = $this->url->link('common/home');
+            $data['date_added'] = $this->model_catalog_information->getDateWithMonth(( $information_info_full['date_added']),$this->language->get('code'));
 
-			$data['column_left'] = $this->load->controller('common/column_left');
+            $data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
@@ -180,13 +180,12 @@ class ControllerInformationInformation extends Controller {
 
             /* added by it-lab start */
             $this->load->model('catalog/category');
-
+            $data['thumb'] ='image/' . $information_info['image'];
 
             $categories = $this->model_catalog_information->getCategories($information_id);
             if(is_array($categories) && count($categories)>0){
                 $category=$categories[0]["category_id"];
                 $data["archive_link"] = $this->url->link('information/category&path='.$category);
-                $data['thumb'] ='image/' . $information_info['image'];
                 $data['date_added'] = $this->model_catalog_information->getDateWithMonth(( $information_info_full['date_added']),$this->language->get('code'));                $category = $this->model_catalog_category->getCategory($category);
                 $data['breadcrumbs'][] = array(
                     'text' => $category['name'],
@@ -234,7 +233,7 @@ class ControllerInformationInformation extends Controller {
                     return $this->response->setOutput($this->load->view($template , $data));
 
                 }else {
-                    return $this->response->setOutput($this->load->view('information/information_news', $data));
+                    return $this->response->setOutput($this->load->view('information/information_default', $data));
                 }
             }else {
                 $data['breadcrumbs'][] = array(
@@ -242,7 +241,7 @@ class ControllerInformationInformation extends Controller {
                     'href' => $this->url->link('information/information', 'information_id=' .  $information_id)
                 );
 
-                return $this->response->setOutput($this->load->view('information/information_news', $data));
+                return $this->response->setOutput($this->load->view('information/information_default', $data));
             }
 
             /* added by it-lab end */

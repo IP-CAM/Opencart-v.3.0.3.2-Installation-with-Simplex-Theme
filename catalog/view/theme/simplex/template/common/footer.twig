@@ -70,7 +70,7 @@
                             {% for footer_title in footer_titles %}
                                 {% if loop.index==2 %}
                                     {% if footer_title.sub_title %}
-                                        <p>
+                                        <p>{{ text_follow_us }}
                                         {% for subtitle in footer_title.sub_title %}
 
                                                 <a href="{{ subtitle.link }}">
@@ -100,6 +100,9 @@
         </div>
     </div>
 </footer>
+<div id="success-poppup">
+    <p class="message">Adăugat cu succes în wishlist</p>
+</div>
 <div class="phone-poppup">
     <span class="delete">
         <a href="#">
@@ -140,6 +143,30 @@
     }
 </script>
 <script>
+    wishlist.add =function(product_id) {
+        $.ajax({
+            url: 'index.php?route=account/wishlist/add',
+            type: 'post',
+            data: 'product_id=' + product_id,
+            dataType: 'json',
+            success: function(json) {
+                $('.alert-dismissible').remove();
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+
+                show_succes_popup(product_id,json['success_message']);
+
+                $('#wishlist-total span').html(json['total']);
+                $('#wishlist-total').attr('title', json['total']);
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        } );
+    }
     wishlist.remove = function (product_id) {
         $.ajax({
             url: 'index.php?route=account/wishlist/remove',
@@ -158,13 +185,12 @@
                 }
 
                 if (json['total'] === 0) {
-                    location.reload();
+                    $('main').html(json['wishlist_empty']);
                 }
-
                 $('#wishlist-total span').html(json['total']);
                 $('#wishlist-total').attr('title', json['total']);
 
-                $('html, body').animate({scrollTop: 0}, 'slow');
+                //$('html, body').animate({scrollTop: 0}, 'slow');
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -216,7 +242,7 @@
                 complete: function () {
                 },
                 success: function (json) {
-                    if (json["error_upload"]) {
+                    if (json["phone_error"]) {
                         $(".input-telephone input").addClass('has-error');
                     } else {
                         //$(".phone-poppup table").hide(300);
@@ -228,7 +254,7 @@
                         }, 1000);
                         setTimeout(function () {
                             $('.phone-poppup .delete').trigger('click');
-                        }, 2000);
+                        }, 1000);
                     }
 
                 },
@@ -251,12 +277,12 @@
 
                 if (json['success']) {
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
+                    show_succes_popup(product_id,json['success_message']);
                     $('#compare-total').html(json['total']);
                     console.log(json['total']);
                     $('#compare .quantity').html(json['total']);
 
-                    $('html, body').animate({scrollTop: 0}, 'slow');
+                    //$('html, body').animate({scrollTop: 0}, 'slow');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -268,6 +294,7 @@
 
 <script>
     cart.add = function (product_id, quantity) {
+        $this=$(this);
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
             type: 'post',
@@ -288,10 +315,10 @@
 
                 if (json['success']) {
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
+                    show_succes_popup(product_id,json['success_message']);
                     // Need to set timeout otherwise it wont update the total
 
-                    $('html, body').animate({scrollTop: 0}, 'slow');
+                    //$('html, body').animate({scrollTop: 0}, 'slow');
 
                     $('#cart .quantity').text(json['cart_count']);
 

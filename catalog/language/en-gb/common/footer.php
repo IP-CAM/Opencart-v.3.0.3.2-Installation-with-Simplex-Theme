@@ -21,4 +21,5 @@ $_['text_your_phone']   = 'Your phone';
 $_['text_our_stores'] = 'Our stores';
 $_['text_copyright'] = '<p>© 2019 Simplex.</p>
                         <p>All rights resserved</p>';
+$_['text_follow_us']   = 'Follow us:';
 

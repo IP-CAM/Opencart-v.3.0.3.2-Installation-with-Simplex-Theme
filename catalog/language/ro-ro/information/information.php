@@ -8,4 +8,5 @@ $_['share_information']="Împărtăşiți în rețelele de socializare";
 $_['text_archive_link']="Înapoi la arhiva";
 $_['text_installed']="Au fost instalate:";
 $_['text_used_brands']="Branduri folosite:";
+$_['text_other_projects'] = 'Alte proecte';
 

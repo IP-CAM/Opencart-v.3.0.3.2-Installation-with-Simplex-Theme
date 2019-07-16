@@ -10,6 +10,7 @@ $_['text_login']    = 'You must <a href="%s">login</a> or <a href="%s">create an
 $_['text_success']  = 'Success: You have added <a href="%s">%s</a> to your <a href="%s">wish list</a>!';
 $_['text_remove']   = 'Success: You have modified your wish list!';
 $_['text_empty']    = 'Your wish list is empty.';
+$_['text_success_message']     = 'Added to Wish List';
 
 // Column
 $_['column_image']  = 'Image';

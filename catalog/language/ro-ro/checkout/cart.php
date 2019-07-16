@@ -4,6 +4,7 @@ $_['heading_title']    = 'Coș de cumpărături';
 
 // Text
 $_['text_success']     = 'Succes: Ai adăugat <a href="%s">%s</a> în <a href="%s">coșul de cumpărături</a>!';
+$_['text_success_message']     = 'Adăugat în coșul';
 $_['text_remove']      = 'Succes: Ai modificat coșul de cumpărături!';
 $_['text_login']       = 'Atenție: Trebuie să <a href="%s">te autentifici</a> sau <a href="%s">să înregistrezi un cont nou</a> pentru a vedea prețurile!';
 $_['text_items']       = '%s produs(e) - %s';

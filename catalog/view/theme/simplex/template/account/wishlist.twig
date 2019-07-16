@@ -50,13 +50,14 @@
                                     </div>
                                 </a>
 
-
+                                {% if product.hide_price %}
                                 <button class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
                                     <p>{{ button_cart }}</p>
                                     <span class="image-container">
                                     <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                     </span>
                                 </button>
+                                {% endif %}
 
                                 <div class="float-buttons">
                                     <button class="compare" href="#" onclick="compare.add('{{ product.product_id }}');">
