@@ -5,7 +5,11 @@
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                 {% if loop.first %}
-                    <li><a href="{{ breadcrumb.href }}"><img alt="Home" src="catalog/view/theme/simplex/assets/img/home.svg"></a></li>
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
                 {% else %}
                     <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
                 {% endif %}
@@ -21,7 +25,7 @@
         </div>
         <div class="gallery-item-container item-container">
             <h4>
-                {{ album_images.album_description}}
+                {{ album_images.album_description }}
             </h4>
             <div class="slideshow">
                 {% for gallery_image in gallery_images %}
@@ -34,16 +38,16 @@
             <div class="slideshow-nav">
                 {% for gallery_image in gallery_images %}
 
-                    <div class="image {{ loop.first?'active' }} data-slick-index="{{ loop.index0 }}">
-                        <img alt="Main" src="{{ gallery_image.image }}">
-                    </div>
-                {% endfor %}
+                <div class="image {{ loop.first?'active' }} data-slick-index="{{ loop.index0 }}">
+                <img alt="Main" src="{{ gallery_image.image }}">
             </div>
+            {% endfor %}
+        </div>
         <div class="content">
             <h2>Detalii despre album</h2>
-                {{ album_images.about }}
-            </div>
+            {{ album_images.about }}
         </div>
+    </div>
     <div class="share">
         <div class="back">
             <a href="{{ archive_link }}">Înapoi la arhiva</a>
@@ -98,7 +102,8 @@
         <div class="interesting">
             <h4>{{ random_album.album_title }}</h4>
             <div class="card">
-                <a href="{{ random_album.link }}" tabindex="0"><img alt="New 1" class="card-img-top" src="{{ random_album.album_image }}"></a>
+                <a href="{{ random_album.link }}" tabindex="0"><img alt="New 1" class="card-img-top"
+                                                                    src="{{ random_album.album_image }}"></a>
                 <div class="card-body">
                     <div class="card-text">
                         <a href="{{ random_album.link }}" tabindex="0">{{ random_album.album_description }}</a>

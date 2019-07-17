@@ -4,12 +4,13 @@
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                 {% if loop.first %}
-                    <li><a href="{{ breadcrumb.href }}"><img alt="Home" src="catalog/view/theme/simplex/assets/img/home.svg"></a></li>
-                {% else %}
-                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
                 {% endif %}
             {% endfor %}
-
         </ul>
         <div class="page-title">
             <h1>{{ heading_title }}</h1>
@@ -19,19 +20,19 @@
         <div class="gallery-wrapper wrapper">
             <div class="gallery-items">
                 {% for gallery_album in gallery_albums %}
-                <div class="item">
-                    <div class="image-container">
-                        <img alt="Foto 1" src="{{ gallery_album.image }}">
-                    </div>
-                    <div class="item-body">
-                        <h3>{{ gallery_album.title }}</h3>
-                        <p>{{ gallery_album.description }}</p>
-                        <div class="photo-num">
-                            <p>{{ gallery_album.count }} {{ gallery_album.photos_msg }}</p>
+                    <a class="item" href="{{ gallery_album.url }}">
+                        <div class="image-container">
+                            <img alt="Foto 1" src="{{ gallery_album.image }}">
                         </div>
-                        <a class="link" href="{{ gallery_album.url}}">{{ visit_gallery_label }}<span class="image-container"></span></a>
-                    </div>
-                </div>
+                        <div class="item-body">
+                            <h3>{{ gallery_album.title }}</h3>
+                            <p>{{ gallery_album.description }}</p>
+                            <div class="photo-num">
+                                <p>{{ gallery_album.count }} {{ gallery_album.photos_msg }}</p>
+                            </div>
+                            <button class="link">{{ visit_gallery_label }}<span class="image-container"></span></button>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
             <aside>
