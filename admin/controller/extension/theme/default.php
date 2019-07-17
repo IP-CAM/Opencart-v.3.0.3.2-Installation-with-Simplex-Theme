@@ -167,8 +167,18 @@ class ControllerExtensionThemeDefault extends Controller {
 		} else {
 			$data['theme_default_image_category_width'] = 80;		
 		}
-		
-		if (isset($this->request->post['theme_default_image_category_height'])) {
+        /* added by it-lab start */
+
+        if (isset($this->request->post['theme_default_image_category_width'])) {
+            $data['theme_default_latest_count'] = $this->request->post['theme_default_latest_count'];
+        } elseif (isset($setting_info['theme_default_latest_count'])) {
+            $data['theme_default_latest_count'] = $setting_info['theme_default_latest_count'];
+        } else {
+            $data['theme_default_latest_count'] = 20;
+        }
+        /* added by it-lab end */
+
+        if (isset($this->request->post['theme_default_image_category_height'])) {
 			$data['theme_default_image_category_height'] = $this->request->post['theme_default_image_category_height'];
 		} elseif (isset($setting_info['theme_default_image_category_height'])) {
 			$data['theme_default_image_category_height'] = $setting_info['theme_default_image_category_height'];

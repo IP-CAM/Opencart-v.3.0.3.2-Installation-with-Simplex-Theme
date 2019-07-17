@@ -46,11 +46,7 @@ class Currency {
 		}
 
 		$string .= number_format($amount, (int)$decimal_place, $this->language->get('decimal_point'), $this->language->get('thousand_point'));
-        if(strlen($string)>3){
-            $last = substr($string,-3);
-            $string =substr($string,0,strlen($string)-3);
-            $string=$string.' '.$last;
-        }
+
 		if ($symbol_right) {
 			$string .= $symbol_right;
 		}

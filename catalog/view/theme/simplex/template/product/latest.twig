@@ -37,6 +37,18 @@
               </select>
               <label for="sort"></label>
             </div>
+              <div class="show-num">
+                  <select id="show-num" onchange="location = this.value;">
+                      {% for limits in limits %}
+                          {% if limits.value == limit %}
+                              <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
+                          {% else %}
+                              <option value="{{ limits.href }}">{{ limits.text }}</option>
+                          {% endif %}
+                      {% endfor %}
+                  </select>
+                  <label for="show-num">{{ text_items_on_page }}</label>
+              </div>
           </div>
           <div class="right">
             <div class="button-group">
@@ -125,8 +137,26 @@
                 </div>
               </div>
             {% endfor %}
-
           </div>
+            <div id="pager">
+                <div class="total">
+                    <p>{{ text_total }} {{ product_total }} {{ text_pozitions }}</p>
+                </div>
+                <div class="show-more">
+                    {% if num_pages>1 %}
+                        <button id="show-more-button" type="button" data-page="{{ page }}" data-limit="{{ limit }}" data-total="{{ product_total }}"
+                                data-num_pages="{{ num_pages }}">
+                            <span class="image-container"></span>
+                            <p>{{ text_show_more }} <span class="show-more-limit">{{ show_more_limit }}</span> {{ text_pozitions }}</p>
+                        </button>
+                    {% endif %}
+                </div>
+                {% if products|length == limit %}
+                    <div class="all">
+                        <a id="show-all" href="#">{{ text_show_all }}</a>
+                    </div>
+                {% endif %}
+            </div>
         {% else %}
           <div class="container-fluid">
             <div id="success">
@@ -140,5 +170,81 @@
   </div>
   </div>
 </main>
+<script>
+    function urlParam(link, name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(link);
+        if (results == null) {
+            return null
+        }
+        return results[1] || null;
+    }
+
+    $("#show-more-button").click(function () {
+        var $show_more_button = $(this);
+        var link = window.location.href;
+        var page = urlParam(link, 'page');
+        var params = {method: "load_more",};
+        link += '&' + jQuery.param(params);
+        var page = $(this).data("page");
+        var page_num = $(this).data("num_pages");
+        if (page <= page_num) {
+            var url = new URL(link);
+            var query_string = url.search;
+            var search_params = new URLSearchParams(query_string);
+            page = page + 1;
+            search_params.set('page', page);
+            url.search = search_params.toString();
+            link = url.toString();
+            $.ajax({
+                url: link,
+                success: function (data) {
+                    $(".products").append(data);
+                    $show_more_button.data("page", page);
+                    var limit = $show_more_button.data('limit');
+                    var total = $show_more_button.data('total');
+
+                    if((total - page*limit)<limit) {
+                        var show_more_limit=total - page*limit;
+                        $show_more_button.find('.show-more-limit').html(show_more_limit);
+                    }
+                    if (page == page_num) {
+                        $show_more_button.hide();
+                        $("#show-all").hide();
+                    }
+                }
+            });
+        }
+    })
+    $("#show-all").click(function (e) {
+
+        var $show_all = $(this);
+        var link = window.location.href;
+        var page = urlParam(link, 'page');
+        var params = {method: "load_all",};
+        link += '&' + jQuery.param(params);
+        var page = $("#show-more-button").data("page");
+        var page_num = $("#show-more-button").data("num_pages");
+        var url = new URL(link);
+        var query_string = url.search;
+        var search_params = new URLSearchParams(query_string);
+        page = page + 1;
+        search_params.set('page', page);
+        search_params.set('num_pages', page_num);
+        url.search = search_params.toString();
+        link = url.toString();
+
+        $.ajax({
+            url: link,
+            success: function (data) {
+                $(".products").append(data);
+                $("#show-more-button").data("page", page);
+                $("#show-more-button").hide();
+                $("#show-all").hide();
+            }
+        });
+        return false;
+    })
+</script>
+
 {{ content_bottom }}
 {{ footer }}

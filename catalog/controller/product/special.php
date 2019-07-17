@@ -89,7 +89,7 @@ class ControllerProductSpecial extends Controller {
 
 		$results = $this->model_catalog_product->getProductSpecials($filter_data);
         /* added by it-lab start */
-        $latest_products=$this->model_catalog_product->getLatestProducts(10);
+        $latest_products=$this->model_catalog_product->getLatestProducts($this->config->get('theme_' . $this->config->get('config_theme') . '_latest_count'));
         /* added by it-lab end */
 		foreach ($results as $result) {
 			if ($result['image']) {
@@ -303,6 +303,12 @@ class ControllerProductSpecial extends Controller {
             $data['num_pages'] = $num_pages;
         }
         $data['page'] = $page;
+        if(($product_total - $page*$limit)<$limit) {
+            $show_more_limit=$product_total - $page*$limit;
+        }else{
+            $show_more_limit=$limit;
+        }
+        $data["show_more_limit"]=$show_more_limit;
         /* added by it-lab end */
 		$data['continue'] = $this->url->link('common/home');
 
