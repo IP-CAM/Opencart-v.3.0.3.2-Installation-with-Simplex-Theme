@@ -1,5 +1,5 @@
 {{ header }}
-<main class="gallery-bg">
+<main class="news-bg">
     <div class="container-fluid">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
@@ -7,11 +7,10 @@
                     <li><a href="{{ breadcrumb.href }}"><img alt="Home"
                                                              src="catalog/view/theme/simplex/assets/img/home.svg"></a>
                     </li>
-                {% else %}
-                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
                 {% endif %}
             {% endfor %}
-
         </ul>
         <div class="page-title" id="news-title">
             <h1>{{ heading_title }}</h1>

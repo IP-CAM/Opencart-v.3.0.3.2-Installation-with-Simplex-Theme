@@ -294,7 +294,7 @@
 
 <script>
     cart.add = function (product_id, quantity) {
-        $this=$(this);
+        var $this = $(this);
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
             type: 'post',
@@ -322,7 +322,7 @@
 
                     $('#cart .quantity').text(json['cart_count']);
 
-                    $('#cart > ul').load('index.php?route=common/cart/info ul li');
+                    $('#cart .dropdown-menu > ul').load('index.php?route=common/cart/info ul li');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -349,8 +349,6 @@
                 }, 100);
                 $('#cart-total').html(json['count']);
 
-
-
                 if (json['count'] === 0) {
                     location.reload();
                 }
@@ -358,7 +356,7 @@
                 if (getURLVar('route') === 'checkout/cart' || getURLVar('route') === 'checkout/checkout') {
                     location = 'index.php?route=checkout/cart';
                 } else {
-                    $('#cart > ul').load('index.php?route=common/cart/info ul li');
+                    $('#cart .dropdown-menu > ul').load('index.php?route=common/cart/info ul li');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {

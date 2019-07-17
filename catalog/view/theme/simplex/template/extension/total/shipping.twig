@@ -1,7 +1,3 @@
-<div class="panel-heading">
-    <h5>{{ text_next }}</h5>
-    <p></p>
-</div>
 <div id="collapse-shipping" class="panel-collapse" style="display: none;">
     <div class="panel-body">
         <select name="zone_id" id="input-zone" class="form-control">
@@ -49,14 +45,15 @@
                                 if (!json['shipping_method'][i]['error']) {
                                     for (j in json['shipping_method'][i]['quote']) {
                                         if (json['shipping_method'][i]['quote'][j]['code'] === '{{ shipping_method }}') {
-                                            $('<label><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" checked="checked" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
+                                            $('<label class="semi-bold"><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" checked="checked" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
+
+                                            $('.panel-heading p').html('<span>Costul livrării</span>' + json['shipping_method'][i]['quote'][j]['cost'] + ' <small>MDL</small>');
                                         } else {
                                             $('<label><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
                                         }
                                     }
                                 }
                             }
-
 
                             $('input[type="radio"]').after('<span class="radio"></span>');
 
@@ -66,53 +63,58 @@
                                     $('#collapse-shipping').show();
                                 } else {
                                     $('#collapse-shipping').hide();
-                                    $('.panel-heading p').html('<span>{{ shipping_cost }}</span>' + 0 + ' <small>MDL</small>');
+                                    $.ajax({
+                                        url: 'index.php?route=extension/total/shipping/shipping',
+                                        type: 'post',
+                                        data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
+                                        dataType: 'json',
+                                        beforeSend: function () {
+                                            $('#button-shipping').button('loading');
+                                        },
+                                        complete: function () {
+                                            $('#button-shipping').button('reset');
+                                        },
+                                        success: function (json) {
+                                            $('.alert-dismissible').remove();
+
+                                            if (json['error']) {
+                                                $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                                                $('html, body').animate({scrollTop: 0}, 'slow');
+                                            }
+                                            location.reload();
+                                            if (json['redirect']) {
+                                                location = json['redirect'];
+                                            }
+                                        },
+                                        error: function (xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                        }
+                                    });
                                 }
                                 $('#input-zone').on('change', function () {
                                     $.ajax({
-                                        url: 'index.php?route=extension/total/shipping/quote',
+                                        url: 'index.php?route=extension/total/shipping/shipping',
                                         type: 'post',
-                                        data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
+                                        data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
                                         dataType: 'json',
                                         beforeSend: function () {
-                                            $('#button-quote').button('loading');
+                                            $('#button-shipping').button('loading');
                                         },
                                         complete: function () {
-                                            $('#button-quote').button('reset');
+                                            $('#button-shipping').button('reset');
                                         },
                                         success: function (json) {
-                                            $('.alert-dismissible, .text-danger').remove();
+                                            $('.alert-dismissible').remove();
+
                                             if (json['error']) {
-                                                if (json['error']['warning']) {
-                                                    $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                                                $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
-                                                    $('html, body').animate({scrollTop: 0}, 'slow');
-                                                }
-
-                                                if (json['error']['country']) {
-                                                    $('select[name=\'country_id\']').addClass('has-error');
-                                                }
-
-                                                if (json['error']['zone']) {
-                                                    $('select[name=\'zone_id\']').addClass('has-error');
-                                                }
-
-                                                if (json['error']['postcode']) {
-                                                    $('input[name=\'postcode\']').addClass('has-error');
-                                                }
+                                                $('html, body').animate({scrollTop: 0}, 'slow');
                                             }
-                                            if (json['shipping_method']) {
-                                                console.log(json['shipping_method']);
-                                                for (i in json['shipping_method']) {
-                                                    if (!json['shipping_method'][i]['error']) {
-                                                        for (j in json['shipping_method'][i]['quote']) {
-                                                            if (json['shipping_method'][i]['quote'][j]['code'] === $('input[name="shipping_method"]:checked').val()) {
-                                                                $('.panel-heading p').html('<span>Costul livrării</span>' + json['shipping_method'][i]['quote'][j]['cost'] + ' <small>MDL</small>');
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
+                                            location.reload();
+                                            if (json['redirect']) {
+                                                location = json['redirect'];
                                             }
                                         },
                                         error: function (xhr, ajaxOptions, thrownError) {

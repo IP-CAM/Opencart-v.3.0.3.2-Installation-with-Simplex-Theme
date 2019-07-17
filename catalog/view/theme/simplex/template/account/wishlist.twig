@@ -3,17 +3,16 @@
     <div class="container-fluid">
         {% if products %}
             <ul class="breadcrumb">
-                {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-
-            </ul>
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
             <div class="page-title" id="wishlist">
                 <h1>{{ heading_title }}</h1>
             </div>

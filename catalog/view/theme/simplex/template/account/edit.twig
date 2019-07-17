@@ -7,8 +7,8 @@
                     <li><a href="{{ breadcrumb.href }}"><img alt="Home"
                                                              src="catalog/view/theme/simplex/assets/img/home.svg"></a>
                     </li>
-                {% else %}
-                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
                 {% endif %}
             {% endfor %}
         </ul>

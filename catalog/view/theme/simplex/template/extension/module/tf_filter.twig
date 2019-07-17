@@ -22,40 +22,19 @@
             <div class="input-min">
               <input id="minprice-xl" name="tf_fp[min]" value="{{ filter['selected']['min'] }}"  min="{{ filter['min_price'] }}" max="{{ filter['max_price'] - 1 }}" step="10"
                      type="number">
-              <label for="minprice-xl">de la</label>
+              <label for="minprice-xl">{{ text_from }}</label>
             </div>
             <p style="line-height:2.25">&ndash;</p>
             <div class="input-max">
               <input id="maxprice-xl" name="tf_fp[max]" value="{{ filter['selected']['max'] }}"  min="{{ filter['min_price'] }}" max="{{ filter['max_price'] - 1 }}" step="10"
                      type="number">
-              <label for="maxprice-xl">pînă la</label>
+              <label for="maxprice-xl">{{ text_to }}</label>
             </div>
           </div>
         </div>
       </div>
     </div>
-  {#<div class="tf-filter-group">
-    <div class="tf-filter-group-header {{ filter['collapse']?'collapsed' }}" data-toggle="collapse" href="#tf-filter-panel{{ key }}">
-      <span class="tf-filter-group-title">{{ text_price }}</span>
-      <span class="pull-right"><i class="fa fa-caret-up"></i></span>
-    </div>
-    <div id="tf-filter-panel{{ key }}" class="collapse {{ not filter['collapse']?'in':'' }}" >
-      {% if reset_group %}
-        {% if filter['selected']['min'] != filter['min_price'] or filter['selected']['max'] != filter['max_price'] %}
-        <a data-tf-reset="price" class=" tf-filter-reset"><i class="fa fa-window-close" aria-hidden="true"></i> {{ text_reset }}</a>
-        {% else %}
-        <a data-tf-reset="price" class=" tf-filter-reset hide"><i class="fa fa-window-close" aria-hidden="true"></i> {{ text_reset }}</a>
-        {% endif %}
-      {% endif %}
-      <div class="tf-filter-group-content">
-        <div data-role="rangeslider"></div>
-        <div class="row">
-          <div class="col-xs-6"><input type="number" class="form-control" name="tf_fp[min]" value="{{ filter['selected']['min'] }}" /></div>
-          <div class="col-xs-6"><input type="number" class="form-control" name="tf_fp[max]" value="{{ filter['selected']['max'] }}" min="{{ filter['min_price'] + 1 }}" max="{{ filter['max_price'] }}" /></div>
-        </div>
-      </div>
-    </div>
-  </div>#}
+
   {% elseif (filter['type'] == 'manufacturer' and filter['values']) %} {# Manufacturer #}
     <div class="card tf-filter-group">
       <button aria-controls="collapse{{ key }}" aria-expanded="false" class="collapsed"
@@ -165,48 +144,14 @@
               </div>
           </div>
       </div>
-  {#<div class="tf-filter-group">
-    <div class="tf-filter-group-header {{ filter['collapse']?'collapsed' }}" data-toggle="collapse" href="#tf-filter-panel{{ key }}">
-      <span  class="tf-filter-group-title">{{ filter['name'] }}</span>
-      <span class="pull-right"><i class="fa fa-caret-up"></i></span>
-    </div>
-    <div id="tf-filter-panel{{ key }}" class="collapse {{ not filter['collapse']?'in':'' }}" >
-      {% if reset_group %}
-        {% set total_selected = 0 %}
-        {% for value in filter['values'] if value['selected'] %}{% set total_selected = total_selected + 1 %}{% endfor %}
-        <a data-tf-reset="check" class=" tf-filter-reset{{ not total_selected?' hide' }}"><i class="fa fa-window-close" aria-hidden="true"></i> {{ text_reset }}</a>
-      {% endif %}
-      <div class="tf-filter-group-content">
-        {% for value in filter['values'] %} 
-          <div class="form-check tf-filter-value">
-            <label class="form-check-label">
-              {% if (value['selected']) %} 
-              <input type="checkbox" name="tf_ff" value="{{ value['filter_id'] }}" class="form-check-input" checked>
-              {% else %} 
-              <input type="checkbox" name="tf_ff" value="{{ value['filter_id'] }}" class="form-check-input" {{ not value['status']?'disabled' }}>
-              {% endif %} 
-              {{ value['name'] }}
-            </label>
-            {% if count_product %}
-              {% if (value['total']) %} 
-              <span class="label label-info pull-right tf-product-total">{{ value['total'] }}</span>
-              {% else %}
-              <span class="label label-info label-danger pull-right tf-product-total">{{ value['total'] }}</span>
-              {% endif %} 
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>#}
-  
+
   {% endif %} 
 {% endfor %}
     <div class="card">
         <div class="card-body">
             <div class="link-group">
                 <a class="apply" >
-                    <p>filtrare</p>
+                    <p>{{ text_filter }}</p>
                     <span class="image-container"></span>
                 </a>
                 {% if reset_all %}

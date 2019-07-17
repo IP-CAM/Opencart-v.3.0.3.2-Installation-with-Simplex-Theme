@@ -22,4 +22,6 @@ $_['text_rating_desc']  = 'Рейтинг (начиная с высокого)';
 $_['text_model_asc']    = 'Модель (А - Я)';
 $_['text_model_desc']   = 'Модель (Я - А)';
 $_['text_limit']        = 'Показать:';
+$_['text_date_added_desc'] = 'Новинки';
+$_['text_popular_desc'] = 'Популярность';
 

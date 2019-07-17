@@ -7,8 +7,8 @@
                     <li><a href="{{ breadcrumb.href }}"><img alt="Home"
                                                              src="catalog/view/theme/simplex/assets/img/home.svg"></a>
                     </li>
-                {% else %}
-                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
                 {% endif %}
             {% endfor %}
         </ul>
@@ -90,9 +90,11 @@
                     <tfoot>
                     <tr>
                         <td colspan="6" style="text-align: right"><span>{{ totals[0].title }}:</span></td>
-                        <td colspan="2"><h5 style="margin-bottom: 0;">{{ totals[0].text }}
+                        <td colspan="2">
+                            <h5 style="margin-bottom: 0;">{{ totals[0].text }}
                                 <small style="font-size: .625rem;font-weight: 500;">MDL</small>
-                            </h5></td>
+                            </h5>
+                        </td>
                     </tr>
                     </tfoot>
                 </table>
@@ -100,6 +102,10 @@
             {% if modules %}
                 <div class="panel panel-default">
                     {% for module in modules %}
+                        <div class="panel-heading">
+                            <h5>{{ text_next }}</h5>
+                            <p><span>{{ totals[0].title }}</span>{{ totals[0].text }}<small>MDL</small></p>
+                        </div>
                         {{ module }}
                     {% endfor %}
                 </div>
@@ -109,11 +115,12 @@
                     <span>{{ total }}</span>
                     <div class="price">
                         <h5>
+                            {{ totals[2].text }}
                             <small>MDL</small>
                         </h5>
                     </div>
                 </div>
-                <a href="{{ checkout }}" class="btn btn-primary">{{ button_checkout }}<span
+                <a href="{{ checkout }}">{{ button_checkout }}<span
                             class="image-container"></span></a>
             </div>
         </div>
@@ -122,58 +129,3 @@
     {{ content_bottom }}
 </main>
 {{ footer }}
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: 'index.php?route=extension/total/shipping/quote',
-            type: 'post',
-            data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
-            dataType: 'json',
-            beforeSend: function () {
-                $('#button-quote').button('loading');
-            },
-            complete: function () {
-                $('#button-quote').button('reset');
-            },
-            success: function (json) {
-                $('.alert-dismissible, .text-danger').remove();
-                if (json['error']) {
-                    if (json['error']['warning']) {
-                        $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
-                        $('html, body').animate({scrollTop: 0}, 'slow');
-                    }
-
-                    if (json['error']['country']) {
-                        $('select[name=\'country_id\']').addClass('has-error');
-                    }
-
-                    if (json['error']['zone']) {
-                        $('select[name=\'zone_id\']').addClass('has-error');
-                    }
-
-                    if (json['error']['postcode']) {
-                        $('input[name=\'postcode\']').addClass('has-error');
-                    }
-                }
-                if (json['shipping_method']) {
-                    for (i in json['shipping_method']) {
-                        if (!json['shipping_method'][i]['error']) {
-                            for (j in json['shipping_method'][i]['quote']) {
-                                if (json['shipping_method'][i]['quote'][j]['code'] === $('input[name="shipping_method"]').val()) {
-                                    $('.checkout .price h5').prepend(parseInt({{ totals[0].text }}) + parseInt(json['shipping_method'][i]['quote'][j]['cost']));
-                                }
-                            }
-                        }
-                    }
-
-
-                    $('input[type="radio"]').after('<span class="radio"></span>');
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
-        });
-    });
-</script>
