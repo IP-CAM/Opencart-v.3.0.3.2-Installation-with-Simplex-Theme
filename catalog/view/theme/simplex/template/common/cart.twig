@@ -1,6 +1,6 @@
 <div class="dropdown-menu dropdown-menu-right">
-    {% if products or vouchers %}
-        <ul>
+    <ul>
+        {% if products or vouchers %}
             {% for product in products %}
                 <li class="product">
                     <a href="{{ product.href }}">
@@ -20,19 +20,24 @@
                             class="delete"></button>
                 </li>
             {% endfor %}
-        </ul>
-        <div class="total">
-            <p>
-                <span>{{ totals[0].title }}</span>
-                <br>
-                <span class="price">{{ totals[0].text }} <span class="currency">MDL</span></span>
-            </p>
-            <a href="{{ cart }}">
-                {{ text_cart }}
-                <span class="image-container"></span>
-            </a>
-        </div>
-    {% else %}
-        <p class="text-center">{{ text_empty }}</p>
-    {% endif %}
+        {% else %}
+            <li><p class="text-center">{{ text_empty }}</p></li>
+        {% endif %}
+    </ul>
+
+    <div class="total-wrapper">
+        {% if products or vouchers %}
+            <div class="total">
+                <p>
+                    <span>{{ totals[0].title }}</span>
+                    <br>
+                    <span class="price">{{ totals[0].text }} <span class="currency">MDL</span></span>
+                </p>
+                <a href="{{ cart }}">
+                    {{ text_cart }}
+                    <span class="image-container"></span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
 </div>

@@ -94,7 +94,7 @@
                         <td colspan="6" style="text-align: right"><span>{{ totals[0].title }}:</span></td>
                         <td colspan="2">
                             <h5 style="margin-bottom: 0;">{{ totals[0].text }}
-                                <small style="font-size: .625rem;font-weight: 500;">MDL</small>
+                                <small style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>
                             </h5>
                         </td>
                     </tr>
@@ -106,7 +106,7 @@
                     {% for module in modules %}
                         <div class="panel-heading">
                             <h5>{{ text_next }}</h5>
-                            <p><span>{{ totals[0].title }}</span>{{ totals[0].text }}<small>MDL</small></p>
+                            <p><span>{{ totals[0].title }}</span>{{ totals[0].text }}<small>{{ currency }}</small></p>
                         </div>
                         {{ module }}
                     {% endfor %}
@@ -118,7 +118,7 @@
                     <div class="price">
                         <h5>
                             {{ totals[2].text }}
-                            <small>MDL</small>
+                            <small>{{ currency }}</small>
                         </h5>
                     </div>
                 </div>

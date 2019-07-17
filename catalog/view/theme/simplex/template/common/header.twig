@@ -110,7 +110,7 @@
                                   stroke-dasharray="1, 4" stroke-linecap="round"
                                   stroke-width="2px"></path>
                         </svg>
-                        <span class="quantity">{{ compare_count }}</span>
+                        <span class="quantity {% if compare_count == 0%} d-none{% endif %}">{{ compare_count }}</span>
                         <span>Comparație</span>
                     </a>
                 </div>
@@ -121,7 +121,7 @@
                                   fill="none" fill-rule="evenodd"
                                   stroke-width="2px"></path>
                         </svg>
-                        <span class="quantity">{{ wishlist_count }}</span>
+                        <span class="quantity {% if wishlist_count == 0%} d-none{% endif %}">{{ wishlist_count }}</span>
                         <span>Favorite</span>
                     </a>
                 </div>
