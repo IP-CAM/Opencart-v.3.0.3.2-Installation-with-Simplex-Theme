@@ -177,7 +177,7 @@
                         <ul>
                             {% for category in catalog.children %}
                                 <li class="menu-item {{ category.active?'active' }} "><a
-                                            class="menu-link {{ category.menu_class }}"
+                                            class="menu-link {{ category.menu_class }} {{ category.active?'active' }}"
                                             href="{{ category.link }}">
                                         {% if category.image_svg !='' %}
                                             {{ category.image_svg }}

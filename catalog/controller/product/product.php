@@ -243,7 +243,7 @@ class ControllerProductProduct extends Controller {
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
             /* added by it-lab* start */
 
-            $latest_products=$this->model_catalog_product->getLatestProducts(10);
+            $latest_products=$this->model_catalog_product->getLatestProducts($this->config->get('theme_' . $this->config->get('config_theme') . '_latest_count'));
             $data['is_new']=array_key_exists($product_id,$latest_products);
             $data['hide_price'] = $product_info['hide_price']?false:true;
             if(!isset($category_info)){

@@ -262,9 +262,11 @@ class ModelCatalogProduct extends Model {
 	}
     /* added by it-lab start */
     public function getProductsByIds($data = array(),$product_ids) {
-        if(count($product_ids)){
-            $product_ids_str=implode(',',$product_ids);
-            $product_ids_sql=" AND (p.product_id IN ( $product_ids_str ) ) ";
+        if(count($product_ids)) {
+            $product_ids_str = implode(',', $product_ids);
+            $product_ids_sql = " AND (p.product_id IN ( $product_ids_str ) ) ";
+        }else{
+            return [];
         }
         $sql = "SELECT p.product_id, 
         (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE  r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, 

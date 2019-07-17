@@ -11,7 +11,7 @@ class ControllerExtensionModuleBestSeller extends Controller {
 
 		$results = $this->model_catalog_product->getBestSellerProducts($setting['limit']);
         /* added by it-lab start */
-        $latest_products=$this->model_catalog_product->getLatestProducts(10);
+        $latest_products=$this->model_catalog_product->getLatestProducts($this->config->get('theme_' . $this->config->get('config_theme') . '_latest_count'));
         /* added by it-lab end */
 		if ($results) {
 			foreach ($results as $result) {
