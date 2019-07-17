@@ -1165,9 +1165,6 @@ class ControllerCatalogProduct extends Controller {
         } else {
             $data['hide_price'] = 0;
         }
-        var_dump($this->request->post['hide_price']);
-        var_dump($data["hide_price"]);
-
 		$data['product_downloads'] = array();
 
 		foreach ($product_downloads as $download_id) {

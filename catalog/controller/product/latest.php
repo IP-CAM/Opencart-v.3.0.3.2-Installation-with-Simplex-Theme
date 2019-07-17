@@ -1,8 +1,6 @@
 <?php
 class ControllerProductLatest extends Controller {
     public function index() {
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
         $this->load->language('product/latest');
 
         $this->load->model('catalog/product');
@@ -26,14 +24,12 @@ class ControllerProductLatest extends Controller {
         } else {
             $page = 1;
         }
-        $filter_data = array(
-            'sort'  => $sort,
-            'order' => $order,
-            'limit' =>10,
-            'start' => 0,
 
-        );
-
+        if (isset($this->request->get['limit'])) {
+            $limit = (int)$this->request->get['limit'];
+        } else {
+            $limit = $this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit');
+        }
 
         $this->document->setTitle($this->language->get('heading_title'));
 
@@ -73,9 +69,23 @@ class ControllerProductLatest extends Controller {
 
         $data['products'] = array();
 
-        $product_total = 10;
+        $product_total = $latest_count = $this->config->get('theme_' . $this->config->get('config_theme') . '_latest_count');
 
-        $latest_products = $this->model_catalog_product->getLatestProducts(10);
+        $filter_data = array(
+            'sort'  => $sort,
+            'order' => $order,
+            'limit' =>$limit,
+            'start' => 0,
+
+        );
+        $filter_data_latest = array(
+            'sort'  => 'p.date_added',
+            'order' => "DESC",
+            'limit' =>$limit,
+            'start' => ($page - 1) * $limit,
+
+        );
+        $latest_products = $this->model_catalog_product->getProducts($filter_data_latest);
         $latest_products_ids=array_column($latest_products,'product_id');
         $results = $this->model_catalog_product->getProductsByIds($filter_data,$latest_products_ids);
 
@@ -128,6 +138,7 @@ class ControllerProductLatest extends Controller {
                 /* added by it-lab start */
                 'special_percentage' => $special_percentage,
                 'economy'     => $economy,
+                'is_new'      => true,
                 'hide_price'  => $result['hide_price']?false:true,
                 /* added by it-lab end */
                 'tax'         => $tax,
@@ -213,6 +224,19 @@ class ControllerProductLatest extends Controller {
         );
         /* added by it-lab end */
 
+        $data['limits'] = array();
+
+        $limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
+
+        sort($limits);
+
+        foreach($limits as $value) {
+            $data['limits'][] = array(
+                'text'  => $value,
+                'value' => $value,
+                'href'  => $this->url->link('product/latest', $url . '&limit=' . $value)
+            );
+        }
         $url = '';
 
         if (isset($this->request->get['sort'])) {
@@ -249,6 +273,20 @@ class ControllerProductLatest extends Controller {
 
         $data['sort'] = $sort;
         $data['order'] = $order;
+        $data['limit'] = $limit;
+        /* added by it-lab start */
+        $data['product_total'] = $product_total;
+        if(!isset($this->request->get['method']) || $this->request->get['method'] != "load_all") {
+            $num_pages = ceil($product_total / $limit);
+            $data['num_pages'] = $num_pages;
+        }
+        $data['page'] = $page;
+        if(($product_total - $page*$limit)<$limit) {
+            $show_more_limit=$product_total - $page*$limit;
+        }else{
+            $show_more_limit=$limit;
+        }
+        $data["show_more_limit"]=$show_more_limit;
         /* added by it-lab start */
 
         $data['continue'] = $this->url->link('common/home');

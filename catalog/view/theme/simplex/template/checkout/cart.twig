@@ -3,14 +3,16 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
-                {% if loop.first %}
-                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                    </li>
-                {% elseif loop.last %}
-                    <li>{{ breadcrumb.text }}</li>
-                {% endif %}
-            {% endfor %}
+                    {% if loop.first %}
+                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                        </li>
+                    {% elseif loop.last %}
+                        <li>{{ breadcrumb.text }}</li>
+                    {% else %}
+                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                    {% endif %}
+                {% endfor %}
         </ul>
         <div class="page-title" id="wishlist">
             <h1>{{ heading_title }}</h1>
@@ -92,7 +94,7 @@
                         <td colspan="6" style="text-align: right"><span>{{ totals[0].title }}:</span></td>
                         <td colspan="2">
                             <h5 style="margin-bottom: 0;">{{ totals[0].text }}
-                                <small style="font-size: .625rem;font-weight: 500;">MDL</small>
+                                <small style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>
                             </h5>
                         </td>
                     </tr>
@@ -104,7 +106,7 @@
                     {% for module in modules %}
                         <div class="panel-heading">
                             <h5>{{ text_next }}</h5>
-                            <p><span>{{ totals[0].title }}</span>{{ totals[0].text }}<small>MDL</small></p>
+                            <p><span>{{ totals[0].title }}</span>{{ totals[0].text }}<small>{{ currency }}</small></p>
                         </div>
                         {{ module }}
                     {% endfor %}
@@ -116,7 +118,7 @@
                     <div class="price">
                         <h5>
                             {{ totals[2].text }}
-                            <small>MDL</small>
+                            <small>{{ currency }}</small>
                         </h5>
                     </div>
                 </div>

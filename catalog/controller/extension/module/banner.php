@@ -20,7 +20,11 @@ class ControllerExtensionModuleBanner extends Controller {
             } else {
                 $data['is_home'] = false;
             }
-            if ($this->request->get['route'] == 'product/category') {
+            if ($this->request->get['route'] == 'product/category' ||
+                $this->request->get['route'] == 'product/manufacturer/info' ||
+                $this->request->get['route'] == 'product/latest' ||
+                $this->request->get['route'] == 'product/special' ||
+                $this->request->get['route'] == 'product/category') {
                 $data['is_catalog'] = true;
             }
         }else{

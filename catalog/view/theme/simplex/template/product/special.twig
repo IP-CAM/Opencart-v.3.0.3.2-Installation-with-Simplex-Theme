@@ -3,14 +3,16 @@
   <div class="container-fluid">
     <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
-                {% if loop.first %}
-                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                    </li>
-                {% elseif loop.last %}
-                    <li>{{ breadcrumb.text }}</li>
-                {% endif %}
-            {% endfor %}
+                    {% if loop.first %}
+                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                        </li>
+                    {% elseif loop.last %}
+                        <li>{{ breadcrumb.text }}</li>
+                    {% else %}
+                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                    {% endif %}
+                {% endfor %}
         </ul>
     <div class="page-title">
       <h1>{{ heading_title }}</h1>
@@ -151,16 +153,18 @@
             </div>
             <div class="show-more">
               {% if num_pages>1 %}
-                <button id="show-more-button" type="button" data-page="{{ page }}"
+                <button id="show-more-button" type="button" data-page="{{ page }}" data-limit="{{ limit }}" data-total="{{ product_total }}"
                         data-num_pages="{{ num_pages }}">
                   <span class="image-container"></span>
-                  <p>{{ text_show_more }} {{ limit }} {{ text_pozitions }}</p>
+                  <p>{{ text_show_more }} <span class="show-more-limit">{{ show_more_limit }}</span> {{ text_pozitions }}</p>
                 </button>
               {% endif %}
             </div>
-            <div class="all">
-              <a id="show-all" href="#">{{ text_show_all }}</a>
-            </div>
+            {% if products|length == limit %}
+              <div class="all">
+                <a id="show-all" href="#">{{ text_show_all }}</a>
+              </div>
+            {% endif %}
           </div>
         {% else %}
           <div class="container-fluid">
@@ -205,6 +209,13 @@
         success: function (data) {
           $(".products").append(data);
           $show_more_button.data("page", page);
+          var limit = $show_more_button.data('limit');
+          var total = $show_more_button.data('total');
+
+          if((total - page*limit)<limit) {
+            var show_more_limit=total - page*limit;
+            $show_more_button.find('.show-more-limit').html(show_more_limit);
+          }
           if (page == page_num) {
             $show_more_button.hide();
             $("#show-all").hide();

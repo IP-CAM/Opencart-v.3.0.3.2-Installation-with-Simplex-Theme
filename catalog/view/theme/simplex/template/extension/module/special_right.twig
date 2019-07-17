@@ -1,7 +1,9 @@
     <div class="product-slider">
         {% for product in products %}
             <div class="product">
+
                 <a href="{{ product.href }}">
+                    <h2>{{ heading_title }}</h2>
                     <ul class="sticker">
                         {% if product.special_percentage %}
                             <li>
@@ -59,6 +61,43 @@
             </div>
         {% endfor %}
     </div>
+
+
+   {# <div class="product">
+        <a href="{{ product.href }}">
+            <h2>{{ heading_title }}</h2>
+
+            {% if product.special %}
+                <span class="sticker stock">%</span>
+            {% endif %}
+            <img alt="" src="{{ product.thumb }}">
+            <h5 class="title">{{ product.name }}</h5>
+
+            <div class="discount">
+                {% if product.special %}
+                    <p class="old-price">{{ product.price }}.-</p>
+                    <p class="discount-percent">-{{ product.special_percentage }}%</p>
+                    <p class="discount-val">-{{ product.economy }}</p>
+                {% endif %}
+            </div>
+            {% if product.special %}
+                <p class="price">{{ product.special }}.-</p>
+            {% else %}
+                <p class="price">{{ product.price }}.-</p>
+            {% endif %}
+            <p class="currency">{{ currency }}</p>
+            <div class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                <p>{{ button_cart }}</p>
+                <span class="image-container">
+                            <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
+                        </span>
+            </div>
+        </a>
+        <div class="float-buttons">
+            <a class="favorite" href="#"><img alt="" src="assets/img/favorites.png"></a>
+            <a class="compare" href="#"><img alt="" src="assets/img/compare.png"></a>
+        </div>
+    </div>#}
 {#
 <div id="discounts">
     <div class="container-fluid">

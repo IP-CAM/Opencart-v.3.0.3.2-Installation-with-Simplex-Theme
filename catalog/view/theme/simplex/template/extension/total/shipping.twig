@@ -47,7 +47,7 @@
                                         if (json['shipping_method'][i]['quote'][j]['code'] === '{{ shipping_method }}') {
                                             $('<label class="semi-bold"><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" checked="checked" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
 
-                                            $('.panel-heading p').html('<span>Costul livrării</span>' + json['shipping_method'][i]['quote'][j]['cost'] + ' <small>MDL</small>');
+                                            $('.panel-heading p').html('<span>{{ shipping_cost }}</span>' + json['shipping_method'][i]['quote'][j]['cost'] + ' <small>{{ currency }}</small>');
                                         } else {
                                             $('<label><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
                                         }
