@@ -14,6 +14,10 @@ class ControllerExtensionTotalShipping extends Controller {
 
 			$data['countries'] = $this->model_localisation_country->getCountries();
 
+			/* added by it-lab start */
+			$data['currency'] = $this->session->data['currency'];
+			/* added by it-lab end */
+
 			if (isset($this->session->data['shipping_address']['zone_id'])) {
 				$data['zone_id'] = $this->session->data['shipping_address']['zone_id'];
 			} else {

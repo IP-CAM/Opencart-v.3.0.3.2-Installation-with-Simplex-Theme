@@ -868,8 +868,10 @@ select {
 		padding-bottom : 0;
 		
 		> a:not(.add-to-cart) {
-			align-items : center;
-			padding     : 0;
+			align-items     : center;
+			flex-direction  : row;
+			justify-content : flex-start;
+			padding         : 0;
 			
 			h5 {
 				font-size     : 0.75rem;
@@ -899,6 +901,7 @@ select {
 			
 			.product-body {
 				align-items    : flex-start;
+				flex           : unset;
 				flex-direction : column;
 				padding-right  : 2rem;
 			}
@@ -4275,7 +4278,7 @@ select {
 	&.centered {
 		@include flex(col, center, center);
 		padding-bottom : 1rem;
-		padding-top    : 0.5rem;
+		padding-top    : 1rem;
 		
 		hr {
 			border-color  : $yellow;
@@ -4470,7 +4473,7 @@ select {
 	width            : 100%;
 	
 	> a:not(.add-to-cart):not(.delete) {
-		@include flex(none, center, none, wrap);
+		@include flex(col, center, start, wrap);
 		flex     : 1;
 		height   : 100%;
 		padding  : 35px 25px;
@@ -4649,6 +4652,11 @@ select {
 		margin-top   : auto;
 	}
 	
+	.product-body {
+		flex : 1 1 auto;
+		@include flex(col);
+	}
+	
 	&:hover {
 		border-color : $yellow;
 		box-shadow   : 7.552px 9.326px 28.48px 3.52px rgba(0, 0, 0, .06);
@@ -4693,7 +4701,7 @@ select {
 		padding-bottom : 0;
 		
 		> a:not(.add-to-cart) {
-			@include flex-align(none, start, center);
+			@include flex-align(row, start, center);
 			padding : .5rem 5.875rem .5rem 3rem;
 		}
 		
@@ -4717,6 +4725,7 @@ select {
 			
 			.image-container {
 				height : 44px;
+				width  : 44px;
 			}
 		}
 		
@@ -4785,9 +4794,10 @@ select {
 		}
 		
 		.product-body {
-			align-items : center;
-			display     : flex;
-			flex        : 1 1 0;
+			align-items    : center;
+			display        : flex;
+			flex           : 1 1 0;
+			flex-direction : row;
 		}
 		
 		&:hover {
@@ -4923,7 +4933,7 @@ select {
 }
 
 .project-card .card-foot {
-	margin-top : 235px;
+	margin-top : 235px !important;
 }
 
 .projects-list {

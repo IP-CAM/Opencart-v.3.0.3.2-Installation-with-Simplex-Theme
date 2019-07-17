@@ -246,6 +246,9 @@ class ControllerCheckoutCart extends Controller {
 			$data['text_error'] = $this->language->get('text_empty');
 
 			$data['continue'] = $this->url->link('common/home');
+			/* added by it-lab start */
+			$data['currency'] = $this->session->data['currency'];
+			/* added by it-lab end */
 
 			unset($this->session->data['success']);
 
