@@ -716,78 +716,6 @@
 		}
 	}
 	
-	#contact-form {
-		background-color : #f5f3ee;
-		display          : none;
-		height           : calc(100vh - 60px);
-		left             : 0;
-		overflow         : auto;
-		position         : fixed;
-		right            : 0;
-		top              : 60px;
-		width            : 100%;
-		z-index          : 1003;
-		
-		&.active {
-			display : block;
-		}
-		
-		h3 {
-			margin-bottom : 0;
-		}
-		
-		form {
-			padding-top : 0.75rem;
-			
-			hr {
-				margin-bottom : 1.5rem;
-				margin-top    : 1.5rem;
-			}
-			
-			input, textarea {
-				margin-bottom : 0;
-			}
-			
-			label {
-				&.required {
-					&:after {
-						position : relative;
-					}
-				}
-				
-				&:not(.upload) {
-					flex       : 0 0 100%;
-					text-align : center;
-				}
-				
-				&.upload {
-					margin : auto;
-				}
-			}
-			
-			textarea {
-				height : 7.5rem;
-			}
-		}
-		
-		.close {
-			display : block;
-		}
-		
-		.submit {
-			flex            : 100%;
-			justify-content : center;
-			padding-left    : 0;
-			
-			p {
-				flex        : 100%;
-				margin-left : 0;
-				margin-top  : 1rem;
-				text-align  : center;
-			}
-		}
-	}
-	
 	#item-card {
 		grid-template-columns : 1fr;
 		
@@ -1124,6 +1052,81 @@
 			.card-foot {
 				margin-bottom : 0;
 				text-align    : center;
+			}
+		}
+	}
+	
+	.job-item-container {
+		#contact-form {
+			background-color : #f5f3ee;
+			display          : none;
+			height           : calc(100vh - 60px);
+			left             : 0;
+			overflow         : auto;
+			position         : fixed;
+			right            : 0;
+			top              : 60px;
+			width            : 100%;
+			z-index          : 1003;
+			max-height       : 756px;
+			
+			&.active {
+				display : block;
+			}
+			
+			h3 {
+				margin-bottom : 0;
+			}
+			
+			form {
+				padding-top : 0.75rem;
+				
+				hr {
+					margin-bottom : 1.5rem;
+					margin-top    : 1.5rem;
+				}
+				
+				input, textarea {
+					margin-bottom : 0;
+				}
+				
+				label {
+					&.required {
+						&:after {
+							position : relative;
+						}
+					}
+					
+					&:not(.upload) {
+						flex       : 0 0 100%;
+						text-align : center;
+					}
+					
+					&.upload {
+						margin : auto;
+					}
+				}
+				
+				textarea {
+					height : 7.5rem;
+				}
+			}
+			
+			.close {
+				display : block;
+			}
+			
+			.submit {
+				flex            : 100%;
+				justify-content : center;
+				padding-left    : 0;
+				
+				p {
+					flex        : 100%;
+					margin-left : 0;
+					margin-top  : 1rem;
+					text-align  : center;
+				}
 			}
 		}
 	}
@@ -1880,9 +1883,8 @@
 			@include flex(none, between);
 			
 			.menu-item {
-				color          : $white;
-				flex           : 1 1 auto;
-				text-transform : capitalize;
+				color : $white;
+				flex  : 1 1 auto;
 				
 				&.active {
 					background-color : $white;

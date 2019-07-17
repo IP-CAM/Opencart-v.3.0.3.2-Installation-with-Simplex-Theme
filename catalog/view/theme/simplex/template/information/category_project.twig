@@ -2,48 +2,49 @@
 <main class="gallery-bg">
     <div class="container-fluid">
 
-            <ul class="breadcrumb">
-                {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
+            {% endfor %}
 
-            </ul>
-        <div class="page-title" >
+        </ul>
+        <div class="page-title">
             <h1>{{ heading_title }}</h1>
         </div>
         <div class="projects-wrapper wrapper">
             <div class="projects">
                 <div class="projects-grid load_more_container">
                     {% for information in informations %}
-                    <div class="item">
-                        <div class="image" style="height: 100%">
-                            <img alt="{{ information.title }}" src="{{ information.thumb }}">
-                        </div>
-                        <div class="overlay">
-                            <div class="city">
-                                {{ information.city }}
-                            </div>
+                        <div class="item">
                             <a href="{{ information.href }}">
-                            <div class="title">
-                                {{ information.title }}
-                            </div>
+                                <div class="image" style="height: 100%">
+                                    <img alt="{{ information.title }}" src="{{ information.thumb }}">
+                                </div>
+                                <div class="overlay">
+                                    <div class="city">
+                                        {{ information.city }}
+                                    </div>
+                                    <div class="title">
+                                        {{ information.title }}
+                                    </div>
+                                    <hr>
+                                </div>
                             </a>
-                            <hr>
                         </div>
-                    </div>
                     {% endfor %}
 
                 </div>
                 <div id="pager">
                     {% if show_load_more_button %}
                         <div class="show-more">
-                            <button id="show-more-button" data-limit="{{ limit }}" data-start="{{ start }}" type="button">
+                            <button id="show-more-button" data-limit="{{ limit }}" data-start="{{ start }}"
+                                    type="button">
                                 <span class="image-container"></span>
                                 <p>{{ text_show_more }} {{ limit }} noutați</p>
                             </button>
@@ -68,19 +69,20 @@
 
         var search_params = new URLSearchParams(query_string);
 
-        search_params.set('start', start );
-        search_params.set('limit', limit );
-        search_params.set('route','information/category/load_more');
+        search_params.set('start', start);
+        search_params.set('limit', limit);
+        search_params.set('route', 'information/category/load_more');
         url.search = search_params.toString();
 
-        var ajax_url =url.toString();;
+        var ajax_url = url.toString();
+        ;
         $.ajax({
             url: ajax_url,
             dataType: "json",
             success: function (data) {
                 $(".load_more_container").append(data.items);
-                $("#show-more-button").data("start",data.start);
-                if(data.displayed_all){
+                $("#show-more-button").data("start", data.start);
+                if (data.displayed_all) {
                     $("#show-more-button").hide();
                 }
             }
