@@ -2,8 +2,6 @@
 class ControllerInformationInformation extends Controller {
 	public function index() {
 
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
 		$this->load->language('information/information');
 		$this->load->language('information/contact');
 
@@ -180,7 +178,7 @@ class ControllerInformationInformation extends Controller {
 
             /* added by it-lab start */
             $this->load->model('catalog/category');
-            $data['thumb'] ='image/' . $information_info['image'];
+            $data['thumb'] = (strlen($information_info['image'])>0)?'image/' . $information_info['image']:false;
 
             $categories = $this->model_catalog_information->getCategories($information_id);
             if(is_array($categories) && count($categories)>0){

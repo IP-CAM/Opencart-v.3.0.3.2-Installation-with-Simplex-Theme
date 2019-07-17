@@ -78,11 +78,10 @@ class ControllerExtensionModuleBestSellerInformation extends Controller {
                 $data['review'] = $setting['review'];
                 $data['rating'] = $setting['rating'];
                 $data['href_category'] = $this->url->link('information/category', 'path=' . $setting['category_id']);
-
                 if ($template == "project" || $template == "news") {
                     return $this->load->view('extension/module/bestseller_information_' . $template, $data);
                 } else {
-                    return $this->load->view('extension/module/bestseller_information_news', $data);
+                    return "";
                 }
             }
 

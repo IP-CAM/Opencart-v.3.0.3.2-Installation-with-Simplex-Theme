@@ -396,6 +396,12 @@ class ControllerProductCategory extends Controller {
                 $data['num_pages'] = $num_pages;
             }
             $data['page'] = $page;
+            if(($product_total - $page*$limit)<$limit) {
+                $show_more_limit=$product_total - $page*$limit;
+            }else{
+                $show_more_limit=$limit;
+            }
+            $data["show_more_limit"]=$show_more_limit;
             /* added by it-lab end */
 
 

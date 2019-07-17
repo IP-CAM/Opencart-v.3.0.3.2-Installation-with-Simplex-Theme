@@ -144,14 +144,12 @@ class ModelExtensionMenuMegamenu extends Model
                     foreach ($child_nodes as &$child_node) {
                         $child_node["link"] = $this->getLink($child_node);
                         $link = htmlspecialchars_decode($child_node["link"]);
-                        //var_dump($link);
                         if ($menu['menu_class'] == 'catalog') {
                             if (strpos($url, '&tf_')) {
                                 $url = substr_replace($url, '', strpos($url, '&tf_'));
                             }
                         }
-                        //var_dump($url);
-                        if (endsWith($link, $url) || endsWith($link, '/' . $url)) {
+                        if (endsWith($link, $url) || endsWith('/'.$link,  $url)) {
                             $child_node["active"] = true;
                             $tree[$menu['megamenu_id']]["active"] = true;
                         } else {

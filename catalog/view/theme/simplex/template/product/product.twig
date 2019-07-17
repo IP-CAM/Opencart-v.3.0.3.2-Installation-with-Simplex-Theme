@@ -421,73 +421,76 @@
     </div>
     </div>
     <hr>
-    <div class="container-fluid">
-        <div class="block-title centered">
-            <h2>{{ text_similar }}</h2>
-        </div>
-        <div class="product-slider">
-            {% for product in products_asemenea %}
-                <div class="product">
-                    <a href="{{ product.href }}">
-                        <ul class="sticker">
-                            {% if product.special_percentage %}
-                                <li>
-                                    <span class="stock">%</span>
-                                </li>
-                            {% endif %}
-                            {% if product.is_new %}
-                                <li>
-                                    <span class="new">new</span>
-                                </li>
-                            {% endif %}
-                        </ul>
-                        <div class="image-container">
-                            <img alt="" src="{{ product.thumb }}">
-                        </div>
-                        <div class="product-body">
-                            <h5 class="title">{{ product.name }}</h5>
-                            {% if product.hide_price %}
-                                <div class="discount">
-                                    {% if product.special %}
-                                        <p class="old-price">{{ product.price }}.-</p>
-                                        <p class="discount-percent">-{{ product.special_percentage }}%</p>
-                                        <p class="discount-val">-{{ product.economy }}</p>
-                                    {% endif %}
-                                </div>
-                                {% if product.special %}
-                                    <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
-                                {% else %}
-                                    <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
+    {% if products_asemenea %}
+        <div class="container-fluid">
+            <div class="block-title centered">
+                <h2>{{ text_similar }}</h2>
+            </div>
+            <div class="product-slider">
+                {% for product in products_asemenea %}
+                    <div class="product">
+                        <a href="{{ product.href }}">
+                            <ul class="sticker">
+                                {% if product.special_percentage %}
+                                    <li>
+                                        <span class="stock">%</span>
+                                    </li>
                                 {% endif %}
+                                {% if product.is_new %}
+                                    <li>
+                                        <span class="new">new</span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                            <div class="image-container">
+                                <img alt="" src="{{ product.thumb }}">
+                            </div>
+                            <div class="product-body">
+                                <h5 class="title">{{ product.name }}</h5>
+                                {% if product.hide_price %}
+                                    <div class="discount">
+                                        {% if product.special %}
+                                            <p class="old-price">{{ product.price }}.-</p>
+                                            <p class="discount-percent">-{{ product.special_percentage }}%</p>
+                                            <p class="discount-val">-{{ product.economy }}</p>
+                                        {% endif %}
+                                    </div>
+                                    {% if product.special %}
+                                        <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
+                                    {% else %}
+                                        <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
+                                    {% endif %}
 
-                            {% endif %}
-                        </div>
-                    </a>
+                                {% endif %}
+                            </div>
+                        </a>
 
-                    <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                        <p>{{ button_cart }}</p>
-                        <span class="image-container">
+                        <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
+                            <p>{{ button_cart }}</p>
+                            <span class="image-container">
                                                 <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
-                    </button>
-                    <div class="float-buttons">
-                        <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
-                            <img
-                                    alt=""
-                                    src="catalog/view/theme/simplex/assets/img/favorites.png">
                         </button>
-                        <button class="compare" href="#"
-                                onclick="compare.add('{{ product.product_id }}');">
-                            <img
-                                    alt=""
-                                    src="catalog/view/theme/simplex/assets/img/compare.png">
-                        </button>
+                        <div class="float-buttons">
+                            <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
+                                <img
+                                        alt=""
+                                        src="catalog/view/theme/simplex/assets/img/favorites.png">
+                            </button>
+                            <button class="compare" href="#"
+                                    onclick="compare.add('{{ product.product_id }}');">
+                                <img
+                                        alt=""
+                                        src="catalog/view/theme/simplex/assets/img/compare.png">
+                            </button>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    <hr>
+        <hr>
+    {% endif %}
+
 </main>
 
 

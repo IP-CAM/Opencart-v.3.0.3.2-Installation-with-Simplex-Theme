@@ -68,6 +68,9 @@ class ControllerProductGalleryAlbum extends Controller
     public function info()
     {
         $this->load->language('product/gallery_album');
+        /* added by it-lab start */
+        $this->load->language('information/information');
+        /* added by it-lab end */
         $this->document->setTitle($this->language->get('title'));
         $this->load->model('catalog/gallery_album');
         $this->load->model('setting/setting');
