@@ -59,10 +59,12 @@
 
 .navbar-nav {
 	@include flex(col); // cannot use `inherit` to get the `.navbar`s value
-	list-style    : none;
-	margin-bottom : 0;
-	margin-right  : auto;
-	padding-left  : 0;
+	justify-content : flex-end;
+	list-style      : none;
+	margin-bottom   : 0;
+	margin-right    : auto;
+	padding-left    : 0;
+	width           : 100%;
 	
 	.dropdown-menu {
 		float    : none;

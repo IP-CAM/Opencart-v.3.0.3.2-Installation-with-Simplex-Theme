@@ -1,5 +1,5 @@
 {{ header }}
-<main class="job-item-bg" xmlns="http://www.w3.org/1999/html">
+<main class="contacts-bg">
     <div class="container-fluid">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
@@ -7,11 +7,10 @@
                     <li><a href="{{ breadcrumb.href }}"><img alt="Home"
                                                              src="catalog/view/theme/simplex/assets/img/home.svg"></a>
                     </li>
-                {% else %}
-                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
                 {% endif %}
             {% endfor %}
-
         </ul>
         <div class="page-title centered">
             <h1>{{ heading_title }}</h1>
@@ -20,7 +19,7 @@
         <div class="container-fluid">
             <div class="item-container job-item-container">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="content">
                             {{ description }}
                             <button type="submit" class="poppup" target="#contact-form">
@@ -35,7 +34,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-6 offset-md-1 order-md-1">
+                    <div class="col-md-5 offset-md-1 order-md-1">
                         <div class="main-image-container">
                             <img alt="" src="{{ thumb }}">
                         </div>

@@ -134,7 +134,7 @@ input {
 label {
 	font-weight   : 500;
 	line-height   : 1rem;
-	padding-right : 0.25rem;
+	padding-right : .1875rem;
 	position      : relative;
 	
 	&.semi-bold {
@@ -239,7 +239,7 @@ footer {
 		
 		ul {
 			@include flex(col, none, start, wrap);
-			max-height : 175px;
+			max-height : 150px;
 			
 			li {
 				margin-bottom : 10px;
@@ -356,10 +356,15 @@ select {
 }
 
 #account {
-	a {
+	a:not(#add):not(.back) {
+		@include transition(color .125s linear);
 		color       : #057f9e;
 		font-size   : 0.8125rem;
 		font-weight : 600;
+		
+		&:hover {
+			color : $yellow;
+		}
 	}
 	
 	li {
@@ -403,9 +408,11 @@ select {
 			font-size        : 0.875rem;
 			font-weight      : 600;
 			text-align       : left;
+			white-space      : nowrap;
 			
 			&:first-child {
 				@include border-radius-left;
+				width : 120px;
 			}
 			
 			&:last-child {
@@ -455,7 +462,7 @@ select {
 			input, textarea, select {
 				@include border-radius;
 				border        : 1px solid #d4d4d4;
-				flex          : 1 1 calc(100% - 160px);
+				flex          : 1 1 50%;
 				font-size     : 0.8125rem;
 				margin-bottom : 1.5rem;
 			}
@@ -465,7 +472,7 @@ select {
 			}
 			
 			label {
-				flex         : 0 0 125px;
+				flex         : 1 1 125px;
 				font-size    : 0.875rem;
 				font-weight  : 600;
 				line-height  : 2.5rem;
@@ -500,8 +507,9 @@ select {
 		.form-submit {
 			@include border-radius;
 			@include flex;
+			@include transition(all .125s linear);
 			align-items      : center;
-			background-color : #ffca30;
+			background-color : $yellow;
 			border           : 0;
 			cursor           : pointer;
 			font-size        : .8125rem;
@@ -522,6 +530,11 @@ select {
 				display                 : block;
 				margin-left             : 1.5rem;
 				padding                 : 10px;
+			}
+			
+			&:hover {
+				background-color : #2b2c30;
+				color            : $white;
 			}
 		}
 		
@@ -586,11 +599,13 @@ select {
 	
 	.back {
 		@include border-radius;
-		border    : 1px solid #f4f4f4;
-		color     : $black;
-		display   : inline-block;
-		font-size : 0.875rem;
-		padding   : 0.75rem 1.5rem 0.75rem 1rem;
+		border      : 1px solid #f4f4f4;
+		color       : $black;
+		display     : inline-block;
+		font-size   : 0.875rem;
+		font-weight : 500;
+		margin-top  : 1rem;
+		padding     : 0.75rem 1.5rem 0.75rem 1rem;
 		
 		&:before {
 			@include transform(rotate(180deg));
@@ -899,8 +914,27 @@ select {
 	}
 	
 	.dropdown-menu {
-		border : 0;
-		width  : 300px;
+		border          : 0;
+		scrollbar-width : auto;
+		width           : 300px;
+		
+		ul {
+			max-height : 336px;
+			overflow   : auto;
+			
+			&::-webkit-scrollbar {
+				width : 0.25rem;
+			}
+			
+			&::-webkit-scrollbar-track {
+				-webkit-box-shadow : inset 0 0 6px rgba(0, 0, 0, 0.3);
+			}
+			
+			&::-webkit-scrollbar-thumb {
+				background-color : darkgrey;
+				outline          : 1px solid slategrey;
+			}
+		}
 	}
 	
 	.total {
@@ -1558,6 +1592,11 @@ select {
 			font-size   : 2.5em;
 			font-weight : 800;
 			margin-left : 1rem;
+			
+			.currency {
+				font-size   : 1.5rem;
+				font-weight : 700;
+			}
 		}
 	}
 	
@@ -1579,10 +1618,11 @@ select {
 	.product-code {
 		p {
 			font-size   : 0.875rem;
-			font-weight : 500;
+			font-weight : 600;
 			
 			span {
-				color : #a4a4a4;
+				color       : #a4a4a4;
+				font-weight : 500;
 			}
 		}
 	}
@@ -1742,12 +1782,17 @@ select {
 	margin : 50px 0 40px;
 	
 	.all a {
+		@include transition(color .125s linear);
 		border-bottom : 1px dotted;
 		color         : #057f9e;
 		font-size     : 0.75rem;
 		font-weight   : 500;
 		line-height   : 1.5;
 		margin-left   : 10px;
+		
+		&:hover {
+			color : $yellow;
+		}
 	}
 	
 	.show-more {
@@ -1768,7 +1813,7 @@ select {
 			padding          : 0 20px 0 10px;
 			z-index          : 10;
 			
-			p {
+			p, p * {
 				color : $white;
 			}
 			
@@ -1941,7 +1986,7 @@ select {
 				
 				.price {
 					@include flex(none, none, start, wrap);
-					max-width : 215px;
+					max-width : 15rem;
 					
 					p {
 						text-align : right;
@@ -2068,7 +2113,9 @@ select {
 }
 
 #slides-counter {
+	margin    : auto;
 	max-width : 940px;
+	width     : 100%;
 	
 	p {
 		font-size   : 0.9375rem;
@@ -2694,12 +2741,14 @@ select {
 		img {
 			@include grayscale;
 			@include transition(all .25s linear);
-			width : 100%;
+			opacity : 0.4;
+			width   : 100%;
 		}
 		
 		&:hover {
 			img {
 				@include grayscale(false);
+				opacity : 1;
 			}
 		}
 		
@@ -2971,7 +3020,7 @@ select {
 	padding-bottom   : 1rem;
 	padding-top      : 1rem;
 	
-	button {
+	button, a {
 		@include border-radius;
 		@include flex(none, between, center);
 		@include transition(all .125s linear);
@@ -3004,6 +3053,11 @@ select {
 				display                 : block;
 				padding                 : 10px;
 			}
+		}
+		
+		&:hover {
+			background-color : #2b2c30;
+			color            : $white;
 		}
 	}
 	
@@ -3136,7 +3190,7 @@ select {
 	
 	.search {
 		@include flex(none, between, center, wrap);
-		margin-bottom : 1.5rem;
+		margin-bottom : 0.75rem;
 		width         : 100%;
 		
 		label {
@@ -3397,6 +3451,7 @@ select {
 			margin-right : 2.5rem;
 			
 			img {
+				@include transition(opacity .125s linear);
 				height     : 100%;
 				object-fit : cover;
 				width      : 100%;
@@ -3415,6 +3470,7 @@ select {
 		.link {
 			@include border-radius;
 			@include flex(none, between, center);
+			@include transition(all .125s linear);
 			background-color : $yellow;
 			border           : 0;
 			cursor           : pointer;
@@ -3446,6 +3502,19 @@ select {
 					display                 : block;
 					padding                 : 10px;
 				}
+			}
+		}
+		
+		&:hover {
+			> .image-container {
+				img {
+					opacity : 0.5;
+				}
+			}
+			
+			.link {
+				background-color : #2b2c30;
+				color            : $white;
 			}
 		}
 	}
@@ -3624,13 +3693,13 @@ select {
 
 .item-gallery {
 	@include flex;
-	grid-row-end   : 8;
+	grid-row-end   : 9;
 	grid-row-start : 1;
 	position       : relative;
 	
 	.gallery-images {
-		flex      : 0 0 112px;
-		max-width : 112px;
+		flex      : 0 0 127px;
+		max-width : 127px;
 		z-index   : 1;
 		
 		.item-image {
@@ -3664,9 +3733,13 @@ select {
 				border-top    : 55px solid transparent;
 				content       : '';
 				position      : absolute;
-				right         : -17px;
+				right         : -16px;
 				top           : 0;
 			}
+		}
+		
+		.slick-track {
+			overflow : hidden;
 		}
 	}
 	
@@ -3752,13 +3825,13 @@ select {
 		display          : none;
 		height           : calc(100vh - 87px);
 		left             : 0;
+		max-height       : 684px;
 		overflow         : auto;
 		position         : fixed;
 		right            : 0;
 		top              : 44px;
 		width            : 100%;
 		z-index          : 1003;
-		max-height       : 684px;
 		
 		&.active {
 			display : block;
@@ -3790,17 +3863,16 @@ select {
 		}
 		
 		.submit {
-			flex            : 100%;
-			justify-content : center;
-			padding-left    : 0;
+			flex : 100%;
 			
 			p {
-				flex        : 100%;
-				margin-left : 0;
-				margin-top  : 1rem;
-				text-align  : center;
+				text-align : center;
 			}
 		}
+	}
+	
+	.main-image-container {
+		margin-top : 3rem;
 	}
 }
 
@@ -4066,11 +4138,15 @@ select {
 			font-weight   : 500;
 			line-height   : 1.692;
 			margin-bottom : auto;
-			margin-top    : 70px;
+			margin-top    : 200px;
 			min-width     : 90px;
 			padding-top   : 20px;
 		}
 	}
+}
+
+.job-card .card-foot {
+	margin-top : 120px;
 }
 
 .newest {
@@ -4162,6 +4238,7 @@ select {
 		font-weight   : 500;
 		line-height   : 1.692;
 		margin-bottom : 1.25rem;
+		width         : 155px
 	}
 	
 	li {
@@ -4198,7 +4275,7 @@ select {
 	&.centered {
 		@include flex(col, center, center);
 		padding-bottom : 1rem;
-		padding-top    : 1.5rem;
+		padding-top    : 0.5rem;
 		
 		hr {
 			border-color  : $yellow;
@@ -4211,6 +4288,7 @@ select {
 		h1 {
 			font-size     : 2.1875rem;
 			margin-bottom : 0;
+			text-align    : center;
 		}
 	}
 	
@@ -4544,7 +4622,7 @@ select {
 	.float-buttons {
 		@include flex(col);
 		@include transition(opacity .25s linear);
-		left     : 20px;
+		left     : 10px;
 		opacity  : 0;
 		position : absolute;
 		top      : 20px;
@@ -4554,7 +4632,7 @@ select {
 		}
 		
 		.favorite {
-			margin-bottom : 15px;
+			margin-bottom : 0.75rem;
 		}
 		
 		aside & {
@@ -4588,10 +4666,10 @@ select {
 			width   : calc(100% - 40px);
 			
 			p {
+				line-height : 1;
 				margin-left : 10px;
 				max-width   : 80px;
 				opacity     : 1;
-				line-height : 1;
 			}
 			
 			.image-container {
@@ -4636,6 +4714,10 @@ select {
 			padding : 0;
 			right   : 2.5rem;
 			top     : 0;
+			
+			.image-container {
+				height : 44px;
+			}
 		}
 		
 		.currency {
@@ -4727,8 +4809,6 @@ select {
 				
 				.image-container {
 					background-color : $yellow;
-					height           : 44px;
-					width            : 44px;
 					
 					img {
 						height : 18px;
@@ -4842,6 +4922,10 @@ select {
 	}
 }
 
+.project-card .card-foot {
+	margin-top : 235px;
+}
+
 .projects-list {
 	.slick-prev, .slick-next {
 		top : 50%;
@@ -4905,8 +4989,8 @@ select {
 		
 		a, .image {
 			height     : 100%;
-			width      : 100%;
 			min-height : 300px;
+			width      : 100%;
 		}
 		
 		.overlay {
@@ -5134,29 +5218,29 @@ select {
 				border   : 1px solid #eae6e7;
 				display  : block;
 				height   : 2.25rem;
+				overflow : hidden;
 				position : relative;
 				width    : 2.25rem;
-				overflow : hidden;
 			}
 			
 			.ya-share2__icon {
 				background-position : center;
-				margin              : auto;
-				position            : absolute;
-				top                 : 0;
 				bottom              : 0;
 				left                : 0;
+				margin              : auto;
+				position            : absolute;
 				right               : 0;
+				top                 : 0;
 			}
 			
 			.ya-share2__badge {
 				background-color : transparent;
-				margin           : auto;
-				position         : absolute;
-				top              : 0;
 				bottom           : 0;
 				left             : 0;
+				margin           : auto;
+				position         : absolute;
 				right            : 0;
+				top              : 0;
 			}
 		}
 		
@@ -5330,7 +5414,6 @@ select {
 				&:before {
 					@include border-radius;
 					background-color : $black;
-					background-color : $black;
 					content          : "";
 					height           : 0.25rem;
 					left             : 0;
@@ -5352,6 +5435,7 @@ select {
 	
 	.items {
 		@include grid;
+		align-self            : start;
 		grid-gap              : 30px;
 		grid-row              : 1 / 3;
 		grid-template-columns : repeat(2, 1fr);

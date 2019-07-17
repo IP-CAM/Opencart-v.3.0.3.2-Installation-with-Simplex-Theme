@@ -7,8 +7,8 @@
                     <li><a href="{{ breadcrumb.href }}"><img alt="Home"
                                                              src="catalog/view/theme/simplex/assets/img/home.svg"></a>
                     </li>
-                {% else %}
-                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
                 {% endif %}
             {% endfor %}
         </ul>
@@ -24,12 +24,12 @@
                     <form action="{{ action }}" method="post">
                         <label class="required" for="name">{{ entry_firstname }}</label><input  class="{{ error_firstname?"has-error"}}" name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" required type="text">
                         <label class="required" for="name">{{ entry_lastname }}</label><input class="{{ error_firstname?"has-error"}}" type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" required >
-                        <label  for="input-company">{{ entry_company }}</label><input type="text" name="company" value="{{ company }}" placeholder="{{ entry_company }}" id="input-company" class="form-control" />
-                        <label  for="input-address-1">{{ entry_address_1 }}</label><input type="text" class="{{ error_address1?"has-error"}}" name="address_1" value="{{ address_1 }}" placeholder="{{ entry_address_1 }}" id="input-address-1" class="form-control" />
-                        <label  for="input-address-2">{{ entry_address_2 }}</label><input type="text" name="address_2" value="{{ address_2 }}" placeholder="{{ entry_address_2 }}" id="input-address-2" class="form-control" />
-                        <label  for="input-city">{{ entry_city }}</label><input class="{{ error_city?"has-error"}}" type="text" name="city" value="{{ city }}" placeholder="{{ entry_city }}" id="input-city"  />
-                        <label  for="input-postcode">{{ entry_postcode }}</label><input  class="{{ error_postcode?"has-error"}}" type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-postcode" class="form-control" />
-                        <label  for="input-country">{{ entry_country }}</label>
+                        <label for="input-company">{{ entry_company }}</label><input type="text" name="company" value="{{ company }}" placeholder="{{ entry_company }}" id="input-company"/>
+                        <label for="input-address-1">{{ entry_address_1 }}</label><input type="text" class="{{ error_address1?"has-error"}}" name="address_1" value="{{ address_1 }}" placeholder="{{ entry_address_1 }}" id="input-address-1" />
+                        <label for="input-address-2">{{ entry_address_2 }}</label><input type="text" name="address_2" value="{{ address_2 }}" placeholder="{{ entry_address_2 }}" id="input-address-2"/>
+                        <label for="input-city">{{ entry_city }}</label><input class="{{ error_city?"has-error"}}" type="text" name="city" value="{{ city }}" placeholder="{{ entry_city }}" id="input-city"  />
+                        <label for="input-postcode">{{ entry_postcode }}</label><input  class="{{ error_postcode?"has-error"}}" type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-postcode" />
+                        <label for="input-country">{{ entry_country }}</label>
                             <select class="{{ error_country?"has-error"}}"  name="country_id" id="input-country" >
                                 <option value="">{{ text_select }}</option>
                                 {% for country in countries %}
@@ -43,7 +43,7 @@
                             </select>
                         <label for="input-zone">{{ entry_zone }}</label>
 
-                            <select class="{{ error_zone?"has-error"}}" name="zone_id" id="input-zone" class="form-control">
+                            <select class="{{ error_zone?"has-error"}}" name="zone_id" id="input-zone">
                             </select>
 
                             <div class="submit">

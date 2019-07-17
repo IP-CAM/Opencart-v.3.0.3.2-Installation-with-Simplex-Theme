@@ -287,7 +287,7 @@ $('.gallery-list').slick({
 });
 $('.gallery-images').slick({
     asNavFor: '.gallery-list',
-    slidesToShow: $('.gallery-images .item-image').length,
+    slidesToShow: 5,
     dots: false,
     focusOnSelect: true,
     vertical: true,
@@ -533,17 +533,19 @@ $(window).resize(function () {
     }
 });
 $('.product .add-to-cart, .product .favorite').click(function () {
-   /* let width_product = $(this).parent().parent().width();
-    let width_poppup = document.getElementById('success-poppup').offsetWidth;
-    let div = $(this).parent().parent().find('.add-to-cart');
-    let offset_poppup = (width_poppup - width_product) / 2;
-    let divOffset = $(div).offset();
-    $('#success-poppup').css('left', divOffset.left - 20 - offset_poppup).css('top', divOffset.top + 48).css('display', 'block');
-*/});
-function show_succes_popup(product_id,message,centered=false){
+    /* let width_product = $(this).parent().parent().width();
+     let width_poppup = document.getElementById('success-poppup').offsetWidth;
+     let div = $(this).parent().parent().find('.add-to-cart');
+     let offset_poppup = (width_poppup - width_product) / 2;
+     let divOffset = $(div).offset();
+     $('#success-poppup').css('left', divOffset.left - 20 - offset_poppup).css('top', divOffset.top + 48).css('display', 'block');
+ */
+});
+
+function show_succes_popup(product_id, message, centered = false) {
     var button_product_id_selector = "button[data-product_id='" + product_id + "']";
     $button = $(button_product_id_selector);
-    if(!centered && $button.length) {
+    if (!centered && $button.length) {
         let width_product = $button.parent().parent().width();
         $("#success-poppup").css('display', 'block');
         let width_poppup = document.getElementById('success-poppup').offsetWidth;
@@ -553,21 +555,22 @@ function show_succes_popup(product_id,message,centered=false){
         let divHeight = $(div).height();
         $("#success-poppup .message").html(message);
         $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
-    }else{
-        var horizontalCenter = Math.floor(window.innerWidth/2);
-        var verticalCener = Math.floor(window.innerHeight/2);
+    } else {
+        var horizontalCenter = Math.floor(window.innerWidth / 2);
+        var verticalCener = Math.floor(window.innerHeight / 2);
         $("#success-poppup").css('display', 'block');
         let width_poppup = document.getElementById('success-poppup').offsetWidth;
-        let left=horizontalCenter-width_poppup/2;
+        let left = horizontalCenter - width_poppup / 2;
         $("#success-poppup .message").html(message);
         console.log($('main').scrollTop());
-        $('#success-poppup').css('left', left).css('top', $('main').scrollTop()+verticalCener).css('display', 'block');
+        $('#success-poppup').css('left', left).css('top', $('main').scrollTop() + verticalCener).css('display', 'block');
 
     }
     setTimeout(function () {
         $('#success-poppup').css('display', 'none');
     }, 2000);
 }
+
 $('.phone a:not(.tel)').click(function (e) {
     e.preventDefault();
     let div = $(this);
@@ -609,5 +612,20 @@ $('.phone-poppup .delete').click(function (e) {
 $('#catalog').append($('#categories'));
 $('.upload').change(function (e) {
     let fileName = e.target.files[0].name;
+    $('+ p', this).remove();
     $('<p style="color: #868686;font-size: .8125rem;font-weight: 500;align-self: center; margin-left: 1rem">' + fileName + '</p>').insertAfter(this);
+});
+
+$(document).ready(function () {
+    $('main ')
+});
+
+$('.search-button').click(function () {
+    $(this).parent().find('#formSearch input').focus();
+});
+
+$('button[data-target="#formSearch"]').click(function () {
+    setTimeout(function () {
+        $('#formSearch input').focus();
+    }, 500);
 });
