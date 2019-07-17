@@ -178,7 +178,6 @@ class ControllerInformationInformation extends Controller {
 
             /* added by it-lab start */
             $this->load->model('catalog/category');
-            var_dump($information_info['image']);
             $data['thumb'] = (strlen($information_info['image'])>0)?'image/' . $information_info['image']:false;
 
             $categories = $this->model_catalog_information->getCategories($information_id);
