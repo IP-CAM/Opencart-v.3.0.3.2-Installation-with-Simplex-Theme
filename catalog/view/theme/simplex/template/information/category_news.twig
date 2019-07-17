@@ -29,29 +29,31 @@
                     <a href="{{ first.href }}"><img alt="Newest" class="card-img-top" src="{{ first.thumb }}"></a>
                 </div>
             </div>
-            <div class="news" >
+            <div class="news">
                 <div class="news-grid load_more_container">
                     {% for information in informations %}
-                    {% if not loop.first %}
-                    <div class="item">
-                        <div class="card">
-                            <a href="{{ information.href }}"><img alt="New 1" class="card-img-top"
-                                                                  src="{{ information.thumb }}"></a>
-                            <div class="card-body">
-                                <div class="card-text">
-                                    <a href="{{ information.href }}">{{ information.title }}</a>
+                        {% if not loop.first %}
+                            <div class="item">
+                                <div class="card">
+                                    <a href="{{ information.href }}">
+                                        <img alt="New 1" class="card-img-top" src="{{ information.thumb }}">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                {{ information.title }}
+                                            </div>
+                                            <span class="card-foot">{{ information.date_added }}</span>
+                                        </div>
+                                    </a>
                                 </div>
-                                <span class="card-foot">{{ information.date_added }}</span>
                             </div>
-                        </div>
-                    </div>
-                    {% endif %}
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div id="pager">
                     {% if show_load_more_button %}
                         <div class="show-more">
-                            <button id="show-more-button" data-limit="{{ limit }}" data-start="{{ start }}" type="button">
+                            <button id="show-more-button" data-limit="{{ limit }}" data-start="{{ start }}"
+                                    type="button">
                                 <span class="image-container"></span>
                                 <p>{{ text_show_more }} {{ limit }} noutați</p>
                             </button>
@@ -77,19 +79,20 @@
 
         var search_params = new URLSearchParams(query_string);
 
-        search_params.set('start', start );
-        search_params.set('limit', limit );
-        search_params.set('route','information/category/load_more');
+        search_params.set('start', start);
+        search_params.set('limit', limit);
+        search_params.set('route', 'information/category/load_more');
         url.search = search_params.toString();
 
-        var ajax_url =url.toString();;
+        var ajax_url = url.toString();
+        ;
         $.ajax({
             url: ajax_url,
             dataType: "json",
             success: function (data) {
                 $(".load_more_container").append(data.items);
-                $("#show-more-button").data("start",data.start);
-                if(data.displayed_all){
+                $("#show-more-button").data("start", data.start);
+                if (data.displayed_all) {
                     $("#show-more-button").hide();
                 }
             }
