@@ -156,7 +156,7 @@
                     location = json['redirect'];
                 }
 
-                show_succes_popup(product_id, json['success_message']);
+                show_succes_popup(product_id, json['success_message'],'wishlist');
 
                 $('#wishlist-total .quantity').removeClass('d-none').html(json['total']);
                 $('#wishlist-total').attr('title', json['total']);
@@ -276,7 +276,7 @@
 
                 if (json['success']) {
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                    show_succes_popup(product_id, json['success_message']);
+                    show_succes_popup(product_id, json['success_message'],'compare');
                     $('#compare-total').html(json['total']);
                     $('#compare .quantity').removeClass('d-none').html(json['total']);
                     //$('html, body').animate({scrollTop: 0}, 'slow');
@@ -311,7 +311,7 @@
 
                 if (json['success']) {
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                    show_succes_popup(product_id, json['success_message']);
+                    show_succes_popup(product_id, json['success_message'],'cart');
 
                     // Need to set timeout otherwise it wont update the total
 
