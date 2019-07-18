@@ -113,6 +113,7 @@ class ControllerProductGalleryAlbum extends Controller
 
         $total_images = $this->model_catalog_gallery_album->getTotalGalleryAlbumsImage($this->request->get['gallery_album_id']);
         $album_image = $this->model_catalog_gallery_album->getGalleryAlbumDescriptions($this->request->get['gallery_album_id']);
+        $this->document->setTitle($album_image['title']);
         $data['album_images'] = array(
             'album_title' => $album_image['title'],
             'about' => trim(htmlspecialchars_decode($album_image['about']), '"'),

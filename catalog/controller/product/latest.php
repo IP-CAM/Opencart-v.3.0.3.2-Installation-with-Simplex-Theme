@@ -81,7 +81,7 @@ class ControllerProductLatest extends Controller {
         $filter_data_latest = array(
             'sort'  => 'p.date_added',
             'order' => "DESC",
-            'limit' =>$limit,
+            'limit' =>$latest_count,
             'start' => ($page - 1) * $limit,
 
         );
@@ -226,7 +226,7 @@ class ControllerProductLatest extends Controller {
 
         $data['limits'] = array();
 
-        $limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
+        $limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'), 16, 24, 32, 48));
 
         sort($limits);
 

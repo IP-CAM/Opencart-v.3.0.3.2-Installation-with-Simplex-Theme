@@ -331,7 +331,7 @@ class ControllerProductCategory extends Controller {
 
 			$data['limits'] = array();
 
-			$limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'),2,3,4,6, 8, 16, 24, 32));
+			$limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'),16,24,32));
 
 			sort($limits);
 

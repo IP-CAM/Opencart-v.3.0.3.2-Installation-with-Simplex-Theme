@@ -331,7 +331,7 @@ class ControllerInformationSearch extends Controller {
 
 			$data['limits'] = array();
 
-			$limits = array_unique(array($this->config->get('information_limit'), 25, 50, 75, 100));
+			$limits = array_unique(array($this->config->get('information_limit'), 16, 24, 32, 48));
 
 			sort($limits);
 
