@@ -1,7 +1,7 @@
 <div class="card-body">
     <div class="row">
         <div class="col-sm-6">
-            <fieldset id="account">
+            <fieldset class="content" id="account">
                 <legend><p><strong>{{ text_your_details }}</strong></p></legend>
                 <div class="form-group"
                      style="display: {% if customer_groups|length > 1 %} block {% else %} none {% endif %};">
@@ -19,29 +19,30 @@
                                 <label>
                                     <input type="radio" name="customer_group_id"
                                            value="{{ customer_group.customer_group_id }}"/>
-                                    {{ customer_group.name }}</label>
+                                    {{ customer_group.name }}
+                                </label>
                             </div>
                         {% endif %}
-                    {% endfor %}</div>
+                    {% endfor %}
+                </div>
                 <div class="form-group required">
                     <label class="control-label" for="input-payment-firstname">{{ entry_firstname }}</label>
                     <input type="text" name="firstname" value="" placeholder="{{ entry_firstname }}"
-                           id="input-payment-firstname" />
+                           id="input-payment-firstname">
                 </div>
                 <div class="form-group required">
                     <label class="control-label" for="input-payment-lastname">{{ entry_lastname }}</label>
                     <input type="text" name="lastname" value="" placeholder="{{ entry_lastname }}"
-                           id="input-payment-lastname" />
+                           id="input-payment-lastname">
                 </div>
                 <div class="form-group required">
                     <label class="control-label" for="input-payment-email">{{ entry_email }}</label>
-                    <input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-payment-email"
-                           />
+                    <input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-payment-email">
                 </div>
                 <div class="form-group required">
                     <label class="control-label" for="input-payment-telephone">{{ entry_telephone }}</label>
                     <input type="text" name="telephone" value="" placeholder="{{ entry_telephone }}"
-                           id="input-payment-telephone" />
+                           id="input-payment-telephone">
                 </div>
             </fieldset>
         </div>

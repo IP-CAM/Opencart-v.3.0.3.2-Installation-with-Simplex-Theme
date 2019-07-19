@@ -287,7 +287,7 @@ $('.gallery-list').slick({
 });
 $('.gallery-images').slick({
     asNavFor: '.gallery-list',
-    slidesToShow: 5,
+    slidesToShow: $('.gallery-images .item-image').length > 5 ? 5 : $('.gallery-images .item-image').length,
     dots: false,
     focusOnSelect: true,
     vertical: true,
@@ -542,10 +542,10 @@ $('.product .add-to-cart, .product .favorite').click(function () {
  */
 });
 
-function show_succes_popup(product_id, message, centered = false) {
+function show_succes_popup(product_id, message, type='cart') {
     var button_product_id_selector = "button[data-product_id='" + product_id + "']";
-    $button = $(button_product_id_selector);
-    if (!centered && $button.length) {
+    var $button = $(button_product_id_selector);
+    if ($button.length) {
         let width_product = $button.parent().parent().width();
         $("#success-poppup").css('display', 'block');
         let width_poppup = document.getElementById('success-poppup').offsetWidth;
@@ -556,7 +556,23 @@ function show_succes_popup(product_id, message, centered = false) {
         $("#success-poppup .message").html(message);
         $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
     } else {
-        var horizontalCenter = Math.floor(window.innerWidth / 2);
+        if(type=='cart'){
+            $button=$("#button-cart");
+        }
+        if(type=='compare'){
+            $button=$("#button-compare");
+        }
+        if(type=='wishlist'){
+            $button=$("#button-wishlist");
+        }
+        let divOffset = $button.offset();
+        let divHeight = $button.height();
+
+
+        $("#success-poppup .message").html(message);
+        $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
+
+      /*  var horizontalCenter = Math.floor(window.innerWidth / 2);
         var verticalCener = Math.floor(window.innerHeight / 2);
         $("#success-poppup").css('display', 'block');
         let width_poppup = document.getElementById('success-poppup').offsetWidth;
@@ -564,7 +580,7 @@ function show_succes_popup(product_id, message, centered = false) {
         $("#success-poppup .message").html(message);
         console.log($('main').scrollTop());
         $('#success-poppup').css('left', left).css('top', $('main').scrollTop() + verticalCener).css('display', 'block');
-
+*/
     }
     setTimeout(function () {
         $('#success-poppup').css('display', 'none');

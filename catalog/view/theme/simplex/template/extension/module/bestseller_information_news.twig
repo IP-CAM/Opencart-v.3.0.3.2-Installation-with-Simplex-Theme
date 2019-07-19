@@ -6,16 +6,19 @@
             {% for information in informations %}
                 {% if i<3 %}
                     <div class="card">
-                        {% if information.thumb %}
-                            <a href="{{ information.href }}"><img alt="New 1" class="card-img-top"
-                                                                  src="{{ information.original_image }}"></a>
-                        {% endif %}
-                        <div class="card-body">
-                            <div class="card-text">
-                                <a href="{{ information.href }}">{{ information.title }}</a>
+                        <a href="{{ information.href }}">
+                            {% if information.thumb %}
+                                <div class="image-container">
+                                    <img alt="New 1" class="card-img-top" src="{{ information.original_image }}">
+                                </div>
+                            {% endif %}
+                            <div class="card-body">
+                                <div class="card-text">
+                                    {{ information.title }}
+                                </div>
+                                <span class="card-foot">{{ information.date_added }}</span>
                             </div>
-                            <span class="card-foot">{{ information.date_added }}</span>
-                        </div>
+                        </a>
                     </div>
                 {% endif %}
                 {% set i=i+1 %}
