@@ -43,3 +43,5 @@ $_['error_recurring_required'] = 'Please select a payment recurring!';
 
 $_['delete_all']               = 'Delete all';
 $_['total'] = 'Total';
+
+$_['delivery_text'] = 'Delivery calculator';

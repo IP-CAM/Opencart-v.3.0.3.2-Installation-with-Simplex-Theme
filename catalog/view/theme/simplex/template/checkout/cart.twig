@@ -3,16 +3,16 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
         <div class="page-title" id="wishlist">
             <h1>{{ heading_title }}</h1>
@@ -105,8 +105,8 @@
                 <div class="panel panel-default">
                     {% for module in modules %}
                         <div class="panel-heading">
-                            <h5>{{ text_next }}</h5>
-                            <p><span>{{ totals[0].title }}</span>{{ totals[0].text }}<small>{{ currency }}</small></p>
+                            <h5>{{ delivery_text }}</h5>
+                            <p></p>
                         </div>
                         {{ module }}
                     {% endfor %}
@@ -116,10 +116,6 @@
                 <div class="total">
                     <span>{{ total }}</span>
                     <div class="price">
-                        <h5>
-                            {{ totals[2].text }}
-                            <small>{{ currency }}</small>
-                        </h5>
                     </div>
                 </div>
                 <a href="{{ checkout }}">{{ button_checkout }}<span
@@ -130,4 +126,5 @@
     <hr>
     {{ content_bottom }}
 </main>
+
 {{ footer }}

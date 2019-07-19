@@ -40,26 +40,30 @@
   {% endfor %}
 </div>#}
 <div id="news">
-  <div class="container-fluid">
-    <div class="block-title">
-      <h2>{{ heading_title }}</h2>
-      <a class="total-link" href="{{ href_category }}">{{ text_all_news }}</a>
-    </div>
-    <div class="news">
-      {% for information in informations %}
-        <div class="card">
-          {% if information.thumb %}
-            <a href="{{ information.href }}"><img alt="New 1" class="card-img-top" src="{{ information.original_image }}"></a>
-          {% endif %}
-          <div class="card-body">
-            <div class="card-text">
-              <a href="{{ information.href }}">{{ information.title }}</a>
-            </div>
-            <span class="card-foot">{{ information.date_added }}</span>
-          </div>
+    <div class="container-fluid">
+        <div class="block-title">
+            <h2>{{ heading_title }}</h2>
+            <a class="total-link" href="{{ href_category }}">{{ text_all_news }}</a>
         </div>
-      {% endfor %}
+        <div class="news">
+            {% for information in informations %}
+                <div class="card">
+                    <a href="{{ information.href }}">
+                        {% if information.thumb %}
+                            <div class="image-container">
+                                <img alt="New 1" class="card-img-top" src="{{ information.original_image }}">
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="card-text">
+                                {{ information.title }}
+                            </div>
+                            <span class="card-foot">{{ information.date_added }}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-  </div>
 </div>
 

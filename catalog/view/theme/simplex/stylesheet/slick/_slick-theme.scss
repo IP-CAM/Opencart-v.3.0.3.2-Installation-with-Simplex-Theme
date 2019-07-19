@@ -24,7 +24,7 @@
 	stroke : #a4a4a4;
 }
 
-.product-slider, .related-slider, .news, .interesting {
+.product {
 	svg path {
 		stroke : #000;
 	}
@@ -46,7 +46,9 @@
 			}
 		}
 	}
-	
+}
+
+.product-slider, .related-slider, .news, .interesting {
 	.slick-disabled {
 		svg path {
 			stroke : #b2b5b6;

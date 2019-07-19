@@ -1,5 +1,5 @@
 .content {
-	padding : 2.5rem 1.5rem 0;
+	padding : 1rem 1.5rem 0;
 	
 	> * {
 		margin-bottom : 1.25rem;
@@ -48,6 +48,10 @@
 		font-weight : 600;
 	}
 	
+	label {
+		display : inline-block;
+	}
+	
 	ol {
 		counter-reset : count;
 		margin-left   : 2rem;
@@ -78,7 +82,7 @@
 	p {
 		font-size   : 0.8125rem;
 		font-weight : 500;
-		line-height : 1.75rem;
+		line-height : 1.625rem;
 		
 		a {
 			@include transition(color 0.125s linear);
@@ -271,6 +275,7 @@
 			td {
 				color   : $black;
 				padding : 0 1.25rem;
+				width   : 50%;
 				
 				&:first-child {
 					color      : #a4a4a4;

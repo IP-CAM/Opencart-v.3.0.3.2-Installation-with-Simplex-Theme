@@ -415,9 +415,13 @@ class ControllerCheckoutConfirm extends Controller {
 			foreach($order_data['totals'] as $total) {
 				$data['totals'][] = array(
 					'title' => $total['title'],
-					'text'  => $this->currency->format($total['value'], $this->session->data['currency'])
+					'text'  => $this->currency->format($total['value'], $this->session->data['currency']),
 				);
 			}
+
+			/* added by it-lab start */
+			$data['currency'] = $this->session->data['currency'];
+			/* added by it-lab end */
 
 			$data['payment'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);
 		} else {

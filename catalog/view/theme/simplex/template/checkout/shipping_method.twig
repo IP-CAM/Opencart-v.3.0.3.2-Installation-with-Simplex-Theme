@@ -1,4 +1,4 @@
-<div class="card-body">
+<div class="card-body content">
     {% if error_warning %}
         <div class="alert alert-warning alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
         </div>
@@ -15,7 +15,7 @@
                         {% else %}
                             <input type="radio" name="shipping_method" value="{{ quote.code }}"/>
                         {% endif %}
-                        {{ quote.title }} - {{ quote.text }}</label>
+                        {{ quote.title }} - {{ quote.text }}{{ currency }}</label>
                 {% endfor %}
             {% else %}
                 <div class="alert alert-danger alert-dismissible">{{ shipping_method.error }}</div>

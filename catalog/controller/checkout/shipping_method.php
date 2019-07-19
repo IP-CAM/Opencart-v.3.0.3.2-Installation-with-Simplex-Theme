@@ -62,6 +62,10 @@ class ControllerCheckoutShippingMethod extends Controller {
 		} else {
 			$data['comment'] = '';
 		}
+
+		/* added by it-lab start */
+		$data['currency'] = $this->session->data['currency'];
+		/* added by it-lab end */
 		
 		$this->response->setOutput($this->load->view('checkout/shipping_method', $data));
 	}
