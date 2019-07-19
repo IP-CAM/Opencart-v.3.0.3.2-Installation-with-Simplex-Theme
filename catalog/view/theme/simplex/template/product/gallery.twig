@@ -102,16 +102,19 @@
         <div class="interesting">
             <h4>{{ random_album.album_title }}</h4>
             <div class="card">
-                <a href="{{ random_album.link }}" tabindex="0"><img alt="New 1" class="card-img-top"
-                                                                    src="{{ random_album.album_image }}"></a>
-                <div class="card-body">
-                    <div class="card-text">
-                        <a href="{{ random_album.link }}" tabindex="0">{{ random_album.album_description }}</a>
+                <a href="{{ random_album.link }}" tabindex="0">
+                    <div class="image-container">
+                        <img alt="New 1" class="card-img-top" src="{{ random_album.album_image }}">
                     </div>
-                    <div class="photo-num">
-                        <p>{{ random_album.total_images }} {{ random_album.photos_msg }}</p>
+                    <div class="card-body">
+                        <div class="card-text">
+                            {{ random_album.album_description }}
+                        </div>
+                        <div class="photo-num">
+                            <p>{{ random_album.total_images }} {{ random_album.photos_msg }}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

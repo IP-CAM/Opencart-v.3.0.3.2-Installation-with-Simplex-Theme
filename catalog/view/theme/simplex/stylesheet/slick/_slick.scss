@@ -11,6 +11,10 @@
 	position : relative;
 	width    : 100%;
 	
+	aside & {
+		margin : 0
+	}
+	
 	&:focus {
 		outline : none;
 	}
@@ -44,6 +48,10 @@
 	margin     : 0 10px;
 	min-height : 1px;
 	opacity    : 1;
+	
+	aside & {
+		margin : 0;
+	}
 	
 	[dir="rtl"] & {
 		float : right;
