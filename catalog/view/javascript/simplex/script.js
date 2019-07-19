@@ -287,7 +287,7 @@ $('.gallery-list').slick({
 });
 $('.gallery-images').slick({
     asNavFor: '.gallery-list',
-    slidesToShow: 5,
+    slidesToShow: $('.gallery-images .item-image').length > 5 ? 5 : $('.gallery-images .item-image').length,
     dots: false,
     focusOnSelect: true,
     vertical: true,

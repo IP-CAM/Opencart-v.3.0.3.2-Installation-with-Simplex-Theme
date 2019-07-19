@@ -219,7 +219,6 @@
         location = url;
     });
 </script>
-
 <script>
     $(".timetable table").attr("style", '');
     $(".input-telephone input , #subscribe #email").on("input", function () {
@@ -288,7 +287,6 @@
         });
     }
 </script>
-
 <script>
     cart.add = function (product_id, quantity) {
         $.ajax({
@@ -367,8 +365,39 @@
         cart.remove('all');
     })
 </script>
-
-
+<script>
+    function getCartTable() {
+        $("#quantity").on("change", function () {
+            let value = $(this).val();
+            let quantity = $(this).attr('name');
+            $.ajax({
+                url: '/index.php?route=checkout/cart/edit',
+                type: 'post',
+                data: quantity + '=' + value,
+                dataType: 'text',
+                success: function (json) {
+                    $('#cart-wrapper .cart-table').html(json);
+                    $("input#quantity").inputSpinner({
+                        decrementButton: "-",
+                        incrementButton: "+",
+                        groupClass: "input-group-spinner",
+                        buttonsWidth: "0",
+                        textAlign: "center",
+                        autoDelay: 500,
+                        autoInterval: 100,
+                        boostThreshold: 15,
+                        boostMultiplier: 2,
+                        locale: null
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        });
+    }
+    getCartTable();
+</script>
 <script src="catalog/view/javascript/simplex/script.js"></script>
 {% for script in scripts %}
     <script src="{{ script }}" type="text/javascript"></script>

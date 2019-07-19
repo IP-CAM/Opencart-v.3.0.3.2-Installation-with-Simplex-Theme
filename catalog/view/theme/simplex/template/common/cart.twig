@@ -4,9 +4,7 @@
             {% for product in products %}
                 <li class="product">
                     <a href="{{ product.href }}">
-                        <div class="image-container">
-                            <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
-                        </div>
+                        <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
                         <div class="product-body">
                             <h5 class="title">{{ product.name }}</h5>
                             <div class="price-container">
@@ -24,7 +22,6 @@
             <li><p class="text-center">{{ text_empty }}</p></li>
         {% endif %}
     </ul>
-
     <div class="total-wrapper">
         {% if products or vouchers %}
             <div class="total">

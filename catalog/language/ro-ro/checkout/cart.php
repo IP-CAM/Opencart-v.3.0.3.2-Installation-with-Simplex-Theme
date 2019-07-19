@@ -44,3 +44,5 @@ $_['error_recurring_required'] = 'Selectează un abonament!';
 
 $_['delete_all']               = 'Sterge totul';
 $_['total'] = 'Total';
+
+$_['delivery_text'] = 'Calcul livrarii';

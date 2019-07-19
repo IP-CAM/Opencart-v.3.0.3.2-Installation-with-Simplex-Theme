@@ -3,16 +3,18 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
+                {% if loop.first %}
+                    <li>
+                        <a href="{{ breadcrumb.href }}">
+                            <img alt="Home" src="catalog/view/theme/simplex/assets/img/home.svg">
+                        </a>
+                    </li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
         <div class="page-title" id="news-title">
             <h1>{{ heading_title }}</h1>
@@ -35,17 +37,19 @@
                     {% for information in informations %}
                         {% if not loop.first %}
                             <div class="item">
-                                <div class="card">
-                                    <a href="{{ information.href }}">
-                                        <img alt="New 1" class="card-img-top" src="{{ information.thumb }}">
+                                <a href="{{ information.href }}">
+                                    <div class="card">
+                                        <div class="image-container">
+                                            <img alt="New 1" class="card-img-top" src="{{ information.thumb }}">
+                                        </div>
                                         <div class="card-body">
                                             <div class="card-text">
                                                 {{ information.title }}
                                             </div>
                                             <span class="card-foot">{{ information.date_added }}</span>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         {% endif %}
                     {% endfor %}

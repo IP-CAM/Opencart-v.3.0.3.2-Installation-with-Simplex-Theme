@@ -1,18 +1,18 @@
 {% for information in informations %}
     <div class="item">
-        <div class="image" style="height: 100%">
-            <img alt="{{ information.title }}" src="{{ information.thumb }}">
-        </div>
-        <div class="overlay">
-            <div class="city">
-                {{ information.city }}
+        <a href="{{ information.href }}">
+            <div class="image" style="height: 100%">
+                <img alt="{{ information.title }}" src="{{ information.thumb }}">
             </div>
-            <a href="{{ information.href }}">
+            <div class="overlay">
+                <div class="city">
+                    {{ information.city }}
+                </div>
                 <div class="title">
                     {{ information.title }}
                 </div>
-            </a>
-            <hr>
-        </div>
+                <hr>
+            </div>
+        </a>
     </div>
 {% endfor %}
