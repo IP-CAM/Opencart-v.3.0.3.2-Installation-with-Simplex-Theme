@@ -102,9 +102,8 @@
                         <div class="quantity">
                             <label><input id="quantity" name="quantity" max="100" min="1" step="1" type="text"
                                           value="1"></label>
-                            <button id="button-cart" class="add-to-cart" role="button" type="submit">{{ button_cart }}
-                                <span
-                                        class="image-container"></span></button>
+                            <button id="button-cart" class="add-to-cart" role="button" type="submit" onclick="cart.add({{ product_id }})">{{ button_cart }}
+                                <span class="image-container"><img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png"></span></button>
                             <input type="hidden" name="product_id" value="{{ product_id }}"/>
                         </div>
                     </div>
@@ -536,57 +535,6 @@ $("#to-availability").click(function(e) {
                 if (json['success']) {
                     $('#recurring-description').html(json['success']);
                 }
-            }
-        });
-    });
-    //--></script>
-<script type="text/javascript"><!--
-    $('#button-cart').on('click', function () {
-        var product_id="{{ product_id }}";
-        $.ajax({
-            url: 'index.php?route=checkout/cart/add',
-            type: 'post',
-            data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
-            dataType: 'json',
-            beforeSend: function () {
-                $('#button-cart').button('loading');
-            },
-            complete: function () {
-                $('#button-cart').button('reset');
-            },
-            success: function (json) {
-                $('.alert-dismissible, .text-danger').remove();
-                $('.form-group').removeClass('has-error');
-
-                if (json['error']) {
-                    if (json['error']['option']) {
-                        for (i in json['error']['option']) {
-                            var element = $('#input-option' + i.replace('_', '-'));
-
-                            if (element.parent().hasClass('input-group')) {
-                                element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
-                            } else {
-                                element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
-                            }
-                        }
-                    }
-
-                    if (json['error']['recurring']) {
-                        $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
-                    }
-
-                    // Highlight any found errors
-                    $('.text-danger').parent().addClass('has-error');
-                }
-
-                if (json['success']) {
-                    $('#cart > ul').load('index.php?route=common/cart/info ul li');
-                    show_succes_popup(product_id,json['success_message'],'cart');
-                    $('#cart .quantity').text(json['cart_count']);
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
     });

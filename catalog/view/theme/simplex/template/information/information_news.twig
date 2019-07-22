@@ -3,16 +3,16 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
         <div class="page-title centered">
             <h1>
@@ -32,7 +32,7 @@
             </div>
             <div class="content heading">
                 <p>
-                    {{ short_description}}
+                    {{ short_description }}
                 </p>
             </div>
 
@@ -56,14 +56,14 @@
 
         <div class="share">
             {% if archive_link %}
-            <div class="back">
-                <a href="{{ archive_link }}">{{ text_archive_link }}</a>
-            </div>
+                <div class="back">
+                    <a href="{{ archive_link }}">{{ text_archive_link }}</a>
+                </div>
             {% endif %}
             <div class="social">
                 <p>{{ share_information }}:</p>
                 <script src="catalog/view/javascript/share2/es5-shims.min.js"></script>
-                        <script src="catalog/view/javascript/share2/share.js"></script>
+                <script src="catalog/view/javascript/share2/share.js"></script>
                 <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter"></div>
 
             </div>
@@ -72,6 +72,7 @@
 
 
     </div>
+    <hr style="margin-top: 0;">
+    {{ content_bottom }}
 </main>
-{{ content_bottom }}
 {{ footer }}

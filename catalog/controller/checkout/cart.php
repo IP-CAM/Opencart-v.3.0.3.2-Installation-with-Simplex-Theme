@@ -241,6 +241,10 @@ class ControllerCheckoutCart extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
+			/* added by it-lab start */
+			$data['currency'] = $this->session->data['currency'];
+			/* added by it-lab end */
+
 			$this->response->setOutput($this->load->view('checkout/cart', $data));
 		} else {
 			$data['text_error'] = $this->language->get('text_empty');
@@ -918,7 +922,6 @@ class ControllerCheckoutCart extends Controller {
 				$sort_order = array();
 
 				$results = $this->model_setting_extension->getExtensions('total');
-
 				foreach($results as $key => $value) {
 					$sort_order[$key] = $this->config->get('total_' . $value['code'] . '_sort_order');
 				}
@@ -935,14 +938,12 @@ class ControllerCheckoutCart extends Controller {
 				}
 
 				$sort_order = array();
-
 				foreach($totals as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];
 				}
 
 				array_multisort($sort_order, SORT_ASC, $totals);
 			}
-
 			$data['totals'] = array();
 
 			foreach($totals as $total) {
@@ -951,7 +952,6 @@ class ControllerCheckoutCart extends Controller {
 					'text'  => $this->currency->format($total['value'], $this->session->data['currency'])
 				);
 			}
-
 			$data['continue'] = $this->url->link('common/home');
 
 			$data['checkout'] = $this->url->link('checkout/checkout', '', true);
@@ -979,11 +979,16 @@ class ControllerCheckoutCart extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
+			/* added by it-lab start */
+			$data['currency'] = $this->session->data['currency'];
+			/* added by it-lab end */
+
 			$this->response->setOutput(json_encode($data['totals']));
 		} else {
 			$data['text_error'] = $this->language->get('text_empty');
 
 			$data['continue'] = $this->url->link('common/home');
+
 			/* added by it-lab start */
 			$data['currency'] = $this->session->data['currency'];
 			/* added by it-lab end */

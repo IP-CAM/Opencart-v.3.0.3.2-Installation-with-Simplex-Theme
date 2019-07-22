@@ -14,10 +14,10 @@ class ControllerExtensionExtensionPromotion extends Controller {
 
 		curl_close($curl);
 
-		if ($response) {
-			return $response;
-		} else {
-			return '';
-		}
+//		if ($response) {
+//			return $response;
+//		} else {
+//			return '';
+//		}
 	}
 }

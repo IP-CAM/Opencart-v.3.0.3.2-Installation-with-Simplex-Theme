@@ -156,7 +156,7 @@
                     location = json['redirect'];
                 }
 
-                show_succes_popup(product_id, json['success_message'],'wishlist');
+                show_succes_popup(product_id, json['success_message'], 'wishlist');
 
                 $('#wishlist-total .quantity').removeClass('d-none').html(json['total']);
                 $('#wishlist-total').attr('title', json['total']);
@@ -275,7 +275,7 @@
 
                 if (json['success']) {
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                    show_succes_popup(product_id, json['success_message'],'compare');
+                    show_succes_popup(product_id, json['success_message'], 'compare');
                     $('#compare-total').html(json['total']);
                     $('#compare .quantity').removeClass('d-none').html(json['total']);
                     //$('html, body').animate({scrollTop: 0}, 'slow');
@@ -309,7 +309,7 @@
 
                 if (json['success']) {
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                    show_succes_popup(product_id, json['success_message'],'cart');
+                    show_succes_popup(product_id, json['success_message'], 'cart');
 
                     // Need to set timeout otherwise it wont update the total
 
@@ -366,17 +366,17 @@
     })
 </script>
 <script>
-    function getCartTable() {
-        $("#quantity").on("change", function () {
-            let value = $(this).val();
-            let quantity = $(this).attr('name');
+    let value;
+    let quantity;
+
+    let timerHandle = setTimeout(function (value, quantity) {
+        if (quantity && value) {
             $.ajax({
                 url: '/index.php?route=checkout/cart/edit',
                 type: 'post',
                 data: quantity + '=' + value,
                 dataType: 'text',
-                success: function (json) {
-                    $('#cart-wrapper .cart-table').html(json);
+                success: function () {
                     $("input#quantity").inputSpinner({
                         decrementButton: "-",
                         incrementButton: "+",
@@ -394,8 +394,47 @@
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                 }
             });
+        }
+    }, 1000);
+
+    function resetTimer(value, quantity) {
+        window.clearTimeout(timerHandle);
+        timerHandle = setTimeout(function () {
+            $.ajax({
+                url: '/index.php?route=checkout/cart/edit',
+                type: 'post',
+                data: quantity + '=' + value,
+                dataType: 'text',
+                success: function () {
+                    $("input#quantity").inputSpinner({
+                        decrementButton: "-",
+                        incrementButton: "+",
+                        groupClass: "input-group-spinner",
+                        buttonsWidth: "0",
+                        textAlign: "center",
+                        autoDelay: 500,
+                        autoInterval: 100,
+                        boostThreshold: 15,
+                        boostMultiplier: 2,
+                        locale: null
+                    });
+                    location.reload();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }, 1000);
+    }
+
+    function getCartTable() {
+        $("#quantity").on("change", function (e) {
+            value = $(this).val();
+            quantity = $(this).attr('name');
+            resetTimer(value, quantity);
         });
     }
+
     getCartTable();
 </script>
 <script src="catalog/view/javascript/simplex/script.js"></script>

@@ -1,28 +1,65 @@
 <div class="card-submit">
-  <button class="next" data-loading-text="{{ text_loading }}" id="button-confirm">
-    {{ button_confirm }}
-    <span class="image-container"></span>
-  </button>
+    <button class="next" data-loading-text="{{ text_loading }}" id="button-confirm">
+        {{ button_confirm }}
+        <span class="image-container"></span>
+    </button>
+    <div class="total">
+        <span></span>
+        <div class="price">
+        </div>
+    </div>
 </div>
-<script type="text/javascript"><!--
-$('#button-confirm').on('click', function() {
-	$.ajax({
-		url: 'index.php?route=extension/payment/cod/confirm',
-		dataType: 'json',
-		beforeSend: function() {
-			$('#button-confirm').button('loading');
-		},
-		complete: function() {
-			$('#button-confirm').button('reset');
-		},
-		success: function(json) {
-			if (json['redirect']) {
-				location = json['redirect'];	
-			}
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-});
-//--></script>
+<script type="text/javascript">
+
+    $('#button-confirm').on('click', function () {
+        $.ajax({
+            url: 'index.php?route=extension/payment/cod/confirm',
+            dataType: 'json',
+            beforeSend: function () {
+                $('#button-confirm').button('loading');
+            },
+            complete: function () {
+                $('#button-confirm').button('reset');
+            },
+            success: function (json) {
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    $(document).ready(function () {
+        let currency;
+
+        $.ajax({
+            url: 'index.php?route=extension/payment/cod/get_currency',
+            dataType: 'json',
+            success: function (json) {
+                currency = json['currency'];
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+        $.ajax({
+            url: 'index.php?route=extension/payment/cod/get_total_price',
+            dataType: 'json',
+            beforeSend: function () {
+                $('#button-confirm').button('loading');
+            },
+            complete: function () {
+                $('#button-confirm').button('reset');
+            },
+            success: function (json) {
+                $('.card-submit .total span').html(json['title']);
+                $('.card-submit .total .price').html('<h5>' + json['text'] + ' <small> ' + currency + '</small></h5>');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+</script>
