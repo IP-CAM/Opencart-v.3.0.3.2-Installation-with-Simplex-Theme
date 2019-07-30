@@ -424,6 +424,10 @@ select {
 			border-bottom : 1px dotted #d6d6d6;
 		}
 		
+		tbody:last-child tr:last-child {
+			border-bottom : 0;
+		}
+		
 		.date {
 			color : #a4a4a4;
 		}
@@ -715,7 +719,6 @@ select {
 			
 			.panel-heading {
 				@include flex(none, none, center);
-				margin-bottom : 2.5rem;
 				
 				h5 {
 					margin-bottom : 0;
@@ -796,6 +799,10 @@ select {
 						}
 					}
 				}
+			}
+			
+			.panel-collapse {
+				margin-top : 2.5rem;
 			}
 		}
 	}
@@ -917,12 +924,18 @@ select {
 		}
 		
 		.delete {
-			@include transform(scale(0.75))
+			@include transform(scale(0.75));
+			@include transition(opacity .125s linear);
+			opacity : 1;
+			
+			&:hover {
+				opacity : 0.4;
+			}
 		}
 	}
 	
 	.dropdown-menu {
-		border          : 0;
+		box-shadow      : 0 18px 18.69px 2.31px rgba(0, 0, 0, 0.03);
 		scrollbar-width : auto;
 		width           : 300px;
 		
@@ -1311,7 +1324,7 @@ select {
 		}
 		
 		td:first-child {
-			width : 135px;
+			width : 165px;
 			
 			&, * {
 				color      : #a4a4a4;
@@ -1334,13 +1347,29 @@ select {
 		.price {
 			font-size   : 1.25em;
 			font-weight : 800;
+			
+			.currency {
+				font-size   : .66em;
+				font-weight : 600;
+				margin-left : 0.5rem;
+			}
 		}
 	}
 	
-	.delete-all {
-		border   : 0;
-		padding  : 0.5rem 1rem;
-		position : static;
+	.delete {
+		border    : 0;
+		color     : #a4a4a4 !important;
+		font-size : .875rem;
+		padding   : 0.5rem 1rem;
+		
+		&:before {
+			background   : url($image_dir + "gray-x.svg") no-repeat center;
+			content      : "";
+			display      : inline-block;
+			height       : 10px;
+			margin-right : .5rem;
+			width        : 10px;
+		}
 	}
 }
 
@@ -2780,6 +2809,32 @@ select {
 		font-size      : 0.8125rem;
 		font-weight    : 500;
 		padding-bottom : 2px;
+	}
+}
+
+.anchor-link {
+	img, .card-body {
+		@include transition(all .125s linear);
+	}
+	
+	img {
+		opacity : 1;
+	}
+	
+	.card-body p {
+		color : $black;
+	}
+	
+	&:hover {
+		img {
+			opacity : 0.4;
+		}
+		
+		.card-body {
+			p {
+				color : $yellow;
+			}
+		}
 	}
 }
 
@@ -4823,7 +4878,7 @@ select {
 		
 		> a:not(.add-to-cart) {
 			@include flex-align(row, start, center);
-			padding : .5rem 5.875rem .5rem 3rem;
+			padding : .5rem 6.875rem .5rem 3rem;
 			
 			> .image-container {
 				flex   : 0;
@@ -4891,7 +4946,7 @@ select {
 		}
 		
 		.float-buttons {
-			@include absolute-center(right unset left 1rem);
+			@include absolute-center(right unset left 0.25rem);
 			@include flex(col, center, center);
 			opacity : 0;
 			
@@ -5272,6 +5327,11 @@ select {
 			display                 : block;
 			padding                 : 10px;
 		}
+	}
+	
+	&:hover {
+		background-color : #2b2c30;
+		color            : $white;
 	}
 }
 

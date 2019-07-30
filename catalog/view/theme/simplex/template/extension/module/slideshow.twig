@@ -1,84 +1,61 @@
-{#<div class="swiper-viewport">
-  <div id="slideshow{{ module }}" class="swiper-container">
-    <div class="swiper-wrapper">
-      {% for banner in banners %}
-        <div class="swiper-slide text-center">{% if banner.link %}<a href="{{ banner.link }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid"/></a>{% else %}<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid" />{% endif %}</div>
-      {% endfor %}
-    </div>
-  </div>
-  <div class="swiper-pagination slideshow{{ module }}"></div>
-  <div class="swiper-pager">
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-</div>#}
-
-
-
 <div id="slider">
-  <!--TODO: Solve problems with slide image on 320px screen width-->
-  <div class="container-fluid">
-    <div class="main-slider" data-interval="{{ interval }}" >
-      {% for banner in banners %}
-        <div class="item">
-          <div class="category">
-            <a href="{{ banner.breadcrumb.href }}">{{ banner.breadcrumb.text }}</a>
-          </div>
-          <div class="title">
-            <h1>{{ banner.title }}</h1>
-          </div>
-          <div class="link">
-            <a href="{{ link_specials }}">
-              <p>{{ text_view_oferts }}</p>
-              <span class="image-container">
+    <div class="container-fluid">
+        <div class="main-slider" data-interval="{{ interval }}">
+            {% for banner in banners %}
+                <div class="item">
+                    <div class="category">
+                        <a href="{{ banner.breadcrumb.href }}">{{ banner.breadcrumb.text }}</a>
+                    </div>
+                    <div class="title">
+                        <h1>{{ banner.title }}</h1>
+                    </div>
+                    <div class="link">
+                        <a href="{{ link_specials }}">
+                            <p>{{ text_view_oferts }}</p>
+                            <span class="image-container">
                             </span>
-            </a>
-          </div>
-          {% if banner.manufacturer_img %}
-            <div class="brand">
-              <a href="{{  banner.manufacturer_link  }}">
-                <img style="max-width: 80px;max-height: 50px" alt="Roca" src="image/{{ banner.manufacturer_img }}">
-              </a>
-            </div>
-          {% endif %}
-         {# <div class="brand">
-            <a href="#">
-              <img alt="Roca" src="assets/img/roca.svg">
-            </a>
-          </div>#}
-          <div class="image-container">
-            <div class="price">
-              {%  if banner.special  %}
-                <div class="old"><p>{{ banner.price }}.-</p></div>
-                <div class="discount">
-                  <p class="absolute">-{{ banner.economy }}</p>
-                  <p class="currency">{{ currency }}</p>
-                  <p class="relative">{{ banner.special_percentage }}%</p>
+                        </a>
+                    </div>
+                    {% if banner.manufacturer_img %}
+                        <div class="brand">
+                            <a href="{{ banner.manufacturer_link }}">
+                                <img style="max-width: 80px;max-height: 50px" alt="Roca"
+                                     src="image/{{ banner.manufacturer_img }}">
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div class="image-container">
+                        <div class="price">
+                            {% if banner.special %}
+                                <div class="old"><p>{{ banner.price }}.-</p></div>
+                                <div class="discount">
+                                    <p class="absolute">-{{ banner.economy }}</p>
+                                    <p class="currency">{{ currency }}</p>
+                                    <p class="relative">{{ banner.special_percentage }}%</p>
+                                </div>
+                                <div class="current">{{ banner.special }}.-</div>
+                            {% else %}
+                                <div class="current">{{ banner.price }}.-</div>
+                            {% endif %}
+                        </div>
+                        <div class="image">
+                            <img alt="{{ banner.title }}" src="{{ banner.image }}">
+                        </div>
+                    </div>
                 </div>
-                <div class="current">{{ banner.special }}.-</div>
-              {% else %}
-                <div class="current">{{ banner.price }}.-</div>
-              {% endif %}
-            </div>
-            <div class="image">
-              <img alt="{{ banner.title }}" src="{{ banner.image }}">
-            </div>
-          </div>
+            {% endfor %}
         </div>
-      {% endfor %}
-    </div>
-    <div class="slider-nav">
-      {% for banner in banners %}
-      <div class="item">
-        <div class="image-container">
-          <div class="image">
-            <img alt="{{ banner.title }}" src="{{ banner.image }}">
-          </div>
+        <div class="slider-nav">
+            {% for banner in banners %}
+                <div class="item">
+                    <div class="image-container">
+                        <div class="image">
+                            <img alt="{{ banner.title }}" src="{{ banner.image }}">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      </div>
-      {% endfor %}
     </div>
-    <!-- TODO: Slider nav can include only 2 elements on <340px. WTD, if more? -->
-  </div>
 </div>
 

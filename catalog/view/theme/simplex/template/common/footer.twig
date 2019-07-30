@@ -15,7 +15,6 @@
                                         {% else %}
                                             <li><a href="{{ subtitle.link }}">
                                                     {{ subtitle.title }}</a></li>
-                                            </a></li>
                                         {% endif %}
                                     {% endfor %}
                                 </ul>
@@ -32,7 +31,7 @@
                         {% if menu.description %}
                             {{ menu.description }}
                         {% else %}
-                            {{ menu.title }}</a></li>
+                            {{ menu.title }}
                         {% endif %}
                         </a></li>
                     {% endfor %}
@@ -309,15 +308,12 @@
 
                 if (json['success']) {
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                    show_succes_popup(product_id, json['success_message'], 'cart');
-
-                    // Need to set timeout otherwise it wont update the total
-
-                    //$('html, body').animate({scrollTop: 0}, 'slow');
 
                     $('#cart .quantity').text(json['cart_count']);
                     $('#cart .dropdown-menu > ul').load('index.php?route=common/cart/info .dropdown-menu ul li');
                     $('#cart .total-wrapper').load('index.php?route=common/cart/info .total-wrapper .total');
+
+                    show_succes_popup(product_id, json['success_message'], 'cart');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -369,69 +365,19 @@
     let value;
     let quantity;
 
-    let timerHandle = setTimeout(function (value, quantity) {
-        if (quantity && value) {
-            $.ajax({
-                url: '/index.php?route=checkout/cart/edit',
-                type: 'post',
-                data: quantity + '=' + value,
-                dataType: 'text',
-                success: function () {
-                    $("input#quantity").inputSpinner({
-                        decrementButton: "-",
-                        incrementButton: "+",
-                        groupClass: "input-group-spinner",
-                        buttonsWidth: "0",
-                        textAlign: "center",
-                        autoDelay: 500,
-                        autoInterval: 100,
-                        boostThreshold: 15,
-                        boostMultiplier: 2,
-                        locale: null
-                    });
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
-        }
-    }, 1000);
-
-    function resetTimer(value, quantity) {
-        window.clearTimeout(timerHandle);
-        timerHandle = setTimeout(function () {
-            $.ajax({
-                url: '/index.php?route=checkout/cart/edit',
-                type: 'post',
-                data: quantity + '=' + value,
-                dataType: 'text',
-                success: function () {
-                    $("input#quantity").inputSpinner({
-                        decrementButton: "-",
-                        incrementButton: "+",
-                        groupClass: "input-group-spinner",
-                        buttonsWidth: "0",
-                        textAlign: "center",
-                        autoDelay: 500,
-                        autoInterval: 100,
-                        boostThreshold: 15,
-                        boostMultiplier: 2,
-                        locale: null
-                    });
-                    location.reload();
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
-        }, 1000);
-    }
-
     function getCartTable() {
-        $("#quantity").on("change", function (e) {
+        $("#quantity").on("change", function () {
             value = $(this).val();
             quantity = $(this).attr('name');
-            resetTimer(value, quantity);
+            $.ajax({
+                url: '/index.php?route=checkout/cart/edit',
+                type: 'post',
+                data: quantity + '=' + value,
+                dataType: 'text',
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
         });
     }
 

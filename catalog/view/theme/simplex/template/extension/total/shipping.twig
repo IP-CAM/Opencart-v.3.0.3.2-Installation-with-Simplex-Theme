@@ -124,7 +124,8 @@
                                                     data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
                                                     dataType: 'json',
                                                     success: function () {
-                                                        location.reload();
+                                                        //location.reload();
+
                                                     }
                                                 });
 
@@ -213,7 +214,6 @@
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 });
-
             });
         </script>
     </div>

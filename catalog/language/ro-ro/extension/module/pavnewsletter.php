@@ -11,7 +11,7 @@
 $_['entry_sign_up_for_newsletter'] = "Sign Up For Newsletter";
 $_['entry_newsletter'] = "Newsletter";
 $_['button_ok'] = "Ok";
-$_['button_subscribe'] = "Subscrieţi la newsletter";
+$_['button_subscribe'] = "Subscrieţi";
 $_['button_subscribes'] = "Go";
 $_['default_input_text'] = "Adresa dvs. e-mail ";
 $_['valid_email'] = "Email уыеу штсщкусе!";
@@ -20,5 +20,3 @@ $_['error_post'] = "This email address is already registered.";
 $_['text_description'] = "A newsletter is a regularly distributed publication that is generally about one main topic of interest to its subscribers.";
 $_['description_fs'] = "Get 15% off your next order. Be the first to learn about promotions special events, new arrivals and more";
 $_['text_dont_show'] = "Close & Don't show this again!!!";
-
-?>

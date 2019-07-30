@@ -45,3 +45,4 @@ $_['delete_all']               = 'Delete all';
 $_['total'] = 'Total';
 
 $_['delivery_text'] = 'Delivery calculator';
+$_['update_cart'] = 'Update cart';

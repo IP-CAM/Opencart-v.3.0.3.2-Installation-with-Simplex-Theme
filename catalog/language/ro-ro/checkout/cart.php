@@ -46,3 +46,4 @@ $_['delete_all']               = 'Sterge totul';
 $_['total'] = 'Total';
 
 $_['delivery_text'] = 'Calcul livrarii';
+$_['update_cart'] = 'Actualizarea cosului';
