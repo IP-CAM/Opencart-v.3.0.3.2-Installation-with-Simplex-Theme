@@ -122,16 +122,10 @@
                                                     url: 'index.php?route=extension/total/shipping/quote',
                                                     type: 'post',
                                                     data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
-                                                    dataType: 'json',
-                                                    success: function () {
-                                                        //location.reload();
-
-                                                    }
+                                                    dataType: 'json'
                                                 });
 
-                                                $('.panel-heading p').html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
-
-
+                                                //$('.panel-heading p').html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
                                             },
                                             error: function (xhr, ajaxOptions, thrownError) {
                                                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -159,10 +153,7 @@
 
                                                 $('html, body').animate({scrollTop: 0}, 'slow');
                                             }
-
                                             $('.panel-heading p').html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
-
-                                            location.reload();
                                         },
                                         error: function (xhr, ajaxOptions, thrownError) {
                                             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

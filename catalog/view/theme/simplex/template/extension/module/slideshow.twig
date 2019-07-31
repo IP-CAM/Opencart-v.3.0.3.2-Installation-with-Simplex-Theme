@@ -19,8 +19,8 @@
                     {% if banner.manufacturer_img %}
                         <div class="brand">
                             <a href="{{ banner.manufacturer_link }}">
-                                <img style="max-width: 80px;max-height: 50px" alt="Roca"
-                                     src="image/{{ banner.manufacturer_img }}">
+                                <img style="max-width: 80px;max-height: 50px" alt="{{ banner.title }}"
+                                     src="{{ banner.manufacturer_img }}">
                             </a>
                         </div>
                     {% endif %}

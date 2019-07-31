@@ -67,7 +67,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
                     }
                     $manufacturer = $this->model_catalog_manufacturer->getManufacturer($product['manufacturer_id']);
                     if($manufacturer){
-                        $banner['manufacturer_img'] = $manufacturer['image'];
+                        $banner['manufacturer_img'] = $this->model_tool_image->resize($manufacturer['image']);
                     }else{
                         $banner['manufacturer_img'] = false;
                     }
