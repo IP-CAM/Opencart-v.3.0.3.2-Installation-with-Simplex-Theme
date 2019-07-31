@@ -382,7 +382,7 @@ $('.slideshow-nav').slick({
     variableWidth: true,
 });
 /* End Slick */
-$("input#quantity").inputSpinner({
+$("input.quantity").inputSpinner({
     decrementButton: "-",
     incrementButton: "+",
     groupClass: "input-group-spinner",

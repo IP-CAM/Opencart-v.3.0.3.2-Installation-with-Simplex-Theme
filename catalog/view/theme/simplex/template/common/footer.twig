@@ -366,7 +366,7 @@
     let quantity;
 
     function getCartTable() {
-        $("#quantity").on("change", function () {
+        $(".quantity").on("change", function () {
             value = $(this).val();
             quantity = $(this).attr('name');
             $.ajax({

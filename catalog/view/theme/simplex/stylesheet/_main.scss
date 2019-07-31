@@ -3025,6 +3025,7 @@ select {
 				bottom   : 0;
 				position : absolute;
 				right    : 0;
+				width    : 100%;
 				z-index  : -1;
 			}
 			
@@ -3078,6 +3079,7 @@ select {
 				> img {
 					height   : 75px;
 					position : static;
+					width    : auto;
 				}
 				
 				p {

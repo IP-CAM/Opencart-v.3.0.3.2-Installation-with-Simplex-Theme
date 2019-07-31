@@ -49,6 +49,22 @@
 	min-height : 1px;
 	opacity    : 1;
 	
+	#news & {
+		height : auto;
+		
+		> div, .card, .card a {
+			height : 100%;
+			
+			.card-body {
+				@include flex(col, start, between);
+			}
+		}
+		
+		.card a {
+			@include flex(col);
+		}
+	}
+	
 	aside & {
 		margin : 0;
 	}
@@ -96,6 +112,10 @@
 	margin-right : auto;
 	position     : relative;
 	top          : 0;
+	
+	#news & {
+		@include flex;
+	}
 	
 	&:after, &:before {
 		content : "";
