@@ -28,12 +28,12 @@
                 <ul>
                     {% for menu in catalog.children %}
                         <li><a href="{{ menu.link }}">
-                        {% if menu.description %}
-                            {{ menu.description }}
-                        {% else %}
-                            {{ menu.title }}
-                        {% endif %}
-                        </a></li>
+                                {% if menu.description %}
+                                    {{ menu.description }}
+                                {% else %}
+                                    {{ menu.title }}
+                                {% endif %}
+                            </a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -362,13 +362,10 @@
     })
 </script>
 <script>
-    let value;
-    let quantity;
+    let timeout;
 
-    function getCartTable() {
-        $(".quantity").on("change", function () {
-            value = $(this).val();
-            quantity = $(this).attr('name');
+    function editCart(quantity, value) {
+        timeout = setTimeout(function () {
             $.ajax({
                 url: '/index.php?route=checkout/cart/edit',
                 type: 'post',
@@ -378,10 +375,15 @@
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                 }
             });
-        });
+        }, 500)
     }
 
-    getCartTable();
+    $("input.quantity").change(function () {
+        let value = $(this).val();
+        let quantity = $(this).attr('name');
+        clearTimeout(timeout);
+        editCart(quantity, value);
+    });
 </script>
 <script src="catalog/view/javascript/simplex/script.js"></script>
 {% for script in scripts %}

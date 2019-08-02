@@ -1,7 +1,18 @@
 <div id="collapse-shipping" class="panel-collapse" style="display: none;">
     <div class="panel-body">
-        <select name="zone_id" id="input-zone" class="form-control">
-        </select>
+        {% if countries|length > 1 %}
+            <select name="country_id" id="input-country" class="form-control">
+                <option value="">{{ text_select }}</option>
+                {% for country in countries %}
+                    {% if country.country_id == country_id %}
+                        <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+                    {% else %}
+                        <option value="{{ country.country_id }}">{{ country.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        {% endif %}
+        <select name="zone_id" id="input-zone" class="form-control"></select>
         <ul>
             <li>{{ text_shipping }}</li>
             <li>{{ text_shipping_time }}</li>
@@ -11,7 +22,7 @@
                 $.ajax({
                     url: 'index.php?route=extension/total/shipping/quote',
                     type: 'post',
-                    data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
+                    data: 'country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %} + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
                     dataType: 'json',
                     beforeSend: function () {
                         $('#button-quote').button('loading');
@@ -21,10 +32,9 @@
                     },
                     success: function (json) {
                         let shipping_method = {{ shipping_method|length }};
-                        $('.alert-dismissible, .text-danger').remove();
                         if (json['error']) {
                             if (json['error']['warning']) {
-                                $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                                $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error }}</i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                                 $('html, body').animate({scrollTop: 0}, 'slow');
                             }
                             if (json['error']['country']) {
@@ -38,7 +48,7 @@
                             }
                         }
                         if (json['shipping_method']) {
-                            if (shipping_method != 0) {
+                            if (shipping_method !== 0) {
                                 for (i in json['shipping_method']) {
                                     if (!json['shipping_method'][i]['error']) {
                                         for (j in json['shipping_method'][i]['quote']) {
@@ -61,9 +71,9 @@
                                     $(this).parent("form").find('.form-element').css('display', 'none');
                                     $('input[type=radio]').parent().removeClass('semi-bold');
                                     $(this).parent().addClass('semi-bold');
-                                    $('#' + $(this).attr('value')).css('display', 'block');
+                                    $('#' + $(this).attr('value')).show();
                                 });
-
+                                replaceTotal();
                             } else {
                                 $.ajax({
                                     url: 'index.php?route=extension/total/shipping/shipping',
@@ -77,10 +87,8 @@
                                         $('#button-shipping').button('reset');
                                     },
                                     success: function (html) {
-                                        $('.alert-dismissible').remove();
-
                                         if (html['error']) {
-                                            $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                                            $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error }}</i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
                                             $('html, body').animate({scrollTop: 0}, 'slow');
                                         }
@@ -97,6 +105,9 @@
                                 let value = $('input[name="shipping_method"]:checked').val();
                                 if (value !== "pickup.pickup") {
                                     $('#collapse-shipping').show();
+                                    if ($('#input-zone').val().length > 0) {
+                                        replaceTotal();
+                                    }
                                     $('#input-zone').on('change', function () {
                                         $.ajax({
                                             url: 'index.php?route=extension/total/shipping/get_shipping_price',
@@ -113,7 +124,7 @@
                                                 $('.alert-dismissible').remove();
 
                                                 if (json['error']) {
-                                                    $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                                                    $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error }}</i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
                                                     $('html, body').animate({scrollTop: 0}, 'slow');
                                                 }
@@ -121,7 +132,7 @@
                                                 $.ajax({
                                                     url: 'index.php?route=extension/total/shipping/quote',
                                                     type: 'post',
-                                                    data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
+                                                    data: 'country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %} + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
                                                     dataType: 'json',
                                                     success: function () {
                                                         //location.reload();
@@ -152,14 +163,13 @@
                                             $('.alert-dismissible').remove();
 
                                             if (json['error']) {
-                                                $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                                                $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error }}</i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
                                                 $('html, body').animate({scrollTop: 0}, 'slow');
                                             }
 
                                             $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
-                                            replaceTotal()
-                                            //location.reload();
+                                            replaceTotal();
                                         },
                                         error: function (xhr, ajaxOptions, thrownError) {
                                             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -174,7 +184,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'index.php?route=extension/total/shipping/country&country_id=' + 140,
+                    url: 'index.php?route=extension/total/shipping/country&country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %},
                     dataType: 'json',
                     beforeSend: function () {
                         $('select[name=\'country_id\']').prop('disabled', true);

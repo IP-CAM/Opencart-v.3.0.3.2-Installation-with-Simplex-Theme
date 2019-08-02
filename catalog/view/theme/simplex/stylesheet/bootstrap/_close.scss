@@ -1,7 +1,11 @@
 .close {
 	position : absolute;
 	right    : 25px;
-	top      : 35px
+	top      : 35px;
+	
+	.alert &{
+		position : static;
+	}
 }
 
 // Additional properties for button version

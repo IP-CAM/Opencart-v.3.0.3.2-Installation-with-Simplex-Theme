@@ -673,7 +673,7 @@ select {
 		tbody {
 			.price {
 				color : #a4a4a4;
-				width : 110px;
+				width : 80px;
 			}
 			
 			.multiply {
@@ -2812,6 +2812,24 @@ select {
 	}
 }
 
+.alert {
+	@include border-radius();
+	background-color : #ffe9ed;
+	font-size        : 0.8125rem;
+	font-weight      : 500;
+	text-align       : center;
+	
+	&.fa-exclamation-circle {
+		color       : #f6767a;
+		font-weight : 600;
+		
+		&:before {
+			color   : #f6767a;
+			content : "!";
+		}
+	}
+}
+
 .anchor-link {
 	img, .card-body {
 		@include transition(all .125s linear);
@@ -3168,7 +3186,7 @@ select {
 
 .checkout {
 	@include border-radius;
-	@include flex(none, center);
+	@include flex(none, center, none, wrap);
 	background-color : #f5f4f2;
 	margin-top       : 2.5rem;
 	padding-bottom   : 1rem;

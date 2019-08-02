@@ -20,7 +20,8 @@
         <div id="cart-wrapper">
             <a class="delete-all delete-all-from-cart" role="button">{{ delete_all }}</a>
             {% if attention %}
-                <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
+                {{ dump(error) }}
+                <div class="alert alert-info"><i class="fa fa-info-circle"></i>{{ attention }}
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                 </div>
             {% endif %}
@@ -29,9 +30,10 @@
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                 </div>
             {% endif %}
+            {#TODO : print {{ error }} #}
             {% if error_warning %}
                 <div class="alert alert-danger alert-dismissible"><i
-                            class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                            class="fa fa-exclamation-circle">{{ error }}</i> {{ error_warning }}
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                 </div>
             {% endif %}
@@ -123,7 +125,7 @@
                 <div class="total">
                     <span>{{ total }}</span>
                     <div class="price">
-                        <h5>{{ totals[2].text }}&nbsp;<small>{{ currency }}</small></h5>
+                        <h5>&nbsp;<small>{{ currency }}</small></h5>
                     </div>
                 </div>
                 <a href="{{ checkout }}">{{ button_checkout }}<span
