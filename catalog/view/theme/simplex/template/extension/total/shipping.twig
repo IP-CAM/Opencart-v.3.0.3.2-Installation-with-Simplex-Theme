@@ -88,7 +88,7 @@
                                                 for (j in json['shipping_method'][i]['quote']) {
                                                     if (json['shipping_method'][i]['quote'][j]['code'] === '{{ shipping_method }}') {
                                                         $('<label class="semi-bold"><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" checked="checked" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
-                                                        $('.panel-heading p').attr('data-cost', json['shipping_method'][i]['quote'][j]['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method'][i]['quote'][j]['cost'] + ' <small>{{ currency }}</small>');
+                                                        $('.panel-heading p').attr('data-cost', json['shipping_method'][i]['quote'][j]['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method'][i]['quote'][j]['cost'] + '.- <small>{{ currency }}</small>');
                                                     } else {
                                                         $('<label><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
                                                     }
@@ -166,7 +166,7 @@
                                                             data: 'country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %} + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
                                                             dataType: 'json',
                                                         });
-                                                        $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
+                                                        $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + '.- <small>{{ currency }}</small>');
                                                         replaceTotal();
                                                     },
                                                     error: function (xhr, ajaxOptions, thrownError) {
@@ -196,7 +196,7 @@
 
                                                         $('html, body').animate({scrollTop: 0}, 'slow');
                                                     }
-                                                    $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
+                                                    $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + '.- <small>{{ currency }}</small>');
                                                     replaceTotal();
                                                 },
                                                 error: function (xhr, ajaxOptions, thrownError) {
@@ -233,7 +233,7 @@
                                                     data: 'country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %} + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
                                                     dataType: 'json',
                                                 });
-                                                $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
+                                                $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + '.- <small>{{ currency }}</small>');
                                                 replaceTotal();
                                             },
                                             error: function (xhr, ajaxOptions, thrownError) {
@@ -260,7 +260,7 @@
             }
             function replaceTotal() {
                 total = parseInt(getSHippingCost()) + parseInt(getSubtotal());
-                $('.checkout .price h5').html(total + '&nbsp;<small>{{ currency }}</small>');
+                $('.checkout .price h5').html(total + '.- <small>{{ currency }}</small>');
             }
         </script>
     </div>
