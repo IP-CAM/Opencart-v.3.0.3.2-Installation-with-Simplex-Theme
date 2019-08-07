@@ -1,0 +1,36 @@
+{{ header }}
+<main>
+    <div id="common-success" class="container-fluid">
+        <div id="success">
+            {% if order_id %}
+                <div id="ok">
+                    <svg height="30px" width="38px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.646,15.066 L16.401,23.868 L30.993,3.330 " fill="none" fill-rule="evenodd"
+                              stroke="rgb(221, 168, 14)"
+                              stroke-width="6px"></path>
+                    </svg>
+                </div>
+                <h1>{{ heading_title }}</h1>
+                {{ text_message }}
+                <a href="{{ continue }}" id="back">{{ button_continue }} <span class="image-container"></span></a>
+            {% else %}
+                <div id="ok">
+                    <svg height="30px" width="38px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.000,31.000 C1.000,31.000 6.636,21.000 18.000,21.000 C29.364,21.000 36.000,35.000 36.000,35.000 "
+                              fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
+                              stroke-linecap="butt" stroke-linejoin="miter"
+                              stroke-width="2px"></path>
+                        <path d="M28.500,0.000 C30.433,0.000 32.000,1.567 32.000,3.500 C32.000,5.433 30.433,7.000 28.500,7.000 C26.567,7.000 25.000,5.433 25.000,3.500 C25.000,1.567 26.567,0.000 28.500,0.000 Z"
+                              fill="rgb(178, 181, 182)"
+                              fill-rule="evenodd"></path>
+                        <path d="M9.500,0.000 C11.433,0.000 13.000,1.567 13.000,3.500 C13.000,5.433 11.433,7.000 9.500,7.000 C7.567,7.000 6.000,5.433 6.000,3.500 C6.000,1.567 7.567,0.000 9.500,0.000 Z"
+                              fill="rgb(178, 181, 182)"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <a href="{{ continue }}" id="history">{{ button_continue }} <span class="image-container"></span></a>
+            {% endif %}
+        </div>
+    </div>
+</main>
+{{ footer }}

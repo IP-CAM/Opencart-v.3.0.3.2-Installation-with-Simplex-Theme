@@ -9,3 +9,4 @@ $_['text_archive_link']="Назад в архив";
 $_['text_installed']="Были установленны:";
 $_['text_used_brands']="Использованные бренды:";
 $_['text_other_projects'] = 'Другие проекты';
+$_['text_other'] = 'Также интересно';

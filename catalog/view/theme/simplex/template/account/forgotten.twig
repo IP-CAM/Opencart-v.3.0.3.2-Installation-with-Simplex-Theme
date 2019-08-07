@@ -16,28 +16,25 @@
                 {% endif %}
             {% endfor %}
         </ul>
-
         <div class="page-title">
             <h1>{{ heading_title }}</h1>
         </div>
         {% if error_warning %}
-            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error_message }}</i> {{ error_warning }}</div>
+            <div class="alert alert-danger alert-dismissible"><i
+                        class="fa fa-exclamation-circle">{{ error_message }}</i> {{ error_warning }}</div>
         {% endif %}
         <div id="account">
             <div class="card">
+                <h6 style="font-weight: 700">{{ text_email }}</h6>
                 <div id="account-form">
-                    <form action="{{ action }}" method="post">
+                    <form action="{{ action }}" method="post" enctype="multipart/form-data">
                         <label class="required" for="input-email">{{ entry_email }}</label>
                         <input type="email" name="email" value="{{ email }}" placeholder="{{ entry_email }}"
                                id="input-email" required>
-                        <label class="required" for="input-password">{{ entry_password }}</label>
-                        <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}"
-                               id="input-password">
                         <div class="submit">
                             <button class="form-submit" type="submit">
                                 {{ button_continue }}<span class="image-container"></span>
                             </button>
-                            <a style="margin-left: 1rem;" href="{{ forgotten }}">{{ text_forgotten }}</a>
                         </div>
                     </form>
                 </div>
@@ -46,4 +43,4 @@
     </div>
     {{ content_bottom }}
 </main>
-{{ footer }} 
+{{ footer }}

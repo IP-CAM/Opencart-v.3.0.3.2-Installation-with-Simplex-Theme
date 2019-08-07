@@ -1,9 +1,10 @@
 <?php
+
 class ControllerCheckoutSuccess extends Controller {
 	public function index() {
 		$this->load->language('checkout/success');
 		$data['order_id'] = isset($this->session->data['order_id']);
-		if (isset($this->session->data['order_id'])) {
+		if(isset($this->session->data['order_id'])) {
 			$this->cart->clear();
 
 			unset($this->session->data['shipping_method']);
@@ -44,7 +45,7 @@ class ControllerCheckoutSuccess extends Controller {
 			'href' => $this->url->link('checkout/success')
 		);
 
-		if ($this->customer->isLogged()) {
+		if($this->customer->isLogged()) {
 			$data['text_message'] = sprintf($this->language->get('text_customer'), $this->url->link('account/account', '', true), $this->url->link('account/order', '', true), $this->url->link('account/download', '', true), $this->url->link('information/contact'));
 		} else {
 			$data['text_message'] = sprintf($this->language->get('text_guest'), $this->url->link('information/contact'));
@@ -58,7 +59,7 @@ class ControllerCheckoutSuccess extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
-		$this->response->setOutput($this->load->view('common/success', $data));
+		//IT-LAB
+		$this->response->setOutput($this->load->view('common/success_order', $data));
 	}
 }

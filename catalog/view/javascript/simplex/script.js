@@ -487,6 +487,7 @@ $('#contact-form .close').click(function () {
         $('.noscroll').removeClass('noscroll');
     });
 });
+
 $('.delete').click(function () {
     $(this).parents('.product-column').animate({
         opacity: 0,
@@ -503,10 +504,19 @@ $('.delete-all').click(function () {
     $(this).remove();
 });
 $('.poppup').click(function () {
-    $('body').addClass('noscroll');
+    if ($(window).width() < 768) {
+        $('body').addClass('noscroll');
+    }
     $($(this).attr('target')).after('<div class="overlay" />').addClass('active').animate({
         opacity: 1,
-    }, 500)
+    }, 500);
+});
+$(window).click(function() {
+    $('#contact-form .close').click();
+});
+
+$('#contact-form, .poppup').click(function(event){
+    event.stopPropagation();
 });
 $('input[type="radio"]').after('<span class="radio"></span>');
 $('input[type="checkbox"]').after('<span class="checkbox"></span>');
@@ -542,7 +552,7 @@ $('.product .add-to-cart, .product .favorite').click(function () {
  */
 });
 
-function show_succes_popup(product_id, message, type='cart') {
+function show_succes_popup(product_id, message, type = 'cart') {
     var button_product_id_selector = "button[data-product_id='" + product_id + "']";
     var $button = $(button_product_id_selector);
     if ($button.length) {
@@ -556,14 +566,14 @@ function show_succes_popup(product_id, message, type='cart') {
         $("#success-poppup .message").html(message);
         $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
     } else {
-        if(type=='cart'){
-            $button=$("#button-cart");
+        if (type == 'cart') {
+            $button = $("#button-cart");
         }
-        if(type=='compare'){
-            $button=$("#button-compare");
+        if (type == 'compare') {
+            $button = $("#button-compare");
         }
-        if(type=='wishlist'){
-            $button=$("#button-wishlist");
+        if (type == 'wishlist') {
+            $button = $("#button-wishlist");
         }
         let divOffset = $button.offset();
         let divHeight = $button.height();
@@ -572,15 +582,15 @@ function show_succes_popup(product_id, message, type='cart') {
         $("#success-poppup .message").html(message);
         $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
 
-      /*  var horizontalCenter = Math.floor(window.innerWidth / 2);
-        var verticalCener = Math.floor(window.innerHeight / 2);
-        $("#success-poppup").css('display', 'block');
-        let width_poppup = document.getElementById('success-poppup').offsetWidth;
-        let left = horizontalCenter - width_poppup / 2;
-        $("#success-poppup .message").html(message);
-        console.log($('main').scrollTop());
-        $('#success-poppup').css('left', left).css('top', $('main').scrollTop() + verticalCener).css('display', 'block');
-*/
+        /*  var horizontalCenter = Math.floor(window.innerWidth / 2);
+          var verticalCener = Math.floor(window.innerHeight / 2);
+          $("#success-poppup").css('display', 'block');
+          let width_poppup = document.getElementById('success-poppup').offsetWidth;
+          let left = horizontalCenter - width_poppup / 2;
+          $("#success-poppup .message").html(message);
+          console.log($('main').scrollTop());
+          $('#success-poppup').css('left', left).css('top', $('main').scrollTop() + verticalCener).css('display', 'block');
+  */
     }
     setTimeout(function () {
         $('#success-poppup').css('display', 'none');
@@ -624,22 +634,18 @@ $('.phone-poppup .delete').click(function (e) {
     e.preventDefault();
     $(this).parent().css('display', 'none');
 });
-
 $('#catalog').append($('#categories'));
 $('.upload').change(function (e) {
     let fileName = e.target.files[0].name;
     $('+ p', this).remove();
     $('<p style="color: #868686;font-size: .8125rem;font-weight: 500;align-self: center; margin-left: 1rem">' + fileName + '</p>').insertAfter(this);
 });
-
 $(document).ready(function () {
     $('main ')
 });
-
 $('.search-button').click(function () {
     $(this).parent().find('#formSearch input').focus();
 });
-
 $('button[data-target="#formSearch"]').click(function () {
     setTimeout(function () {
         $('#formSearch input').focus();
