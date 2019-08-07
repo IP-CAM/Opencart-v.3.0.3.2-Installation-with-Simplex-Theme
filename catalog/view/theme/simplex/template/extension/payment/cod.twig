@@ -10,7 +10,6 @@
     </div>
 </div>
 <script type="text/javascript">
-
     $('#button-confirm').on('click', function () {
         $.ajax({
             url: 'index.php?route=extension/payment/cod/confirm',
@@ -39,23 +38,24 @@
             dataType: 'json',
             success: function (json) {
                 currency = json['currency'];
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
-        });
-        $.ajax({
-            url: 'index.php?route=extension/payment/cod/get_total_price',
-            dataType: 'json',
-            beforeSend: function () {
-                $('#button-confirm').button('loading');
-            },
-            complete: function () {
-                $('#button-confirm').button('reset');
-            },
-            success: function (json) {
-                $('.card-submit .total span').html(json['title']);
-                $('.card-submit .total .price').html('<h5>' + json['text'] + ' <small> ' + currency + '</small></h5>');
+
+                $.ajax({
+                    url: 'index.php?route=extension/payment/cod/get_total_price',
+                    dataType: 'json',
+                    beforeSend: function () {
+                        $('#button-confirm').button('loading');
+                    },
+                    complete: function () {
+                        $('#button-confirm').button('reset');
+                    },
+                    success: function (json) {
+                        $('.card-submit .total span').html(json['title']);
+                        $('.card-submit .total .price').html('<h5 style="font-weight: 800; font-size: 1.25rem">' + json['text'] + ' <small style="font-weight: 500; font-size: 10px"> ' + currency + '</small></h5>');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

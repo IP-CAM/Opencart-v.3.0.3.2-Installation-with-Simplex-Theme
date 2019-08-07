@@ -12,33 +12,36 @@
                             <a href="{{ product.href }}"><p>{{ product.name }}</p>
                             </a></td>
                         <td style="width: 134px;text-align: right;"><span>{{ product.price }} x</span></td>
-                        <td style="width: 120px;padding-left: 12px"><p style="font-weight: 600">{{ product.quantity }}
+                        <td style="width: 120px;padding-left: 12px"><p
+                                    style="font-weight: 600; font-size:13px">{{ product.quantity }}
                                 <span>=</span> {{ product.total }}</p></td>
                     </tr>
                 {% endfor %}
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <td style="width: 110px;"></td>
-                        <td></td>
-                        <td style="width: 134px;text-align: right;padding-right: 25px; padding-top: 0.75rem;">
-                            <span style="font-weight: 500">{{ totals[0].title }}</span></td>
-                        <td style="width: 120px;padding-top: 0.75rem;font-weight: 800; font-size: 1rem;">{{ totals[0].text }} {{ currency }}</td>
-                    </tr>
-                    <tr>
-                        <td style="width: 110px;"></td>
-                        <td></td>
-                        <td style="width: 134px;text-align: right;padding-right: 25px; padding-top: 0.75rem;">
-                            <span style="font-weight: 500">{{ totals[1].title }}</span></td>
-                        <td style="width: 120px;padding-top: 0.75rem;font-weight: 800; font-size: 1rem;">{{ totals[1].text }} {{ currency }}</td>
-                    </tr>
+                <tr>
+                    <td style="width: 110px;"></td>
+                    <td></td>
+                    <td style="width: 134px;text-align: right;padding-right: 25px; padding-top: 0.75rem;">
+                        <span style="font-weight: 500">{{ totals[0].title }}</span></td>
+                    <td style="width: 120px;padding-top: 0.75rem;font-weight: 800; font-size: 1rem;">{{ totals[0].text }}
+                        <small style="font-size: 10px; font-weight: 500">{{ currency }}</small></td>
+                </tr>
+                <tr>
+                    <td style="width: 110px;"></td>
+                    <td></td>
+                    <td style="width: 134px;text-align: right;padding-right: 25px; padding-top: 0.75rem;">
+                        <span style="font-weight: 500">{{ totals[1].title }}</span></td>
+                    <td style="width: 120px;padding-top: 0.75rem;font-weight: 800; font-size: 1rem;">{{ totals[1].text }}
+                        <small style="font-size: 10px; font-weight: 500">{{ currency }}</small></td>
+                </tr>
                 </tfoot>
             </table>
         </div>
     </div>
     {{ payment }}
 {% else %}
-    <script type="text/javascript"><!--
+    <script type="text/javascript">
         location = '{{ redirect }}';
-        //--></script>
+    </script>
 {% endif %} 
