@@ -66,7 +66,7 @@ $_['button_grid']           = 'Grilă';
 $_['button_map']            = 'Vezi harta google';
 
 // Error
-$_['error']                 = 'Eroare';
+$_['error_message']         = 'Eroare:';
 $_['error_exception']       = 'Cod de eroare(%s): %s În %s pe linia %s';
 $_['error_upload_1']        = 'Atenţie: Fisierul uploadat depaseste marimea maxima setata in php.ini!';
 $_['error_upload_2']        = 'Atenţie: Fisierul uploadat depaseste marimea maxima specificata in formularul HTML!';

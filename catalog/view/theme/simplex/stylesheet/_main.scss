@@ -388,6 +388,11 @@ select {
 		td {
 			line-height    : 2.385;
 			vertical-align : middle;
+			
+			&.warning a {
+				color       : #f6767a;
+				font-weight : 800;
+			}
 		}
 		
 		td, th {
@@ -2817,15 +2822,28 @@ select {
 	background-color : #ffe9ed;
 	font-size        : 0.8125rem;
 	font-weight      : 500;
+	margin-bottom    : 1.625rem;
+	padding          : 0.75rem 0;
+	position         : relative;
 	text-align       : center;
 	
-	&.fa-exclamation-circle {
+	.fa-exclamation-circle {
 		color       : #f6767a;
+		font-style  : normal;
 		font-weight : 600;
 		
 		&:before {
-			color   : #f6767a;
-			content : "!";
+			background              : url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjIgMiAxOCAxNiI+DQo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiICBzdHJva2U9InJnYigyNDYsIDExOCwgMTIyKSIgc3Ryb2tlLXdpZHRoPSIycHgiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBmaWxsPSJub25lIg0KIGQ9Ik00LjAzMCwxNi44NjAgQzQuNzUzLDE2Ljg2MCAxNy40NjAsMTYuODYwIDE3Ljk1OSwxNi44NjAgQzE4LjYwNywxNi44NjAgMTkuMDg5LDE2LjE5NSAxOC43MTAsMTUuNTM3IEMxOC40MDcsMTUuMDEwIDEyLjI4Myw0LjQ3NSAxMS43NTksMy41NzUgQzExLjQxNSwyLjk4NSAxMC41OTUsMi45OTUgMTAuMjUwLDMuNTc1IEM5Ljg2Niw0LjIyMyAzLjcxMSwxNC43OTggMy4yODMsMTUuNTY0IEMyLjk3MCwxNi4xMjUgMy4zMTYsMTYuODYwIDQuMDMwLDE2Ljg2MCBaIi8+DQo8L3N2Zz4=") no-repeat center;
+			-webkit-background-size : 23px 21px;
+			background-size         : 23px 21px;
+			color                   : #f6767a;
+			content                 : "!";
+			display                 : inline-block;
+			height                  : 21px;
+			line-height             : 1.5rem;
+			margin-right            : 0.5rem;
+			text-align              : center;
+			width                   : 23px;
 		}
 	}
 }

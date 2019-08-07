@@ -125,11 +125,9 @@
         </button>
     </div>
 </div>
-<script src="catalog/view/javascript/simplex/jquery-ui.min.js"></script>
-<script src="catalog/view/javascript/simplex/popper.min.js"></script>
-<script src="catalog/view/javascript/simplex/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="catalog/view/javascript/simplex/bootstrap-input-spinner.js"></script>
-
 <script src="catalog/view/javascript/simplex/slick.js"></script>
 <script src="catalog/view/javascript/simplex/grid-animate.js"></script>
 <script>
@@ -356,14 +354,12 @@
             }
         });
     };
-
     $('.delete-all-from-cart').click(function () {
         cart.remove('all');
     })
 </script>
 <script>
     let timeout;
-
     function editCart(quantity, value) {
         timeout = setTimeout(function () {
             $.ajax({
@@ -377,7 +373,6 @@
             });
         }, 500)
     }
-
     $("input.quantity").change(function () {
         let value = $(this).val();
         let quantity = $(this).attr('name');
@@ -389,4 +384,5 @@
 {% for script in scripts %}
     <script src="{{ script }}" type="text/javascript"></script>
 {% endfor %}
-</body></html>
+</body>
+</html>

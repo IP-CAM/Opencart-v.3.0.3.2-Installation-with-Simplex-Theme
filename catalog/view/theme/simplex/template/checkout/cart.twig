@@ -19,22 +19,19 @@
         </div>
         <div id="cart-wrapper">
             <a class="delete-all delete-all-from-cart" role="button">{{ delete_all }}</a>
-            {% if attention %}
-                {{ dump(error) }}
-                <div class="alert alert-info"><i class="fa fa-info-circle"></i>{{ attention }}
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                </div>
-            {% endif %}
-            {% if success %}
-                <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                </div>
-            {% endif %}
-            {#TODO : print {{ error }} #}
             {% if error_warning %}
                 <div class="alert alert-danger alert-dismissible"><i
-                            class="fa fa-exclamation-circle">{{ error }}</i> {{ error_warning }}
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            class="fa fa-exclamation-circle">{{ error_message }}</i> {{ error_warning }}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd"
+                                  stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter"
+                                  stroke-width="2px"></path>
+                            <path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd"
+                                  stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter"
+                                  stroke-width="2px"></path>
+                        </svg>
+                    </button>
                 </div>
             {% endif %}
             <div class="cards">
@@ -60,7 +57,7 @@
                             <td class="image">{% if product.thumb %} <a href="{{ product.href }}"><img
                                             src="{{ product.thumb }}" alt="{{ product.name }}"
                                             title="{{ product.name }}"></a> {% endif %}</td>
-                            <td>
+                            <td {% if not product.stock %}class="warning"{% endif %}>
                                 <a href="{{ product.href }}">{{ product.name }}</a>
                                 {% if product.option %}
                                     {% for option in product.option %} <br/>
