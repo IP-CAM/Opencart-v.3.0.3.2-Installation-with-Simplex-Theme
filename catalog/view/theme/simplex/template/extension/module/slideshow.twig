@@ -9,6 +9,7 @@
                     <div class="title">
                         <h1>{{ banner.title }}</h1>
                     </div>
+                    {% if banner.special %}
                     <div class="link">
                         <a href="{{ link_specials }}">
                             <p>{{ text_view_oferts }}</p>
@@ -16,6 +17,7 @@
                             </span>
                         </a>
                     </div>
+                    {% endif %}
                     {% if banner.manufacturer_img %}
                         <div class="brand">
                             <a href="{{ banner.manufacturer_link }}">
