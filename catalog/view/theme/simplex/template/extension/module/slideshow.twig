@@ -1,50 +1,54 @@
 <div id="slider">
     <div class="container-fluid">
-        <div class="main-slider" data-interval="{{ interval }}">
+{#        <div class="main-slider" data-interval="{{ interval }}">#}
+        <div class="main-slider">
             {% for banner in banners %}
-                <div class="item">
-                    <div class="category">
-                        <a href="{{ banner.breadcrumb.href }}">{{ banner.breadcrumb.text }}</a>
-                    </div>
-                    <div class="title">
-                        <h1>{{ banner.title }}</h1>
-                    </div>
-                    {% if banner.special %}
-                    <div class="link">
-                        <a href="{{ link_specials }}">
-                            <p>{{ text_view_oferts }}</p>
-                            <span class="image-container">
-                            </span>
-                        </a>
-                    </div>
-                    {% endif %}
-                    {% if banner.manufacturer_img %}
-                        <div class="brand">
-                            <a href="{{ banner.manufacturer_link }}">
-                                <img style="max-width: 80px;max-height: 50px" alt="{{ banner.title }}"
-                                     src="{{ banner.manufacturer_img }}">
-                            </a>
-                        </div>
-                    {% endif %}
-                    <div class="image-container">
-                        <div class="price">
-                            {% if banner.special %}
-                                <div class="old"><p>{{ banner.price }}.-</p></div>
-                                <div class="discount">
-                                    <p class="absolute">-{{ banner.economy }}</p>
-                                    <p class="currency">{{ currency }}</p>
-                                    <p class="relative">{{ banner.special_percentage }}%</p>
-                                </div>
-                                <div class="current">{{ banner.special }}.-</div>
-                            {% else %}
-                                <div class="current">{{ banner.price }}.-</div>
-                            {% endif %}
-                        </div>
-                        <div class="image">
-                            <img alt="{{ banner.title }}" src="{{ banner.image }}">
-                        </div>
-                    </div>
-                </div>
+{#                <div class="item">#}
+{#                    <div class="category">#}
+{#                        <a href="{{ banner.breadcrumb.href }}">{{ banner.breadcrumb.text }}</a>#}
+{#                    </div>#}
+{#                    <div class="title">#}
+{#                        <h1>{{ banner.title }}</h1>#}
+{#                    </div>#}
+{#                    {% if banner.special %}#}
+{#                    <div class="link">#}
+{#                        <a href="{{ link_specials }}">#}
+{#                            <p>{{ text_view_oferts }}</p>#}
+{#                            <span class="image-container">#}
+{#                            </span>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    {% endif %}#}
+{#                    {% if banner.manufacturer_img %}#}
+{#                        <div class="brand">#}
+{#                            <a href="{{ banner.manufacturer_link }}">#}
+{#                                <img style="max-width: 80px;max-height: 50px" alt="{{ banner.title }}"#}
+{#                                     src="{{ banner.manufacturer_img }}">#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    {% endif %}#}
+{#                    <div class="image-container">#}
+{#                        <div class="price">#}
+{#                            {% if banner.special %}#}
+{#                                <div class="old"><p>{{ banner.price }}.-</p></div>#}
+{#                                <div class="discount">#}
+{#                                    <p class="absolute">-{{ banner.economy }}</p>#}
+{#                                    <p class="currency">{{ currency }}</p>#}
+{#                                    <p class="relative">{{ banner.special_percentage }}%</p>#}
+{#                                </div>#}
+{#                                <div class="current">{{ banner.special }}.-</div>#}
+{#                            {% else %}#}
+{#                                <div class="current">{{ banner.price }}.-</div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                        <div class="image">#}
+{#                            <a href="{{ banner.link }}"><img alt="{{ banner.title }}" src="{{ banner.image }}"></a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+                <a href="{{ banner.link }}">
+                    <img alt="{{ banner.title }}" src="{{ banner.image }}">
+                </a>
             {% endfor %}
         </div>
         <div class="slider-nav">

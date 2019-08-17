@@ -2000,14 +2000,15 @@ select {
 	
 	.container-fluid {
 		@include flex;
+		max-width : 100%;
 		
 		.main-slider {
-			flex  : 1 1 percentage(13 / 15);
+			flex  : 1 1 80%;
 			width : 100%;
 			
 			.item {
 				@include flex(col, none, start, wrap);
-				height : 416px;
+				//height : 416px;
 				
 				.brand {
 					img {
@@ -2205,34 +2206,38 @@ select {
 		}
 		
 		.slider-nav {
-			flex      : 0 0 90px;
-			max-width : 90px;
+			flex      : 0 0 20%;
+			max-width : 20%;
 			
 			.item {
-				@include border-radius(50%);
-				background-color : #d4dcde;
-				cursor           : pointer;
-				height           : 50px;
-				margin-bottom    : 10px;
-				max-width        : 50px;
+				//@include border-radius(50%);
+				//background-color : #d4dcde;
+				cursor        : pointer;
+				//height           : 50px;
+				margin-bottom : 10px;
+				max-width     : 200px;
 				
 				* {
 					width : 100%
 				}
 				
-				.image {
-					left     : 10px;
-					position : relative;
-					top      : 5px;
-				}
+				//.image {
+				//	left     : 10px;
+				//	position : relative;
+				//	top      : 5px;
+				//}
 			}
 			
 			.slick-current .item {
-				background-color : $yellow;
+				//background-color : $yellow;
 			}
 			
-			.slick-track {
-				transform : translate3d(0, 0, 0) !important;
+			//.slick-track {
+			//	transform : translate3d(0, 0, 0) !important;
+			//}
+			
+			.slick-slide {
+				opacity : 1 !important;
 			}
 		}
 	}

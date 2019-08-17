@@ -16,7 +16,6 @@
         </ul>
         <div id="product" class="product-wrapper">
             <div id="item-card">
-
                 <div class="item-gallery">
                     {% if thumb or images %}
                         <div class="gallery-images">
@@ -127,9 +126,9 @@
                                 <p>
                                     {{ text_available_online }}
                                 </p>
-                                <a id="to-availability" >
-                                    {{ text_available_in_stores }}
-                                </a>
+{#                                <a id="to-availability" >#}
+{#                                    {{ text_available_in_stores }}#}
+{#                                </a>#}
                             {% else %}
                                 <p>
                                     {{ text_not_available }}
@@ -188,11 +187,11 @@
                     </li>
                 {% endif %}
 
-                <li class="nav-item">
-                    <a aria-selected="false" class="nav-link" data-toggle="tab" href="#availability"
-                       id="availability-tab"
-                       role="tab">{{ tab_availability_in_stocks }}</a>
-                </li>
+{#                <li class="nav-item">#}
+{#                    <a aria-selected="false" class="nav-link" data-toggle="tab" href="#availability"#}
+{#                       id="availability-tab"#}
+{#                       role="tab">{{ tab_availability_in_stocks }}</a>#}
+{#                </li>#}
                 {% if products %}
                     <li class="nav-item">
                         <a aria-selected="false" class="nav-link" data-toggle="tab" href="#relative" id="relative-tab"
@@ -284,65 +283,123 @@
                     </div>
                 {% endif %}
                 <!-- Availability tab -->
-                <button aria-controls="availability" aria-expanded="false" class="collapsed"
-                        data-target="#availability"
-                        data-toggle="collapse" type="button">
-                    {{ tab_availability_in_stocks }}
-                </button>
-                <div aria-labelledby="availability-tab" class="tab-pane fade collapse"
-                     data-parent="#productAccordion"
-                     id="availability" role="tabpanel">
-                    <div class="content">
-                        <h2>{{ tab_availability_in_stocks }}</h2>
-                        <div style="overflow: auto">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th style="text-align: center">{{ column_map }}</th>
-                                    <th>{{ column_address }}</th>
-                                    <th colspan="2" style="text-align: center;">{{ column_open }}</th>
-                                    <th style="text-align: center;">{{ column_telefon }}</th>
-                                    <th style="text-align: center;">{{ column_availability }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for ld in location_descriptions %}
-                                    <tr>
-                                        <td>
-                                            {% if ld.image_geo %}
-                                                <a href="{{ ld.geocode }}" target="_blank"><img
-                                                            alt="Map" src="{{ ld.image_geo }}"></a>
-                                            {% elseif ld.is_online %}
-                                                <span class="online"></span>
-                                            {% endif %}
-                                        </td>
-                                        <td>{{ ld.address }}</td>
-                                        <td class="open-cell" colspan="2">
-                                            {{ ld.open }}
-                                        </td>
-                                        <td style="text-align: center;">{{ ld.telephone }}</td>
-                                        <td>
-                                            <div class="battery">
-                                                {% if ld.availability_level >0 %}
-                                                    <span class="cell"></span>
-                                                {% endif %}
-                                                {% if ld.availability_level >1 %}
-                                                    <span class="cell"></span>
-                                                {% endif %}
-                                                {% if ld.availability_level >2 %}
-                                                    <span class="cell"></span>
-                                                {% endif %}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
+{#                <button aria-controls="availability" aria-expanded="false" class="collapsed"#}
+{#                        data-target="#availability"#}
+{#                        data-toggle="collapse" type="button">#}
+{#                    {{ tab_availability_in_stocks }}#}
+{#                </button>#}
+{#                <div aria-labelledby="availability-tab" class="tab-pane fade collapse"#}
+{#                     data-parent="#productAccordion"#}
+{#                     id="availability" role="tabpanel">#}
+{#                    <div class="content">#}
+{#                        <h2>{{ tab_availability_in_stocks }}</h2>#}
+{#                        <div style="overflow: auto">#}
+{#                            <table>#}
+{#                                <thead>#}
+{#                                <tr>#}
+{#                                    <th style="text-align: center">{{ column_map }}</th>#}
+{#                                    <th>{{ column_address }}</th>#}
+{#                                    <th colspan="2" style="text-align: center;">{{ column_open }}</th>#}
+{#                                    <th style="text-align: center;">{{ column_telefon }}</th>#}
+{#                                    <th style="text-align: center;">{{ column_availability }}</th>#}
+{#                                </tr>#}
+{#                                </thead>#}
+{#                                <tbody>#}
+{#                                {% for ld in location_descriptions %}#}
+{#                                    <tr>#}
+{#                                        <td>#}
+{#                                            {% if ld.image_geo %}#}
+{#                                                <a href="{{ ld.geocode }}" target="_blank"><img#}
+{#                                                            alt="Map" src="{{ ld.image_geo }}"></a>#}
+{#                                            {% elseif ld.is_online %}#}
+{#                                                <span class="online"></span>#}
+{#                                            {% endif %}#}
+{#                                        </td>#}
+{#                                        <td>{{ ld.address }}</td>#}
+{#                                        <td class="open-cell" colspan="2">#}
+{#                                            {{ ld.open }}#}
+{#                                        </td>#}
+{#                                        <td style="text-align: center;">{{ ld.telephone }}</td>#}
+{#                                        <td>#}
+{#                                            <div class="battery">#}
+{#                                                {% if ld.availability_level >0 %}#}
+{#                                                    <span class="cell"></span>#}
+{#                                                {% endif %}#}
+{#                                                {% if ld.availability_level >1 %}#}
+{#                                                    <span class="cell"></span>#}
+{#                                                {% endif %}#}
+{#                                                {% if ld.availability_level >2 %}#}
+{#                                                    <span class="cell"></span>#}
+{#                                                {% endif %}#}
+{#                                            </div>#}
+{#                                        </td>#}
+{#                                    </tr>#}
+{#                                {% endfor %}#}
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <!--TODO: Finish Table-->
-                    </div>
-                </div>
+{#                                </tbody>#}
+{#                            </table>#}
+{#                        </div>#}
+{#                        <!--TODO: Finish Table-->#}
+{#                    </div>#}
+{#                </div><button aria-controls="availability" aria-expanded="false" class="collapsed"#}
+{#                        data-target="#availability"#}
+{#                        data-toggle="collapse" type="button">#}
+{#                    {{ tab_availability_in_stocks }}#}
+{#                </button>#}
+{#                <div aria-labelledby="availability-tab" class="tab-pane fade collapse"#}
+{#                     data-parent="#productAccordion"#}
+{#                     id="availability" role="tabpanel">#}
+{#                    <div class="content">#}
+{#                        <h2>{{ tab_availability_in_stocks }}</h2>#}
+{#                        <div style="overflow: auto">#}
+{#                            <table>#}
+{#                                <thead>#}
+{#                                <tr>#}
+{#                                    <th style="text-align: center">{{ column_map }}</th>#}
+{#                                    <th>{{ column_address }}</th>#}
+{#                                    <th colspan="2" style="text-align: center;">{{ column_open }}</th>#}
+{#                                    <th style="text-align: center;">{{ column_telefon }}</th>#}
+{#                                    <th style="text-align: center;">{{ column_availability }}</th>#}
+{#                                </tr>#}
+{#                                </thead>#}
+{#                                <tbody>#}
+{#                                {% for ld in location_descriptions %}#}
+{#                                    <tr>#}
+{#                                        <td>#}
+{#                                            {% if ld.image_geo %}#}
+{#                                                <a href="{{ ld.geocode }}" target="_blank"><img#}
+{#                                                            alt="Map" src="{{ ld.image_geo }}"></a>#}
+{#                                            {% elseif ld.is_online %}#}
+{#                                                <span class="online"></span>#}
+{#                                            {% endif %}#}
+{#                                        </td>#}
+{#                                        <td>{{ ld.address }}</td>#}
+{#                                        <td class="open-cell" colspan="2">#}
+{#                                            {{ ld.open }}#}
+{#                                        </td>#}
+{#                                        <td style="text-align: center;">{{ ld.telephone }}</td>#}
+{#                                        <td>#}
+{#                                            <div class="battery">#}
+{#                                                {% if ld.availability_level >0 %}#}
+{#                                                    <span class="cell"></span>#}
+{#                                                {% endif %}#}
+{#                                                {% if ld.availability_level >1 %}#}
+{#                                                    <span class="cell"></span>#}
+{#                                                {% endif %}#}
+{#                                                {% if ld.availability_level >2 %}#}
+{#                                                    <span class="cell"></span>#}
+{#                                                {% endif %}#}
+{#                                            </div>#}
+{#                                        </td>#}
+{#                                    </tr>#}
+{#                                {% endfor %}#}
+
+{#                                </tbody>#}
+{#                            </table>#}
+{#                        </div>#}
+{#                        <!--TODO: Finish Table-->#}
+{#                    </div>#}
+{#                </div>#}
                 <!-- Relative tab -->
                 {% if products %}
                     <button aria-controls="relative" aria-expanded="false" class="collapsed"

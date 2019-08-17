@@ -220,7 +220,7 @@ $('#slider .main-slider').slick({
 });
 $('#slider .slider-nav').slick({
     asNavFor: '.main-slider',
-    slidesToShow: $('.slider-nav .item').length,
+    slidesToShow: 4,
     slidesToScroll: 1,
     dots: false,
     focusOnSelect: true,
@@ -229,10 +229,30 @@ $('#slider .slider-nav').slick({
     variableWidth: false,
     responsive: [
         {
+            breakpoint: 1260,
+            settings: {
+                slidesToShow: 3,
+            }
+        },
+        {
             breakpoint: 992,
             settings: {
                 vertical: false,
-                variableWidth: true,
+                slidesToShow: 3,
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                vertical: false,
+                slidesToShow: 2,
+            }
+        },
+        {
+            breakpoint: 576,
+            settings: {
+                vertical: false,
+                slidesToShow: 1,
             }
         }
     ]
@@ -511,11 +531,11 @@ $('.poppup').click(function () {
         opacity: 1,
     }, 500);
 });
-$(window).click(function() {
+$(window).click(function () {
     $('#contact-form .close').click();
 });
 
-$('#contact-form, .poppup').click(function(event){
+$('#contact-form, .poppup').click(function (event) {
     event.stopPropagation();
 });
 $('input[type="radio"]').after('<span class="radio"></span>');
