@@ -152,7 +152,7 @@
     $('input.quantity').change(function () {
         let product_id = $(this).attr('data-product-id');
         subtotal = calcProductTotal();
-        total = parseInt(subtotal) + parseInt(getSHippingCost());
+        total = parseInt(subtotal);
         $('.cart-table tfoot h5').html(subtotal + '.- <small style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>');
         $('.total[data-product-id=' + product_id + ']').html(sum(product_id));
         $('.checkout .price h5').html(total + '.- <small>{{ currency }}</small>');
