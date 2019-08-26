@@ -3928,8 +3928,12 @@ select {
 				border-top    : 55px solid transparent;
 				content       : '';
 				position      : absolute;
-				right         : -16px;
+				right         : -1rem;
 				top           : 0;
+			}
+			
+			img {
+				width : auto;
 			}
 		}
 		
