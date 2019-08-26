@@ -112,7 +112,7 @@ input {
 	}
 	
 	.has-error &, &.has-error {
-		background   : #b7323240 !important;
+		background   : #ffe9ed !important;
 		border-color : #b73232 !important;
 		
 		&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -388,6 +388,11 @@ select {
 		td {
 			line-height    : 2.385;
 			vertical-align : middle;
+			
+			&.warning a {
+				color       : #f6767a;
+				font-weight : 800;
+			}
 		}
 		
 		td, th {
@@ -422,6 +427,10 @@ select {
 		
 		tbody tr {
 			border-bottom : 1px dotted #d6d6d6;
+		}
+		
+		tbody:last-child tr:last-child {
+			border-bottom : 0;
 		}
 		
 		.date {
@@ -669,7 +678,7 @@ select {
 		tbody {
 			.price {
 				color : #a4a4a4;
-				width : 110px;
+				width : 80px;
 			}
 			
 			.multiply {
@@ -715,7 +724,6 @@ select {
 			
 			.panel-heading {
 				@include flex(none, none, center);
-				margin-bottom : 2.5rem;
 				
 				h5 {
 					margin-bottom : 0;
@@ -797,6 +805,10 @@ select {
 					}
 				}
 			}
+			
+			.panel-collapse {
+				margin-top : 2.5rem;
+			}
 		}
 	}
 	
@@ -873,6 +885,7 @@ select {
 		> a:not(.add-to-cart) {
 			align-items     : center;
 			flex-direction  : row;
+			flex-wrap       : nowrap;
 			justify-content : flex-start;
 			padding         : 0;
 			
@@ -916,12 +929,18 @@ select {
 		}
 		
 		.delete {
-			@include transform(scale(0.75))
+			@include transform(scale(0.75));
+			@include transition(opacity .125s linear);
+			opacity : 1;
+			
+			&:hover {
+				opacity : 0.4;
+			}
 		}
 	}
 	
 	.dropdown-menu {
-		border          : 0;
+		box-shadow      : 0 18px 18.69px 2.31px rgba(0, 0, 0, 0.03);
 		scrollbar-width : auto;
 		width           : 300px;
 		
@@ -1155,11 +1174,34 @@ select {
 		@include border-radius;
 		background-color : #f4f4f4;
 		padding          : 1.25rem 2.8125rem;
+		
+		.total {
+			@include flex(none, end, center);
+			margin-left  : auto;
+			margin-right : 2rem;
+			
+			> span {
+				color       : #a4a4a4;
+				font-size   : .8125rem;
+				font-weight : 500;
+			}
+			
+			h5 {
+				margin-bottom : 0;
+				margin-left   : 1rem;
+			}
+			
+			small {
+				font-size   : .625rem;
+				font-weight : 500;
+			}
+		}
 	}
 	
 	.next {
 		@include border-radius;
 		@include flex(none, between, center);
+		@include transition(all .125s linear);
 		background-color : $yellow;
 		border           : 0;
 		cursor           : pointer;
@@ -1189,6 +1231,11 @@ select {
 				display                 : block;
 				padding                 : 10px;
 			}
+		}
+		
+		&:hover {
+			background-color : #2b2c30;
+			color            : $white;
 		}
 	}
 }
@@ -1282,7 +1329,7 @@ select {
 		}
 		
 		td:first-child {
-			width : 135px;
+			width : 165px;
 			
 			&, * {
 				color      : #a4a4a4;
@@ -1305,13 +1352,29 @@ select {
 		.price {
 			font-size   : 1.25em;
 			font-weight : 800;
+			
+			.currency {
+				font-size   : .66em;
+				font-weight : 600;
+				margin-left : 0.5rem;
+			}
 		}
 	}
 	
-	.delete-all {
-		border   : 0;
-		padding  : 0.5rem 1rem;
-		position : static;
+	.delete {
+		border    : 0;
+		color     : #a4a4a4 !important;
+		font-size : .875rem;
+		padding   : 0.5rem 1rem;
+		
+		&:before {
+			background   : url($image_dir + "gray-x.svg") no-repeat center;
+			content      : "";
+			display      : inline-block;
+			height       : 10px;
+			margin-right : .5rem;
+			width        : 10px;
+		}
 	}
 }
 
@@ -1528,13 +1591,28 @@ select {
 		
 		.image-container {
 			@include border-radius(50%);
-			background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
-			-webkit-background-size : 6px;
-			background-size         : 6px;
-			content                 : "";
-			display                 : block;
-			margin-left             : 1.25rem;
-			padding                 : 10px;
+			background-color : $white;
+			content          : "";
+			display          : block;
+			margin-left      : 1.25rem;
+			padding          : 10px 8px;
+			position         : relative;
+			
+			img {
+				display : block;
+				height  : 18px;
+			}
+			
+			&:after {
+				@include absolute-center;
+				content     : "+";
+				display     : block;
+				font-size   : .875rem;
+				font-weight : 600;
+				line-height : 35px;
+				text-align  : center;
+				width       : 100%;
+			}
 		}
 		
 		&:hover {
@@ -1615,8 +1693,9 @@ select {
 			margin-left : 1rem;
 			
 			.currency {
-				font-size   : 1.5rem;
-				font-weight : 700;
+				font-size   : .875rem;
+				font-weight : 500;
+				margin-left : 0.75rem;
 			}
 		}
 	}
@@ -1921,14 +2000,15 @@ select {
 	
 	.container-fluid {
 		@include flex;
+		max-width : 100%;
 		
 		.main-slider {
-			flex  : 1 1 percentage(13 / 15);
+			flex  : 1 1 80%;
 			width : 100%;
 			
 			.item {
 				@include flex(col, none, start, wrap);
-				height : 416px;
+				//height : 416px;
 				
 				.brand {
 					img {
@@ -2126,34 +2206,38 @@ select {
 		}
 		
 		.slider-nav {
-			flex      : 0 0 90px;
-			max-width : 90px;
+			flex      : 0 0 20%;
+			max-width : 20%;
 			
 			.item {
-				@include border-radius(50%);
-				background-color : #d4dcde;
-				cursor           : pointer;
-				height           : 50px;
-				margin-bottom    : 10px;
-				max-width        : 50px;
+				//@include border-radius(50%);
+				//background-color : #d4dcde;
+				cursor        : pointer;
+				//height           : 50px;
+				margin-bottom : 10px;
+				max-width     : 200px;
 				
 				* {
 					width : 100%
 				}
 				
-				.image {
-					left     : 10px;
-					position : relative;
-					top      : 5px;
-				}
+				//.image {
+				//	left     : 10px;
+				//	position : relative;
+				//	top      : 5px;
+				//}
 			}
 			
 			.slick-current .item {
-				background-color : $yellow;
+				//background-color : $yellow;
 			}
 			
-			.slick-track {
-				transform : translate3d(0, 0, 0) !important;
+			//.slick-track {
+			//	transform : translate3d(0, 0, 0) !important;
+			//}
+			
+			.slick-slide {
+				opacity : 1 !important;
 			}
 		}
 	}
@@ -2563,6 +2647,11 @@ select {
 	#history {
 		background-color : #2b2c30;
 		color            : $white;
+		
+		&:hover {
+			background-color : $yellow;
+			color            : $black;
+		}
 	}
 	
 	#ok {
@@ -2730,6 +2819,63 @@ select {
 		font-size      : 0.8125rem;
 		font-weight    : 500;
 		padding-bottom : 2px;
+	}
+}
+
+.alert {
+	@include border-radius();
+	background-color : #ffe9ed;
+	font-size        : 0.8125rem;
+	font-weight      : 500;
+	margin-bottom    : 1.625rem;
+	padding          : 0.75rem 0;
+	position         : relative;
+	text-align       : center;
+	
+	.fa-exclamation-circle {
+		color       : #f6767a;
+		font-style  : normal;
+		font-weight : 600;
+		
+		&:before {
+			background              : url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjIgMiAxOCAxNiI+DQo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiICBzdHJva2U9InJnYigyNDYsIDExOCwgMTIyKSIgc3Ryb2tlLXdpZHRoPSIycHgiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBmaWxsPSJub25lIg0KIGQ9Ik00LjAzMCwxNi44NjAgQzQuNzUzLDE2Ljg2MCAxNy40NjAsMTYuODYwIDE3Ljk1OSwxNi44NjAgQzE4LjYwNywxNi44NjAgMTkuMDg5LDE2LjE5NSAxOC43MTAsMTUuNTM3IEMxOC40MDcsMTUuMDEwIDEyLjI4Myw0LjQ3NSAxMS43NTksMy41NzUgQzExLjQxNSwyLjk4NSAxMC41OTUsMi45OTUgMTAuMjUwLDMuNTc1IEM5Ljg2Niw0LjIyMyAzLjcxMSwxNC43OTggMy4yODMsMTUuNTY0IEMyLjk3MCwxNi4xMjUgMy4zMTYsMTYuODYwIDQuMDMwLDE2Ljg2MCBaIi8+DQo8L3N2Zz4=") no-repeat center;
+			-webkit-background-size : 23px 21px;
+			background-size         : 23px 21px;
+			color                   : #f6767a;
+			content                 : "!";
+			display                 : inline-block;
+			height                  : 21px;
+			line-height             : 1.5rem;
+			margin-right            : 0.5rem;
+			text-align              : center;
+			width                   : 23px;
+		}
+	}
+}
+
+.anchor-link {
+	img, .card-body {
+		@include transition(all .125s linear);
+	}
+	
+	img {
+		opacity : 1;
+	}
+	
+	.card-body p {
+		color : $black;
+	}
+	
+	&:hover {
+		img {
+			opacity : 0.4;
+		}
+		
+		.card-body {
+			p {
+				color : $yellow;
+			}
+		}
 	}
 }
 
@@ -2920,6 +3066,7 @@ select {
 				bottom   : 0;
 				position : absolute;
 				right    : 0;
+				width    : 100%;
 				z-index  : -1;
 			}
 			
@@ -2973,6 +3120,7 @@ select {
 				> img {
 					height   : 75px;
 					position : static;
+					width    : auto;
 				}
 				
 				p {
@@ -3061,7 +3209,7 @@ select {
 
 .checkout {
 	@include border-radius;
-	@include flex(none, center);
+	@include flex(none, center, none, wrap);
 	background-color : #f5f4f2;
 	margin-top       : 2.5rem;
 	padding-bottom   : 1rem;
@@ -3984,7 +4132,7 @@ select {
 		
 		.search-form {
 			background-color : #f5f4f2;
-			max-width        : 432px;
+			max-width        : 535px;
 			position         : absolute;
 			right            : 0;
 			top              : 0;
@@ -4692,12 +4840,26 @@ select {
 		}
 		
 		.favorite {
-			margin-bottom : 0.75rem;
+			margin-bottom : 0.25rem;
 		}
 		
 		aside & {
-			left : 25px;
-			top  : 155px;
+			left  : unset;
+			right : 0;
+			top   : 145px;
+		}
+		
+		button {
+			svg path {
+				@include transition(all .125s linear);
+				stroke : #b4b4b4;
+			}
+			
+			&:hover {
+				svg path {
+					stroke : #000;
+				}
+			}
 		}
 	}
 	
@@ -4759,7 +4921,17 @@ select {
 		
 		> a:not(.add-to-cart) {
 			@include flex-align(row, start, center);
-			padding : .5rem 5.875rem .5rem 3rem;
+			padding : .5rem 6.875rem .5rem 3rem;
+			
+			> .image-container {
+				flex   : 0;
+				height : 100%;
+				margin : 0 2.75rem 0 0;
+				
+				img {
+					width : auto;
+				}
+			}
 		}
 		
 		h5 {
@@ -4768,16 +4940,11 @@ select {
 			margin-right  : auto;
 		}
 		
-		img {
-			height : 100%;
-			margin : 0 2.75rem 0 0;
-		}
-		
 		.add-to-cart {
 			bottom  : 0;
 			margin  : auto;
 			padding : 0;
-			right   : 2.5rem;
+			right   : 3.5rem;
 			top     : 0;
 			
 			.image-container {
@@ -4821,12 +4988,8 @@ select {
 			}
 		}
 		
-		.image-container {
-			height : 100%;
-		}
-		
 		.float-buttons {
-			@include absolute-center(right unset left 1rem);
+			@include absolute-center(right unset left 0.25rem);
 			@include flex(col, center, center);
 			opacity : 0;
 			
@@ -5178,6 +5341,7 @@ select {
 .poppup {
 	@include border-radius;
 	@include flex(none, between, center);
+	@include transition(all .25s linear);
 	background-color : $yellow;
 	border           : 0;
 	cursor           : pointer;
@@ -5186,7 +5350,7 @@ select {
 	height           : 35px;
 	line-height      : 35px;
 	overflow         : hidden;
-	padding          : 0 10px 0 20px;
+	padding          : 0 0.625rem 0 1.25rem;
 	width            : 11rem;
 	z-index          : 10;
 	
@@ -5194,9 +5358,9 @@ select {
 		@include border-radius(50%);
 		background-color : $white;
 		display          : block;
-		height           : 20px;
+		height           : 1.25rem;
 		position         : relative;
-		width            : 20px;
+		width            : 1.25rem;
 		
 		&:after {
 			@include border-radius(50%);
@@ -5207,6 +5371,11 @@ select {
 			display                 : block;
 			padding                 : 10px;
 		}
+	}
+	
+	&:hover {
+		background-color : #2b2c30;
+		color            : $white;
 	}
 }
 
@@ -5500,8 +5669,14 @@ select {
 	}
 }
 
-.tab-content button {
-	display : none;
+.tab-content {
+	button {
+		display : none;
+	}
+	
+	.content h2 {
+		text-align : center;
+	}
 }
 
 .upload {

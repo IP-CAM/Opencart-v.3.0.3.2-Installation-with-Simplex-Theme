@@ -35,7 +35,7 @@
         var showError = function(message) {
             $('#continue-button').button('reset');
 
-            $('#addressBookWidget').before('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;' + message + '</div>');
+            $('#addressBookWidget').before('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><i class="fa fa-exclamation-circle">{{ error }}</i>&nbsp;&nbsp;' + message + '</div>');
         }
 
         amazon.Login.setClientId('{{ client_id }}');
@@ -83,7 +83,7 @@
                     $('#shippingMethods').empty();
 
                     if (data.error) {
-                        $('#addressBookWidget').before('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;' + data.error + '</div>');
+                        $('#addressBookWidget').before('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error }}</i>&nbsp;&nbsp;' + data.error + '</div>');
                     } else if (data.quotes) {
                         var html = '';
 

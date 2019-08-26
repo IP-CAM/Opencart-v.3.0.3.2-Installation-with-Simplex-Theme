@@ -352,7 +352,9 @@
 			
 			.slider-nav {
 				margin-top : 15px;
-				max-width  : none;
+				//max-width  : none;
+				max-width  : calc(100% - 75px);
+				flex: 100%;
 			}
 		}
 	}
@@ -464,7 +466,7 @@
 		}
 		
 		#search .search-form {
-			max-width : calc(100vw - 289px);
+			max-width : calc(100vw - 300px);
 		}
 	}
 	
@@ -1062,13 +1064,13 @@
 			display          : none;
 			height           : calc(100vh - 60px);
 			left             : 0;
+			max-height       : 756px;
 			overflow         : auto;
 			position         : fixed;
 			right            : 0;
 			top              : 60px;
 			width            : 100%;
 			z-index          : 1003;
-			max-height       : 756px;
 			
 			&.active {
 				display : block;
@@ -1166,7 +1168,7 @@
 	}
 	
 	.navbar #search .search-form {
-		max-width : calc(100vw - 125px);
+		max-width : calc(100vw - 135px);
 	}
 	
 	.navbar-nav {

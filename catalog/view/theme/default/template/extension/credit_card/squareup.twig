@@ -23,7 +23,7 @@
         <h2>{{ heading_title }}</h2>
 
         {% if not cards %}
-            <div class="alert alert-warning"><i class="fa fa-exclamation-circle"></i> {{ text_no_cards }}</div>
+            <div class="alert alert-warning"><i class="fa fa-exclamation-circle">{{ error }}</i> {{ text_no_cards }}</div>
         {% else %}
             <table class="table table-bordered">
                 {% for card in cards %}

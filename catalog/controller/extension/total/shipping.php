@@ -37,6 +37,10 @@ class ControllerExtensionTotalShipping extends Controller {
 				$data['shipping_method'] = '';
 			}
 
+			/* added by it-lab start */
+			$data['currency'] = $this->session->data['currency'];
+			/* added by it-lab end */
+
 			return $this->load->view('extension/total/shipping', $data);
 		}
 	}

@@ -29,6 +29,10 @@
 			}
 		}
 	}
+	
+	&.active:after {
+		color : #dda80e;
+	}
 }
 
 // The dropdown menu

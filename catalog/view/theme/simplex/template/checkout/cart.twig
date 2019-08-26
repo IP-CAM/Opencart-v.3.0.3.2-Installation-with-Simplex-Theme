@@ -19,20 +19,19 @@
         </div>
         <div id="cart-wrapper">
             <a class="delete-all delete-all-from-cart" role="button">{{ delete_all }}</a>
-            {% if attention %}
-                <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                </div>
-            {% endif %}
-            {% if success %}
-                <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                </div>
-            {% endif %}
             {% if error_warning %}
                 <div class="alert alert-danger alert-dismissible"><i
-                            class="fa fa-exclamation-circle"></i> {{ error_warning }}
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            class="fa fa-exclamation-circle">{{ error_message }}</i> {{ error_warning }}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd"
+                                  stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter"
+                                  stroke-width="2px"></path>
+                            <path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd"
+                                  stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter"
+                                  stroke-width="2px"></path>
+                        </svg>
+                    </button>
                 </div>
             {% endif %}
             <div class="cards">
@@ -58,21 +57,27 @@
                             <td class="image">{% if product.thumb %} <a href="{{ product.href }}"><img
                                             src="{{ product.thumb }}" alt="{{ product.name }}"
                                             title="{{ product.name }}"></a> {% endif %}</td>
-                            <td>
+                            <td {% if not product.stock %}class="warning"{% endif %}>
                                 <a href="{{ product.href }}">{{ product.name }}</a>
                                 {% if product.option %}
                                     {% for option in product.option %} <br/>
                                         <small>{{ option.name }}: {{ option.value }}</small> {% endfor %}
                                 {% endif %}
                             </td>
-                            <td class="price">{{ product.price }}</td>
+                            <td class="price" data-price="{{ product.price }}"
+                                data-product-id="{{ product.cart_id }}">{{ product.price }}</td>
                             <td class="multiply"><span>x</span></td>
-                            <td class="quantity"><label><input type="number" id="quantity"
-                                                               name="quantity[{{ product.cart_id }}]"
-                                                               value="{{ product.quantity }}" max="100" min="1" step="1"
-                                                               size="1"></label></td>
+                            <td class="quantity" data-product-id="{{ product.cart_id }}"><label><input type="number"
+                                                                                                       class="quantity"
+                                                                                                       data-product-id="{{ product.cart_id }}"
+                                                                                                       name="quantity[{{ product.cart_id }}]"
+                                                                                                       value="{{ product.quantity }}"
+                                                                                                       max="100" min="1"
+                                                                                                       step="1"
+                                                                                                       size="1"></label>
+                            </td>
                             <td class="equal"><span>=</span></td>
-                            <td class="total">{{ product.total }}</td>
+                            <td class="total" data-product-id="{{ product.cart_id }}">{{ product.total }}</td>
                             <td class="delete">
                                 <a role="button" title="{{ button_remove }}"
                                    onclick="cart.remove('{{ product.cart_id }}');">
@@ -93,31 +98,33 @@
                     <tr>
                         <td colspan="6" style="text-align: right"><span>{{ totals[0].title }}:</span></td>
                         <td colspan="2">
-                            <h5 style="margin-bottom: 0;">{{ totals[0].text }}
-                                <small style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>
+                            <h5 style="margin-bottom: 0;">
+                                {{ totals[0].text }}.-&nbsp;<small
+                                        style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>
                             </h5>
                         </td>
                     </tr>
                     </tfoot>
                 </table>
             </div>
-            {% if modules %}
-                <div class="panel panel-default">
-                    {% for module in modules %}
-                        <div class="panel-heading">
-                            <h5>{{ delivery_text }}</h5>
-                            <p></p>
-                        </div>
-                        {{ module }}
-                    {% endfor %}
-                </div>
-            {% endif %}
+{#            {% if modules %}#}
+{#                <div class="panel panel-default">#}
+{#                    {% for module in modules %}#}
+{#                        <div class="panel-heading">#}
+{#                            <h5>{{ delivery_text }}</h5>#}
+{#                            <p></p>#}
+{#                        </div>#}
+{#                        {{ module }}#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            {% endif %}#}
             <div class="checkout">
-                <div class="total">
-                    <span>{{ total }}</span>
-                    <div class="price">
-                    </div>
-                </div>
+{#                <div class="total">#}
+{#                    <span>{{ total }}</span>#}
+{#                    <div class="price">#}
+{#                        <h5></h5>#}
+{#                    </div>#}
+{#                </div>#}
                 <a href="{{ checkout }}">{{ button_checkout }}<span
                             class="image-container"></span></a>
             </div>
@@ -126,5 +133,34 @@
     <hr>
     {{ content_bottom }}
 </main>
+<script>
+    let subtotal = 0;
+    let total = 0;
 
+    function calcProductTotal() {
+        let sum = 0;
+        $('.cart-table tbody tr').each(function () {
+            sum += $('.price', this).attr('data-price') * $('input.quantity', this).val();
+        });
+        return sum;
+    }
+
+    function sum(product_id) {
+        return $('.price[data-product-id=' + product_id + ']').attr('data-price') * $('input.quantity[data-product-id=' + product_id + ']').val();
+    }
+
+    $('input.quantity').change(function () {
+        let product_id = $(this).attr('data-product-id');
+        subtotal = calcProductTotal();
+        total = parseInt(subtotal) + parseInt(getSHippingCost());
+        $('.cart-table tfoot h5').html(subtotal + '.- <small style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>');
+        $('.total[data-product-id=' + product_id + ']').html(sum(product_id));
+        $('.checkout .price h5').html(total + '.- <small>{{ currency }}</small>');
+    });
+</script>
+<script>
+    function getSubtotal() {
+        return calcProductTotal();
+    }
+</script>
 {{ footer }}

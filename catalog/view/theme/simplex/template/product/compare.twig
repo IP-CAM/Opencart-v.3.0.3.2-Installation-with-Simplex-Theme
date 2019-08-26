@@ -5,8 +5,10 @@
             <ul class="breadcrumb">
                 {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                        <li>
+                            <a href="{{ breadcrumb.href }}">
+                                <img alt="Home" src="catalog/view/theme/simplex/assets/img/home.svg">
+                            </a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -75,12 +77,12 @@
                             <td>{{ product.availability }}</td>
                         {% endfor %}
                     </tr>
-                    <tr>
-                        <td><strong>{{ text_summary }}</strong></td>
-                        {% for product in products %}
-                            <td>{{ product.description }}</td>
-                        {% endfor %}
-                    </tr>
+{#                    <tr>#}
+{#                        <td><strong>{{ text_summary }}</strong></td>#}
+{#                        {% for product in products %}#}
+{#                            <td>{{ product.description }}</td>#}
+{#                        {% endfor %}#}
+{#                    </tr>#}
                     <tr>
                         <td><strong>{{ text_weight }}</strong></td>
                         {% for product in products %}
@@ -125,7 +127,7 @@
                                     <span class="image-container"><img alt="Cart"
                                                                        src="catalog/view/theme/simplex/assets/img/cart.svg"></span>
                                 </button>
-                                <a href="{{ product.remove }}" class="delete-all">{{ button_remove }}</a>
+                                <a href="{{ product.remove }}" class="delete">{{ button_remove }}</a>
                             </td>
                         {% endfor %}
                     </tr>
@@ -156,6 +158,7 @@
             </div>
         {% endif %}
     </div>
+    {{ content_bottom }}
 </main>
 
 {{ footer }} 

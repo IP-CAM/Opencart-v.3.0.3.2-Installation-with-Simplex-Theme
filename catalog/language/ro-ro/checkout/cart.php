@@ -36,7 +36,7 @@ $_['column_price']          = 'Preț unitar';
 $_['column_total']          = 'Preț Total';
 
 // Error
-$_['error_stock']            = 'Produsele marcate cu *** nu sunt disponibile in cantitatea dorită sau nu se află in stoc deloc!';
+$_['error_stock']            = 'Produsele marcate nu sunt disponibile in cantitatea dorită sau nu se află in stoc deloc!';
 $_['error_minimum']          = 'Cantitate minimă de comandat pentru %s este de %s!';
 $_['error_required']         = '%s este obligatoriu!';
 $_['error_product']          = 'Atenție: Coșul de cumpărături este gol!';
@@ -46,3 +46,4 @@ $_['delete_all']               = 'Sterge totul';
 $_['total'] = 'Total';
 
 $_['delivery_text'] = 'Calcul livrarii';
+$_['update_cart'] = 'Actualizarea cosului';
