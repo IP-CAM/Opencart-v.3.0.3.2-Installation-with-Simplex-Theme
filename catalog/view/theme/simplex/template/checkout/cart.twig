@@ -107,24 +107,7 @@
                     </tfoot>
                 </table>
             </div>
-{#            {% if modules %}#}
-{#                <div class="panel panel-default">#}
-{#                    {% for module in modules %}#}
-{#                        <div class="panel-heading">#}
-{#                            <h5>{{ delivery_text }}</h5>#}
-{#                            <p></p>#}
-{#                        </div>#}
-{#                        {{ module }}#}
-{#                    {% endfor %}#}
-{#                </div>#}
-{#            {% endif %}#}
             <div class="checkout">
-{#                <div class="total">#}
-{#                    <span>{{ total }}</span>#}
-{#                    <div class="price">#}
-{#                        <h5></h5>#}
-{#                    </div>#}
-{#                </div>#}
                 <a href="{{ checkout }}">{{ button_checkout }}<span
                             class="image-container"></span></a>
             </div>
@@ -152,7 +135,7 @@
     $('input.quantity').change(function () {
         let product_id = $(this).attr('data-product-id');
         subtotal = calcProductTotal();
-        total = parseInt(subtotal) + parseInt(getSHippingCost());
+        total = parseInt(subtotal);
         $('.cart-table tfoot h5').html(subtotal + '.- <small style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>');
         $('.total[data-product-id=' + product_id + ']').html(sum(product_id));
         $('.checkout .price h5').html(total + '.- <small>{{ currency }}</small>');

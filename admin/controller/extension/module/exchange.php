@@ -48,10 +48,16 @@ class ControllerExtensionModuleExchange extends Controller {
 			$data['module_exchange_status'] = $this->config->get('module_exchange_status');
 		}
 
-		if(isset($this->request->post['module_exchange_url'])) {
-			$data['module_exchange_url'] = $this->request->post['module_exchange_url'];
+		if(isset($this->request->post['module_exchange_receive_url'])) {
+			$data['module_exchange_receive_url'] = $this->request->post['module_exchange_receive_url'];
 		} else {
-			$data['module_exchange_url'] = $this->config->get('module_exchange_url');
+			$data['module_exchang_receivee_url'] = $this->config->get('module_exchange_receive_url');
+		}
+
+		if(isset($this->request->post['module_exchange_send_url'])) {
+			$data['module_exchange_send_url'] = $this->request->post['module_exchange_send_url'];
+		} else {
+			$data['module_exchange_send_url'] = $this->config->get('module_exchange_send_url');
 		}
 
 		if(isset($this->request->post['module_exchange_login'])) {

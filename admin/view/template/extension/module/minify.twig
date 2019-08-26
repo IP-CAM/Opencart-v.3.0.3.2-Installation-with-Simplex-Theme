@@ -1,0 +1,128 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <a href="{{ clear }}" data-toggle="tooltip" title="{{ cache_del }}"
+                   class="btn btn-warning"><i class="fa fa-eraser"></i></a>
+                <button type="submit" form="form-featured" data-toggle="tooltip" title="{{ button_save }}"
+                        class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}"
+                   class="btn btn-default"><i class="fa fa-reply"></i></a>
+            </div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if success %}
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-featured"
+                      class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_status" value="1"
+                                       {% if minify_status %}checked="checked"{% endif %}>
+                                {{ text_enabled }}
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_status" value="0"
+                                       {% if not minify_status %}checked="checked"{% endif %}>
+                                {{ text_disabled }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-time">{{ text_time }}</label>
+                        <div class="col-sm-2">
+                            <input type="number" style="display:inline-block;width:80%;" name="minify_time"
+                                   value="{{ minify_time }}" class="form-control"
+                                   id="input-time"> {{ text_time_amount }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{ text_css }}</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_css" value="1"
+                                        {% if minify_css %} checked="checked"{% endif %}> {{ text_enabled }}
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_css"
+                                       value="0"{% if not minify_css %} checked="checked"{% endif %}> {{ text_disabled }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{ text_js }}</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_js" value="1"
+                                        {% if minify_js %} checked="checked"{% endif %}> {{ text_enabled }}
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_js"
+                                       value="0"{% if not minify_js %} checked="checked"{% endif %}> {{ text_disabled }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{ text_gzip }}</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_gzip" value="1"
+                                        {% if minify_gzip %} checked="checked"{% endif %}> {{ text_enabled }}
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_gzip"
+                                       value="0"{% if not minify_gzip %} checked="checked"{% endif %}> {{ text_disabled }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{ text_html }}</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_html" value="1"
+                                        {% if minify_html %} checked="checked"{% endif %}> {{ text_enabled }}
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_html"
+                                       value="0"{% if not minify_html %} checked="checked"{% endif %}> {{ text_disabled }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{ text_async }}</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_async" value="1"
+                                        {% if minify_async %} checked="checked"{% endif %}> {{ text_enabled }}
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="minify_async"
+                                       value="0"{% if not minify_async %} checked="checked"{% endif %}> {{ text_disabled }}
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Minify by https://github.com/milkamil93 -->
+<?php echo $footer; ?>

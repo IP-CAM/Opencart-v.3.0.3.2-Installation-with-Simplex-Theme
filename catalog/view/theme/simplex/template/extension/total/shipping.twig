@@ -255,11 +255,8 @@
             });
         </script>
         <script>
-            function getSHippingCost() {
-                return $('.panel-heading p').attr('data-cost')
-            }
             function replaceTotal() {
-                total = parseInt(getSHippingCost()) + parseInt(getSubtotal());
+                total = parseInt(getSubtotal());
                 $('.checkout .price h5').html(total + '.- <small>{{ currency }}</small>');
             }
         </script>

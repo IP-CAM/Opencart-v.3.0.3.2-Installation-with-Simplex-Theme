@@ -5,62 +5,13 @@ class ControllerCheckoutSuccess extends Controller {
 		$this->load->language('checkout/success');
 		$this->load->model('checkout/order');
 		$this->load->model('api/exchange');
-		$data['order_id'] = isset($this->session->data['order_id']);
-		//$order = $this->model_checkout_order->getOrder(58);
-//		unset($order['invoice_no']);
-//		unset($order['invoice_prefix']);
-//		unset($order['store_id']);
-//		unset($order['customer_id']);
-//		unset($order['store_url']);
-//		unset($order['store_name']);
-//		unset($order['payment_firstname']);
-//		unset($order['payment_lastname']);
-//		unset($order['payment_company']);
-//		unset($order['payment_address_1']);
-//		unset($order['payment_address_2']);
-//		unset($order['payment_postcode']);
-//		unset($order['payment_zone_id']);
-//		unset($order['payment_zone']);
-//		unset($order['payment_method']);
-//		unset($order['shipping_method']);
-//		unset($order['payment_zone_code']);
-//		unset($order['payment_country_id']);
-//		unset($order['payment_country']);
-//		unset($order['payment_iso_code_2']);
-//		unset($order['payment_iso_code_3']);
-//		unset($order['payment_address_format']);
-//		unset($order['payment_custom_field']);
-//		unset($order['shipping_zone_id']);
-//		unset($order['shipping_zone_code']);
-//		unset($order['shipping_country_id']);
-//		unset($order['shipping_country']);
-//		unset($order['shipping_iso_code_2']);
-//		unset($order['shipping_iso_code_3']);
-//		unset($order['shipping_address_format']);
-//		unset($order['shipping_custom_field']);
-//		unset($order['comment']);
-//		unset($order['order_status_id']);
-//		unset($order['order_status']);
-//		unset($order['affiliate_id']);
-//		unset($order['commission']);
-//		unset($order['language_id']);
-//		unset($order['language_code']);
-//		unset($order['currency_id']);
-//		unset($order['currency_code']);
-//		unset($order['currency_value']);
-//		unset($order['ip']);
-//		unset($order['forwarded_ip']);
-//		unset($order['user_agent']);
-//		unset($order['accept_language']);
-
-		//$order['products'] = $this->model_checkout_order->getOrderProducts(58);
-
-//		foreach($order['products'] as &$product){
-//			unset($product['order_id']);
-//			unset($product['order_product_id']);
-//		}
 
 		if(isset($this->session->data['order_id'])) {
+			if($this->config->get('module_exchange_status')) {
+				$order = $this->model_api_exchange->getOrder($this->session->data['order_id']);
+				$order['products'] = $this->model_api_exchange->getOrderProducts($this->session->data['order_id']);
+				$this->model_api_exchange->sendOrder($this->config->get('module_exchange_send_url'), json_encode($order), $this->config->get('module_exchange_login'), $this->config->get('module_exchange_password'));
+			}
 			$this->cart->clear();
 
 			unset($this->session->data['shipping_method']);
