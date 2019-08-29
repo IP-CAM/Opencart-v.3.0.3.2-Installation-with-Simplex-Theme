@@ -1,13 +1,14 @@
 <?php
+
 class ModelExtensionShippingFlat extends Model {
 	function getQuote($address) {
 		$this->load->language('extension/shipping/flat');
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('shipping_flat_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 
-		if (!$this->config->get('shipping_flat_geo_zone_id')) {
+		if(!$this->config->get('shipping_flat_geo_zone_id')) {
 			$status = true;
-		} elseif ($query->num_rows) {
+		} else if($query->num_rows) {
 			$status = true;
 		} else {
 			$status = false;
@@ -15,7 +16,7 @@ class ModelExtensionShippingFlat extends Model {
 
 		$method_data = array();
 
-		if ($status) {
+		if($status) {
 			$quote_data = array();
 
 			$quote_data['flat'] = array(
@@ -36,5 +37,17 @@ class ModelExtensionShippingFlat extends Model {
 		}
 
 		return $method_data;
+	}
+
+	function getPriceByZone($zone_id) {
+		$query = $this->db->query("SELECT shipping_price from " . DB_PREFIX . "zone_to_shipping_price where zone_id = " . $zone_id);
+
+		return $query;
+	}
+
+	function getAllPrices() {
+		$query = $this->db->query("SELECT * from " . DB_PREFIX . "zone_to_shipping_price");
+
+		return $query;
 	}
 }

@@ -35,7 +35,7 @@ $_['column_price']             = 'Unit Price';
 $_['column_total']             = 'Total';
 
 // Error
-$_['error_stock']              = 'Products marked with *** are not available in the desired quantity or not in stock!';
+$_['error_stock']              = 'Marked products are not available in the desired quantity or not in stock!';
 $_['error_minimum']            = 'Minimum order amount for %s is %s!';
 $_['error_required']           = '%s required!';
 $_['error_product']            = 'Warning: There are no products in your cart!';
@@ -45,3 +45,4 @@ $_['delete_all']               = 'Delete all';
 $_['total'] = 'Total';
 
 $_['delivery_text'] = 'Delivery calculator';
+$_['update_cart'] = 'Update cart';

@@ -59,6 +59,9 @@
 		li {
 			@include flex(none, none, start);
 			counter-increment : count;
+			font-size         : .8125rem;
+			font-weight       : 500;
+			line-height       : 1.625rem;
 			margin-bottom     : 0.75rem;
 			
 			&:before {
@@ -172,6 +175,9 @@
 			padding-right : 4.5rem;
 			
 			li {
+				font-size     : 0.8125rem;
+				font-weight   : 500;
+				line-height   : 1.625rem;
 				margin-bottom : 0.25em;
 				padding-left  : 2rem;
 				

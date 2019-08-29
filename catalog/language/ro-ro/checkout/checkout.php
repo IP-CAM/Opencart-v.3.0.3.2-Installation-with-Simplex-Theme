@@ -4,13 +4,13 @@ $_['heading_title']                  = 'Finalizează comanda';
 
 // Text
 $_['text_cart']                      = 'Coș de cumpărături';
-$_['text_checkout_option']           = 'Opțiuni pentru finalizarea comenzii';
-$_['text_checkout_account']          = 'Cont și facturare';
-$_['text_checkout_payment_address']  = 'Adresa de facturare';
-$_['text_checkout_shipping_address'] = 'Adresa de livrare';
-$_['text_checkout_shipping_method']  = 'Metoda de livrare';
-$_['text_checkout_payment_method']   = 'Metoda de plată';
-$_['text_checkout_confirm']          = 'Confirmarea comenzii';
+$_['text_checkout_option']           = 'Pasul %s: Opțiuni pentru finalizarea comenzii';
+$_['text_checkout_account']          = 'Pasul %s: Cont și facturare';
+$_['text_checkout_payment_address']  = 'Pasul %s: Adresa de facturare';
+$_['text_checkout_shipping_address'] = 'Pasul %s: Adresa de livrare';
+$_['text_checkout_shipping_method']  = 'Pasul %s: Metoda de livrare';
+$_['text_checkout_payment_method']   = 'Pasul %s: Metoda de plată';
+$_['text_checkout_confirm']          = 'Pasul 6: Confirmarea comenzii';
 $_['text_modify']                    = 'Modifică &raquo;';
 $_['text_new_customer']              = 'Client nou';
 $_['text_returning_customer']        = 'Client existent';

@@ -66,6 +66,7 @@ $_['button_grid']           = 'Grid';
 $_['button_map']            = 'View Google Map';
 
 // Error
+$_['error_message']         = 'Error:';
 $_['error_exception']       = 'Error Code(%s): %s in %s on line %s';
 $_['error_upload_1']        = 'Warning: The uploaded file exceeds the upload_max_filesize directive in php.ini!';
 $_['error_upload_2']        = 'Warning: The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form!';

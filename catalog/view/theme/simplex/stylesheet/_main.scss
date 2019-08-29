@@ -23,8 +23,8 @@ input {
 		opacity : 0;
 		width   : 1rem;
 		z-index : 1;
-		
-		
+
+
 		& + .checkbox {
 			background-color : $white;
 			border           : 1px solid #d4d4d4;
@@ -34,7 +34,7 @@ input {
 			position         : absolute;
 			top              : 0.125rem;
 			width            : 1rem;
-			
+
 			&:after {
 				@include absolute-center;
 				@include transition(background 0.125s linear);
@@ -45,28 +45,28 @@ input {
 				width            : calc(1rem - 6px);
 			}
 		}
-		
+
 		& + .checkbox {
 			@include border-radius(.125rem);
-			
+
 			&:after {
 				@include border-radius(.125rem);
 			}
 		}
-		
+
 		&:checked + .checkbox {
 			border-color : $yellow;
-			
+
 			&:after {
 				background-color : #434343;
 			}
 		}
 	}
-	
+
 	&[type="file"] {
 		display : none;
 	}
-	
+
 	&[type="radio"] {
 		height         : 1rem;
 		margin         : 0 0.5rem 0 0;
@@ -74,7 +74,7 @@ input {
 		vertical-align : middle;
 		width          : 1rem;
 		z-index        : 1;
-		
+
 		& + .radio {
 			background-color : $white;
 			border           : 1px solid #d4d4d4;
@@ -84,7 +84,7 @@ input {
 			position         : absolute;
 			top              : 0;
 			width            : 1rem;
-			
+
 			&:after {
 				@include absolute-center;
 				@include transition(background 0.125s linear);
@@ -95,40 +95,40 @@ input {
 				width            : calc(1rem - 6px);
 			}
 		}
-		
+
 		& + .radio {
 			@include border-radius(50%);
-			
+
 			&:after {
 				@include border-radius(50%);
 			}
 		}
-		
+
 		&:checked + .radio {
 			&:after {
 				background-color : $yellow;
 			}
 		}
 	}
-	
+
 	.has-error &, &.has-error {
-		background   : #b7323240 !important;
+		background   : #ffe9ed !important;
 		border-color : #b73232 !important;
-		
+
 		&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 			color   : #b73232;
 			opacity : 1; /* Firefox */
 		}
-		
+
 		&:-ms-input-placeholder { /* Internet Explorer 10-11 */
 			color : #b73232;
 		}
-		
+
 		&::-ms-input-placeholder { /* Microsoft Edge */
 			color : #b73232;
 		}
 	}
-	
+
 }
 
 label {
@@ -136,7 +136,7 @@ label {
 	line-height   : 1rem;
 	padding-right : .1875rem;
 	position      : relative;
-	
+
 	&.semi-bold {
 		font-weight   : 600 !important;
 		padding-right : 0;
@@ -145,23 +145,23 @@ label {
 
 main {
 	margin-top : 85px;
-	
+
 	&.contacts-bg {
 		@include background-gradient(#f5f3ee 170px, $white 0);
 	}
-	
+
 	&.gallery-bg {
 		@include background-gradient(#f5f3ee 340px, $white 0);
 	}
-	
+
 	&.gallery-item-bg {
 		@include background-gradient(#f5f3ee 200px, $white 0);
 	}
-	
+
 	&.job-item-bg {
 		@include background-gradient(#f5f3ee 200px, $white 0);
 	}
-	
+
 	&.news-bg {
 		@include background-gradient(#f5f3ee 280px, $white 0);
 	}
@@ -170,84 +170,84 @@ main {
 footer {
 	background-color : $dark_gray;
 	padding          : 75px 0;
-	
+
 	a {
 		@include transition(color .125s linear);
-		
+
 		&:hover {
 			color : $yellow;
 		}
 	}
-	
+
 	h5, h6 {
 		color : $white;
 	}
-	
+
 	h5 {
 		font-size : 1.125rem;
 	}
-	
+
 	h6 {
 		font-size     : 1rem;
 		margin-bottom : 30px;
 	}
-	
+
 	p, a {
 		color     : #949494;
 		font-size : 0.8125rem;
 	}
-	
+
 	ul {
 		@include flex(col);
-		
+
 		&.contacts {
 			> li:first-child {
 				margin-bottom : 25px;
 			}
 		}
-		
+
 		&.info {
 			> li:last-child {
 				margin-top : auto;
 			}
-			
+
 			> li:nth-child(2) {
 				margin-top : 45px;
 			}
 		}
 	}
-	
+
 	#footer {
 		@include grid;
 		grid-row-gap          : 40px;
 		grid-template-areas   : "about catalog contacts info";
 		grid-template-columns : 1fr 2fr 1fr 1fr;
 	}
-	
+
 	.about-list {
 		grid-area : about;
-		
+
 		li {
 			margin-bottom : 10px;
 		}
 	}
-	
+
 	.catalog-list {
 		grid-area    : catalog;
 		padding-left : 35px;
 		position     : relative;
-		
+
 		ul {
 			@include flex(col, none, start, wrap);
 			max-height : 150px;
-			
+
 			li {
 				margin-bottom : 10px;
 				margin-right  : auto;
 				max-width     : 150px;
 			}
 		}
-		
+
 		&:before {
 			background   : url($image_dir + "catalog.svg") no-repeat center;
 			content      : "";
@@ -260,58 +260,58 @@ footer {
 			width        : 18px;
 		}
 	}
-	
+
 	.contacts {
 		grid-area   : contacts;
 		padding-top : 50px;
 	}
-	
+
 	.copyright {
 		p {
 			font-weight : 500;
 			line-height : 1.846;
 		}
 	}
-	
+
 	.follow-us {
 		a {
 			margin-left    : 10px;
 			vertical-align : sub;
 		}
 	}
-	
+
 	.info {
 		grid-area   : info;
 		padding-top : 50px;
 	}
-	
+
 	.offices {
 		li {
 			margin-bottom : 5px;
 		}
-		
+
 		a {
 			color       : #a4a4a4;
 			line-height : 1.5;
-			
+
 			&:before {
 				background : url($image_dir + "angle-right-solid-yellow.svg") no-repeat center;
 			}
 		}
-		
+
 		h6 {
 			line-height : 1.75;
 		}
 	}
-	
+
 	.pay-methods ul {
 		@include flex(row, none, center);
-		
+
 		li {
 			margin-right : 20px;
 		}
 	}
-	
+
 	.phone {
 		a {
 			color        : $white;
@@ -319,12 +319,12 @@ footer {
 			height       : auto;
 			padding-left : 0;
 		}
-		
+
 		p a {
 			@include transition(all .125s linear);
 			color       : #a4a4a4;
 			margin-left : 1rem;
-			
+
 			&:hover {
 				border-color : $yellow;
 				color        : $yellow;
@@ -361,12 +361,12 @@ select {
 		color       : #057f9e;
 		font-size   : 0.8125rem;
 		font-weight : 600;
-		
+
 		&:hover {
 			color : $yellow;
 		}
 	}
-	
+
 	li {
 		margin-bottom : 0.875rem;
 	}
@@ -374,22 +374,27 @@ select {
 
 #account, #cart-wrapper, #compare-table {
 	position : relative;
-	
+
 	h5 {
 		font-weight : 800;
 	}
-	
+
 	table {
 		font-size     : 0.8125rem;
 		font-weight   : 500;
 		margin-bottom : 50px;
 		width         : 100%;
-		
+
 		td {
 			line-height    : 2.385;
 			vertical-align : middle;
+
+			&.warning a {
+				color       : #f6767a;
+				font-weight : 800;
+			}
 		}
-		
+
 		td, th {
 			font-weight : 500;
 			padding    : {
@@ -397,68 +402,72 @@ select {
 				left   : 0.5rem;
 				top    : 1rem;
 			}
-			
+
 			&:first-child {
 				padding-left : 1.625rem;
 			}
 		}
-		
+
 		th {
 			background-color : #f5f4f2;
 			font-size        : 0.875rem;
 			font-weight      : 600;
 			text-align       : left;
 			white-space      : nowrap;
-			
+
 			&:first-child {
 				@include border-radius-left;
 				width : 120px;
 			}
-			
+
 			&:last-child {
 				@include border-radius-right;
 			}
 		}
-		
+
 		tbody tr {
 			border-bottom : 1px dotted #d6d6d6;
 		}
-		
+
+		tbody:last-child tr:last-child {
+			border-bottom : 0;
+		}
+
 		.date {
 			color : #a4a4a4;
 		}
-		
+
 		.price {
 			font-weight : 600;
 		}
-		
+
 		.status {
 			width : percentage(1/3);
 		}
 	}
-	
+
 	#account-form {
 		margin      : auto;
 		max-width   : 40.5rem;
 		padding-top : 1.5rem;
 		position    : relative;
-		
+
 		h3 {
 			font-size   : 1.5rem;
 			font-weight : 800;
 			text-align  : center;
 		}
-		
+
 		form {
 			@include flex(none, none, start, wrap);
-			
+
 			hr {
 				border-top    : 1px dotted rgb(214, 214, 214);
 				flex          : 100%;
 				margin-bottom : 2rem;
 				margin-top    : 0.5rem;
 			}
-			
+
 			input, textarea, select {
 				@include border-radius;
 				border        : 1px solid #d4d4d4;
@@ -466,11 +475,11 @@ select {
 				font-size     : 0.8125rem;
 				margin-bottom : 1.5rem;
 			}
-			
+
 			input {
 				line-height : 0.375rem;
 			}
-			
+
 			label {
 				flex         : 1 1 125px;
 				font-size    : 0.875rem;
@@ -479,7 +488,7 @@ select {
 				margin-right : 2.125rem;
 				position     : relative;
 				text-align   : right;
-				
+
 				&.required {
 					&:after {
 						color     : #b73232;
@@ -491,19 +500,19 @@ select {
 					}
 				}
 			}
-			
+
 			textarea {
 				height : 15.5rem;
 				resize : none;
 			}
 		}
-		
+
 		.close {
 			display : none;
 			right   : 15px;
 			top     : 15px;
 		}
-		
+
 		.form-submit {
 			@include border-radius;
 			@include flex;
@@ -520,7 +529,7 @@ select {
 			overflow         : hidden;
 			padding          : 0 10px 0 20px;
 			z-index          : 10;
-			
+
 			.image-container:after {
 				@include border-radius(50%);
 				background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -531,19 +540,19 @@ select {
 				margin-left             : 1.5rem;
 				padding                 : 10px;
 			}
-			
+
 			&:hover {
 				background-color : #2b2c30;
 				color            : $white;
 			}
 		}
-		
+
 		.submit {
 			@include flex(none, none, center, wrap);
 			padding-left : 154px;
 		}
 	}
-	
+
 	.add-to-cart {
 		@include border-radius(50%);
 		@include flex(none, end, center);
@@ -558,7 +567,7 @@ select {
 		position         : relative;
 		width            : 48px;
 		z-index          : 10;
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -566,7 +575,7 @@ select {
 			height           : 44px;
 			position         : relative;
 			width            : 44px;
-			
+
 			&:after {
 				@include transition(all .25s linear);
 				content     : "+";
@@ -577,7 +586,7 @@ select {
 				text-align  : center;
 				width       : 100%;
 			}
-			
+
 			img {
 				bottom   : 0;
 				display  : block;
@@ -589,14 +598,14 @@ select {
 				top      : 0;
 			}
 		}
-		
+
 		&:hover {
 			.image-container {
 				background-color : $yellow;
 			}
 		}
 	}
-	
+
 	.back {
 		@include border-radius;
 		border      : 1px solid #f4f4f4;
@@ -606,7 +615,7 @@ select {
 		font-weight : 500;
 		margin-top  : 1rem;
 		padding     : 0.75rem 1.5rem 0.75rem 1rem;
-		
+
 		&:before {
 			@include transform(rotate(180deg));
 			background   : url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -617,7 +626,7 @@ select {
 			width        : 0.875rem;
 		}
 	}
-	
+
 	.card {
 		@include border-radius;
 		border    : 1px solid #f4f4f4;
@@ -625,11 +634,11 @@ select {
 		max-width : 572px;
 		padding   : 2rem;
 	}
-	
+
 	.input-group-spinner .form-control {
 		font-size : 0.875rem;
 	}
-	
+
 	.table {
 		overflow : auto;
 	}
@@ -645,7 +654,7 @@ select {
 
 #cart, #favorite, #compare {
 	position : relative;
-	
+
 	.quantity {
 		@include absolute-center(left 0.25rem top 1.5rem bottom unset);
 		@include border-radius(50%);
@@ -660,46 +669,46 @@ select {
 		text-align       : center;
 		width            : 18px;
 	}
-	
+
 	&-wrapper {
 		table {
 			min-width : 720px;
 		}
-		
+
 		tbody {
 			.price {
 				color : #a4a4a4;
-				width : 110px;
+				width : 80px;
 			}
-			
+
 			.multiply {
 				padding : 0;
 				width   : 20px;
 			}
-			
+
 			.quantity {
 				font-weight : 600;
 				width       : 115px;
 			}
-			
+
 			.equal {
 				padding : 0;
 				width   : 20px;
 			}
-			
+
 			.total {
 				font-weight : 600;
 				width       : 45px;
 			}
-			
+
 			.delete {
 				text-align : center;
 				width      : 80px;
-				
+
 				a svg path {
 					@include transition(all .125s linear);
 				}
-				
+
 				a:hover {
 					svg path {
 						stroke : $black;
@@ -707,40 +716,39 @@ select {
 				}
 			}
 		}
-		
+
 		.panel {
 			@include border-radius;
 			border  : 1px dashed #d1d1d1;
 			padding : 30px;
-			
+
 			.panel-heading {
 				@include flex(none, none, center);
-				margin-bottom : 2.5rem;
-				
+
 				h5 {
 					margin-bottom : 0;
 				}
-				
+
 				label {
 					font-size   : 0.8125rem;
 					font-weight : 500;
 					margin-left : 1.75rem;
-					
+
 					&.semi-bold {
 						font-weight : 600;
 					}
 				}
-				
+
 				p {
 					font-size   : 1.25rem;
 					font-weight : 800;
 					margin-left : auto;
-					
+
 					small {
 						font-size   : 0.625rem;
 						font-weight : 500;
 					}
-					
+
 					span {
 						color        : #a4a4a4;
 						font-size    : 0.8125rem;
@@ -749,7 +757,7 @@ select {
 					}
 				}
 			}
-			
+
 			.panel-body {
 				select {
 					@include border-radius(0.375rem);
@@ -767,7 +775,7 @@ select {
 					padding                 : 0.75rem 1.125rem 0.75rem 2.5rem;
 					width                   : 100%;
 				}
-				
+
 				ul {
 					li {
 						color         : #a4a4a4;
@@ -777,7 +785,7 @@ select {
 						margin-bottom : 1rem;
 						padding-left  : 1.75rem;
 						position      : relative;
-						
+
 						&:before {
 							@include border-radius(50%);
 							border      : 1px solid #a4a4a4;
@@ -797,9 +805,13 @@ select {
 					}
 				}
 			}
+
+			.panel-collapse {
+				margin-top : 2.5rem;
+			}
 		}
 	}
-	
+
 	.dropdown-toggle:after {
 		content : none;
 	}
@@ -812,18 +824,18 @@ select {
 			margin-bottom : 0;
 			margin-right  : auto;
 		}
-		
+
 		.discount {
 			flex          : none;
 			font-size     : 0.625rem;
 			margin-bottom : 0;
 			margin-right  : 0.75rem;
-			
+
 			.discount-percent {
 				font-weight  : 800;
 				margin-right : 5px;
 			}
-			
+
 			.discount-val {
 				@include border-radius();
 				background-color : $green;
@@ -835,7 +847,7 @@ select {
 					right : 8px;
 				}
 			}
-			
+
 			.old-price {
 				color           : #bababa;
 				font-weight     : 500;
@@ -843,24 +855,24 @@ select {
 				text-decoration : line-through;
 			}
 		}
-		
+
 		.price {
 			margin-top : 0;
 		}
-		
+
 		.price-container {
 			@include flex(none, none, none, wrap);
 			flex            : 1 0 0;
 			justify-content : flex-end;
 		}
-		
+
 		.product-body {
 			align-items : center;
 			display     : flex;
 			flex        : 1 1 0;
 		}
 	}
-	
+
 	.product {
 		@include border-radius(0);
 		border-bottom  : 1px dotted #dedede;
@@ -869,40 +881,41 @@ select {
 		border-top     : 0;
 		height         : 5.25rem;
 		padding-bottom : 0;
-		
+
 		> a:not(.add-to-cart) {
 			align-items     : center;
 			flex-direction  : row;
+			flex-wrap       : nowrap;
 			justify-content : flex-start;
 			padding         : 0;
-			
+
 			h5 {
 				font-size     : 0.75rem;
 				margin-bottom : 0.5rem;
 			}
-			
+
 			img {
 				height       : 50px;
 				margin-right : 1rem;
 			}
-			
+
 			.image-container {
 				margin-right : 2rem;
 			}
-			
+
 			.price {
 				font-size   : 0.8125rem;
 				font-weight : 600;
-				
+
 				span {
 					color : #a4a4a4
 				}
 			}
-			
+
 			.price-container {
 				justify-content : flex-start;
 			}
-			
+
 			.product-body {
 				align-items    : flex-start;
 				flex           : unset;
@@ -910,45 +923,51 @@ select {
 				padding-right  : 2rem;
 			}
 		}
-		
+
 		&:hover {
 			box-shadow : none;
 		}
-		
+
 		.delete {
-			@include transform(scale(0.75))
+			@include transform(scale(0.75));
+			@include transition(opacity .125s linear);
+			opacity : 1;
+
+			&:hover {
+				opacity : 0.4;
+			}
 		}
 	}
-	
+
 	.dropdown-menu {
-		border          : 0;
+		box-shadow      : 0 18px 18.69px 2.31px rgba(0, 0, 0, 0.03);
 		scrollbar-width : auto;
 		width           : 300px;
-		
+
 		ul {
 			max-height : 336px;
 			overflow   : auto;
-			
+
 			&::-webkit-scrollbar {
 				width : 0.25rem;
 			}
-			
+
 			&::-webkit-scrollbar-track {
 				-webkit-box-shadow : inset 0 0 6px rgba(0, 0, 0, 0.3);
 			}
-			
+
 			&::-webkit-scrollbar-thumb {
 				background-color : darkgrey;
 				outline          : 1px solid slategrey;
 			}
 		}
 	}
-	
+
 	.total {
 		@include flex(none, between, center);
 		line-height : 1.25;
 		padding     : 1.25rem 0;
-		
+
 		a {
 			@include border-radius;
 			@include flex(none, between, center);
@@ -963,7 +982,7 @@ select {
 			overflow         : hidden;
 			padding          : 0 10px 0 20px;
 			z-index          : 10;
-			
+
 			.image-container {
 				@include border-radius(50%);
 				background-color : $white;
@@ -972,7 +991,7 @@ select {
 				margin-left      : 0.5rem;
 				position         : relative;
 				width            : 20px;
-				
+
 				&:after {
 					@include border-radius(50%);
 					background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -983,23 +1002,23 @@ select {
 					padding                 : 10px;
 				}
 			}
-			
+
 			&:hover {
 				background-color : #2b2c30;
 				color            : #fff;
 			}
 		}
-		
+
 		p {
 			span {
 				color     : #a4a4a4;
 				font-size : 0.8125rem;
-				
+
 				&.price {
 					color       : $black;
 					font-size   : 1.25rem;
 					font-weight : 800;
-					
+
 					.currency {
 						color       : $black;
 						font-size   : 0.625rem;
@@ -1014,43 +1033,43 @@ select {
 #checkout {
 	form {
 		max-width : 40rem;
-		
+
 		> * {
 			margin-bottom : 1rem;
 			margin-top    : 1rem;
 		}
 	}
-	
+
 	label {
 		font-size    : 0.8125rem;
 		font-weight  : 500;
 		margin-right : 1rem;
 		position     : relative;
 		white-space  : nowrap;
-		
-		
+
+
 	}
-	
+
 	p {
 		font-size   : 0.875rem;
 		font-weight : 500;
 		line-height : 1.5;
 	}
-	
+
 	textarea {
 		resize : none;
 	}
-	
+
 	.form-group {
 		@include flex(none, center, center);
-		
+
 		label {
 			flex        : 0 0 34%;
 			font-weight : 600;
 			line-height : 2.5;
 			text-align  : right;
 		}
-		
+
 		&.required {
 			label {
 				&:after {
@@ -1062,23 +1081,23 @@ select {
 			}
 		}
 	}
-	
+
 	.card {
 		margin-bottom : 1rem;
 	}
-	
+
 	.card-body {
 		padding-left  : 2.5rem;
 		padding-right : 2.5rem;
 	}
-	
+
 	.card-header {
 		@include border-radius;
 		background-color : #f4f4f4;
 		border           : 0;
 		padding          : 0;
 		position         : relative;
-		
+
 		h4 {
 			display       : block;
 			font-size     : 0.875rem;
@@ -1090,7 +1109,7 @@ select {
 			position      : relative;
 			text-align    : left;
 			width         : 100%;
-			
+
 			button {
 				display     : block;
 				font-weight : 600;
@@ -1098,7 +1117,7 @@ select {
 				padding     : 1rem 0 1rem 2.5rem;
 				text-align  : left;
 				width       : calc(100% + 2.5rem);
-				
+
 				&[aria-expanded="true"]:after {
 					border-left  : 3px solid transparent;
 					border-right : 3px solid transparent;
@@ -1107,15 +1126,15 @@ select {
 					position     : absolute;
 					right        : 15px;
 					top          : calc(1rem + 2px);
-					
+
 				}
 			}
 		}
-		
+
 		&.success {
 			background-color : $white;
 			border           : 1px solid #d4d4d4;
-			
+
 			&:before {
 				background : url("data:image/svg+xml;base64,PHN2Zw0KICAgICAgICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciDQogICAgICAgIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KICAgICAgICB3aWR0aD0iMTQiIGhlaWdodD0iMTAiPg0KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgIHN0cm9rZT0icmdiKDI1NSwgMjAyLCA0OCkiIHN0cm9rZS13aWR0aD0iMnB4IiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZmlsbD0ibm9uZSINCiAgICAgICAgICBkPSJNMy4wMDAsNS4wMDAgTDYuMDAwLDguMDAwIEwxMS4wMDAsMS4wMDAgIi8+DQo8L3N2Zz4=") no-repeat center;
 				bottom     : 0;
@@ -1126,19 +1145,19 @@ select {
 				position   : absolute;
 				top        : 0;
 				width      : 0.75rem;
-				
+
 			}
 		}
-		
+
 		&.waiting {
 			background-color : $white;
 			border           : 1px dashed #d4d4d4;
-			
+
 			h4 {
 				color   : #a4a4a4;
 				padding : .75rem 1.25rem .75rem 2.5rem;
 			}
-			
+
 			&:before {
 				color       : #a4a4a4;
 				content     : '...';
@@ -1149,17 +1168,40 @@ select {
 			}
 		}
 	}
-	
+
 	.card-submit {
 		@include flex(none, none, center);
 		@include border-radius;
 		background-color : #f4f4f4;
 		padding          : 1.25rem 2.8125rem;
+
+		.total {
+			@include flex(none, end, center);
+			margin-left  : auto;
+			margin-right : 2rem;
+
+			> span {
+				color       : #a4a4a4;
+				font-size   : .8125rem;
+				font-weight : 500;
+			}
+
+			h5 {
+				margin-bottom : 0;
+				margin-left   : 1rem;
+			}
+
+			small {
+				font-size   : .625rem;
+				font-weight : 500;
+			}
+		}
 	}
-	
+
 	.next {
 		@include border-radius;
 		@include flex(none, between, center);
+		@include transition(all .125s linear);
 		background-color : $yellow;
 		border           : 0;
 		cursor           : pointer;
@@ -1170,7 +1212,7 @@ select {
 		overflow         : hidden;
 		padding          : 0 10px 0 20px;
 		z-index          : 10;
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -1179,7 +1221,7 @@ select {
 			margin-left      : 1.5rem;
 			position         : relative;
 			width            : 20px;
-			
+
 			&:after {
 				@include border-radius(50%);
 				background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -1189,6 +1231,11 @@ select {
 				display                 : block;
 				padding                 : 10px;
 			}
+		}
+
+		&:hover {
+			background-color : #2b2c30;
+			color            : $white;
 		}
 	}
 }
@@ -1223,7 +1270,7 @@ select {
 		padding          : 0 10px 0 20px;
 		width            : 100%;
 		z-index          : 10;
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -1232,13 +1279,13 @@ select {
 			margin-left      : 1rem;
 			position         : relative;
 			width            : 25px;
-			
+
 			img {
 				@include absolute-center;
 				display : block;
 				height  : 13px;
 			}
-			
+
 			&:after {
 				@include transition(all 0.25s linear);
 				content     : "+";
@@ -1250,68 +1297,84 @@ select {
 				width       : 100%;
 			}
 		}
-		
+
 		&:hover {
 			background-color : #2b2c30;
 			color            : #fff;
 		}
-		
+
 		&.remove {
 			background-color : #c71919;
 			color            : $white;
-			
+
 			.image-container:after {
 				content : none;
 			}
 		}
 	}
-	
+
 	table {
 		text-align : center;
-		
+
 		a:not(.delete-all) {
 			&, * {
 				color : #057f9e;
 			}
-			
+
 			&:hover {
 				&, * {
 					color : $yellow;
 				}
 			}
 		}
-		
+
 		td:first-child {
-			width : 135px;
-			
+			width : 165px;
+
 			&, * {
 				color      : #a4a4a4;
 				text-align : left;
 			}
 		}
-		
+
 		td:only-child {
 			background-color : #f5f4f2;
 			font-size        : .875rem;
 		}
-		
+
 		s {
 			color           : #bababa;
 			font-weight     : 500;
 			margin-right    : 5px;
 			text-decoration : line-through;
 		}
-		
+
 		.price {
 			font-size   : 1.25em;
 			font-weight : 800;
+
+			.currency {
+				font-size   : .66em;
+				font-weight : 600;
+				margin-left : 0.5rem;
+			}
 		}
 	}
-	
-	.delete-all {
-		border   : 0;
-		padding  : 0.5rem 1rem;
-		position : static;
+
+	.delete {
+		border    : 0;
+		color     : #a4a4a4 !important;
+		font-size : .875rem;
+		padding   : 0.5rem 1rem;
+
+		&:before {
+			background   : url($image_dir + "gray-x.svg") no-repeat center;
+			content      : "";
+			display      : inline-block;
+			height       : 10px;
+			margin-right : .5rem;
+			width        : 10px;
+		}
 	}
 }
 
@@ -1319,7 +1382,7 @@ select {
 	@include flex(none, center, none, wrap);
 	margin    : auto;
 	max-width : 28rem;
-	
+
 	a {
 		@include border-radius;
 		@include flex(none, none, center);
@@ -1330,12 +1393,12 @@ select {
 		font-weight      : 600;
 		margin           : 0 1rem;
 		padding          : 1.25rem 1.5rem;
-		
+
 		svg {
 			height       : 1rem;
 			margin-right : 1rem;
 		}
-		
+
 		&:hover {
 			background-color : #f4f4f4;
 		}
@@ -1347,25 +1410,25 @@ select {
 	max-width   : 40.5rem;
 	padding-top : 1.5rem;
 	position    : relative;
-	
+
 	h3 {
 		font-size   : 1.5rem;
 		font-weight : 800;
 		text-align  : center;
 	}
-	
+
 	form {
 		@include flex(none, none, start, wrap);
 		background-color : #f5f3ee;
 		padding          : 2.75rem 4rem 2.75rem 3rem;
-		
+
 		hr {
 			border-top    : 1px dotted rgb(214, 214, 214);
 			flex          : 100%;
 			margin-bottom : 2rem;
 			margin-top    : 1.5rem;
 		}
-		
+
 		input, textarea {
 			@include border-radius;
 			border        : 1px solid #d4d4d4;
@@ -1373,11 +1436,11 @@ select {
 			font-size     : 0.8125rem;
 			margin-bottom : 1.5rem;
 		}
-		
+
 		input {
 			line-height : 0.375rem;
 		}
-		
+
 		label {
 			&:not(.upload) {
 				flex         : 0 0 25%;
@@ -1388,7 +1451,7 @@ select {
 				position     : relative;
 				text-align   : right;
 			}
-			
+
 			&.required {
 				&:after {
 					color     : #b73232;
@@ -1399,7 +1462,7 @@ select {
 					top       : -0.25rem;
 				}
 			}
-			
+
 			&.upload {
 				@include border-radius(0.375rem);
 				background-color : #222327;
@@ -1415,19 +1478,19 @@ select {
 				text-align       : center;
 			}
 		}
-		
+
 		textarea {
 			height : 15.5rem;
 			resize : none;
 		}
 	}
-	
+
 	.close {
 		display : none;
 		right   : 15px;
 		top     : 15px;
 	}
-	
+
 	.form-submit {
 		@include border-radius;
 		@include flex;
@@ -1444,7 +1507,7 @@ select {
 		overflow         : hidden;
 		padding          : 0 10px 0 20px;
 		z-index          : 10;
-		
+
 		.image-container:after {
 			@include border-radius(50%);
 			background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -1455,17 +1518,17 @@ select {
 			margin-left             : 1.5rem;
 			padding                 : 10px;
 		}
-		
+
 		&:hover {
 			background-color : #2b2c30;
 			color            : $white;
 		}
 	}
-	
+
 	.submit {
 		@include flex(none, none, center, wrap);
 		margin-left : calc(25% + 2.125rem);
-		
+
 		p {
 			color       : #868686;
 			font-size   : 0.8125rem;
@@ -1484,7 +1547,7 @@ select {
 	position  : absolute;
 	right     : 0;
 	top       : -75px;
-	
+
 	&:before {
 		background   : url($image_dir + "gray-x.svg") no-repeat center;
 		content      : "";
@@ -1506,11 +1569,11 @@ select {
 	margin-bottom         : 3rem;
 	margin-top            : 2rem;
 	width                 : 100%;
-	
+
 	#seller-warranties {
 		margin-bottom : 1.5rem;
 	}
-	
+
 	.add-to-cart {
 		@include border-radius(.375rem);
 		@include flex(none, between, center);
@@ -1525,24 +1588,39 @@ select {
 		overflow         : hidden;
 		padding          : 0 10px 0 20px;
 		z-index          : 10;
-		
+
 		.image-container {
 			@include border-radius(50%);
-			background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
-			-webkit-background-size : 6px;
-			background-size         : 6px;
-			content                 : "";
-			display                 : block;
-			margin-left             : 1.25rem;
-			padding                 : 10px;
+			background-color : $white;
+			content          : "";
+			display          : block;
+			margin-left      : 1.25rem;
+			padding          : 10px 8px;
+			position         : relative;
+
+			img {
+				display : block;
+				height  : 18px;
+			}
+
+			&:after {
+				@include absolute-center;
+				content     : "+";
+				display     : block;
+				font-size   : .875rem;
+				font-weight : 600;
+				line-height : 35px;
+				text-align  : center;
+				width       : 100%;
+			}
 		}
-		
+
 		&:hover {
 			background-color : #2b2c30;
 			color            : $white;
 		}
 	}
-	
+
 	.cart-options {
 		@include flex;
 		align-items   : center;
@@ -1551,16 +1629,16 @@ select {
 		font-size     : .625rem;
 		margin-bottom : .625rem;
 	}
-	
+
 	.cart-wrapper {
 		margin-bottom : 2rem;
 	}
-	
+
 	.discount-percent {
 		font-weight  : 800;
 		margin-right : 5px;
 	}
-	
+
 	.discount-val {
 		@include border-radius;
 		background-color : $green;
@@ -1569,14 +1647,14 @@ select {
 		line-height      : 1.7;
 		padding-left     : 0.5rem;
 		padding-right    : 0.5rem;
-		
+
 	}
-	
+
 	.item-actions {
 		@include flex;
 		margin-bottom : 2rem;
 	}
-	
+
 	.item-action {
 		@include transition(all .125s linear);
 		@include border-radius(0.375rem);
@@ -1587,67 +1665,68 @@ select {
 		font-weight  : 500;
 		margin-right : 0.75rem;
 		padding      : 0.5rem 0.75rem;
-		
+
 		svg {
 			@include transition(all .125s linear);
 			margin-right : 0.625rem;
 			stroke       : rgb(178, 181, 182);
 		}
-		
+
 		&:hover {
 			border-color : $black;
 			color        : $black;
-			
+
 			svg {
 				stroke : $black;
 			}
 		}
 	}
-	
+
 	.item-price-block {
 		@include flex(none, start, center, wrap);
 		font-size     : 0.875rem;
 		margin-bottom : 1.875rem;
-		
+
 		.price {
 			font-size   : 2.5em;
 			font-weight : 800;
 			margin-left : 1rem;
-			
+
 			.currency {
-				font-size   : 1.5rem;
-				font-weight : 700;
+				font-size   : .875rem;
+				font-weight : 500;
+				margin-left : 0.75rem;
 			}
 		}
 	}
-	
+
 	.old-price {
 		color           : #bababa;
 		font-weight     : 500;
 		margin-right    : 5px;
 		text-decoration : line-through;
 	}
-	
+
 	.page-title {
 		padding-top : 0;
-		
+
 		h1 {
 			font-size : 2.1875rem;
 		}
 	}
-	
+
 	.product-code {
 		p {
 			font-size   : 0.875rem;
 			font-weight : 600;
-			
+
 			span {
 				color       : #a4a4a4;
 				font-weight : 500;
 			}
 		}
 	}
-	
+
 	.prof-help {
 		@include border-radius;
 		@include inline-flex(none, center, center);
@@ -1656,19 +1735,19 @@ select {
 		justify-self     : start;
 		margin-bottom    : 1.5rem;
 		padding          : 0.5rem 1.25rem 0.5rem 1.625rem;
-		
+
 		img {
 			height       : 100%;
 			margin-right : 1rem;
 		}
-		
+
 		p {
 			color       : #a4a4a4;
 			font-size   : 0.875rem;
 			font-weight : 500;
 		}
 	}
-	
+
 	.quantity {
 		@include flex(none, none, center);
 	}
@@ -1678,7 +1757,7 @@ select {
 	.dropdown-toggle {
 		color     : $text_gray;
 		font-size : 0.875rem;
-		
+
 		&:after {
 			color : $text_gray
 		}
@@ -1688,7 +1767,7 @@ select {
 #locations {
 	margin    : auto;
 	max-width : 950px;
-	
+
 	.card {
 		@include border-radius;
 		@include flex-align(row);
@@ -1696,45 +1775,45 @@ select {
 		flex-wrap     : wrap;
 		margin-bottom : 1.5rem;
 		padding       : 1.5rem;
-		
+
 		iframe {
 			height : 490px;
 			width  : 100%;
 		}
-		
+
 		.card-body {
 			flex        : 0 0 265px;
 			margin-left : 2rem;
 			padding     : 0;
-			
+
 			h4 {
 				font-size  : 1.125rem;
 				margin     : 0 0 0.6875rem;
 				text-align : left;
 			}
-			
+
 			h5 {
 				font-size   : 0.875rem;
 				font-weight : 600;
 			}
-			
+
 			p {
 				font-size     : 0.8125rem;
 				font-weight   : 500;
 				margin-bottom : 1.125rem;
-				
+
 				a {
 					color       : #057f9e;
 					font-weight : 600;
 				}
 			}
-			
+
 			table {
 				td {
 					font-size   : 0.8125rem;
 					font-weight : 500;
 					line-height : 1.538;
-					
+
 					&:first-child {
 						color         : #a4a4a4;
 						padding-right : 1rem;
@@ -1742,15 +1821,15 @@ select {
 				}
 			}
 		}
-		
+
 		.image-container {
 			flex : 1 1 auto;
 		}
-		
+
 		.title {
 			@include flex(none, none, start);
 			flex : 100%;
-			
+
 			h3 {
 				font-weight : 800;
 				margin     : {
@@ -1773,16 +1852,16 @@ select {
 		.card-img-top {
 			opacity : 0.5;
 		}
-		
+
 		.card-text {
 			color : $yellow;
 		}
 	}
-	
+
 	.card-img-top {
 		@include transition(opacity .125s linear);
 	}
-	
+
 	.card-foot, .photo-num {
 		border-top  : 5px solid $yellow;
 		color       : #a4a4a4;
@@ -1792,10 +1871,10 @@ select {
 		margin-top  : 20px;
 		padding-top : 20px;
 	}
-	
+
 	.image, .image-container {
 		height : 190px;
-		
+
 		img {
 			height          : 100%;
 			object-fit      : cover;
@@ -1803,17 +1882,17 @@ select {
 			width           : 100%;
 		}
 	}
-	
+
 	.photo-num {
 		padding-left : 24px;
 		position     : relative;
 	}
-	
+
 	.card-text {
 		@include transition(color .125s linear);
 		font-weight : 700;
 		line-height : 1.625;
-		
+
 		a {
 			width : 100%;
 		}
@@ -1827,7 +1906,7 @@ select {
 #pager {
 	@include flex(none, between, center);
 	margin : 50px 0 40px;
-	
+
 	.all a {
 		@include transition(color .125s linear);
 		border-bottom : 1px dotted;
@@ -1836,15 +1915,15 @@ select {
 		font-weight   : 500;
 		line-height   : 1.5;
 		margin-left   : 10px;
-		
+
 		&:hover {
 			color : $yellow;
 		}
 	}
-	
+
 	.show-more {
 		margin : auto;
-		
+
 		button {
 			@include border-radius(.5rem);
 			@include flex(none, center, center);
@@ -1859,11 +1938,11 @@ select {
 			overflow         : hidden;
 			padding          : 0 20px 0 10px;
 			z-index          : 10;
-			
+
 			p, p * {
 				color : $white;
 			}
-			
+
 			.image-container {
 				@include border-radius(50%);
 				background              : url($image_dir + "angle-right-solid-white.svg") no-repeat center;
@@ -1875,7 +1954,7 @@ select {
 			}
 		}
 	}
-	
+
 	.total p {
 		color       : #a4a4a4;
 		font-size   : 0.8125rem;
@@ -1887,12 +1966,12 @@ select {
 	span {
 		display : none;
 	}
-	
+
 	.dropdown-toggle {
 		&:after {
 			color : #b2b5b6;
 		}
-		
+
 		&[aria-expanded="true"], &:hover {
 			&:after {
 				color : $black;
@@ -1918,37 +1997,38 @@ select {
 
 #slider {
 	padding-top : 50px;
-	
+
 	.container-fluid {
 		@include flex;
-		
+		max-width : 100%;
+
 		.main-slider {
-			flex  : 1 1 percentage(13 / 15);
+			flex  : 1 1 80%;
 			width : 100%;
-			
+
 			.item {
 				@include flex(col, none, start, wrap);
-				height : 416px;
-				
+				//height : 416px;
+
 				.brand {
 					img {
 						@include transition(all .25s linear);
 						@include grayscale(1);
-						
+
 						&:hover {
 							@include grayscale(0);
 						}
 					}
 				}
-				
+
 				.category {
 					margin-bottom : 40px;
-					
+
 					a {
 						font-size   : 0.8125rem;
 						font-weight : 600;
 						line-height : 1.538;
-						
+
 						&:before {
 							color        : #c5d7dd;
 							content      : "\\";
@@ -1958,7 +2038,7 @@ select {
 						}
 					}
 				}
-				
+
 				.image {
 					@include border-radius(50%);
 					background-color : $yellow;
@@ -1966,7 +2046,7 @@ select {
 					left             : -135px;
 					position         : relative;
 					z-index          : -1;
-					
+
 					img {
 						left     : 100px;
 						position : relative;
@@ -1974,20 +2054,20 @@ select {
 						width    : 100%;
 					}
 				}
-				
+
 				> .image-container {
 					@include flex(none, start, center);
 					flex : 0 0 100%;
 				}
-				
+
 				.info {
 					flex : 0 0 percentage(3 / 8);
 				}
-				
+
 				.link {
 					margin-bottom : 40px;
 					max-width     : 220px;
-					
+
 					a {
 						@include border-radius();
 						@include flex(none, between, center);
@@ -2002,23 +2082,23 @@ select {
 						overflow         : hidden;
 						padding          : 0 10px 0 20px;
 						z-index          : 10;
-						
+
 						p {
 							@include transition(color .125s linear);
 						}
-						
+
 						&:hover {
 							background-color : #2b2c30;
-							
+
 							p {
 								color : $white;
 							}
 						}
 					}
-					
+
 					.image-container {
 						height : 20px;
-						
+
 						&:after {
 							@include border-radius(50%);
 							background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -2030,15 +2110,15 @@ select {
 						}
 					}
 				}
-				
+
 				.price {
 					@include flex(none, none, start, wrap);
 					max-width : 15rem;
-					
+
 					p {
 						text-align : right;
 					}
-					
+
 					.current {
 						@include border-radius-right(.5rem);
 						background-color : $white;
@@ -2049,7 +2129,7 @@ select {
 						padding          : 15px 10px 15px 20px;
 						position         : relative;
 					}
-					
+
 					.discount {
 						@include border-radius(.5rem);
 						background-color : $green;
@@ -2057,29 +2137,29 @@ select {
 						padding          : 15px 10px 15px 5px;
 						position         : relative;
 						z-index          : 10;
-						
+
 						* {
 							color : $white;
 						}
-						
+
 						.absolute {
 							font-size     : 1.25rem;
 							font-weight   : 800;
 							margin-bottom : 5px;
 						}
-						
+
 						.currency {
 							color         : $white;
 							font-size     : 0.8125rem;
 							font-weight   : 800;
 							margin-bottom : 20px;
 						}
-						
+
 						.relative {
 							font-size   : 0.625rem;
 							font-weight : 500;
 						}
-						
+
 						&:after {
 							border     : {
 								bottom : 16px solid $white;
@@ -2093,11 +2173,11 @@ select {
 							top      : calc(100% - 32px);
 						}
 					}
-					
+
 					.old {
 						flex    : 1 1 100%;
 						padding : 0 5px;
-						
+
 						p {
 							color           : #bababa;
 							display         : inline;
@@ -2110,11 +2190,11 @@ select {
 						}
 					}
 				}
-				
+
 				.title {
 					margin-bottom : 40px;
 					max-width     : 300px;
-					
+
 					h1 {
 						font-size     : 3rem;
 						font-weight   : 800;
@@ -2124,36 +2204,40 @@ select {
 				}
 			}
 		}
-		
+
 		.slider-nav {
-			flex      : 0 0 90px;
-			max-width : 90px;
-			
+			flex      : 0 0 20%;
+			max-width : 20%;
+
 			.item {
-				@include border-radius(50%);
-				background-color : #d4dcde;
-				cursor           : pointer;
-				height           : 50px;
-				margin-bottom    : 10px;
-				max-width        : 50px;
-				
+				//@include border-radius(50%);
+				//background-color : #d4dcde;
+				cursor        : pointer;
+				//height           : 50px;
+				margin-bottom : 10px;
+				max-width     : 200px;
+
 				* {
 					width : 100%
 				}
-				
-				.image {
-					left     : 10px;
-					position : relative;
-					top      : 5px;
-				}
+
+				//.image {
+				//	left     : 10px;
+				//	position : relative;
+				//	top      : 5px;
+				//}
 			}
-			
+
 			.slick-current .item {
-				background-color : $yellow;
+				//background-color : $yellow;
 			}
-			
-			.slick-track {
-				transform : translate3d(0, 0, 0) !important;
+
+			//.slick-track {
+			//	transform : translate3d(0, 0, 0) !important;
+			//}
+
+			.slick-slide {
+				opacity : 1 !important;
 			}
 		}
 	}
@@ -2163,7 +2247,7 @@ select {
 	margin    : auto;
 	max-width : 940px;
 	width     : 100%;
-	
+
 	p {
 		font-size   : 0.9375rem;
 		font-weight : 600;
@@ -2175,10 +2259,10 @@ select {
 
 #steps {
 	background-color : #f5f3ee;
-	
+
 	li {
 		counter-increment : section;
-		
+
 		&:last-child {
 			.step {
 				&:before {
@@ -2187,14 +2271,14 @@ select {
 			}
 		}
 	}
-	
+
 	.step {
 		@include flex(col);
 		flex-direction : column;
 		height         : 100%;
 		padding        : 0 40px;
 		position       : relative;
-		
+
 		&:after {
 			content     : counter(section);
 			font-size   : 3.75rem;
@@ -2203,7 +2287,7 @@ select {
 			margin-top  : auto;
 			opacity     : .071;
 		}
-		
+
 		&:before {
 			@include transform(rotate(-45deg));
 			border     : {
@@ -2217,12 +2301,12 @@ select {
 			top      : 125px;
 			width    : 15px;
 		}
-		
+
 		h5 {
 			font-weight   : 800;
 			margin-bottom : 40px;
 		}
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background    : $yellow;
@@ -2230,11 +2314,11 @@ select {
 			margin-bottom : 45px;
 			position      : relative;
 			width         : 75px;
-			
+
 			img {
 				@include absolute-center(left -15px right unset);
 			}
-			
+
 			&:after {
 				background   : #2b2c30;
 				border-color : #2b2c30 transparent;
@@ -2249,7 +2333,7 @@ select {
 				top          : 0;
 				width        : 12px;
 			}
-			
+
 			&:before {
 				border-color : #2b2c30 transparent;
 				border-style : solid;
@@ -2262,10 +2346,10 @@ select {
 				transform    : rotate(90deg);
 				z-index      : 10;
 			}
-			
-			
+
+
 		}
-		
+
 		.step-text {
 			color         : #a4a4a4;
 			font-size     : 0.8125rem;
@@ -2273,12 +2357,12 @@ select {
 			margin-bottom : 40px;
 		}
 	}
-	
+
 	.step-list {
 		counter-reset : section;
 		margin-bottom : 55px;
 	}
-	
+
 	.wrapper {
 		> p {
 			flex        : 0 0 20%;
@@ -2294,18 +2378,18 @@ select {
 	margin    : 1.75rem auto;
 	max-width : 1166px;
 	width     : 100%;
-	
+
 	.card {
 		@include border-radius;
 		border  : 1px solid #f4f4f4;
 		flex    : 1;
 		margin  : 0 0.5rem;
 		padding : 1.125rem;
-		
+
 		img {
 			width : 100%;
 		}
-		
+
 		.card-body {
 			font-weight : 600;
 			margin-top  : 1rem;
@@ -2319,7 +2403,7 @@ select {
 	background-color : $gray;
 	padding          : 35px 0;
 	position         : relative;
-	
+
 	button {
 		@include border-radius();
 		@include flex(none, between, center);
@@ -2336,7 +2420,7 @@ select {
 		overflow         : hidden;
 		padding          : 0 10px 0 20px;
 		z-index          : 10;
-		
+
 		p {
 			display     : block;
 			font-size   : 1em;
@@ -2348,7 +2432,7 @@ select {
 			white-space : nowrap;
 			width       : 100%;
 		}
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -2356,7 +2440,7 @@ select {
 			height           : 20px;
 			position         : relative;
 			width            : 20px;
-			
+
 			&:after {
 				@include border-radius(50%);
 				background              : #fff url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -2367,17 +2451,17 @@ select {
 				padding                 : 10px;
 			}
 		}
-		
+
 		&:hover {
 			background-color : #2b2c30;
 			color            : #fff;
 		}
 	}
-	
+
 	form {
 		@include flex(none, none, center);
 	}
-	
+
 	input {
 		@include border-radius(.5rem);
 		border       : 1px solid #d4d4d4;
@@ -2389,19 +2473,19 @@ select {
 		margin-right : 20px;
 		padding-left : 15px;
 	}
-	
+
 	label {
 		color        : $white;
 		flex         : 0 0 400px;
 		margin-right : 30px;
-		
+
 		p {
 			color       : $white;
 			font-size   : 1rem;
 			font-weight : 600;
 			line-height : 27px;
 		}
-		
+
 		&:before {
 			background   : url($image_dir + "mail.png") no-repeat center;
 			content      : "";
@@ -2420,8 +2504,8 @@ select {
 	background-size         : 139px 89px;
 	overflow                : hidden;
 	padding                 : 2.5rem 1.25rem 3.125rem 1.5rem;
-	
-	
+
+
 	button {
 		@include border-radius;
 		@include flex(none, between, center);
@@ -2437,7 +2521,7 @@ select {
 		text-align       : left;
 		width            : 100%;
 		z-index          : 10;
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -2445,7 +2529,7 @@ select {
 			height           : 20px;
 			position         : relative;
 			width            : 20px;
-			
+
 			&:after {
 				@include border-radius(50%);
 				background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -2456,28 +2540,28 @@ select {
 				padding                 : 10px;
 			}
 		}
-		
+
 		&:hover {
 			background-color : #2b2c30;
 			color            : #fff;
 		}
 	}
-	
+
 	form {
 		@include flex(col, start);
-		
+
 		> * {
 			width : 100%;
 		}
 	}
-	
+
 	label p {
 		font-size     : 1.625rem;
 		font-weight   : 800;
 		line-height   : 1.077;
 		margin-bottom : 1.625rem;
 	}
-	
+
 	input {
 		@include border-radius(0.5rem);
 		border        : 1px solid #d4d4d4;
@@ -2488,7 +2572,7 @@ select {
 		margin-bottom : 1rem;
 		padding-left  : 15px;
 	}
-	
+
 	p {
 		font-size     : 0.8125rem;
 		font-weight   : 500;
@@ -2505,22 +2589,22 @@ select {
 	padding-bottom : 5rem;
 	padding-top    : 5rem;
 	text-align     : center;
-	
+
 	h1, p {
 		flex : 100%;
 	}
-	
+
 	h1 {
 		font-weight   : 800;
 		margin-bottom : 3rem;
 	}
-	
+
 	p {
 		font-size   : 0.8125rem;
 		font-weight : 500;
 		line-height : 2.154;
 	}
-	
+
 	#back, #history {
 		@include border-radius(0.5rem);
 		@include flex(none, between, center);
@@ -2534,7 +2618,7 @@ select {
 		overflow    : hidden;
 		padding     : 0 10px 0 20px;
 		z-index     : 10;
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -2543,7 +2627,7 @@ select {
 			margin-left      : 1.5rem;
 			position         : relative;
 			width            : 20px;
-			
+
 			&:after {
 				@include border-radius(50%);
 				background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -2555,16 +2639,21 @@ select {
 			}
 		}
 	}
-	
+
 	#back {
 		background-color : $yellow;
 	}
-	
+
 	#history {
 		background-color : #2b2c30;
 		color            : $white;
+
+		&:hover {
+			background-color : $yellow;
+			color            : $black;
+		}
 	}
-	
+
 	#ok {
 		@include border-radius(50%);
 		border        : 2px dashed rgb(178, 181, 182);
@@ -2586,7 +2675,7 @@ select {
 	padding-right    : 1.25rem;
 	position         : absolute;
 	z-index          : 9999;
-	
+
 	&:before {
 		background : url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSI1IDEgMjggMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogICAgPHBhdGggZD0iTTcuNjQ2LDE1LjA2NiBMMTYuNDAxLDIzLjg2OCBMMzAuOTkzLDMuMzMwICIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIg0KICAgICAgICAgIHN0cm9rZT0iIzkyY2Y5YiINCiAgICAgICAgICBzdHJva2Utd2lkdGg9IjZweCIvPg0KPC9zdmc+") no-repeat center;
 		bottom     : 0;
@@ -2611,11 +2700,11 @@ select {
 
 .accordion {
 	@include border-radius();
-	
+
 	&:not(.tab-content) {
 		border : 1px solid #f4f4f4;
 	}
-	
+
 	button {
 		@include transition(color .25s ease);
 		background-color : #f5f3ee;
@@ -2629,7 +2718,7 @@ select {
 		text-transform   : capitalize;
 		width            : 100%;
 	}
-	
+
 	.apply {
 		@include border-radius(0.5rem);
 		@include flex(none, between, center);
@@ -2644,7 +2733,7 @@ select {
 		padding          : 0 10px;
 		text-transform   : capitalize;
 		z-index          : 10;
-		
+
 		p {
 			display     : block;
 			font-size   : 0.8125rem;
@@ -2656,7 +2745,7 @@ select {
 			white-space : nowrap;
 			width       : 100%;
 		}
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -2664,7 +2753,7 @@ select {
 			height           : 20px;
 			position         : relative;
 			width            : 20px;
-			
+
 			&:after {
 				@include border-radius(50%);
 				background              : #fff url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -2676,37 +2765,37 @@ select {
 			}
 		}
 	}
-	
+
 	.card {
 		border-bottom : 1px solid #e9e7e2;
-		
+
 		.card-body {
 			padding : 20px;
 		}
-		
+
 		&:last-child {
 			border-bottom : 0;
 		}
 	}
-	
+
 	.links {
 		li {
 			font-size     : 0.8125rem;
 			font-weight   : 500;
 			line-height   : 1.385;
 			margin-bottom : 15px;
-			
+
 			a {
 				color : #6e6e6e;
 			}
-			
+
 			&.active {
 				font-weight : 600;
-				
+
 				a {
 					color : #000;
 				}
-				
+
 				&:before {
 					background : $yellow;
 					content    : '';
@@ -2719,17 +2808,74 @@ select {
 			}
 		}
 	}
-	
+
 	.link-group {
 		@include flex(none, center, none, wrap);
 	}
-	
+
 	.reset {
 		border-bottom  : 1px dotted #a4a4a4;
 		color          : #a4a4a4;
 		font-size      : 0.8125rem;
 		font-weight    : 500;
 		padding-bottom : 2px;
+	}
+}
+
+.alert {
+	@include border-radius();
+	background-color : #ffe9ed;
+	font-size        : 0.8125rem;
+	font-weight      : 500;
+	margin-bottom    : 1.625rem;
+	padding          : 0.75rem 0;
+	position         : relative;
+	text-align       : center;
+
+	.fa-exclamation-circle {
+		color       : #f6767a;
+		font-style  : normal;
+		font-weight : 600;
+
+		&:before {
+			background              : url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjIgMiAxOCAxNiI+DQo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiICBzdHJva2U9InJnYigyNDYsIDExOCwgMTIyKSIgc3Ryb2tlLXdpZHRoPSIycHgiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBmaWxsPSJub25lIg0KIGQ9Ik00LjAzMCwxNi44NjAgQzQuNzUzLDE2Ljg2MCAxNy40NjAsMTYuODYwIDE3Ljk1OSwxNi44NjAgQzE4LjYwNywxNi44NjAgMTkuMDg5LDE2LjE5NSAxOC43MTAsMTUuNTM3IEMxOC40MDcsMTUuMDEwIDEyLjI4Myw0LjQ3NSAxMS43NTksMy41NzUgQzExLjQxNSwyLjk4NSAxMC41OTUsMi45OTUgMTAuMjUwLDMuNTc1IEM5Ljg2Niw0LjIyMyAzLjcxMSwxNC43OTggMy4yODMsMTUuNTY0IEMyLjk3MCwxNi4xMjUgMy4zMTYsMTYuODYwIDQuMDMwLDE2Ljg2MCBaIi8+DQo8L3N2Zz4=") no-repeat center;
+			-webkit-background-size : 23px 21px;
+			background-size         : 23px 21px;
+			color                   : #f6767a;
+			content                 : "!";
+			display                 : inline-block;
+			height                  : 21px;
+			line-height             : 1.5rem;
+			margin-right            : 0.5rem;
+			text-align              : center;
+			width                   : 23px;
+		}
+	}
+}
+
+.anchor-link {
+	img, .card-body {
+		@include transition(all .125s linear);
+	}
+
+	img {
+		opacity : 1;
+	}
+
+	.card-body p {
+		color : $black;
+	}
+
+	&:hover {
+		img {
+			opacity : 0.4;
+		}
+
+		.card-body {
+			p {
+				color : $yellow;
+			}
+		}
 	}
 }
 
@@ -2741,14 +2887,14 @@ select {
 	margin  : auto;
 	padding : 2px;
 	width   : 2.375rem;
-	
+
 	.cell {
 		background-color : $black;
 		height           : 0.5rem;
 		margin           : 0 1px;
 		width            : 0.5rem;
 	}
-	
+
 	&.empty {
 		background              : url($image_dir + 'x.png') no-repeat center;
 		-webkit-background-size : 0.5rem;
@@ -2759,18 +2905,18 @@ select {
 
 .block-title {
 	@include flex(none, between, center);
-	
+
 	a {
 		@include transition(color .125s linear);
 		color       : #057f9e;
 		font-size   : 0.9375rem;
 		font-weight : 600;
-		
+
 		&:hover {
 			color : $yellow;
 		}
 	}
-	
+
 	h2 {
 		font-size     : 2.1875rem;
 		font-weight   : 800;
@@ -2784,23 +2930,23 @@ select {
 		a {
 			margin : auto;
 		}
-		
+
 		img {
 			@include grayscale;
 			@include transition(all .25s linear);
 			opacity : 0.4;
 			width   : 100%;
 		}
-		
+
 		&:hover {
 			img {
 				@include grayscale(false);
 				opacity : 1;
 			}
 		}
-		
+
 	}
-	
+
 	.slick-track {
 		@include flex(none, none, center);
 	}
@@ -2810,22 +2956,22 @@ select {
 	background-color : transparent;
 	margin           : 0;
 	padding          : 2rem 0 0;
-	
+
 	li {
 		color       : #b9b9b9;
 		font-size   : 0.8125rem;
 		font-weight : 500;
 		line-height : 1rem;
-		
+
 		a {
 			color          : #b9b9b9;
 			text-transform : capitalize;
 			vertical-align : middle;
-			
+
 			img {
 				vertical-align : bottom;
 			}
-			
+
 			&:after {
 				border         : 1px solid #b9b9b9;
 				content        : "";
@@ -2846,11 +2992,11 @@ select {
 		left  : -12px;
 		right : -12px;
 	};
-	
+
 	h4 {
 		font-weight : 800;
 	}
-	
+
 	.btn {
 		@include border-radius(.5rem);
 		@include flex(none, between, center);
@@ -2863,7 +3009,7 @@ select {
 		padding     : 10px 20px;
 		width       : 100%;
 		z-index     : 1;
-		
+
 		&:after {
 			@include border-radius(50%);
 			background              : #b1b1b2 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgNTEyIj4NCiAgICA8cGF0aCBmaWxsPSIjMDAwIg0KICAgICAgICAgIGQ9Ik0yMjQuMyAyNzNsLTEzNiAxMzZjLTkuNCA5LjQtMjQuNiA5LjQtMzMuOSAwbC0yMi42LTIyLjZjLTkuNC05LjQtOS40LTI0LjYgMC0zMy45bDk2LjQtOTYuNC05Ni40LTk2LjRjLTkuNC05LjQtOS40LTI0LjYgMC0zMy45TDU0LjMgMTAzYzkuNC05LjQgMjQuNi05LjQgMzMuOSAwbDEzNiAxMzZjOS41IDkuNCA5LjUgMjQuNi4xIDM0eiIvPg0KPC9zdmc+') no-repeat center;
@@ -2872,12 +3018,12 @@ select {
 			content                 : "";
 			padding                 : 10px;
 		}
-		
+
 		&:hover {
 			background-color : $white;
 			border-color     : $white;
 			color            : $black;
-			
+
 			&:after {
 				background              : #2b2c30 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgNTEyIj4NCiAgICA8cGF0aCBmaWxsPSIjZmZmIg0KICAgICAgICAgIGQ9Ik0yMjQuMyAyNzNsLTEzNiAxMzZjLTkuNCA5LjQtMjQuNiA5LjQtMzMuOSAwbC0yMi42LTIyLjZjLTkuNC05LjQtOS40LTI0LjYgMC0zMy45bDk2LjQtOTYuNC05Ni40LTk2LjRjLTkuNC05LjQtOS40LTI0LjYgMC0zMy45TDU0LjMgMTAzYzkuNC05LjQgMjQuNi05LjQgMzMuOSAwbDEzNiAxMzZjOS41IDkuNCA5LjUgMjQuNi4xIDM0eiIvPg0KPC9zdmc+') no-repeat center;
 				-webkit-background-size : 6px;
@@ -2885,7 +3031,7 @@ select {
 			}
 		}
 	}
-	
+
 	.card {
 		@include border-radius;
 		flex    : 1 1 50%;
@@ -2895,11 +3041,11 @@ select {
 			right : 12px;
 		}
 		padding : 35px;
-		
+
 		&.about {
 			background : url($image_dir + 'about.png') no-repeat;
 			flex       : 0 0 220px;
-			
+
 			p {
 				color         : $white;
 				font-size     : 0.8125rem;
@@ -2908,21 +3054,22 @@ select {
 				margin-top    : auto;
 			}
 		}
-		
+
 		&.choose {
 			@include flex-align(none, between, none);
 			background-repeat : no-repeat;
 			border            : 1px solid #f4f4f4;
 			min-width         : 454px;
 			padding           : 30px 40px;
-			
+
 			> img {
 				bottom   : 0;
 				position : absolute;
 				right    : 0;
+				width    : 100%;
 				z-index  : -1;
 			}
-			
+
 			> p {
 				color       : #a4a4a4;
 				font-size   : 0.8125rem;
@@ -2930,31 +3077,31 @@ select {
 				line-height : 1.692;
 				width       : 135px;
 			}
-			
+
 			.phone {
 				@include flex;
 				flex-wrap   : wrap;
 				font-weight : 600;
-				
+
 				a {
 					font-size    : 1.125rem;
 					height       : auto;
 					padding-left : 0;
 				}
-				
+
 				p a {
 					@include transition(all .125s linear);
 					border-color : #057f9e;
 					color        : #057f9e;
 					font-size    : .75rem;
-					
+
 					&:hover {
 						border-color : $yellow;
 						color        : $yellow;
 					}
 				}
 			}
-			
+
 			&.inline, .inline & {
 				align-items           : center;
 				display               : grid;
@@ -2963,47 +3110,48 @@ select {
 				margin-bottom         : 1.5rem;
 				max-width             : 100% !important;
 				padding               : 0 3rem 0 1.5rem !important;
-				
+
 				h4 {
 					font-size   : 1.125rem;
 					margin      : 0;
 					white-space : nowrap;
 				}
-				
+
 				> img {
 					height   : 75px;
 					position : static;
+					width    : auto;
 				}
-				
+
 				p {
 					padding-right : 1rem;
 					width         : auto;
 				}
-				
+
 				.offices {
 					h6 {
 						margin : 0;
 					}
-					
+
 					ul {
 						display : none;
 					}
 				}
-				
+
 				.close {
 					right : 1rem;
 					top   : 1rem;
 				}
 			}
 		}
-		
+
 		&.showroom {
 			@include flex-align(row, between, end);
 			background              : url($image_dir + "showroom.png") no-repeat center;
 			-webkit-background-size : auto;
 			background-size         : auto;
 			min-width               : 220px;
-			
+
 			&:after {
 				@include background-gradient(#3e3e3e1a, #3e3e3e);
 				@include border-radius();
@@ -3014,7 +3162,7 @@ select {
 				top      : 0;
 				width    : 100%;
 			}
-			
+
 			h4 {
 				color         : $white;
 				line-height   : 42px;
@@ -3023,7 +3171,7 @@ select {
 			}
 		}
 	}
-	
+
 	.mini-card {
 		@include flex(none, none, center);
 		margin    : {
@@ -3031,12 +3179,12 @@ select {
 			right : 12px;
 		}
 		padding-right : 25px;
-		
+
 		.image-container {
 			@include flex(none, none, center);
 			height : 45px;
 		}
-		
+
 		p {
 			font-size   : 0.8125rem;
 			font-weight : 600;
@@ -3048,7 +3196,7 @@ select {
 
 .catalog-wrapper {
 	@include flex;
-	
+
 	aside {
 		flex         : 0 0 20%;
 		margin-right : 35px;
@@ -3061,12 +3209,12 @@ select {
 
 .checkout {
 	@include border-radius;
-	@include flex(none, center);
+	@include flex(none, center, none, wrap);
 	background-color : #f5f4f2;
 	margin-top       : 2.5rem;
 	padding-bottom   : 1rem;
 	padding-top      : 1rem;
-	
+
 	button, a {
 		@include border-radius;
 		@include flex(none, between, center);
@@ -3081,7 +3229,7 @@ select {
 		overflow         : hidden;
 		padding          : 0 10px 0 20px;
 		z-index          : 10;
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -3090,7 +3238,7 @@ select {
 			margin-left      : 1rem;
 			position         : relative;
 			width            : 20px;
-			
+
 			&:after {
 				@include border-radius(50%);
 				background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -3101,28 +3249,28 @@ select {
 				padding                 : 10px;
 			}
 		}
-		
+
 		&:hover {
 			background-color : #2b2c30;
 			color            : $white;
 		}
 	}
-	
+
 	.total {
 		@include flex(none, end, center);
 		margin-right : 2rem;
-		
+
 		> span {
 			color       : #a4a4a4;
 			font-size   : .8125rem;
 			font-weight : 500;
 		}
-		
+
 		h5 {
 			margin-bottom : 0;
 			margin-left   : 1rem;
 		}
-		
+
 		small {
 			font-size   : .625rem;
 			font-weight : 500;
@@ -3134,7 +3282,7 @@ select {
 	li {
 		position : relative;
 	}
-	
+
 	label {
 		@include user-select();
 		cursor         : pointer;
@@ -3170,16 +3318,16 @@ select {
 .control {
 	@include flex(none, none, center, wrap);
 	margin-bottom : 35px;
-	
+
 	#show-num {
 		display : inherit;
 		padding : 10px 2rem 10px 1rem;
 	}
-	
+
 	#sort {
 		padding : 10px 40px 10px 20px;
 	}
-	
+
 	#sort, #show-num {
 		@include appearance;
 		@include border-radius(.375rem);
@@ -3190,29 +3338,29 @@ select {
 		font-size   : 0.8125rem;
 		font-weight : 600;
 	}
-	
+
 	.button-group {
 		@include flex;
 		align-items : center;
-		
+
 		.grid, .inline {
 			height      : 1rem;
 			margin-left : 16px;
 			padding     : 0;
 			width       : 1.375rem;
-			
+
 			svg {
 				height         : 100%;
 				vertical-align : super;
 				width          : 100%;
-				
+
 				path {
 					@include transition();
 					fill : #000;
 				}
-				
+
 			}
-			
+
 			&.active {
 				svg {
 					path {
@@ -3222,52 +3370,52 @@ select {
 			}
 		}
 	}
-	
+
 	.left, .right {
 		@include flex;
 		flex      : 0 0 auto;
 		flex-wrap : wrap;
 	}
-	
+
 	.right {
 		justify-content : flex-end;
 		margin-left     : auto;
 		position        : relative;
 	}
-	
+
 	.search {
 		@include flex(none, between, center, wrap);
 		margin-bottom : 0.75rem;
 		width         : 100%;
-		
+
 		label {
 			font-size    : 0.8125rem;
 			margin-right : 1rem;
-			
+
 			&.search-field {
 				flex : auto;
-				
+
 				button {
 					bottom   : 0;
 					left     : 6px;
 					position : absolute;
 					top      : 4px;
-					
+
 					img {
 						width : 1.25rem;
 					}
 				}
-				
+
 				input {
 					padding-left : 2.5rem;
 				}
 			}
 		}
 	}
-	
+
 	.show-num {
 		@include flex(none, none, center, wrap);
-		
+
 		label {
 			color         : #a4a4a4;
 			font-size     : 0.8125rem;
@@ -3277,7 +3425,7 @@ select {
 			margin-top    : 0.5rem;
 		}
 	}
-	
+
 	.sort-by {
 		@include flex(none, none, center, wrap);
 		margin-bottom : 0.5rem;
@@ -3292,7 +3440,7 @@ select {
 	position         : fixed;
 	width            : 100%;
 	z-index          : 99999;
-	
+
 	.cookies-politic-block {
 		align-items     : center;
 		bottom          : 0;
@@ -3300,19 +3448,19 @@ select {
 		justify-content : center;
 		padding         : 20px 0;
 		z-index         : 1001;
-		
+
 		p {
 			color         : #d5c2c2;
 			font-size     : 0.875rem;
 			font-weight   : 500;
 			line-height   : 28px;
 			padding-right : 20px;
-			
+
 			a {
 				color : $yellow;
 			}
 		}
-		
+
 		.btn-accept-cookies-policy {
 			@include border-radius(.375rem);
 			@include flex(none, none, center);
@@ -3338,16 +3486,16 @@ select {
 	top      : 0;
 	width    : 0.75rem;
 	z-index  : 10000;
-	
-	
+
+
 	&:after {
 		@include transform(rotate(-55deg));
 	}
-	
+
 	&:before {
 		@include transform(rotate(55deg));
 	}
-	
+
 	&:before, &:after {
 		background-color : #b4b4b4;
 		content          : '';
@@ -3361,7 +3509,7 @@ select {
 	a svg path {
 		@include transition(all .125s linear);
 	}
-	
+
 	a:hover svg path {
 		stroke : $black;
 	}
@@ -3376,19 +3524,19 @@ select {
 	top              : 0;
 	width            : 100%;
 	z-index          : 100;
-	
+
 	p {
 		color       : $white;
 		font-weight : 600;
 		margin-left : 1.125rem;
 	}
-	
+
 	#ok {
 		@include border-radius(50%);
 		border  : 2px dashed rgb(178, 181, 182);
 		padding : 0.75rem 0.875rem;
 	}
-	
+
 	.delete {
 		position : absolute;
 		right    : 0;
@@ -3402,7 +3550,7 @@ select {
 .dropdown-toggle {
 	display     : block;
 	line-height : 85px;
-	
+
 	&:hover, &[aria-expanded=" true "] {
 		background-color : $light_gray;
 	}
@@ -3414,13 +3562,13 @@ select {
 		margin-left  : 15px;
 		padding-left : 15px;
 	}
-	
+
 	img {
 		height         : 1rem;
 		vertical-align : middle;
 		width          : 1rem;
 	}
-	
+
 	.accordion {
 		background-color : $white;
 		box-shadow       : 7.552px 9.326px 28.48px 3.52px rgba(0, 0, 0, 0.06);
@@ -3437,7 +3585,7 @@ select {
 	.card {
 		button {
 			position : relative;
-			
+
 			&:after {
 				@include transform(rotate(0) scale(0.5));
 				@include transition(all .25s ease-out);
@@ -3452,7 +3600,7 @@ select {
 				top          : 1px;
 				width        : 10px;
 			}
-			
+
 			&[aria-expanded="true"] {
 				&:after {
 					@include transform(rotate(-180deg) scale(0.5));
@@ -3471,7 +3619,7 @@ select {
 	.gallery-items {
 		width : 100%;
 	}
-	
+
 	.item {
 		@include border-radius;
 		@include flex;
@@ -3480,23 +3628,23 @@ select {
 		margin-bottom    : 2.625rem;
 		min-height       : 265px;
 		overflow         : hidden;
-		
+
 		h3 {
 			font-size   : 1.5rem;
 			font-weight : 800;
 			line-height : 1;
 		}
-		
+
 		p {
 			font-size   : 0.8125rem;
 			font-weight : 500;
 			line-height : 1.692;
 		}
-		
+
 		> .image-container {
 			flex         : 0 0 55%;
 			margin-right : 2.5rem;
-			
+
 			img {
 				@include transition(opacity .125s linear);
 				height     : 100%;
@@ -3504,16 +3652,16 @@ select {
 				width      : 100%;
 			}
 		}
-		
+
 		.item-body {
 			@include flex(col);
 			padding-top : 2rem;
-			
+
 			> * {
 				margin-bottom : 1.25rem;
 			}
 		}
-		
+
 		.link {
 			@include border-radius;
 			@include flex(none, between, center);
@@ -3531,7 +3679,7 @@ select {
 			padding          : 0 10px 0 20px;
 			width            : 100%;
 			z-index          : 10;
-			
+
 			.image-container {
 				@include border-radius(50%);
 				background-color : $white;
@@ -3539,7 +3687,7 @@ select {
 				height           : 20px;
 				position         : relative;
 				width            : 20px;
-				
+
 				&:after {
 					@include border-radius(50%);
 					background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -3551,14 +3699,14 @@ select {
 				}
 			}
 		}
-		
+
 		&:hover {
 			> .image-container {
 				img {
 					opacity : 0.5;
 				}
 			}
-			
+
 			.link {
 				background-color : #2b2c30;
 				color            : $white;
@@ -3571,7 +3719,7 @@ select {
 	@include flex;
 	flex-wrap       : wrap;
 	justify-content : center;
-	
+
 	.range {
 		@include border-radius(.125rem);
 		background    : #dfdfdf;
@@ -3583,7 +3731,7 @@ select {
 		margin-bottom : 25px;
 		position      : relative;
 		text-align    : left;
-		
+
 		.ui-slider-range {
 			background  : #434343 0 0;
 			border      : 0;
@@ -3596,7 +3744,7 @@ select {
 			top         : 0;
 			z-index     : 1;
 		}
-		
+
 		.ui-slider-handle {
 			background    : $white;
 			border        : 2px solid $yellow;
@@ -3617,21 +3765,21 @@ select {
 			z-index       : 2;;
 		}
 	}
-	
+
 	.input-max, .input-min {
 		@include flex(col, center);
 		-moz-appearance : textfield;
 		flex            : 1 1 calc(50% - 20px);
 		font-size       : 0.875rem;
-		
-		
+
+
 		label {
 			color       : #a4a4a4;
 			font-size   : 0.625rem;
 			font-weight : 500;
 			line-height : 2;
 		}
-		
+
 		input {
 			border        : 1px solid #dfdfdf;
 			border-radius : 5px;
@@ -3640,17 +3788,17 @@ select {
 			padding       : 10px;
 			text-align    : center;
 			width         : 100%;
-			
+
 			&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
 				display : none;
 			}
 		}
 	}
-	
+
 	.input-min {
 		margin-right : 5px;
 	}
-	
+
 	.input-max {
 		margin-left : 5px;
 	}
@@ -3661,20 +3809,21 @@ select {
 	border : 1px solid #d4d4d4;
 	height : 40px;
 	width  : 90px;
-	
+
 	.form-control {
 		color       : $black;
 		font-size   : 1.125rem;
 		font-weight : 600;
+		max-width   : 40%; //Fix firefox flexbox bug, when children have more width than parent
 	}
-	
+
 	.input-group-prepend, .input-group-append {
 		button {
 			@include transition(color .125s linear);
 			color       : #bababa;
 			font-size   : 1.5rem;
 			font-weight : 500;
-			
+
 			&:hover {
 				color : $yellow;
 			}
@@ -3688,13 +3837,13 @@ select {
 		font-weight : 800;
 		text-align  : center;
 	}
-	
+
 	.card {
 		margin    : auto;
 		max-width : 380px;
 		width     : 100%;
 	}
-	
+
 	.projects-list .card {
 		max-width : 100%;
 	}
@@ -3704,13 +3853,13 @@ select {
 	@include flex(col);
 	margin : auto;
 	width  : 100%;
-	
+
 	h3 {
 		font-size     : 1.25rem;
 		margin-bottom : 2rem;
 		text-align    : left;
 	}
-	
+
 	h4 {
 		font-size   : 1rem;
 		font-weight : 600;
@@ -3720,7 +3869,7 @@ select {
 		order       : -1;
 		text-align  : center;
 	}
-	
+
 	.content {
 		margin        : auto;
 		max-width     : 40rem;
@@ -3728,7 +3877,7 @@ select {
 		padding-right : 0;
 		padding-top   : 3rem;
 		width         : 100%;
-		
+
 		p {
 			a {
 				color       : #057f9e;
@@ -3743,23 +3892,23 @@ select {
 	grid-row-end   : 9;
 	grid-row-start : 1;
 	position       : relative;
-	
+
 	.gallery-images {
 		flex      : 0 0 127px;
 		max-width : 127px;
 		z-index   : 1;
-		
+
 		.item-image {
 			background-color : $white;
 			border           : 1px solid #f4f4f4;
 			height           : 80px;
 			justify-content  : center;
 		}
-		
+
 		.slick-current {
 			background-color : #f4f4f4;
 		}
-		
+
 		.slick-list {
 			@include border-radius;
 			border         : 1px solid #f4f4f4;
@@ -3768,28 +3917,32 @@ select {
 			padding-bottom : 2rem;
 			padding-top    : 1.625rem;
 		}
-		
+
 		.slick-slide {
 			margin   : 0;
 			padding  : 13px;
 			position : relative;
-			
+
 			&.slick-current:after {
 				border-bottom : 55px solid transparent;
 				border-left   : 15px solid #f4f4f4;
 				border-top    : 55px solid transparent;
 				content       : '';
 				position      : absolute;
-				right         : -16px;
+				right         : -1rem;
 				top           : 0;
 			}
+
+			img {
+				width : auto;
+			}
 		}
-		
+
 		.slick-track {
 			overflow : hidden;
 		}
 	}
-	
+
 	.gallery-list {
 		img {
 			width : 100%;
@@ -3799,11 +3952,11 @@ select {
 
 .jobs {
 	@include flex;
-	
+
 	.job-list {
 		flex         : 1 1;
 		padding-left : percentage(2/30);
-		
+
 		a {
 			@include flex;
 			font-size     : .875rem;
@@ -3811,8 +3964,8 @@ select {
 			line-height   : 1.25rem;
 			margin-bottom : 1rem;
 			margin-top    : 1rem;
-			
-			
+
+
 			&:after, &:before {
 				background    : url($image_dir + "job.svg") no-repeat center;
 				content       : '';
@@ -3821,44 +3974,44 @@ select {
 				margin-top    : auto;
 				width         : 1.375rem;
 			}
-			
+
 			&:after {
 				background-image        : url($image_dir + "angle-right-solid.svg");
 				-webkit-background-size : 8px;
 				background-size         : 8px;
 				margin-left             : auto;
 			}
-			
+
 			&:before {
 				margin-right : 0.875rem;
 			}
 		}
-		
+
 		li {
 			border-bottom : 1px dotted #d6d6d6;
 			padding-left  : 0.5rem;
 			padding-right : 0.5rem;
-			
+
 			&:last-child {
 				border : 0;
 			}
 		}
 	}
-	
+
 	.pers-dev {
 		flex : 0 0 percentage(1/3);
-		
+
 		h4 {
 			font-weight : 800;
 			line-height : 1.5;
 		}
-		
+
 		p {
 			font-size   : 0.8125rem;
 			font-weight : 500;
 			line-height : 2.154;
 		}
-		
+
 		svg {
 			padding : 3rem 5rem;
 			width   : 100%;
@@ -3879,19 +4032,19 @@ select {
 		top              : 44px;
 		width            : 100%;
 		z-index          : 1003;
-		
+
 		&.active {
 			display : block;
 		}
-		
+
 		form {
 			padding-top : 0.75rem;
-			
+
 			hr {
 				margin-bottom : 1.5rem;
 				margin-top    : 1.5rem;
 			}
-			
+
 			label {
 				&.required {
 					&:after {
@@ -3899,25 +4052,25 @@ select {
 					}
 				}
 			}
-			
+
 			textarea {
 				height : 7.5rem;
 			}
 		}
-		
+
 		.close {
 			display : block;
 		}
-		
+
 		.submit {
 			flex : 100%;
-			
+
 			p {
 				text-align : center;
 			}
 		}
 	}
-	
+
 	.main-image-container {
 		margin-top : 3rem;
 	}
@@ -3944,19 +4097,19 @@ select {
 		font-weight : 600;
 		height      : 100%;
 		padding     : 30px 10px;
-		
+
 		svg {
 			margin-right : 10px;
 			opacity      : 0.5;
-			
+
 			&, * {
 				@include transition(all .25s linear);
 			}
-			
+
 			path {
 				stroke : #c4d6dc;
 			}
-			
+
 			tspan {
 				fill : #b7c8cd;
 			}
@@ -3967,37 +4120,37 @@ select {
 .navbar {
 	font-weight : 600;
 	padding     : 0;
-	
+
 	a {
 		img {
 			max-width      : 156px;
 			vertical-align : sub;
 		}
-		
+
 		svg {
 			vertical-align : middle;
 		}
 	}
-	
+
 	#search {
 		position : relative;
-		
+
 		.search-form {
 			background-color : #f5f4f2;
-			max-width        : 432px;
+			max-width        : 535px;
 			position         : absolute;
 			right            : 0;
 			top              : 0;
 			width            : 100vw;
-			
+
 			&.collapse.show {
 				display : flex;
 			}
-			
+
 			label {
 				flex : 100%;
 			}
-			
+
 			input {
 				@include border-radius(0);
 				background-color : transparent;
@@ -4006,59 +4159,59 @@ select {
 				padding          : 0.75rem 2rem 0.75rem 1.125rem;
 			}
 		}
-		
+
 		button {
 			line-height : 85px;
 			padding     : 0 20px;
-			
+
 			&.search-button {
 				img, &.collapsed .cross {
 					opacity : 0;
 				}
-				
+
 				&.collapsed img, .cross {
 					opacity : 1;
 				}
 			}
 		}
-		
+
 		img {
 			height         : 18px;
 			vertical-align : sub;
 			width          : 18px;
 		}
 	}
-	
+
 	.nav-item {
 		position : relative;
 	}
-	
+
 	.nav-link {
 		display     : block;
 		font-size   : 0.875rem;
 		line-height : 85px;
-		
+
 		&:hover, &[aria-expanded="true"] {
 			background-color : $light_gray;
 		}
-		
+
 		&.active {
 			color : $dark_yellow;
 		}
 	}
-	
+
 	.navbar-brand {
 		line-height : 1;
 		padding    : {
 			bottom : 0.5rem;
 			top    : 0;
 		};
-		
+
 		img {
 			width : 100%;
 		}
 	}
-	
+
 	.switch {
 		position : absolute;
 	}
@@ -4067,11 +4220,11 @@ select {
 .navbar-toggler {
 	@include border-radius(0);
 	height : 85px;
-	
+
 	&:not(.collapsed) {
 		background-color : #f5f4f2;
 	}
-	
+
 	.navbar-toggler-icon svg path {
 		stroke : rgb(196, 214, 220);
 	}
@@ -4084,7 +4237,7 @@ select {
 			right : 20px;
 		}
 	}
-	
+
 	&#compare {
 		a {
 			padding   : {
@@ -4093,13 +4246,13 @@ select {
 			}
 		}
 	}
-	
+
 	&#favorite {
 		a {
 			padding-left : 7.5px;
 		}
 	}
-	
+
 	&#profile {
 		a {
 			padding-right : 7.5px;
@@ -4111,24 +4264,24 @@ select {
 	> a {
 		display     : block;
 		line-height : 85px;
-		
+
 		&, &:after, svg path {
 			@include transition(all .125s linear);
 		}
-		
+
 		svg {
 			path {
 				stroke : #b2b5b6
 			}
 		}
-		
+
 		&:hover {
 			background-color : #f5f4f2;
-			
+
 			&:after {
 				color : $black;
 			}
-			
+
 			svg {
 				path {
 					stroke : #000;
@@ -4149,11 +4302,11 @@ select {
 .newest, .job-card, .project-card, .news-card {
 	flex          : 100% !important;
 	margin-bottom : 3.5rem;
-	
+
 	.card {
 		@include flex-align(row);
 		height : 100%;
-		
+
 		a {
 			@include border-radius;
 			flex        : 1 1;
@@ -4162,7 +4315,7 @@ select {
 			height      : 100%;
 			line-height : 1.2;
 			overflow    : hidden;
-			
+
 			img {
 				border-bottom   : 5px solid $yellow;
 				height          : 100%;
@@ -4170,13 +4323,13 @@ select {
 				object-position : bottom;
 			}
 		}
-		
+
 		.card-body {
 			@include flex(col, start, between);
 			flex    : 0 0 200px;
 			padding : 0;
 		}
-		
+
 		.card-foot {
 			border-top    : 5px solid #ffca30;
 			color         : #a4a4a4;
@@ -4198,7 +4351,7 @@ select {
 
 .newest {
 	height : 315px;
-	
+
 	.card {
 		.card-body {
 			flex : 0 0 300px;
@@ -4215,18 +4368,18 @@ select {
 		@include grid;
 		grid-gap              : 18px;
 		grid-template-columns : repeat(2, 1fr);
-		
+
 		.item {
 			a:hover {
 				.card-img-top {
 					opacity : 0.5;
 				}
-				
+
 				.card-text {
 					color : $yellow;
 				}
 			}
-			
+
 			.card-img-top {
 				@include transition(opacity .125s linear);
 				height          : 100%;
@@ -4234,7 +4387,7 @@ select {
 				object-position : center;
 				width           : 100%;
 			}
-			
+
 			.card-foot {
 				border-top  : 5px solid $yellow;
 				color       : #a4a4a4;
@@ -4244,12 +4397,12 @@ select {
 				margin-top  : 20px;
 				padding-top : 20px;
 			}
-			
+
 			.card-text {
 				@include transition(color .125s linear);
 				font-weight : 700;
 				line-height : 1.625;
-				
+
 				a {
 					width : 100%;
 				}
@@ -4269,7 +4422,7 @@ select {
 		font-size   : 0.75rem;
 		font-weight : 500;
 		line-height : 1.5;
-		
+
 		&:before {
 			background   : url($image_dir + "angle-right-solid.svg") no-repeat center;
 			content      : "";
@@ -4278,12 +4431,12 @@ select {
 			margin-right : 10px;
 			width        : 5px;
 		}
-		
+
 		&:hover {
 			color : $yellow;
 		}
 	}
-	
+
 	h6 {
 		font-size     : 0.8125rem;
 		font-weight   : 500;
@@ -4291,7 +4444,7 @@ select {
 		margin-bottom : 1.25rem;
 		width         : 155px
 	}
-	
+
 	li {
 		margin-bottom : 0.5rem;
 	}
@@ -4302,7 +4455,7 @@ select {
 	height  : 6px;
 	margin  : auto;
 	width   : 6px;
-	
+
 	&:before {
 		@include border-radius(50%);
 		border   : 3px solid #4dd160;
@@ -4315,19 +4468,19 @@ select {
 .page-title {
 	margin-bottom : 1.5rem;
 	padding-top   : 2rem;
-	
+
 	h1 {
 		@include flex(none, none, center, wrap);
 		font-size     : 2.625rem;
 		font-weight   : 800;
 		margin-bottom : 0;
 	}
-	
+
 	&.centered {
 		@include flex(col, center, center);
 		padding-bottom : 1rem;
 		padding-top    : 1rem;
-		
+
 		hr {
 			border-color  : $yellow;
 			border-width  : 5px;
@@ -4335,21 +4488,21 @@ select {
 			margin-top    : 1.5rem;
 			width         : 95px;
 		}
-		
+
 		h1 {
 			font-size     : 2.1875rem;
 			margin-bottom : 0;
 			text-align    : center;
 		}
 	}
-	
+
 	.city {
 		display       : inline-block;
 		font-weight   : 500;
 		margin-bottom : 0;
 		margin-right  : 1.25rem;
 	}
-	
+
 	.photo-num {
 		font-size   : 0.8125rem;
 		font-weight : 500;
@@ -4358,7 +4511,7 @@ select {
 
 .phone {
 	&, &-poppup {
-		
+
 		a {
 			@include flex(none, none, center);
 			font-size : 0.875rem;
@@ -4367,7 +4520,7 @@ select {
 				left  : 15px;
 				right : 5px;
 			}
-			
+
 			&.tel:before {
 				@include border-radius(50%);
 				border       : 3px solid #4dd160;
@@ -4375,12 +4528,12 @@ select {
 				display      : inline-block;
 				margin-right : 10px;
 			}
-			
+
 			&.tel:after {
 				content : none;
 			}
 		}
-		
+
 		p a {
 			border-bottom : 1px dotted;
 			display       : inline;
@@ -4389,19 +4542,19 @@ select {
 			line-height   : 1.5;
 			margin-left   : 1rem;
 		}
-		
+
 		.dropdown-menu {
 			box-shadow : 0 18px 18.69px 2.31px rgba(0, 0, 0, 0.03);
 		}
-		
+
 		.input-telephone {
 			padding-bottom : 1rem;
-			
+
 			h6 {
 				color       : #2b2c30;
 				font-size   : 0.9375rem;
 				font-weight : 600;
-				
+
 				&:before {
 					background   : url($image_dir + "phone-gray.svg") no-repeat top center;
 					content      : '';
@@ -4411,7 +4564,7 @@ select {
 					width        : 23px;
 				}
 			}
-			
+
 			button {
 				@include border-radius;
 				@include flex(none, between, center);
@@ -4427,7 +4580,7 @@ select {
 				overflow         : hidden;
 				padding          : 0 10px 0 20px;
 				z-index          : 10;
-				
+
 				.image-container {
 					@include border-radius(50%);
 					background-color : $white;
@@ -4436,7 +4589,7 @@ select {
 					margin-left      : 0.5rem;
 					position         : relative;
 					width            : 20px;
-					
+
 					&:after {
 						@include border-radius(50%);
 						background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -4447,20 +4600,20 @@ select {
 						padding                 : 10px;
 					}
 				}
-				
+
 				&:hover {
 					background-color : #2b2c30;
 					color            : #fff;
 				}
 			}
 		}
-		
+
 		.timetable {
 			border-bottom  : 1px dotted #dedede;
 			margin-bottom  : 1.25rem;
 			padding-bottom : 2rem;
 			padding-top    : 1rem;
-			
+
 			&:before {
 				background   : url($image_dir + "clocks.svg") no-repeat top center;
 				content      : '';
@@ -4469,20 +4622,20 @@ select {
 				margin-right : 1rem;
 				width        : 22px;
 			}
-			
+
 			table tr td {
 				font-size     : 0.8125rem;
 				font-weight   : 500;
 				line-height   : 1.538;
 				padding-right : 1rem;
-				
+
 				&:first-child {
 					color : #a4a4a4;
 				}
 			}
 		}
 	}
-	
+
 	&-poppup {
 		@include border-radius-bottom;
 		background-color : $white;
@@ -4493,17 +4646,17 @@ select {
 		padding-right    : 1.25rem;
 		position         : absolute;
 		z-index          : 9999;
-		
+
 		.delete {
 			position : absolute;
 			right    : 0.5rem;
 			top      : 0.75rem;
-			
+
 			a {
 				height : auto;
 			}
 		}
-		
+
 		.timetable {
 			padding-top : 1.5rem;
 		}
@@ -4519,7 +4672,7 @@ select {
 	height           : 100%;
 	position         : relative;
 	width            : 100%;
-	
+
 	> a:not(.add-to-cart):not(.delete) {
 		@include flex(col, center, start, wrap);
 		flex     : 1;
@@ -4527,7 +4680,7 @@ select {
 		padding  : 35px 25px;
 		position : relative;
 		width    : 100%;
-		
+
 		> .image-container {
 			margin     : {
 				bottom : 1.5rem;
@@ -4536,7 +4689,7 @@ select {
 				top    : auto;
 			};
 			width : 100%;
-			
+
 			img {
 				height          : 100%;
 				object-fit      : cover;
@@ -4545,19 +4698,19 @@ select {
 			}
 		}
 	}
-	
+
 	h2 {
 		font-size     : 1.375rem;
 		font-weight   : 800;
 		padding-right : 1.5rem;
 	}
-	
+
 	h5 {
 		font-size     : 0.8125rem;
 		font-weight   : 500;
 		margin-bottom : 1.25rem;
 	}
-	
+
 	.add-to-cart {
 		@include border-radius(50%);
 		@include flex(none, end, center);
@@ -4575,11 +4728,11 @@ select {
 		right            : 0;
 		width            : 48px;
 		z-index          : 10;
-		
+
 		&, * {
 			@include transition(all .25s linear, border-color 0s);
 		}
-		
+
 		p {
 			display     : block;
 			font-size   : 0.8125rem;
@@ -4590,7 +4743,7 @@ select {
 			white-space : nowrap;
 			width       : 100%;
 		}
-		
+
 		.image-container {
 			@include border-radius(50%);
 			background-color : $white;
@@ -4598,7 +4751,7 @@ select {
 			height           : 44px;
 			position         : relative;
 			width            : 44px;
-			
+
 			&:after {
 				@include transition(all .25s linear);
 				content     : '+';
@@ -4609,15 +4762,16 @@ select {
 				text-align  : center;
 				width       : 100%;
 			}
-			
+
 			img {
 				@include absolute-center();
 				display : block;
 				height  : 18px;
+				width   : auto;
 			}
 		}
 	}
-	
+
 	.currency {
 		@include flex-align(none, none, end);
 		font-size   : 0.625rem;
@@ -4625,7 +4779,7 @@ select {
 		line-height : 2;
 		margin-top  : auto;
 	}
-	
+
 	.delete {
 		@include border-radius(50%);
 		background-color : #2b2c30;
@@ -4637,28 +4791,29 @@ select {
 		right            : 0.75rem;
 		top              : 1.25rem;
 		width            : 22px;
-		
+
 		&:after {
 			background              : url($image_dir + "white-x.svg") no-repeat center;
 			-webkit-background-size : 12px;
 			background-size         : 12px;
 			content                 : '';
 			display                 : inline-block;
-			height                  : 22px;width : 22px;
+			height                  : 22px;
+			width                   : 22px;
 		}
 	}
-	
+
 	.discount {
 		@include flex(none, none, center);
 		flex          : 100%;
 		font-size     : 0.625rem;
 		margin-bottom : 0.625rem;
-		
+
 		.discount-percent {
 			font-weight  : 800;
 			margin-right : 5px;
 		}
-		
+
 		.discount-val {
 			@include border-radius();
 			background-color : $green;
@@ -4670,7 +4825,7 @@ select {
 				right : 8px;
 			}
 		}
-		
+
 		.old-price {
 			color           : #bababa;
 			font-weight     : 500;
@@ -4678,7 +4833,7 @@ select {
 			text-decoration : line-through;
 		}
 	}
-	
+
 	.float-buttons {
 		@include flex(col);
 		@include transition(opacity .25s linear);
@@ -4686,21 +4841,35 @@ select {
 		opacity  : 0;
 		position : absolute;
 		top      : 20px;
-		
+
 		img {
 			height : 15px;
 		}
-		
+
 		.favorite {
-			margin-bottom : 0.75rem;
+			margin-bottom : 0.25rem;
 		}
-		
+
 		aside & {
-			left : 25px;
-			top  : 155px;
+			left  : unset;
+			right : 0;
+			top   : 145px;
+		}
+
+		button {
+			svg path {
+				@include transition(all .125s linear);
+				stroke : #b4b4b4;
+			}
+
+			&:hover {
+				svg path {
+					stroke : #000;
+				}
+			}
 		}
 	}
-	
+
 	.price {
 		font-size    : 1.25rem;
 		font-weight  : 800;
@@ -4708,20 +4877,20 @@ select {
 		margin-right : 5px;
 		margin-top   : auto;
 	}
-	
+
 	.product-body {
 		flex : 1 1 auto;
 		@include flex(col);
 	}
-	
+
 	&:hover {
 		border-color : $yellow;
 		box-shadow   : 7.552px 9.326px 28.48px 3.52px rgba(0, 0, 0, .06);
-		
+
 		.float-buttons {
 			opacity : 1;
 		}
-		
+
 		.add-to-cart {
 			@include flex-align(none, between, none);
 			@include border-radius();
@@ -4729,22 +4898,22 @@ select {
 			height  : 2.5rem;
 			padding : 0.5rem;
 			width   : calc(100% - 40px);
-			
+
 			p {
 				line-height : 1;
 				margin-left : 10px;
 				max-width   : 80px;
 				opacity     : 1;
 			}
-			
+
 			.image-container {
 				height : 25px;
 				width  : 25px;
-				
+
 				img {
 					height : 13px;
 				}
-				
+
 				&:after {
 					font-size   : 0.625rem;
 					line-height : 22px;
@@ -4752,55 +4921,60 @@ select {
 			}
 		}
 	}
-	
+
 	.inline & {
 		height         : 90px;
 		padding-bottom : 0;
-		
+
 		> a:not(.add-to-cart) {
 			@include flex-align(row, start, center);
-			padding : .5rem 5.875rem .5rem 3rem;
+			padding : .5rem 6.875rem .5rem 3rem;
+
+			> .image-container {
+				flex   : 0;
+				height : 100%;
+				margin : 0 2.75rem 0 0;
+
+				img {
+					width : auto;
+				}
+			}
 		}
-		
+
 		h5 {
 			flex          : 1 1 0;
 			margin-bottom : 0;
 			margin-right  : auto;
 		}
-		
-		img {
-			height : 100%;
-			margin : 0 2.75rem 0 0;
-		}
-		
+
 		.add-to-cart {
 			bottom  : 0;
 			margin  : auto;
 			padding : 0;
-			right   : 2.5rem;
+			right   : 3.5rem;
 			top     : 0;
-			
+
 			.image-container {
 				height : 44px;
 				width  : 44px;
 			}
 		}
-		
+
 		.currency {
 			margin-top : 0;
 		}
-		
+
 		.discount {
 			flex          : none;
 			font-size     : 0.625rem;
 			margin-bottom : 0;
 			margin-right  : 0.75rem;
-			
+
 			.discount-percent {
 				font-weight  : 800;
 				margin-right : 5px;
 			}
-			
+
 			.discount-val {
 				@include border-radius();
 				background-color : $green;
@@ -4812,7 +4986,7 @@ select {
 					right : 8px;
 				}
 			}
-			
+
 			.old-price {
 				color           : #bababa;
 				font-weight     : 500;
@@ -4820,74 +4994,70 @@ select {
 				text-decoration : line-through;
 			}
 		}
-		
-		.image-container {
-			height : 100%;
-		}
-		
+
 		.float-buttons {
-			@include absolute-center(right unset left 1rem);
+			@include absolute-center(right unset left 0.25rem);
 			@include flex(col, center, center);
 			opacity : 0;
-			
+
 			img {
 				height : 15px;
 			}
-			
+
 			aside & {
 				left : 25px;
 				top  : 155px;
 			}
 		}
-		
+
 		.price {
 			margin-top : 0;
 		}
-		
+
 		.price-container {
 			@include flex(none, none, none, wrap);
 			flex            : 1 0 0;
 			justify-content : flex-end;
 		}
-		
+
 		.product-body {
 			align-items    : center;
 			display        : flex;
 			flex           : 1 1 0;
 			flex-direction : row;
 		}
-		
+
 		&:hover {
 			border-color : $yellow;
 			box-shadow   : 7.552px 9.326px 28.48px 3.52px rgba(0, 0, 0, .06);
-			
+
 			.add-to-cart {
 				@include border-radius(50%);
 				border  : 2px solid $yellow;
 				height  : 48px;
 				padding : 0;
 				width   : auto;
-				
+
 				p {
 					margin-left : 0;
 					max-width   : 0;
 					opacity     : 0;
 				}
-				
+
 				.image-container {
 					background-color : $yellow;
-					
+
 					img {
 						height : 18px;
 					}
-					
+
 					&:after {
 						font-size   : .875rem;
 						line-height : 35px;
 					}
 				}
 			}
-			
+
 			.float-buttons {
 				opacity : 1;
 			}
@@ -4900,27 +5070,27 @@ select {
 	grid-gap              : 2.5rem 30px;
 	grid-template-columns : repeat(4, 1fr);
 	grid-template-rows    : auto;
-	
+
 	.cards {
 		grid-column : span 2;
 		margin      : 0;
-		
+
 		.card.choose {
 			margin    : 0;
 			min-width : 0;
 		}
 	}
-	
+
 	&.inline {
 		grid-row-gap          : 0.75rem;
 		grid-template-columns : 1fr;
-		
+
 		.cards {
 			grid-column  : 1;
 			justify-self : end;
 		}
 	}
-	
+
 	&.wish {
 		grid-template-columns : repeat(5, 1fr);
 	}
@@ -4928,17 +5098,17 @@ select {
 
 .product-slider, .related-slider, .projects-list {
 	padding-bottom : 20px;
-	
+
 	.slick-slide {
 		height         : auto;
 		min-height     : 100%;
 		padding-bottom : 20px;
-		
+
 		> div, .product {
 			height : 100%;
 		}
 	}
-	
+
 	.slick-track {
 		@include flex;
 	}
@@ -4949,24 +5119,24 @@ select {
 	border   : 1px solid #f4f4f4;
 	overflow : auto;
 	padding  : 1.25rem 1.375rem;
-	
+
 	table {
 		font-size : 0.8125rem;
 		min-width : 580px;
 		width     : 100%;
-		
+
 		p {
 			font-weight : 600;
 		}
-		
+
 		span {
 			color : #a4a4a4;
 		}
-		
+
 		td {
 			vertical-align : middle;
 		}
-		
+
 		tbody tr {
 			border-bottom : 1px dotted #dedede;
 		}
@@ -4977,12 +5147,12 @@ select {
 	.card {
 		a {
 			max-width : 920px;
-			
+
 			img {
 				border-bottom : 0;
 			}
 		}
-		
+
 		.card-body {
 			flex : 0 0 145px;
 		}
@@ -4997,7 +5167,7 @@ select {
 	.slick-prev, .slick-next {
 		top : 50%;
 	}
-	
+
 	.slick-slide:not(.slick-active) {
 		opacity : 1;
 	}
@@ -5006,29 +5176,29 @@ select {
 .cart-table {
 	@include border-radius;
 	overflow : auto;
-	
+
 	table {
 		font-size : 0.8125rem;
 		min-width : 580px;
 		width     : 100%;
-		
+
 		p {
 			font-weight : 600;
 		}
-		
+
 		span {
 			color : #a4a4a4;
 		}
-		
+
 		td {
 			vertical-align : middle;
 		}
-		
+
 		tbody tr {
 			border-bottom : 1px dotted #dedede;
 		}
 	}
-	
+
 	.image img {
 		display : block;
 	}
@@ -5046,20 +5216,20 @@ select {
 			width      : 100%;
 		}
 	}
-	
+
 	.item {
 		@include border-radius;
 		height     : 100%;
 		max-height : 320px;
 		overflow   : hidden;
 		position   : relative;
-		
+
 		a, .image {
 			height     : 100%;
 			min-height : 300px;
 			width      : 100%;
 		}
-		
+
 		.overlay {
 			@include background-gradient(transparent, #3e3e3eaa);
 			@include flex(col, start, end);
@@ -5071,7 +5241,7 @@ select {
 			right    : 0;
 			top      : 0;
 			width    : 100%;
-			
+
 			hr {
 				border-color : $yellow;
 				border-width : 5px;
@@ -5079,7 +5249,7 @@ select {
 				max-width    : 114px;
 				width        : 100%;
 			}
-			
+
 			.title {
 				color         : $white;
 				font-weight   : 600;
@@ -5097,7 +5267,7 @@ select {
 		grid-gap              : 1.5rem;
 		grid-template-columns : repeat(3, 1fr);
 		width                 : 100%;
-		
+
 		.image {
 			img {
 				height     : 100%;
@@ -5105,12 +5275,12 @@ select {
 				width      : 100%;
 			}
 		}
-		
+
 		.item {
 			@include border-radius;
 			overflow : hidden;
 			position : relative;
-			
+
 			.overlay {
 				@include flex(col, start, end);
 				@include background-gradient(transparent, #3e3e3eaa);
@@ -5122,7 +5292,7 @@ select {
 				right    : 0;
 				top      : 0;
 				width    : 100%;
-				
+
 				hr {
 					border-color : $yellow;
 					border-width : 5px;
@@ -5130,7 +5300,7 @@ select {
 					max-width    : 114px;
 					width        : 100%;
 				}
-				
+
 				.title {
 					color         : $white;
 					font-weight   : 600;
@@ -5147,7 +5317,7 @@ select {
 		@include grid;
 		grid-template-columns : repeat(3, 1fr);
 	}
-	
+
 	.content, .used-products {
 		margin    : auto;
 		max-width : 960px;
@@ -5158,11 +5328,11 @@ select {
 	@include flex(none, none, center);
 	padding-left : 1.5rem;
 	position     : relative;
-	
+
 	p {
 		color : #a4a4a4;
 	}
-	
+
 	&:before {
 		background : url($image_dir + "foto_num.png") no-repeat center;
 		content    : "";
@@ -5178,6 +5348,7 @@ select {
 .poppup {
 	@include border-radius;
 	@include flex(none, between, center);
+	@include transition(all .25s linear);
 	background-color : $yellow;
 	border           : 0;
 	cursor           : pointer;
@@ -5186,18 +5357,18 @@ select {
 	height           : 35px;
 	line-height      : 35px;
 	overflow         : hidden;
-	padding          : 0 10px 0 20px;
+	padding          : 0 0.625rem 0 1.25rem;
 	width            : 11rem;
 	z-index          : 10;
-	
+
 	.image-container {
 		@include border-radius(50%);
 		background-color : $white;
 		display          : block;
-		height           : 20px;
+		height           : 1.25rem;
 		position         : relative;
-		width            : 20px;
-		
+		width            : 1.25rem;
+
 		&:after {
 			@include border-radius(50%);
 			background              : $white url($image_dir + "angle-right-solid.svg") no-repeat center;
@@ -5207,6 +5378,11 @@ select {
 			display                 : block;
 			padding                 : 10px;
 		}
+	}
+
+	&:hover {
+		background-color : #2b2c30;
+		color            : $white;
 	}
 }
 
@@ -5223,10 +5399,10 @@ select {
 	padding-left  : 1.53125rem;
 	padding-right : 1.53125rem;
 	width         : 100%;
-	
+
 	.back {
 		border-right : 1px solid #f4f4f4;
-		
+
 		a {
 			@include transition(background .125s linear);
 			display       : block;
@@ -5236,7 +5412,7 @@ select {
 			padding-right : 2.25rem;
 			position      : relative;
 			white-space   : nowrap;
-			
+
 			&:before {
 				@include absolute-center(right unset left 2.25rem);
 				background : url($image_dir + 'back_arrow.png') no-repeat center;
@@ -5244,28 +5420,28 @@ select {
 				height     : 1rem;
 				width      : 1rem;
 			}
-			
+
 			&:hover {
 				background-color : #f4f4f4;
 			}
 		}
 	}
-	
+
 	.social {
 		@include flex(none, none, center, wrap);
 		padding-left  : 2.25rem;
 		padding-right : 2.25rem;
-		
+
 		p {
 			font-size     : 0.875rem;
 			font-weight   : 600;
 			padding-right : 0.75rem;
 			white-space   : nowrap;
 		}
-		
+
 		.social-list {
 			@include flex;
-			
+
 			a {
 				@include border-radius(50%);
 				border   : 1px solid #eae6e7;
@@ -5273,17 +5449,17 @@ select {
 				height   : 2.25rem;
 				position : relative;
 				width    : 2.25rem;
-				
+
 				svg {
 					@include absolute-center;
 				}
 			}
-			
+
 			li {
 				margin-right : 0.25rem;
 			}
 		}
-		
+
 		.ya-share2 {
 			.ya-share2__link {
 				@include border-radius(50%);
@@ -5294,7 +5470,7 @@ select {
 				position : relative;
 				width    : 2.25rem;
 			}
-			
+
 			.ya-share2__icon {
 				background-position : center;
 				bottom              : 0;
@@ -5304,7 +5480,7 @@ select {
 				right               : 0;
 				top                 : 0;
 			}
-			
+
 			.ya-share2__badge {
 				@include transition(background .125s linear);
 				background-color : transparent;
@@ -5316,69 +5492,69 @@ select {
 				top              : 0;
 			}
 		}
-		
+
 		.ya-share2__item_service_vkontakte {
 			.ya-share2__icon {
 				@include transition(background .125s linear);
 				background : url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjExcHgiIHdpZHRoPSIxOXB4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE4LjU2NiwwLjc0NSBDMTguNjk4LDAuMzE1IDE4LjU2NiwtMC4wMDAgMTcuOTM3LC0wLjAwMCBMMTUuODU5LC0wLjAwMCBDMTUuMzMwLC0wLjAwMCAxNS4wODcsMC4yNzMgMTQuOTU1LDAuNTczIEMxNC45NTUsMC41NzMgMTMuODk4LDMuMDg1IDEyLjQwMCw0LjcxNiBDMTEuOTE2LDUuMTg5IDExLjY5NSw1LjMzOSAxMS40MzEsNS4zMzkgQzExLjI5OSw1LjMzOSAxMS4xMDgsNS4xODkgMTEuMTA4LDQuNzU5IEwxMS4xMDgsMC43NDUgQzExLjEwOCwwLjIzMCAxMC45NTQsLTAuMDAwIDEwLjUxNCwtMC4wMDAgTDcuMjQ3LC0wLjAwMCBDNi45MTcsLTAuMDAwIDYuNzE5LDAuMjM5IDYuNzE5LDAuNDY2IEM2LjcxOSwwLjk1NCA3LjQ2NywxLjA2NyA3LjU0NCwyLjQ0MSBMNy41NDQsNS40MjUgQzcuNTQ0LDYuMDc5IDcuNDIzLDYuMTk4IDcuMTU5LDYuMTk4IEM2LjQ1NCw2LjE5OCA0Ljc0MCwzLjY3NSAzLjcyNCwwLjc4OCBDMy41MjQsMC4yMjcgMy4zMjQsLTAuMDAwIDIuNzkzLC0wLjAwMCBMMC43MTQsLTAuMDAwIEMwLjEyMSwtMC4wMDAgMC4wMDIsMC4yNzMgMC4wMDIsMC41NzMgQzAuMDAyLDEuMTEwIDAuNzA3LDMuNzcyIDMuMjgzLDcuMjkyIEM1LjAwMSw5LjY5NyA3LjQyMSwxMS4wMDAgOS42MjMsMTEuMDAwIEMxMC45NDQsMTEuMDAwIDExLjEwOCwxMC43MTEgMTEuMTA4LDEwLjIxMiBMMTEuMTA4LDguMzk1IEMxMS4xMDgsNy44MTYgMTEuMjMzLDcuNzAwIDExLjY1MSw3LjcwMCBDMTEuOTYwLDcuNzAwIDEyLjQ4OCw3Ljg1MCAxMy43MjEsOS4wMTAgQzE1LjEzMSwxMC4zODQgMTUuMzYzLDExLjAwMCAxNi4xNTYsMTEuMDAwIEwxOC4yMzQsMTEuMDAwIEMxOC44MjgsMTEuMDAwIDE5LjEyNSwxMC43MTEgMTguOTU0LDEwLjEzOSBDMTguNzY3LDkuNTcwIDE4LjA5NCw4Ljc0NCAxNy4yMDEsNy43NjUgQzE2LjcxNiw3LjIwNiAxNS45OTAsNi42MDUgMTUuNzY5LDYuMzA1IEMxNS40NjEsNS45MTkgMTUuNTQ5LDUuNzQ3IDE1Ljc2OSw1LjQwMyBDMTUuNzY5LDUuNDAzIDE4LjMwMiwxLjkyNiAxOC41NjYsMC43NDUgIiBmaWxsPSJyZ2IoMjAwLCAyMDUsIDIwNikiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PC9wYXRoPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3N2Zz4=") no-repeat center;
 			}
-			
+
 			&:hover {
 				.ya-share2__icon {
 					background : url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjExcHgiIHdpZHRoPSIxOXB4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE4LjU2NiwwLjc0NSBDMTguNjk4LDAuMzE1IDE4LjU2NiwtMC4wMDAgMTcuOTM3LC0wLjAwMCBMMTUuODU5LC0wLjAwMCBDMTUuMzMwLC0wLjAwMCAxNS4wODcsMC4yNzMgMTQuOTU1LDAuNTczIEMxNC45NTUsMC41NzMgMTMuODk4LDMuMDg1IDEyLjQwMCw0LjcxNiBDMTEuOTE2LDUuMTg5IDExLjY5NSw1LjMzOSAxMS40MzEsNS4zMzkgQzExLjI5OSw1LjMzOSAxMS4xMDgsNS4xODkgMTEuMTA4LDQuNzU5IEwxMS4xMDgsMC43NDUgQzExLjEwOCwwLjIzMCAxMC45NTQsLTAuMDAwIDEwLjUxNCwtMC4wMDAgTDcuMjQ3LC0wLjAwMCBDNi45MTcsLTAuMDAwIDYuNzE5LDAuMjM5IDYuNzE5LDAuNDY2IEM2LjcxOSwwLjk1NCA3LjQ2NywxLjA2NyA3LjU0NCwyLjQ0MSBMNy41NDQsNS40MjUgQzcuNTQ0LDYuMDc5IDcuNDIzLDYuMTk4IDcuMTU5LDYuMTk4IEM2LjQ1NCw2LjE5OCA0Ljc0MCwzLjY3NSAzLjcyNCwwLjc4OCBDMy41MjQsMC4yMjcgMy4zMjQsLTAuMDAwIDIuNzkzLC0wLjAwMCBMMC43MTQsLTAuMDAwIEMwLjEyMSwtMC4wMDAgMC4wMDIsMC4yNzMgMC4wMDIsMC41NzMgQzAuMDAyLDEuMTEwIDAuNzA3LDMuNzcyIDMuMjgzLDcuMjkyIEM1LjAwMSw5LjY5NyA3LjQyMSwxMS4wMDAgOS42MjMsMTEuMDAwIEMxMC45NDQsMTEuMDAwIDExLjEwOCwxMC43MTEgMTEuMTA4LDEwLjIxMiBMMTEuMTA4LDguMzk1IEMxMS4xMDgsNy44MTYgMTEuMjMzLDcuNzAwIDExLjY1MSw3LjcwMCBDMTEuOTYwLDcuNzAwIDEyLjQ4OCw3Ljg1MCAxMy43MjEsOS4wMTAgQzE1LjEzMSwxMC4zODQgMTUuMzYzLDExLjAwMCAxNi4xNTYsMTEuMDAwIEwxOC4yMzQsMTEuMDAwIEMxOC44MjgsMTEuMDAwIDE5LjEyNSwxMC43MTEgMTguOTU0LDEwLjEzOSBDMTguNzY3LDkuNTcwIDE4LjA5NCw4Ljc0NCAxNy4yMDEsNy43NjUgQzE2LjcxNiw3LjIwNiAxNS45OTAsNi42MDUgMTUuNzY5LDYuMzA1IEMxNS40NjEsNS45MTkgMTUuNTQ5LDUuNzQ3IDE1Ljc2OSw1LjQwMyBDMTUuNzY5LDUuNDAzIDE4LjMwMiwxLjkyNiAxOC41NjYsMC43NDUgIiBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjwvcGF0aD4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+") no-repeat center;
 				}
-				
+
 				.ya-share2__badge {
 					background-color : #eae6e7;
 				}
 			}
 		}
-		
+
 		.ya-share2__item_service_facebook {
 			.ya-share2__icon {
 				@include transition(background .125s linear);
 				background : url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjE1cHgiIHdpZHRoPSI4cHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMS42MzEsMy4yMTUgQzEuNjMxLDMuNTkyIDEuNjMxLDUuMjcyIDEuNjMxLDUuMjcyIEwwLjE0Myw1LjI3MiBMMC4xNDMsNy43ODcgTDEuNjMxLDcuNzg3IEwxLjYzMSwxNC42ODkgTDQuNjg2LDE0LjY4OSBMNC42ODYsNy43ODcgTDYuNzM1LDcuNzg3IEM2LjczNSw3Ljc4NyA2LjkyNyw2LjU4MSA3LjAyMCw1LjI2MiBDNi43NTMsNS4yNjIgNC42OTcsNS4yNjIgNC42OTcsNS4yNjIgQzQuNjk3LDUuMjYyIDQuNjk3LDMuNzk5IDQuNjk3LDMuNTQzIEM0LjY5NywzLjI4NiA1LjAzMCwyLjk0MCA1LjM1OSwyLjk0MCBDNS42ODgsMi45NDAgNi4zODIsMi45NDAgNy4wMjQsMi45NDAgQzcuMDI0LDIuNTk4IDcuMDI0LDEuNDE1IDcuMDI0LDAuMzIyIEM2LjE2NiwwLjMyMiA1LjE5MSwwLjMyMiA0Ljc2MSwwLjMyMiBDMS41NTUsMC4zMjIgMS42MzEsMi44MzkgMS42MzEsMy4yMTUgWiIgZmlsbD0icmdiKDIwMCwgMjA1LCAyMDYpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjwvcGF0aD4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+") no-repeat center;
 			}
-			
+
 			&:hover {
 				.ya-share2__icon {
 					background : url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjE1cHgiIHdpZHRoPSI4cHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMS42MzEsMy4yMTUgQzEuNjMxLDMuNTkyIDEuNjMxLDUuMjcyIDEuNjMxLDUuMjcyIEwwLjE0Myw1LjI3MiBMMC4xNDMsNy43ODcgTDEuNjMxLDcuNzg3IEwxLjYzMSwxNC42ODkgTDQuNjg2LDE0LjY4OSBMNC42ODYsNy43ODcgTDYuNzM1LDcuNzg3IEM2LjczNSw3Ljc4NyA2LjkyNyw2LjU4MSA3LjAyMCw1LjI2MiBDNi43NTMsNS4yNjIgNC42OTcsNS4yNjIgNC42OTcsNS4yNjIgQzQuNjk3LDUuMjYyIDQuNjk3LDMuNzk5IDQuNjk3LDMuNTQzIEM0LjY5NywzLjI4NiA1LjAzMCwyLjk0MCA1LjM1OSwyLjk0MCBDNS42ODgsMi45NDAgNi4zODIsMi45NDAgNy4wMjQsMi45NDAgQzcuMDI0LDIuNTk4IDcuMDI0LDEuNDE1IDcuMDI0LDAuMzIyIEM2LjE2NiwwLjMyMiA1LjE5MSwwLjMyMiA0Ljc2MSwwLjMyMiBDMS41NTUsMC4zMjIgMS42MzEsMi44MzkgMS42MzEsMy4yMTUgWiIgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIj48L3BhdGg+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc3ZnPg==") no-repeat center;
 				}
-				
+
 				.ya-share2__badge {
 					background-color : #eae6e7;
 				}
 			}
 		}
-		
+
 		.ya-share2__item_service_odnoklassniki {
 			.ya-share2__icon {
 				@include transition(background .125s linear);
 				background : url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjE1cHgiIHdpZHRoPSIxMHB4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTQuNjE2LDAuMzQ5IEM2LjQwNSwwLjMyNiA3LjM2OCwxLjExNyA4LjA1NCwyLjIwNyBDOC4wOTAsMi4yMjQgOC4xMjUsMi4yNDIgOC4xNjAsMi4yNjAgQzguMTYwLDIuMjk1IDguMTYwLDIuMzMxIDguMTYwLDIuMzY2IEM4LjE3OCwyLjM2NiA4LjE5NiwyLjM2NiA4LjIxMywyLjM2NiBDOC4yMzEsMi40MzcgOC4yNDksMi41MDcgOC4yNjYsMi41NzggQzguMjg0LDIuNTc4IDguMzAxLDIuNTc4IDguMzE5LDIuNTc4IEM4LjMzNywyLjY4NCA4LjM1NCwyLjc5MSA4LjM3MiwyLjg5NyBDOC4zOTAsMi44OTcgOC40MDcsMi44OTcgOC40MjUsMi44OTcgQzguNDI1LDIuOTUwIDguNDI1LDMuMDAzIDguNDI1LDMuMDU2IEM4LjQ0MiwzLjA1NiA4LjQ2MCwzLjA1NiA4LjQ3OCwzLjA1NiBDOC40NzgsMy4xMDkgOC40NzgsMy4xNjIgOC40NzgsMy4yMTUgQzguNDk1LDMuMjE1IDguNTEzLDMuMjE1IDguNTMxLDMuMjE1IEM4LjUzMSwzLjMyMSA4LjUzMSwzLjQyOCA4LjUzMSwzLjUzNCBDOC41NDgsMy41MzQgOC41NjYsMy41MzQgOC41ODMsMy41MzQgQzguNjQzLDMuNzQ2IDguNTgyLDQuNzYyIDguNTMxLDQuOTE0IEM4LjUxMyw0LjkxNCA4LjQ5NSw0LjkxNCA4LjQ3OCw0LjkxNCBDOC40NzgsNC45NjcgOC40NzgsNS4wMjAgOC40NzgsNS4wNzMgQzguNDYwLDUuMDczIDguNDQyLDUuMDczIDguNDI1LDUuMDczIEM4LjQyNSw1LjE0MyA4LjQyNSw1LjIxNCA4LjQyNSw1LjI4NSBDOC40MDcsNS4yODUgOC4zOTAsNS4yODUgOC4zNzIsNS4yODUgQzguMzcyLDUuMzIxIDguMzcyLDUuMzU2IDguMzcyLDUuMzkxIEM4LjM1NCw1LjM5MSA4LjMzNyw1LjM5MSA4LjMxOSw1LjM5MSBDOC4zMTksNS40NDQgOC4zMTksNS40OTcgOC4zMTksNS41NTAgQzguMzAxLDUuNTUwIDguMjg0LDUuNTUwIDguMjY2LDUuNTUwIEM4LjI0OSw1LjYyMSA4LjIzMSw1LjY5MiA4LjIxMyw1Ljc2MyBDOC4xOTYsNS43NjMgOC4xNzgsNS43NjMgOC4xNjAsNS43NjMgQzguMTQzLDUuODMzIDguMTI1LDUuOTA0IDguMTA3LDUuOTc1IEM4LjA3Miw1Ljk5MyA4LjAzNyw2LjAxMCA4LjAwMiw2LjAyOCBDOC4wMDIsNi4wNjMgOC4wMDIsNi4wOTkgOC4wMDIsNi4xMzQgQzcuOTY2LDYuMTUyIDcuOTMxLDYuMTcwIDcuODk2LDYuMTg3IEM3Ljg5Niw2LjIyMiA3Ljg5Niw2LjI1OCA3Ljg5Niw2LjI5MyBDNy44MjUsNi4zNDYgNy43NTUsNi4zOTkgNy42ODQsNi40NTIgQzcuNjg0LDYuNDg4IDcuNjg0LDYuNTIzIDcuNjg0LDYuNTU5IEM3LjU5Niw2LjYyOSA3LjUwOCw2LjcwMCA3LjQyMCw2Ljc3MSBDNy40MDIsNi44MDYgNy4zODQsNi44NDEgNy4zNjcsNi44NzcgQzcuMzMyLDYuODc3IDcuMjk2LDYuODc3IDcuMjYxLDYuODc3IEM3LjIwOCw2Ljk0OCA3LjE1NSw3LjAxOSA3LjEwMiw3LjA4OSBDNy4wNjcsNy4wODkgNy4wMzIsNy4wODkgNi45OTcsNy4wODkgQzYuOTc5LDcuMTI1IDYuOTYxLDcuMTYwIDYuOTQ0LDcuMTk1IEM2Ljg3Myw3LjIxMyA2LjgwMyw3LjIzMSA2LjczMiw3LjI0OCBDNi43MTUsNy4yODQgNi42OTcsNy4zMTkgNi42NzksNy4zNTUgQzYuNjQ0LDcuMzU1IDYuNjA5LDcuMzU1IDYuNTc0LDcuMzU1IEM2LjU3NCw3LjM3MyA2LjU3NCw3LjM5MCA2LjU3NCw3LjQwOCBDNi41MzgsNy40MDggNi41MDMsNy40MDggNi40NjgsNy40MDggQzYuNDY4LDcuNDI2IDYuNDY4LDcuNDQzIDYuNDY4LDcuNDYxIEM2LjQxNSw3LjQ2MSA2LjM2Miw3LjQ2MSA2LjMwOSw3LjQ2MSBDNi4zMDksNy40NzggNi4zMDksNy40OTYgNi4zMDksNy41MTQgQzYuMjc0LDcuNTE0IDYuMjM4LDcuNTE0IDYuMjAzLDcuNTE0IEM2LjIwMyw3LjUzMiA2LjIwMyw3LjU0OSA2LjIwMyw3LjU2NyBDNi4xNTAsNy41NjcgNi4wOTcsNy41NjcgNi4wNDQsNy41NjcgQzYuMDQ0LDcuNTg1IDYuMDQ0LDcuNjAyIDYuMDQ0LDcuNjIwIEM1Ljk5Miw3LjYyMCA1LjkzOSw3LjYyMCA1Ljg4Niw3LjYyMCBDNS44ODYsNy42MzcgNS44ODYsNy42NTUgNS44ODYsNy42NzMgQzUuODE1LDcuNjczIDUuNzQ1LDcuNjczIDUuNjc0LDcuNjczIEM1LjY3NCw3LjY5MSA1LjY3NCw3LjcwOCA1LjY3NCw3LjcyNiBDNS41NjgsNy43MjYgNS40NjMsNy43MjYgNS4zNTcsNy43MjYgQzUuMzU3LDcuNzQ0IDUuMzU3LDcuNzYyIDUuMzU3LDcuNzc5IEM0Ljk5NSw3Ljg4MiAzLjk0Miw3LjcwOSAzLjcxNyw3LjYyMCBDMy43MTcsNy42MDIgMy43MTcsNy41ODUgMy43MTcsNy41NjcgQzMuNjY0LDcuNTY3IDMuNjExLDcuNTY3IDMuNTU4LDcuNTY3IEMzLjU1OCw3LjU0OSAzLjU1OCw3LjUzMiAzLjU1OCw3LjUxNCBDMy41MjMsNy41MTQgMy40ODgsNy41MTQgMy40NTMsNy41MTQgQzMuNDUzLDcuNDk2IDMuNDUzLDcuNDc4IDMuNDUzLDcuNDYxIEMzLjQwMCw3LjQ2MSAzLjM0Nyw3LjQ2MSAzLjI5NCw3LjQ2MSBDMy4yOTQsNy40NDMgMy4yOTQsNy40MjYgMy4yOTQsNy40MDggQzMuMjU5LDcuNDA4IDMuMjIzLDcuNDA4IDMuMTg4LDcuNDA4IEMzLjE4OCw3LjM5MCAzLjE4OCw3LjM3MyAzLjE4OCw3LjM1NSBDMy4xNTMsNy4zNTUgMy4xMTgsNy4zNTUgMy4wODIsNy4zNTUgQzMuMDY1LDcuMzE5IDMuMDQ3LDcuMjg0IDMuMDMwLDcuMjQ4IEMyLjk1OSw3LjIzMSAyLjg4OSw3LjIxMyAyLjgxOCw3LjE5NSBDMi44MDAsNy4xNjAgMi43ODMsNy4xMjUgMi43NjUsNy4wODkgQzIuNzMwLDcuMDg5IDIuNjk1LDcuMDg5IDIuNjU5LDcuMDg5IEMyLjYwNiw3LjAxOSAyLjU1Myw2Ljk0OCAyLjUwMSw2Ljg3NyBDMi40NjUsNi44NzcgMi40MzAsNi44NzcgMi4zOTUsNi44NzcgQzIuMzI0LDYuNzg4IDIuMjU0LDYuNzAwIDIuMTgzLDYuNjEyIEMyLjE0OCw2LjU5NCAyLjExMyw2LjU3NyAyLjA3Nyw2LjU1OSBDMi4wNzcsNi41MjMgMi4wNzcsNi40ODggMi4wNzcsNi40NTIgQzIuMDA3LDYuMzk5IDEuOTM2LDYuMzQ2IDEuODY2LDYuMjkzIEMxLjg2Niw2LjI1OCAxLjg2Niw2LjIyMiAxLjg2Niw2LjE4NyBDMS44MzEsNi4xNzAgMS43OTUsNi4xNTIgMS43NjAsNi4xMzQgQzEuNzYwLDYuMDk5IDEuNzYwLDYuMDYzIDEuNzYwLDYuMDI4IEMxLjcyNSw2LjAxMCAxLjY5MCw1Ljk5MyAxLjY1NCw1Ljk3NSBDMS42MzcsNS45MDQgMS42MTksNS44MzMgMS42MDEsNS43NjMgQzEuNTg0LDUuNzYzIDEuNTY2LDUuNzYzIDEuNTQ4LDUuNzYzIEMxLjUzMSw1LjY5MiAxLjUxMyw1LjYyMSAxLjQ5Niw1LjU1MCBDMS40NzgsNS41NTAgMS40NjAsNS41NTAgMS40NDMsNS41NTAgQzEuNDQzLDUuNDk3IDEuNDQzLDUuNDQ0IDEuNDQzLDUuMzkxIEMxLjQyNSw1LjM5MSAxLjQwNyw1LjM5MSAxLjM5MCw1LjM5MSBDMS4zOTAsNS4zNTYgMS4zOTAsNS4zMjEgMS4zOTAsNS4yODUgQzEuMzcyLDUuMjg1IDEuMzU0LDUuMjg1IDEuMzM3LDUuMjg1IEMxLjMzNyw1LjIxNCAxLjMzNyw1LjE0MyAxLjMzNyw1LjA3MyBDMS4zMTksNS4wNzMgMS4zMDIsNS4wNzMgMS4yODQsNS4wNzMgQzEuMjg0LDUuMDIwIDEuMjg0LDQuOTY3IDEuMjg0LDQuOTE0IEMxLjI2Niw0LjkxNCAxLjI0OSw0LjkxNCAxLjIzMSw0LjkxNCBDMS4xODEsNC43NjEgMS4xMTgsMy43NDYgMS4xNzgsMy41MzQgQzEuMjY2LDMuMjE1IDEuMzU0LDIuODk3IDEuNDQzLDIuNTc4IEMxLjQ2MCwyLjU3OCAxLjQ3OCwyLjU3OCAxLjQ5NiwyLjU3OCBDMS41MTMsMi41MDcgMS41MzEsMi40MzcgMS41NDgsMi4zNjYgQzEuNTY2LDIuMzY2IDEuNTg0LDIuMzY2IDEuNjAxLDIuMzY2IEMxLjYwMSwyLjMzMSAxLjYwMSwyLjI5NSAxLjYwMSwyLjI2MCBDMS42MzcsMi4yNDIgMS42NzIsMi4yMjQgMS43MDcsMi4yMDcgQzEuNzI1LDIuMTM2IDEuNzQyLDIuMDY1IDEuNzYwLDEuOTk1IEMxLjgxMywxLjk1OSAxLjg2NiwxLjkyNCAxLjkxOSwxLjg4OCBDMS45MTksMS44NTMgMS45MTksMS44MTcgMS45MTksMS43ODIgQzIuMDA3LDEuNzExIDIuMDk1LDEuNjQxIDIuMTgzLDEuNTcwIEMyLjMwNywxLjQyOCAyLjQzMCwxLjI4NyAyLjU1MywxLjE0NiBDMi41ODksMS4xNDYgMi42MjQsMS4xNDYgMi42NTksMS4xNDYgQzIuNjk1LDEuMDkyIDIuNzMwLDEuMDM5IDIuNzY1LDAuOTg2IEMyLjgwMCwwLjk4NiAyLjgzNiwwLjk4NiAyLjg3MSwwLjk4NiBDMi44ODksMC45NTAgMi45MDYsMC45MTUgMi45MjQsMC44ODAgQzIuOTU5LDAuODgwIDIuOTk0LDAuODgwIDMuMDMwLDAuODgwIEwzLjEzNSwwLjc3NCBDMy4xNzAsMC43NzQgMy4yMDYsMC43NzQgMy4yNDEsMC43NzQgQzMuMjQxLDAuNzU2IDMuMjQxLDAuNzM5IDMuMjQxLDAuNzIxIEMzLjI3NiwwLjcyMSAzLjMxMiwwLjcyMSAzLjM0NywwLjcyMSBDMy4zNDcsMC43MDMgMy4zNDcsMC42ODYgMy4zNDcsMC42NjggQzMuMzgyLDAuNjY4IDMuNDE3LDAuNjY4IDMuNDUzLDAuNjY4IEMzLjQ1MywwLjY1MCAzLjQ1MywwLjYzMyAzLjQ1MywwLjYxNSBDMy41MDYsMC42MTUgMy41NTgsMC42MTUgMy42MTEsMC42MTUgQzMuNjExLDAuNTk3IDMuNjExLDAuNTc5IDMuNjExLDAuNTYxIEMzLjY2NCwwLjU2MSAzLjcxNywwLjU2MSAzLjc3MCwwLjU2MSBDMy43NzAsMC41NDQgMy43NzAsMC41MjYgMy43NzAsMC41MDggQzMuODIzLDAuNTA4IDMuODc2LDAuNTA4IDMuOTI5LDAuNTA4IEMzLjkyOSwwLjQ5MCAzLjkyOSwwLjQ3MyAzLjkyOSwwLjQ1NSBDNC4wMTcsMC40NTUgNC4xMDUsMC40NTUgNC4xOTMsMC40NTUgQzQuMTkzLDAuNDM4IDQuMTkzLDAuNDIwIDQuMTkzLDAuNDAyIEM0LjMzNCwwLjQwMiA0LjQ3NSwwLjQwMiA0LjYxNiwwLjQwMiBDNC42MTYsMC4zODUgNC42MTYsMC4zNjcgNC42MTYsMC4zNDkgWk00LjUxMSwyLjU3OCBDNC41MTEsMi41OTYgNC41MTEsMi42MTQgNC41MTEsMi42MzEgQzQuNDA1LDIuNjQ5IDQuMjk5LDIuNjY3IDQuMTkzLDIuNjg0IEM0LjE3NiwyLjcyMCA0LjE1OCwyLjc1NSA0LjE0MCwyLjc5MSBDNC4xMDUsMi43OTEgNC4wNzAsMi43OTEgNC4wMzUsMi43OTEgQzQuMDE3LDIuODI2IDMuOTk5LDIuODYxIDMuOTgyLDIuODk3IEMzLjk0NiwyLjg5NyAzLjkxMSwyLjg5NyAzLjg3NiwyLjg5NyBDMy44MjMsMi45NjggMy43NzAsMy4wMzggMy43MTcsMy4xMDkgQzMuNzAwLDMuMTA5IDMuNjgyLDMuMTA5IDMuNjY0LDMuMTA5IEMzLjY2NCwzLjE0NCAzLjY2NCwzLjE4MCAzLjY2NCwzLjIxNSBDMy42MjksMy4yMzMgMy41OTQsMy4yNTAgMy41NTgsMy4yNjggQzMuNTU4LDMuMzA0IDMuNTU4LDMuMzM5IDMuNTU4LDMuMzc0IEMzLjU0MSwzLjM3NCAzLjUyMywzLjM3NCAzLjUwNiwzLjM3NCBDMy41MDYsMy40MTAgMy41MDYsMy40NDUgMy41MDYsMy40ODAgQzMuNDg4LDMuNDgwIDMuNDcwLDMuNDgwIDMuNDUzLDMuNDgwIEMzLjQ1MywzLjUzNCAzLjQ1MywzLjU4NyAzLjQ1MywzLjY0MCBDMy40MzUsMy42NDAgMy40MTcsMy42NDAgMy40MDAsMy42NDAgQzMuNDAwLDMuNzExIDMuNDAwLDMuNzgxIDMuNDAwLDMuODUyIEMzLjM4MiwzLjg1MiAzLjM2NCwzLjg1MiAzLjM0NywzLjg1MiBDMy4yNjgsNC4xMjQgMy40NzksNC43MTcgMy41NTgsNC44NjEgQzMuNTc2LDQuODYxIDMuNTk0LDQuODYxIDMuNjExLDQuODYxIEMzLjYxMSw0Ljg5NiAzLjYxMSw0LjkzMSAzLjYxMSw0Ljk2NyBDMy43MDAsNS4wMzcgMy43ODgsNS4xMDggMy44NzYsNS4xNzkgQzMuOTExLDUuMjMyIDMuOTQ2LDUuMjg1IDMuOTgyLDUuMzM4IEM0LjA4Nyw1LjM3MyA0LjE5Myw1LjQwOSA0LjI5OSw1LjQ0NCBDNC4yOTksNS40NjIgNC4yOTksNS40ODAgNC4yOTksNS40OTcgQzQuMzM0LDUuNDk3IDQuMzY5LDUuNDk3IDQuNDA1LDUuNDk3IEM0LjQwNSw1LjUxNSA0LjQwNSw1LjUzMiA0LjQwNSw1LjU1MCBDNC42MzQsNS41NjggNC44NjMsNS41ODYgNS4wOTIsNS42MDMgQzUuMDkyLDUuNTg2IDUuMDkyLDUuNTY4IDUuMDkyLDUuNTUwIEM1LjE4MSw1LjU1MCA1LjI2OSw1LjU1MCA1LjM1Nyw1LjU1MCBDNS45OTEsNS4zMDUgNi42NDYsNC41MTcgNi4zMDksMy42NDAgQzYuMzA5LDMuNTg3IDYuMzA5LDMuNTM0IDYuMzA5LDMuNDgwIEM2LjI5MSwzLjQ4MCA2LjI3NCwzLjQ4MCA2LjI1NiwzLjQ4MCBDNi4yNTYsMy40NDUgNi4yNTYsMy40MTAgNi4yNTYsMy4zNzQgQzYuMjM4LDMuMzc0IDYuMjIxLDMuMzc0IDYuMjAzLDMuMzc0IEM2LjIwMywzLjMzOSA2LjIwMywzLjMwNCA2LjIwMywzLjI2OCBDNi4xNjgsMy4yNTAgNi4xMzMsMy4yMzMgNi4wOTcsMy4yMTUgQzYuMDk3LDMuMTgwIDYuMDk3LDMuMTQ0IDYuMDk3LDMuMTA5IEM2LjAyNywzLjA1NiA1Ljk1NiwzLjAwMyA1Ljg4NiwyLjk1MCBDNS44ODYsMi45MzIgNS44ODYsMi45MTQgNS44ODYsMi44OTcgQzUuODUxLDIuODk3IDUuODE1LDIuODk3IDUuNzgwLDIuODk3IEM1Ljc4MCwyLjg3OSA1Ljc4MCwyLjg2MSA1Ljc4MCwyLjg0MyBDNS43MjcsMi44MjYgNS42NzQsMi44MDggNS42MjEsMi43OTEgQzUuNjA0LDIuNzU1IDUuNTg2LDIuNzIwIDUuNTY4LDIuNjg0IEM1LjMyNiwyLjU1NyA0Ljg4MSwyLjU3MSA0LjUxMSwyLjU3OCBaTTEuNjAxLDcuODg1IEMxLjg2Myw3Ljg4NSAyLjE3OCw3Ljg5MyAyLjM0Miw3Ljk5MSBDMi4zNTksOC4wMjcgMi4zNzcsOC4wNjIgMi4zOTUsOC4wOTggQzIuNDMwLDguMDk4IDIuNDY1LDguMDk4IDIuNTAxLDguMDk4IEwyLjYwNiw4LjIwMyBDMi42NDIsOC4yMDMgMi42NzcsOC4yMDMgMi43MTIsOC4yMDMgQzIuNzEyLDguMjIxIDIuNzEyLDguMjM5IDIuNzEyLDguMjU3IEMyLjc0Nyw4LjI1NyAyLjc4Myw4LjI1NyAyLjgxOCw4LjI1NyBDMi44MTgsOC4yNzUgMi44MTgsOC4yOTIgMi44MTgsOC4zMTAgQzIuODUzLDguMzEwIDIuODg5LDguMzEwIDIuOTI0LDguMzEwIEMyLjkyNCw4LjMyOCAyLjkyNCw4LjM0NSAyLjkyNCw4LjM2MyBDMi45NTksOC4zNjMgMi45OTQsOC4zNjMgMy4wMzAsOC4zNjMgQzMuMDMwLDguMzgxIDMuMDMwLDguMzk4IDMuMDMwLDguNDE2IEMzLjA2NSw4LjQxNiAzLjEwMCw4LjQxNiAzLjEzNSw4LjQxNiBDMy4xMzUsOC40MzQgMy4xMzUsOC40NTEgMy4xMzUsOC40NjkgQzMuMTg4LDguNDY5IDMuMjQxLDguNDY5IDMuMjk0LDguNDY5IEMzLjI5NCw4LjQ4NyAzLjI5NCw4LjUwNCAzLjI5NCw4LjUyMiBDMy4zNDcsOC41MjIgMy40MDAsOC41MjIgMy40NTMsOC41MjIgQzMuNDUzLDguNTQwIDMuNDUzLDguNTU4IDMuNDUzLDguNTc1IEMzLjUwNiw4LjU3NSAzLjU1OCw4LjU3NSAzLjYxMSw4LjU3NSBDMy42MTEsOC41OTMgMy42MTEsOC42MTEgMy42MTEsOC42MjkgQzMuNzAwLDguNjI5IDMuNzg4LDguNjI5IDMuODc2LDguNjI5IEMzLjg3Niw4LjY0NiAzLjg3Niw4LjY2NCAzLjg3Niw4LjY4MiBDMy45NjQsOC42ODIgNC4wNTIsOC42ODIgNC4xNDAsOC42ODIgQzQuMTQwLDguNjk5IDQuMTQwLDguNzE3IDQuMTQwLDguNzM0IEM0LjMxNyw4LjczNCA0LjQ5Myw4LjczNCA0LjY2OSw4LjczNCBDNC42NjksOC43NTIgNC42NjksOC43NzAgNC42NjksOC43ODggQzQuOTg3LDguNzcwIDUuMzA0LDguNzUyIDUuNjIxLDguNzM0IEM1LjYyMSw4LjcxNyA1LjYyMSw4LjY5OSA1LjYyMSw4LjY4MiBDNS43OTgsOC42NjQgNS45NzQsOC42NDYgNi4xNTAsOC42MjkgQzYuMTUwLDguNjExIDYuMTUwLDguNTkzIDYuMTUwLDguNTc1IEM2LjMwOSw4LjU0MCA2LjQ2OCw4LjUwNCA2LjYyNiw4LjQ2OSBDNi42MjYsOC40NTEgNi42MjYsOC40MzQgNi42MjYsOC40MTYgQzYuNzMyLDguMzgxIDYuODM4LDguMzQ1IDYuOTQ0LDguMzEwIEM2Ljk0NCw4LjI5MiA2Ljk0NCw4LjI3NSA2Ljk0NCw4LjI1NyBDNi45NzksOC4yNTcgNy4wMTQsOC4yNTcgNy4wNTAsOC4yNTcgQzcuMDUwLDguMjM5IDcuMDUwLDguMjIxIDcuMDUwLDguMjAzIEM3LjA4NSw4LjIwMyA3LjEyMCw4LjIwMyA3LjE1NSw4LjIwMyBDNy4xNTUsOC4xODYgNy4xNTUsOC4xNjggNy4xNTUsOC4xNTEgQzcuMjI2LDguMTMzIDcuMjk2LDguMTE1IDcuMzY3LDguMDk4IEM3LjM4NCw4LjA2MiA3LjQwMiw4LjAyNyA3LjQyMCw3Ljk5MSBDNy42MTMsNy44NzUgOC4yMDIsNy44MzQgOC4zNzIsNy45OTEgQzguNzM5LDguMDcwIDguNzc3LDguMzcyIDkuMDA3LDguNTc1IEM5LjAxOCw4LjgzMSA5LjA3OSw4LjkzMSA5LjAwNyw5LjE1OSBDOS4wMDcsOS4yMzAgOS4wMDcsOS4zMDEgOS4wMDcsOS4zNzEgQzguOTg5LDkuMzcxIDguOTcxLDkuMzcxIDguOTU0LDkuMzcxIEM4LjkzNiw5LjQ0MiA4LjkxOCw5LjUxMyA4LjkwMSw5LjU4NCBDOC44MTMsOS42NTQgOC43MjQsOS43MjUgOC42MzYsOS43OTYgQzguNjE5LDkuODMxIDguNjAxLDkuODY2IDguNTgzLDkuOTAyIEM4LjU0OCw5LjkwMiA4LjUxMyw5LjkwMiA4LjQ3OCw5LjkwMiBDOC40NjAsOS45MzggOC40NDIsOS45NzMgOC40MjUsMTAuMDA4IEM4LjM1NCwxMC4wMjYgOC4yODQsMTAuMDQ0IDguMjEzLDEwLjA2MSBDOC4xOTYsMTAuMDk3IDguMTc4LDEwLjEzMiA4LjE2MCwxMC4xNjcgQzguMTI1LDEwLjE2NyA4LjA5MCwxMC4xNjcgOC4wNTQsMTAuMTY3IEM4LjA1NCwxMC4xODUgOC4wNTQsMTAuMjAzIDguMDU0LDEwLjIyMCBDNy45ODQsMTAuMjM4IDcuOTE0LDEwLjI1NiA3Ljg0MywxMC4yNzMgQzcuODQzLDEwLjI5MSA3Ljg0MywxMC4zMDkgNy44NDMsMTAuMzI3IEM3Ljc5MCwxMC4zMjcgNy43MzcsMTAuMzI3IDcuNjg0LDEwLjMyNyBDNy42ODQsMTAuMzQ0IDcuNjg0LDEwLjM2MiA3LjY4NCwxMC4zODAgQzcuNjE0LDEwLjM5NyA3LjU0MywxMC40MTUgNy40NzMsMTAuNDMzIEM3LjQ3MywxMC40NTEgNy40NzMsMTAuNDY4IDcuNDczLDEwLjQ4NiBDNy4zNjcsMTAuNTA0IDcuMjYxLDEwLjUyMSA3LjE1NSwxMC41MzkgQzcuMTU1LDEwLjU1NyA3LjE1NSwxMC41NzQgNy4xNTUsMTAuNTkyIEM3LjEyMCwxMC41OTIgNy4wODUsMTAuNTkyIDcuMDUwLDEwLjU5MiBDNy4wNTAsMTAuNjEwIDcuMDUwLDEwLjYyNyA3LjA1MCwxMC42NDUgQzYuOTc5LDEwLjY0NSA2LjkwOSwxMC42NDUgNi44MzgsMTAuNjQ1IEM2LjgzOCwxMC42NjMgNi44MzgsMTAuNjgxIDYuODM4LDEwLjY5OCBDNi42OTMsMTAuNzUzIDYuNTQ0LDEwLjc1NSA2LjQxNSwxMC44MDQgQzYuNDE1LDEwLjgyMiA2LjQxNSwxMC44NDAgNi40MTUsMTAuODU3IEM2LjQzMiwxMC44NTcgNi40NTAsMTAuODU3IDYuNDY4LDEwLjg1NyBDNi42NzksMTEuMDg3IDYuODkxLDExLjMxNyA3LjEwMiwxMS41NDcgQzcuMTM4LDExLjU0NyA3LjE3MywxMS41NDcgNy4yMDgsMTEuNTQ3IEM3LjIwOCwxMS41NjUgNy4yMDgsMTEuNTgzIDcuMjA4LDExLjYwMSBDNy4yNzksMTEuNjU0IDcuMzQ5LDExLjcwNyA3LjQyMCwxMS43NjAgQzcuNjY2LDEyLjAyNSA3LjkxNCwxMi4yOTAgOC4xNjAsMTIuNTU2IEM4LjI4NCwxMi42NjIgOC40MDcsMTIuNzY4IDguNTMxLDEyLjg3NCBDOC42MTksMTMuMDAwIDguNjI5LDEzLjE0OCA4Ljc0MiwxMy4yNDYgQzguNzY2LDEzLjYzNSA4LjgxMCwxMy44ODYgOC42MzYsMTQuMjAxIEM4LjYxOSwxNC4yMDEgOC42MDEsMTQuMjAxIDguNTgzLDE0LjIwMSBDOC41ODMsMTQuMjM2IDguNTgzLDE0LjI3MSA4LjU4MywxNC4zMDcgQzguNTMxLDE0LjM0MiA4LjQ3OCwxNC4zNzggOC40MjUsMTQuNDEzIEM4LjQyNSwxNC40MzEgOC40MjUsMTQuNDQ4IDguNDI1LDE0LjQ2NiBDOC4zMDMsMTQuNTUzIDguMTU0LDE0LjU2NiA4LjA1NCwxNC42NzggQzcuODA3LDE0LjY5MSA3LjczOCwxNC43NDYgNy41MjYsMTQuNjc4IEM3LjQ1NSwxNC42NzggNy4zODQsMTQuNjc4IDcuMzE0LDE0LjY3OCBDNy4zMTQsMTQuNjYxIDcuMzE0LDE0LjY0MyA3LjMxNCwxNC42MjUgQzcuMjQzLDE0LjYwOCA3LjE3MywxNC41OTAgNy4xMDIsMTQuNTcyIEM2Ljg5NSwxNC40NDEgNi43NDQsMTQuMjEzIDYuNTc0LDE0LjA0MSBDNi4yMjEsMTMuNzA2IDUuODY4LDEzLjM2OSA1LjUxNiwxMy4wMzMgQzUuMzMwLDEyLjg0NyA1LjEwMSwxMi40NzMgNC44MjgsMTIuMzk2IEM0LjY2MSwxMi42OTEgNC4yNzQsMTIuOTUyIDQuMDM1LDEzLjE5MyBDMy42MDIsMTMuNjI2IDMuMjMwLDE0LjExNyAyLjcxMiwxNC40NjYgQzIuNjk1LDE0LjUwMSAyLjY3NywxNC41MzcgMi42NTksMTQuNTcyIEMyLjQ2MywxNC42OTYgMS45MDgsMTQuODEzIDEuNzA3LDE0LjYyNSBDMS4xODcsMTQuNTE2IDAuNzU3LDEzLjc0MSAxLjA3MiwxMy4xMzkgQzEuMjk3LDEyLjcxMiAxLjc0OCwxMi40MDkgMi4wNzcsMTIuMDc4IEMyLjI3MSwxMS44NjYgMi40NjUsMTEuNjU0IDIuNjU5LDExLjQ0MSBDMi42OTUsMTEuNDQxIDIuNzMwLDExLjQ0MSAyLjc2NSwxMS40NDEgQzIuOTU5LDExLjIyOSAzLjE1MywxMS4wMTYgMy4zNDcsMTAuODA0IEMzLjI4NywxMC43NjAgMy4zMzksMTAuODExIDMuMjk0LDEwLjc1MSBDMy4xNzAsMTAuNzM0IDMuMDQ3LDEwLjcxNiAyLjkyNCwxMC42OTggQzIuOTI0LDEwLjY4MSAyLjkyNCwxMC42NjMgMi45MjQsMTAuNjQ1IEMyLjg1MywxMC42NDUgMi43ODMsMTAuNjQ1IDIuNzEyLDEwLjY0NSBDMi43MTIsMTAuNjI3IDIuNzEyLDEwLjYxMCAyLjcxMiwxMC41OTIgQzIuNjc3LDEwLjU5MiAyLjY0MiwxMC41OTIgMi42MDYsMTAuNTkyIEMyLjYwNiwxMC41NzQgMi42MDYsMTAuNTU3IDIuNjA2LDEwLjUzOSBDMi41MDEsMTAuNTIxIDIuMzk1LDEwLjUwNCAyLjI4OSwxMC40ODYgQzIuMjg5LDEwLjQ2OCAyLjI4OSwxMC40NTEgMi4yODksMTAuNDMzIEMyLjIxOCwxMC40MTUgMi4xNDgsMTAuMzk3IDIuMDc3LDEwLjM4MCBDMi4wNzcsMTAuMzYyIDIuMDc3LDEwLjM0NCAyLjA3NywxMC4zMjcgQzIuMDI1LDEwLjMyNyAxLjk3MiwxMC4zMjcgMS45MTksMTAuMzI3IEMxLjkxOSwxMC4zMDkgMS45MTksMTAuMjkxIDEuOTE5LDEwLjI3MyBDMS44NDgsMTAuMjU2IDEuNzc4LDEwLjIzOCAxLjcwNywxMC4yMjAgQzEuNzA3LDEwLjIwMyAxLjcwNywxMC4xODUgMS43MDcsMTAuMTY3IEMxLjY3MiwxMC4xNjcgMS42MzcsMTAuMTY3IDEuNjAxLDEwLjE2NyBDMS41ODQsMTAuMTMyIDEuNTY2LDEwLjA5NyAxLjU0OCwxMC4wNjEgQzEuNDQzLDEwLjAyNiAxLjMzNyw5Ljk5MCAxLjIzMSw5Ljk1NSBDMS4xNDMsOS44NDkgMS4wNTUsOS43NDMgMC45NjcsOS42MzcgQzAuOTMxLDkuNjE5IDAuODk2LDkuNjAxIDAuODYxLDkuNTg0IEMwLjgwMCw5LjQ5NCAwLjg1OSw5LjQ2NCAwLjc1NSw5LjM3MSBDMC43MzcsOS4xNzcgMC43MjAsOC45ODIgMC43MDIsOC43ODggQzAuNzIwLDguNzg4IDAuNzM3LDguNzg4IDAuNzU1LDguNzg4IEMwLjgxMSw4LjYyOSAwLjgzMCw4LjUxMyAwLjg2MSw4LjM2MyBDMC45NjcsOC4yNzUgMS4wNzIsOC4xODYgMS4xNzgsOC4wOTggQzEuMTc4LDguMDgwIDEuMTc4LDguMDYyIDEuMTc4LDguMDQ0IEMxLjI2Niw3Ljk4MyAxLjI5OSw4LjA0NSAxLjM5MCw3LjkzOCBDMS40NjAsNy45MzggMS41MzEsNy45MzggMS42MDEsNy45MzggQzEuNjAxLDcuOTIxIDEuNjAxLDcuOTAzIDEuNjAxLDcuODg1IFoiIGZpbGw9InJnYigyMDAsIDIwNSwgMjA2KSIgZmlsbC1ydWxlPSJldmVub2RkIj48L3BhdGg+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc3ZnPg==") no-repeat center
 			}
-			
+
 			&:hover {
 				.ya-share2__icon {
 					background : url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjE1cHgiIHdpZHRoPSIxMHB4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTQuNjE2LDAuMzQ5IEM2LjQwNSwwLjMyNiA3LjM2OCwxLjExNyA4LjA1NCwyLjIwNyBDOC4wOTAsMi4yMjQgOC4xMjUsMi4yNDIgOC4xNjAsMi4yNjAgQzguMTYwLDIuMjk1IDguMTYwLDIuMzMxIDguMTYwLDIuMzY2IEM4LjE3OCwyLjM2NiA4LjE5NiwyLjM2NiA4LjIxMywyLjM2NiBDOC4yMzEsMi40MzcgOC4yNDksMi41MDcgOC4yNjYsMi41NzggQzguMjg0LDIuNTc4IDguMzAxLDIuNTc4IDguMzE5LDIuNTc4IEM4LjMzNywyLjY4NCA4LjM1NCwyLjc5MSA4LjM3MiwyLjg5NyBDOC4zOTAsMi44OTcgOC40MDcsMi44OTcgOC40MjUsMi44OTcgQzguNDI1LDIuOTUwIDguNDI1LDMuMDAzIDguNDI1LDMuMDU2IEM4LjQ0MiwzLjA1NiA4LjQ2MCwzLjA1NiA4LjQ3OCwzLjA1NiBDOC40NzgsMy4xMDkgOC40NzgsMy4xNjIgOC40NzgsMy4yMTUgQzguNDk1LDMuMjE1IDguNTEzLDMuMjE1IDguNTMxLDMuMjE1IEM4LjUzMSwzLjMyMSA4LjUzMSwzLjQyOCA4LjUzMSwzLjUzNCBDOC41NDgsMy41MzQgOC41NjYsMy41MzQgOC41ODMsMy41MzQgQzguNjQzLDMuNzQ2IDguNTgyLDQuNzYyIDguNTMxLDQuOTE0IEM4LjUxMyw0LjkxNCA4LjQ5NSw0LjkxNCA4LjQ3OCw0LjkxNCBDOC40NzgsNC45NjcgOC40NzgsNS4wMjAgOC40NzgsNS4wNzMgQzguNDYwLDUuMDczIDguNDQyLDUuMDczIDguNDI1LDUuMDczIEM4LjQyNSw1LjE0MyA4LjQyNSw1LjIxNCA4LjQyNSw1LjI4NSBDOC40MDcsNS4yODUgOC4zOTAsNS4yODUgOC4zNzIsNS4yODUgQzguMzcyLDUuMzIxIDguMzcyLDUuMzU2IDguMzcyLDUuMzkxIEM4LjM1NCw1LjM5MSA4LjMzNyw1LjM5MSA4LjMxOSw1LjM5MSBDOC4zMTksNS40NDQgOC4zMTksNS40OTcgOC4zMTksNS41NTAgQzguMzAxLDUuNTUwIDguMjg0LDUuNTUwIDguMjY2LDUuNTUwIEM4LjI0OSw1LjYyMSA4LjIzMSw1LjY5MiA4LjIxMyw1Ljc2MyBDOC4xOTYsNS43NjMgOC4xNzgsNS43NjMgOC4xNjAsNS43NjMgQzguMTQzLDUuODMzIDguMTI1LDUuOTA0IDguMTA3LDUuOTc1IEM4LjA3Miw1Ljk5MyA4LjAzNyw2LjAxMCA4LjAwMiw2LjAyOCBDOC4wMDIsNi4wNjMgOC4wMDIsNi4wOTkgOC4wMDIsNi4xMzQgQzcuOTY2LDYuMTUyIDcuOTMxLDYuMTcwIDcuODk2LDYuMTg3IEM3Ljg5Niw2LjIyMiA3Ljg5Niw2LjI1OCA3Ljg5Niw2LjI5MyBDNy44MjUsNi4zNDYgNy43NTUsNi4zOTkgNy42ODQsNi40NTIgQzcuNjg0LDYuNDg4IDcuNjg0LDYuNTIzIDcuNjg0LDYuNTU5IEM3LjU5Niw2LjYyOSA3LjUwOCw2LjcwMCA3LjQyMCw2Ljc3MSBDNy40MDIsNi44MDYgNy4zODQsNi44NDEgNy4zNjcsNi44NzcgQzcuMzMyLDYuODc3IDcuMjk2LDYuODc3IDcuMjYxLDYuODc3IEM3LjIwOCw2Ljk0OCA3LjE1NSw3LjAxOSA3LjEwMiw3LjA4OSBDNy4wNjcsNy4wODkgNy4wMzIsNy4wODkgNi45OTcsNy4wODkgQzYuOTc5LDcuMTI1IDYuOTYxLDcuMTYwIDYuOTQ0LDcuMTk1IEM2Ljg3Myw3LjIxMyA2LjgwMyw3LjIzMSA2LjczMiw3LjI0OCBDNi43MTUsNy4yODQgNi42OTcsNy4zMTkgNi42NzksNy4zNTUgQzYuNjQ0LDcuMzU1IDYuNjA5LDcuMzU1IDYuNTc0LDcuMzU1IEM2LjU3NCw3LjM3MyA2LjU3NCw3LjM5MCA2LjU3NCw3LjQwOCBDNi41MzgsNy40MDggNi41MDMsNy40MDggNi40NjgsNy40MDggQzYuNDY4LDcuNDI2IDYuNDY4LDcuNDQzIDYuNDY4LDcuNDYxIEM2LjQxNSw3LjQ2MSA2LjM2Miw3LjQ2MSA2LjMwOSw3LjQ2MSBDNi4zMDksNy40NzggNi4zMDksNy40OTYgNi4zMDksNy41MTQgQzYuMjc0LDcuNTE0IDYuMjM4LDcuNTE0IDYuMjAzLDcuNTE0IEM2LjIwMyw3LjUzMiA2LjIwMyw3LjU0OSA2LjIwMyw3LjU2NyBDNi4xNTAsNy41NjcgNi4wOTcsNy41NjcgNi4wNDQsNy41NjcgQzYuMDQ0LDcuNTg1IDYuMDQ0LDcuNjAyIDYuMDQ0LDcuNjIwIEM1Ljk5Miw3LjYyMCA1LjkzOSw3LjYyMCA1Ljg4Niw3LjYyMCBDNS44ODYsNy42MzcgNS44ODYsNy42NTUgNS44ODYsNy42NzMgQzUuODE1LDcuNjczIDUuNzQ1LDcuNjczIDUuNjc0LDcuNjczIEM1LjY3NCw3LjY5MSA1LjY3NCw3LjcwOCA1LjY3NCw3LjcyNiBDNS41NjgsNy43MjYgNS40NjMsNy43MjYgNS4zNTcsNy43MjYgQzUuMzU3LDcuNzQ0IDUuMzU3LDcuNzYyIDUuMzU3LDcuNzc5IEM0Ljk5NSw3Ljg4MiAzLjk0Miw3LjcwOSAzLjcxNyw3LjYyMCBDMy43MTcsNy42MDIgMy43MTcsNy41ODUgMy43MTcsNy41NjcgQzMuNjY0LDcuNTY3IDMuNjExLDcuNTY3IDMuNTU4LDcuNTY3IEMzLjU1OCw3LjU0OSAzLjU1OCw3LjUzMiAzLjU1OCw3LjUxNCBDMy41MjMsNy41MTQgMy40ODgsNy41MTQgMy40NTMsNy41MTQgQzMuNDUzLDcuNDk2IDMuNDUzLDcuNDc4IDMuNDUzLDcuNDYxIEMzLjQwMCw3LjQ2MSAzLjM0Nyw3LjQ2MSAzLjI5NCw3LjQ2MSBDMy4yOTQsNy40NDMgMy4yOTQsNy40MjYgMy4yOTQsNy40MDggQzMuMjU5LDcuNDA4IDMuMjIzLDcuNDA4IDMuMTg4LDcuNDA4IEMzLjE4OCw3LjM5MCAzLjE4OCw3LjM3MyAzLjE4OCw3LjM1NSBDMy4xNTMsNy4zNTUgMy4xMTgsNy4zNTUgMy4wODIsNy4zNTUgQzMuMDY1LDcuMzE5IDMuMDQ3LDcuMjg0IDMuMDMwLDcuMjQ4IEMyLjk1OSw3LjIzMSAyLjg4OSw3LjIxMyAyLjgxOCw3LjE5NSBDMi44MDAsNy4xNjAgMi43ODMsNy4xMjUgMi43NjUsNy4wODkgQzIuNzMwLDcuMDg5IDIuNjk1LDcuMDg5IDIuNjU5LDcuMDg5IEMyLjYwNiw3LjAxOSAyLjU1Myw2Ljk0OCAyLjUwMSw2Ljg3NyBDMi40NjUsNi44NzcgMi40MzAsNi44NzcgMi4zOTUsNi44NzcgQzIuMzI0LDYuNzg4IDIuMjU0LDYuNzAwIDIuMTgzLDYuNjEyIEMyLjE0OCw2LjU5NCAyLjExMyw2LjU3NyAyLjA3Nyw2LjU1OSBDMi4wNzcsNi41MjMgMi4wNzcsNi40ODggMi4wNzcsNi40NTIgQzIuMDA3LDYuMzk5IDEuOTM2LDYuMzQ2IDEuODY2LDYuMjkzIEMxLjg2Niw2LjI1OCAxLjg2Niw2LjIyMiAxLjg2Niw2LjE4NyBDMS44MzEsNi4xNzAgMS43OTUsNi4xNTIgMS43NjAsNi4xMzQgQzEuNzYwLDYuMDk5IDEuNzYwLDYuMDYzIDEuNzYwLDYuMDI4IEMxLjcyNSw2LjAxMCAxLjY5MCw1Ljk5MyAxLjY1NCw1Ljk3NSBDMS42MzcsNS45MDQgMS42MTksNS44MzMgMS42MDEsNS43NjMgQzEuNTg0LDUuNzYzIDEuNTY2LDUuNzYzIDEuNTQ4LDUuNzYzIEMxLjUzMSw1LjY5MiAxLjUxMyw1LjYyMSAxLjQ5Niw1LjU1MCBDMS40NzgsNS41NTAgMS40NjAsNS41NTAgMS40NDMsNS41NTAgQzEuNDQzLDUuNDk3IDEuNDQzLDUuNDQ0IDEuNDQzLDUuMzkxIEMxLjQyNSw1LjM5MSAxLjQwNyw1LjM5MSAxLjM5MCw1LjM5MSBDMS4zOTAsNS4zNTYgMS4zOTAsNS4zMjEgMS4zOTAsNS4yODUgQzEuMzcyLDUuMjg1IDEuMzU0LDUuMjg1IDEuMzM3LDUuMjg1IEMxLjMzNyw1LjIxNCAxLjMzNyw1LjE0MyAxLjMzNyw1LjA3MyBDMS4zMTksNS4wNzMgMS4zMDIsNS4wNzMgMS4yODQsNS4wNzMgQzEuMjg0LDUuMDIwIDEuMjg0LDQuOTY3IDEuMjg0LDQuOTE0IEMxLjI2Niw0LjkxNCAxLjI0OSw0LjkxNCAxLjIzMSw0LjkxNCBDMS4xODEsNC43NjEgMS4xMTgsMy43NDYgMS4xNzgsMy41MzQgQzEuMjY2LDMuMjE1IDEuMzU0LDIuODk3IDEuNDQzLDIuNTc4IEMxLjQ2MCwyLjU3OCAxLjQ3OCwyLjU3OCAxLjQ5NiwyLjU3OCBDMS41MTMsMi41MDcgMS41MzEsMi40MzcgMS41NDgsMi4zNjYgQzEuNTY2LDIuMzY2IDEuNTg0LDIuMzY2IDEuNjAxLDIuMzY2IEMxLjYwMSwyLjMzMSAxLjYwMSwyLjI5NSAxLjYwMSwyLjI2MCBDMS42MzcsMi4yNDIgMS42NzIsMi4yMjQgMS43MDcsMi4yMDcgQzEuNzI1LDIuMTM2IDEuNzQyLDIuMDY1IDEuNzYwLDEuOTk1IEMxLjgxMywxLjk1OSAxLjg2NiwxLjkyNCAxLjkxOSwxLjg4OCBDMS45MTksMS44NTMgMS45MTksMS44MTcgMS45MTksMS43ODIgQzIuMDA3LDEuNzExIDIuMDk1LDEuNjQxIDIuMTgzLDEuNTcwIEMyLjMwNywxLjQyOCAyLjQzMCwxLjI4NyAyLjU1MywxLjE0NiBDMi41ODksMS4xNDYgMi42MjQsMS4xNDYgMi42NTksMS4xNDYgQzIuNjk1LDEuMDkyIDIuNzMwLDEuMDM5IDIuNzY1LDAuOTg2IEMyLjgwMCwwLjk4NiAyLjgzNiwwLjk4NiAyLjg3MSwwLjk4NiBDMi44ODksMC45NTAgMi45MDYsMC45MTUgMi45MjQsMC44ODAgQzIuOTU5LDAuODgwIDIuOTk0LDAuODgwIDMuMDMwLDAuODgwIEwzLjEzNSwwLjc3NCBDMy4xNzAsMC43NzQgMy4yMDYsMC43NzQgMy4yNDEsMC43NzQgQzMuMjQxLDAuNzU2IDMuMjQxLDAuNzM5IDMuMjQxLDAuNzIxIEMzLjI3NiwwLjcyMSAzLjMxMiwwLjcyMSAzLjM0NywwLjcyMSBDMy4zNDcsMC43MDMgMy4zNDcsMC42ODYgMy4zNDcsMC42NjggQzMuMzgyLDAuNjY4IDMuNDE3LDAuNjY4IDMuNDUzLDAuNjY4IEMzLjQ1MywwLjY1MCAzLjQ1MywwLjYzMyAzLjQ1MywwLjYxNSBDMy41MDYsMC42MTUgMy41NTgsMC42MTUgMy42MTEsMC42MTUgQzMuNjExLDAuNTk3IDMuNjExLDAuNTc5IDMuNjExLDAuNTYxIEMzLjY2NCwwLjU2MSAzLjcxNywwLjU2MSAzLjc3MCwwLjU2MSBDMy43NzAsMC41NDQgMy43NzAsMC41MjYgMy43NzAsMC41MDggQzMuODIzLDAuNTA4IDMuODc2LDAuNTA4IDMuOTI5LDAuNTA4IEMzLjkyOSwwLjQ5MCAzLjkyOSwwLjQ3MyAzLjkyOSwwLjQ1NSBDNC4wMTcsMC40NTUgNC4xMDUsMC40NTUgNC4xOTMsMC40NTUgQzQuMTkzLDAuNDM4IDQuMTkzLDAuNDIwIDQuMTkzLDAuNDAyIEM0LjMzNCwwLjQwMiA0LjQ3NSwwLjQwMiA0LjYxNiwwLjQwMiBDNC42MTYsMC4zODUgNC42MTYsMC4zNjcgNC42MTYsMC4zNDkgWk00LjUxMSwyLjU3OCBDNC41MTEsMi41OTYgNC41MTEsMi42MTQgNC41MTEsMi42MzEgQzQuNDA1LDIuNjQ5IDQuMjk5LDIuNjY3IDQuMTkzLDIuNjg0IEM0LjE3NiwyLjcyMCA0LjE1OCwyLjc1NSA0LjE0MCwyLjc5MSBDNC4xMDUsMi43OTEgNC4wNzAsMi43OTEgNC4wMzUsMi43OTEgQzQuMDE3LDIuODI2IDMuOTk5LDIuODYxIDMuOTgyLDIuODk3IEMzLjk0NiwyLjg5NyAzLjkxMSwyLjg5NyAzLjg3NiwyLjg5NyBDMy44MjMsMi45NjggMy43NzAsMy4wMzggMy43MTcsMy4xMDkgQzMuNzAwLDMuMTA5IDMuNjgyLDMuMTA5IDMuNjY0LDMuMTA5IEMzLjY2NCwzLjE0NCAzLjY2NCwzLjE4MCAzLjY2NCwzLjIxNSBDMy42MjksMy4yMzMgMy41OTQsMy4yNTAgMy41NTgsMy4yNjggQzMuNTU4LDMuMzA0IDMuNTU4LDMuMzM5IDMuNTU4LDMuMzc0IEMzLjU0MSwzLjM3NCAzLjUyMywzLjM3NCAzLjUwNiwzLjM3NCBDMy41MDYsMy40MTAgMy41MDYsMy40NDUgMy41MDYsMy40ODAgQzMuNDg4LDMuNDgwIDMuNDcwLDMuNDgwIDMuNDUzLDMuNDgwIEMzLjQ1MywzLjUzNCAzLjQ1MywzLjU4NyAzLjQ1MywzLjY0MCBDMy40MzUsMy42NDAgMy40MTcsMy42NDAgMy40MDAsMy42NDAgQzMuNDAwLDMuNzExIDMuNDAwLDMuNzgxIDMuNDAwLDMuODUyIEMzLjM4MiwzLjg1MiAzLjM2NCwzLjg1MiAzLjM0NywzLjg1MiBDMy4yNjgsNC4xMjQgMy40NzksNC43MTcgMy41NTgsNC44NjEgQzMuNTc2LDQuODYxIDMuNTk0LDQuODYxIDMuNjExLDQuODYxIEMzLjYxMSw0Ljg5NiAzLjYxMSw0LjkzMSAzLjYxMSw0Ljk2NyBDMy43MDAsNS4wMzcgMy43ODgsNS4xMDggMy44NzYsNS4xNzkgQzMuOTExLDUuMjMyIDMuOTQ2LDUuMjg1IDMuOTgyLDUuMzM4IEM0LjA4Nyw1LjM3MyA0LjE5Myw1LjQwOSA0LjI5OSw1LjQ0NCBDNC4yOTksNS40NjIgNC4yOTksNS40ODAgNC4yOTksNS40OTcgQzQuMzM0LDUuNDk3IDQuMzY5LDUuNDk3IDQuNDA1LDUuNDk3IEM0LjQwNSw1LjUxNSA0LjQwNSw1LjUzMiA0LjQwNSw1LjU1MCBDNC42MzQsNS41NjggNC44NjMsNS41ODYgNS4wOTIsNS42MDMgQzUuMDkyLDUuNTg2IDUuMDkyLDUuNTY4IDUuMDkyLDUuNTUwIEM1LjE4MSw1LjU1MCA1LjI2OSw1LjU1MCA1LjM1Nyw1LjU1MCBDNS45OTEsNS4zMDUgNi42NDYsNC41MTcgNi4zMDksMy42NDAgQzYuMzA5LDMuNTg3IDYuMzA5LDMuNTM0IDYuMzA5LDMuNDgwIEM2LjI5MSwzLjQ4MCA2LjI3NCwzLjQ4MCA2LjI1NiwzLjQ4MCBDNi4yNTYsMy40NDUgNi4yNTYsMy40MTAgNi4yNTYsMy4zNzQgQzYuMjM4LDMuMzc0IDYuMjIxLDMuMzc0IDYuMjAzLDMuMzc0IEM2LjIwMywzLjMzOSA2LjIwMywzLjMwNCA2LjIwMywzLjI2OCBDNi4xNjgsMy4yNTAgNi4xMzMsMy4yMzMgNi4wOTcsMy4yMTUgQzYuMDk3LDMuMTgwIDYuMDk3LDMuMTQ0IDYuMDk3LDMuMTA5IEM2LjAyNywzLjA1NiA1Ljk1NiwzLjAwMyA1Ljg4NiwyLjk1MCBDNS44ODYsMi45MzIgNS44ODYsMi45MTQgNS44ODYsMi44OTcgQzUuODUxLDIuODk3IDUuODE1LDIuODk3IDUuNzgwLDIuODk3IEM1Ljc4MCwyLjg3OSA1Ljc4MCwyLjg2MSA1Ljc4MCwyLjg0MyBDNS43MjcsMi44MjYgNS42NzQsMi44MDggNS42MjEsMi43OTEgQzUuNjA0LDIuNzU1IDUuNTg2LDIuNzIwIDUuNTY4LDIuNjg0IEM1LjMyNiwyLjU1NyA0Ljg4MSwyLjU3MSA0LjUxMSwyLjU3OCBaTTEuNjAxLDcuODg1IEMxLjg2Myw3Ljg4NSAyLjE3OCw3Ljg5MyAyLjM0Miw3Ljk5MSBDMi4zNTksOC4wMjcgMi4zNzcsOC4wNjIgMi4zOTUsOC4wOTggQzIuNDMwLDguMDk4IDIuNDY1LDguMDk4IDIuNTAxLDguMDk4IEwyLjYwNiw4LjIwMyBDMi42NDIsOC4yMDMgMi42NzcsOC4yMDMgMi43MTIsOC4yMDMgQzIuNzEyLDguMjIxIDIuNzEyLDguMjM5IDIuNzEyLDguMjU3IEMyLjc0Nyw4LjI1NyAyLjc4Myw4LjI1NyAyLjgxOCw4LjI1NyBDMi44MTgsOC4yNzUgMi44MTgsOC4yOTIgMi44MTgsOC4zMTAgQzIuODUzLDguMzEwIDIuODg5LDguMzEwIDIuOTI0LDguMzEwIEMyLjkyNCw4LjMyOCAyLjkyNCw4LjM0NSAyLjkyNCw4LjM2MyBDMi45NTksOC4zNjMgMi45OTQsOC4zNjMgMy4wMzAsOC4zNjMgQzMuMDMwLDguMzgxIDMuMDMwLDguMzk4IDMuMDMwLDguNDE2IEMzLjA2NSw4LjQxNiAzLjEwMCw4LjQxNiAzLjEzNSw4LjQxNiBDMy4xMzUsOC40MzQgMy4xMzUsOC40NTEgMy4xMzUsOC40NjkgQzMuMTg4LDguNDY5IDMuMjQxLDguNDY5IDMuMjk0LDguNDY5IEMzLjI5NCw4LjQ4NyAzLjI5NCw4LjUwNCAzLjI5NCw4LjUyMiBDMy4zNDcsOC41MjIgMy40MDAsOC41MjIgMy40NTMsOC41MjIgQzMuNDUzLDguNTQwIDMuNDUzLDguNTU4IDMuNDUzLDguNTc1IEMzLjUwNiw4LjU3NSAzLjU1OCw4LjU3NSAzLjYxMSw4LjU3NSBDMy42MTEsOC41OTMgMy42MTEsOC42MTEgMy42MTEsOC42MjkgQzMuNzAwLDguNjI5IDMuNzg4LDguNjI5IDMuODc2LDguNjI5IEMzLjg3Niw4LjY0NiAzLjg3Niw4LjY2NCAzLjg3Niw4LjY4MiBDMy45NjQsOC42ODIgNC4wNTIsOC42ODIgNC4xNDAsOC42ODIgQzQuMTQwLDguNjk5IDQuMTQwLDguNzE3IDQuMTQwLDguNzM0IEM0LjMxNyw4LjczNCA0LjQ5Myw4LjczNCA0LjY2OSw4LjczNCBDNC42NjksOC43NTIgNC42NjksOC43NzAgNC42NjksOC43ODggQzQuOTg3LDguNzcwIDUuMzA0LDguNzUyIDUuNjIxLDguNzM0IEM1LjYyMSw4LjcxNyA1LjYyMSw4LjY5OSA1LjYyMSw4LjY4MiBDNS43OTgsOC42NjQgNS45NzQsOC42NDYgNi4xNTAsOC42MjkgQzYuMTUwLDguNjExIDYuMTUwLDguNTkzIDYuMTUwLDguNTc1IEM2LjMwOSw4LjU0MCA2LjQ2OCw4LjUwNCA2LjYyNiw4LjQ2OSBDNi42MjYsOC40NTEgNi42MjYsOC40MzQgNi42MjYsOC40MTYgQzYuNzMyLDguMzgxIDYuODM4LDguMzQ1IDYuOTQ0LDguMzEwIEM2Ljk0NCw4LjI5MiA2Ljk0NCw4LjI3NSA2Ljk0NCw4LjI1NyBDNi45NzksOC4yNTcgNy4wMTQsOC4yNTcgNy4wNTAsOC4yNTcgQzcuMDUwLDguMjM5IDcuMDUwLDguMjIxIDcuMDUwLDguMjAzIEM3LjA4NSw4LjIwMyA3LjEyMCw4LjIwMyA3LjE1NSw4LjIwMyBDNy4xNTUsOC4xODYgNy4xNTUsOC4xNjggNy4xNTUsOC4xNTEgQzcuMjI2LDguMTMzIDcuMjk2LDguMTE1IDcuMzY3LDguMDk4IEM3LjM4NCw4LjA2MiA3LjQwMiw4LjAyNyA3LjQyMCw3Ljk5MSBDNy42MTMsNy44NzUgOC4yMDIsNy44MzQgOC4zNzIsNy45OTEgQzguNzM5LDguMDcwIDguNzc3LDguMzcyIDkuMDA3LDguNTc1IEM5LjAxOCw4LjgzMSA5LjA3OSw4LjkzMSA5LjAwNyw5LjE1OSBDOS4wMDcsOS4yMzAgOS4wMDcsOS4zMDEgOS4wMDcsOS4zNzEgQzguOTg5LDkuMzcxIDguOTcxLDkuMzcxIDguOTU0LDkuMzcxIEM4LjkzNiw5LjQ0MiA4LjkxOCw5LjUxMyA4LjkwMSw5LjU4NCBDOC44MTMsOS42NTQgOC43MjQsOS43MjUgOC42MzYsOS43OTYgQzguNjE5LDkuODMxIDguNjAxLDkuODY2IDguNTgzLDkuOTAyIEM4LjU0OCw5LjkwMiA4LjUxMyw5LjkwMiA4LjQ3OCw5LjkwMiBDOC40NjAsOS45MzggOC40NDIsOS45NzMgOC40MjUsMTAuMDA4IEM4LjM1NCwxMC4wMjYgOC4yODQsMTAuMDQ0IDguMjEzLDEwLjA2MSBDOC4xOTYsMTAuMDk3IDguMTc4LDEwLjEzMiA4LjE2MCwxMC4xNjcgQzguMTI1LDEwLjE2NyA4LjA5MCwxMC4xNjcgOC4wNTQsMTAuMTY3IEM4LjA1NCwxMC4xODUgOC4wNTQsMTAuMjAzIDguMDU0LDEwLjIyMCBDNy45ODQsMTAuMjM4IDcuOTE0LDEwLjI1NiA3Ljg0MywxMC4yNzMgQzcuODQzLDEwLjI5MSA3Ljg0MywxMC4zMDkgNy44NDMsMTAuMzI3IEM3Ljc5MCwxMC4zMjcgNy43MzcsMTAuMzI3IDcuNjg0LDEwLjMyNyBDNy42ODQsMTAuMzQ0IDcuNjg0LDEwLjM2MiA3LjY4NCwxMC4zODAgQzcuNjE0LDEwLjM5NyA3LjU0MywxMC40MTUgNy40NzMsMTAuNDMzIEM3LjQ3MywxMC40NTEgNy40NzMsMTAuNDY4IDcuNDczLDEwLjQ4NiBDNy4zNjcsMTAuNTA0IDcuMjYxLDEwLjUyMSA3LjE1NSwxMC41MzkgQzcuMTU1LDEwLjU1NyA3LjE1NSwxMC41NzQgNy4xNTUsMTAuNTkyIEM3LjEyMCwxMC41OTIgNy4wODUsMTAuNTkyIDcuMDUwLDEwLjU5MiBDNy4wNTAsMTAuNjEwIDcuMDUwLDEwLjYyNyA3LjA1MCwxMC42NDUgQzYuOTc5LDEwLjY0NSA2LjkwOSwxMC42NDUgNi44MzgsMTAuNjQ1IEM2LjgzOCwxMC42NjMgNi44MzgsMTAuNjgxIDYuODM4LDEwLjY5OCBDNi42OTMsMTAuNzUzIDYuNTQ0LDEwLjc1NSA2LjQxNSwxMC44MDQgQzYuNDE1LDEwLjgyMiA2LjQxNSwxMC44NDAgNi40MTUsMTAuODU3IEM2LjQzMiwxMC44NTcgNi40NTAsMTAuODU3IDYuNDY4LDEwLjg1NyBDNi42NzksMTEuMDg3IDYuODkxLDExLjMxNyA3LjEwMiwxMS41NDcgQzcuMTM4LDExLjU0NyA3LjE3MywxMS41NDcgNy4yMDgsMTEuNTQ3IEM3LjIwOCwxMS41NjUgNy4yMDgsMTEuNTgzIDcuMjA4LDExLjYwMSBDNy4yNzksMTEuNjU0IDcuMzQ5LDExLjcwNyA3LjQyMCwxMS43NjAgQzcuNjY2LDEyLjAyNSA3LjkxNCwxMi4yOTAgOC4xNjAsMTIuNTU2IEM4LjI4NCwxMi42NjIgOC40MDcsMTIuNzY4IDguNTMxLDEyLjg3NCBDOC42MTksMTMuMDAwIDguNjI5LDEzLjE0OCA4Ljc0MiwxMy4yNDYgQzguNzY2LDEzLjYzNSA4LjgxMCwxMy44ODYgOC42MzYsMTQuMjAxIEM4LjYxOSwxNC4yMDEgOC42MDEsMTQuMjAxIDguNTgzLDE0LjIwMSBDOC41ODMsMTQuMjM2IDguNTgzLDE0LjI3MSA4LjU4MywxNC4zMDcgQzguNTMxLDE0LjM0MiA4LjQ3OCwxNC4zNzggOC40MjUsMTQuNDEzIEM4LjQyNSwxNC40MzEgOC40MjUsMTQuNDQ4IDguNDI1LDE0LjQ2NiBDOC4zMDMsMTQuNTUzIDguMTU0LDE0LjU2NiA4LjA1NCwxNC42NzggQzcuODA3LDE0LjY5MSA3LjczOCwxNC43NDYgNy41MjYsMTQuNjc4IEM3LjQ1NSwxNC42NzggNy4zODQsMTQuNjc4IDcuMzE0LDE0LjY3OCBDNy4zMTQsMTQuNjYxIDcuMzE0LDE0LjY0MyA3LjMxNCwxNC42MjUgQzcuMjQzLDE0LjYwOCA3LjE3MywxNC41OTAgNy4xMDIsMTQuNTcyIEM2Ljg5NSwxNC40NDEgNi43NDQsMTQuMjEzIDYuNTc0LDE0LjA0MSBDNi4yMjEsMTMuNzA2IDUuODY4LDEzLjM2OSA1LjUxNiwxMy4wMzMgQzUuMzMwLDEyLjg0NyA1LjEwMSwxMi40NzMgNC44MjgsMTIuMzk2IEM0LjY2MSwxMi42OTEgNC4yNzQsMTIuOTUyIDQuMDM1LDEzLjE5MyBDMy42MDIsMTMuNjI2IDMuMjMwLDE0LjExNyAyLjcxMiwxNC40NjYgQzIuNjk1LDE0LjUwMSAyLjY3NywxNC41MzcgMi42NTksMTQuNTcyIEMyLjQ2MywxNC42OTYgMS45MDgsMTQuODEzIDEuNzA3LDE0LjYyNSBDMS4xODcsMTQuNTE2IDAuNzU3LDEzLjc0MSAxLjA3MiwxMy4xMzkgQzEuMjk3LDEyLjcxMiAxLjc0OCwxMi40MDkgMi4wNzcsMTIuMDc4IEMyLjI3MSwxMS44NjYgMi40NjUsMTEuNjU0IDIuNjU5LDExLjQ0MSBDMi42OTUsMTEuNDQxIDIuNzMwLDExLjQ0MSAyLjc2NSwxMS40NDEgQzIuOTU5LDExLjIyOSAzLjE1MywxMS4wMTYgMy4zNDcsMTAuODA0IEMzLjI4NywxMC43NjAgMy4zMzksMTAuODExIDMuMjk0LDEwLjc1MSBDMy4xNzAsMTAuNzM0IDMuMDQ3LDEwLjcxNiAyLjkyNCwxMC42OTggQzIuOTI0LDEwLjY4MSAyLjkyNCwxMC42NjMgMi45MjQsMTAuNjQ1IEMyLjg1MywxMC42NDUgMi43ODMsMTAuNjQ1IDIuNzEyLDEwLjY0NSBDMi43MTIsMTAuNjI3IDIuNzEyLDEwLjYxMCAyLjcxMiwxMC41OTIgQzIuNjc3LDEwLjU5MiAyLjY0MiwxMC41OTIgMi42MDYsMTAuNTkyIEMyLjYwNiwxMC41NzQgMi42MDYsMTAuNTU3IDIuNjA2LDEwLjUzOSBDMi41MDEsMTAuNTIxIDIuMzk1LDEwLjUwNCAyLjI4OSwxMC40ODYgQzIuMjg5LDEwLjQ2OCAyLjI4OSwxMC40NTEgMi4yODksMTAuNDMzIEMyLjIxOCwxMC40MTUgMi4xNDgsMTAuMzk3IDIuMDc3LDEwLjM4MCBDMi4wNzcsMTAuMzYyIDIuMDc3LDEwLjM0NCAyLjA3NywxMC4zMjcgQzIuMDI1LDEwLjMyNyAxLjk3MiwxMC4zMjcgMS45MTksMTAuMzI3IEMxLjkxOSwxMC4zMDkgMS45MTksMTAuMjkxIDEuOTE5LDEwLjI3MyBDMS44NDgsMTAuMjU2IDEuNzc4LDEwLjIzOCAxLjcwNywxMC4yMjAgQzEuNzA3LDEwLjIwMyAxLjcwNywxMC4xODUgMS43MDcsMTAuMTY3IEMxLjY3MiwxMC4xNjcgMS42MzcsMTAuMTY3IDEuNjAxLDEwLjE2NyBDMS41ODQsMTAuMTMyIDEuNTY2LDEwLjA5NyAxLjU0OCwxMC4wNjEgQzEuNDQzLDEwLjAyNiAxLjMzNyw5Ljk5MCAxLjIzMSw5Ljk1NSBDMS4xNDMsOS44NDkgMS4wNTUsOS43NDMgMC45NjcsOS42MzcgQzAuOTMxLDkuNjE5IDAuODk2LDkuNjAxIDAuODYxLDkuNTg0IEMwLjgwMCw5LjQ5NCAwLjg1OSw5LjQ2NCAwLjc1NSw5LjM3MSBDMC43MzcsOS4xNzcgMC43MjAsOC45ODIgMC43MDIsOC43ODggQzAuNzIwLDguNzg4IDAuNzM3LDguNzg4IDAuNzU1LDguNzg4IEMwLjgxMSw4LjYyOSAwLjgzMCw4LjUxMyAwLjg2MSw4LjM2MyBDMC45NjcsOC4yNzUgMS4wNzIsOC4xODYgMS4xNzgsOC4wOTggQzEuMTc4LDguMDgwIDEuMTc4LDguMDYyIDEuMTc4LDguMDQ0IEMxLjI2Niw3Ljk4MyAxLjI5OSw4LjA0NSAxLjM5MCw3LjkzOCBDMS40NjAsNy45MzggMS41MzEsNy45MzggMS42MDEsNy45MzggQzEuNjAxLDcuOTIxIDEuNjAxLDcuOTAzIDEuNjAxLDcuODg1IFoiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PC9wYXRoPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3N2Zz4=") no-repeat center;
 				}
-				
+
 				.ya-share2__badge {
 					background-color : #eae6e7;
 				}
 			}
 		}
-		
+
 		.ya-share2__item_service_twitter {
 			.ya-share2__icon {
 				@include transition(background .125s linear);
 				background : url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjE0cHgiIHdpZHRoPSIxNXB4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTQuNTgyLDEzLjAyNSBDMTAuMDI4LDEzLjAyNSAxMy4wMDYsOC4zNjAgMTMuMDA2LDQuMzE0IEMxMy4wMDYsNC4xODIgMTMuMDAzLDQuMDUwIDEyLjk5OCwzLjkxOSBDMTMuNTc2LDMuNDg3IDE0LjA3OCwyLjk0OCAxNC40NzQsMi4zMzQgQzEzLjk0NCwyLjU3OCAxMy4zNzMsMi43NDIgMTIuNzc0LDIuODE2IEMxMy4zODYsMi40MzcgMTMuODU1LDEuODM4IDE0LjA3NiwxLjEyMyBDMTMuNTA0LDEuNDczIDEyLjg3MSwxLjcyOSAxMi4xOTYsMS44NjYgQzExLjY1NiwxLjI3MSAxMC44ODcsMC44OTkgMTAuMDM2LDAuODk5IEM4LjQwMCwwLjg5OSA3LjA3NCwyLjI3MCA3LjA3NCwzLjk2MCBDNy4wNzQsNC4yMDAgNy4xMDAsNC40MzQgNy4xNTEsNC42NTcgQzQuNjkxLDQuNTMwIDIuNTA5LDMuMzEyIDEuMDQ5LDEuNDU5IEMwLjc5NCwxLjkxMiAwLjY0OCwyLjQzNyAwLjY0OCwyLjk5OCBDMC42NDgsNC4wNjAgMS4xNzEsNC45OTcgMS45NjUsNS41NDYgQzEuNDgwLDUuNTMwIDEuMDI0LDUuMzkzIDAuNjI1LDUuMTYzIEMwLjYyNCw1LjE3NSAwLjYyNCw1LjE4OSAwLjYyNCw1LjIwMiBDMC42MjQsNi42ODUgMS42NDUsNy45MjIgMi45OTksOC4yMDMgQzIuNzUxLDguMjczIDIuNDg5LDguMzExIDIuMjE4LDguMzExIEMyLjAyOCw4LjMxMSAxLjg0Myw4LjI5MSAxLjY2Miw4LjI1NiBDMi4wMzksOS40NzIgMy4xMzIsMTAuMzU3IDQuNDI4LDEwLjM4MiBDMy40MTQsMTEuMjAzIDIuMTM4LDExLjY5MiAwLjc1MSwxMS42OTIgQzAuNTEyLDExLjY5MiAwLjI3NiwxMS42NzggMC4wNDUsMTEuNjUwIEMxLjM1NSwxMi41MTggMi45MTEsMTMuMDI1IDQuNTgyLDEzLjAyNSAiIGZpbGw9InJnYigyMDAsIDIwNSwgMjA2KSIgZmlsbC1ydWxlPSJldmVub2RkIj48L3BhdGg+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc3ZnPg==") no-repeat center
 			}
-			
+
 			&:hover {
 				.ya-share2__icon {
 					background : url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjE0cHgiIHdpZHRoPSIxNXB4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTQuNTgyLDEzLjAyNSBDMTAuMDI4LDEzLjAyNSAxMy4wMDYsOC4zNjAgMTMuMDA2LDQuMzE0IEMxMy4wMDYsNC4xODIgMTMuMDAzLDQuMDUwIDEyLjk5OCwzLjkxOSBDMTMuNTc2LDMuNDg3IDE0LjA3OCwyLjk0OCAxNC40NzQsMi4zMzQgQzEzLjk0NCwyLjU3OCAxMy4zNzMsMi43NDIgMTIuNzc0LDIuODE2IEMxMy4zODYsMi40MzcgMTMuODU1LDEuODM4IDE0LjA3NiwxLjEyMyBDMTMuNTA0LDEuNDczIDEyLjg3MSwxLjcyOSAxMi4xOTYsMS44NjYgQzExLjY1NiwxLjI3MSAxMC44ODcsMC44OTkgMTAuMDM2LDAuODk5IEM4LjQwMCwwLjg5OSA3LjA3NCwyLjI3MCA3LjA3NCwzLjk2MCBDNy4wNzQsNC4yMDAgNy4xMDAsNC40MzQgNy4xNTEsNC42NTcgQzQuNjkxLDQuNTMwIDIuNTA5LDMuMzEyIDEuMDQ5LDEuNDU5IEMwLjc5NCwxLjkxMiAwLjY0OCwyLjQzNyAwLjY0OCwyLjk5OCBDMC42NDgsNC4wNjAgMS4xNzEsNC45OTcgMS45NjUsNS41NDYgQzEuNDgwLDUuNTMwIDEuMDI0LDUuMzkzIDAuNjI1LDUuMTYzIEMwLjYyNCw1LjE3NSAwLjYyNCw1LjE4OSAwLjYyNCw1LjIwMiBDMC42MjQsNi42ODUgMS42NDUsNy45MjIgMi45OTksOC4yMDMgQzIuNzUxLDguMjczIDIuNDg5LDguMzExIDIuMjE4LDguMzExIEMyLjAyOCw4LjMxMSAxLjg0Myw4LjI5MSAxLjY2Miw4LjI1NiBDMi4wMzksOS40NzIgMy4xMzIsMTAuMzU3IDQuNDI4LDEwLjM4MiBDMy40MTQsMTEuMjAzIDIuMTM4LDExLjY5MiAwLjc1MSwxMS42OTIgQzAuNTEyLDExLjY5MiAwLjI3NiwxMS42NzggMC4wNDUsMTEuNjUwIEMxLjM1NSwxMi41MTggMi45MTEsMTMuMDI1IDQuNTgyLDEzLjAyNSAiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PC9wYXRoPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3N2Zz4=") no-repeat center;
 				}
-				
+
 				.ya-share2__badge {
 					background-color : #eae6e7;
 				}
@@ -5391,7 +5567,7 @@ select {
 	margin    : auto;
 	max-width : 940px;
 	padding   : 0 1rem;
-	
+
 	.slick-arrow {
 		@include border-radius(50%);
 		background-color : $white;
@@ -5401,68 +5577,68 @@ select {
 		right            : 2.25rem;
 		top              : unset;
 		width            : 38px;
-		
+
 		svg {
 			@include transform(scale(calc(12 / 22)));
 		}
-		
+
 		&.slick-prev {
 			left  : unset;
 			right : 4.9375rem;
-			
+
 			svg {
 				@include transform(scale(calc(12 / 22)) rotate(180deg));
 			}
 		}
 	}
-	
+
 	.slick-list, .slick-slide {
 		margin : 0;
 	}
-	
+
 	&-nav {
 		@include border-radius;
 		border  : 1px solid #f4f4f4;
 		padding : 1rem;
-		
+
 		.slick-slide > div {
 			height : 100%;
 		}
-		
+
 		.image {
 			@include border-radius;
 			cursor   : pointer;
 			height   : 100%;
 			overflow : hidden;
-			
+
 			img {
 				max-height : 10rem;
 				object-fit : cover;
 				width      : 100%;
 			}
-			
+
 			&:hover {
 				opacity : 0.5;
 			}
 		}
-		
+
 		.slick-list, .slick-slide {
 			margin : 0;
 		}
-		
+
 		.slick-track {
 			@include grid;
 			grid-gap              : 15px;
 			grid-template-columns : repeat(4, 1fr);
 			transform             : none !important;
 			width                 : 100% !important;
-			
+
 			&:before, &:after {
 				content : none;
 			}
 		}
 	}
-	
+
 	.image {
 		img {
 			height     : 100%;
@@ -5477,7 +5653,7 @@ select {
 	right    : 0;
 	top      : 0;
 	z-index  : 1;
-	
+
 	.stock, .new {
 		@include border-radius();
 		@include flex(col);
@@ -5492,7 +5668,7 @@ select {
 		text-transform : uppercase;
 		width          : 40px;
 	}
-	
+
 	.new {
 		background : linear-gradient(45deg, transparent 25%, #76c5cc 11%);
 		font-size  : 0.5rem;
@@ -5500,8 +5676,14 @@ select {
 	}
 }
 
-.tab-content button {
-	display : none;
+.tab-content {
+	button {
+		display : none;
+	}
+
+	.content h2 {
+		text-align : center;
+	}
 }
 
 .upload {
@@ -5515,22 +5697,22 @@ select {
 	@include grid;
 	grid-template-columns : auto 300px;
 	grid-template-rows    : repeat(auto-fit, minmax(300px, auto));
-	
+
 	.address-list, .brands {
 		grid-column : 2;
 		margin      : 1.5rem;
 		padding     : 0 1.75rem;
-		
+
 		h6 {
 			font-weight : 600;
 		}
 	}
-	
+
 	.address-list {
 		background-color : #f5f3ee;
 		float            : left;
 		padding          : 1.5rem 1.75rem;
-		
+
 		ul {
 			li {
 				font-size     : 0.8125rem;
@@ -5539,7 +5721,7 @@ select {
 				margin-bottom : 1rem;
 				padding-left  : 2rem;
 				position      : relative;
-				
+
 				&:before {
 					@include border-radius;
 					background-color : $black;
@@ -5555,13 +5737,13 @@ select {
 			}
 		}
 	}
-	
+
 	.brands {
 		ul li {
 			margin-bottom : 1.5rem;
 		}
 	}
-	
+
 	.items {
 		@include grid;
 		align-self            : start;
@@ -5569,7 +5751,7 @@ select {
 		grid-row              : 1 / 3;
 		grid-template-columns : repeat(2, 1fr);
 		margin                : 1.5rem;
-		
+
 		.card {
 			@include border-radius;
 			align-items : center;
@@ -5580,7 +5762,7 @@ select {
 			line-height : 1.385;
 			padding     : 1.25rem 1.5rem 0;
 			text-align  : center;
-			
+
 			.image-container {
 				&, img {
 					width : 100%;
@@ -5594,17 +5776,17 @@ select {
 	@include flex;
 	flex-wrap  : wrap;
 	margin-top : 1.5rem;
-	
+
 	> * {
 		flex : 1 1 0;
 	}
-	
+
 	aside {
 		flex        : 0 0 220px;
 		margin-left : 2.5rem;
 		max-width   : 220px;
 	}
-	
+
 	&.wish-wrapper {
 		position : relative;
 	}
@@ -5615,7 +5797,7 @@ select {
 	@include flex;
 	border  : 1px solid #f4f4f4;
 	padding : 1.25rem 0;
-	
+
 	.warranty-item {
 		@include flex(col, center);
 		border-right : 1px solid #f4f4f4;
@@ -5624,35 +5806,35 @@ select {
 		min-width    : 140px;
 		padding      : 0.5rem 1.25rem 1.25rem;
 		text-align   : center;
-		
+
 		&:last-child {
 			border : 0;
 		}
-		
+
 		a {
 			border-bottom : 1px dotted #a4a4a4;
 			color         : #a4a4a4;
 			font-size     : .8125rem;
 			font-weight   : 500;
 		}
-		
+
 		p {
 			font-size   : 0.875rem;
 			font-weight : 500;
 			line-height : 1.5;
 			padding     : 0.5rem 0;
 		}
-		
+
 		span {
 			color       : $green;
 			font-size   : .8125rem;
 			font-weight : 500;
 		}
-		
+
 		.battery {
 			margin : 0 0 9px 0;
 		}
-		
+
 		.battery, img {
 			margin-bottom : 1.25rem;
 			margin-top    : auto;

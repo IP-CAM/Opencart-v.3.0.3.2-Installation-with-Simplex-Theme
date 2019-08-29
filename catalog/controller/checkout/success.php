@@ -1,9 +1,17 @@
 <?php
+
 class ControllerCheckoutSuccess extends Controller {
 	public function index() {
 		$this->load->language('checkout/success');
-		$data['order_id'] = isset($this->session->data['order_id']);
-		if (isset($this->session->data['order_id'])) {
+		$this->load->model('checkout/order');
+		$this->load->model('api/exchange');
+
+		if(isset($this->session->data['order_id'])) {
+			if($this->config->get('module_exchange_status')) {
+				$order = $this->model_api_exchange->getOrder($this->session->data['order_id']);
+				$order['products'] = $this->model_api_exchange->getOrderProducts($this->session->data['order_id']);
+				$this->model_api_exchange->sendOrder($this->config->get('module_exchange_send_url'), json_encode($order), $this->config->get('module_exchange_login'), $this->config->get('module_exchange_password'));
+			}
 			$this->cart->clear();
 
 			unset($this->session->data['shipping_method']);
@@ -44,7 +52,7 @@ class ControllerCheckoutSuccess extends Controller {
 			'href' => $this->url->link('checkout/success')
 		);
 
-		if ($this->customer->isLogged()) {
+		if($this->customer->isLogged()) {
 			$data['text_message'] = sprintf($this->language->get('text_customer'), $this->url->link('account/account', '', true), $this->url->link('account/order', '', true), $this->url->link('account/download', '', true), $this->url->link('information/contact'));
 		} else {
 			$data['text_message'] = sprintf($this->language->get('text_guest'), $this->url->link('information/contact'));
@@ -58,7 +66,7 @@ class ControllerCheckoutSuccess extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
-		$this->response->setOutput($this->load->view('common/success', $data));
+		//IT-LAB
+		$this->response->setOutput($this->load->view('common/success_order', $data));
 	}
 }

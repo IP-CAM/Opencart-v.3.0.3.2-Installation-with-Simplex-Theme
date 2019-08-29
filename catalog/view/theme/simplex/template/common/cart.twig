@@ -19,7 +19,7 @@
                 </li>
             {% endfor %}
         {% else %}
-            <li><p class="text-center">{{ text_empty }}</p></li>
+            <li><p class="text-center" style="line-height: 3;">{{ text_empty }}</p></li>
         {% endif %}
     </ul>
     <div class="total-wrapper">
@@ -28,7 +28,7 @@
                 <p>
                     <span>{{ totals[0].title }}</span>
                     <br>
-                    <span class="price">{{ totals[0].text }} <span class="currency">MDL</span></span>
+                    <span class="price">{{ totals[0].text }}.- <span class="currency">MDL</span></span>
                 </p>
                 <a href="{{ cart }}">
                     {{ text_cart }}

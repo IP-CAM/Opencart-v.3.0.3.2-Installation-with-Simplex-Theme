@@ -3,16 +3,16 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
+                {% if loop.first %}
+                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    </li>
+                {% elseif loop.last %}
+                    <li>{{ breadcrumb.text }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
         {% if error_warning %}
             <div class="alert alert-danger alert-dismissible"><i
@@ -105,7 +105,7 @@
 </main>
 
 
-<script type="text/javascript"><!--
+<script type="text/javascript">
     $(document).on('change', 'input[name=\'account\']', function () {
         if ($('#payment-address').parent().find('.card-header h4 > *').is('button')) {
             if (this.value == 'register') {
@@ -234,7 +234,7 @@
                 if (json['redirect']) {
                     location = json['redirect'];
                 } else if (json['error']) {
-                    $('#checkout-option .card-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    $('#checkout-option .card-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error }}</i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
                     // Highlight any found errors
                     $('input[name=\'email\']').parent().addClass('has-error');
@@ -267,7 +267,7 @@
                     $('#button-register').button('reset');
 
                     if (json['error']['warning']) {
-                        $('#payment-address .card-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        $('#payment-address .card-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error }}</i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                     }
 
                     for (i in json['error']) {
@@ -811,5 +811,5 @@
             }
         });
     });
-    //--></script>
+</script>
 {{ footer }}

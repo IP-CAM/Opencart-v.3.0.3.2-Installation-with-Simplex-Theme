@@ -1,6 +1,6 @@
 <div id="amazonContainer">
     {% if success %}
-        <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><i class="fa fa-exclamation-circle"></i> {{ success }}
+        <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><i class="fa fa-exclamation-circle">{{ error }}</i> {{ success }}
         </div>
     {% endif %}
     <h3 class="text-center">{{ heading_confirm }}</h3>
@@ -78,7 +78,7 @@
             {% if is_order_total_positive %}
                 {% if is_amount_converted %}
                     <div class="alert alert-warning">
-                        <i class="fa fa-exclamation-circle"></i> {{ text_amount_converted }}
+                        <i class="fa fa-exclamation-circle">{{ error }}</i> {{ text_amount_converted }}
                         <hr />
                         <div class="text-right">
                             <a class="btn btn-primary" href="{{ process }}" id="confirm-button">{{ text_confirm }}</a>
@@ -89,7 +89,7 @@
                 {% endif %}
             {% else %}
                 <div class="alert alert-warning">
-                    <i class="fa fa-exclamation-circle"></i> {{ error_order_total_zero }}
+                    <i class="fa fa-exclamation-circle">{{ error }}</i> {{ error_order_total_zero }}
                     <hr />
                     <div class="text-right">
                         <a class="btn btn-primary" href="{{ standard_checkout }}" id="confirm-button">{{ text_continue_checkout }}</a>
@@ -126,7 +126,7 @@
 <script>
 (function($) {
     var showCouponError = function(message) {
-        $('#couponContainer').before('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;' + message + '</div>');
+        $('#couponContainer').before('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><i class="fa fa-exclamation-circle">{{ error }}</i>&nbsp;&nbsp;' + message + '</div>');
     }
 
     var typewatch = (function() {

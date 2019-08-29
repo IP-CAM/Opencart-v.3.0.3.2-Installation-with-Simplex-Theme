@@ -25,6 +25,16 @@ class ControllerCommonHeader extends Controller {
 			$this->document->addLink($server . 'image/' . $this->config->get('config_icon'), 'icon');
 		}
 
+		if(isset($this->request->get['information_id'])) {
+			$this->load->model('catalog/information');
+
+			$information_id = (int)$this->request->get['information_id'];
+
+			$information_info = $this->model_catalog_information->getInformation($information_id);
+
+			$data['thumb'] = (strlen($information_info['image']) > 0) ? 'image/' . $information_info['image'] : false;
+		}
+
 		$data['title'] = $this->document->getTitle();
 
 		$data['base'] = $server;
@@ -37,6 +47,9 @@ class ControllerCommonHeader extends Controller {
 		$data['direction'] = $this->language->get('direction');
 
 		$data['name'] = $this->config->get('config_name');
+
+		$data['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+
 
 		if(is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
 			$data['logo'] = $server . 'image/' . $this->config->get('config_logo');

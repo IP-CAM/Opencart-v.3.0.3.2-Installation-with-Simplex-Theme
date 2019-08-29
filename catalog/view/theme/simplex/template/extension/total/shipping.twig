@@ -1,7 +1,18 @@
 <div id="collapse-shipping" class="panel-collapse" style="display: none;">
     <div class="panel-body">
-        <select name="zone_id" id="input-zone" class="form-control">
-        </select>
+        {% if countries|length > 1 %}
+            <select name="country_id" id="input-country" class="form-control">
+                <option value="">{{ text_select }}</option>
+                {% for country in countries %}
+                    {% if country.country_id == country_id %}
+                        <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+                    {% else %}
+                        <option value="{{ country.country_id }}">{{ country.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        {% endif %}
+        <select name="zone_id" id="input-zone" class="form-control"></select>
         <ul>
             <li>{{ text_shipping }}</li>
             <li>{{ text_shipping_time }}</li>
@@ -9,211 +20,7 @@
         <script>
             $(document).ready(function () {
                 $.ajax({
-                    url: 'index.php?route=extension/total/shipping/quote',
-                    type: 'post',
-                    data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
-                    dataType: 'json',
-                    beforeSend: function () {
-                        $('#button-quote').button('loading');
-                    },
-                    complete: function () {
-                        $('#button-quote').button('reset');
-                    },
-                    success: function (json) {
-                        let shipping_method = {{ shipping_method|length }};
-                        $('.alert-dismissible, .text-danger').remove();
-                        if (json['error']) {
-                            if (json['error']['warning']) {
-                                $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                                $('html, body').animate({scrollTop: 0}, 'slow');
-                            }
-                            if (json['error']['country']) {
-                                $('select[name=\'country_id\']').addClass('has-error');
-                            }
-                            if (json['error']['zone']) {
-                                $('select[name=\'zone_id\']').addClass('has-error');
-                            }
-                            if (json['error']['postcode']) {
-                                $('input[name=\'postcode\']').addClass('has-error');
-                            }
-                        }
-                        if (json['shipping_method']) {
-                            if (shipping_method != 0) {
-                                for (i in json['shipping_method']) {
-                                    if (!json['shipping_method'][i]['error']) {
-                                        for (j in json['shipping_method'][i]['quote']) {
-                                            if (json['shipping_method'][i]['quote'][j]['code'] === '{{ shipping_method }}') {
-                                                $('<label class="semi-bold"><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" checked="checked" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
-                                                $('.panel-heading p').html('<span>{{ shipping_cost }}</span>' + json['shipping_method'][i]['quote'][j]['cost'] + ' <small>{{ currency }}</small>');
-                                            } else {
-                                                $('<label><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
-                                            }
-                                        }
-                                    }
-                                }
-                                if ($('input[name="shipping_method"]:checked').val() !== "pickup.pickup") {
-                                    $('#collapse-shipping').show();
-                                } else {
-                                    $('#collapse-shipping').hide();
-                                }
-                                $.ajax({
-                                    url: 'index.php?route=checkout/cart/get_total_price',
-                                    type: 'post',
-                                    data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
-                                    dataType: 'json',
-                                    success: function (json) {
-                                        $('.total .price').html('<h5>' + json[2]['text'] + ' <small> {{ currency }}</small></h5>');
-                                    },
-                                    error: function (xhr, ajaxOptions, thrownError) {
-                                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                                    }
-                                });
-                            } else {
-                                $.ajax({
-                                    url: 'index.php?route=extension/total/shipping/shipping',
-                                    type: 'post',
-                                    data: 'shipping_method=' + encodeURIComponent('pickup.pickup'),
-                                    dataType: 'text',
-                                    beforeSend: function () {
-                                        $('#button-shipping').button('loading');
-                                    },
-                                    complete: function () {
-                                        $('#button-shipping').button('reset');
-                                    },
-                                    success: function (html) {
-                                        $('.alert-dismissible').remove();
-
-                                        if (html['error']) {
-                                            $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
-                                            $('html, body').animate({scrollTop: 0}, 'slow');
-                                        }
-                                        $.ajax({
-                                            url: 'index.php?route=checkout/cart/get_total_price',
-                                            type: 'post',
-                                            data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
-                                            dataType: 'json',
-                                            success: function (json) {
-                                                $('.total .price').html('<h5>' + json[2]['text'] + ' <small> {{ currency }}</small></h5>');
-                                            },
-                                            error: function (xhr, ajaxOptions, thrownError) {
-                                                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                                            }
-                                        });
-                                        $('#cart-wrapper .panel #collapse-shipping').remove();
-                                        $('#cart-wrapper .panel').append(html);
-                                    },
-                                    error: function (xhr, ajaxOptions, thrownError) {
-                                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                                    }
-                                });
-                            }
-                            $('input[type="radio"]').after('<span class="radio"></span>');
-                            $('input[name="shipping_method"]').on('change', function () {
-                                let value = $('input[name="shipping_method"]:checked').val();
-                                if (value !== "pickup.pickup") {
-                                    $('#collapse-shipping').show();
-                                    $('#input-zone').on('change', function () {
-                                        $.ajax({
-                                            url: 'index.php?route=extension/total/shipping/get_shipping_price',
-                                            type: 'post',
-                                            data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
-                                            dataType: 'json',
-                                            beforeSend: function () {
-                                                $('#button-shipping').button('loading');
-                                            },
-                                            complete: function () {
-                                                $('#button-shipping').button('reset');
-                                            },
-                                            success: function (json) {
-                                                $('.alert-dismissible').remove();
-
-                                                if (json['error']) {
-                                                    $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
-                                                    $('html, body').animate({scrollTop: 0}, 'slow');
-                                                }
-                                                $.ajax({
-                                                    url: 'index.php?route=extension/total/shipping/quote',
-                                                    type: 'post',
-                                                    data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
-                                                    dataType: 'json'
-                                                });
-                                                $.ajax({
-                                                    url: 'index.php?route=checkout/cart/get_total_price',
-                                                    type: 'post',
-                                                    data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
-                                                    dataType: 'json',
-                                                    success: function (json) {
-                                                        $('.total .price').html('<h5>' + json[2]['text'] + ' <small>{{ currency }}</small></h5>');
-                                                    },
-                                                    error: function (xhr, ajaxOptions, thrownError) {
-                                                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                                                    }
-                                                });
-
-                                                $('.panel-heading p').html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
-                                            },
-                                            error: function (xhr, ajaxOptions, thrownError) {
-                                                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                                            }
-                                        });
-                                    });
-                                } else {
-                                    $('#collapse-shipping').hide();
-                                    $.ajax({
-                                        url: 'index.php?route=extension/total/shipping/get_shipping_price',
-                                        type: 'post',
-                                        data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
-                                        dataType: 'json',
-                                        beforeSend: function () {
-                                            $('#button-shipping').button('loading');
-                                        },
-                                        complete: function () {
-                                            $('#button-shipping').button('reset');
-                                        },
-                                        success: function (json) {
-                                            $('.alert-dismissible').remove();
-
-                                            if (json['error']) {
-                                                $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
-                                                $('html, body').animate({scrollTop: 0}, 'slow');
-                                            }
-                                            $.ajax({
-                                                url: 'index.php?route=extension/total/shipping/quote',
-                                                type: 'post',
-                                                data: 'country_id=' + 140 + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
-                                                dataType: 'json'
-                                            });
-                                            $.ajax({
-                                                url: 'index.php?route=checkout/cart/get_total_price',
-                                                type: 'post',
-                                                data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
-                                                dataType: 'json',
-                                                success: function (json) {
-                                                    $('.total .price').html('<h5>' + json[2]['text'] + '<small> {{ currency }}</small></h5>');
-                                                },
-                                                error: function (xhr, ajaxOptions, thrownError) {
-                                                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                                                }
-                                            });
-                                            $('.panel-heading p').html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + ' <small>{{ currency }}</small>');
-                                        },
-                                        error: function (xhr, ajaxOptions, thrownError) {
-                                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                    }
-                });
-                $.ajax({
-                    url: 'index.php?route=extension/total/shipping/country&country_id=' + 140,
+                    url: 'index.php?route=extension/total/shipping/country&country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %},
                     dataType: 'json',
                     beforeSend: function () {
                         $('select[name=\'country_id\']').prop('disabled', true);
@@ -241,17 +48,217 @@
                                 html += '>' + json['zone'][i]['name'] + '</option>';
                             }
                         } else {
-
                             html += '<option value="0" selected="selected">{{ text_none }}</option>';
                         }
 
                         $('select[name=\'zone_id\']').html(html);
+
+                        $.ajax({
+                            url: 'index.php?route=extension/total/shipping/quote',
+                            type: 'post',
+                            data: 'country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %} + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
+                            dataType: 'json',
+                            beforeSend: function () {
+                                $('#button-quote').button('loading');
+                            },
+                            complete: function () {
+                                $('#button-quote').button('reset');
+                            },
+                            success: function (json) {
+                                let shipping_method = {{ shipping_method|length }};
+                                if (json['error']) {
+                                    if (json['error']['warning']) {
+                                        $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error }}</i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                                        $('html, body').animate({scrollTop: 0}, 'slow');
+                                    }
+                                    if (json['error']['country']) {
+                                        $('select[name=\'country_id\']').addClass('has-error');
+                                    }
+                                    if (json['error']['zone']) {
+                                        $('select[name=\'zone_id\']').addClass('has-error');
+                                    }
+                                    if (json['error']['postcode']) {
+                                        $('input[name=\'postcode\']').addClass('has-error');
+                                    }
+                                }
+                                if (json['shipping_method']) {
+                                    if (shipping_method !== 0) {
+                                        for (i in json['shipping_method']) {
+                                            if (!json['shipping_method'][i]['error']) {
+                                                for (j in json['shipping_method'][i]['quote']) {
+                                                    if (json['shipping_method'][i]['quote'][j]['code'] === '{{ shipping_method }}') {
+                                                        $('<label class="semi-bold"><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" checked="checked" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
+                                                        $('.panel-heading p').attr('data-cost', json['shipping_method'][i]['quote'][j]['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method'][i]['quote'][j]['cost'] + '.- <small>{{ currency }}</small>');
+                                                    } else {
+                                                        $('<label><input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" />' + json['shipping_method'][i]['quote'][j]['title'] + '</label>').insertAfter('.panel-heading h5');
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if ($('input[name="shipping_method"]:checked').val() !== "pickup.pickup") {
+                                            $('#collapse-shipping').show();
+                                        } else {
+                                            $('#collapse-shipping').hide();
+                                        }
+
+                                        $('input[type=radio]').click(function () {
+                                            $(this).parent("form").find('.form-element').css('display', 'none');
+                                            $('input[type=radio]').parent().removeClass('semi-bold');
+                                            $(this).parent().addClass('semi-bold');
+                                            $('#' + $(this).attr('value')).show();
+                                        });
+                                        replaceTotal();
+                                    } else {
+                                        $.ajax({
+                                            url: 'index.php?route=extension/total/shipping/shipping',
+                                            type: 'post',
+                                            data: 'shipping_method=' + encodeURIComponent('pickup.pickup'),
+                                            dataType: 'text',
+                                            beforeSend: function () {
+                                                $('#button-shipping').button('loading');
+                                            },
+                                            complete: function () {
+                                                $('#button-shipping').button('reset');
+                                            },
+                                            success: function (html) {
+                                                if (html['error']) {
+                                                    $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error_message }}</i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert"><svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path><path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path></svg></button></div>');
+
+                                                    $('html, body').animate({scrollTop: 0}, 'slow');
+                                                }
+                                                $('#cart-wrapper .panel #collapse-shipping').remove();
+                                                $('#cart-wrapper .panel').append(html);
+                                            },
+                                            error: function (xhr, ajaxOptions, thrownError) {
+                                                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                            }
+                                        });
+                                    }
+                                    $('input[type="radio"]').after('<span class="radio"></span>');
+                                    $('input[name="shipping_method"]').on('change', function () {
+                                        let value = $('input[name="shipping_method"]:checked').val();
+                                        if (value !== "pickup.pickup") {
+                                            $('#collapse-shipping').show();
+                                            if ($('#input-zone').val().length > 0) {
+                                                $.ajax({
+                                                    url: 'index.php?route=extension/total/shipping/get_shipping_price',
+                                                    type: 'post',
+                                                    data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
+                                                    dataType: 'json',
+                                                    beforeSend: function () {
+                                                        $('#button-shipping').button('loading');
+                                                    },
+                                                    complete: function () {
+                                                        $('#button-shipping').button('reset');
+                                                    },
+                                                    success: function (json) {
+                                                        $('.alert-dismissible').remove();
+
+                                                        if (json['error']) {
+                                                            $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error_message }}</i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert"><svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path><path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path></svg></button></div>');
+
+                                                            $('html, body').animate({scrollTop: 0}, 'slow');
+                                                        }
+
+                                                        $.ajax({
+                                                            url: 'index.php?route=extension/total/shipping/quote',
+                                                            type: 'post',
+                                                            data: 'country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %} + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
+                                                            dataType: 'json',
+                                                        });
+                                                        $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + '.- <small>{{ currency }}</small>');
+                                                        replaceTotal();
+                                                    },
+                                                    error: function (xhr, ajaxOptions, thrownError) {
+                                                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                                    }
+                                                });
+                                                replaceTotal();
+                                            }
+                                        } else {
+                                            $('#collapse-shipping').hide();
+                                            $.ajax({
+                                                url: 'index.php?route=extension/total/shipping/get_shipping_price',
+                                                type: 'post',
+                                                data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
+                                                dataType: 'json',
+                                                beforeSend: function () {
+                                                    $('#button-shipping').button('loading');
+                                                },
+                                                complete: function () {
+                                                    $('#button-shipping').button('reset');
+                                                },
+                                                success: function (json) {
+                                                    $('.alert-dismissible').remove();
+
+                                                    if (json['error']) {
+                                                        $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error_message }}</i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert"><svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path><path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path></svg></button></div>');
+
+                                                        $('html, body').animate({scrollTop: 0}, 'slow');
+                                                    }
+                                                    $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + '.- <small>{{ currency }}</small>');
+                                                    replaceTotal();
+                                                },
+                                                error: function (xhr, ajaxOptions, thrownError) {
+                                                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                                }
+                                            });
+                                        }
+                                    });
+
+                                    $('#input-zone').on('change', function () {
+                                        $.ajax({
+                                            url: 'index.php?route=extension/total/shipping/get_shipping_price',
+                                            type: 'post',
+                                            data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
+                                            dataType: 'json',
+                                            beforeSend: function () {
+                                                $('#button-shipping').button('loading');
+                                            },
+                                            complete: function () {
+                                                $('#button-shipping').button('reset');
+                                            },
+                                            success: function (json) {
+                                                $('.alert-dismissible').remove();
+
+                                                if (json['error']) {
+                                                    $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle">{{ error_message }}</i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert"><svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path><path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path></svg></button></div>');
+
+                                                    $('html, body').animate({scrollTop: 0}, 'slow');
+                                                }
+
+                                                $.ajax({
+                                                    url: 'index.php?route=extension/total/shipping/quote',
+                                                    type: 'post',
+                                                    data: 'country_id=' + {% if countries|length > 1 %} $('select[name=\'country_id\']').val() {% else %} {{ countries[0]['country_id'] }} {% endif %} + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
+                                                    dataType: 'json',
+                                                });
+                                                $('.panel-heading p').attr('data-cost', json['shipping_method']['cost']).html('<span>{{ shipping_cost }}</span>' + json['shipping_method']['cost'] + '.- <small>{{ currency }}</small>');
+                                                replaceTotal();
+                                            },
+                                            error: function (xhr, ajaxOptions, thrownError) {
+                                                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                            }
+                                        });
+                                    });
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                            }
+                        });
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 });
             });
+        </script>
+        <script>
+            function replaceTotal() {
+                total = parseInt(getSubtotal());
+                $('.checkout .price h5').html(total + '.- <small>{{ currency }}</small>');
+            }
         </script>
     </div>
 </div>
