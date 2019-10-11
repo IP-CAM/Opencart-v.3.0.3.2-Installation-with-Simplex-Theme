@@ -5,7 +5,7 @@
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
                         <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -153,7 +153,7 @@
                     </div>
                 </div>
                 <div class="prof-help">
-                    <img alt="" src="catalog/view/theme/simplex/assets/img/step4.png">
+                    <img alt="" src="/catalog/view/theme/simplex/assets/img/step4.png">
                     <p>{{ text_professional_installation }}</p>
                 </div>
                 <div class="product-code">
@@ -161,9 +161,6 @@
                         <p><span>{{ text_sku }}</span> {{ sku }}</p>
                     {% endif %}
                 </div>
-            </div>
-            <div class="cards">
-                {{ content_top }}
             </div>
             <ul class="nav nav-tabs" id="productTabs" role="tablist">
                 {% if description %}
@@ -478,10 +475,10 @@
                     </div>
                 {% endif %}
             </div>
+            <div class="cards">
+                {{ content_top }}
+            </div>
         </div>
-
-
-    </div>
     </div>
     <hr>
     {% if products_asemenea %}

@@ -2958,13 +2958,13 @@ select {
 	padding          : 2rem 0 0;
 
 	li {
-		color       : #b9b9b9;
+		color       : #999;
 		font-size   : 0.8125rem;
 		font-weight : 500;
 		line-height : 1rem;
 
 		a {
-			color          : #b9b9b9;
+			color          : inherit;
 			text-transform : capitalize;
 			vertical-align : middle;
 
@@ -3814,7 +3814,7 @@ select {
 		color       : $black;
 		font-size   : 1.125rem;
 		font-weight : 600;
-		max-width   : 40%; //Fix firefox flexbox bug, when children have more width than parent
+		max-width   : 50%; //Fix firefox flexbox bug, when children have more width than parent
 	}
 
 	.input-group-prepend, .input-group-append {
@@ -3913,7 +3913,6 @@ select {
 			@include border-radius;
 			border         : 1px solid #f4f4f4;
 			margin         : 0;
-			overflow       : visible;
 			padding-bottom : 2rem;
 			padding-top    : 1.625rem;
 		}

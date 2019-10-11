@@ -6,13 +6,13 @@ require '../config.php';
 define('MODULE_URL', HTTP_SERVER . 'index.php?route=api/exchange/');
 
 class Request1C {
-	protected $current_task = 0;
-	protected $skipped_task = 0;
-	protected $bool = true;
-	protected $connection;
-	protected $model;
-	protected $file;
-	protected $filename;
+	private $current_task = 0;
+	private $skipped_task = 0;
+	private $bool = true;
+	private $connection;
+	private $model;
+	private $file;
+	private $filename;
 
 	public function __construct() {
 		$this->connection = new Exchange(MODULE_URL . 'getModuleConfig');
@@ -21,7 +21,7 @@ class Request1C {
 		$this->file = fopen($this->filename, 'r+');
 	}
 
-	protected function rewriteJSONData(&$array) {
+	protected static function rewriteJSONData(&$array) {
 		$data = [];
 		foreach($array['#value']['row'] as $index => $arr) {
 			$data[$index]['sku'] = $arr[0]['#value'];
@@ -39,7 +39,7 @@ class Request1C {
 		if(filesize($this->filename) == 0) {
 			fwrite($this->file, json_encode($decoded_json));
 			if(isset($decoded_json)) {
-				$this->rewriteJSONData($decoded_json);
+				self::rewriteJSONData($decoded_json);
 				foreach($decoded_json as $d_json) {
 					$this->current_task++;
 					$this->model->update($d_json);
@@ -49,8 +49,8 @@ class Request1C {
 		} else {
 			$previous_json = json_decode(fread($this->file, filesize($this->filename)), true);
 			if(isset($decoded_json) && isset($previous_json)) {
-				$this->rewriteJSONData($previous_json);
-				$this->rewriteJSONData($decoded_json);
+				self::rewriteJSONData($previous_json);
+				self::rewriteJSONData($decoded_json);
 
 				foreach($decoded_json as $d_json) {
 					foreach($previous_json as $p_json) {
@@ -69,8 +69,8 @@ class Request1C {
 						$this->current_task++;
 						$this->model->update($d_json);
 					}
-					echo $this->current_task . ' of ' . sizeof($decoded_json) . "\n";
-					echo "Skipped " . $this->skipped_task . ' of ' . sizeof($decoded_json) . "\n\n";
+					echo $this->current_task . ' of ' . count($decoded_json) . "\n";
+					echo "Skipped " . $this->skipped_task . ' of ' . count($decoded_json) . "\n\n";
 					$this->bool = true;
 				}
 			}
@@ -79,11 +79,11 @@ class Request1C {
 
 	public function restorePrevious(){
 		if(isset($previous_json)) {
-			$this->rewriteJSONData($previous_json);
+			self::rewriteJSONData($previous_json);
 			foreach($previous_json as $p_json) {
 				$this->current_task++;
 				$this->model->update($p_json);
-				echo $this->current_task . ' of ' . sizeof($previous_json) . "\n";
+				echo $this->current_task . ' of ' . count($previous_json) . "\n";
 			}
 		}
 	}
