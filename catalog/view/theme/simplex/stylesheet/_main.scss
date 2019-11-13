@@ -954,6 +954,7 @@ select {
 
 			&::-webkit-scrollbar-track {
 				-webkit-box-shadow : inset 0 0 6px rgba(0, 0, 0, 0.3);
+				box-shadow         : inset 0 0 6px rgba(0, 0, 0, 0.3);
 			}
 
 			&::-webkit-scrollbar-thumb {
@@ -5069,6 +5070,7 @@ select {
 	grid-gap              : 2.5rem 30px;
 	grid-template-columns : repeat(4, 1fr);
 	grid-template-rows    : auto;
+	overflow              : hidden;
 
 	.cards {
 		grid-column : span 2;
