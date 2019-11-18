@@ -4676,6 +4676,7 @@ select {
 	height           : 100%;
 	position         : relative;
 	width            : 100%;
+	margin-bottom    : 20px;
 
 	> a:not(.add-to-cart):not(.delete) {
 		@include flex(col, center, start, wrap);
