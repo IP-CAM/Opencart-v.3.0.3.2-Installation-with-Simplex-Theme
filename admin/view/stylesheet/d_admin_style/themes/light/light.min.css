@@ -1,0 +1,18 @@
+/* Error: Invalid UTF-8.
+ *    ,
+ * 49 | /* �allout *∕
+ *    |    ^
+ *    '
+ *   modification\_notification.scss 49:4  @import
+ *   light.scss 11:9                       root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Invalid UTF-8.\a    \2577 \a 49 \2502  /* \fffd allout */\a    \2502     ^\a    \2575 \a   modification\\_notification.scss 49:4  @import\a   light.scss 11:9                       root stylesheet";
+}
