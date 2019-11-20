@@ -88,7 +88,6 @@
 									{{ column_right }}
 								</div>
 							{% endif %}
-							
 							<div class="product-column">
 								<div class="product">
 									<a href="{{ product.href }}">
@@ -175,12 +174,11 @@
 						<div class="show-more">
 							{% if num_pages>1 %}
 								<button id="show-more-button" type="button" data-page="{{ page }}"
-										data-limit="{{ limit }}" data-total="{{ product_total }}"
+										data-limit="{{ pager_limit }}" data-total="{{ product_total }}"
 										data-num_pages="{{ num_pages }}">
 									<span class="image-container"></span>
 									<p>{{ text_show_more }} <span
-												class="show-more-limit">{{ show_more_limit }}</span> {{ text_pozitions }}
-									</p>
+												class="show-more-limit">{{ show_more_limit }}</span> {{ text_pozitions }}</p>
 								</button>
 							{% endif %}
 						</div>
@@ -260,6 +258,7 @@
 		}
 	});
 	$("#show-all").click(function (e) {
+		e.preventDefault();
 		var link = window.location.href;
 		var params = {method: "load_all",};
 		link += '&' + jQuery.param(params);
@@ -285,6 +284,5 @@
 		return false;
 	})
 </script>
-
 {{ content_bottom }}
 {{ footer }} 

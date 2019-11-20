@@ -14,6 +14,7 @@ $_['text_image']                       = 'Images';
 $_['entry_directory']                  = 'Theme Directory';
 $_['entry_status']                     = 'Status';
 $_['entry_product_limit']              = 'Default Items Per Page';
+$_['entry_pager_limit']                = 'Default Items Loaded by click on pager button';
 $_['entry_product_description_length'] = 'List Description Limit';
 $_['entry_image_category']             = 'Category Image Size (W x H)';
 $_['entry_image_thumb']                = 'Product Image Thumb Size (W x H)';
@@ -31,6 +32,7 @@ $_['entry_height']                     = 'Height';
 // Help
 $_['help_directory']                   = 'This field is only to enable older themes to be compatible with the new theme system. You can set the theme directory to use on the image size settings defined here.';
 $_['help_product_limit']               = 'Determines how many catalog items are shown per page (products, categories, etc)';
+$_['help_pager_limit']                 = 'Determines how many catalog items are loaded by click on pager button (products, categories, etc)';
 $_['help_product_description_length']  = 'In the list view, short description character limit (categories, special etc)';
 
 // Error
