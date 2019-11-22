@@ -1,0 +1,17 @@
+/* Error: $color: currentColor is not a color.
+ *     ,
+ * 170 |   a: alpha(currentColor);
+ *     |      ^^^^^^^^^^^^^^^^^^^
+ *     '
+ *   builtins.scss 170:6  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: $color: currentColor is not a color.\a     \2577 \a 170 \2502    a: alpha(currentColor);\a     \2502       ^^^^^^^^^^^^^^^^^^^\a     \2575 \a   builtins.scss 170:6  root stylesheet";
+}

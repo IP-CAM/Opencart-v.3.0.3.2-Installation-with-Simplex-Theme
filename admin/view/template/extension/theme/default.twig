@@ -68,6 +68,15 @@
               </div>
             </div>
             <div class="form-group required">
+              <label class="col-sm-2 control-label" for="input-pager-limit"><span data-toggle="tooltip" title="{{ help_pager_limit }}">{{ entry_pager_limit }}</span></label>
+              <div class="col-sm-10">
+                <input type="text" name="theme_default_pager_limit" value="{{ theme_default_pager_limit }}" placeholder="{{ entry_pager_limit }}" id="input-pager-limit" class="form-control" />
+                {% if error_pager_limit %}
+                <div class="text-danger">{{ error_pager_limit }}</div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group required">
               <label class="col-sm-2 control-label" for="input-description-limit"><span data-toggle="tooltip" title="{{ help_product_description_length }}">{{ entry_product_description_length }}</span></label>
               <div class="col-sm-10">
                 <input type="text" name="theme_default_product_description_length" value="{{ theme_default_product_description_length }}" placeholder="{{ entry_product_description_length }}" id="input-description-limit" class="form-control" />

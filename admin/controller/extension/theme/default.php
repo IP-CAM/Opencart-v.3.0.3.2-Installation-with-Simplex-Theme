@@ -29,6 +29,12 @@ class ControllerExtensionThemeDefault extends Controller {
 			$data['error_product_limit'] = '';
 		}
 
+		if (isset($this->error['pager_limit'])) {
+			$data['error_pager_limit'] = $this->error['pager_limit'];
+		} else {
+			$data['error_pager_limit'] = '';
+		}
+
 		if (isset($this->error['product_description_length'])) {
 			$data['error_product_description_length'] = $this->error['product_description_length'];
 		} else {
@@ -142,6 +148,13 @@ class ControllerExtensionThemeDefault extends Controller {
 			$data['theme_default_product_limit'] = $setting_info['theme_default_product_limit'];
 		} else {
 			$data['theme_default_product_limit'] = 15;
+		}
+		if (isset($this->request->post['theme_default_pager_limit'])) {
+			$data['theme_default_pager_limit'] = $this->request->post['theme_default_pager_limit'];
+		} elseif (isset($setting_info['theme_default_pager_limit'])) {
+			$data['theme_default_pager_limit'] = $setting_info['theme_default_pager_limit'];
+		} else {
+			$data['theme_default_pager_limit'] = 15;
 		}		
 		
 		if (isset($this->request->post['theme_default_status'])) {

@@ -2,8 +2,8 @@
 /.htaccess
 /config.php
 /admin/config.php
-## Image Cache Files
-/image/cache/*
+## Image Files
+/image/*
 !/image/cache/index.html
 
 ## System Cache Files
