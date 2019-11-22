@@ -31,7 +31,7 @@ $_['entry_height']                     = 'Height';
 
 // Help
 $_['help_directory']                   = 'This field is only to enable older themes to be compatible with the new theme system. You can set the theme directory to use on the image size settings defined here.';
-$_['help_product_limit']               = 'Determines how many catalog items are shown per page (products, categories, etc)';
+$_['help_product_limit']               = 'Determines the minimum quantity of catalog items are shown per page (products, categories, etc)';
 $_['help_pager_limit']                 = 'Determines how many catalog items are loaded by click on pager button (products, categories, etc)';
 $_['help_product_description_length']  = 'In the list view, short description character limit (categories, special etc)';
 
