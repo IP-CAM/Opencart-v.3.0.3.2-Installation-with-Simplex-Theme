@@ -21,18 +21,6 @@ class Request1C {
 		$this->file = fopen($this->filename, 'r+');
 	}
 
-	protected static function rewriteJSONData(&$array) {
-		$data = [];
-		foreach($array['#value']['row'] as $index => $arr) {
-			$data[$index]['sku'] = $arr[0]['#value'];
-			$data[$index]['model'] = $arr[1]['#value'];
-			$data[$index]['quantity'] = $arr[2]['#value'];
-			$data[$index]['product_description'][1]['name'] = $arr[3]['#value'];
-			$data[$index]['product_description'][2]['name'] = $arr[3]['#value'];
-		}
-		$array = $data;
-	}
-
 	public function makeRequest() {
 		$decoded_json = json_decode($this->connection->request1C(), true);
 
@@ -62,6 +50,7 @@ class Request1C {
 							} else {
 								$this->current_task++;
 								$this->model->update($d_json);
+								$this->log($d_json);
 							}
 						}
 					}
@@ -77,7 +66,26 @@ class Request1C {
 		}
 	}
 
-	public function restorePrevious(){
+	protected static function rewriteJSONData(&$array) {
+		$data = [];
+		foreach($array['#value']['row'] as $index => $arr) {
+			$data[$index]['sku'] = $arr[0]['#value'];
+			$data[$index]['model'] = $arr[1]['#value'];
+			$data[$index]['quantity'] = $arr[2]['#value'];
+			$data[$index]['product_description'][1]['name'] = $arr[3]['#value'];
+			$data[$index]['product_description'][2]['name'] = $arr[3]['#value'];
+		}
+
+		$array = $data;
+	}
+
+	public function log($product_json) {
+		$logFile = fopen("log/1c_log.log", "a");
+		fwrite($logFile, "[" . date("Y-m-d H:m:s", time()) . "]" . json_encode($product_json));
+		fclose($logFile);
+	}
+
+	public function restorePrevious() {
 		if(isset($previous_json)) {
 			self::rewriteJSONData($previous_json);
 			foreach($previous_json as $p_json) {
