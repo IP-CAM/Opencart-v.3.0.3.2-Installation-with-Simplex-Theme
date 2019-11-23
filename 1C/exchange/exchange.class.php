@@ -1,10 +1,27 @@
 <?php
 
+/**
+ * Class Exchange
+ */
 class Exchange {
+	/**
+	 * 1C webservice url
+	 * @var string
+	 */
 	protected $url = '';
+	/**
+	 * @var string
+	 */
 	protected $login = '';
+	/**
+	 * @var string
+	 */
 	protected $password = '';
 
+	/**
+	 * Exchange constructor.
+	 * @param string $module_url Path to 1C module controller
+	 */
 	public function __construct($module_url) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $module_url);
@@ -17,6 +34,10 @@ class Exchange {
 		$this->password = $return['password'];
 	}
 
+	/**
+	 * Request data
+	 * @return bool|string
+	 */
 	public function request1C() {
 		$ch = curl_init($this->url);
 		curl_setopt($ch, CURLOPT_USERPWD, $this->login . ":" . $this->password);
@@ -29,6 +50,12 @@ class Exchange {
 		return $return;
 	}
 
+	/**
+	 * Send data to 1C webservice
+	 * @param string $module_url Path to 1C module controller
+	 * @param string $json
+	 * @return bool
+	 */
 	public function import($module_url, $json) {
 		$fields = array(
 			'json' => $json,
