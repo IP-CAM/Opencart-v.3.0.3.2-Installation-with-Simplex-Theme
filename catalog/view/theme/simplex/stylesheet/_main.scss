@@ -954,6 +954,7 @@ select {
 
 			&::-webkit-scrollbar-track {
 				-webkit-box-shadow : inset 0 0 6px rgba(0, 0, 0, 0.3);
+				box-shadow         : inset 0 0 6px rgba(0, 0, 0, 0.3);
 			}
 
 			&::-webkit-scrollbar-thumb {
@@ -1560,6 +1561,10 @@ select {
 
 #discounts, #hits {
 	margin-bottom : 40px;
+}
+
+#info {
+	margin-top : 2.5rem;
 }
 
 #item-card {
@@ -2958,13 +2963,13 @@ select {
 	padding          : 2rem 0 0;
 
 	li {
-		color       : #b9b9b9;
+		color       : #999;
 		font-size   : 0.8125rem;
 		font-weight : 500;
 		line-height : 1rem;
 
 		a {
-			color          : #b9b9b9;
+			color          : inherit;
 			text-transform : capitalize;
 			vertical-align : middle;
 
@@ -3814,7 +3819,7 @@ select {
 		color       : $black;
 		font-size   : 1.125rem;
 		font-weight : 600;
-		max-width   : 40%; //Fix firefox flexbox bug, when children have more width than parent
+		max-width   : 50%; //Fix firefox flexbox bug, when children have more width than parent
 	}
 
 	.input-group-prepend, .input-group-append {
@@ -3913,7 +3918,6 @@ select {
 			@include border-radius;
 			border         : 1px solid #f4f4f4;
 			margin         : 0;
-			overflow       : visible;
 			padding-bottom : 2rem;
 			padding-top    : 1.625rem;
 		}
@@ -5067,13 +5071,15 @@ select {
 
 .products {
 	@include grid;
-	grid-gap              : 2.5rem 30px;
+	grid-gap              : 0 30px;
 	grid-template-columns : repeat(4, 1fr);
 	grid-template-rows    : auto;
+	overflow              : hidden;
 
 	.cards {
-		grid-column : span 2;
-		margin      : 0;
+		grid-column    : span 2;
+		margin         : 0;
+		padding-bottom : 2.5rem;
 
 		.card.choose {
 			margin    : 0;
@@ -5094,6 +5100,10 @@ select {
 	&.wish {
 		grid-template-columns : repeat(5, 1fr);
 	}
+}
+
+.product-column {
+	padding-bottom : 2.5rem;
 }
 
 .product-slider, .related-slider, .projects-list {

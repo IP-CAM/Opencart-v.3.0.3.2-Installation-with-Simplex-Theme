@@ -78,17 +78,18 @@ class ControllerInformationCategory extends Controller
         }
         $filter_data = array(
             'filter_category_id' => $category_id,
-            'sort' => 'i.sort_order, i.date_added',
+            'sort' => 'i.date_added',
             'order' => 'DESC',
             'start' => 0,
             'limit' => $limit
         );
         $results = $this->model_catalog_information->getInformations($filter_data);
-        $total = $this->model_catalog_information->getTotalInformations();
+        $total = $this->model_catalog_information->getTotalInformations($filter_data);
         if($category_id == 61){
             $filter_data['limit']=$total;
         }
-        if (isset($results)) {
+
+        if ($results) {
             foreach ($results as $result) {
                 if ($result['image']) {
                     $image = "image/" . $result['image'];
@@ -197,7 +198,7 @@ class ControllerInformationCategory extends Controller
 
         $filter_data = array(
             'filter_category_id' => $category_id,
-            'sort' => 'i.sort_order, i.date_added',
+            'sort' => 'i.date_added',
             'order' => 'DESC',
             'start' => $start,
             'limit' => $limit
@@ -218,7 +219,7 @@ class ControllerInformationCategory extends Controller
 
         }
         $results = $this->model_catalog_information->getInformations($filter_data);
-        $total = $this->model_catalog_information->getTotalInformations();
+        $total = $this->model_catalog_information->getTotalInformations($filter_data);
         if ($results) {
             foreach ($results as $result) {
                 if ($result['image']) {

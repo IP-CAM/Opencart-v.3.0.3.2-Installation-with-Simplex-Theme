@@ -1155,12 +1155,12 @@
                   {% for location in product_locations %}
                     <tr>
                       <td class="text-left">
-                        <input type="hidden" class="form-control" name="product_location[{{ location['location_id'] }}][name]" value="{{ location['name'] }}" >
-                        <input type="hidden" class="form-control" name="product_location[{{ location['location_id'] }}][location_id]" value="{{ location['location_id'] }}" >
+                        <input type="hidden" name="product_location[{{ location['location_id'] }}][name]" value="{{ location['name'] }}" >
+                        <input type="hidden" name="product_location[{{ location['location_id'] }}][location_id]" value="{{ location['location_id'] }}" >
                         {{ location['name'] }}
                       </td>
                       <td class="text-left">
-                        <input type="number" class="form-control" name="product_location[{{ location['location_id'] }}][quantity]" value="{{ location['quantity'] }}" min="0">
+                        <input type="number" name="product_location[{{ location['location_id'] }}][quantity]" value="{{ location['quantity'] }}" >
                       </td>
                     </tr>
                   {% endfor %}

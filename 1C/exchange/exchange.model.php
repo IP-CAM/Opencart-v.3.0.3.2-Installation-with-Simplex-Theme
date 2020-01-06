@@ -1,8 +1,20 @@
 <?php
 
 class ModelExchange {
+	/**
+	 * @var mysqli Database connection
+	 */
 	private $connection;
 
+	/**
+	 * ModelExchange constructor.
+	 * @param string $hostname
+	 * @param string $username
+	 * @param string $password
+	 * @param string $database
+	 * @param string $port
+	 * @throws Exception
+	 */
 	public function __construct($hostname, $username, $password, $database, $port = '3306') {
 		$this->connection = new \mysqli($hostname, $username, $password, $database, $port);
 
@@ -14,6 +26,22 @@ class ModelExchange {
 		$this->connection->query("SET SQL_MODE = ''");
 	}
 
+	/**
+	 * Optimize tables
+	 * @param array $tables
+	 */
+	public function optimize($tables = array()) {
+		sizeof($tables) != 0 ?: $tables = $this->query('SELECT table_name FROM information_schema.tables WHERE table_type = "base table"');
+		foreach($tables as $table) {
+			$this->query('OPTIMIZE TABLE ' . $table);
+		}
+	}
+
+	/**
+	 * Execute SQL query
+	 * @param string $sql
+	 * @return bool
+	 */
 	public function query($sql) {
 		$query = $this->connection->query($sql);
 
@@ -37,40 +65,56 @@ class ModelExchange {
 		}
 	}
 
-	public function optimize($tables = array()) {
-		sizeof($tables) != 0 ?: $tables = $this->query('SELECT table_name FROM information_schema.tables WHERE table_type = "base table"');
-		foreach($tables as $table) {
-			$this->query('OPTIMIZE TABLE ' . $table);
-		}
-	}
-
-	public function escape($value) {
-		return $this->connection->real_escape_string($value);
-	}
-
+	/**
+	 * Affected rows count
+	 * @return int
+	 */
 	public function countAffected() {
 		return $this->connection->affected_rows;
 	}
 
-	public function getLastId() {
-		return $this->connection->insert_id;
-	}
-
+	/**
+	 * Connection status
+	 * @return bool
+	 */
 	public function connected() {
 		return $this->connection->ping();
 	}
 
+	/**
+	 * ExchangeModel destructor
+	 * Closes connection
+	 */
 	public function __destruct() {
 		$this->connection->close();
 	}
 
+	/**
+	 * Update product
+	 * @param array $data
+	 */
 	public function update($data) {
 		$sku_check = $this->query("SELECT sku from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'");
 		if(empty($sku_check->row)) {
 			$this->addProduct($data);
-		} else $this->editProduct($data);
+		} else {
+			$this->editProduct($data);
+		}
 	}
 
+	/**
+	 * Escape html chars
+	 * @param string $value
+	 * @return string
+	 */
+	public function escape($value) {
+		return $this->connection->real_escape_string($value);
+	}
+
+	/**
+	 * Add new product
+	 * @param array $data
+	 */
 	public function addProduct($data) {
 		$q = $data['quantity'];
 
@@ -83,6 +127,18 @@ class ModelExchange {
 		}
 	}
 
+	/**
+	 * Get last inserted id
+	 * @return int
+	 */
+	public function getLastId() {
+		return $this->connection->insert_id;
+	}
+
+	/**
+	 * Edit existing product by known data
+	 * @param array $data
+	 */
 	public function editProduct($data) {
 		$q = $data['quantity'];
 
