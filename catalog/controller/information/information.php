@@ -45,7 +45,6 @@ class ControllerInformationInformation extends Controller {
 			if(!empty($this->request->files['file']['name']) && is_file($this->request->files['file']['tmp_name'])) {
 				// Sanitize the filename
 				$filename = $this->request->files['file']['name'];
-				var_dump($this->request->files['file']);
 				// Validate the filename length
 				if((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 64)) {
 					$json['error'] = $this->language->get('error_filename');
