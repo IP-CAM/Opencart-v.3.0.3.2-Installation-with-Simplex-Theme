@@ -19,7 +19,7 @@ $_['text_phone_callback'] = 'We can call back';
 $_['text_callback'] = 'Call back';
 $_['text_your_phone']   = 'Your phone';
 $_['text_our_stores'] = 'Our stores';
-$_['text_copyright'] = '<p>© 2019 Simplex.</p>
+$_['text_copyright'] = '<p>© ' . date('Y') . ' Simplex.</p>
                         <p>All rights resserved</p>';
 $_['text_follow_us']   = 'Follow us:';
 

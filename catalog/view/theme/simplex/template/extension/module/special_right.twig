@@ -24,15 +24,15 @@
                         {% if product.hide_price %}
                             <div class="discount">
                                 {% if product.special %}
-                                    <p class="old-price">{{ product.price }}.-</p>
+                                    <p class="old-price">{{ product.price }}</p>
                                     <p class="discount-percent">-{{ product.special_percentage }}%</p>
                                     <p class="discount-val">-{{ product.economy }}</p>
                                 {% endif %}
                             </div>
                             {% if product.special %}
-                                <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
+                                <p class="price">{{ product.special }}<span class="currency">{{ currency }}</span></p>
                             {% else %}
-                                <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
+                                <p class="price">{{ product.price }}<span class="currency">{{ currency }}</span></p>
                             {% endif %}
 
                         {% endif %}
@@ -42,7 +42,7 @@
                 <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
                     <p>{{ button_cart }}</p>
                     <span class="image-container">
-                                                <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
+                                                <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
                 </button>
                 <div class="float-buttons">
@@ -66,91 +66,3 @@
             </div>
         {% endfor %}
     </div>
-
-
-   {# <div class="product">
-        <a href="{{ product.href }}">
-            <h2>{{ heading_title }}</h2>
-
-            {% if product.special %}
-                <span class="sticker stock">%</span>
-            {% endif %}
-            <img alt="" src="{{ product.thumb }}">
-            <h5 class="title">{{ product.name }}</h5>
-
-            <div class="discount">
-                {% if product.special %}
-                    <p class="old-price">{{ product.price }}.-</p>
-                    <p class="discount-percent">-{{ product.special_percentage }}%</p>
-                    <p class="discount-val">-{{ product.economy }}</p>
-                {% endif %}
-            </div>
-            {% if product.special %}
-                <p class="price">{{ product.special }}.-</p>
-            {% else %}
-                <p class="price">{{ product.price }}.-</p>
-            {% endif %}
-            <p class="currency">{{ currency }}</p>
-            <div class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                <p>{{ button_cart }}</p>
-                <span class="image-container">
-                            <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
-                        </span>
-            </div>
-        </a>
-        <div class="float-buttons">
-            <a class="favorite" href="#"><img alt="" src="assets/img/favorites.png"></a>
-            <a class="compare" href="#"><img alt="" src="assets/img/compare.png"></a>
-        </div>
-    </div>#}
-{#
-<div id="discounts">
-    <div class="container-fluid">
-        <div class="block-title">
-            <h2>{{ heading_title }}</h2>
-        </div>
-        <div class="product-slider">
-            {% for product in products %}
-                <div class="product">
-                    <a href="{{ product.href }}">
-                        {% if product.special %}
-                            <span class="sticker stock">{{ product.special_percentage }}%</span>
-                        {% endif %}
-                        <img alt="" src="{{ product.thumb }}">
-                        <h5 class="title">{{ product.name }}</h5>
-
-                        <div class="discount">
-                            {% if product.special %}
-                                <p class="old-price">{{ product.price }}.-</p>
-                                <p class="discount-percent">-{{ product.special_percentage }}%</p>
-                                <p class="discount-val">-{{ product.economy }}</p>
-                            {% endif %}
-                        </div>
-                        {% if product.special %}
-                            <p class="price">{{ product.special }}.-</p>
-                        {% else %}
-                            <p class="price">{{ product.price }}.-</p>
-                        {% endif %}
-                        <p class="currency">{{ currency }}</p>
-                        <div class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                            <p>{{ button_cart }}</p>
-                            <span class="image-container">
-                            <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
-                        </span>
-                        </div>
-                    </a>
-                    <div class="float-buttons">
-                        <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');"><img alt=""
-                                                                                                          src="catalog/view/theme/simplex/assets/img/favorites.png">
-                        </button>
-                        <button class="compare" href="#" onclick="compare.add('{{ product.product_id }}');"><img alt=""
-                                                                                                                 src="catalog/view/theme/simplex/assets/img/compare.png">
-                        </button>
-                    </div>
-                </div>
-            {% endfor %}
-
-        </div>
-    </div>
-</div>
-#}

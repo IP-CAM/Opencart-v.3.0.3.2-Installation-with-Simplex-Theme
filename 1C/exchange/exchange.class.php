@@ -28,7 +28,7 @@ class Exchange {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$return = json_decode(curl_exec($ch), true);
 		curl_close($ch);
-
+		
 		$this->url = $return['url'];
 		$this->login = $return['login'];
 		$this->password = $return['password'];
@@ -46,7 +46,7 @@ class Exchange {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$return = curl_exec($ch);
 		curl_close($ch);
-
+		
 		return $return;
 	}
 

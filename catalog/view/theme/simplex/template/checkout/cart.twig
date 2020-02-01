@@ -99,7 +99,7 @@
                         <td colspan="6" style="text-align: right"><span>{{ totals[0].title }}:</span></td>
                         <td colspan="2">
                             <h5 style="margin-bottom: 0;">
-                                {{ totals[0].text }}.-&nbsp;<small
+                                {{ totals[0].text }}&nbsp;<small
                                         style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>
                             </h5>
                         </td>
@@ -136,9 +136,9 @@
         let product_id = $(this).attr('data-product-id');
         subtotal = calcProductTotal();
         total = parseInt(subtotal);
-        $('.cart-table tfoot h5').html(subtotal + '.- <small style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>');
+        $('.cart-table tfoot h5').html(subtotal + ' <small style="font-size: .625rem;font-weight: 500;">{{ currency }}</small>');
         $('.total[data-product-id=' + product_id + ']').html(sum(product_id));
-        $('.checkout .price h5').html(total + '.- <small>{{ currency }}</small>');
+        $('.checkout .price h5').html(total + ' <small>{{ currency }}</small>');
     });
 </script>
 <script>

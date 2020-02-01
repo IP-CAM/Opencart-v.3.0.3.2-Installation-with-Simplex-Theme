@@ -65,7 +65,6 @@
 									<path d="M89.279,70V69h11.944v1H89.279m0,3V72h11.944v1H89.279m0,3V75h11.944v1H89.279"
 										  transform="translate(-89.281 -69)"></path>
 								</svg>
-							
 							</button>
 						</div>
 						<div class="filter d-lg-none d-block">
@@ -111,17 +110,17 @@
 											{% if product.hide_price %}
 												<div class="discount">
 													{% if product.special %}
-														<p class="old-price">{{ product.price }}.-</p>
+														<p class="old-price">{{ product.price }}</p>
 														<p class="discount-percent">-{{ product.special_percentage }}
 															%</p>
 														<p class="discount-val">-{{ product.economy }}</p>
 													{% endif %}
 												</div>
 												{% if product.special %}
-													<p class="price">{{ product.special }}.- <span
+													<p class="price">{{ product.special }} <span
 																class="currency">{{ currency }}</span></p>
 												{% else %}
-													<p class="price">{{ product.price }}.- <span
+													<p class="price">{{ product.price }} <span
 																class="currency">{{ currency }}</span></p>
 												{% endif %}
 											
@@ -172,13 +171,14 @@
 							<p>{{ text_total }} {{ product_total }} {{ text_pozitions }}</p>
 						</div>
 						<div class="show-more">
-							{% if num_pages>1 %}
+							{% if show_more %}
 								<button id="show-more-button" type="button" data-page="{{ page }}"
 										data-limit="{{ pager_limit }}" data-total="{{ product_total }}"
 										data-num_pages="{{ num_pages }}">
 									<span class="image-container"></span>
-									<p>{{ text_show_more }} <span
-												class="show-more-limit">{{ show_more_limit }}</span> {{ text_pozitions }}</p>
+{#									<p>{{ text_show_more }} <span#}
+{#												class="show-more-limit">{{ show_more_limit }}</span> {{ text_pozitions }}</p>#}
+									<p>{{ show_more_alternative }}</p>
 								</button>
 							{% endif %}
 						</div>
@@ -262,8 +262,9 @@
 		var link = window.location.href;
 		var params = {method: "load_all",};
 		link += '&' + jQuery.param(params);
-		var page = $("#show-more-button").data("page");
-		var page_num = page.data("num_pages");
+		let show_more_button = $("#show-more-button");
+		var page = show_more_button.data("page");
+		var page_num = show_more_button.data("num_pages");
 		var url = new URL(link);
 		var query_string = url.search;
 		var search_params = new URLSearchParams(query_string);

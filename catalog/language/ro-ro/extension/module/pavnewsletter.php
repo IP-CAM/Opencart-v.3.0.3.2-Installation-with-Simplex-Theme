@@ -11,7 +11,7 @@
 $_['entry_sign_up_for_newsletter'] = "Sign Up For Newsletter";
 $_['entry_newsletter'] = "Newsletter";
 $_['button_ok'] = "Ok";
-$_['button_subscribe'] = "Subscrieţi";
+$_['button_subscribe'] = "Abonare";
 $_['button_subscribes'] = "Go";
 $_['default_input_text'] = "Adresa dvs. e-mail ";
 $_['valid_email'] = "Email уыеу штсщкусе!";

@@ -51,7 +51,7 @@ class ControllerExtensionModuleExchange extends Controller {
 		if(isset($this->request->post['module_exchange_receive_url'])) {
 			$data['module_exchange_receive_url'] = $this->request->post['module_exchange_receive_url'];
 		} else {
-			$data['module_exchang_receivee_url'] = $this->config->get('module_exchange_receive_url');
+			$data['module_exchange_receive_url'] = $this->config->get('module_exchange_receive_url');
 		}
 
 		if(isset($this->request->post['module_exchange_send_url'])) {

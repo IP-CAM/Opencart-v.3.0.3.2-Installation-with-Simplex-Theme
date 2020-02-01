@@ -5,7 +5,7 @@
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
                         <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -48,18 +48,18 @@
                     </div>
                     <div class="social">
                         <p>{{ share_information }}:</p>
-                        <script src="catalog/view/javascript/share2/es5-shims.min.js"></script>
-                        <script src="catalog/view/javascript/share2/share.js"></script>
+                        <script src="/catalog/view/javascript/share2/es5-shims.min.js"></script>
+                        <script src="/catalog/view/javascript/share2/share.js"></script>
                         <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter"></div>
 
                     </div>
                 </div>
                 <div id="contact-form" {% if error_name or error_email or error_enquiry %} class="active" style="opacity: 1" {% endif %}>
                     <a class="close" role="button">
-                        <img alt="Close" src="catalog/view/theme/simplex/assets/img/x.png">
+                        <img alt="Close" src="/catalog/view/theme/simplex/assets/img/x.png">
                     </a>
                     <h3>{{ text_contact }}</h3>
-                    <form action="{{ action }}" method="post"  method="post" enctype="multipart/form-data" class="contact-form">
+                    <form action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
                         <label class="required" for="name">{{ entry_name }}</label><input id="name" class="{{ error_name?"has-error" }}"  name="name" placeholder="{{ error_name?error_name }}"  value="{{ name }}" required type="text">
                         <label class="required" for="mail">{{ entry_email }}</label><input id="mail" name="email" class="{{ error_email?"has-error" }}"  name="name" placeholder="{{ error_email?error_email }}" value="{{ email }}"  required type="text">
                         <label for="subject">{{ entry_subject }}</label><input id="subject" value="{{ subject }}" name="subject" type="text">

@@ -64,13 +64,14 @@ class ControllerExtensionModuleSlideshow extends Controller {
 					}
 
 					$manufacturer = $this->model_catalog_manufacturer->getManufacturer($product['manufacturer_id']);
+					
 					if($manufacturer) {
 						$banner['manufacturer_img'] = $this->model_tool_image->resize($manufacturer['image'], 0, 0);
+                        $banner['manufacturer_link'] = $this->url->link('product/manufacturer/info', '&manufacturer_id=' . $manufacturer['manufacturer_id']);
+                        $banner['link_product'] = $this->url->link('product/product', '&product_id=' . $product_id);
 					} else {
 						$banner['manufacturer_img'] = false;
 					}
-					$banner['manufacturer_link'] = $this->url->link('product/manufacturer/info', '&manufacturer_id=' . $manufacturer['manufacturer_id']);
-					$banner['link_product'] = $this->url->link('product/product', '&product_id=' . $product_id);
 				}
 			}
 		}

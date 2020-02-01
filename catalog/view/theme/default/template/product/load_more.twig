@@ -10,15 +10,15 @@
 
                 <div class="discount">
                     {% if product.special %}
-                        <p class="old-price">{{ product.price }}.-</p>
+                        <p class="old-price">{{ product.price }}</p>
                         <p class="discount-percent">-{{ product.special_percentage }}%</p>
                         <p class="discount-val">-{{ product.economy }}</p>
                     {% endif %}
                 </div>
                 {% if product.special %}
-                    <p class="price">{{ product.special }}.-</p>
+                    <p class="price">{{ product.special }}</p>
                 {% else %}
-                    <p class="price">{{ product.price }}.-</p>
+                    <p class="price">{{ product.price }}</p>
                 {% endif %}
                 <p class="currency">{{ currency }}</p>
                 <div class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">

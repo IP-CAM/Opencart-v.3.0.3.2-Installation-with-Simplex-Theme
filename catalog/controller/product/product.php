@@ -508,8 +508,8 @@ class ControllerProductProduct extends Controller {
 
             /* added by it-lab start */
             if ($category_info) {
-                //var_dump($category_info['category_id']);
                 $results = $this->model_catalog_product->getRandomProductsFromCategory($category_info["category_id"],$product_id,10);
+                
                 foreach ($results as $result) {
                     if ($result['image']) {
                         $image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));

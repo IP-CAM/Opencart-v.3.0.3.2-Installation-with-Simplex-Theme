@@ -49,7 +49,6 @@ class ControllerExtensionModulePavmegamenu extends Controller {
 
         $this->data['tree']=$this->model_extension_menu_megamenu->getTreeData( $parent, true, $params, $store_id);
        	$this->data['treemenu'] = self::$MEGAMENU;
-        //var_dump( $this->data['tree']['41'] );
 
 
         $template = 'extension/module/pavmegamenu';
@@ -57,4 +56,3 @@ class ControllerExtensionModulePavmegamenu extends Controller {
 
 	}
 }
-?>
