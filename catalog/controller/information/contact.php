@@ -99,7 +99,7 @@ class ControllerInformationContact extends Controller {
             $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
             
             $mail->setTo($this->config->get('config_email'));
-            $mail->setFrom($this->config->get('config_email'));
+            $mail->setFrom($this->config->get('config_mail_smtp_username'));
             if(!isset($this->request->post['customer_phone'])) {
                 $mail->setReplyTo($this->request->post['email']);
                 $mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
@@ -373,7 +373,7 @@ class ControllerInformationContact extends Controller {
         ];
         
         $data['continue'] = $this->url->link('common/home');
-        
+        $data['heading_title'] = $this->language->get('success_text');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
         $data['content_top'] = $this->load->controller('common/content_top');

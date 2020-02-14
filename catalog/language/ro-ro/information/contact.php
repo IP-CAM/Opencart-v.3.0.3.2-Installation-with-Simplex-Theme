@@ -1,7 +1,7 @@
 <?php
 // Heading
 $_['heading_title']  = 'Contacte';
-
+$_['success_text'] = 'Messajul dvs. a fost expediat cu succes';
 // Text
 $_['text_location']  = 'Locația noastră';
 $_['text_store']     = 'Magazinele noastre fizice';
