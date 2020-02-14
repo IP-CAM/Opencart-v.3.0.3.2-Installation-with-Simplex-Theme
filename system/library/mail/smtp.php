@@ -57,7 +57,7 @@ class Smtp {
 			$message .= $this->html . PHP_EOL;
 			$message .= '--' . $boundary . '_alt--' . PHP_EOL;
 		}
-
+  
 		foreach ($this->attachments as $attachment) {
 			if (file_exists($attachment)) {
 				$handle = fopen($attachment, 'r');

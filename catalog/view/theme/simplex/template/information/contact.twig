@@ -13,18 +13,18 @@
           <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
         {% endif %}
       {% endfor %}
-
-  </ul>
+    
+    </ul>
     <div class="page-title centered">
       <h1>{{ heading_title }}</h1>
       <hr>
     </div>
     <div class="item-container">
       <h4>
-          {{ text_asteptam_in_magazinele }}
+        {{ text_asteptam_in_magazinele }}
       </h4>
       <div id="contacts-buttons" style="max-width: 40rem">
-        <a  id="form-link" role="button" target="#contact-form" ">
+        <a id="form-link" role="button" target="#contact-form">
           <svg viewBox="0 0 139 89" xmlns="http://www.w3.org/2000/svg">
             <path d="M99.854,6.359 C115.045,6.359 123.298,6.359 123.298,6.359 C127.314,6.359 130.570,9.567 130.570,13.525 L130.570,72.449 C130.570,76.406 127.314,79.614 123.298,79.614 L13.929,79.614 C9.913,79.614 6.657,76.406 6.657,72.449 L6.657,13.525 C6.657,9.567 9.913,6.359 13.929,6.359 C13.929,6.359 20.889,6.359 35.224,6.359 C43.627,6.359 90.699,6.359 99.854,6.359 Z"
                   fill="none" fill-rule="evenodd" stroke="#000"
@@ -47,26 +47,26 @@
           {% for footer_title in footer_titles %}
             {% if loop.index==2 %}
               {% if footer_title.sub_title %}
-                  {% for subtitle in footer_title.sub_title %}
-
-                    <a target="_blank" href="{{ subtitle.link }}" style="text-transform: capitalize">
-                      {% if subtitle.title=='facebook' %}
-                        <svg width="9px" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M2.430,8.260 L2.430,14.699 L5.564,14.699 L5.564,8.290 L7.701,8.290 L8.220,5.619 L5.591,5.619 C5.591,5.619 5.591,4.360 5.591,3.655 C5.591,3.386 5.734,3.024 6.170,3.024 C6.848,3.024 7.695,3.024 7.695,3.024 L7.695,0.301 C7.695,0.301 6.317,0.301 4.847,0.301 C3.870,0.301 2.428,1.510 2.428,2.791 C2.428,4.117 2.428,5.540 2.428,5.540 L0.780,5.540 L0.780,8.246 L2.430,8.260 Z"
-                                fill="#000"
-                                fill-rule="evenodd"></path>
-                        </svg>
-                      {% endif %}
-                      {% if subtitle.title=='instagram' %}
-                        <img style="margin-right: 16px" height="16" alt="{{ subtitle.title }}"
-                             src="catalog/view/theme/simplex/assets/img/instagram_black.svg"> {{ ' ' }}
-                      {% endif %}
-                      {{ subtitle.title }}</a>
-                  {% endfor %}
-
+                {% for subtitle in footer_title.sub_title %}
+                  
+                  <a target="_blank" href="{{ subtitle.link }}" style="text-transform: capitalize">
+                    {% if subtitle.title=='facebook' %}
+                      <svg width="9px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.430,8.260 L2.430,14.699 L5.564,14.699 L5.564,8.290 L7.701,8.290 L8.220,5.619 L5.591,5.619 C5.591,5.619 5.591,4.360 5.591,3.655 C5.591,3.386 5.734,3.024 6.170,3.024 C6.848,3.024 7.695,3.024 7.695,3.024 L7.695,0.301 C7.695,0.301 6.317,0.301 4.847,0.301 C3.870,0.301 2.428,1.510 2.428,2.791 C2.428,4.117 2.428,5.540 2.428,5.540 L0.780,5.540 L0.780,8.246 L2.430,8.260 Z"
+                              fill="#000"
+                              fill-rule="evenodd"></path>
+                      </svg>
+                    {% endif %}
+                    {% if subtitle.title=='instagram' %}
+                      <img style="margin-right: 16px" height="16" alt="{{ subtitle.title }}"
+                           src="/catalog/view/theme/simplex/assets/img/instagram_black.svg"> {{ ' ' }}
+                    {% endif %}
+                    {{ subtitle.title }}</a>
+                {% endfor %}
+              
               {% endif %}
             {% endif %}
-
+          
           {% endfor %}
         {% endif %}
         {#<a href="#">
@@ -83,7 +83,7 @@
           <div class="card">
             <a class="anchor-link" role="button" target="#location-{{ location.location_id }}">
               <div class="image-container">
-                <img alt="" src="{{ location.image }}">
+                <img src="{{ location.image }}">
               </div>
               <div class="card-body">
                 <p>{{ location.city }} {{ location.district }}</p>
@@ -92,8 +92,8 @@
           </div>
         {% endfor %}
       </div>
-        <div id="locations">
-          {% for location in locations %}
+      <div id="locations">
+        {% for location in locations %}
           <div id="location-{{ location.location_id }}" class="card">
             <div class="title">
               <div class="city">
@@ -121,21 +121,51 @@
               <div class="open-cell"> {{ location.open }}</div>
             </div>
           </div>
-          {% endfor %}
-        </div>
+        {% endfor %}
+      </div>
       <div id="contact-form">
         <a class="close" role="button">
-          <img alt="Close" src="catalog/view/theme/simplex/assets/img/x.png">
+          <img alt="Close" src="/catalog/view/theme/simplex/assets/img/x.png">
         </a>
         <h3>{{ text_contact }}</h3>
-        <form action="{{ action }}" method="post" action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
-          <label class="required" for="name">{{ entry_name }}</label><input id="name" class="{{ error_name?"has-error" }}"  name="name" placeholder="{{ error_name?error_name }}"  value="{{ name }}" required type="text">
-          <label class="required" for="mail">{{ entry_email }}</label><input id="mail" name="email" class="{{ error_email?"has-error" }}"  name="name" placeholder="{{ error_email?error_email }}" value="{{ email }}"  required type="text">
-          <label for="subject">{{ entry_subject }}</label><input id="subject" value="{{ subject }}" name="subject" type="text">
-          <label class="required" for="message">{{ entry_enquiry }}</label><textarea  id="message" placeholder="{{ error_enquiry?error_enquiry }}" class="{{ error_enquiry?"has-error" }}" name="enquiry" rows="10" id="input-enquiry"
-                                                                                      required>{{ enquiry }}</textarea>
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
+          <label class="required" for="name">{{ entry_name }}</label>
+          <input id="name"
+                 class="{{ error_name?"has-error" }}"
+                 name="name"
+                 placeholder="{{ error_name?error_name }}"
+                 value="{{ name }}"
+                 required
+                 type="text">
+          <label class="required" for="mail">{{ entry_email }}</label>
+          <input id="mail"
+                 name="email"
+                 class="{{ error_email?"has-error" }}"
+                 placeholder="{{ error_email?error_email }}"
+                 value="{{ email }}"
+                 required
+                 type="text">
+          <label for="subject">{{ entry_subject }}</label>
+          <input id="subject"
+                 value="{{ subject }}"
+                 name="subject"
+                 type="text">
+          <label class="required" for="message">{{ entry_enquiry }}</label>
+          <textarea id="message"
+                    placeholder="{{ error_enquiry?error_enquiry }}"
+                    class="{{ error_enquiry?"has-error" }}"
+                    name="enquiry"
+                    rows="10"
+                    id="input-enquiry"
+                    required>{{ enquiry }}</textarea>
           <hr>
-          <label for="file">{{ entry_file }}</label><label class="upload">{{ text_browse_file }}...<input id="file" name="file"  type="file"></label>
+          <label for="file">{{ entry_file }}</label>
+          <label class="upload">
+            {{ text_browse_file }}...
+            <input id="file"
+                   name="file"
+                   type="file">
+          </label>
           <hr>
           <div class="submit">
             <button class="form-submit" type="submit" value="{{ button_submit }}">
@@ -146,58 +176,49 @@
           </div>
         </form>
       </div>
-</div>
-
+    </div>
     <script type="text/javascript"><!--
-
-      $('.upload').on('click', function() {
-        var node = this;
-
-        $('#form-upload').remove();
-
-        $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
-
-      //  $('#form-upload input[name=\'file\']').trigger('click');
-
-        $('#form-upload input[name=\'file\']').on('change', function() {
-          $.ajax({
-            url: 'index.php?route=information/contact/upload',
-            type: 'post',
-            dataType: 'json',
-            data: new FormData($(this).parent()[0]),
-            cache: false,
-            contentType: false,
-            processData: false,
-            beforeSend: function() {
-              $(node).button('loading');
-            },
-            complete: function() {
-              $(node).button('reset');
-            },
-            success: function(json) {
-              $('.text-danger').remove();
-
-              if (json['error']) {
-                $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
-              }
-
-              if (json['success']) {
-                alert(json['success']);
-                $(node).parent().find('.success').html(json['file']);
-                $(node).parent().find('input').attr('value', json['file']);
-              }
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
-          });
+        $('.upload').on('click', function () {
+            var node = this;
+            $('#form-upload').remove();
+            $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+            $('#form-upload input[name=\'file\']').on('change', function () {
+                $.ajax({
+                    url: 'index.php?route=information/contact/upload',
+                    type: 'post',
+                    dataType: 'json',
+                    data: new FormData($(this).parent()[0]),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function () {
+                        $(node).button('loading');
+                    },
+                    complete: function () {
+                        $(node).button('reset');
+                    },
+                    success: function (json) {
+                        $('.text-danger').remove();
+                        if (json['error']) {
+                            $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+                        }
+                        if (json['success']) {
+                            alert(json['success']);
+                            $(node).parent().find('.success').html(json['file']);
+                            $(node).parent().find('input').attr('value', json['file']);
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            });
         });
-      });
-      //--></script>
+        //--></script>
   </div>
 </main>
 <script>
-  $(".open-cell table").attr('class', '').attr('style', '');
+    $(".open-cell table").attr('class', '').attr('style', '');
 </script>
 {{ content_bottom }}
 {{ footer }}

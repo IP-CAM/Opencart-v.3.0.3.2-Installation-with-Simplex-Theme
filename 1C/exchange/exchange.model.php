@@ -1,6 +1,11 @@
 <?php
 
 class ModelExchange {
+    const STATUS_OUT_OF_STOCK = 5;
+    const STATUS_SOON_AVAILABLE = 6;
+    const STATUS_IN_STOCK = 7;
+    const STATUS_PRE_ORDER = 8;
+    
     /**
      * @var mysqli Database connection
      */
@@ -145,6 +150,10 @@ class ModelExchange {
         foreach($data['product_description'] as $language_id => $value) {
             $this->query("INSERT IGNORE INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->escape($value['name']) . "'");
         }
+        
+        if($data['price'] == 0) {
+            $this->setStockStatus($product_id, self::STATUS_OUT_OF_STOCK);
+        }
     }
     
     /**
@@ -165,5 +174,15 @@ class ModelExchange {
      */
     public function editProduct($data) {
         $this->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape($data['model']) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape($data['sku']) . "'");
+    }
+    
+    /**
+     * @param $product_id
+     * @param $stock_status_id
+     *
+     * @throws Exception
+     */
+    public function setStockStatus(int $product_id, int $stock_status_id) {
+        $this->query("UPDATE " . DB_PREFIX . "product set stock_status_id = $stock_status_id WHERE product_id = $product_id");
     }
 }

@@ -123,7 +123,7 @@ class ControllerInformationCategory extends Controller {
         /* added by it-lab start */
         if($category_info['template']) {
             $template = 'information/category_' . $category_info['template'];
-            
+            var_dump($category_info['template']);
             $category_info["description"] = trim(htmlspecialchars_decode($category_info["description"]), '"');
             $data["category"] = $category_info;
             $data['pozitions_numeral'] = $this->getNumeral(count($results));

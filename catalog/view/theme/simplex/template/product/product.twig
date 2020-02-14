@@ -1,577 +1,579 @@
 {{ header }}
 <main>
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                   src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div id="product" class="product-wrapper">
+      <div id="item-card">
+        <div class="item-gallery">
+          {% if thumb or images %}
+            <div class="gallery-images">
+              {% if thumb %}
+                <div class="item-image">
+                  <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"/>
+                </div>
+              {% endif %}
+              {% if images %}
+                {% for image in images %}
+                  <div class="item-image">
+                    <img src="{{ image.thumb }}" title="{{ heading_title }}"
+                         alt="{{ heading_title }}"/>
+                  </div>
                 {% endfor %}
-        </ul>
-        <div id="product" class="product-wrapper">
-            <div id="item-card">
-                <div class="item-gallery">
-                    {% if thumb or images %}
-                        <div class="gallery-images">
-                            {% if thumb %}
-                                <div class="item-image">
-                                    <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"/>
-                                </div>
-                            {% endif %}
-                            {% if images %}
-                                {% for image in images %}
-                                    <div class="item-image">
-                                        <img src="{{ image.thumb }}" title="{{ heading_title }}"
-                                             alt="{{ heading_title }}"/>
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
-
-                        </div>
-                        <ul class="gallery-list">
-                            {% if thumb %}
-                                <li class="item-image">
-                                    <img src="{{ popup }}" title="{{ heading_title }}" alt="{{ heading_title }}"/>
-                                </li>
-                            {% endif %}
-                            {% if images %}
-                                {% for image in images %}
-                                    <li class="item-image">
-                                        <img src="{{ image.popup }}" title="{{ heading_title }}"
-                                             alt="{{ heading_title }}"/>
-                                    </li>
-                                {% endfor %}
-                            {% endif %}
-                        </ul>
-                    {% endif %}
-                    <ul class="sticker">
-                        {% if special_percentage %}
-                            <li>
-                                <span class="stock">%</span>
-                            </li>
-                        {% endif %}
-                        {% if is_new %}
-                            <li>
-                                <span class="new">new</span>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-                <div class="page-title">
-                    <h1>{{ heading_title }}</h1>
-                </div>
-                <div class="item-actions">
-                    <button id="button-wishlist" class="item-action" onclick="wishlist.add('{{ product_id }}');">
-                        <svg height="17" viewBox="0 0 23 24" width="17" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 " fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                        </svg>
-                        {{ button_wishlist }}
-                    </button>
-                    <button id="button-compare" class="item-action" onclick="compare.add('{{ product_id }}');">
-                        <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z" fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                            <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z" fill="none" fill-rule="evenodd" stroke-dasharray="1, 4" stroke-linecap="round" stroke-width="2px"></path>
-                        </svg>
-                        {{ button_compare }}
-                    </button>
-                </div>
-                {% if hide_price %}
-                    <div class="item-price-block">
-
-
-                        {% if special %}
-                            <p class="old-price">{{ price }}</p>
-                            <p class="discount-percent">{{ special_percentage }}%</p>
-                            <p class="discount-val">-{{ economy }}</p>
-                        {% endif %}
-                        {% if special %}
-                            <p class="price">{{ special }}<span class="currency">{{ currency }}</span></p>
-                        {% else %}
-                            <p class="price">{{ price }}<span class="currency">{{ currency }}</span></p>
-                        {% endif %}
-                    </div>
-                    <div class="cart-wrapper">
-
-                        <div class="quantity">
-                            <label><input class="quantity" name="quantity" max="100" min="1" step="1" type="text"
-                                          value="1"></label>
-                            <button id="button-cart" class="add-to-cart" role="button" type="submit" onclick="cart.add({{ product_id }})">{{ button_cart }}
-                                <span class="image-container"><img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png"></span></button>
-                            <input type="hidden" name="product_id" value="{{ product_id }}"/>
-                        </div>
-                    </div>
-                {% endif %}
-                <div id="seller-warranties">
-                    <div class="warranties">
-                        <div class="warranty-item">
-                            <div class="battery">
-                                {% if availability_level >0 %}
-                                    <span class="cell"></span>
-                                {% endif %}
-                                {% if availability_level >1 %}
-                                    <span class="cell"></span>
-                                {% endif %}
-                                {% if availability_level >2 %}
-                                    <span class="cell"></span>
-                                {% endif %}
-
-                            </div>
-                            {% if availability_level %}
-                                <p>
-                                    {{ text_available_online }}
-                                </p>
-{#                                <a id="to-availability" >#}
-{#                                    {{ text_available_in_stores }}#}
-{#                                </a>#}
-                            {% else %}
-                                <p>
-                                    {{ text_not_available }}
-                                </p>
-                            {% endif %}
-
-                        </div>
-                        <div class="warranty-item">
-                            <img alt="" src="catalog/view/theme/simplex/assets/img/car.png">
-                            <p>
-                                {{ text_livrarea_miine }}
-                            </p>
-                            <span>{{ text_gratuit }}</span>
-                        </div>
-                        <div class="warranty-item">
-                            <img alt="" src="catalog/view/theme/simplex/assets/img/warranty.png">
-                            <p>
-                                {{ text_garanty }}
-                            </p>
-                            <span>{{ garanty }} {{ text_months }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="prof-help">
-                    <img alt="" src="/catalog/view/theme/simplex/assets/img/step4.png">
-                    <p>{{ text_professional_installation }}</p>
-                </div>
-                <div class="product-code">
-                    {% if sku %}
-                        <p><span>{{ text_sku }}</span> {{ sku }}</p>
-                    {% endif %}
-                </div>
+              {% endif %}
+            
             </div>
-            <ul class="nav nav-tabs" id="productTabs" role="tablist">
-                {% if description %}
-                    <li class="nav-item">
-                        <a aria-selected="true" class="nav-link active" data-toggle="tab" href="#about1" id="about1-tab"
-                           role="tab">{{ tab_description }}</a>
-                    </li>
-                {% endif %}
-                {% if attribute_groups %}
-                    <li class="nav-item">
-                        <a aria-selected="false" class="nav-link" data-toggle="tab" href="#properties"
-                           id="properties-tab"
-                           role="tab">{{ tab_attribute }}</a>
-                    </li>
-                {% endif %}
-                {% if documentation or downloads %}
-                    <li class="nav-item">
-                        <a aria-selected="false" class="nav-link" data-toggle="tab" href="#documentation"
-                           id="documentation-tab"
-                           role="tab">{{ tab_documentation }}</a>
-                    </li>
-                {% endif %}
-
-{#                <li class="nav-item">#}
-{#                    <a aria-selected="false" class="nav-link" data-toggle="tab" href="#availability"#}
-{#                       id="availability-tab"#}
-{#                       role="tab">{{ tab_availability_in_stocks }}</a>#}
-{#                </li>#}
-                {% if products %}
-                    <li class="nav-item">
-                        <a aria-selected="false" class="nav-link" data-toggle="tab" href="#relative" id="relative-tab"
-                           role="tab">{{ text_related }}</a>
-                    </li>
-                {% endif %}
+            <ul class="gallery-list">
+              {% if thumb %}
+                <li class="item-image">
+                  <img src="{{ popup }}" title="{{ heading_title }}" alt="{{ heading_title }}"/>
+                </li>
+              {% endif %}
+              {% if images %}
+                {% for image in images %}
+                  <li class="item-image">
+                    <img src="{{ image.popup }}" title="{{ heading_title }}"
+                         alt="{{ heading_title }}"/>
+                  </li>
+                {% endfor %}
+              {% endif %}
             </ul>
-            <div class="tab-content accordion" id="productAccordion">
-                <!-- About tab -->
-                {% if description %}
-
-                    <button aria-controls="about1" aria-expanded="false" class="collapsed" data-target="#about1"
-                            data-toggle="collapse" type="button">
-                        {{ tab_description }}
-                    </button>
-                    <div aria-labelledby="about1-tab" class="tab-pane fade show active  collapse"
-                         data-parent="#productAccordion"
-                         id="about1" role="tabpanel">
-                        <div class="content">
-                            <h2>
-                                {{ tab_description }}
-                            </h2>
-                            {{ description }}
-                        </div>
-                    </div>
-                {% endif %}
-                <!-- Properties tab -->
-                {% if attribute_groups %}
-                    <button aria-controls="properties" aria-expanded="false" class="collapsed"
-                            data-target="#properties"
-                            data-toggle="collapse" type="button">
-                        {{ tab_properties }}
-                    </button>
-                    <div aria-labelledby="properties-tab" class="tab-pane fade  collapse"
-                         data-parent="#productAccordion"
-                         id="properties" role="tabpanel">
-                        <div class="content">
-                            <h2>
-                                {{ tab_attribute }}
-                            </h2>
-
-                            {% for attribute_group in attribute_groups %}
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th colspan="2">{{ attribute_group.name }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for attribute in attribute_group.attribute %}
-                                        <tr>
-                                            <td>{{ attribute.name }}</td>
-                                            <td>{{ attribute.text }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            {% endfor %}
-
-
-                        </div>
-                    </div>
-                {% endif %}
-                <!-- Documentation tab -->
-                {% if documentation or downloads %}
-
-                    <button aria-controls="documentation" aria-expanded="false" class="collapsed"
-                            data-target="#documentation"
-                            data-toggle="collapse" type="button">
-                        {{ tab_documentation }}
-                    </button>
-                    <div aria-labelledby="documentation-tab" class="tab-pane fade collapse"
-                         data-parent="#productAccordion"
-                         id="documentation" role="tabpanel">
-                        <div class="content">
-                            <h2>
-                                {{ tab_documentation }}
-                            </h2>
-                            {{ documentation }}
-                            <div class="file-list">
-                                {% for download in downloads %}
-                                    <div class="file-item">
-                                        <a class="file pdf" href="{{ download.href }}">{{ download.name }}</a>
-                                        <p class="file-size">{{ download.size }}</p>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-                <!-- Availability tab -->
-{#                <button aria-controls="availability" aria-expanded="false" class="collapsed"#}
-{#                        data-target="#availability"#}
-{#                        data-toggle="collapse" type="button">#}
-{#                    {{ tab_availability_in_stocks }}#}
-{#                </button>#}
-{#                <div aria-labelledby="availability-tab" class="tab-pane fade collapse"#}
-{#                     data-parent="#productAccordion"#}
-{#                     id="availability" role="tabpanel">#}
-{#                    <div class="content">#}
-{#                        <h2>{{ tab_availability_in_stocks }}</h2>#}
-{#                        <div style="overflow: auto">#}
-{#                            <table>#}
-{#                                <thead>#}
-{#                                <tr>#}
-{#                                    <th style="text-align: center">{{ column_map }}</th>#}
-{#                                    <th>{{ column_address }}</th>#}
-{#                                    <th colspan="2" style="text-align: center;">{{ column_open }}</th>#}
-{#                                    <th style="text-align: center;">{{ column_telefon }}</th>#}
-{#                                    <th style="text-align: center;">{{ column_availability }}</th>#}
-{#                                </tr>#}
-{#                                </thead>#}
-{#                                <tbody>#}
-{#                                {% for ld in location_descriptions %}#}
-{#                                    <tr>#}
-{#                                        <td>#}
-{#                                            {% if ld.image_geo %}#}
-{#                                                <a href="{{ ld.geocode }}" target="_blank"><img#}
-{#                                                            alt="Map" src="{{ ld.image_geo }}"></a>#}
-{#                                            {% elseif ld.is_online %}#}
-{#                                                <span class="online"></span>#}
-{#                                            {% endif %}#}
-{#                                        </td>#}
-{#                                        <td>{{ ld.address }}</td>#}
-{#                                        <td class="open-cell" colspan="2">#}
-{#                                            {{ ld.open }}#}
-{#                                        </td>#}
-{#                                        <td style="text-align: center;">{{ ld.telephone }}</td>#}
-{#                                        <td>#}
-{#                                            <div class="battery">#}
-{#                                                {% if ld.availability_level >0 %}#}
-{#                                                    <span class="cell"></span>#}
-{#                                                {% endif %}#}
-{#                                                {% if ld.availability_level >1 %}#}
-{#                                                    <span class="cell"></span>#}
-{#                                                {% endif %}#}
-{#                                                {% if ld.availability_level >2 %}#}
-{#                                                    <span class="cell"></span>#}
-{#                                                {% endif %}#}
-{#                                            </div>#}
-{#                                        </td>#}
-{#                                    </tr>#}
-{#                                {% endfor %}#}
-
-{#                                </tbody>#}
-{#                            </table>#}
-{#                        </div>#}
-{#                        <!--TODO: Finish Table-->#}
-{#                    </div>#}
-{#                </div><button aria-controls="availability" aria-expanded="false" class="collapsed"#}
-{#                        data-target="#availability"#}
-{#                        data-toggle="collapse" type="button">#}
-{#                    {{ tab_availability_in_stocks }}#}
-{#                </button>#}
-{#                <div aria-labelledby="availability-tab" class="tab-pane fade collapse"#}
-{#                     data-parent="#productAccordion"#}
-{#                     id="availability" role="tabpanel">#}
-{#                    <div class="content">#}
-{#                        <h2>{{ tab_availability_in_stocks }}</h2>#}
-{#                        <div style="overflow: auto">#}
-{#                            <table>#}
-{#                                <thead>#}
-{#                                <tr>#}
-{#                                    <th style="text-align: center">{{ column_map }}</th>#}
-{#                                    <th>{{ column_address }}</th>#}
-{#                                    <th colspan="2" style="text-align: center;">{{ column_open }}</th>#}
-{#                                    <th style="text-align: center;">{{ column_telefon }}</th>#}
-{#                                    <th style="text-align: center;">{{ column_availability }}</th>#}
-{#                                </tr>#}
-{#                                </thead>#}
-{#                                <tbody>#}
-{#                                {% for ld in location_descriptions %}#}
-{#                                    <tr>#}
-{#                                        <td>#}
-{#                                            {% if ld.image_geo %}#}
-{#                                                <a href="{{ ld.geocode }}" target="_blank"><img#}
-{#                                                            alt="Map" src="{{ ld.image_geo }}"></a>#}
-{#                                            {% elseif ld.is_online %}#}
-{#                                                <span class="online"></span>#}
-{#                                            {% endif %}#}
-{#                                        </td>#}
-{#                                        <td>{{ ld.address }}</td>#}
-{#                                        <td class="open-cell" colspan="2">#}
-{#                                            {{ ld.open }}#}
-{#                                        </td>#}
-{#                                        <td style="text-align: center;">{{ ld.telephone }}</td>#}
-{#                                        <td>#}
-{#                                            <div class="battery">#}
-{#                                                {% if ld.availability_level >0 %}#}
-{#                                                    <span class="cell"></span>#}
-{#                                                {% endif %}#}
-{#                                                {% if ld.availability_level >1 %}#}
-{#                                                    <span class="cell"></span>#}
-{#                                                {% endif %}#}
-{#                                                {% if ld.availability_level >2 %}#}
-{#                                                    <span class="cell"></span>#}
-{#                                                {% endif %}#}
-{#                                            </div>#}
-{#                                        </td>#}
-{#                                    </tr>#}
-{#                                {% endfor %}#}
-
-{#                                </tbody>#}
-{#                            </table>#}
-{#                        </div>#}
-{#                        <!--TODO: Finish Table-->#}
-{#                    </div>#}
-{#                </div>#}
-                <!-- Relative tab -->
-                {% if products %}
-                    <button aria-controls="relative" aria-expanded="false" class="collapsed"
-                            data-target="#relative"
-                            data-toggle="collapse" type="button">
-                        {{ text_related }}
-                    </button>
-                    <div aria-labelledby="relative-tab" class="tab-pane fade collapse" data-parent="#productAccordion"
-                         id="relative" role="tabpanel">
-                        <div class="related-slider">
-                            {% for product in products %}
-                                <div class="product">
-                                    <a href="{{ product.href }}">
-                                        <ul class="sticker">
-                                            {% if product.special_percentage %}
-                                                <li>
-                                                    <span class="stock">%</span>
-                                                </li>
-                                            {% endif %}
-                                            {% if product.is_new %}
-                                                <li>
-                                                    <span class="new">new</span>
-                                                </li>
-                                            {% endif %}
-                                        </ul>
-                                        <div class="image-container">
-                                            <img alt="" src="{{ product.thumb }}">
-                                        </div>
-                                        <div class="product-body">
-                                            <h5 class="title">{{ product.name }}</h5>
-                                            {% if product.hide_price %}
-                                                <div class="discount">
-                                                    {% if product.special %}
-                                                        <p class="old-price">{{ product.price }}</p>
-                                                        <p class="discount-percent">-{{ product.special_percentage }}%</p>
-                                                        <p class="discount-val">-{{ product.economy }}</p>
-                                                    {% endif %}
-                                                </div>
-                                                {% if product.special %}
-                                                    <p class="price">{{ product.special }} <span class="currency">{{ currency }}</span></p>
-                                                {% else %}
-                                                    <p class="price">{{ product.price }} <span class="currency">{{ currency }}</span></p>
-                                                {% endif %}
-
-                                            {% endif %}
-                                        </div>
-                                    </a>
-
-                                    <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                                        <p>{{ button_cart }}</p>
-                                        <span class="image-container">
-                                                <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
-                                          </span>
-                                    </button>
-                                    <div class="float-buttons">
-                                        <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
-                                            <svg height="17" viewBox="0 0 23 24" width="17" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
-                                                      fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                                            </svg>
-                                        </button>
-                                        <button class="compare" href="#"
-                                                onclick="compare.add('{{ product.product_id }}');">
-                                            <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
-                                                      fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                                                <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
-                                                      fill="none" fill-rule="evenodd" stroke-dasharray="1, 4" stroke-linecap="round"
-                                                      stroke-width="2px"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
-            <div class="cards">
-                {{ content_top }}
-            </div>
+          {% endif %}
+          <ul class="sticker">
+            {% if special_percentage %}
+              <li>
+                <span class="stock">%</span>
+              </li>
+            {% endif %}
+            {% if is_new %}
+              <li>
+                <span class="new">new</span>
+              </li>
+            {% endif %}
+          </ul>
         </div>
-    </div>
-    <hr>
-    {% if products_asemenea %}
-        <div class="container-fluid">
-            <div class="block-title centered">
-                <h2>{{ text_similar }}</h2>
+        <div class="page-title">
+          <h1>{{ heading_title }}</h1>
+        </div>
+        <div class="item-actions">
+          <button id="button-wishlist" class="item-action" onclick="wishlist.add('{{ product_id }}');">
+            <svg height="17" viewBox="0 0 23 24" width="17" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
+                    fill="none"
+                    fill-rule="evenodd"
+                    stroke-width="2px"></path>
+            </svg>
+            {{ button_wishlist }}
+          </button>
+          <button id="button-compare" class="item-action" onclick="compare.add('{{ product_id }}');">
+            <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
+                    fill="none"
+                    fill-rule="evenodd"
+                    stroke-width="2px"></path>
+              <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
+                    fill="none"
+                    fill-rule="evenodd"
+                    stroke-dasharray="1, 4"
+                    stroke-linecap="round"
+                    stroke-width="2px"></path>
+            </svg>
+            {{ button_compare }}
+          </button>
+        </div>
+        {% if hide_price and price > 0 %}
+          <div class="item-price-block">
+            {% if special %}
+              <p class="old-price">{{ price }}</p>
+              <p class="discount-percent">{{ special_percentage }}%</p>
+              <p class="discount-val">-{{ economy }}</p>
+              <p class="price">{{ special }}<span class="currency">{{ currency }}</span></p>
+            {% else %}
+              <p class="price">{{ price }}<span class="currency">{{ currency }}</span></p>
+            {% endif %}
+          </div>
+          <div class="cart-wrapper">
+            <div class="quantity">
+              <label><input class="quantity" name="quantity" max="100" min="1" step="1" type="text"
+                            value="1"></label>
+              <button id="button-cart"
+                      class="add-to-cart"
+                      role="button"
+                      type="submit"
+                      onclick="cart.add({{ product_id }})">{{ button_cart }}
+                <span class="image-container"><img alt="Cart"
+                                                   src="/catalog/view/theme/simplex/assets/img/cart.png"></span>
+              </button>
+              <input type="hidden" name="product_id" value="{{ product_id }}"/>
             </div>
-            <div class="product-slider">
-                {% for product in products_asemenea %}
-                    <div class="product">
-                        <a href="{{ product.href }}">
-                            <ul class="sticker">
-                                {% if product.special_percentage %}
-                                    <li>
-                                        <span class="stock">%</span>
-                                    </li>
-                                {% endif %}
-                                {% if product.is_new %}
-                                    <li>
-                                        <span class="new">new</span>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                            <div class="image-container">
-                                <img alt="" src="{{ product.thumb }}">
-                            </div>
-                            <div class="product-body">
-                                <h5 class="title">{{ product.name }}</h5>
-                                {% if product.hide_price %}
-                                    <div class="discount">
-                                        {% if product.special %}
-                                            <p class="old-price">{{ product.price }}</p>
-                                            <p class="discount-percent">-{{ product.special_percentage }}%</p>
-                                            <p class="discount-val">-{{ product.economy }}</p>
-                                        {% endif %}
-                                    </div>
-                                    {% if product.special %}
-                                        <p class="price">{{ product.special }} <span class="currency">{{ currency }}</span></p>
-                                    {% else %}
-                                        <p class="price">{{ product.price }} <span class="currency">{{ currency }}</span></p>
-                                    {% endif %}
-
-                                {% endif %}
-                            </div>
-                        </a>
-
-                        <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                            <p>{{ button_cart }}</p>
-                            <span class="image-container">
-                                                <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
-                                          </span>
-                        </button>
-                        <div class="float-buttons">
-                            <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
-                                <svg height="17" viewBox="0 0 23 24" width="17" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
-                                          fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                                </svg>
-                            </button>
-                            <button class="compare" href="#"
-                                    onclick="compare.add('{{ product.product_id }}');">
-                                <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
-                                          fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                                    <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
-                                          fill="none" fill-rule="evenodd" stroke-dasharray="1, 4" stroke-linecap="round"
-                                          stroke-width="2px"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+          </div>
+        {% endif %}
+        <div id="seller-warranties">
+          <div class="warranties">
+            <div class="warranty-item">
+              <div class="battery{% if price == 0 or availability_level == 0 %} empty{% endif %}">
+                {% if price > 0 %}
+                  {% if availability_level >0 %}
+                    <span class="cell"></span>
+                    {% if availability_level >1 %}
+                      <span class="cell"></span>
+                      {% if availability_level >2 %}
+                        <span class="cell"></span>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              </div>
+              <p>
+                {% if availability_level and price >0 %}
+                  {{ text_available_online }}
+                {% else %}
+                  {{ text_not_available }}
+                {% endif %}
+              </p>
+            </div>
+            <div class="warranty-item">
+              <img alt="" src="/catalog/view/theme/simplex/assets/img/car.png">
+              <p>
+                {{ text_livrarea_miine }}
+              </p>
+              <span>{{ text_gratuit }}</span>
+            </div>
+            <div class="warranty-item">
+              <img alt="" src="/catalog/view/theme/simplex/assets/img/warranty.png">
+              <p>
+                {{ text_garanty }}
+              </p>
+              <span>{{ garanty }} {{ text_months }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="prof-help">
+          <img alt="" src="/catalog/view/theme/simplex/assets/img/step4.png">
+          <p>{{ text_professional_installation }}</p>
+        </div>
+        <div class="product-code">
+          {% if sku %}
+            <p><span>{{ text_sku }}</span> {{ sku }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <ul class="nav nav-tabs" id="productTabs" role="tablist">
+        {% if description %}
+          <li class="nav-item">
+            <a aria-selected="true" class="nav-link active" data-toggle="tab" href="#about1" id="about1-tab"
+               role="tab">{{ tab_description }}</a>
+          </li>
+        {% endif %}
+        {% if attribute_groups %}
+          <li class="nav-item">
+            <a aria-selected="false" class="nav-link" data-toggle="tab" href="#properties"
+               id="properties-tab"
+               role="tab">{{ tab_attribute }}</a>
+          </li>
+        {% endif %}
+        {% if documentation or downloads %}
+          <li class="nav-item">
+            <a aria-selected="false" class="nav-link" data-toggle="tab" href="#documentation"
+               id="documentation-tab"
+               role="tab">{{ tab_documentation }}</a>
+          </li>
+        {% endif %}
+        {% if products %}
+          <li class="nav-item">
+            <a aria-selected="false" class="nav-link" data-toggle="tab" href="#relative" id="relative-tab"
+               role="tab">{{ text_related }}</a>
+          </li>
+        {% endif %}
+      </ul>
+      <div class="tab-content accordion" id="productAccordion">
+        <!-- About tab -->
+        {% if description %}
+          
+          <button aria-controls="about1" aria-expanded="false" class="collapsed" data-target="#about1"
+                  data-toggle="collapse" type="button">
+            {{ tab_description }}
+          </button>
+          <div aria-labelledby="about1-tab" class="tab-pane fade show active  collapse"
+               data-parent="#productAccordion"
+               id="about1" role="tabpanel">
+            <div class="content">
+              <h2>
+                {{ tab_description }}
+              </h2>
+              {{ description }}
+            </div>
+          </div>
+        {% endif %}
+        <!-- Properties tab -->
+        {% if attribute_groups %}
+          <button aria-controls="properties" aria-expanded="false" class="collapsed"
+                  data-target="#properties"
+                  data-toggle="collapse" type="button">
+            {{ tab_properties }}
+          </button>
+          <div aria-labelledby="properties-tab" class="tab-pane fade  collapse"
+               data-parent="#productAccordion"
+               id="properties" role="tabpanel">
+            <div class="content">
+              <h2>
+                {{ tab_attribute }}
+              </h2>
+              
+              {% for attribute_group in attribute_groups %}
+                <table>
+                  <thead>
+                  <tr>
+                    <th colspan="2">{{ attribute_group.name }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for attribute in attribute_group.attribute %}
+                    <tr>
+                      <td>{{ attribute.name }}</td>
+                      <td>{{ attribute.text }}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              {% endfor %}
+            
+            
+            </div>
+          </div>
+        {% endif %}
+        <!-- Documentation tab -->
+        {% if documentation or downloads %}
+          
+          <button aria-controls="documentation" aria-expanded="false" class="collapsed"
+                  data-target="#documentation"
+                  data-toggle="collapse" type="button">
+            {{ tab_documentation }}
+          </button>
+          <div aria-labelledby="documentation-tab" class="tab-pane fade collapse"
+               data-parent="#productAccordion"
+               id="documentation" role="tabpanel">
+            <div class="content">
+              <h2>
+                {{ tab_documentation }}
+              </h2>
+              {{ documentation }}
+              <div class="file-list">
+                {% for download in downloads %}
+                  <div class="file-item">
+                    <a class="file pdf" href="{{ download.href }}">{{ download.name }}</a>
+                    <p class="file-size">{{ download.size }}</p>
+                  </div>
                 {% endfor %}
+              </div>
             </div>
-        </div>
-    {% endif %}
-
+          </div>
+        {% endif %}
+        <!-- Availability tab -->
+        {#                <button aria-controls="availability" aria-expanded="false" class="collapsed"#}
+        {#                        data-target="#availability"#}
+        {#                        data-toggle="collapse" type="button">#}
+        {#                    {{ tab_availability_in_stocks }}#}
+        {#                </button>#}
+        {#                <div aria-labelledby="availability-tab" class="tab-pane fade collapse"#}
+        {#                     data-parent="#productAccordion"#}
+        {#                     id="availability" role="tabpanel">#}
+        {#                    <div class="content">#}
+        {#                        <h2>{{ tab_availability_in_stocks }}</h2>#}
+        {#                        <div style="overflow: auto">#}
+        {#                            <table>#}
+        {#                                <thead>#}
+        {#                                <tr>#}
+        {#                                    <th style="text-align: center">{{ column_map }}</th>#}
+        {#                                    <th>{{ column_address }}</th>#}
+        {#                                    <th colspan="2" style="text-align: center;">{{ column_open }}</th>#}
+        {#                                    <th style="text-align: center;">{{ column_telefon }}</th>#}
+        {#                                    <th style="text-align: center;">{{ column_availability }}</th>#}
+        {#                                </tr>#}
+        {#                                </thead>#}
+        {#                                <tbody>#}
+        {#                                {% for ld in location_descriptions %}#}
+        {#                                    <tr>#}
+        {#                                        <td>#}
+        {#                                            {% if ld.image_geo %}#}
+        {#                                                <a href="{{ ld.geocode }}" target="_blank"><img#}
+        {#                                                            alt="Map" src="{{ ld.image_geo }}"></a>#}
+        {#                                            {% elseif ld.is_online %}#}
+        {#                                                <span class="online"></span>#}
+        {#                                            {% endif %}#}
+        {#                                        </td>#}
+        {#                                        <td>{{ ld.address }}</td>#}
+        {#                                        <td class="open-cell" colspan="2">#}
+        {#                                            {{ ld.open }}#}
+        {#                                        </td>#}
+        {#                                        <td style="text-align: center;">{{ ld.telephone }}</td>#}
+        {#                                        <td>#}
+        {#                                            <div class="battery">#}
+        {#                                                {% if ld.availability_level >0 %}#}
+        {#                                                    <span class="cell"></span>#}
+        {#                                                {% endif %}#}
+        {#                                                {% if ld.availability_level >1 %}#}
+        {#                                                    <span class="cell"></span>#}
+        {#                                                {% endif %}#}
+        {#                                                {% if ld.availability_level >2 %}#}
+        {#                                                    <span class="cell"></span>#}
+        {#                                                {% endif %}#}
+        {#                                            </div>#}
+        {#                                        </td>#}
+        {#                                    </tr>#}
+        {#                                {% endfor %}#}
+        
+        {#                                </tbody>#}
+        {#                            </table>#}
+        {#                        </div>#}
+        {#                        <!--TODO: Finish Table-->#}
+        {#                    </div>#}
+        {#                </div><button aria-controls="availability" aria-expanded="false" class="collapsed"#}
+        {#                        data-target="#availability"#}
+        {#                        data-toggle="collapse" type="button">#}
+        {#                    {{ tab_availability_in_stocks }}#}
+        {#                </button>#}
+        {#                <div aria-labelledby="availability-tab" class="tab-pane fade collapse"#}
+        {#                     data-parent="#productAccordion"#}
+        {#                     id="availability" role="tabpanel">#}
+        {#                    <div class="content">#}
+        {#                        <h2>{{ tab_availability_in_stocks }}</h2>#}
+        {#                        <div style="overflow: auto">#}
+        {#                            <table>#}
+        {#                                <thead>#}
+        {#                                <tr>#}
+        {#                                    <th style="text-align: center">{{ column_map }}</th>#}
+        {#                                    <th>{{ column_address }}</th>#}
+        {#                                    <th colspan="2" style="text-align: center;">{{ column_open }}</th>#}
+        {#                                    <th style="text-align: center;">{{ column_telefon }}</th>#}
+        {#                                    <th style="text-align: center;">{{ column_availability }}</th>#}
+        {#                                </tr>#}
+        {#                                </thead>#}
+        {#                                <tbody>#}
+        {#                                {% for ld in location_descriptions %}#}
+        {#                                    <tr>#}
+        {#                                        <td>#}
+        {#                                            {% if ld.image_geo %}#}
+        {#                                                <a href="{{ ld.geocode }}" target="_blank"><img#}
+        {#                                                            alt="Map" src="{{ ld.image_geo }}"></a>#}
+        {#                                            {% elseif ld.is_online %}#}
+        {#                                                <span class="online"></span>#}
+        {#                                            {% endif %}#}
+        {#                                        </td>#}
+        {#                                        <td>{{ ld.address }}</td>#}
+        {#                                        <td class="open-cell" colspan="2">#}
+        {#                                            {{ ld.open }}#}
+        {#                                        </td>#}
+        {#                                        <td style="text-align: center;">{{ ld.telephone }}</td>#}
+        {#                                        <td>#}
+        {#                                            <div class="battery">#}
+        {#                                                {% if ld.availability_level >0 %}#}
+        {#                                                    <span class="cell"></span>#}
+        {#                                                {% endif %}#}
+        {#                                                {% if ld.availability_level >1 %}#}
+        {#                                                    <span class="cell"></span>#}
+        {#                                                {% endif %}#}
+        {#                                                {% if ld.availability_level >2 %}#}
+        {#                                                    <span class="cell"></span>#}
+        {#                                                {% endif %}#}
+        {#                                            </div>#}
+        {#                                        </td>#}
+        {#                                    </tr>#}
+        {#                                {% endfor %}#}
+        
+        {#                                </tbody>#}
+        {#                            </table>#}
+        {#                        </div>#}
+        {#                        <!--TODO: Finish Table-->#}
+        {#                    </div>#}
+        {#                </div>#}
+        <!-- Relative tab -->
+        {% if products %}
+          <button aria-controls="relative" aria-expanded="false" class="collapsed"
+                  data-target="#relative"
+                  data-toggle="collapse" type="button">
+            {{ text_related }}
+          </button>
+          <div aria-labelledby="relative-tab" class="tab-pane fade collapse" data-parent="#productAccordion"
+               id="relative" role="tabpanel">
+            <div class="related-slider">
+              {% for product in products %}
+                <div class="product">
+                  <a href="{{ product.href }}">
+                    <ul class="sticker">
+                      {% if product.special_percentage %}
+                        <li>
+                          <span class="stock">%</span>
+                        </li>
+                      {% endif %}
+                      {% if product.is_new %}
+                        <li>
+                          <span class="new">new</span>
+                        </li>
+                      {% endif %}
+                    </ul>
+                    <div class="image-container">
+                      <img alt="" src="{{ product.thumb }}">
+                    </div>
+                    <div class="product-body">
+                      <h5 class="title">{{ product.name }}</h5>
+                      {% if product.hide_price %}
+                        <div class="discount">
+                          {% if product.special %}
+                            <p class="old-price">{{ product.price }}</p>
+                            <p class="discount-percent">-{{ product.special_percentage }}%</p>
+                            <p class="discount-val">-{{ product.economy }}</p>
+                          {% endif %}
+                        </div>
+                        {% if product.special %}
+                          <p class="price">{{ product.special }} <span class="currency">{{ currency }}</span></p>
+                        {% else %}
+                          <p class="price">{{ product.price }} <span class="currency">{{ currency }}</span></p>
+                        {% endif %}
+                      
+                      {% endif %}
+                    </div>
+                  </a>
+                  
+                  <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}"
+                                                                                               class="add-to-cart"
+                                                                                               onclick="cart.add('{{ product.product_id }}');">
+                    <p>{{ button_cart }}</p>
+                    <span class="image-container">
+                                                <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+                                          </span>
+                  </button>
+                  <div class="float-buttons">
+                    <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
+                      <svg height="17" viewBox="0 0 23 24" width="17" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
+                              fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                      </svg>
+                    </button>
+                    <button class="compare" href="#"
+                            onclick="compare.add('{{ product.product_id }}');">
+                      <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
+                              fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                        <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
+                              fill="none" fill-rule="evenodd" stroke-dasharray="1, 4" stroke-linecap="round"
+                              stroke-width="2px"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <div class="cards">
+        {{ content_top }}
+      </div>
+    </div>
+  </div>
+  <hr>
+  {% if products_asemenea %}
+    <div class="container-fluid">
+      <div class="block-title centered">
+        <h2>{{ text_similar }}</h2>
+      </div>
+      <div class="product-slider">
+        {% for product in products_asemenea %}
+          <div class="product">
+            <a href="{{ product.href }}">
+              <ul class="sticker">
+                {% if product.special_percentage %}
+                  <li>
+                    <span class="stock">%</span>
+                  </li>
+                {% endif %}
+                {% if product.is_new %}
+                  <li>
+                    <span class="new">new</span>
+                  </li>
+                {% endif %}
+              </ul>
+              <div class="image-container">
+                <img alt="" src="{{ product.thumb }}">
+              </div>
+              <div class="product-body">
+                <h5 class="title">{{ product.name }}</h5>
+                {% if product.hide_price %}
+                  <div class="discount">
+                    {% if product.special %}
+                      <p class="old-price">{{ product.price }}</p>
+                      <p class="discount-percent">-{{ product.special_percentage }}%</p>
+                      <p class="discount-val">-{{ product.economy }}</p>
+                    {% endif %}
+                  </div>
+                  {% if product.special %}
+                    <p class="price">{{ product.special }} <span class="currency">{{ currency }}</span></p>
+                  {% else %}
+                    <p class="price">{{ product.price }} <span class="currency">{{ currency }}</span></p>
+                  {% endif %}
+                
+                {% endif %}
+              </div>
+            </a>
+            
+            <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}"
+                                                                                         class="add-to-cart"
+                                                                                         onclick="cart.add('{{ product.product_id }}');">
+              <p>{{ button_cart }}</p>
+              <span class="image-container">
+                <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+              </span>
+            </button>
+            <div class="float-buttons">
+              <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
+                <svg height="17" viewBox="0 0 23 24" width="17" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
+                        fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                </svg>
+              </button>
+              <button class="compare" href="#"
+                      onclick="compare.add('{{ product.product_id }}');">
+                <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
+                        fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                  <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
+                        fill="none" fill-rule="evenodd" stroke-dasharray="1, 4" stroke-linecap="round"
+                        stroke-width="2px"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 </main>
-
-
 {{ column_right }}
-    {{ content_bottom }}
+{{ content_bottom }}
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $(".nav-tabs a:first").trigger('click');
     });
-$("#to-availability").click(function(e) {
-    e.preventDefault();
-    $("#availability-tab").trigger('click');
-    $([document.documentElement, document.body]).animate({
-        scrollTop: $("#availability-tab").offset().top
-    }, 500);
-    return false;
-});
+    $("#to-availability").click(function (e) {
+        e.preventDefault();
+        $("#availability-tab").trigger('click');
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#availability-tab").offset().top
+        }, 500);
+        return false;
+    });
 </script>
 <script type="text/javascript"><!--
     $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
