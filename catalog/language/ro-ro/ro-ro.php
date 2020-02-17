@@ -25,13 +25,13 @@ $_['text_pozitions']        = 'poziții';
 $_['text_show_more']        = 'Arată încă';
 $_['text_total']            = 'Total:';
 $_['text_view_oferts']      = 'Vezi oferte speciale:';
-
+$_['show_more_alternative'] = 'Încarcă mai multe';
 
 // Buttons
 $_['button_address_add']    = 'Adaugă Adresă';
 $_['button_back']           = 'Înapoi';
 $_['button_continue']       = 'Continuă';
-$_['button_cart']           = 'Pune în coş';
+$_['button_cart']           = 'Adaugă în coș';
 $_['button_cancel']         = 'Anulează';
 $_['button_compare']        = 'Compară produsul';
 $_['button_wishlist']       = 'Adaugă in Wishlist';

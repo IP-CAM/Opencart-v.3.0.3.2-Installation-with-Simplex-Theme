@@ -28,7 +28,6 @@ class ControllerAccountNewsletter extends Controller {
             $data['store_id']    = $this->config->get('config_store_id');
             $data['customer_id'] = $customer['customer_id'];
             $data['email']       = $customer['email'];
-            var_dump($data);
             if($this->request->post['newsletter']){
                 if (!$this->model_extension_pavnewsletter_subscribe->checkExists($customer['email'])) {
                     $customer = $this->model_account_customer->getCustomerByEmail($customer['email']);

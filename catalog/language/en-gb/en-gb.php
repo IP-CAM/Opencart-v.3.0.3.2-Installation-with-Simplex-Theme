@@ -25,6 +25,7 @@ $_['text_pozitions']        = 'pozitions';
 $_['text_show_more']        = 'Show';
 $_['text_total']            = 'Total:';
 $_['text_view_oferts']      = 'View special offerts:';
+$_['show_more_alternative'] = 'Load more';
 
 
 // Buttons

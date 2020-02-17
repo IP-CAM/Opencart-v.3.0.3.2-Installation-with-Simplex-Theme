@@ -482,6 +482,7 @@ $('.slick-arrow, .slick-slide').click(function () {
 });
 $('a#form-link').click(function () {
     let screen = $(window);
+
     if (screen.width() > 800) {
         $([document.documentElement, document.body]).animate({
             scrollTop: $($(this).attr('target')).offset().top - 95
@@ -507,7 +508,6 @@ $('#contact-form .close').click(function () {
         $('.noscroll').removeClass('noscroll');
     });
 });
-
 $('.delete').click(function () {
     $(this).parents('.product-column').animate({
         opacity: 0,
@@ -532,9 +532,9 @@ $('.poppup').click(function () {
     }, 500);
 });
 $(window).click(function () {
-    $('#contact-form .close').click();
+    if ($(window).width() < 800)
+        $('#contact-form .close').click();
 });
-
 $('#contact-form, .poppup').click(function (event) {
     event.stopPropagation();
 });
@@ -559,58 +559,36 @@ $(window).resize(function () {
         $('#compare, #favorite').insertAfter('#search').removeClass('nav-item');
         $('#profile').insertAfter('#search');
         $('.navbar-nav #buttons').remove();
-
     }
-});
-$('.product .add-to-cart, .product .favorite').click(function () {
-    /* let width_product = $(this).parent().parent().width();
-     let width_poppup = document.getElementById('success-poppup').offsetWidth;
-     let div = $(this).parent().parent().find('.add-to-cart');
-     let offset_poppup = (width_poppup - width_product) / 2;
-     let divOffset = $(div).offset();
-     $('#success-poppup').css('left', divOffset.left - 20 - offset_poppup).css('top', divOffset.top + 48).css('display', 'block');
- */
 });
 
 function show_succes_popup(product_id, message, type = 'cart') {
-    var button_product_id_selector = "button[data-product_id='" + product_id + "']";
-    var $button = $(button_product_id_selector);
+    let button_product_id_selector = "button[data-product_id='" + product_id + "']";
+    let $button = $(button_product_id_selector);
     if ($button.length) {
-        let width_product = $button.parent().parent().width();
+        $button.parent().parent().width();
         $("#success-poppup").css('display', 'block');
-        let width_poppup = document.getElementById('success-poppup').offsetWidth;
-        let div = $button.parent();//.find('.add-to-cart');
-        let offset_poppup = (width_poppup - width_product) / 2;
+        document.getElementById('success-poppup').offsetWidth;
+        let div = $button.parent();
         let divOffset = $(div).offset();
         let divHeight = $(div).height();
         $("#success-poppup .message").html(message);
         $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
     } else {
-        if (type == 'cart') {
+        if (type === 'cart') {
             $button = $("#button-cart");
         }
-        if (type == 'compare') {
+        if (type === 'compare') {
             $button = $("#button-compare");
         }
-        if (type == 'wishlist') {
+        if (type === 'wishlist') {
             $button = $("#button-wishlist");
         }
         let divOffset = $button.offset();
         let divHeight = $button.height();
 
-
         $("#success-poppup .message").html(message);
         $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
-
-        /*  var horizontalCenter = Math.floor(window.innerWidth / 2);
-          var verticalCener = Math.floor(window.innerHeight / 2);
-          $("#success-poppup").css('display', 'block');
-          let width_poppup = document.getElementById('success-poppup').offsetWidth;
-          let left = horizontalCenter - width_poppup / 2;
-          $("#success-poppup .message").html(message);
-          console.log($('main').scrollTop());
-          $('#success-poppup').css('left', left).css('top', $('main').scrollTop() + verticalCener).css('display', 'block');
-  */
     }
     setTimeout(function () {
         $('#success-poppup').css('display', 'none');
@@ -621,14 +599,12 @@ $('.phone a:not(.tel)').click(function (e) {
     e.preventDefault();
     let div = $(this);
     let divOffset = $(div).offset();
-    console.log(div);
-    console.log(divOffset);
     $('.phone-poppup').css('left', divOffset.left - 130).css('top', divOffset.top - 282).css('display', 'block');
 });
 
 function getCookie(name) {
     let matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        "(?:^|; )" + name.replace(/([.$?*|{}()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }

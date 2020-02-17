@@ -26,6 +26,7 @@ $_['text_pozitions']        = 'позиций';
 $_['text_show_more']        = 'Показать еще';
 $_['text_total']            = 'Всего:';
 $_['text_view_oferts']      = 'Перейти к специальным предложениям:';
+$_['show_more_alternative'] = 'Загрузить мне';
 // Buttons
 $_['button_address_add']    = 'Добавить адрес';
 $_['button_back']           = 'Назад';

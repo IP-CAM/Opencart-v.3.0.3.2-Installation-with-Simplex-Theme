@@ -17,7 +17,7 @@
         <meta name="keywords" content="{{ keywords }}"/>
     {% endif %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
-    <link href="catalog/view/theme/simplex/stylesheet/style.min.css" rel="stylesheet">
+    <link href="/catalog/view/theme/simplex/stylesheet/style.min.css" rel="stylesheet">
     <link rel="image_src" href="{{ base }}{{ thumb }}" />
     {% for style in styles %}
         <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
@@ -25,7 +25,7 @@
     {% for script in scripts %}
         <script src="{{ script }}" type="text/javascript"></script>
     {% endfor %}
-    <script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+    <script src="/catalog/view/javascript/common.js" type="text/javascript"></script>
     {% for link in links %}
         <link href="{{ link.href }}" rel="{{ link.rel }}"/>
     {% endfor %}
@@ -159,7 +159,7 @@
                             </table>
                         </div>
                         <div class="input-telephone">
-                            <h6>Putem să sunăm înapoi</h6>
+                            <h6>{{ text_phone_callback }}</h6>
                             <label><input placeholder="Telefonul dvs." type="text"></label>
                             <button type="submit">
                                 Sunaţi înapoi

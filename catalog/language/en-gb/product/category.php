@@ -24,3 +24,4 @@ $_['text_model_desc']   = 'Model (Z - A)';
 $_['text_limit']        = 'Show:';
 $_['text_date_added_desc'] = 'New';
 $_['text_popular_desc'] = 'Popular';
+$_['show_more_alternative'] = 'Load more';

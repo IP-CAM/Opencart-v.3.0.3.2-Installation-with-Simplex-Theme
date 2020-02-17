@@ -24,3 +24,4 @@ $_['text_model_desc']   = 'Model (Z - A)';
 $_['text_limit']        = 'Afisare';
 $_['text_date_added_desc'] = 'Noutati';
 $_['text_popular_desc'] = 'Populare';
+$_['show_more_alternative'] = 'Încarcă mai multe';

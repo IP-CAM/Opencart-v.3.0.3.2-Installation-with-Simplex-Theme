@@ -14,3 +14,4 @@ $_['text_logout']        = 'Ieșire din cont';
 $_['text_checkout']      = 'Comandă';
 $_['text_search']        = 'Căutare';
 $_['text_all']           = 'Vezi tot în';
+$_['text_phone_callback'] = 'Introdu datele de contact și revenim cu un apel!';

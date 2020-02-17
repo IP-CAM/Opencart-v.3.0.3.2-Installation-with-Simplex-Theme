@@ -22,15 +22,15 @@
                     {% if product.hide_price %}
                         <div class="discount">
                             {% if product.special %}
-                                <p class="old-price">{{ product.price }}.-</p>
+                                <p class="old-price">{{ product.price }}</p>
                                 <p class="discount-percent">-{{ product.special_percentage }}%</p>
                                 <p class="discount-val">-{{ product.economy }}</p>
                             {% endif %}
                         </div>
                         {% if product.special %}
-                            <p class="price">{{ product.special }}.- <span class="currency">{{ currency }}</span></p>
+                            <p class="price">{{ product.special }} <span class="currency">{{ currency }}</span></p>
                         {% else %}
-                            <p class="price">{{ product.price }}.- <span class="currency">{{ currency }}</span></p>
+                            <p class="price">{{ product.price }} <span class="currency">{{ currency }}</span></p>
                         {% endif %}
 
                     {% endif %}

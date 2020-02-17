@@ -322,13 +322,17 @@ footer {
 
 		p a {
 			@include transition(all .125s linear);
-			color       : #a4a4a4;
-			margin-left : 1rem;
+			color : #a4a4a4;
+			//margin-left : 1rem;
 
 			&:hover {
 				border-color : $yellow;
 				color        : $yellow;
 			}
+		}
+
+		p {
+			padding-left : 10px;
 		}
 	}
 }
@@ -1392,7 +1396,7 @@ select {
 		border           : 1px solid #f4f4f4;
 		font-size        : 0.875rem;
 		font-weight      : 600;
-		margin           : 0 1rem;
+		margin           : 0.5rem 1rem;
 		padding          : 1.25rem 1.5rem;
 
 		svg {
@@ -2923,7 +2927,7 @@ select {
 	}
 
 	h2 {
-		font-size     : 2.1875rem;
+		font-size     : 1.75rem;
 		font-weight   : 800;
 		margin-bottom : 35px;
 		margin-top    : 45px;
@@ -4515,7 +4519,6 @@ select {
 
 .phone {
 	&, &-poppup {
-
 		a {
 			@include flex(none, none, center);
 			font-size : 0.875rem;
@@ -4541,13 +4544,13 @@ select {
 		p a {
 			border-bottom : 1px dotted;
 			display       : inline;
-			font-size     : 0.75rem;
+			font-size     : .8125rem;
 			font-weight   : 500;
 			line-height   : 1.5;
-			margin-left   : 1rem;
 		}
 
 		.dropdown-menu {
+			max-width  : 320px;
 			box-shadow : 0 18px 18.69px 2.31px rgba(0, 0, 0, 0.03);
 		}
 
@@ -4650,6 +4653,7 @@ select {
 		padding-right    : 1.25rem;
 		position         : absolute;
 		z-index          : 9999;
+		max-width        : 320px;
 
 		.delete {
 			position : absolute;
@@ -4906,7 +4910,7 @@ select {
 			p {
 				line-height : 1;
 				margin-left : 10px;
-				max-width   : 80px;
+				max-width   : 95px;
 				opacity     : 1;
 			}
 

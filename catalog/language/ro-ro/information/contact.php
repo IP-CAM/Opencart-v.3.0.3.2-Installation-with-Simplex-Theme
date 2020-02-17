@@ -1,7 +1,7 @@
 <?php
 // Heading
-$_['heading_title']  = 'Contactează-ne';
-
+$_['heading_title']  = 'Contacte';
+$_['success_text'] = 'Messajul dvs. a fost expediat cu succes';
 // Text
 $_['text_location']  = 'Locația noastră';
 $_['text_store']     = 'Magazinele noastre fizice';
@@ -13,7 +13,7 @@ $_['text_open']      = 'Program magazin';
 $_['text_comment']   = 'Comentarii';
 $_['text_success']   = '<p>Mesajul tău a fost trimis cu succes către administratorul magazinului!</p>';
 $_['text_telephone_fix']                = 'fix';
-$_['text_required_fields']              = 'Cimpuri obligatoare';
+$_['text_required_fields']              = 'Câmpuri obligatorii';
 $_['text_telephone_consilier_termo']    = 'Consilier termo/hidro';
 $_['text_telephone_consilier_obiecte']  = 'Consilier obiecte sanitar';
 $_['text_asteptam_in_magazinele']       = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
@@ -24,7 +24,7 @@ $_['text_phone_error']="Telegonul greșit ";
 
 // Entry
 $_['entry_name']     = 'Nume';
-$_['entry_email']    = 'E-Mail';
+$_['entry_email']    = 'Adresa de e-mail';
 $_['entry_enquiry']  = 'Mesaj';
 $_['entry_captcha']  = 'Introdu codul din imagine';
 

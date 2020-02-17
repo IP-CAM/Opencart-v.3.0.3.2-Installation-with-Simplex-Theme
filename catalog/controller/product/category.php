@@ -106,9 +106,11 @@ class ControllerProductCategory extends Controller {
 			if(isset($this->request->get['method']) && $this->request->get['method'] == "load_all") {
 				$num_pages = $this->request->get['num_pages'];
 				$limit_to_end = ($num_pages - $page + 1) * $limit;
-			} else {
-				$limit_to_end = $pager_limit;
 			}
+            else {
+				$limit_to_end = $limit;
+			}
+			
 			/* added by it-lab end */
 
 			$filter_data = array(
@@ -270,12 +272,11 @@ class ControllerProductCategory extends Controller {
 			$url .= $this->request->get['order'] ?? '';
 
 			$data['limits'] = array();
-
 			$limits = array_unique(array(
-				$limit,
-				$limit << 1,
-				$limit << 2,
-				$limit << 3
+				$pager_limit,
+				$pager_limit << 1,
+				$pager_limit << 2,
+				$pager_limit << 3
 			));
 
 			sort($limits);
@@ -287,13 +288,7 @@ class ControllerProductCategory extends Controller {
 					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&limit=' . $value)
 				);
 			}
-
-			//$url = '';
-//			$url .= $this->request->get['filter'] ?? '';
-//			$url .= $this->request->get['sort'] ?? '';
-//			$url .= $this->request->get['order'] ?? '';
 			$url .= $this->request->get['limit'] ?? '';
-			$pager_limit = $this->config->get('theme_' . $this->config->get('config_theme') . '_pager_limit') ?? $limit;
 
 			$pagination = new Pagination();
 			$pagination->total = $product_total;
@@ -323,11 +318,12 @@ class ControllerProductCategory extends Controller {
 			/* added by it-lab start */
 			$data['product_total'] = $product_total;
 			if(!isset($this->request->get['method']) || $this->request->get['method'] != "load_all") {
-				$data['num_pages'] = ceil(($product_total - $limit) / $pager_limit) + 1;
+				$data['num_pages'] = ceil($product_total / $limit);
 			}
 			$data['page'] = $page;
 			$data['show_more_limit'] = ($product_total - $page * $pager_limit) < $pager_limit ? $product_total - $page * $pager_limit : $pager_limit;
 			/* added by it-lab end */
+            $data['show_more'] = $product_total - $limit * $page > 0;
 			$data['continue'] = $this->url->link('common/home');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');

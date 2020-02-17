@@ -391,7 +391,7 @@ class ControllerExtensionfooterlink extends Controller {
 		} else {
 			$data['link'] = '';
 		}
-	
+		
 		if (isset($this->request->post['selectheading'])) {
 			$data['selectheading'] = $this->request->post['selectheading'];
 		} elseif (!empty($footerlink_info)) {

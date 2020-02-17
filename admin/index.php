@@ -1,4 +1,5 @@
 <?php
+ini_set("memory_limit", "1536M");
 // Version
 define('VERSION', '3.0.3.2');
 

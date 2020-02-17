@@ -61,10 +61,8 @@ class Image {
 	}
 
 	/**
-     * 
-	 * 
-	 * @return	array
-     */
+	 * @return false|resource
+	 */
 	public function getImage() {
 		return $this->image;
 	}
@@ -141,10 +139,6 @@ class Image {
 			return;
 		}
 
-		$xpos = 0;
-		$ypos = 0;
-		$scale = 1;
-
 		$scale_w = $width / $this->width;
 		$scale_h = $height / $this->height;
 
@@ -169,7 +163,7 @@ class Image {
 
 		$image_old = $this->image;
 		$this->image = imagecreatetruecolor($width, $height);
-
+		
 		if ($this->mime == 'image/png') {
 			imagealphablending($this->image, false);
 			imagesavealpha($this->image, true);

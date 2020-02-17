@@ -24,4 +24,4 @@ $_['text_model_desc']   = 'Модель (Я - А)';
 $_['text_limit']        = 'Показать:';
 $_['text_date_added_desc'] = 'Новинки';
 $_['text_popular_desc'] = 'Популярность';
-
+$_['show_more_alternative'] = "Загрузить больше";

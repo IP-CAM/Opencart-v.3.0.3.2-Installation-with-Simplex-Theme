@@ -3,7 +3,7 @@
 $_['heading_title']    = 'Harta Sitului';
 
 // Text
-$_['text_special']     = 'Oferte Speciale';
+$_['text_special']     = 'Cele mai bune oferte';
 $_['text_account']     = 'Contul Meu';
 $_['text_edit']        = 'Informații cont';
 $_['text_password']    = 'Parolă';

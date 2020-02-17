@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = 'Oferte speciale';
+$_['heading_title']     = 'Cele mai bune oferte';
 
 // Text
 $_['text_empty']        = 'Momentan nu avem oferte speciale.';

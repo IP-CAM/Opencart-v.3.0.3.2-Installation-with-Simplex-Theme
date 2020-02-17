@@ -19,8 +19,6 @@ class ModelCatalogProduct extends Model {
         }
         $sql .= ') ORDER BY RAND() LIMIT 0 ,' . $limit;
 
-        //var_dump($sql);
-
         $product_data = array();
 
         $query = $this->db->query($sql);
@@ -38,8 +36,6 @@ class ModelCatalogProduct extends Model {
         $i=0;
 
         $sql.=' ORDER BY RAND() LIMIT 0 ,'.$limit;
-
-        //var_dump($sql);
 
         $product_data = array();
 

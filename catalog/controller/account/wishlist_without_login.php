@@ -76,7 +76,6 @@ class ControllerAccountWishList extends Controller {
 		
 		foreach ($results as $key => $result) {
 			$product_info = $this->model_catalog_product->getProduct($result['product_id']);
-            //var_dump($product_info);
 
 			if ($product_info) {
 				if ($product_info['image']) {
@@ -98,8 +97,6 @@ class ControllerAccountWishList extends Controller {
 				} else {
 					$price = false;
 				}
-
-                //var_dump($product_info['tax_class_id']);
 
 				if ((float)$product_info['special']) {
 					$special = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
