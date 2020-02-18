@@ -81,7 +81,6 @@ class ControllerInformationCategory extends Controller {
         ];
         $results = $this->model_catalog_information->getInformations($filter_data);
         $total = $this->model_catalog_information->getTotalInformations();
-//		var_dump($total);
         if($category_id == 61) {
             $filter_data['limit'] = $total;
         }
@@ -112,7 +111,7 @@ class ControllerInformationCategory extends Controller {
         }
         $data["limit"] = $limit;
         $data["start"] = $start + count($results);
-        $data["show_load_more_button"] = !(count($results) <= $start + count($results));
+        $data["show_load_more_button"] = !(count($results) < $start + count($results));
         $data['href_category'] = $this->url->link('product/category', 'path=' . $category_id);
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
@@ -123,7 +122,6 @@ class ControllerInformationCategory extends Controller {
         /* added by it-lab start */
         if($category_info['template']) {
             $template = 'information/category_' . $category_info['template'];
-            var_dump($category_info['template']);
             $category_info["description"] = trim(htmlspecialchars_decode($category_info["description"]), '"');
             $data["category"] = $category_info;
             $data['pozitions_numeral'] = $this->getNumeral(count($results));
