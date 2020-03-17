@@ -1,12 +1,11 @@
 {{ header }}
 <main class="gallery-bg">
     <div class="container-fluid">
-
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
                         <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -39,7 +38,6 @@
                             </a>
                         </div>
                     {% endfor %}
-
                 </div>
                 <div id="pager">
                     {% if show_load_more_button %}
@@ -60,7 +58,6 @@
     </div>
 </main>
 <script>
-
     $("#show-more-button").click(function () {
         var start = $("#show-more-button").data('start');
         var limit = $("#show-more-button").data('limit');
