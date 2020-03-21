@@ -165,5 +165,4 @@ if ($config->has('action_pre_action')) {
 $route->dispatch(new Action($config->get('action_router')), new Action($config->get('action_error')));
 
 // Output
-$loader->controller('extension/module/minify/minify');
 $response->output();
