@@ -27,6 +27,7 @@ $_['entry_name']     = 'Nume';
 $_['entry_email']    = 'Adresa de e-mail';
 $_['entry_enquiry']  = 'Mesaj';
 $_['entry_captcha']  = 'Introdu codul din imagine';
+$_['entry_subject']    ="Subiect";
 
 // Email
 $_['email_subject']  = 'Mesaj %s';

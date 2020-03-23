@@ -200,7 +200,6 @@
       <div class="tab-content accordion" id="productAccordion">
         <!-- About tab -->
         {% if description %}
-          
           <button aria-controls="about1" aria-expanded="false" class="collapsed" data-target="#about1"
                   data-toggle="collapse" type="button">
             {{ tab_description }}
@@ -209,9 +208,9 @@
                data-parent="#productAccordion"
                id="about1" role="tabpanel">
             <div class="content">
-              <h2>
-                {{ tab_description }}
-              </h2>
+{#              <h2>#}
+{#                {{ tab_description }}#}
+{#              </h2>#}
               {{ description }}
             </div>
           </div>
