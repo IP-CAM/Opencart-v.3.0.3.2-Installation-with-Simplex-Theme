@@ -190,6 +190,7 @@
 }
 
 @mixin flex($dir: none, $pos_align_x: none, $pos_align_y: none, $wrap: none) {
+	display : -webkit-flex;
 	display : flex;
 	
 	@include flex-align($dir, $pos_align_x, $pos_align_y);
@@ -197,6 +198,7 @@
 }
 
 @mixin inline-flex($dir: none, $pos_align_x: none, $pos_align_y: none, $wrap: none) {
+	display : -webkit-inline-flex;
 	display : inline-flex;
 	
 	@include flex-align($dir, $pos_align_x, $pos_align_y);
