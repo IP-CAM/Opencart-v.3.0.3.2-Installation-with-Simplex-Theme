@@ -19,11 +19,11 @@
     </div>
     <div class="brand-slider">
       {% for banner in banners %}
-      <div class="brand">
-        <a href="{{ banner.link }}">
-          <img alt="{{ banner.title }}" src="{{ banner.image }}">
-        </a>
-      </div>
+        <div class="brand">
+          {% if banner.link %}<a href="{{ banner.link }}">{% endif %}
+            <img alt="{{ banner.title }}" src="{{ banner.image }}">
+          {% if banner.link %}</a>{% endif %}
+        </div>
       {% endfor %}
     </div>
   </div>
