@@ -66,7 +66,6 @@ class ControllerCommonFooter extends Controller {
 
         //$data['locations']=$this->model_localisation_location->getLocationDescriptions();
         $locations = $this->model_localisation_location->getLocationDescriptions();
-        var_dump($locations);
         foreach ($locations as &$location){
             if(!$location['is_online']){
                 $location['contacts_link']=$data['contact']."#location-{$location['location_id']}";
@@ -74,6 +73,7 @@ class ControllerCommonFooter extends Controller {
             }else{
                 $data['open'] = html_entity_decode($location['open'], ENT_QUOTES, 'UTF-8');
             }
+
         }
         /* added by it-lab end */
         return $this->load->view('common/footer', $data);
