@@ -55,7 +55,9 @@ class ControllerStartupSeoUrl extends Controller {
 				if (isset($this->request->get['product_id'])) {
 					$this->request->get['route'] = 'product/product';
 				} elseif (isset($this->request->get['path'])) {
-				    if($this->db->query("SELECT information FROM " . DB_PREFIX . "category where category_id = {$this->request->get['path']}")->row) {
+                    $informations = $this->db->query("SELECT information FROM " . DB_PREFIX . "category where category_id in (". str_replace("_",",", $this->request->get['path']).")")->rows;
+
+                    if($informations[count($informations) - 1]['information']) {
                         $this->request->get['route'] = 'information/category';
                     } else $this->request->get['route'] = 'product/category';
 				} elseif (isset($this->request->get['manufacturer_id'])) {
