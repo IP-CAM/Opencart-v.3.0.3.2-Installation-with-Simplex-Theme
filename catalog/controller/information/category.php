@@ -137,7 +137,7 @@ class ControllerInformationCategory extends Controller
         }
         $data["limit"] = $limit;
         $data["start"] = $start + count($results);
-        $data["show_load_more_button"] = !(count($results) < $start + count($results));
+        $data["show_load_more_button"] = !(count($results) <= $start + count($results));
         $data['href_category'] = $this->url->link('product/category', 'path=' . $category_id);
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
