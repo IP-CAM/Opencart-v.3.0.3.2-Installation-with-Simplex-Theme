@@ -99,10 +99,10 @@
         </div>
     </div>
 </footer>
-<div id="success-poppup">
+<div id="success-popup">
     <p class="message">Adăugat cu succes în wishlist</p>
 </div>
-<div class="phone-poppup">
+<div class="phone-popup">
     <span class="delete">
         <a href="#">
             <svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
@@ -242,15 +242,15 @@
                     if (json["phone_error"]) {
                         $(".input-telephone input").addClass('has-error');
                     } else {
-                        //$(".phone-poppup table").hide(300);
+                        //$(".phone-popup table").hide(300);
                         $(".input-telephone input").removeClass('has-error');
                         $(".input-telephone h6").text(json["result"]);
                         $(".input-telephone input").hide();
                         setTimeout(function () {
-                            $('.phone-poppup').css({'opacity': '0'});
+                            $('.phone-popup').css({'opacity': '0'});
                         }, 1000);
                         setTimeout(function () {
-                            $('.phone-poppup .delete').trigger('click');
+                            $('.phone-popup .delete').trigger('click');
                         }, 1000);
                     }
 

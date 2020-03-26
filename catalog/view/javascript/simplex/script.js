@@ -523,7 +523,7 @@ $('.delete-all').click(function () {
     });
     $(this).remove();
 });
-$('.poppup').click(function () {
+$('.popup').click(function () {
     if ($(window).width() < 768) {
         $('body').addClass('noscroll');
     }
@@ -535,7 +535,7 @@ $(window).click(function () {
     if ($(window).width() < 800)
         $('#contact-form .close').click();
 });
-$('#contact-form, .poppup').click(function (event) {
+$('#contact-form, .popup').click(function (event) {
     event.stopPropagation();
 });
 $('input[type="radio"]').after('<span class="radio"></span>');
@@ -567,13 +567,13 @@ function show_succes_popup(product_id, message, type = 'cart') {
     let $button = $(button_product_id_selector);
     if ($button.length) {
         $button.parent().parent().width();
-        $("#success-poppup").css('display', 'block');
-        document.getElementById('success-poppup').offsetWidth;
+        $("#success-popup").css('display', 'block');
+        document.getElementById('success-popup').offsetWidth;
         let div = $button.parent();
         let divOffset = $(div).offset();
         let divHeight = $(div).height();
-        $("#success-poppup .message").html(message);
-        $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
+        $("#success-popup .message").html(message);
+        $('#success-popup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
     } else {
         if (type === 'cart') {
             $button = $("#button-cart");
@@ -587,11 +587,11 @@ function show_succes_popup(product_id, message, type = 'cart') {
         let divOffset = $button.offset();
         let divHeight = $button.height();
 
-        $("#success-poppup .message").html(message);
-        $('#success-poppup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
+        $("#success-popup .message").html(message);
+        $('#success-popup').css('left', divOffset.left).css('top', divOffset.top + divHeight + 24).css('display', 'block');
     }
     setTimeout(function () {
-        $('#success-poppup').css('display', 'none');
+        $('#success-popup').css('display', 'none');
     }, 2000);
 }
 
@@ -599,7 +599,7 @@ $('.phone a:not(.tel)').click(function (e) {
     e.preventDefault();
     let div = $(this);
     let divOffset = $(div).offset();
-    $('.phone-poppup').css('left', divOffset.left - 130).css('top', divOffset.top - 282).css('display', 'block');
+    $('.phone-popup').css('left', divOffset.left - 130).css('top', divOffset.top - 282).css('display', 'block');
 });
 
 function getCookie(name) {
@@ -626,7 +626,7 @@ $('.done .delete a').click(function () {
 $('#search .search-button').click(function () {
     $(this).parent().toggleClass('active');
 });
-$('.phone-poppup .delete').click(function (e) {
+$('.phone-popup .delete').click(function (e) {
     e.preventDefault();
     $(this).parent().css('display', 'none');
 });

@@ -13,4 +13,4 @@ $_['heading_title'] = 'Latest Information';
 // Text
 $_['text_read']     = 'Read..';
 $_['text_review']   = 'Reviews (%s)';
-$_['text_all_news']   = 'All news';
+$_['text_all_news']   = 'Toate noutățile';
