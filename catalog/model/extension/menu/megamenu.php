@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************
  * @package Pav Megamenu module for Opencart 3.x
  * @version 2.0
@@ -6,16 +7,11 @@
  * @copyright    Copyright (C) September 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
  * @license        GNU General Public License version 2
  *******************************************************/
-function endsWith($haystack, $needle)
-{
-    $length = strlen($needle);
-    if ($length == 0) {
-        return true;
-    }
 
-    return (substr($haystack, -$length) === $needle);
-}
-
+/**
+ * @property Request $request
+ * @property Url $url
+ */
 class ModelExtensionMenuMegamenu extends Model
 {
 
@@ -49,8 +45,9 @@ class ModelExtensionMenuMegamenu extends Model
      */
     public function getChilds($id = null, $store_id = 0)
     {
-        $sql = ' SELECT m.*, md.title,md.description FROM ' . DB_PREFIX . 'megamenu m LEFT JOIN '
-            . DB_PREFIX . 'megamenu_description md ON m.megamenu_id=md.megamenu_id AND language_id=' . (int)$this->config->get('config_language_id');
+        $sql = ' SELECT m.*, md.title,md.description FROM ' . DB_PREFIX . 'megamenu m LEFT JOIN ' . DB_PREFIX . 'megamenu_description md ON m.megamenu_id=md.megamenu_id AND language_id=' . (int)$this->config->get(
+                'config_language_id'
+            );
         $sql .= ' WHERE m.`published`=1 ';
         $sql .= ' AND store_id=' . (int)$store_id;
         if ($id != null) {
@@ -58,6 +55,7 @@ class ModelExtensionMenuMegamenu extends Model
         }
         $sql .= ' ORDER BY `position`  ';
         $query = $this->db->query($sql);
+
         return $query->rows;
     }
 
@@ -107,7 +105,6 @@ class ModelExtensionMenuMegamenu extends Model
 
         $childs = $this->getChilds(null, $store_id);
         foreach ($childs as $child) {
-
             $this->children[$child['parent_id']][] = $child;
         }
 
@@ -149,12 +146,9 @@ class ModelExtensionMenuMegamenu extends Model
                                 $url = substr_replace($url, '', strpos($url, '&tf_'));
                             }
                         }
-                        if (endsWith($link, $url) || endsWith('/'.$link,  $url)) {
-                            $child_node["active"] = true;
+                        $child_node["active"] = $this->isActive($link);
+                        if ($this->isActive($link)) {
                             $tree[$menu['megamenu_id']]["active"] = true;
-                        } else {
-                            $child_node["active"] = false;
-
                         }
                         if (!isset($tree[$menu['megamenu_id']]["active"])) {
                             $tree[$menu['megamenu_id']]["active"] = false;
@@ -165,22 +159,17 @@ class ModelExtensionMenuMegamenu extends Model
                             $child_node['image_svg'] = '';
                         }
                         $tree[$menu['megamenu_id']]['children'][] = $child_node;
-
                     }
-
                 } else {
                     $tree[$menu['megamenu_id']]['children'] = false;
                     $tree[$menu['megamenu_id']]['data_toogle'] = '';
                     $link = htmlspecialchars_decode($menu["link"]);
-                    if (endsWith($link, $url) || endsWith("/" . $link, $url)) {
-                        $tree[$menu['megamenu_id']]["active"] = true;
-                    } else {
-                        $tree[$menu['megamenu_id']]["active"] = false;
-                    }
+                    $tree[$menu['megamenu_id']]["active"] = $this->isActive($link);
                 }
             }
         }
         $this->tree = $tree;
+
         return $this->tree;
     }
 
@@ -209,6 +198,7 @@ class ModelExtensionMenuMegamenu extends Model
                 break;
             }
         }
+
         return $catalog;
     }
 
@@ -217,7 +207,6 @@ class ModelExtensionMenuMegamenu extends Model
      */
     public function getTree($parent = 1, $edit = false, $params, $store_id = 0)
     {
-
         if ($this->output !== false) {
             return $this->output;
         }
@@ -238,7 +227,6 @@ class ModelExtensionMenuMegamenu extends Model
 
         $childs = $this->getChilds(null, $store_id);
         foreach ($childs as $child) {
-
             $this->children[$child['parent_id']][] = $child;
         }
 
@@ -261,30 +249,38 @@ class ModelExtensionMenuMegamenu extends Model
             // render menu at level 0
             $output = '<ul class="nav navbar-nav megamenu">';
             foreach ($data as $menu) {
-
                 // set width align ment
                 if (isset($menu['width']) && !empty($menu['width'])) {
                     $menu['menu_class'] .= ' ' . $menu['width'];
                 }
 
-                if ($this->hasChild($menu['megamenu_id']) || $menu['type_submenu'] == 'html' || $menu['type_submenu'] == 'blkbuilder') {
-
-                    $output .= '<li class="parent dropdown ' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
+                if ($this->hasChild(
+                        $menu['megamenu_id']
+                    ) || $menu['type_submenu'] == 'html' || $menu['type_submenu'] == 'blkbuilder') {
+                    $output .= '<li class="parent dropdown ' . $menu['menu_class'] . '" ' . $this->renderAttrs(
+                            $menu
+                        ) . '>';
 
                     $output .= '<a class="dropdown-toggle" href="' . $this->getLink($menu) . '">';
 
                     if (isset($menu['badges']) && !empty($menu['badges'])) {
-                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get(
+                                $menu['badges']
+                            ) . '</span>';
                     }
 
                     if ($menu['image']) {
                         $output .= '<span class="menu-icon" style="background:url(\'' . $this->shopUrl . "image/" . $menu['image'] . '\') no-repeat;">';
-                    } else if (!empty($menu['icon'])) {
-                        $output .= '<span class="' . $menu['icon'] . '"></span>';
+                    } else {
+                        if (!empty($menu['icon'])) {
+                            $output .= '<span class="' . $menu['icon'] . '"></span>';
+                        }
                     }
                     if ($menu['show_title']) {
                         if (isset($menu['badges']) && !empty($menu['badges'])) {
-                            $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                            $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get(
+                                    $menu['badges']
+                                ) . '</span>';
                         }
                         $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
                     }
@@ -305,18 +301,20 @@ class ModelExtensionMenuMegamenu extends Model
                     $output .= '<li class="' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
 
                     if (isset($menu['badges']) && !empty($menu['badges'])) {
-                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get(
+                                $menu['badges']
+                            ) . '</span>';
                     }
 
                     if ($menu['image']) {
                         $output .= '<span class="menu-icon" style="background:url(\'' . $this->shopUrl . "image/" . $menu['image'] . '\') no-repeat;">';
-                    } else if (!empty($menu['icon'])) {
-                        $output .= '<span class="' . $menu['icon'] . '"></span>';
+                    } else {
+                        if (!empty($menu['icon'])) {
+                            $output .= '<span class="' . $menu['icon'] . '"></span>';
+                        }
                     }
 
                     if ($menu['show_title']) {
-
-
                         $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
                     }
 
@@ -333,17 +331,20 @@ class ModelExtensionMenuMegamenu extends Model
                     $output .= '<a href="' . $this->getLink($menu) . '">';
 
                     if (isset($menu['badges']) && !empty($menu['badges'])) {
-                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                        $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get(
+                                $menu['badges']
+                            ) . '</span>';
                     }
 
                     if ($menu['image']) {
                         $output .= '<span class="menu-icon" style="background:url(\'' . $this->shopUrl . "image/" . $menu['image'] . '\') no-repeat;">';
-                    } else if (!empty($menu['icon'])) {
-                        $output .= '<span class="' . $menu['icon'] . '"></span>';
+                    } else {
+                        if (!empty($menu['icon'])) {
+                            $output .= '<span class="' . $menu['icon'] . '"></span>';
+                        }
                     }
 
                     if ($menu['show_title']) {
-
                         $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
                     }
 
@@ -357,20 +358,18 @@ class ModelExtensionMenuMegamenu extends Model
                 }
             }
             $output .= '</ul>';
-
         }
 
         return $this->output = $output;
-
     }
 
     public function renderBlockbuilder($id)
     {
-
         if (isset($id)) {
             $setting_info = $this->model_setting_module->getModule($id);
             if ($setting_info && $setting_info['status'] && !isset($setting_info['absolute'])) {
                 $output = $this->load->controller('extension/module/pavobuilder', $setting_info);
+
                 return $output;
             }
         }
@@ -381,8 +380,6 @@ class ModelExtensionMenuMegamenu extends Model
      */
     public function genTree($parentId, $level, $parent, $store_id = 0)
     {
-
-
         $attrw = '';
         $class = $parent['is_group'] ? "dropdown-mega" : "dropdown-menu";
 
@@ -394,6 +391,7 @@ class ModelExtensionMenuMegamenu extends Model
             $output = '<div class="' . $class . '" ' . $attrw . '><div class="dropdown-menu-inner content-blockbuilder">';
             $output .= $this->renderBlockbuilder($parent['widget_id']);
             $output .= '</div></div>';
+
             return $output;
         }
 
@@ -401,9 +399,9 @@ class ModelExtensionMenuMegamenu extends Model
             $output = '<div class="' . $class . '"><div class="menu-content content-html">';
             $output .= html_entity_decode($parent['submenu_content']);
             $output .= '</div></div>';
+
             return $output;
         } elseif ($this->hasChild($parentId)) {
-
             $data = $this->getNodes($parentId);
 
             $failse = false;
@@ -412,7 +410,6 @@ class ModelExtensionMenuMegamenu extends Model
             $row = '<ul>';
             foreach ($data as $menu) {
                 if ($level == 1) {
-
                 }
                 $row .= $this->renderMenuContent($menu, $level + 1);
             }
@@ -421,8 +418,8 @@ class ModelExtensionMenuMegamenu extends Model
             $output .= $row;
 
             return $output;
-
         }
+
         return;
     }
 
@@ -431,7 +428,6 @@ class ModelExtensionMenuMegamenu extends Model
      */
     public function renderAttrs($menu)
     {
-
     }
 
     /**
@@ -439,7 +435,6 @@ class ModelExtensionMenuMegamenu extends Model
      */
     public function renderMenuContent($menu, $level)
     {
-
         $output = '';
         $class = $menu['is_group'] ? "mega-group" : "";
         $menu['menu_class'] = ' ' . $class;
@@ -447,11 +442,13 @@ class ModelExtensionMenuMegamenu extends Model
             $output .= '<li class="' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
             $output .= '<div class="menu-content">' . html_entity_decode($menu['content_text']) . '</div>';
             $output .= '</li>';
+
             return $output;
         }
         if ($this->hasChild($menu['megamenu_id'])) {
-
-            $output .= '<li class="parent dropdown-submenu' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
+            $output .= '<li class="parent dropdown-submenu' . $menu['menu_class'] . '" ' . $this->renderAttrs(
+                    $menu
+                ) . '>';
             if ($menu['show_title']) {
                 $output .= '<a class="dropdown-toggle" data-toggle="dropdown" href="' . $this->getLink($menu) . '">';
                 $t = '%s';
@@ -460,7 +457,9 @@ class ModelExtensionMenuMegamenu extends Model
                 }
 
                 if (isset($menu['badges']) && !empty($menu['badges'])) {
-                    $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get($menu['badges']) . '</span>';
+                    $output .= '<span class="badges ' . $menu['badges'] . '">' . $this->language->get(
+                            $menu['badges']
+                        ) . '</span>';
                 }
 
                 $output .= '<span class="menu-title">' . $menu['title'] . "</span>";
@@ -477,7 +476,6 @@ class ModelExtensionMenuMegamenu extends Model
                 $output .= $this->genTree($menu['megamenu_id'], $level, $menu);
             }
             $output .= '</li>';
-
         } else {
             $output .= '<li class="' . $menu['menu_class'] . '" ' . $this->renderAttrs($menu) . '>';
             if ($menu['show_title']) {
@@ -498,12 +496,16 @@ class ModelExtensionMenuMegamenu extends Model
             }
             $output .= '</li>';
         }
+
         return $output;
     }
 
     public function getParentCategory($id_child)
     {
-        $result = $this->db->query("SELECT `parent_id`,`information` FROM `" . DB_PREFIX . "category` WHERE `category_id` = '" . $id_child . "'");
+        $result = $this->db->query(
+            "SELECT `parent_id`,`information` FROM `" . DB_PREFIX . "category` WHERE `category_id` = '" . $id_child . "'"
+        );
+
         return $result->row;
     }
 
@@ -522,6 +524,7 @@ class ModelExtensionMenuMegamenu extends Model
                 if ($parent && isset($parent['information']) && $parent['information']) {
                     return $this->url->link('information/category', 'path=' . $id, 'SSL');
                 }
+
                 return $this->url->link('product/category', 'path=' . $id, 'SSL');
             case 'product':
                 return $this->url->link('product/product', 'product_id=' . $id, 'SSL');
@@ -539,7 +542,6 @@ class ModelExtensionMenuMegamenu extends Model
      */
     public function getResponsiveTree()
     {
-
     }
 
     public function isInstalled()
@@ -551,11 +553,37 @@ class ModelExtensionMenuMegamenu extends Model
             if (file_exists($file)) {
                 require_once($file);
                 $sample = new ModelSampleModule($this->registry);
-                $result = $sample->installSampleQuery($this->config->get('theme_default_directory'), 'pavmegamenu', true);
+                $result = $sample->installSampleQuery(
+                    $this->config->get('theme_default_directory'),
+                    'pavmegamenu',
+                    true
+                );
+
                 return true;
             }
         }
+
         return true;
     }
 
+    public function isActive($needle = null)
+    {
+        if (!isset($needle) || strlen($needle) === 0) {
+            return false;
+        }
+
+        foreach ($this->request->get as $param => $value) {
+            if ($param !== 'route') {
+                $params[$param] = $value;
+            }
+        }
+
+        if (isset($params)) {
+            $link = $this->url->link($this->request->get['route'], $params);
+        } else {
+            $link = $this->url->link($this->request->get['route']);
+        }
+
+        return $link === $needle || strpos($link, $needle) !== false;
+    }
 }
