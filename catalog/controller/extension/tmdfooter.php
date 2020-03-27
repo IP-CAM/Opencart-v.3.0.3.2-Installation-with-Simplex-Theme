@@ -5,7 +5,7 @@ class ControllerExtensionTmdFooter extends Controller {
 		
 		$this->load->model('catalog/information');
 
-		$data['footer_titles'] = $this->model_catalog_information->getFotterTitle();
+		$data['footer_titles'] = $this->model_catalog_information->getFooterTitle();
 		
 		return $this->load->view('extension/tmdfooter', $data);
 	}

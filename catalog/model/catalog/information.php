@@ -39,9 +39,12 @@ class ModelCatalogInformation extends Model {
     }
 
     public function getFotterTitle(){
+        return $this->getFooterTitle();
+    }
+    public function getFooterTitle(){
         $data=array();
         $query =$this->db->query("SELECT ftd.title,ft.footertitle_id FROM " . DB_PREFIX . "footertitle ft LEFT JOIN " . DB_PREFIX . "footertitle_description ftd ON (ft.footertitle_id = ftd.footertitle_id) where ftd.language_id = '" . (int)$this->config->get('config_language_id') . "' and ft.status=1 order by ft.sort_order");
-        
+
         foreach($query->rows as $row){
             $query2 = $this->db->query("SELECT * FROM " . DB_PREFIX . "footerlink f LEFT JOIN " . DB_PREFIX . "footerlink_description fd ON (f.footerlink_id = fd.footerlink_id) where fd.language_id = '" . (int)$this->config->get('config_language_id') . "' and f.status=1 and f.selectheading='".$row['footertitle_id']."' order by f.sort_order");
             $subtitle=array();
@@ -57,7 +60,7 @@ class ModelCatalogInformation extends Model {
 
         return $data;
     }
-    public  function getDateWithMonth($date,$lang){
+    public function getDateWithMonth($date,$lang){
         $date=strtotime($date);
         $mon = date("n", $date);
         $day = date("d", $date);
@@ -76,5 +79,7 @@ class ModelCatalogInformation extends Model {
 
     }
     /* added by it-lab end */
-
+    public function getPreviousInformation($informationId){
+        return $this->db->query("SELECT i.`information_id` FROM `" . DB_PREFIX . "information` i INNER JOIN " . DB_PREFIX . "information_to_category itc on i.`information_id` = itc.`information_id` WHERE `sort_order` > (SELECT `sort_order` FROM " . DB_PREFIX . "information WHERE `information_id` = $informationId) and itc.category_id in (SELECT `category_id` FROM " . DB_PREFIX . "information_to_category WHERE `information_id` = $informationId) ORDER BY sort_order LIMIT 1")->row['information_id'] ?? null;
+    }
 }

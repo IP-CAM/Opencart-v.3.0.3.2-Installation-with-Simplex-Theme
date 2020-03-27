@@ -65,7 +65,6 @@ class ControllerCheckoutSuccess extends Controller
                     $this->language->get('text_customer'),
                     $this->url->link('account/account', '', true),
                     $this->url->link('account/order', '', true),
-                    //                $this->url->link('account/download', '', true),
                     $this->url->link('information/contact')
                 );
             } else {
