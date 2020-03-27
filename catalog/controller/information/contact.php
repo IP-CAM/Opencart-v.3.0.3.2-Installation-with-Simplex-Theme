@@ -314,7 +314,7 @@ class ControllerInformationContact extends Controller {
         $data['header'] = $this->load->controller('common/header');
         /* added by it-lab start */
         $this->load->model('catalog/information');
-        $data['footer_titles'] = $this->model_catalog_information->getFotterTitle();
+        $data['footer_titles'] = $this->model_catalog_information->getFooterTitle();
         $this->response->setOutput($this->load->view('information/contact', $data));
         /* added by it-lab end */
     }
