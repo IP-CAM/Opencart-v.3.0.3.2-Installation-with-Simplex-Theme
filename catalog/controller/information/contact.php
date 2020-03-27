@@ -88,7 +88,7 @@ class ControllerInformationContact extends Controller {
         $this->load->language('information/contact');
         
         $this->document->setTitle($this->language->get('heading_title'));
-        
+
         if(($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
             $mail = new Mail($this->config->get('config_mail_engine'));
             $mail->parameter = $this->config->get('config_mail_parameter');
@@ -98,7 +98,7 @@ class ControllerInformationContact extends Controller {
             $mail->smtp_port = $this->config->get('config_mail_smtp_port');
             $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
             
-            $mail->setTo($this->config->get('config_email'));
+            $mail->setTo($this->config->get('config_mail_smtp_username'));
             $mail->setFrom($this->config->get('config_mail_smtp_username'));
             if(!isset($this->request->post['customer_phone'])) {
                 $mail->setReplyTo($this->request->post['email']);
@@ -341,7 +341,7 @@ class ControllerInformationContact extends Controller {
                 $this->error['captcha'] = $captcha;
             }
         }
-        
+        var_dump($this->error);
         return !$this->error;
     }
     
