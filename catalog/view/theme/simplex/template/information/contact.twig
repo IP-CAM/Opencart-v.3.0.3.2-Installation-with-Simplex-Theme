@@ -13,12 +13,27 @@
           <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
         {% endif %}
       {% endfor %}
-    
+
     </ul>
     <div class="page-title centered">
       <h1>{{ heading_title }}</h1>
       <hr>
     </div>
+    {% if errors %}
+      <div class="alert alert-danger alert-dismissible"><i
+                class="fa fa-exclamation-circle">{{ error_message }}</i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">
+          <svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd"
+                  stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter"
+                  stroke-width="2px"></path>
+            <path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd"
+                  stroke="rgb(178, 181, 182)" stroke-linecap="butt" stroke-linejoin="miter"
+                  stroke-width="2px"></path>
+          </svg>
+        </button>
+      </div>
+    {% endif %}
     <div class="item-container">
       <h4>
         {{ text_asteptam_in_magazinele }}
@@ -48,7 +63,7 @@
             {% if loop.index==2 %}
               {% if footer_title.sub_title %}
                 {% for subtitle in footer_title.sub_title %}
-                  
+
                   <a target="_blank" href="{{ subtitle.link }}" style="text-transform: capitalize">
                     {% if subtitle.title=='facebook' %}
                       <svg width="9px" xmlns="http://www.w3.org/2000/svg">
@@ -63,10 +78,10 @@
                     {% endif %}
                     {{ subtitle.title }}</a>
                 {% endfor %}
-              
+
               {% endif %}
             {% endif %}
-          
+
           {% endfor %}
         {% endif %}
         {#<a href="#">
@@ -133,8 +148,8 @@
           <input id="name"
                  class="{{ error_name?"has-error" }}"
                  name="name"
-                 placeholder="{{ error_name?error_name }}"
-                 value="{{ name }}"
+                 placeholder="{{ error_name ? error_name }}"
+                 value="{{ error_name ? '' : name }}"
                  required
                  type="text">
           <label class="required" for="mail">{{ entry_email }}</label>
@@ -142,7 +157,7 @@
                  name="email"
                  class="{{ error_email?"has-error" }}"
                  placeholder="{{ error_email }}"
-                 value="{{ email }}"
+                 value="{{ error_email ? '' : email }}"
                  required
                  type="text">
           <label for="subject">{{ entry_subject }}</label>
@@ -152,12 +167,12 @@
                  type="text">
           <label class="required" for="message">{{ entry_enquiry }}</label>
           <textarea id="message"
-                    placeholder="{{ error_enquiry?error_enquiry }}"
-                    class="{{ error_enquiry?"has-error" }}"
+                    placeholder="{{ error_enquiry ? error_enquiry }}"
+                    class="{{ error_enquiry ? "has-error" }}"
                     name="enquiry"
                     rows="10"
                     id="input-enquiry"
-                    required>{{ enquiry }}</textarea>
+                    required>{{ error_enquiry ? '' : enquiry }}</textarea>
           <hr>
           <label for="file">{{ entry_file }}</label>
           <label class="upload">
@@ -177,9 +192,9 @@
         </form>
       </div>
     </div>
-    <script type="text/javascript"><!--
+    <script type="text/javascript">
         $('.upload').on('click', function () {
-            var node = this;
+            let node = this;
             $('#form-upload').remove();
             $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
             $('#form-upload input[name=\'file\']').on('change', function () {
@@ -214,11 +229,14 @@
                 });
             });
         });
-        //--></script>
+    </script>
   </div>
 </main>
 <script>
     $(".open-cell table").attr('class', '').attr('style', '');
+    $(".contact-form input, .contact-form textarea").on('input', function () {
+        $(this).removeClass('has-error');
+    })
 </script>
 {{ content_bottom }}
 {{ footer }}

@@ -38,3 +38,4 @@ $_['error_email']    = 'Adresa de e-mail nu este validă!';
 $_['error_enquiry']  = 'Mesajul trebuie să conțină între 10 și 3000 de caractere!';
 $_['error_captcha']  = 'Codul de verificare este greșit!';
 $_['error_customer_phone']  = 'Telefonul incorrect';
+$_['error_warning']  = 'Exista eroare in forma de contact. Verificati daca forma este completata corect';
