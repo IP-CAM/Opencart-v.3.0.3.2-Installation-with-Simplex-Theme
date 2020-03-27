@@ -92,9 +92,10 @@ class ControllerInformationContact extends Controller
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $data['errors'] = !$this->validate();
-
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+        $data['errors'] = $this->request->server['REQUEST_METHOD'] == 'POST';
+        
+        if ($this->request->server['REQUEST_METHOD'] == 'POST' && $this->validate()) {
+            $data['errors'] = false;
             $mail = new Mail($this->config->get('config_mail_engine'));
             $mail->parameter = $this->config->get('config_mail_parameter');
             $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
