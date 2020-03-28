@@ -158,6 +158,9 @@ class ControllerProductProduct extends Controller {
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
+		$data['terms_link'] = $this->url->link("information/information", ['information_id' => 5]);
+        $data['prof_help_link'] = $this->url->link("information/information", ['information_id' => 51]);
+
 		if ($product_info) {
 			$url = '';
 
@@ -509,7 +512,7 @@ class ControllerProductProduct extends Controller {
             /* added by it-lab start */
             if ($category_info) {
                 $results = $this->model_catalog_product->getRandomProductsFromCategory($category_info["category_id"],$product_id,10);
-                
+
                 foreach ($results as $result) {
                     if ($result['image']) {
                         $image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
@@ -589,7 +592,7 @@ class ControllerProductProduct extends Controller {
 			$data['recurrings'] = $this->model_catalog_product->getProfiles($this->request->get['product_id']);
 
 			$this->model_catalog_product->updateViewed($this->request->get['product_id']);
-			
+
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
@@ -773,7 +776,7 @@ class ControllerProductProduct extends Controller {
 		}
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
-		
+
 		$recurring_info = $this->model_catalog_product->getProfile($product_id, $recurring_id);
 
 		$json = array();

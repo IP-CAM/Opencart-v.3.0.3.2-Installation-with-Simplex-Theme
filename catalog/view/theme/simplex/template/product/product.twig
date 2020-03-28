@@ -143,13 +143,13 @@
                 {% endif %}
               </p>
             </div>
-            <div class="warranty-item">
-              <img alt="" src="/catalog/view/theme/simplex/assets/img/car.png">
+            <a class="warranty-item" href="{{ terms_link }}">
+              <img alt="Livrare" src="/catalog/view/theme/simplex/assets/img/car.png">
               <p>
                 {{ text_livrarea_miine }}
               </p>
               <span>{{ text_gratuit }}</span>
-            </div>
+            </a>
             <div class="warranty-item">
               <img alt="" src="/catalog/view/theme/simplex/assets/img/warranty.png">
               <p>
@@ -159,10 +159,10 @@
             </div>
           </div>
         </div>
-        <div class="prof-help">
+        <a class="prof-help" href="{{ prof_help_link }}">
           <img alt="" src="/catalog/view/theme/simplex/assets/img/step4.png">
           <p>{{ text_professional_installation }}</p>
-        </div>
+        </a>
         <div class="product-code">
           {% if sku %}
             <p><span>{{ text_sku }}</span> {{ sku }}</p>
@@ -526,7 +526,6 @@
                 {% endif %}
               </div>
             </a>
-            
             <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}"
                                                                                          class="add-to-cart"
                                                                                          onclick="cart.add('{{ product.product_id }}');">
