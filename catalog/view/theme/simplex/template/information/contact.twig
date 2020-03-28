@@ -5,7 +5,7 @@
       {% for breadcrumb in breadcrumbs %}
         {% if loop.first %}
           <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                   src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                                                   src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
           </li>
         {% elseif loop.last %}
           <li>{{ breadcrumb.text }}</li>
@@ -13,7 +13,6 @@
           <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
         {% endif %}
       {% endfor %}
-
     </ul>
     <div class="page-title centered">
       <h1>{{ heading_title }}</h1>
@@ -98,7 +97,7 @@
           <div class="card">
             <a class="anchor-link" role="button" target="#location-{{ location.location_id }}">
               <div class="image-container">
-                <img src="{{ location.image }}">
+                <img src="{{ location.image }}" alt="{{ location.city }}">
               </div>
               <div class="card-body">
                 <p>{{ location.city }} {{ location.district }}</p>
@@ -146,18 +145,18 @@
         <form action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
           <label class="required" for="name">{{ entry_name }}</label>
           <input id="name"
-                 class="{{ error_name?"has-error" }}"
+                 class="{{ errors and error_name?"has-error" }}"
                  name="name"
-                 placeholder="{{ error_name ? error_name }}"
-                 value="{{ error_name ? '' : name }}"
+                 placeholder="{{ errors and error_name ? error_name }}"
+                 value="{{ errors and error_name ? '' : name }}"
                  required
                  type="text">
           <label class="required" for="mail">{{ entry_email }}</label>
           <input id="mail"
                  name="email"
-                 class="{{ error_email?"has-error" }}"
+                 class="{{ errors and error_email ? "has-error" }}"
                  placeholder="{{ error_email }}"
-                 value="{{ error_email ? '' : email }}"
+                 value="{{ errors and error_email ? '' : email }}"
                  required
                  type="text">
           <label for="subject">{{ entry_subject }}</label>
@@ -167,12 +166,12 @@
                  type="text">
           <label class="required" for="message">{{ entry_enquiry }}</label>
           <textarea id="message"
-                    placeholder="{{ error_enquiry ? error_enquiry }}"
-                    class="{{ error_enquiry ? "has-error" }}"
+                    placeholder="{{ errors and error_enquiry ? error_enquiry }}"
+                    class="{{ errors and error_enquiry ? "has-error" }}"
                     name="enquiry"
                     rows="10"
                     id="input-enquiry"
-                    required>{{ error_enquiry ? '' : enquiry }}</textarea>
+                    required>{{ errors and error_enquiry ? '' : enquiry }}</textarea>
           <hr>
           <label for="file">{{ entry_file }}</label>
           <label class="upload">

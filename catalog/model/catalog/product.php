@@ -33,7 +33,7 @@ class ModelCatalogProduct extends Model {
     public function getRandomProductsFromCategory($category_id,$product_id,$limit){
         $sql="SELECT p.product_id FROM " . DB_PREFIX . "product p JOIN " .DB_PREFIX . "product_to_category p2c ON p.product_id = p2c.product_id WHERE NOT p.product_id =".$product_id;
         $sql.=" AND p2c.category_id = $category_id";
-        $i=0;
+        $sql.=" AND p.status = 1";
 
         $sql.=' ORDER BY RAND() LIMIT 0 ,'.$limit;
 

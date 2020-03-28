@@ -83,10 +83,8 @@ $('.slick-arrow, .slick-slide').click(function () {
     $('#slides-counter p').remove();
     $('#slides-counter').prepend('<p>' + current_slide + '/' + total_slides + '</p>');
 });
-$('a#form-link').click(function () {
-    let screen = $(window);
-
-    if (screen.width() > 800) {
+$('#form-link').click(function () {
+    if ($(window).width() >= 768) {
         $([document.documentElement, document.body]).animate({
             scrollTop: $($(this).attr('target')).offset().top - 95
         }, 500);
@@ -134,9 +132,12 @@ $('.popup').click(function () {
         opacity: 1,
     }, 500);
 });
-$(window).click(function () {
-    if ($(window).width() < 800)
-        $('#contact-form .close').click();
+$(document).on("click", function(event){
+    if($(event.target).attr('class') === 'overlay'){
+        if ($(window).width() < 768) {
+            $('#contact-form .close').click();
+        }
+    }
 });
 $('#contact-form, .popup').click(function (event) {
     event.stopPropagation();
@@ -434,7 +435,40 @@ $(document).ready(function () {
                 }
             }
         ]
-
+    });
+    $('#about-us .cards').slick({
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        adaptiveHeight: false,
+        prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+            '        xmlns="http://www.w3.org/2000/svg"\n' +
+            '        width="14px" height="22px">\n' +
+            '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+            '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+            '</svg></button>',
+        nextArrow: '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+            '        xmlns="http://www.w3.org/2000/svg"\n' +
+            '        width="14px" height="22px">\n' +
+            '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+            '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+            '</svg></button>',
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+        ]
     });
     $('#slider .main-slider').slick({
         dots: false,

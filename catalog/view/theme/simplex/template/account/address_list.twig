@@ -1,51 +1,74 @@
 {{ header }}
 <main>
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title">
-            <h1>{{ heading_title }}</h1>
-        </div>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li>
+            <a href="{{ breadcrumb.href }}">
+              <img alt="Home" src="/catalog/view/theme/simplex/assets/img/home.svg">
+            </a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
     </div>
-    <div class="container-fluid">
-        <div id="account">
-
-            <a id="add" href="{{ add }}" >{{ button_new_address }}</a>
-            <br>
-            <div style="overflow: auto">
-                <table style="min-width: 620px">
-                    <thead>
-                    <tr>
-                        <th>{{ text_address }}</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for result in addresses %}
-                        <tr>
-                            <td class="text-left">{{ result.address }}</td>
-                            <td class="text-right"><a href="{{ result.update }}"
-                                                      class="btn btn-info">{{ button_edit }}</a> &nbsp; <a
-                                        href="{{ result.delete }}" class="btn btn-danger">{{ button_delete }}</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <a class="back" href="{{ back }}">{#Înapoi la Cont Personal#}{{ button_back }}</a>
+  </div>
+  <div class="container-fluid">
+    <div id="account">
+      <a id="add" href="{{ add }}">{{ button_new_address }}</a>
+      <br>
+      {% if addresses %}
+        <div style="overflow: auto">
+          <table style="min-width: 620px">
+            <thead>
+            <tr>
+              <th>{{ text_address_book }}</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for result in addresses %}
+              <tr>
+                <td class="text-left" style="width: 100%;">{{ result.address }}</td>
+                <td class="text-right">
+                  <a href="{{ result.update }}" class="btn btn-info">{{ button_edit }}</a>
+                  <br>
+                  <a href="{{ result.delete }}" class="btn btn-danger">{{ button_delete }}</a>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
         </div>
+      {% else %}
+        <div id="success">
+          <div id="ok">
+            <svg height="30px" width="38px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.000,31.000 C1.000,31.000 6.636,21.000 18.000,21.000 C29.364,21.000 36.000,35.000 36.000,35.000 "
+                    fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
+                    stroke-linecap="butt" stroke-linejoin="miter"
+                    stroke-width="2px"></path>
+              <path d="M28.500,0.000 C30.433,0.000 32.000,1.567 32.000,3.500 C32.000,5.433 30.433,7.000 28.500,7.000 C26.567,7.000 25.000,5.433 25.000,3.500 C25.000,1.567 26.567,0.000 28.500,0.000 Z"
+                    fill="rgb(178, 181, 182)"
+                    fill-rule="evenodd"></path>
+              <path d="M9.500,0.000 C11.433,0.000 13.000,1.567 13.000,3.500 C13.000,5.433 11.433,7.000 9.500,7.000 C7.567,7.000 6.000,5.433 6.000,3.500 C6.000,1.567 7.567,0.000 9.500,0.000 Z"
+                    fill="rgb(178, 181, 182)"
+                    fill-rule="evenodd"></path>
+            </svg>
+          </div>
+          <h1>{{ text_empty }}</h1>
+        </div>
+      {% endif %}
+      <a class="back" href="{{ back }}">{{ button_back }}</a>
     </div>
+  </div>
 </main>
 {{ content_bottom }}
 {{ footer }}

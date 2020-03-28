@@ -1,16 +1,16 @@
 <?php
 
 /******************************************************
- * @package Pav Megamenu module for Opencart 3.x
- * @version 2.0
- * @author http://www.pavothemes.com
- * @copyright    Copyright (C) September 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
+ * @package        Pav Megamenu module for Opencart 3.x
+ * @version        2.0
+ * @author         http://www.pavothemes.com
+ * @copyright      Copyright (C) September 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
  * @license        GNU General Public License version 2
  *******************************************************/
 
 /**
  * @property Request $request
- * @property Url $url
+ * @property Url     $url
  */
 class ModelExtensionMenuMegamenu extends Model
 {
@@ -39,43 +39,36 @@ class ModelExtensionMenuMegamenu extends Model
     private $_editStringCol = '';
 
     private $_isLiveEdit = true;
-
-    /**
-     *
-     */
-    public function getChilds($id = null, $store_id = 0)
-    {
-        $sql = ' SELECT m.*, md.title,md.description FROM ' . DB_PREFIX . 'megamenu m LEFT JOIN ' . DB_PREFIX . 'megamenu_description md ON m.megamenu_id=md.megamenu_id AND language_id=' . (int)$this->config->get(
-                'config_language_id'
-            );
-        $sql .= ' WHERE m.`published`=1 ';
-        $sql .= ' AND store_id=' . (int)$store_id;
-        if ($id != null) {
-            $sql .= ' AND parent_id=' . (int)$id;
-        }
-        $sql .= ' ORDER BY `position`  ';
-        $query = $this->db->query($sql);
-
-        return $query->rows;
-    }
-
-    /**
-     *
-     */
-    public function hasChild($id)
-    {
-        return isset($this->children[$id]);
-    }
-
-    /**
-     *
-     */
-    public function getNodes($id)
-    {
-        return $this->children[$id];
-    }
-
     private $tree = null;
+
+    public function getSubMenu($class)
+    {
+        $params = $this->config->get('params');
+
+        $this->load->model('setting/setting');
+        $params = $this->model_setting_setting->getSetting('pavmegamenu_params');
+
+
+        if (isset($params['pavmegamenu_params']) && !empty($params['pavmegamenu_params'])) {
+            $params = json_decode($params['pavmegamenu_params']);
+        }
+
+        //get store
+        $store_id = $this->config->get('config_store_id');
+
+
+        $parent = '1';
+        $tree = $this->getTreeData($parent, true, $params, $store_id);
+        $catalog = array();
+        foreach ($tree as $key => $menu) {
+            if ($menu['menu_class'] == $class) {
+                $catalog = $menu;
+                break;
+            }
+        }
+
+        return $catalog;
+    }
 
     public function getTreeData($parent = 1, $edit = false, $params, $store_id = 0)
     {
@@ -173,33 +166,122 @@ class ModelExtensionMenuMegamenu extends Model
         return $this->tree;
     }
 
-    public function getSubMenu($class)
+    public function isInstalled()
     {
-        $params = $this->config->get('params');
+        $sql = " SHOW TABLES LIKE '" . DB_PREFIX . "megamenu'";
+        $query = $this->db->query($sql);
+        if (count($query->rows) <= 0) {
+            $file = dirname(DIR_APPLICATION) . '/admin/model/sample/module.php';
+            if (file_exists($file)) {
+                require_once($file);
+                $sample = new ModelSampleModule($this->registry);
+                $result = $sample->installSampleQuery(
+                    $this->config->get('theme_default_directory'),
+                    'pavmegamenu',
+                    true
+                );
 
-        $this->load->model('setting/setting');
-        $params = $this->model_setting_setting->getSetting('pavmegamenu_params');
-
-
-        if (isset($params['pavmegamenu_params']) && !empty($params['pavmegamenu_params'])) {
-            $params = json_decode($params['pavmegamenu_params']);
-        }
-
-        //get store
-        $store_id = $this->config->get('config_store_id');
-
-
-        $parent = '1';
-        $tree = $this->getTreeData($parent, true, $params, $store_id);
-        $catalog = array();
-        foreach ($tree as $key => $menu) {
-            if ($menu['menu_class'] == $class) {
-                $catalog = $menu;
-                break;
+                return true;
             }
         }
 
-        return $catalog;
+        return true;
+    }
+
+    /**
+     *
+     */
+    public function getChilds($id = null, $store_id = 0)
+    {
+        $sql = ' SELECT m.*, md.title,md.description FROM ' . DB_PREFIX . 'megamenu m LEFT JOIN ' . DB_PREFIX . 'megamenu_description md ON m.megamenu_id=md.megamenu_id AND language_id=' . (int)$this->config->get(
+                'config_language_id'
+            );
+        $sql .= ' WHERE m.`published`=1 ';
+        $sql .= ' AND store_id=' . (int)$store_id;
+        if ($id != null) {
+            $sql .= ' AND parent_id=' . (int)$id;
+        }
+        $sql .= ' ORDER BY `position`  ';
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
+
+    /**
+     *
+     */
+    public function hasChild($id)
+    {
+        return isset($this->children[$id]);
+    }
+
+    /**
+     *
+     */
+    public function getNodes($id)
+    {
+        return $this->children[$id];
+    }
+
+    /**
+     *
+     */
+    public function getLink($menu)
+    {
+        $id = (int)$menu['item'];
+        switch ($menu['type']) {
+            case 'category':
+                $parent = $this->getParentCategory($id);
+                if ($parent && isset($parent['parent_id']) && $parent['parent_id']) {
+                    $id = $parent['parent_id'] . '_' . $id;
+                }
+                if ($parent && isset($parent['information']) && $parent['information']) {
+                    return $this->url->link('information/category', 'path=' . $id, 'SSL');
+                }
+
+                return $this->url->link('product/category', 'path=' . $id, 'SSL');
+            case 'product':
+                return $this->url->link('product/product', 'product_id=' . $id, 'SSL');
+            case 'information':
+                return $this->url->link('information/information', 'information_id=' . $id, 'SSL');
+            case 'manufacturer':
+                return $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $id, 'SSL');
+            default:
+                return $menu['url'];
+        }
+    }
+
+    public function getParentCategory($id_child)
+    {
+        $result = $this->db->query(
+            "SELECT `parent_id`,`information` FROM `" . DB_PREFIX . "category` WHERE `category_id` = '" . $id_child . "'"
+        );
+
+        return $result->row;
+    }
+
+    public function isActive($needle = null)
+    {
+        if (!isset($needle) || strlen($needle) === 0) {
+            return false;
+        }
+
+        foreach ($this->request->get as $param => $value) {
+            if ($param !== 'route') {
+                $params[$param] = $value;
+            }
+        }
+        if (isset($this->request->get['route'])) {
+            if (isset($params)) {
+                $link = $this->url->link($this->request->get['route'], $params);
+            } else {
+                $link = $this->url->link($this->request->get['route']);
+            }
+
+            return $link === $needle || strpos($link, $needle) !== false;
+        }
+
+        return false;
     }
 
     /**
@@ -363,16 +445,11 @@ class ModelExtensionMenuMegamenu extends Model
         return $this->output = $output;
     }
 
-    public function renderBlockbuilder($id)
+    /**
+     *
+     */
+    public function renderAttrs($menu)
     {
-        if (isset($id)) {
-            $setting_info = $this->model_setting_module->getModule($id);
-            if ($setting_info && $setting_info['status'] && !isset($setting_info['absolute'])) {
-                $output = $this->load->controller('extension/module/pavobuilder', $setting_info);
-
-                return $output;
-            }
-        }
     }
 
     /**
@@ -423,11 +500,16 @@ class ModelExtensionMenuMegamenu extends Model
         return;
     }
 
-    /**
-     *
-     */
-    public function renderAttrs($menu)
+    public function renderBlockbuilder($id)
     {
+        if (isset($id)) {
+            $setting_info = $this->model_setting_module->getModule($id);
+            if ($setting_info && $setting_info['status'] && !isset($setting_info['absolute'])) {
+                $output = $this->load->controller('extension/module/pavobuilder', $setting_info);
+
+                return $output;
+            }
+        }
     }
 
     /**
@@ -500,90 +582,10 @@ class ModelExtensionMenuMegamenu extends Model
         return $output;
     }
 
-    public function getParentCategory($id_child)
-    {
-        $result = $this->db->query(
-            "SELECT `parent_id`,`information` FROM `" . DB_PREFIX . "category` WHERE `category_id` = '" . $id_child . "'"
-        );
-
-        return $result->row;
-    }
-
-    /**
-     *
-     */
-    public function getLink($menu)
-    {
-        $id = (int)$menu['item'];
-        switch ($menu['type']) {
-            case 'category':
-                $parent = $this->getParentCategory($id);
-                if ($parent && isset($parent['parent_id']) && $parent['parent_id']) {
-                    $id = $parent['parent_id'] . '_' . $id;
-                }
-                if ($parent && isset($parent['information']) && $parent['information']) {
-                    return $this->url->link('information/category', 'path=' . $id, 'SSL');
-                }
-
-                return $this->url->link('product/category', 'path=' . $id, 'SSL');
-            case 'product':
-                return $this->url->link('product/product', 'product_id=' . $id, 'SSL');
-            case 'information':
-                return $this->url->link('information/information', 'information_id=' . $id, 'SSL');
-            case 'manufacturer':
-                return $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $id, 'SSL');
-            default:
-                return $menu['url'];
-        }
-    }
-
     /**
      *
      */
     public function getResponsiveTree()
     {
-    }
-
-    public function isInstalled()
-    {
-        $sql = " SHOW TABLES LIKE '" . DB_PREFIX . "megamenu'";
-        $query = $this->db->query($sql);
-        if (count($query->rows) <= 0) {
-            $file = dirname(DIR_APPLICATION) . '/admin/model/sample/module.php';
-            if (file_exists($file)) {
-                require_once($file);
-                $sample = new ModelSampleModule($this->registry);
-                $result = $sample->installSampleQuery(
-                    $this->config->get('theme_default_directory'),
-                    'pavmegamenu',
-                    true
-                );
-
-                return true;
-            }
-        }
-
-        return true;
-    }
-
-    public function isActive($needle = null)
-    {
-        if (!isset($needle) || strlen($needle) === 0) {
-            return false;
-        }
-
-        foreach ($this->request->get as $param => $value) {
-            if ($param !== 'route') {
-                $params[$param] = $value;
-            }
-        }
-
-        if (isset($params)) {
-            $link = $this->url->link($this->request->get['route'], $params);
-        } else {
-            $link = $this->url->link($this->request->get['route']);
-        }
-
-        return $link === $needle || strpos($link, $needle) !== false;
     }
 }

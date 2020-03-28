@@ -41,7 +41,7 @@ class ModelExchange {
      * @throws Exception
      */
     public function optimize($tables = []) {
-        sizeof($tables) != 0 ?: $tables = $this->query('SELECT table_name FROM information_schema.tables WHERE table_type = "base table"');
+        count($tables) != 0 ?: $tables = $this->query('SELECT table_name FROM information_schema.tables WHERE table_type = "base table"');
         foreach($tables as $table) {
             $this->query('OPTIMIZE TABLE ' . $table);
         }
