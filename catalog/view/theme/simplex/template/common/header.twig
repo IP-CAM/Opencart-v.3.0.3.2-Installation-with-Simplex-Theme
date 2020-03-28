@@ -36,8 +36,7 @@
 </head>
 <body>
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v6.0"></script>
 {% if cookie %}
     {{ cookie }}
 {% endif %}
@@ -95,8 +94,8 @@
                                 <a class="dropdown-item" href="{{ order }}">{{ text_order }}</a>
                                 <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
                             {% else %}
-                                <a class="dropdown-item" href="{{ register }}">{{ text_register }}</a>
                                 <a class="dropdown-item" href="{{ login }}">{{ text_login }}</a>
+                                <a class="dropdown-item" href="{{ register }}">{{ text_register }}</a>
                             {% endif %}
                         </div>
                     </div>

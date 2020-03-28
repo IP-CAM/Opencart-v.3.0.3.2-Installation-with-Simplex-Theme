@@ -4541,7 +4541,7 @@ select {
   &, &-popup {
     a {
       @include flex(none, none, center);
-      font-size : 0.875rem;
+      font-size : 1rem;
       height    : 85px;
       padding : {
         left  : 15px;
