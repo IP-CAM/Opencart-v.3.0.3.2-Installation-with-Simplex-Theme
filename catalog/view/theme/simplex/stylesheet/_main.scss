@@ -3016,11 +3016,9 @@ select {
 }
 
 .cards {
-  @include flex;
-  margin  : {
-    left  : -12px;
-    right : -12px;
-  };
+  #info & {
+    @include flex;
+  }
   
   h4 {
     font-weight : 800;
@@ -3202,7 +3200,9 @@ select {
   }
   
   .mini-card {
-    @include flex(none, none, center);
+    display       : -webkit-flex !important;
+    display       : flex !important;
+    align-items   : center;
     margin  : {
       left  : 12px;
       right : 12px;
