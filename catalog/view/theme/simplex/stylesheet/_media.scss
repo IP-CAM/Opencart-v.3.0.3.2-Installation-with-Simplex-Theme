@@ -108,6 +108,11 @@
   }
   
   .cards {
+    margin  : {
+      left  : -9px;
+      right : -9px;
+    }
+    
     .card {
       margin  : {
         left  : 9px;
@@ -278,6 +283,23 @@
     }
   }
   
+  #catalog, .categories {
+    display : none;
+  }
+  
+  .main-slider {
+    .slick-prev, .slick-next {
+      display : none !important;
+    }
+  }
+  
+  .slick-dots {
+    .main-slider & {
+      width    : auto;
+      position : static;
+    }
+  }
+  
   #categories {
     position : static;
   }
@@ -295,10 +317,9 @@
       @include border-radius(.375rem);
       @include flex(none, none, center);
       @include transition(all .125s linear);
-      font-size    : .8125rem;
-      height       : 40px;
-      margin-right : .75rem;
-      padding      : .75rem 1rem;
+      font-size : .8125rem;
+      height    : 40px;
+      padding   : .75rem 1rem;
       
       &:hover, &.active {
         color : $yellow;
@@ -306,6 +327,10 @@
       
       &.active {
         border : 1px solid #f4f4f4;
+      }
+      
+      &:first-child {
+        margin-right : .75rem;
       }
     }
     
@@ -347,9 +372,7 @@
       
       .slider-nav {
         margin-top : 15px;
-        //max-width  : none;
-        max-width  : calc(100% - 75px);
-        flex       : 100%;
+        max-width  : none;
       }
     }
   }
@@ -461,7 +484,7 @@
     }
     
     #search .search-form {
-      max-width : calc(100vw - 300px);
+      max-width : calc(100vw - 289px);
     }
   }
   
@@ -470,23 +493,17 @@
     left             : 0;
     margin           : auto;
     position         : absolute;
-    right            : 0;
     top              : 100%;
     z-index          : 10;
+    max-width        : 370px;
   }
   
   .navbar-nav {
     border      : 1px solid #f4f4f4;
     line-height : 2.5rem;
     
-    #catalog {
-      grid-column : 2;
-      grid-row    : 1 / 4;
-      order       : 1;
-    }
-    
     #lang {
-      grid-column : 3;
+      grid-column : 2;
       grid-row    : 1;
     }
     
@@ -618,10 +635,11 @@
         text-align : center;
       }
     }
-    
-    .phone, .offices {
-      max-width : 190px;
-      margin    : auto;
+  }
+  
+  #about-us {
+    .cards {
+      @include flex-align(row);
     }
   }
   
@@ -644,8 +662,8 @@
   
   #buttons {
     @include flex(none, center, center, wrap-reverse);
-    order   : -1;
-    padding : 1.25rem 0;
+    order   : 2;
+    padding : 0.25rem 0;
     
     a {
       line-height : 1;
@@ -709,6 +727,78 @@
     
     a {
       margin-bottom : 0.75rem;
+    }
+  }
+  
+  #contact-form {
+    background-color : #f5f3ee;
+    display          : none;
+    height           : calc(100vh - 60px);
+    left             : 0;
+    overflow         : auto;
+    position         : fixed;
+    right            : 0;
+    top              : 60px;
+    width            : 100%;
+    z-index          : 1003;
+    
+    &.active {
+      display : block;
+    }
+    
+    h3 {
+      margin-bottom : 0;
+    }
+    
+    form {
+      padding-top : 0.75rem;
+      
+      hr {
+        margin-bottom : 1.5rem;
+        margin-top    : 1.5rem;
+      }
+      
+      input, textarea {
+        margin-bottom : 0;
+      }
+      
+      label {
+        &.required {
+          &:after {
+            position : relative;
+          }
+        }
+        
+        &:not(.upload) {
+          flex       : 0 0 100%;
+          text-align : center;
+        }
+        
+        &.upload {
+          margin : auto;
+        }
+      }
+      
+      textarea {
+        height : 7.5rem;
+      }
+    }
+    
+    .close {
+      display : block;
+    }
+    
+    .submit {
+      flex            : 100%;
+      justify-content : center;
+      padding-left    : 0;
+      
+      p {
+        flex        : 100%;
+        margin-left : 0;
+        margin-top  : 1rem;
+        text-align  : center;
+      }
     }
   }
   
@@ -778,6 +868,34 @@
       table {
         margin : auto;
       }
+    }
+  }
+  
+  #navigation .navbar-nav {
+    .dropdown-toggle, .nav-link {
+      @include border-radius();
+      padding-left : 30px !important;
+      margin-left  : 20px;
+      margin-right : 20px;
+      
+      
+      &:hover, &.active {
+        color            : #000;
+        background-color : $yellow;
+        box-shadow       : 4px 10px 13px rgba(0, 0, 0, 0.04);
+      }
+    }
+    
+    .dropdown-toggle::before {
+      content  : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAANCAYAAACUwi84AAAAlUlEQVQoU5WQsRXCMAxET507WIFxThUbQCZImADYIGwQJnBnrcMm5tkv4dnYFFwpfendnXjv9865keQdHYmZ3QBcASwkh29G0sDMFgCnGONFVecSykAJARhIpoOsD/ALqoAe1ABrqheAHYDDfx+2NKXRJkWM8aGqU5UihDCLyAjgSfJc9RBCOIqI7y1zD6vriWSqvNEbXQxDU9JLVqgAAAAASUVORK5CYII=");
+      position : absolute;
+      left     : 34px;
+      top      : 9px;
+    }
+    
+    .dropdown-toggle:hover,
+    .dropdown-toggle::after {
+      content : none;
     }
   }
   
@@ -975,6 +1093,10 @@
         left  : 12px;
         right : 12px;
       }
+      
+      &:last-child, &:nth-last-child(2) {
+        display : none;
+      }
     }
   }
   
@@ -1048,90 +1170,6 @@
     }
   }
   
-  #contact-form {
-    background-color : #f5f3ee;
-    display          : none;
-    height           : calc(100vh - 60px);
-    left             : 0;
-    max-height       : 756px;
-    overflow         : auto;
-    position         : fixed;
-    right            : 0;
-    top              : 60px;
-    width            : 100%;
-    z-index          : 1003;
-    
-    &.active {
-      display : block;
-    }
-    
-    h3 {
-      margin-bottom : 0;
-    }
-    
-    form {
-      padding-top : 0.75rem;
-      
-      hr {
-        margin-bottom : 1.5rem;
-        margin-top    : 1.5rem;
-      }
-      
-      input, textarea {
-        margin-bottom : 0;
-      }
-      
-      label {
-        &.required {
-          &:after {
-            position : relative;
-          }
-        }
-        
-        &:not(.upload) {
-          flex       : 0 0 100%;
-          text-align : center;
-        }
-        
-        &.upload {
-          margin : auto;
-        }
-      }
-      
-      textarea {
-        height : 7.5rem;
-      }
-    }
-    
-    .close {
-      display : block;
-    }
-    
-    .submit {
-      flex            : 100%;
-      justify-content : center;
-      padding-left    : 0;
-      margin-left     : 0;
-      
-      p {
-        flex        : 100%;
-        margin-left : 0;
-        margin-top  : 1rem;
-        text-align  : center;
-      }
-    }
-    
-    & + .overlay {
-      width      : 100vw;
-      height     : 100vh;
-      position   : fixed;
-      top        : 0;
-      left       : 0;
-      background : rgba(128, 128, 128, 0.3);
-      z-index    : 1001;
-    }
-  }
-  
   .jobs {
     flex-wrap : wrap;
     
@@ -1167,26 +1205,31 @@
   }
   
   .navbar #search .search-form {
-    max-width : calc(100vw - 135px);
+    max-width : calc(100vw - 125px);
   }
   
   .navbar-nav {
-    text-align : center;
-    
     #lang {
       @include flex(none, center);
-      order   : 2;
-      padding : 2.25rem 0;
+      order   : 3;
+      padding : 1.25rem 0;
     }
     
     #contacts, #news-menu {
-      order   : 1;
-      padding : 0.75rem 0;
+      order : 1;
+      
+      .nav-link {
+        padding : 0.5rem 0;
+      }
     }
     
     .dropdown-item, .menu-link {
       justify-content : center;
-      text-align      : center;
+    }
+    
+    .dropdown-item {
+      padding-left  : 28px !important;
+      padding-right : 0 !important;
     }
     
     .dropdown-menu.show {
@@ -1195,17 +1238,13 @@
     
     .dropdown-toggle {
       font-weight : 600;
-      padding     : 0.75rem 0 !important;
+      padding     : 0.5rem 0 !important;
       
       &:hover, &[aria-expanded=true] {
         &, &:after {
-          color : #dda80e;
+          background-color : $yellow;
         }
       }
-    }
-    
-    .nav-item {
-      border-bottom : 1px solid #f4f4f4;
     }
     
     .nav-link {
@@ -1786,11 +1825,6 @@
 }
 
 @media (max-width : 449.98px) {
-  .delete-all, #add {
-    position      : static;
-    margin-bottom : 20px;
-  }
-  
   #checkout form .form-group {
     flex-wrap       : wrap;
     justify-content : flex-start;
@@ -1799,7 +1833,6 @@
       text-align : left;
     }
   }
-  
   #item-card .item-gallery {
     max-width : 280px;
   }
@@ -1813,7 +1846,6 @@
       grid-template-columns : 1fr;
     }
   }
-  
   .warranties {
     flex-wrap : wrap;
     
@@ -1843,9 +1875,9 @@
 @media (min-width : 768px) and (max-width : 991.98px) {
   .navbar-nav {
     @include grid;
-    grid-template-columns : repeat(2, 2fr) 1fr;
+    grid-template-columns : 2fr 1fr;
     line-height           : 2.5rem;
-    padding               : 45px 60px;
+    padding               : 22px 34px;
     
     .dropdown-menu {
       border  : 0;
@@ -1861,46 +1893,9 @@
 
 @media (min-width : 992px) {
   #catalog {
-    border-left  : 1px solid #f4f4f4;
-    border-right : 1px solid #f4f4f4;
-    
     .dropdown-toggle {
       &:before {
-        background     : url($image_dir + 'catalog.svg') no-repeat center;
-        content        : '';
-        display        : inline-block;
-        height         : 12px;
-        margin-right   : 10px;
-        vertical-align : middle;
-        width          : 18px;
-      }
-    }
-  }
-  
-  #categories {
-    @include transition(all .25s linear);
-    background-color : $dark_gray;
-    border           : 0;
-    left             : 0;
-    padding          : 0;
-    position         : fixed;
-    top              : 85px;
-    width            : 100%;
-    
-    .menu ul {
-      @include flex(none, between);
-      
-      .menu-item {
-        color : $white;
-        flex  : 1 1 auto;
-        
-        &.active {
-          background-color : $white;
-          
-          .menu-link {
-            color : $black;
-          }
-        }
+        content : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAMCAYAAABvEu28AAAARUlEQVQ4T2NkYGA4wMDAYM9AGgDpcUTWwkimQQcZGBgc0A0izS04VINcRBVAVYPICWx0XxwgN7DRDTpIVa8Nj8CmXcoGAPqIC4wnT7vzAAAAAElFTkSuQmCC");
       }
     }
   }
@@ -1910,7 +1905,7 @@
   }
   
   .menu .menu-link {
-    &.deals, &:hover, &.active {
+    &:hover, &.active {
       background-color : $yellow;
       color            : $black;
       
@@ -1925,10 +1920,6 @@
           fill : #000;
         }
       }
-    }
-    
-    &:hover, &.active {
-      background-color : $white !important;
     }
   }
   

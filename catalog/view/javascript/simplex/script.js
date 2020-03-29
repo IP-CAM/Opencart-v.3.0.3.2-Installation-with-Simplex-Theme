@@ -251,6 +251,31 @@ $('button[data-target="#formSearch"]').click(function () {
 
 $(document).ready(function () {
     /* Slick */
+    $('#slider .main-slider').slick({
+        dots: true,
+        infinite: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        vertical: true,
+        verticalSwiping: true,
+        arrows: true,
+        autoplay: true,
+        autoplaySpeed: $('#slider .main-slider').data('interval'),
+        prevArrow:
+            '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
+            '        xmlns="http://www.w3.org/2000/svg"\n' +
+            '        width="14px" height="22px">\n' +
+            '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+            '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+            '</svg></button>',
+        nextArrow:
+            '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
+            '        xmlns="http://www.w3.org/2000/svg"\n' +
+            '        width="14px" height="22px">\n' +
+            '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
+            '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
+            '</svg></button>',
+    });
     $('.product-slider').slick({
         dots: true,
         infinite: false,
@@ -465,72 +490,6 @@ $(document).ready(function () {
                     slidesToShow: 2
                 }
             },
-        ]
-    });
-    $('#slider .main-slider').slick({
-        dots: false,
-        infinite: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        vertical: true,
-        verticalSwiping: true,
-        adaptiveHeight: true,
-        asNavFor: '.slider-nav',
-        arrows: true,
-        autoplay: true,
-        autoplaySpeed: $('#slider .main-slider').data('interval'),
-        prevArrow:
-            '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
-            '        xmlns="http://www.w3.org/2000/svg"\n' +
-            '        width="14px" height="22px">\n' +
-            '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
-            '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
-            '</svg></button>',
-        nextArrow:
-            '<button class="slick-next" aria-label="Next" type="button"><svg\n' +
-            '        xmlns="http://www.w3.org/2000/svg"\n' +
-            '        width="14px" height="22px">\n' +
-            '    <path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"\n' +
-            '          d="M2.468,1.000 L12.000,11.000 L2.468,21.000 "></path>\n' +
-            '</svg></button>',
-    });
-    $('#slider .slider-nav').slick({
-        asNavFor: '.main-slider',
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        dots: false,
-        focusOnSelect: true,
-        vertical: true,
-        infinite: false,
-        variableWidth: false,
-        responsive: [
-            {
-                breakpoint: 1260,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    vertical: false,
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    vertical: false,
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    vertical: false,
-                    slidesToShow: 1,
-                }
-            }
         ]
     });
     $('#news .news').slick({
