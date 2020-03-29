@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.2" baseProfile="tiny"
-	 xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 22 16"
-	 xml:space="preserve">
-<path fill="#FFCA30" d="M12,12h4v4h-4V12z M6,12h4v4H6V12z M0,12h4v4H0V12z M12,6h4v4h-4V6z M6,6h4v4H6V6z M0,6h4v4H0V6z M12,0h4v4
-	h-4V0z M6,0h4v4H6V0z M0,0h4v4H0V0z"/>
-<path fill="#FFCA30" d="M18,12h4v4h-4V12z M12,12h4v4h-4V12z M6,12h4v4H6V12z M18,6h4v4h-4V6z M12,6h4v4h-4V6z M6,6h4v4H6V6z M18,0
-	h4v4h-4V0z M12,0h4v4h-4V0z M6,0h4v4H6V0z"/>
-</svg>

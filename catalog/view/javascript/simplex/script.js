@@ -240,9 +240,6 @@ $('.upload').change(function (e) {
     $('+ p', this).remove();
     $('<p style="color: #868686;font-size: .8125rem;font-weight: 500;align-self: center; margin-left: 1rem">' + fileName + '</p>').insertAfter(this);
 });
-$(document).ready(function () {
-    $('main ')
-});
 $('.search-button').click(function () {
     $(this).parent().find('#formSearch input').focus();
 });

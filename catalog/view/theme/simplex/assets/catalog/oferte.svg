@@ -1,9 +1,0 @@
-<svg height="26px" width="26px" xmlns="http://www.w3.org/2000/svg">
-    <text fill="#000" font-size="15px" kerning="auto"
-          x="6px" y="18.005px">
-        <tspan fill="#000" font-size="15px">&#37;</tspan>
-    </text>
-    <path d="M13.000,1.000 C19.627,1.000 25.000,6.373 25.000,13.000 C25.000,19.627 19.627,25.000 13.000,25.000 C6.373,25.000 1.000,19.627 1.000,13.000 C1.000,6.373 6.373,1.000 13.000,1.000 Z"
-          fill="none" fill-rule="evenodd" stroke="rgb(0, 0, 0)"
-          stroke-width="2px"/>
-</svg>
