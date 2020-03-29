@@ -166,30 +166,66 @@ class ControllerProductProduct extends Controller
 
         $product_info = $this->model_catalog_product->getProduct($product_id);
 
-        $data['terms_link'] = $this->url->link("information/information", ['information_id' => 5]);
-        $data['prof_help_link'] = $this->url->link("information/information", ['information_id' => 51]);
-
         if ($product_info) {
+            $params = [];
+
+            if (isset($this->request->get['path'])) {
+                $params['path'] = $this->request->get['path'];
+            }
+
+            if (isset($this->request->get['filter'])) {
+                $params['filter'] = $this->request->get['filter'];
+            }
+
+            if (isset($this->request->get['manufacturer_id'])) {
+                $params['manufacturer_id'] = $this->request->get['manufacturer_id'];
+            }
+
+            if (isset($this->request->get['search'])) {
+                $params['search'] = $this->request->get['search'];
+            }
+
+            if (isset($this->request->get['tag'])) {
+                $params['tag'] = $this->request->get['tag'];
+            }
+
+            if (isset($this->request->get['description'])) {
+                $params['description'] = $this->request->get['description'];
+            }
+
+            if (isset($this->request->get['category_id'])) {
+                $params['category_id'] = $this->request->get['category_id'];
+            }
+
+            if (isset($this->request->get['sub_category'])) {
+                $params['sub_category'] = $this->request->get['sub_category'];
+            }
+
+            if (isset($this->request->get['sort'])) {
+                $params['sort'] = $this->request->get['sort'];
+            }
+
+            if (isset($this->request->get['order'])) {
+                $params['order'] = $this->request->get['order'];
+            }
+
+            if (isset($this->request->get['page'])) {
+                $params['page'] = $this->request->get['page'];
+            }
+
+            if (isset($this->request->get['limit'])) {
+                $params['limit'] = $this->request->get['limit'];
+            }
+
+            if (isset($this->request->get['path'])) {
+                $params['path'] = $this->request->get['path'];
+            }
+
+            $params['product_id'] = $this->request->get['product_id'];
+
             $data['breadcrumbs'][] = array(
                 'text' => $product_info['name'],
-                'href' => $this->url->link(
-                    'product/product',
-                    [
-                        'path'            => $this->request->get['path'],
-                        'product_id'      => $this->request->get['product_id'],
-                        'filter'          => $this->request->get['filter'],
-                        'manufacturer_id' => $this->request->get['manufacturer_id'],
-                        'search'          => $this->request->get['search'],
-                        'tag'             => $this->request->get['tag'],
-                        'description'     => $this->request->get['description'],
-                        'category_id'     => $this->request->get['category_id'],
-                        'subcategory'     => $this->request->get['sub_category'],
-                        'sort'            => $this->request->get['sort'],
-                        'order'           => $this->request->get['order'],
-                        'page'            => $this->request->get['page'],
-                        'limit'           => $this->request->get['limit']
-                    ]
-                )
+                'href' => $this->url->link('product/product', $params)
             );
 
             $this->document->setTitle($product_info['meta_title']);
@@ -811,10 +847,7 @@ class ControllerProductProduct extends Controller
                         'rating'             => $rating,
                         'href'               => $this->url->link(
                             'product/product',
-                            [
-                                'path'       => $this->request->get['path'],
-                                'product_id' => $result['product_id']
-                            ]
+                            'product_id=' . $result['product_id']
                         )
                     );
                 }
