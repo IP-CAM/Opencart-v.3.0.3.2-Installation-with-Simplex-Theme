@@ -73,6 +73,28 @@ class ModelCatalogCategory extends Model {
     }
     /* added by it-lab end */
 
+    public function getCatalogTree() {
+        $allCategories = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)")->rows;
+        $tree = [];
 
+        foreach ($allCategories as $item) {
+            if ($item['parent_id'] == 0) {
+                $item['path'] = $item['category_id'];
+                static::getTree($allCategories, $item, $tree);
+            }
+        }
 
+        return $tree;
+    }
+    protected static function getTree($data, $item, &$tree = [], $depth = 0) {
+        $item['depth'] = $depth;
+        $tree[$item['category_id']] = $item;
+
+        foreach ($data as $child) {
+            if ($item['category_id'] == $child['parent_id'] && !in_array($child['category_id'], array_keys($tree))) {
+                $child['path'] = $item['path'] . "_" . $child['category_id'];
+                static::getTree($data, $child, $tree, ++$depth);
+            }
+        }
+    }
 }
