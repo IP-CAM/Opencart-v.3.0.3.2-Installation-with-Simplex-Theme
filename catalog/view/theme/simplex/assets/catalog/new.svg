@@ -1,9 +1,0 @@
-<svg height="19px" width="35px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7.000,1.000 L28.000,1.000 C31.314,1.000 34.000,3.686 34.000,7.000 L34.000,12.063 C34.000,15.376 31.314,18.063 28.000,18.063 L7.000,18.063 C3.686,18.063 1.000,15.376 1.000,12.063 L1.000,7.000 C1.000,3.686 3.686,1.000 7.000,1.000 Z"
-          fill="none" fill-rule="evenodd" stroke="rgb(196, 214, 220)"
-          stroke-width="2px"/>
-    <text fill="rgb(0, 0, 0)" font-size="8px" kerning="auto"
-          x="8px" y="11.937px">
-        <tspan fill="#B7C8CD" font-size="8px">NOU</tspan>
-    </text>
-</svg>
