@@ -128,6 +128,12 @@ class ControllerCommonHeader extends Controller
         $this->load->model('extension/menu/megamenu');
         $data['pavmegamenu'] = $this->load->controller('extension/module/pavmegamenu');
         $data['catalog'] = $this->model_extension_menu_megamenu->getSubMenu('catalog');
+        $this->load->model('catalog/category');
+        $data['catalog_tree'] = $this->model_catalog_category->getCatalogTree();
+
+        foreach ($data['catalog_tree'] as &$catalog_item) {
+            $catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
+        }
         /* added by it-lab* start end */
 
         return $this->load->view('common/header', $data);

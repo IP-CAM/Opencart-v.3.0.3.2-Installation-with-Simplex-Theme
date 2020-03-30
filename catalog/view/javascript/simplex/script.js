@@ -132,8 +132,8 @@ $('.popup').click(function () {
         opacity: 1,
     }, 500);
 });
-$(document).on("click", function(event){
-    if($(event.target).attr('class') === 'overlay'){
+$(document).on("click", function (event) {
+    if ($(event.target).attr('class') === 'overlay') {
         if ($(window).width() < 768) {
             $('#contact-form .close').click();
         }
@@ -151,9 +151,17 @@ if ($(window).width() < 768) {
     $('#compare, #favorite').prependTo('#buttons');
     $('#profile').appendTo('.navbar-nav').addClass('nav-item');
 }
+
+let height = $(window).scrollTop();
+
+if (height > 585 && $(window).width() > 991) {
+    $('#catalog').show('fast');
+} else {
+    $('#catalog').hide('fast');
+}
+
 $(window).resize(function () {
-    let screen = $(window);
-    if (screen.width() < 768) {
+    if ($(window).width() < 768) {
         if ($('.navbar-nav #buttons').length === 0) {
             $('.navbar-nav').append('<div class="nav-item" id="buttons"></div>');
         }
@@ -163,6 +171,22 @@ $(window).resize(function () {
         $('#compare, #favorite').insertAfter('#search').removeClass('nav-item');
         $('#profile').insertAfter('#search');
         $('.navbar-nav #buttons').remove();
+    }
+    let height = $(window).scrollTop();
+
+    if (height > 585 && $(window).width() > 991) {
+        $('#catalog').show('fast');
+    } else {
+        $('#catalog').hide('fast');
+    }
+
+}).scroll(function () {
+    let height = $(window).scrollTop();
+
+    if (height > 585 && $(window).width() > 991) {
+        $('#catalog').show('fast');
+    } else {
+        $('#catalog').hide('fast');
     }
 });
 
@@ -637,4 +661,25 @@ $(document).ready(function () {
         variableWidth: true,
     });
     /* End Slick */
+});
+
+$('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+    if (!$(this).next().hasClass('show')) {
+        $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+    }
+    var $subMenu = $(this).next('.dropdown-menu');
+    $subMenu.toggleClass('show');
+
+
+    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+        $('.dropdown-submenu .show').removeClass('show');
+    });
+
+
+    return false;
+});
+
+$('.dropdown-toggle.back').click(function () {
+    $(this).parent().parent().removeClass('show');
+    $(this).parent().find('.dropdown-menu').removeClass('show');
 });
