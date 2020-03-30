@@ -151,6 +151,7 @@ if ($(window).width() < 768) {
     $('#compare, #favorite').prependTo('#buttons');
     $('#profile').appendTo('.navbar-nav').addClass('nav-item');
 }
+
 $(window).resize(function () {
     let screen = $(window);
     if (screen.width() < 768) {
@@ -638,3 +639,4 @@ $(document).ready(function () {
     });
     /* End Slick */
 });
+

@@ -472,7 +472,8 @@
   
   .navbar {
     .navbar-brand {
-      margin-right : auto;
+      margin-left  : auto;
+      margin-right : 20px;
     }
     
     .nav-link {
@@ -874,9 +875,7 @@
   #navigation .navbar-nav {
     .dropdown-toggle, .nav-link {
       @include border-radius();
-      padding-left : 30px !important;
-      margin-left  : 20px;
-      margin-right : 20px;
+      padding-left : 50px !important;
       
       
       &:hover, &.active {
@@ -1679,10 +1678,6 @@
   
   .navbar #search {
     z-index : 1;
-    
-    button {
-      line-height : 60px;
-    }
     
     &.active {
       position : absolute;
