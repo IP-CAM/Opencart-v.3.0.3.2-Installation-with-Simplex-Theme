@@ -323,7 +323,6 @@ footer {
     p a {
       @include transition(all .125s linear);
       color       : #a4a4a4;
-      margin-left : 1rem;
       
       &:hover {
         border-color : $yellow;
@@ -4253,7 +4252,7 @@ select {
     
     a {
       @include flex(none, none, center);
-      font-size : 0.875rem;
+      font-size : 1rem;
       height    : 85px;
       padding : {
         left  : 15px;
@@ -4279,7 +4278,6 @@ select {
       font-size     : 0.75rem;
       font-weight   : 500;
       line-height   : 1.5;
-      margin-left   : 1rem;
     }
     
     .dropdown-menu {
