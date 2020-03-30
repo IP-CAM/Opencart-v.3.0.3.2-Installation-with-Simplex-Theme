@@ -256,6 +256,8 @@ class ControllerProductProduct extends Controller
             $this->load->model('catalog/review');
 
             $data['tab_review'] = sprintf($this->language->get('tab_review'), $product_info['reviews']);
+            $data['terms_link'] = $this->url->link("information/information", ['information_id' => 5]);
+            $data['prof_help_link'] = $this->url->link("information/information", ['information_id' => 51]);
 
             $data['product_id'] = (int)$this->request->get['product_id'];
             $data['manufacturer'] = $product_info['manufacturer'];
