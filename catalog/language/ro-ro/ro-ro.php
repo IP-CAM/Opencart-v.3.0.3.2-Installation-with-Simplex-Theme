@@ -26,6 +26,7 @@ $_['text_show_more']        = 'Arată încă';
 $_['text_total']            = 'Total:';
 $_['text_view_oferts']      = 'Vezi oferte speciale:';
 $_['show_more_alternative'] = 'Încarcă mai multe';
+$_['text_menu_back']        = 'Inapoi la Meniu';
 
 // Buttons
 $_['button_address_add']    = 'Adaugă Adresă';
