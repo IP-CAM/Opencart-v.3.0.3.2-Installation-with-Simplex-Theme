@@ -322,7 +322,7 @@ footer {
     
     p a {
       @include transition(all .125s linear);
-      color : #a4a4a4;
+      color       : #a4a4a4;
       
       &:hover {
         border-color : $yellow;
@@ -976,7 +976,6 @@ select {
   border       : 1px solid #f4f4f4;
   margin-right : 1.5rem;
   font-weight  : 600;
-  font-size    : 14px;
   
   .packs h5:before {
     content : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAANCAYAAACtpZ5jAAABpElEQVQ4T7XUP0hbQRzA8e/F1PeSKKKItSBVSkEX0aGDHTpIQAoKoWCLhUJFKU6SuOnmlApKG6cWNYmDk6i4+gdcdOhWcBBcjEUEReOfxKfP+O5K0iIFc4JKD2447ncfjvv9ficAjroGQgiCQE12/YCRABEpjYZHxV/06wOwm0cVfeKoeyABVOeDC55UIEqKcLZ2UPZlLkSYBq7H5ciDJOrsXHefRBZW+XYLmxrxdLQhk8cgFenhcVTmCl9PBwVVlaTC326D0cK+YCfq+BR7cZXiwV5S4e+4nz/FfNNCeiSKk9i59fW0sOd9G+7aZ2R+bmD4X2LFZ/F2v+VibgF75Qco9WdqhhYWXhOj5RWushIy65t4An6c3X3k/iGPXtQjT06xYrPIvYO8tBa+jhYC76d3uKursKbmKQp+JB2ZxGxtRiZPsOIz94ON5ibM9tecfYmhHIfi/h5SQ2OYAX8uedbE9N3hbLn5Qp3YS2vYy2vgcuH9EMDdUIeyzrHGp3F+7WphbR1rE2MU5koPKXUh2/+v8/75K0K6DrxDu2+jiJTGPkd+A0CBrV2OQe03AAAAAElFTkSuQmCC");
