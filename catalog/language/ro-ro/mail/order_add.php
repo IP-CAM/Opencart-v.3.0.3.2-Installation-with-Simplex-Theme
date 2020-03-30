@@ -1,8 +1,8 @@
 <?php
 // Text
 $_['text_subject']          = '%s - Comanda %s';
-$_['text_greeting']         = 'Îți mulțumim pentru interesul tău în produsele %s. Comanda ta a fost primită și va fi procesată imediat ce plata a fost confirmată.';
-$_['text_link']             = 'Pentru a viziona comanda ta, fă click pe urmatorul link:';
+$_['text_greeting']         = 'Vă mulțumim că ați ales produsele %s. Comanda a fost înregistrată. În cel mai scurt timp veți primi un apel de confirmare a comenzii.';
+$_['text_link']             = 'Pentru mai multe detalii despre comanda dumneavoastră, vă rugăm să accesați următorul link:';
 $_['text_order_detail']     = 'Detaliile comenzii';
 $_['text_instruction']      = 'Instrucțiuni';
 $_['text_order_id']         = 'ID Comandă:';
