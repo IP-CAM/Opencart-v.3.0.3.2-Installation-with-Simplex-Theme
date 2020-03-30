@@ -11,25 +11,25 @@
 		</div>
 	</div>	
 </nav>#}
-{% for menu in tree %}
-    <div class="nav-item dropdown" id="{{ menu.menu_class }}">
-        {% if menu.children %}
-            <a aria-expanded="false" aria-haspopup="true"
-               class="nav-link dropdown-toggle {{ menu.active ? "active" }}"
-               data-toggle="dropdown"
-               href="{{ menu.link }}" role="button">
-                {{ menu.title }}
-            </a>
-            {% if menu.data_toogle=='dropdown' %}
-                <div class="dropdown-menu">
-                    {% for menu_child in menu.children %}
-                        <a class="dropdown-item {{ menu_child.active ? "active" }}"
-                           href="{{ menu_child.link }}">{{ menu_child.title }}</a>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% else %}
-            <a class="nav-link {{ menu.active ? "active" }}" href="{{ menu.link }}">{{ menu.title }}</a>
-        {% endif %}
-    </div>
+{% for menu in tree if menu.title != 'Catalog' %}
+  <div class="nav-item dropdown" id="{{ menu.menu_class }}">
+    {% if menu.children %}
+      <a aria-expanded="false" aria-haspopup="true"
+         class="nav-link dropdown-toggle {{ menu.active ? "active" }}"
+         data-toggle="dropdown"
+         href="{{ menu.link }}" role="button">
+        {{ menu.title }}
+      </a>
+      {% if menu.data_toogle=='dropdown' %}
+        <div class="dropdown-menu">
+          {% for menu_child in menu.children %}
+            <a class="dropdown-item {{ menu_child.active ? "active" }}"
+               href="{{ menu_child.link }}">{{ menu_child.title }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      <a class="nav-link {{ menu.active ? "active" }}" href="{{ menu.link }}">{{ menu.title }}</a>
+    {% endif %}
+  </div>
 {% endfor %}
