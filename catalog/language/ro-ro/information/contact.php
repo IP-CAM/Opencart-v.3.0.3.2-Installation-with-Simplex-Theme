@@ -18,6 +18,7 @@ $_['text_telephone_consilier_termo']    = 'Consilier termo/hidro';
 $_['text_telephone_consilier_obiecte']  = 'Consilier obiecte sanitar';
 $_['text_asteptam_in_magazinele']       = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
         Suntem întotdeauna bucuroși să vă vedem!';
+$_['text_browse_file']="Ataşează";
 $_['text_phone_succes']="Telephon obtinut";
 $_['text_customer_telephone']="Customer phone for recall";
 $_['text_phone_error']="Telegonul greșit ";
@@ -28,6 +29,7 @@ $_['entry_email']    = 'Adresa de e-mail';
 $_['entry_enquiry']  = 'Mesaj';
 $_['entry_captcha']  = 'Introdu codul din imagine';
 $_['entry_subject']    ="Subiect";
+$_['entry_file']       ="Fişier";
 
 // Email
 $_['email_subject']  = 'Mesaj %s';
