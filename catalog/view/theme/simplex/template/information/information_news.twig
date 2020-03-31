@@ -57,7 +57,11 @@
         <div class="share">
             {% if archive_link %}
                 <div class="back">
-                    <a href="{{ archive_link }}">{{ text_archive_link }}</a>
+                    {% if back_to_the_list %}
+                        <a href="{{ archive_link }}">{{ text_back_list }}</a>
+                    {% else %}
+                        <a href="{{ archive_link }}">{{ text_archive_link }}</a>
+                    {% endif %}
                 </div>
             {% endif %}
             <div class="social">

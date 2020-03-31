@@ -193,12 +193,14 @@ class ControllerInformationInformation extends Controller {
 				$category = $categories[0]["category_id"];
 				$previousInfo = $this->model_catalog_information->getPreviousInformation($information_id);
 
+                $data["back_to_the_list"] = false;
 				if(isset($previousInfo)) {
                     $data["archive_link"] = $this->url->link(
                         'information/information',
                         ['information_id' => $previousInfo]
                     );
                 } else {
+                    $data["back_to_the_list"] = true;
                     $data["archive_link"] = $this->url->link('information/category', ['path' => $category]);
                 }
 				$data['date_added'] = $this->model_catalog_information->getDateWithMonth(($information_info_full['date_added']), $this->language->get('code'));
