@@ -12,9 +12,11 @@
                     <a class="menu-link dropdown-toggle" aria-expanded="false" aria-haspopup="true"
                        data-toggle="dropdown"
                        href="{{ category.href }}" role="button">
-{#                      <div class="image-container">#}
-{#                        <img src="{{ category.image }}" alt="{{ category.name }}">#}
-{#                      </div>#}
+                      {% if {{ category.image }} %}
+                        <div class="image-container">
+                          <img src="/image/{{ category.image }}" alt="{{ category.name }}">
+                        </div>
+                      {% endif %}
                       <span>{{ category.name }}</span>
                     </a>
                     <div class="dropdown-menu">
