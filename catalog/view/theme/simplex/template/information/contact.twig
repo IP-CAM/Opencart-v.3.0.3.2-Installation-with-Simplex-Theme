@@ -31,6 +31,17 @@
           </svg>
         </button>
       </div>
+
+      <script type="text/javascript">
+        $(document).ready(function (){
+          setTimeout(function(){
+            $('html, body').animate({
+              scrollTop: $('#contact-form').offset().top - 110
+            }, 300);
+          }, 2000);
+
+        });
+      </script>
     {% endif %}
     <div class="item-container">
       <h4>
