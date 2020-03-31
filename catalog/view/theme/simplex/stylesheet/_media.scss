@@ -927,6 +927,8 @@
         padding-top      : 34px;
         background-color : #fff;
         min-height       : fit-content;
+        max-height       : calc(100vh - 85px);
+        overflow         : auto;
       }
       
       .dropdown-toggle.back {
@@ -1327,7 +1329,7 @@
       bottom           : 0;
       background-color : #fff;
       padding-top      : 34px;
-      //min-height       : fit-content;
+      min-height       : fit-content;
     }
     
     .dropdown-toggle {

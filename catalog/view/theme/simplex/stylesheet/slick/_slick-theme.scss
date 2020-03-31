@@ -22,7 +22,9 @@
   .slick-next {
     right : 0;
   }
-  
+}
+
+aside .product-slider, .main-slider {
   .slick-slide, .slick-list {
     margin : 0;
   }
@@ -109,7 +111,8 @@
   left : -75px;
   
   .main-slider & {
-    left : 0;
+    left  : 0;
+    right : 135px;
   }
   
   svg {

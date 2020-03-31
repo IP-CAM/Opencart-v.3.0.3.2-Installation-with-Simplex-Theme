@@ -16,13 +16,17 @@
                     {% endif %}
                   {% endif %}
                 </div>
-                <span>{{ catalog_item.title }}</span>
+                <span>
+                  {% if catalog_item.type == 'catalog' %}
+                    {{ catalog_tree[catalog_item.item].name }}
+                  {% else %}
+                    {{ catalog_item.title }}
+                  {% endif %}
+                </span>
               </a>
               <div class="dropdown-menu">
-                {% import _self as slideshow %}
-                {{ slideshow.catalog_links(catalog_tree, 1, catalog_item.item) }}
+                {{ _self.catalog_links(catalog_tree, 1, catalog_item.item) }}
                 {% macro catalog_links(items, menu_level, parent_id) %}
-                  {% import _self as slide %}
                   {% for category in items %}
                     {% if category.parent_id == parent_id %}
                       {% if menu_level == 1 %}
@@ -31,7 +35,7 @@
                             <a href="{{ category.href }}">{{ category.name }}</a>
                           </h5>
                           <ul>
-                            {{ slide.catalog_links(items, 2, category.category_id) }}
+                            {{ _self.catalog_links(items, 2, category.category_id) }}
                           </ul>
                         </div>
                       {% else %}
@@ -45,7 +49,7 @@
                       {% endif %}
                     {% endif %}
                   {% endfor %}
-                {% endmacro %}
+                {% endmacro catalog_links%}
               </div>
             </li>
           {% endfor %}
