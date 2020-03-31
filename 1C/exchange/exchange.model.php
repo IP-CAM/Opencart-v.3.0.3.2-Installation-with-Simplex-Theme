@@ -118,10 +118,10 @@ class ModelExchange
     public function update($data)
     {
         $sku_check = $this->query(
-            "SELECT count(sku) from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
+            "SELECT count(sku) AS count from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
         );
 
-        if ($sku_check['row']) {
+        if ($sku_check['row']['count']) {
             $this->editProduct($data);
         } else {
             $this->addProduct($data);
@@ -146,7 +146,7 @@ class ModelExchange
     public function addProduct($data)
     {
         $this->query(
-            "INSERT INTO " . DB_PREFIX . "product SET category_1c = '" . $data['category_1c'] . "' model = '" . $this->escape(
+            "INSERT INTO " . DB_PREFIX . "product SET category_1c = '" . $data['category_1c'] . "', model = '" . $this->escape(
                 $data['model']
             ) . "', sku = '" . $this->escape(
                 $data['sku']
@@ -205,15 +205,23 @@ class ModelExchange
         $category = $this->query(
             "SELECT category_id, parent_id FROM oc_category WHERE category_1c = '{$data['category_1c']}'"
         )['row'];
+       var_dump("SELECT category_id, parent_id FROM oc_category WHERE category_1c = '{$data['category_1c']}'"
+			,$category);
         $category_id = $category['category_id'];
         $parent_id = $category['parent_id'] == 0 ? 0 : 1;
-        $this->query(
+        $result = $this->query(
             "UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
                 $data['model']
             ) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
                 $data['sku']
             ) . "'"
         );
+        var_dump( "UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
+				$data['model']
+			) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
+				$data['sku']
+			) . "'");
+        var_dump( $this->connection->affected_rows);
         $product_id = $this->getLastId();
         $this->query(
             "INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $parent_id"
@@ -234,9 +242,12 @@ class ModelExchange
         $parent_category = $this->query(
                 "SELECT category_id FROM oc_category WHERE category_1c = '$parent_id' and information = 0"
             )['row']['category_id'] ?? 0;
+
         $this->query(
-            "INSERT INTO oc_category SET status= 1, category_1c = '{$data['category_id']}', parent_id = $parent_category"
+            "INSERT INTO oc_category SET status= 1,top=0,`column`=1,information=0, category_1c = '{$data['category_id']}', parent_id = $parent_category"
         );
+     /*   var_dump($result);
+        var_dump("INSERT INTO oc_category SET status= 1,top=0,`column`=1,information=0, category_1c = '{$data['category_id']}', parent_id = $parent_category");*/
         $category_id = $this->getLastId();
         $this->query(
             "INSERT INTO oc_category_description SET category_id = $category_id, language_id = 1, name = '{$data['name']}', meta_title = '{$data['name']}'"
@@ -256,7 +267,8 @@ class ModelExchange
 
         $depth = $data['depth'];
         $current_parent = $category_id;
-        var_dump($data['depth']);
+        $current_category = $category_id;
+       /// var_dump($data['depth']);
         do {
             var_dump("INSERT INTO oc_category_path SET category_id = $category_id, path_id = $current_parent, level = $depth");
             $this->query(
@@ -264,9 +276,9 @@ class ModelExchange
             );
 
             $current_parent = $this->query(
-                "SELECT parent_id FROM oc_category WHERE category_id = $category_id"
+                "SELECT parent_id, category_id FROM oc_category WHERE category_id = $current_category"
             )['row']['parent_id'];
-            var_dump($current_parent);
+			$current_category = $current_parent;
         } while (--$depth >= 0);
 
         return $category_id;
@@ -274,16 +286,11 @@ class ModelExchange
 
     public function updateCategory($data)
     {
-        $category = $this->query(
-            "SELECT c.category_id FROM oc_category_description cd LEFT JOIN oc_category c on cd.category_id = c.category_id WHERE c.information = 0 and name = '{$data['name']}'"
-        )['row'];
-
-        if (isset($category['category_id']) && isset($data['category_id']) and $data['category_id']) {
+    	$oc_category=$this->query(
+			"SELECT category_id FROM oc_category WHERE category_1c = '{$data['category_id']}'")['row'];
+        if ( isset($oc_category['category_id']) && isset($data['category_id']) and $data['category_id']) {
             $this->query(
-                "UPDATE oc_category SET category_1c = '{$data['category_id']}' WHERE category_id = {$category['category_id']}"
-            );
-            $this->query(
-                "UPDATE oc_category_description SET name = '{$data['name']}' WHERE category_id = {$category['category_id']} and language_id = 1"
+                "UPDATE oc_category_description SET name = '{$data['name']}' WHERE category_id = {$oc_category['category_id']} and language_id = 1"
             );
         } else {
             $this->addCategory($data);

@@ -88,7 +88,7 @@ class Exchange {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $return = curl_exec($ch);
         curl_close($ch);
-
+		file_put_contents('categories.json',$return);
         return $return;
 	}
 }

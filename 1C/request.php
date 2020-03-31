@@ -71,7 +71,6 @@ class Request
         if (!isset($decoded_json)) {
             throw new InvalidJsonException("JSON not received or is invalid");
         }
-
         if (filesize($this->filename) == 0) {
             if (isset($decoded_json)) {
                 fwrite($this->file, json_encode($decoded_json));
@@ -143,7 +142,6 @@ class Request
             $data[$index]['price'] = $arr[4]['#value'];
             $data[$index]['category_1c'] = $arr[5]['#value'];
         }
-
         $array = $data;
     }
 
@@ -160,7 +158,7 @@ class Request
         $tree = [];
 
         foreach ($data as $item) {
-            if ($item['parent_id'] == 0) {
+            if ($item['parent_id'] == '') {
                 static::getCategoriesAsTree($data, $item, $tree);
             }
         }
@@ -170,12 +168,13 @@ class Request
 
     protected static function getCategoriesAsTree(array $data, $item, array &$tree = [], $depth = 0)
     {
+    	//var_dump($item['category_id'] . ' {} '. $depth );
         $item['depth'] = $depth;
         $tree[$item['category_id']] = $item;
 
         foreach ($data as $child) {
             if ($item['category_id'] == $child['parent_id'] && !in_array($child['category_id'], array_keys($tree))) {
-                static::getCategoriesAsTree($data, $child, $tree, ++$depth);
+                static::getCategoriesAsTree($data, $child, $tree, $depth + 1);
             }
         }
     }
@@ -208,16 +207,20 @@ class Request
     {
         $categories = json_decode($this->connection->requestCategories(), true);
         self::rewriteJSONCategories($categories);
+       /*foreach ($categories as $category){
+			var_dump($category['category_id'].' | ' .$category['parent_id'].  ' | '.$category['depth']);
+		}
+        exit;*/
+
         $depth = 0;
         do {
             $rewrite = false;
             foreach ($categories as $category) {
                 if($category['depth'] == $depth) {
-                    $rewrite = true;
-                    $this->model->updateCategory($category);
+					$rewrite = true;
+					$this->model->updateCategory($category);
                 }
             }
-
             $depth++;
         } while($rewrite);
     }
