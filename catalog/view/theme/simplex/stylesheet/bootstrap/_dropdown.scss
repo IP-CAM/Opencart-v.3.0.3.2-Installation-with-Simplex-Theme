@@ -1,7 +1,7 @@
 // The dropdown wrapper (`<div>`)
 
 .dropdown-toggle {
-	white-space : nowrap;
+	white-space : normal;
 	
 	// Generate the caret automatically
 	@include caret;
@@ -99,10 +99,10 @@
 	display     : block;
 	font-size   : 0.875rem;
 	font-weight : 600;
-	line-height : 2.857;
+	line-height : 1.5;
 	padding     : 0;
 	text-align  : inherit; // For `<button>`s
-	white-space : nowrap; // prevent links from randomly breaking onto new lines
+	white-space : normal; // prevent links from randomly breaking onto new lines
 	width       : 100%; // For `<button>`s
 	
 	

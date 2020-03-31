@@ -18,7 +18,7 @@ $_['text_telephone_consilier_termo']   = 'Consilier termo/hidro';
 $_['text_telephone_consilier_obiecte'] = 'Consilier obiecte sanitar';
 $_['text_asteptam_in_magazinele'] = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
         Suntem întotdeauna bucuroși să vă vedem!';
-$_['text_browse_file']="Browse";
+$_['text_browse_file']="Выбрать";
 $_['text_phone_succes']="Phone received";
 $_['text_customer_telephone']="Customer phone for recall";
 $_['text_phone_error']="Некорректный номер телефона ";
@@ -38,7 +38,7 @@ $_['entry_country']    = 'Country';
 $_['entry_city']       = 'City';
 $_['entry_district']   = 'District';
 $_['entry_subject']    ="Subject";
-$_['entry_file']       ="File";
+$_['entry_file']       ="Файл";
 
 // Email
 $_['email_subject']  = 'Enquiry %s';
