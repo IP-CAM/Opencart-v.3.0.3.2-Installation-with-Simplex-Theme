@@ -36,7 +36,13 @@ aside .product-slider, .main-slider {
 
 .product-slider, .related-slider, .news, .interesting {
   svg path {
-    stroke : #000;
+    stroke : #b2b5b6;
+  }
+  
+  .float-buttons button:hover{
+    svg path {
+      stroke : #000;
+    }
   }
   
   .float-buttons {
