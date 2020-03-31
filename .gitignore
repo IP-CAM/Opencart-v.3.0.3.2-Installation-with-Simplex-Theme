@@ -25,3 +25,4 @@
 !/vqmod/logs/.gitkeep
 
 .idea
+*.sql

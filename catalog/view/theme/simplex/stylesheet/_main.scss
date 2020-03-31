@@ -354,6 +354,11 @@ select {
   margin-top : 2.5rem;
 }
 
+.nav-button .dropdown-item, #about .dropdown-item {
+  white-space : nowrap;
+  line-height : calc(20 / 7);
+}
+
 #account {
   a {
     color       : #057f9e;
@@ -897,7 +902,7 @@ select {
   }
   
   .dropdown-menu {
-    border : 0;
+    //border : 0;
     width  : 300px;
   }
   
@@ -3990,7 +3995,7 @@ select {
   }
   
   .navbar-toggler-icon svg path {
-    stroke : rgb(196, 214, 220);
+    stroke : #000;
   }
 }
 
@@ -4579,7 +4584,7 @@ select {
     }
     
     aside & {
-      left : 25px;
+      left : 8px;
       top  : 155px;
     }
   }

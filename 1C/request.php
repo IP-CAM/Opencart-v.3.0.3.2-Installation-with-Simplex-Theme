@@ -73,7 +73,7 @@ class Request
         }
         if (filesize($this->filename) == 0) {
             if (isset($decoded_json)) {
-                fwrite($this->file, json_encode($decoded_json));
+                //fwrite($this->file, json_encode($decoded_json));
                 self::rewriteJSONData($decoded_json);
                 foreach ($decoded_json as $d_json) {
                     if ($d_json['quantity'] >= 0 && strlen($d_json['quantity']) > 0 && strlen(
@@ -89,7 +89,7 @@ class Request
             $previous_json = json_decode(file_get_contents($this->filename), true);
 
             if (isset($decoded_json) && isset($previous_json)) {
-                fwrite($this->file, json_encode($decoded_json));
+                //fwrite($this->file, json_encode($decoded_json));
                 self::rewriteJSONData($previous_json);
                 self::rewriteJSONData($decoded_json);
                 foreach ($decoded_json as $d_json) {
