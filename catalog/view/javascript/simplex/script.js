@@ -685,9 +685,6 @@ $('.dropdown-toggle.back').click(function () {
 });
 
 const $dropdown = $(".categories .dropright");
-const $dropdownToggle = $(".categories .dropdown-toggle");
-const $dropdownMenu = $(".categories .dropdown-menu");
-const showClass = "show";
 
 $(window).on("load resize", function () {
     if (this.matchMedia("(min-width: 992px)").matches) {

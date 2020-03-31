@@ -1,97 +1,100 @@
 {{ header }}
 <main class="gallery-bg">
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title centered">
-            <h1>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li><a href="{{ breadcrumb.href }}"><img alt="Home"
+                                                   src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="page-title centered">
+      <h1>
                 <span class="city">
                     {{ city }}
                 </span>
-                {{ heading_title }}
-            </h1>
-        </div>
-        <div class="project-wrapper">
-            <div class="project-card">
-                <div class="card">
-                    <div class="card-body">
-                        <span class="card-foot">{{ date_added }}</span>
-                    </div>
-                    <a href="#"><img alt="Newest" class="card-img-top" src="{{ thumb }}"></a>
-                </div>
-            </div>
-            <div class="content">
-                <div class="address-list">
-                    {{ description_additional }}
-                </div>
-                {{ description }}
-            </div>
-            <div class="used-products">
-                <div class="items">
-                    {% for product in products %}
-                        <div class="card">
-                            <div class="image-container"><img alt="" src="{{ product.thumb }}"></div>
-                            <div class="card-body"><p>{{ product.name }}</p></div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="address-list">
-                    <h6>
-                       {{ text_installed }}
-                    </h6>
-                    <ul>
-                        {% for product in products %}
-                            <li><p>{{ product.name }}</p></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="brands">
-                    <h6>
-                        {{ text_used_brands }}
-                    </h6>
-                    <ul>
-                        {% for manufacturer in manufacturers %}
-                            <li><img style="max-height: 50px" alt="{{ manufacturer.name }}" src="{{ manufacturer.image }}"></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-            <div class="slideshow">
-                {% for image in original_images %}
-                    <div class="image">
-                        <img alt="Main" src="{{ image.popup }}">
-                    </div>
-                {% endfor %}
-
-            </div>
-            <div id="slides-counter"></div>
-
-        </div>
-        <div class="share">
-            <div class="back">
-                <a href="{{ archive_link }}">{{ text_archive_link }}</a>
-            </div>
-            <div class="social">
-                <p>{{ share_information }}:</p>
-                <script src="catalog/view/javascript/share2/es5-shims.min.js"></script>
-                        <script src="catalog/view/javascript/share2/share.js"></script>
-                <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter"></div>
-            </div>
-        </div>
-        <hr style="margin-top: 0;">
+        {{ heading_title }}
+      </h1>
     </div>
+    <div class="project-wrapper">
+      <div class="project-card">
+        <div class="card">
+          <div class="card-body">
+            <span class="card-foot">{{ date_added }}</span>
+          </div>
+          <a href="#"><img alt="Newest" class="card-img-top" src="{{ thumb }}"></a>
+        </div>
+      </div>
+      <div class="content">
+        <div class="address-list">
+          {{ description_additional }}
+        </div>
+        {{ description }}
+      </div>
+      {% if products %}
+        <div class="used-products">
+          <div class="items">
+            {% for product in products %}
+              <div class="card">
+                <div class="image-container"><img alt="" src="{{ product.thumb }}"></div>
+                <div class="card-body"><p>{{ product.name }}</p></div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="address-list">
+            <h6>
+              {{ text_installed }}
+            </h6>
+            <ul>
+              {% for product in products %}
+                <li><p>{{ product.name }}</p></li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% if manufacturers %}
+            <div class="brands">
+              <h6>
+                {{ text_used_brands }}
+              </h6>
+              <ul>
+                {% for manufacturer in manufacturers %}
+                  <li><img style="max-height: 50px" alt="{{ manufacturer.name }}" src="{{ manufacturer.image }}"></li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if original_images %}
+        <div class="slideshow">
+          {% for image in original_images %}
+            <div class="image">
+              <img alt="Main" src="{{ image.popup }}">
+            </div>
+          {% endfor %}
+        </div>
+        <div id="slides-counter"></div>
+      {% endif %}
+    </div>
+    <div class="share">
+      <div class="back">
+        <a href="{{ archive_link }}">{{ text_archive_link }}</a>
+      </div>
+      <div class="social">
+        <p>{{ share_information }}:</p>
+        <script src="/catalog/view/javascript/share2/es5-shims.min.js"></script>
+        <script src="/catalog/view/javascript/share2/share.js"></script>
+        <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter"></div>
+      </div>
+    </div>
+    <hr style="margin-top: 0;">
+  </div>
 </main>
-
 {{ content_bottom }}
 {{ footer }}
