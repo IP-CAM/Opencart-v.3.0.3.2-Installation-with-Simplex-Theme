@@ -683,3 +683,20 @@ $('.dropdown-toggle.back').click(function () {
     $(this).parent().parent().removeClass('show');
     $(this).parent().find('.dropdown-menu').removeClass('show');
 });
+
+const $dropdown = $(".categories .dropright");
+const $dropdownToggle = $(".categories .dropdown-toggle");
+const $dropdownMenu = $(".categories .dropdown-menu");
+const showClass = "show";
+
+$(window).on("load resize", function () {
+    if (this.matchMedia("(min-width: 992px)").matches) {
+        $dropdown.hover(
+            function () {
+                $(this).find('.dropdown-toggle').dropdown('toggle');
+            }
+        );
+    } else {
+        $dropdown.off("mouseenter mouseleave");
+    }
+});
