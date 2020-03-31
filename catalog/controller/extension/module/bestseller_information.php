@@ -65,7 +65,7 @@ class ControllerExtensionModuleBestSellerInformation extends Controller {
                         'date_added' => $this->model_catalog_information->getDateWithMonth(($result['date_added']), $this->language->get('code')),
                         'reviews' => sprintf($this->language->get('text_review'), $result['reviews']),
                         'rating' => $result['rating'],
-                        'href' => $this->url->link('information/information', '&information_id=' . $result['information_id'])
+                        'href' => $this->url->link('information/information', ['information_id' => $result['information_id']])
                     );
                 }
 
