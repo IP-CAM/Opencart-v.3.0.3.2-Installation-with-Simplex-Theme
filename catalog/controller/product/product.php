@@ -44,7 +44,7 @@ class ControllerProductProduct extends Controller
             // Set the last category breadcrumb
             $category_info = $this->model_catalog_category->getCategory($category_id);
 
-            if ($category_info) {
+            if (isset($category_info) && $category_info) {
                 $url = '';
 
                 if (isset($this->request->get['sort'])) {

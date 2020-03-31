@@ -6,12 +6,12 @@
 	// Generate the caret automatically
 	@include caret;
 	
-	&, &:after, svg path {
+	&, &:after, svg * {
 		@include transition(all .125s linear);
 	}
 	
 	svg {
-		path, g {
+		* {
 			stroke : #b2b5b6
 		}
 	}
@@ -24,7 +24,7 @@
 		}
 		
 		svg {
-			path {
+			* {
 				stroke : #000;
 			}
 		}
