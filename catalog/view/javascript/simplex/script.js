@@ -733,3 +733,22 @@ $('.categories-header .dropdown-toggle:not(.back)').click(function () {
         }
     }
 });
+$('.navbar-toggler').click(function () {
+    let children = $(this).parent().children();
+
+    for (let child of children) {
+        if ($(child).hasClass('invisible')) {
+            $(child).removeClass('invisible');
+        }
+    }
+});
+
+$(document).ready(function () {
+    $(document).click(function (event) {
+        let clickover = $(event.target);
+        let _opened = $(".navbar-collapse").hasClass("show");
+        if (_opened === true && !clickover.hasClass("navbar-toggler")) {
+            $(".navbar-toggler").click();
+        }
+    });
+});
