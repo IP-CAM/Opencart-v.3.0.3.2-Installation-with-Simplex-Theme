@@ -697,3 +697,39 @@ $(window).on("load resize", function () {
         $dropdown.off("mouseenter mouseleave");
     }
 });
+$('.categories-header > .dropdown-toggle').click(function () {
+    let parents = $(this).parents();
+    for (let parent of parents) {
+        if ($(parent).hasClass('navbar-collapse')) {
+            $(parent).addClass('invisible');
+            break;
+        }
+    }
+
+    let children = $(this).children();
+    for (let child of children) {
+        if ($(parent).hasClass('invisible')) {
+            $(parent).removeClass('invisible');
+        }
+    }
+
+});
+$('.categories-header .dropdown-toggle.back').click(function () {
+    let parents = $(this).parents();
+    for (let parent of parents) {
+        if ($(parent).hasClass('invisible')) {
+            console.log(parent);
+            $(parent).removeClass('invisible');
+            break;
+        }
+    }
+});
+$('.categories-header .dropdown-toggle:not(.back)').click(function () {
+    let parents = $(this).parents();
+    for (let parent of parents) {
+        if ($(parent).hasClass('show')) {
+            $(parent).addClass('invisible');
+            break;
+        }
+    }
+});
