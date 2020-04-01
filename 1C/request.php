@@ -70,12 +70,13 @@ class Request
     {
     	$this->model->dropOldCategories();
         $this->updateCategories();
-        $decoded_json = json_decode($this->connection->request1C(), true);
+		$this->model->loadActiveProductsIds();
+		$this->model->setProductsStatusInactive();
+		$decoded_json = json_decode($this->connection->request1C(), true);
         if (!isset($decoded_json)) {
             throw new InvalidJsonException("JSON not received or is invalid");
         }
         if (filesize($this->filename) == 0) {
-        	var_dump("FDSFFFFFFfffffffffffffljkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjjjjjjjjjjjKLLJKKLJLKJKL");
             if (isset($decoded_json)) {
                 //fwrite($this->file, json_encode($decoded_json));
                 self::rewriteJSONData($decoded_json);
@@ -90,7 +91,7 @@ class Request
                     	//var_dump($d_json);
 					}
 
-                    //echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
+                    echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
                 }
             }
         } else {
@@ -126,8 +127,8 @@ class Request
                             $this->log($d_json);
                         }
                     }
-                    //echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
-                    //echo "Skipped " . $this->skipped_tasks . ' of ' . count($decoded_json) . "\n\n";
+                    echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
+                    echo "Skipped " . $this->skipped_tasks . ' of ' . count($decoded_json) . "\n\n";
                     $this->flag = true;
                 }
             }

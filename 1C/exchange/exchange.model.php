@@ -23,6 +23,13 @@ class ModelExchange
      * @param string $port
      * @throws Exception
      */
+
+    private $active_products_ids;
+
+    public function loadActiveProductsIds(){
+    	$this->active_products_ids = array_column($this->query("select product_id from oc_product where status=1")['rows'],'product_id');
+	}
+
     public function __construct($hostname, $username, $password, $database, $port = '3306')
     {
         $this->connection = new \mysqli($hostname, $username, $password, $database, $port);
@@ -167,12 +174,14 @@ class ModelExchange
 				);
 			}
 
-			if ($data['price'] == 0) {
+			if ($data['price'] == 0 || $data['quantity']==0) {
 				$this->setStockStatus($product_id, self::STATUS_OUT_OF_STOCK);
+			}else{
+				$this->setStockStatus($product_id, self::STATUS_IN_STOCK);
 			}
 
 			$category_id = $category['category_id'];
-			$parent_id = $category['parent_id'] == 0 ? 0 : 1;
+			$parent_id = $category['parent_id'];
 			$this->query(
 				"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
 					$data['model']
@@ -180,14 +189,25 @@ class ModelExchange
 					$data['sku']
 				) . "'"
 			);
+			$main_category = 1;
 			$this->query(
-				"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $parent_id"
+				"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $main_category"
 			);
-			$this->query(
-				"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $parent_id"
-			);
+			$main_category = 1;
+			while($parent_id!=0) {
+				$category = $this->query(
+					"SELECT category_id, parent_id FROM oc_category WHERE category_id = '$parent_id'"
+				)['row'];
+
+				$category_id = $category['category_id'];
+				$parent_id = $category['parent_id'];
+				$this->query(
+					"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $main_category"
+				);
+			}
+
 		}else{
-			var_dump("UNDEFINED CATEGORY on  add CATEGORY | {$data['category_1c']} | {$data['sku']}");
+			//var_dump("UNDEFINED CATEGORY on  add CATEGORY | {$data['category_1c']} | {$data['sku']}");
 		}
     }
 
@@ -216,40 +236,40 @@ class ModelExchange
 		//if($data['sku']=='BXP32220S'){ var_dump($category);}
         if(isset($category['category_id']) && strlen($category['category_id'])) {
 			$category_id = $category['category_id'];
-			$parent_id = $category['parent_id'] == 0 ? 0 : 1;
-/*			if($data['sku']=='BXP32220S'){
-			$result = $this->query(
-				"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
-					$data['model']
-				) . " UPDATED24132143" . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
-					$data['sku']
-				) . "'"
-			);}else{*/
-				$result = $this->query(
-					"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
-						$data['model']
-					) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
-						$data['sku']
-					) . "'"
-				);
-//			if($data['sku']=='BXP32220S'){ var_dump($result);}
-
+			$parent_id = $category['parent_id'];
 			$product_id = $this->query(
 				"SELECT product_id from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
 			)['row']['product_id'];
-			//if($data['sku']=='BXP32220S'){ var_dump("product_id : ".$product_id);}
 
-/*			if($data['sku']=='BXP32220S'){ var_dump("UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
-					$data['model']
-				) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
-					$data['sku']
-				) . "'");}*/
+			$status = in_array($product_id,$this->active_products_ids)?1:0;
 
 			$this->query(
-				"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $parent_id"
+					"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
+						$data['model']
+					) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] .", status = " . $status . " WHERE sku = '" . $this->escape(
+						$data['sku']
+					) . "'"
+				);
+
+			$main_category = 1;
+			$this->query(
+			"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $main_category"
 			);
+			$main_category = 0;
+			while($parent_id!=0) {
+				$category = $this->query(
+					"SELECT category_id, parent_id FROM oc_category WHERE category_id = '$parent_id'"
+				)['row'];
+
+				$category_id = $category['category_id'];
+				$parent_id = $category['parent_id'];
+				$this->query(
+				"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $main_category"
+				);
+
+			}
 		}else{
-			var_dump("UNDEFINED CATEGORY on edit | {$data['category_1c']} | {$data['sku']}");
+			//var_dump("UNDEFINED CATEGORY on edit | {$data['category_1c']} | {$data['sku']}");
 		}
     }
 
@@ -341,6 +361,9 @@ class ModelExchange
             $this->query("DELETE FROM oc_category_path WHERE category_id in (" . implode(",", $implode) . ")");
         }
     }
+	public function setProductsStatusInactive() {
+    	$this->query("UPDATE oc_product SET status=0");
+	}
 
     /**
      * @param $product_id
