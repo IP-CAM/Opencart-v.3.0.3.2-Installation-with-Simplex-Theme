@@ -23,15 +23,16 @@ class Exchange {
 	 * @param string $module_url Path to 1C module controller
 	 */
 	public function __construct($module_url) {
+	/*	$module_url="http://simplex.dev.it-lab.md/index.php?route=api/exchange/getModuleConfig";
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $module_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$return = json_decode(curl_exec($ch), true);
-		curl_close($ch);
+		curl_close($ch);*/
 
-		$this->url = $return['url'];
-		$this->login = $return['login'];
-		$this->password = $return['password'];
+		$this->url = 'http://195.22.235.118:4480/simplex/hs/ExportArticles/post';//$return['url'];
+		$this->login = 'ws';// $return['login'];
+		$this->password = 'Simplexws1702';//$return['password'];
 	}
 
 	/**
@@ -46,7 +47,8 @@ class Exchange {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$return = curl_exec($ch);
 		curl_close($ch);
-		
+		file_put_contents('products.json' , $return);
+
 		return $return;
 	}
 

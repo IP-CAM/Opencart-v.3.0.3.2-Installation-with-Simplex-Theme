@@ -187,7 +187,7 @@ class ModelExchange
 				"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $parent_id"
 			);
 		}else{
-			var_dump("UNDDDDDDDDDDDDDDDDDDDDEEEEEEEEEFFFFFFFFFIIIIIINED CATEGORY {$data['category_1c']}");
+			var_dump("UNDEFINED CATEGORY on  add CATEGORY | {$data['category_1c']} | {$data['sku']}");
 		}
     }
 
@@ -207,27 +207,49 @@ class ModelExchange
      */
     public function editProduct($data)
     {
+    	//if($data['sku']=='BXP32220S'){ var_dump('SKKKKKKKKKKKKKKKKKKKKKKKKKKKUUUUUUUUUUUUU BXP32220S');}
+
+
         $category = $this->query(
             "SELECT category_id, parent_id FROM oc_category WHERE category_1c = '{$data['category_1c']}'"
         )['row'];
-
+		//if($data['sku']=='BXP32220S'){ var_dump($category);}
         if(isset($category['category_id']) && strlen($category['category_id'])) {
 			$category_id = $category['category_id'];
 			$parent_id = $category['parent_id'] == 0 ? 0 : 1;
+/*			if($data['sku']=='BXP32220S'){
 			$result = $this->query(
 				"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
 					$data['model']
-				) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
+				) . " UPDATED24132143" . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
 					$data['sku']
 				) . "'"
-			);
+			);}else{*/
+				$result = $this->query(
+					"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
+						$data['model']
+					) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
+						$data['sku']
+					) . "'"
+				);
+//			if($data['sku']=='BXP32220S'){ var_dump($result);}
 
-			$product_id = $this->getLastId();
+			$product_id = $this->query(
+				"SELECT product_id from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
+			)['row']['product_id'];
+			//if($data['sku']=='BXP32220S'){ var_dump("product_id : ".$product_id);}
+
+/*			if($data['sku']=='BXP32220S'){ var_dump("UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
+					$data['model']
+				) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . " WHERE sku = '" . $this->escape(
+					$data['sku']
+				) . "'");}*/
+
 			$this->query(
 				"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $parent_id"
 			);
 		}else{
-			var_dump("UNDDDDDDDDDDDDDDDDDDDDEEEEEEEEEFFFFFFFFFIIIIIINED CATEGORY {$data['category_1c']}");
+			var_dump("UNDEFINED CATEGORY on edit | {$data['category_1c']} | {$data['sku']}");
 		}
     }
 
