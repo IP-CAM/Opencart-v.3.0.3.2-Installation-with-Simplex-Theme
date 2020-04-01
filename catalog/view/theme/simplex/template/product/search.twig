@@ -5,7 +5,7 @@
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
                         <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -112,7 +112,7 @@
                 {% if products %}
                     <div class="products grid">
                         {% for product in products %}
-                            {% if loop.index == '7' %}
+                            {% if loop.index == '7' and column_right %}
                                 <div class="cards">
                                     {{ column_right }}
                                 </div>
@@ -160,7 +160,7 @@
                                     <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
                                         <p>{{ button_cart }}</p>
                                         <span class="image-container">
-                                                <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
+                                                <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
                                     </button>
                                     <div class="float-buttons">

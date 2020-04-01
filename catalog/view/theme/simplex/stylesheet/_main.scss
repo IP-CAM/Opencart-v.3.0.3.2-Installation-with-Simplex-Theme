@@ -704,6 +704,7 @@ select {
       .total {
         font-weight : 600;
         width       : 45px;
+        white-space : nowrap;
       }
       
       .delete {
