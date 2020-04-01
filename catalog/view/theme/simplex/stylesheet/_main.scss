@@ -4468,6 +4468,16 @@ select {
           color            : #fff;
         }
       }
+      
+      &.top {
+        border-bottom  : 1px dotted #dedede;
+        margin-top     : 1rem;
+        padding-bottom : 0;
+        
+        a {
+          height : auto;
+        }
+      }
     }
     
     .timetable {
