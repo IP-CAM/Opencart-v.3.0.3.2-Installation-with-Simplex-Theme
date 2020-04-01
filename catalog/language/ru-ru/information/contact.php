@@ -19,8 +19,8 @@ $_['text_telephone_consilier_obiecte'] = 'Consilier obiecte sanitar';
 $_['text_asteptam_in_magazinele'] = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
         Suntem întotdeauna bucuroși să vă vedem!';
 $_['text_browse_file']="Выбрать";
-$_['text_phone_succes']="Phone received";
-$_['text_customer_telephone']="Customer phone for recall";
+$_['text_phone_succes']="Телефон получен";
+$_['text_customer_telephone']="Номер телефона для звонка клиенту";
 $_['text_phone_error']="Некорректный номер телефона ";
 
 // Entry
