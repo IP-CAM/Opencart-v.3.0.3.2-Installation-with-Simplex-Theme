@@ -109,7 +109,6 @@ class ControllerInformationContact extends Controller
             $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
             $mail->setTo($this->config->get('config_mail_smtp_username'));
-            $mail->setTo('vasile.costiuc@it-lab.md');
             $mail->setFrom($this->config->get('config_mail_smtp_username'));
             if (!isset($this->request->post['customer_phone'])) {
                 $mail->setReplyTo($this->request->post['email']);

@@ -125,7 +125,7 @@
         <h6>{{ text_phone_callback }}</h6>
         <label><input id="customer_phone" placeholder="{{ text_your_phone }}" type="text"></label>
         <button class="button-call-back" type="submit">
-            {{ text_callback }}wereewe
+            {{ text_callback }}
             <span class="image-container"></span>
         </button>
     </div>
@@ -231,9 +231,10 @@
     $(".button-call-back").click(function () {
 
         var button_callback=$(this);
-        var phone1 = button_callback.closest(".input-telephone").find("#customer_phone").val();
+        var input_telephone_block = button_callback.closest(".input-telephone");
+        var phone1 = input_telephone_block.find("#customer_phone").val();
         var url = $('base').attr('href') + 'index.php?route=information/contact';
-        var phone = $("#customer_phone").val();
+        var phone = input_telephone_block.find("#customer_phone").val();
         if (phone.length > 3) {
 
             $.ajax({
@@ -250,9 +251,10 @@
                         $(".input-telephone input").addClass('has-error');
                     } else {
                         //$(".phone-popup table").hide(300);
-                        $(".input-telephone input").removeClass('has-error');
-                        $(".input-telephone h6").text(json["result"]);
-                        $(".input-telephone input").hide();
+                        input_telephone_block.find("input").removeClass('has-error');
+                        input_telephone_block.find("h6").text(json["result"]);
+                        input_telephone_block.find("input").hide();
+                        button_callback.hide();
                         setTimeout(function () {
                             $('.phone-popup').css({'opacity': '0'});
                         }, 1000);
