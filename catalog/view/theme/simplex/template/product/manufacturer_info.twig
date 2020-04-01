@@ -5,7 +5,7 @@
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
                         <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -17,8 +17,6 @@
     <div class="page-title">
       <h1>{{ heading_title }}</h1>
     </div>
-  </div>
-  <div class="container-fluid">
     <div class="catalog-wrapper">
       {{ column_left }}
       <div class="products-wrapper">
@@ -74,152 +72,9 @@
               <button aria-controls="collapseExample" aria-expanded="false" class="dropdown-button"
                       data-target="#collapseExample" data-toggle="collapse"
                       type="button">
-                <img alt="Filter" src="catalog/view/theme/simplex/assets/img/filter.svg">
+                <img alt="Filter" src="/catalog/view/theme/simplex/assets/img/filter.svg">
               </button>
               <div class="accordion filters collapse" id="collapseExample">
-                {#<div class="card">
-                    <button aria-controls="collapseOne" aria-expanded="false" class="collapsed"
-                            data-target="#collapseOne" data-toggle="collapse" type="button">
-                        Subcategorii
-                    </button>
-                    <div aria-labelledby="headingOne" class="collapse" data-parent=""
-                         id="collapseOne">
-                        <div class="card-body">
-                            <div class="links">
-                                <ul>
-                                    <li>
-                                        <a href="#">Centrale termice BAXI</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Microcentrale termice cu condensare</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Cazane pe combustibil solid Metal-Fach</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Microcentrale electrice</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Cazane pe combustibil solid</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Sisteme solare</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Radiatoare</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Termostate</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Incălzire în pardoseală</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <button aria-controls="collapseTwo" aria-expanded="false" class="collapsed"
-                            data-target="#collapseTwo" data-toggle="collapse" type="button">
-                        Preț
-                    </button>
-                    <div aria-labelledby="headingTwo" class="collapse" data-parent=""
-                         id="collapseTwo">
-                        <div class="card-body">
-                            <div class="input-range">
-                                <div class="range"></div>
-                                <div class="input-min">
-                                    <input id="minprice-xl" max="19000" min="11000" name="minprice"
-                                           step="10"
-                                           type="number"
-                                           value="11000">
-                                    <label for="minprice-xl">de la</label>
-                                </div>
-                                <p style="line-height:2.25">&ndash;</p>
-                                <div class="input-max">
-                                    <input id="maxprice-xl" max="19000" min="11000" name="maxprice"
-                                           step="10"
-                                           type="number"
-                                           value="14280">
-                                    <label for="maxprice-xl">pînă la</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <button aria-controls="collapseThree" aria-expanded="false" class="collapsed"
-                            data-target="#collapseThree" data-toggle="collapse"
-                            type="button">
-                        Brand
-                    </button>
-                    <div aria-labelledby="headingThree" class="collapse" data-parent=""
-                         id="collapseThree">
-                        <div class="card-body">
-                            <ul class="checkbox-list">
-                                <li>
-                                    <label>
-                                        <input name="Buderus" type="checkbox">
-                                        <span class="checkbox"></span>
-                                        Buderus
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input name="BOSCH" type="checkbox">
-                                        <span class="checkbox"></span>
-                                        BOSCH
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input name="Demrad" type="checkbox">
-                                        <span class="checkbox"></span>
-                                        Demrad
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <button aria-controls="collapseFour" aria-expanded="false" class="collapsed"
-                            data-target="#collapseFour" data-toggle="collapse"
-                            type="button">
-                        Puterea termica
-                    </button>
-                    <div aria-labelledby="headingThree" class="collapse" data-parent=""
-                         id="collapseFour">
-                        <div class="card-body">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <button aria-controls="collapseFive" aria-expanded="false" class="collapsed"
-                            data-target="#collapseFive" data-toggle="collapse"
-                            type="button">
-                        Debit ACM
-                    </button>
-                    <div aria-labelledby="headingThree" class="collapse" data-parent=""
-                         id="collapseFive">
-                        <div class="card-body">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="link-group">
-                            <a class="apply" href="#">
-                                <p>filtrare</p>
-                                <span class="image-container"></span>
-                            </a>
-                            <a class="reset" href="#">Anulează filtre</a>
-                        </div>
-                    </div>
-                </div>#}
                 {{ content_top }}
               </div>
             </div>
@@ -333,6 +188,7 @@
         {% endif %}
       </div>
     </div>
+  </div>
 </main>
 {{ content_bottom }}
 <script>

@@ -3067,12 +3067,10 @@ select {
         }
         
         .offices {
+          display : none;
+          
           h6 {
             margin : 0;
-          }
-          
-          ul {
-            display : none;
           }
         }
         

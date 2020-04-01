@@ -128,8 +128,8 @@
                               </div>
                             {% endif %}
                             <span>
-                                {{ category.name }}
-                              </span>
+                                {{ category.name|capitalize }}
+                            </span>
                           </a>
                           <div class="dropdown-menu dropdown-submenu">
                             <div class="dropdown-item dropright">
@@ -156,7 +156,7 @@
                                     data-toggle="dropdown"
                                   {% endif %}
                              href="{{ category.href }}">
-                            {{ category.name }}
+                            {{ category.name|capitalize }}
                           </a>
                           {% if flag %}
                             <div class="dropdown-menu dropdown-submenu">
@@ -166,7 +166,7 @@
                         </div>
                       {% endif %}
                       {% if menu_level == 2 %}
-                        <a href="{{ category.href }}" class="dropdown-item">{{ category.name }}</a>
+                        <a href="{{ category.href }}" class="dropdown-item">{{ category.name|capitalize }}</a>
                       {% endif %}
                     {% endif %}
                   {% endfor %}

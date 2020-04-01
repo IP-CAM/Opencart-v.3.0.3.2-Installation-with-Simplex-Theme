@@ -118,7 +118,7 @@
 													{% endif %}
 												</div>
 												<p class="price">
-													{% if product.stock_status_id != 7 or product.special is not same as(false) or product.price == 0 %}
+													{% if product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false)) %}
 														<span class="currency">{{ product.stock_status }}</span>
 													{% else %}
 														{{ product.special ? product.special : product.price }} <span class="currency">{{ currency }}</span>

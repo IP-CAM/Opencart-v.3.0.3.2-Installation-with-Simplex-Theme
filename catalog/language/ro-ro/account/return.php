@@ -18,7 +18,7 @@ $_['text_date_added']    = 'Data adăugării:';
 $_['text_comment']       = 'Comentariu';
 $_['text_history']       = 'Istoricul returnării';
 $_['text_empty']         = 'Nu ai făcut nicio returnare anterioară!';
-$_['text_agree']         = 'Am citit și sunt de acord cu <a href="%s" aclass="agree"><b>%s</b></a>';
+$_['text_agree']         = 'Am citit și sunt de acord cu <a target="_blank" href="%s"><b>%s</b></a>';
 
 // Column
 $_['column_return_id']   = 'Numărul returnării';
