@@ -14,7 +14,7 @@ $_['text_your_password']        = 'Пароль';
 $_['text_cheque']               = 'Чек';
 $_['text_paypal']               = 'PayPal';
 $_['text_bank']                 = 'Банковский перевод';
-$_['text_agree']                = 'Я прочитал <a href="%s" class="agree"><b>%s</b></a> и согласен с <br /> условиями безопасности и обработки персональных данных';
+$_['text_agree']                = 'Я прочитал <a target="_blank" href="%s" class="agree"><b>%s</b></a> и согласен с <br /> условиями безопасности и обработки персональных данных';
 
 // Entry
 $_['entry_customer_group']      = 'Группа';
