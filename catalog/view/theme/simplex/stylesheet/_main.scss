@@ -3067,12 +3067,10 @@ select {
         }
         
         .offices {
+          display : none;
+          
           h6 {
             margin : 0;
-          }
-          
-          ul {
-            display : none;
           }
         }
         
@@ -4466,6 +4464,16 @@ select {
         &:hover {
           background-color : #2b2c30;
           color            : #fff;
+        }
+      }
+      
+      &.top {
+        border-bottom  : 1px dotted #dedede;
+        margin-top     : 1rem;
+        padding-bottom : 0;
+        
+        a {
+          height : auto;
         }
       }
     }

@@ -14,7 +14,7 @@
                        href="{{ category.href }}" role="button">
                       {% if category.image %}
                         <div class="image-container">
-                          <img src="/image/{{ category.image }}" alt="{{ category.name }}">
+                          <img src="/image/{{ category.image }}" alt="{{ category.name|capitalize }}">
                         </div>
                       {% endif %}
                       <span>{{ category.name }}</span>
@@ -27,7 +27,7 @@
                 {% if menu_level == 1 %}
                   <div class="category-list">
                     <h5>
-                      <a href="{{ category.href }}">{{ category.name }}</a>
+                      <a href="{{ category.href }}">{{ category.name|capitalize }}</a>
                     </h5>
                     <ul>
                       {{ _self.catalog_links(items, 2, category.category_id) }}
@@ -37,7 +37,7 @@
                   {% if menu_level == 2 %}
                     <li>
                       <a href="{{ category.href }}">
-                        {{ category.name }}
+                        {{ category.name|capitalize }}
                       </a>
                     </li>
                   {% endif %}
