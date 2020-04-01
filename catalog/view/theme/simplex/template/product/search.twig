@@ -5,7 +5,7 @@
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
                         <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -112,12 +112,11 @@
                 {% if products %}
                     <div class="products grid">
                         {% for product in products %}
-                            {% if loop.index == '7' %}
+                            {% if loop.index == '7' and column_right %}
                                 <div class="cards">
                                     {{ column_right }}
                                 </div>
                             {% endif %}
-
                             <div class="product-column">
                                 <div class="product">
                                     <a href="{{ product.href }}">
@@ -147,7 +146,7 @@
                                                     {% endif %}
                                                 </div>
                                                 <p class="price">
-                                                    {% if product.stock_status_id != 7 or product.special == 0 or product.price == 0 %}
+                                                    {% if product.stock_status_id != 7 or product.special is not same as(false) or product.price == 0 %}
                                                         <span class="currency">{{ product.stock_status }}</span>
                                                     {% else %}
                                                         {{ product.special ? product.special : product.price }} <span class="currency">{{ currency }}</span>
@@ -160,7 +159,7 @@
                                     <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
                                         <p>{{ button_cart }}</p>
                                         <span class="image-container">
-                                                <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
+                                                <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
                                     </button>
                                     <div class="float-buttons">
