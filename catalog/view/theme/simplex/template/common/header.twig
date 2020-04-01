@@ -51,19 +51,17 @@
           <div class="dropdown-menu categories">
             <nav class="menu">
               <ul>
-                {% for catalog_item in catalog.children %}
+                {% for category in catalog_tree if category.parent_id == 0 %}
                   <li class="menu-item">
-                    <a class="menu-link" href="{{ catalog_item.link }}">
+                    <a class="menu-link" href="{{ category.href }}">
                       <div class="image-container">
-                        {% if catalog_item.image_svg %}
-                          {{ catalog_item.image_svg }}
-                        {% else %}
-                          {% if catalog_item.image %}
-                            <img src="{{ catalog_item.image }}" alt="{{ catalog_item.title }}">
-                          {% endif %}
+                        {% if category.image %}
+                          <div class="image-container">
+                            <img src="/image/{{ category.image }}" alt="{{ category.name }}">
+                          </div>
                         {% endif %}
                       </div>
-                      <span>{{ catalog_item.title }}</span>
+                      <span>{{ category.name|capitalize }}</span>
                     </a>
                   </li>
                 {% endfor %}
@@ -244,7 +242,7 @@
           <div class="dropdown-menu dropdown-menu-right">
             <div class="input-telephone top">
               <h6>
-                <a href="tel:{{ telephone }}">{{ telephone }}</a>
+                <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
               </h6>
             </div>
             <div class="timetable">

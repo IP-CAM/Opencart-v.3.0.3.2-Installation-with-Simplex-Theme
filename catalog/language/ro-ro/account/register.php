@@ -10,7 +10,7 @@ $_['text_your_details']    = 'Detalii personale';
 $_['text_your_address']    = 'Adresa';
 $_['text_newsletter']      = 'Newsletter';
 $_['text_your_password']   = 'Parola';
-$_['text_agree']           = 'Am citit şi sunt de acord cu <a target="_blank" href="%s"><b>%s</b></a>';
+$_['text_agree']           = 'Am citit şi sunt de acord cu <a target="_blank" href="%s" class="agree"><b>%s</b></a>';
 
 // Entry
 $_['entry_customer_group'] = 'Grupul de clienți';

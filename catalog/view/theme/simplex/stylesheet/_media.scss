@@ -283,7 +283,7 @@
     }
   }
   
-  #catalog, .categories {
+  #catalog, #slider .categories {
     display : none;
   }
   
@@ -432,6 +432,25 @@
         left  : 0;
         right : 0;
       }
+    }
+  }
+  
+  .categories-main {
+    width : 100%;
+    
+    .menu {
+      position : relative;
+    }
+    
+    .dropright .dropdown-menu {
+      width      : 100%;
+      height     : auto;
+      min-height : fit-content;
+      left       : 0 !important;
+    }
+    
+    .category-list .dropdown-menu {
+      position : static;
     }
   }
   
@@ -896,7 +915,7 @@
       content  : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAANCAYAAACUwi84AAAAlUlEQVQoU5WQsRXCMAxET507WIFxThUbQCZImADYIGwQJnBnrcMm5tkv4dnYFFwpfendnXjv9865keQdHYmZ3QBcASwkh29G0sDMFgCnGONFVecSykAJARhIpoOsD/ALqoAe1ABrqheAHYDDfx+2NKXRJkWM8aGqU5UihDCLyAjgSfJc9RBCOIqI7y1zD6vriWSqvNEbXQxDU9JLVqgAAAAASUVORK5CYII=");
       position : absolute;
       left     : 34px;
-      top      : 9px;
+      height   : 13px;
     }
     
     .categories-header {
@@ -938,8 +957,8 @@
         
         &:before {
           transform : rotate(180deg);
-          top       : 14px;
           left      : 20px;
+          top       : calc(50% - 11px);
         }
         
         &.back-category {
