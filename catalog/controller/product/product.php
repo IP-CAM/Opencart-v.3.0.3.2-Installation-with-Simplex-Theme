@@ -1236,6 +1236,7 @@ class ControllerProductProduct extends Controller
 
     static function getAwailabilityLevel($count, $category_info)
     {
+    	return 3;
         if ($count === 0) {
             return 0;
         } elseif ($count < $category_info['count_few']) {
