@@ -100,10 +100,10 @@ class ControllerProductManufacturer extends Controller {
 			'href' => $this->url->link('common/home')
 		);
 
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_brand'),
-			'href' => $this->url->link('product/manufacturer')
-		);
+//		$data['breadcrumbs'][] = array(
+//			'text' => $this->language->get('text_brand'),
+//			'href' => $this->url->link('product/manufacturer')
+//		);
 
 		$manufacturer_info = $this->model_catalog_manufacturer->getManufacturer($manufacturer_id);
 
