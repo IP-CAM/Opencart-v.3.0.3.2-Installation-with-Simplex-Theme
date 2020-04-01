@@ -117,18 +117,16 @@
 														<p class="discount-val">-{{ product.economy }}</p>
 													{% endif %}
 												</div>
-												{% if product.special %}
-													<p class="price">{{ product.special }} <span
-																class="currency">{{ currency }}</span></p>
-												{% else %}
-													<p class="price">{{ product.price }} <span
-																class="currency">{{ currency }}</span></p>
-												{% endif %}
-											
+												<p class="price">
+													{% if product.stock_status_id != 7 or product.special is not same as(false) or product.price == 0 %}
+														<span class="currency">{{ product.stock_status }}</span>
+													{% else %}
+														{{ product.special ? product.special : product.price }} <span class="currency">{{ currency }}</span>
+													{% endif %}
+												</p>
 											{% endif %}
 										</div>
 									</a>
-									
 									<button {% if product.hide_price==false %} style="display: none" {% endif %}
 											data-product_id="{{ product.product_id }}" class="add-to-cart"
 											onclick="cart.add('{{ product.product_id }}');">

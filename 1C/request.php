@@ -5,13 +5,16 @@ require_once __DIR__ . '/exchange/exchange.model.php';
 require_once dirname(__DIR__) . '/config.php';
 require_once __DIR__ . '/Exception/InvalidJsonException.php';
 
-define('MODULE_URL', HTTPS_SERVER . 'index.php?route=api/exchange/');
+define('MODULE_URL', HTTPS_SERVER . 'index.php?route=api/exchange/getModuleConfig');
+define('LOGIN_URL', HTTPS_SERVER . 'index.php?route=api/login');
 
 /**
  * Class Request
  */
 class Request
 {
+    const USERNAME = 'exchange';
+    const KEY = 'WWTiMShnGWZQ0iZMOaRtIIrPe36V2Y7ZPRZxOwVKpo2JkQigL1kybLtgRO1JSEG5E28k3HhciY5RntShO51PlXcyBmAFmJ4qh4Jw4zHfCX6RRM7foNsSWfwoU0UOzOqfU6rlVghdAnlWfFifbXRJJBjnwvTcU21iHQH1UmAJFnptNbZaTrnOoASnUnF3LDCv4d86fhbDq6MuSohC2uVP0Ae0IzolKjwjafEdNVqddDVAnXccehVSwYYJ6KpHnTbg';
     /**
      * @var int Successful Task counter
      */
@@ -51,7 +54,7 @@ class Request
      */
     public function __construct()
     {
-        $this->connection = new Exchange(MODULE_URL . 'getModuleConfig');
+        $this->connection = new Exchange(MODULE_URL, self::USERNAME, self::KEY, LOGIN_URL);
         $this->model = new ModelExchange(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
         $this->filename = 'json/previous.json';
         $this->file = fopen($this->filename, 'r+');

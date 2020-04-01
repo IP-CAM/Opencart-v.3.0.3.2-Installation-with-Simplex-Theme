@@ -32,7 +32,7 @@
                   </div>
                 {% endfor %}
               {% endif %}
-            
+
             </div>
             <ul class="gallery-list">
               {% if thumb %}
@@ -229,7 +229,7 @@
               <h2>
                 {{ tab_attribute }}
               </h2>
-              
+
               {% for attribute_group in attribute_groups %}
                 <table>
                   <thead>
@@ -247,14 +247,14 @@
                   </tbody>
                 </table>
               {% endfor %}
-            
-            
+
+
             </div>
           </div>
         {% endif %}
         <!-- Documentation tab -->
         {% if documentation or downloads %}
-          
+
           <button aria-controls="documentation" aria-expanded="false" class="collapsed"
                   data-target="#documentation"
                   data-toggle="collapse" type="button">
@@ -332,7 +332,7 @@
         {#                                        </td>#}
         {#                                    </tr>#}
         {#                                {% endfor %}#}
-        
+
         {#                                </tbody>#}
         {#                            </table>#}
         {#                        </div>#}
@@ -390,7 +390,7 @@
         {#                                        </td>#}
         {#                                    </tr>#}
         {#                                {% endfor %}#}
-        
+
         {#                                </tbody>#}
         {#                            </table>#}
         {#                        </div>#}
@@ -435,16 +435,11 @@
                             <p class="discount-val">-{{ product.economy }}</p>
                           {% endif %}
                         </div>
-                        {% if product.special %}
-                          <p class="price">{{ product.special }} <span class="currency">{{ currency }}</span></p>
-                        {% else %}
-                          <p class="price">{{ product.price }} <span class="currency">{{ currency }}</span></p>
-                        {% endif %}
-                      
+                        <p class="price">{{ product.special ? product.special : product.price }} <span class="currency">{{ currency }}</span></p>
                       {% endif %}
                     </div>
                   </a>
-                  
+
                   <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}"
                                                                                                class="add-to-cart"
                                                                                                onclick="cart.add('{{ product.product_id }}');">
@@ -522,7 +517,7 @@
                   {% else %}
                     <p class="price">{{ product.price }} <span class="currency">{{ currency }}</span></p>
                   {% endif %}
-                
+
                 {% endif %}
               </div>
             </a>

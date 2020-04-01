@@ -497,6 +497,7 @@
     top              : 100%;
     z-index          : 10;
     max-width        : 370px;
+    visibility       : visible;
   }
   
   .navbar-nav {
@@ -929,6 +930,7 @@
         min-height       : fit-content;
         max-height       : calc(100vh - 85px);
         overflow         : auto;
+        visibility       : visible;
       }
       
       .dropdown-toggle.back {
@@ -1316,6 +1318,7 @@
     
     .dropdown-menu.show {
       background-color : #f4f4f4;
+      visibility       : visible;
     }
     
     .dropdown-submenu {
