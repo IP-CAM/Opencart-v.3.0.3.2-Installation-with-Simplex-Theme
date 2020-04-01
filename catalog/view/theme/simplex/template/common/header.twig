@@ -249,25 +249,14 @@
             </div>
             <div class="timetable">
               <table>
-                <tr>
-                  <td>Luni - Vineri</td>
-                  <td>08:00 - 18:00</td>
-                </tr>
-                <tr>
-                  <td>Simbata</td>
-                  <td>08:00 - 16:00</td>
-                </tr>
-                <tr>
-                  <td>Duminica</td>
-                  <td>zi libera</td>
-                </tr>
+               {{open}}
               </table>
             </div>
             <div class="input-telephone">
               <h6>{{ text_phone_callback }}</h6>
-              <label><input placeholder="Telefonul dvs." type="text"></label>
-              <button type="submit">
-                Sunaţi înapoi
+              <label><input  id="customer_phone"  placeholder="{{ text_your_phone }}" type="text"></label>
+              <button class="button-call-back" type="submit">
+                {{ text_callback }}
                 <span class="image-container"></span>
               </button>
             </div>

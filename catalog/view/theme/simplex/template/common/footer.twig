@@ -124,8 +124,8 @@
     <div class="input-telephone">
         <h6>{{ text_phone_callback }}</h6>
         <label><input id="customer_phone" placeholder="{{ text_your_phone }}" type="text"></label>
-        <button id="button-call-back" type="submit">
-            {{ text_callback }}
+        <button class="button-call-back" type="submit">
+            {{ text_callback }}wereewe
             <span class="image-container"></span>
         </button>
     </div>
@@ -228,8 +228,10 @@
     $(".input-telephone input , #subscribe #email").on("input", function () {
         $(this).removeClass('has-error');
     });
-    $("#button-call-back").click(function () {
+    $(".button-call-back").click(function () {
 
+        var button_callback=$(this);
+        var phone1 = button_callback.closest(".input-telephone").find("#customer_phone").val();
         var url = $('base').attr('href') + 'index.php?route=information/contact';
         var phone = $("#customer_phone").val();
         if (phone.length > 3) {

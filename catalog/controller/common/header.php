@@ -135,6 +135,22 @@ class ControllerCommonHeader extends Controller
             $catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
         }
         /* added by it-lab* start end */
+		/* added by it-lab start */
+		$this->load->model('localisation/location');
+		$data['telephone'] = $this->config->get('config_telephone');
+
+		//$data['locations']=$this->model_localisation_location->getLocationDescriptions();
+		$locations = $this->model_localisation_location->getLocationDescriptions();
+		foreach ($locations as &$location){
+			if(!$location['is_online']){
+				$location['contacts_link']=$data['contact']."#location-{$location['location_id']}";
+				$data['locations'][]=$location;
+			}else{
+				$data['open'] = html_entity_decode($location['open'], ENT_QUOTES, 'UTF-8');
+			}
+
+		}
+		/* added by it-lab end */
 
         return $this->load->view('common/header', $data);
     }

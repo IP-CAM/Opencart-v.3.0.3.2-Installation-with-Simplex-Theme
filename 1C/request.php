@@ -68,9 +68,11 @@ class Request
      */
     public function makeRequest()
     {
-        $this->model->dropOldCategories();
+    	$this->model->dropOldCategories();
         $this->updateCategories();
-        $decoded_json = json_decode($this->connection->request1C(), true);
+		$this->model->loadActiveProductsIds();
+		$this->model->setProductsStatusInactive();
+		$decoded_json = json_decode($this->connection->request1C(), true);
         if (!isset($decoded_json)) {
             throw new InvalidJsonException("JSON not received or is invalid");
         }
@@ -78,13 +80,17 @@ class Request
             if (isset($decoded_json)) {
                 //fwrite($this->file, json_encode($decoded_json));
                 self::rewriteJSONData($decoded_json);
+                //var_dump(count($decoded_json));exit();
                 foreach ($decoded_json as $d_json) {
-                    if ($d_json['quantity'] >= 0 && strlen($d_json['quantity']) > 0 && strlen(
+                    if ($d_json['quantity'] >= 0 && strlen(
                             $d_json['model']
-                        ) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] > 0 && strlen($d_json['sku']) > 0) {
+                        ) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] >= 0 && strlen($d_json['sku']) > 0) {
                         $this->model->update($d_json);
                         $this->successful_tasks++;
-                    }
+                    }else{
+                    	//var_dump($d_json);
+					}
+
                     echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
                 }
             }
@@ -98,7 +104,8 @@ class Request
                 foreach ($decoded_json as $d_json) {
                     if ($d_json['quantity'] >= 0 && strlen($d_json['quantity']) > 0 && strlen(
                             $d_json['model']
-                        ) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] > 0 && strlen($d_json['sku']) > 0) {
+                        ) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] > 0 && strlen($d_json['sku']) > 0)
+                    {
                         foreach ($previous_json as $p_json) {
                             if ($d_json['sku'] == $p_json['sku']) {
                                 $this->flag = false;
@@ -139,7 +146,7 @@ class Request
         foreach ($array['#value']['row'] as $index => $arr) {
             $data[$index]['sku'] = $arr[0]['#value'];
             $data[$index]['model'] = $arr[1]['#value'];
-            $data[$index]['quantity'] = $arr[2]['#value'];
+            $data[$index]['quantity'] = (strlen($arr[2]['#value']) > 0) ? $arr[2]['#value'] : 0;
             $data[$index]['product_description'][1]['name'] = $arr[3]['#value'];
             $data[$index]['product_description'][2]['name'] = $arr[3]['#value'];
             $data[$index]['price'] = $arr[4]['#value'];
