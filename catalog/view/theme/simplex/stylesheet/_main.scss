@@ -1108,7 +1108,7 @@ select {
 
 #checkout {
   form {
-    max-width : 600px;
+    max-width : 40rem;
     
     > * {
       margin-bottom : 1rem;
@@ -1122,6 +1122,8 @@ select {
     margin-right : 1rem;
     position     : relative;
     white-space  : nowrap;
+    
+    
   }
   
   p {
@@ -1138,7 +1140,7 @@ select {
     @include flex(none, center, center);
     
     label {
-      flex        : 0 0 30%;
+      flex        : 0 0 34%;
       font-weight : 600;
       line-height : 2.5;
       text-align  : right;
@@ -1248,11 +1250,34 @@ select {
     @include border-radius;
     background-color : #f4f4f4;
     padding          : 1.25rem 2.8125rem;
+    
+    .total {
+      @include flex(none, end, center);
+      margin-left  : auto;
+      margin-right : 2rem;
+      
+      > span {
+        color       : #a4a4a4;
+        font-size   : .8125rem;
+        font-weight : 500;
+      }
+      
+      h5 {
+        margin-bottom : 0;
+        margin-left   : 1rem;
+      }
+      
+      small {
+        font-size   : .625rem;
+        font-weight : 500;
+      }
+    }
   }
   
   .next {
     @include border-radius;
     @include flex(none, between, center);
+    @include transition(all .125s linear);
     background-color : $yellow;
     border           : 0;
     cursor           : pointer;
@@ -1282,6 +1307,11 @@ select {
         display                 : block;
         padding                 : 10px;
       }
+    }
+    
+    &:hover {
+      background-color : #2b2c30;
+      color            : $white;
     }
   }
 }
@@ -4473,7 +4503,12 @@ select {
         padding-bottom : 0;
         
         a {
-          height : auto;
+          height       : auto;
+          padding-left : 0;
+          
+          &:before {
+            content : none;
+          }
         }
       }
     }
