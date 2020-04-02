@@ -4,13 +4,14 @@
     <div class="cards">
       {% for banner in banners %}
       <div class="mini-card">
+        <a href="#">
         <div class="image-container">
           <img alt="" src="{{ banner.image_original }}">
         </div>
         <p>{{ banner.title }}</p>
+        </a>
       </div>
       {% endfor %}
-
     </div>
   </div>
 </div>
