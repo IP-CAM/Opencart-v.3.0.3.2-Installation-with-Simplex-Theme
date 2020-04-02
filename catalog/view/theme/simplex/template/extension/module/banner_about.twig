@@ -1,17 +1,20 @@
 <hr>
 <div id="about-us">
-  <div class="container-fluid">
-    <div class="cards">
-      {% for banner in banners %}
-        <div class="mini-card">
-          <div class="image-container">
-            <img alt="" src="{{ banner.image_original }}">
-          </div>
-          <p>{{ banner.title }}</p>
+    <div class="container-fluid">
+        <div class="cards">
+            {% for banner in banners %}
+
+            <a href="{{ banner.link }}">
+                <div class="mini-card">
+                    <div class="image-container">
+                        <img alt="" src="{{ banner.image_original }}">
+                    </div>
+                    <p>{{ banner.title }}</p>
+                </div>
+                {% endfor %}
+            </a>
         </div>
-      {% endfor %}
     </div>
-  </div>
 </div>
 <div class="categories categories-main">
   <nav class="menu">
