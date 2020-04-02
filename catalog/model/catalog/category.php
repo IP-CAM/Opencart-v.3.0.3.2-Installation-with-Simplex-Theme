@@ -87,14 +87,16 @@ class ModelCatalogCategory extends Model {
         return $tree;
     }
     protected static function getTree($data, $item, &$tree = [], $depth = 0) {
-        $item['depth'] = $depth;
-        $tree[$item['category_id']] = $item;
+		//if ($depth < 2 || ($depth >= 2 && (strlen($item['category_1c']) == 0))) {
+			$item['depth'] = $depth;
+			$tree[$item['category_id']] = $item;
 
-        foreach ($data as $child) {
-            if ($item['category_id'] == $child['parent_id'] && !in_array($child['category_id'], array_keys($tree))) {
-                $child['path'] = $item['path'] . "_" . $child['category_id'];
-                static::getTree($data, $child, $tree, $depth + 1);
-            }
-        }
-    }
+			foreach ($data as $child) {
+				if ($item['category_id'] == $child['parent_id'] && !in_array($child['category_id'], array_keys($tree))) {
+					$child['path'] = $item['path'] . "_" . $child['category_id'];
+					static::getTree($data, $child, $tree, $depth + 1);
+				}
+			}
+		//}
+	}
 }

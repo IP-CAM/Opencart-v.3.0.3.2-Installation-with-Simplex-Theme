@@ -91,7 +91,7 @@ class Request
                     	//var_dump($d_json);
 					}
 
-                    echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
+                    //echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
                 }
             }
         } else {
@@ -127,12 +127,13 @@ class Request
                             $this->log($d_json);
                         }
                     }
-                    echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
-                    echo "Skipped " . $this->skipped_tasks . ' of ' . count($decoded_json) . "\n\n";
+                    //echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
+                    //echo "Skipped " . $this->skipped_tasks . ' of ' . count($decoded_json) . "\n\n";
                     $this->flag = true;
                 }
             }
         }
+        $this->model->dropHighLevelCategories();
     }
 
     /**
@@ -228,7 +229,7 @@ class Request
             foreach ($categories as $category) {
                 if($category['depth'] == $depth) {
 					$rewrite = true;
-					$this->model->updateCategory($category);
+					$this->model->updateCategory($category,$depth);
                 }
             }
             $depth++;
