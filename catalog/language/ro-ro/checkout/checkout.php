@@ -23,7 +23,7 @@ $_['text_forgotten']                 = 'Am uitat parola';
 $_['text_your_details']              = 'Detalii personale';
 $_['text_your_address']              = 'Adresa ta';
 $_['text_your_password']             = 'Parola ta';
-$_['text_agree']                     = 'Am citit și sunt de acord cu <a target="_blank" class="agree" href="%s"><b>%s</b></a>';
+$_['text_agree']                     = 'Am citit și sunt de acord cu <a target="_blank" href="%s"><b>%s</b></a>';
 $_['text_address_new']               = 'Vreau să folosesc o adresă nouă';
 $_['text_address_existing']          = 'Vreau să folosesc o adresă existentă';
 $_['text_shipping_method']           = 'Selectează metoda de livrare.';
