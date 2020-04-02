@@ -64,10 +64,10 @@ class ControllerExtensionModuleBanner extends Controller {
 		}
 
 		$data['module'] = $module++;
-        $data['catalog_tree'] = $this->model_catalog_category->getCatalogTree();
+        /*$data['catalog_tree'] = $this->model_catalog_category->getCatalogTree();
         foreach ($data['catalog_tree'] as &$catalog_item) {
             $catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
-        }
+        }*/
 
 		return $this->load->view('extension/module/banner_'.$setting['banner_type'], $data);
 	}
