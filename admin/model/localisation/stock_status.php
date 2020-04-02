@@ -61,7 +61,6 @@ class ModelLocalisationStockStatus extends Model {
 
 				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 			}
-
 			$query = $this->db->query($sql);
 
 			return $query->rows;
@@ -69,7 +68,7 @@ class ModelLocalisationStockStatus extends Model {
 			$stock_status_data = $this->cache->get('stock_status.' . (int)$this->config->get('config_language_id'));
 
 			if (!$stock_status_data) {
-				$query = $this->db->query("SELECT stock_status_id, name FROM " . DB_PREFIX . "stock_status WHERE language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY name");
+				$query = $this->db->query("SELECT stock_status_id, name FROM " . DB_PREFIX . "stock_status WHERE language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY stock_status_id");
 
 				$stock_status_data = $query->rows;
 

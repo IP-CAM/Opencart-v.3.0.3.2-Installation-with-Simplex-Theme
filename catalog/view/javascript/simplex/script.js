@@ -2,7 +2,7 @@ $('.nav-tabs .nav-link').click(function () {
     if ($(this).attr('href') === '#relative') {
         setTimeout(function () {
             $('#relative .related-slider').slick('setPosition');
-        }, 155);
+        }, 350);
     }
 });
 $("input.quantity").inputSpinner({
