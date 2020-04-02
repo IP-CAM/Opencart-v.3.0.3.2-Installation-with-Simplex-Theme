@@ -436,21 +436,65 @@
   }
   
   .categories-main {
-    width : 100%;
+    width    : auto;
+    margin   : 20px;
+    overflow : hidden;
+    @include border-radius();
     
     .menu {
       position : relative;
+      
+      .menu-link:after {
+      
+      }
     }
     
-    .dropright .dropdown-menu {
-      width      : 100%;
-      height     : auto;
-      min-height : fit-content;
-      left       : 0 !important;
+    .dropright {
+      &:first-child .dropdown-toggle {
+        @include border-radius-top();
+      }
+      
+      .dropdown-menu {
+        width      : 100%;
+        height     : auto;
+        min-height : fit-content;
+        left       : 0 !important;
+        padding    : 0;
+        @include border-radius();
+      }
     }
     
-    .category-list .dropdown-menu {
-      position : static;
+    .category-list {
+      font-size : 14px;
+      
+      .category-toggle {
+        display     : block;
+        line-height : 1;
+        padding     : 20px;
+      }
+      
+      &:first-child .category-toggle {
+        @include border-radius-top();
+      }
+      
+      .dropdown-menu {
+        position         : static;
+        background-color : #f4f4f4;
+        border           : 0;
+        padding          : 16px;
+      }
+    }
+    
+    .back-category {
+      background-color : $yellow;
+      
+      &:before {
+        content      : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAANCAYAAACUwi84AAAAj0lEQVQoU5XRwQ3CMAwF0O9bjmyAGOfn1A2gE5AR6ASICVomyM1eh02CEhVEijngo/1i5cuSc96FEM4kJzglqppE5ApgITlujdSGmS0Ajh5qYINGkvVBqzf4hTrgoS+wogeAPYDDfxteaUoptxhj6j75EfVO8tSlMLPamAF0w7ZBVQcRyd6wgfUWieTFu8UTlORAUzqxtv8AAAAASUVORK5CYII=");
+        transform    : rotate(180deg);
+        filter       : brightness(0);
+        display      : inline-block;
+        margin-right : 10px;
+      }
     }
   }
   
@@ -478,7 +522,7 @@
   .menu .menu-link {
     color           : $black;
     justify-content : flex-start;
-    padding         : 0;
+    padding         : 20px;
     
     svg {
       display : none;
@@ -912,10 +956,8 @@
     }
     
     .dropdown-toggle:before {
-      content  : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAANCAYAAACUwi84AAAAlUlEQVQoU5WQsRXCMAxET507WIFxThUbQCZImADYIGwQJnBnrcMm5tkv4dnYFFwpfendnXjv9865keQdHYmZ3QBcASwkh29G0sDMFgCnGONFVecSykAJARhIpoOsD/ALqoAe1ABrqheAHYDDfx+2NKXRJkWM8aGqU5UihDCLyAjgSfJc9RBCOIqI7y1zD6vriWSqvNEbXQxDU9JLVqgAAAAASUVORK5CYII=");
       position : absolute;
       left     : 34px;
-      height   : 13px;
     }
     
     .categories-header {
@@ -956,9 +998,14 @@
         background-color : #f5f3ee;
         
         &:before {
+          content   : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAANCAYAAACUwi84AAAAj0lEQVQoU5XRwQ3CMAwF0O9bjmyAGOfn1A2gE5AR6ASICVomyM1eh02CEhVEijngo/1i5cuSc96FEM4kJzglqppE5ApgITlujdSGmS0Ajh5qYINGkvVBqzf4hTrgoS+wogeAPYDDfxteaUoptxhj6j75EfVO8tSlMLPamAF0w7ZBVQcRyd6wgfUWieTFu8UTlORAUzqxtv8AAAAASUVORK5CYII=");
           transform : rotate(180deg);
-          left      : 20px;
-          top       : calc(50% - 11px);
+          filter    : brightness(0);
+          display   : inline-block;
+          top       : 24px;
+          bottom    : 0;
+          margin    : auto;
+          height    : 13px;
         }
         
         &.back-category {
@@ -966,6 +1013,10 @@
           background-color : $yellow;
           white-space      : normal;
           line-height      : 1.5;
+          
+          &:before {
+            top : 0;
+          }
         }
         
         &.back-category, &.back-category + .dropdown-menu .nav-link {
@@ -2026,7 +2077,7 @@
 
 @media (min-width : 992px) {
   #catalog {
-    .dropdown-toggle {
+    > .dropdown-toggle {
       &:before {
         content : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAMCAYAAABvEu28AAAARUlEQVQ4T2NkYGA4wMDAYM9AGgDpcUTWwkimQQcZGBgc0A0izS04VINcRBVAVYPICWx0XxwgN7DRDTpIVa8Nj8CmXcoGAPqIC4wnT7vzAAAAAElFTkSuQmCC");
       }
@@ -2057,6 +2108,10 @@
   }
   
   .navbar-nav .follow-us {
+    display : none;
+  }
+  
+  .categories-main {
     display : none;
   }
 }
