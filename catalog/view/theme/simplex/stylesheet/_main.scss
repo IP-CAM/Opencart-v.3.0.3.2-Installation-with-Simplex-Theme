@@ -1047,7 +1047,7 @@ select {
   
   .menu-link {
     @include flex(none, none, center);
-    line-height : 1;
+    line-height : 1.4;
     padding     : 14px 20px;
     white-space : normal;
     
