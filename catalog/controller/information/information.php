@@ -186,7 +186,7 @@ class ControllerInformationInformation extends Controller {
 			/* added by it-lab start */
 			$this->load->model('catalog/category');
 			$data['thumb'] = (strlen($information_info['image']) > 0) ? $this->model_tool_image->resize
-			($information_info['image'], 920, 415, "w") : false;
+			($information_info['image'], 1920, 866, "w") : false;
 
 			$categories = $this->model_catalog_information->getCategories($information_id);
 			if(is_array($categories) && count($categories) > 0) {
