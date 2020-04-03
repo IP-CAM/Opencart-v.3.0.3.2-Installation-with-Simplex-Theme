@@ -689,10 +689,9 @@ let $dropdown = $(".categories .dropright");
 $(window).on("load resize", function () {
     if (this.matchMedia("(min-width: 992px)").matches) {
         $dropdown.hover(function () {
-            console.log($('.dropdown-toggle', this));
             $('.dropdown-toggle', this).dropdown('toggle');
-        }, function () {
-            $('.dropdown-toggle', this).dropdown('update')
+        }).click(function () {
+            $('.dropdown-toggle', this).dropdown('destroy');
         });
     } else {
         $dropdown.off("mouseenter mouseleave");

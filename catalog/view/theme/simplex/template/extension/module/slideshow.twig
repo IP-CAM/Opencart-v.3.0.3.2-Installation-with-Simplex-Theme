@@ -12,9 +12,13 @@
                     <a class="menu-link{% if key != 'oferte' %} dropdown-toggle{% endif %}"{% if key != 'oferte' %} aria-expanded="false" aria-haspopup="true"
                       data-toggle="dropdown"{% endif %}
                        href="{{ category.href }}">
-                      {% if category.image %}
+                      {% if category.image or category.image_svg %}
                         <div class="image-container">
-                          <img src="/image/{{ category.image }}" alt="{{ category.name|capitalize }}">
+                          {% if category.image_svg %}
+                            {{ category.image_svg }}
+                          {% else %}
+                            <img src="/image/{{ category.image }}" alt="{{ category.name|capitalize }}">
+                          {% endif %}
                         </div>
                       {% endif %}
                       <span>{{ category.name }}</span>
