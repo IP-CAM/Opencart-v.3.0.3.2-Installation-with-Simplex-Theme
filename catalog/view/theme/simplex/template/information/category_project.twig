@@ -62,7 +62,7 @@
         var start = $("#show-more-button").data('start');
         var limit = $("#show-more-button").data('limit');
         var path = {{ category.category_id }};
-        var url = new URL(window.location.href);
+        var url = new URL(window.location.origin + '/index.php');
         var query_string = url.search;
 
 

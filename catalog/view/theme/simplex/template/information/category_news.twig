@@ -78,8 +78,10 @@
     $("#show-more-button").click(function () {
         var start = $("#show-more-button").data('start');
         var limit = $("#show-more-button").data('limit');
+        var path = {{ category.category_id }};
 
         var url = new URL(window.location.href);
+        var url = new URL(window.location.origin + '/index.php');
         var query_string = url.search;
 
 
@@ -87,6 +89,7 @@
 
         search_params.set('start', start);
         search_params.set('limit', limit);
+        search_params.set('path', path);
         search_params.set('route', 'information/category/load_more');
         url.search = search_params.toString();
 
