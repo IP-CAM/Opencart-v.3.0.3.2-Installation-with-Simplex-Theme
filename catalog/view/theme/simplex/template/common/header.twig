@@ -141,12 +141,13 @@
                 </div>
                 {{ _self.catalog_links(catalog_tree, 0, 0) }}
                 {% macro catalog_links(items, menu_level, parent_id) %}
-                  {% for category in items %}
+                  {% for key, category in items %}
                     {% if category.parent_id == parent_id %}
                       {% if menu_level == 0 %}
                         <div class="dropdown-item dropright">
-                          <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle catalog-item"
-                             data-toggle="dropdown"
+                          <a class="nav-link{% if key != 'oferte' %} dropdown-toggle{% endif %} catalog-item"
+                             {% if key != 'oferte' %}data-toggle="dropdown" aria-expanded="false"
+                             aria-haspopup="true"{% endif %}
                              href="{{ category.href }}" role="button">
                             {% if category.image %}
                               <div class="image-container">
@@ -158,15 +159,17 @@
                             </span>
                           </a>
                           <div class="dropdown-menu dropdown-submenu">
-                            <div class="dropdown-item dropright">
-                              <a aria-expanded="true" aria-haspopup="true"
-                                 class="nav-link dropdown-toggle back back-category"
-                                 data-toggle="dropdown"
-                                 href="{{ category.href }}">
-                                {{ category.name }}
-                              </a>
-                            </div>
-                            {{ _self.catalog_links(items, 1, category.category_id) }}
+                            {% if key != 'oferte' %}
+                              <div class="dropdown-item dropright">
+                                <a aria-expanded="true" aria-haspopup="true"
+                                   class="nav-link dropdown-toggle back back-category"
+                                   data-toggle="dropdown"
+                                   href="{{ category.href }}">
+                                  {{ category.name }}
+                                </a>
+                              </div>
+                              {{ _self.catalog_links(items, 1, category.category_id) }}
+                            {% endif %}
                           </div>
                         </div>
                       {% endif %}
