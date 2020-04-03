@@ -289,7 +289,16 @@
   
   .main-slider {
     .slick-prev, .slick-next {
-      display : none !important;
+      bottom : 0;
+      top    : 0;
+    }
+    
+    .slick-prev {
+      right : 0;
+    }
+    
+    .slick-next {
+      left : 0;
     }
   }
   
