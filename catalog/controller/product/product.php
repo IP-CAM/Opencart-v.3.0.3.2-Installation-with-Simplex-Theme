@@ -326,15 +326,15 @@ class ControllerProductProduct extends Controller
                 } else {
                     $available_in_stores = true;
                     $total_count += $ld['count'];
-                    $ld["availability_level"] = self::getAwailabilityLevel($ld['count'], $category_info);
+                    $ld["availability_level"] = self::getAvalabilityLevel($ld['count'], $category_info);
                 }
             }
-            $location_descriptions[$online_ld_id]["availability_level"] = self::getAwailabilityLevel(
+            $location_descriptions[$online_ld_id]["availability_level"] = self::getAvalabilityLevel(
                 $total_count,
                 $category_info
             );
             $data['location_descriptions'] = $location_descriptions;
-            $data["availability_level"] = self::getAwailabilityLevel($total_count, $category_info);
+            $data["availability_level"] = self::getAvalabilityLevel($total_count, $category_info);
 
             /* added by it-lab* start end */
 
@@ -1234,18 +1234,21 @@ class ControllerProductProduct extends Controller
         return $result;
     }
 
-    static function getAwailabilityLevel($count, $category_info)
-    {
-    	return 3;
-        if ($count === 0) {
-            return 0;
-        } elseif ($count < $category_info['count_few']) {
-            return 1;
-        } elseif ($count < $category_info['count_medium']) {
-            return 2;
-        }
+	static function getAvalabilityLevel($count, $category_info) {
+		$count_few = $category_info['count_few'] ?? 10;
+		$count_medium = $category_info['count_medium'] ?? 50;
 
-        return 3;
-    }
+		if ($count === 0) {
+			return 0;
+		}
+		if ($count < $count_few) {
+			return 1;
+		}
+		if ($count < $count_medium) {
+			return 2;
+		}
+
+		return 3;
+	}
     /* added by it-lab* end */
 }
