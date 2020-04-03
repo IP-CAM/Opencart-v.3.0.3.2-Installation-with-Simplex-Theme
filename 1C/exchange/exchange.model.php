@@ -128,12 +128,12 @@ class ModelExchange
             "SELECT count(sku) AS count from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
         );
 
-		if (!isset($sku_check['row']['count']) || $sku_check['row']['count']==0)
+/*		if (!isset($sku_check['row']['count']) || $sku_check['row']['count']==0)
 		{
 			$sku_check = $this->query(
 				"SELECT count(sku) AS count from " . DB_PREFIX . "product where model='" . $this->escape($data['model']) . "'"
 			);
-		}
+		}*/
 
         if (isset($sku_check['row']['count']) && $sku_check['row']['count']) {
             $this->editProduct($data);
@@ -239,50 +239,23 @@ class ModelExchange
         $category = $this->query(
             "SELECT category_id, parent_id FROM oc_category WHERE category_1c = '{$data['category_1c']}'"
         )['row'];
-		//if($data['sku']=='BXP32220S'){ var_dump($category);}
+
         if(isset($category['category_id']) && strlen($category['category_id'])) {
 			$category_id = $category['category_id'];
 			$parent_id = $category['parent_id'];
 			$result = $this->query(
 				"SELECT product_id from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
 			);
-			$update_by_model=false;
-			if(isset($result['row']['product_id'])) {
-				 $product_id = $result['row']['product_id'];
-			}else{
-				if(strlen($this->escape($data['model']))) {
-					$product_id = $this->query(
-						"SELECT product_id from " . DB_PREFIX . "product where model='" . $this->escape($data['model']) . "'"
-					)['row']['product_id'];
-
-					$update_by_model = true;
-				}
-			}
+			$product_id = $result['row']['product_id'];
 
 			$status = in_array($product_id,$this->active_products_ids)?1:0;
-			if($update_by_model){
-				if($status) {
-					$this->query(
-						"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
-							$data['model']
-						) . "', sku = '" . $this->escape(
-							$data['sku']
-						) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . ", status = " . $status . " WHERE model = '" . $this->escape(
-							$data['model']
-						) . "'"
-					);
-					$this->edited_by_model_count++;
-					var_dump('UPDATE BY MODEL : ' . $product_id . ' | ' . $this->escape($data['model']) . ' | ' . $product_id . " | $this->edited_by_model_count | {$this->connection->affected_rows} ");
-				}
-			}else {
-				$this->query(
-					"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
-						$data['model']
-					) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . ", status = " . $status . " WHERE sku = '" . $this->escape(
-						$data['sku']
-					) . "'"
-				);
-			}
+			$this->query(
+				"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
+					$data['model']
+				) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . ", status = " . $status . " WHERE sku = '" . $this->escape(
+					$data['sku']
+				) . "'"
+			);
 			$main_category = 1;
 			$this->query(
 			"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $main_category"
