@@ -82,10 +82,15 @@ class ControllerInformationCategory extends Controller
             'limit'              => $limit
         ];
         $results = $this->model_catalog_information->getInformations($filter_data);
-        $total = $this->model_catalog_information->getTotalInformations();
-        if ($category_id == 61) {
-            $filter_data['limit'] = $total;
-        }
+		if(isset($category_info['category_id'])) {
+			$total = $this->model_catalog_information->getTotalInformationsByCategory($category_info['category_id']);
+		}else{
+			$total = $this->model_catalog_information->getTotalInformations();
+		}
+
+		if($category_info['template'] == 'vacancy') {
+			$filter_data['limit'] = $total;
+		}
         
         if ($results) {
             foreach ($results as $result) {
@@ -137,7 +142,13 @@ class ControllerInformationCategory extends Controller
         }
         $data["limit"] = $limit;
         $data["start"] = $start + count($results);
-        $data["show_load_more_button"] = !(count($results) <= $start + count($results));
+
+
+		if ($total <= $start + count($results)) {
+			$data["show_load_more_button"] = false;
+		} else {
+			$data["show_load_more_button"] = true;
+		}
         $data['href_category'] = $this->url->link('product/category', 'path=' . $category_id);
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');

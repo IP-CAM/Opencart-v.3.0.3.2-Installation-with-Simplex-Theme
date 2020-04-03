@@ -78,7 +78,14 @@ class ModelCatalogInformation extends Model {
         return $date_str;
 
     }
-    /* added by it-lab end */
+	/* added by it-lab start */
+	public function getTotalInformationsByCategory($category_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information_to_category WHERE category_id=".$category_id);
+
+		return $query->row['total'];
+	}
+	/* added by it-lab end */
+	/* added by it-lab end */
     public function getPreviousInformation($informationId){
         return $this->db->query("SELECT i.`information_id` FROM `" . DB_PREFIX . "information` i INNER JOIN " . DB_PREFIX . "information_to_category itc on i.`information_id` = itc.`information_id` WHERE `sort_order` > (SELECT `sort_order` FROM " . DB_PREFIX . "information WHERE `information_id` = $informationId) and itc.category_id in (SELECT `category_id` FROM " . DB_PREFIX . "information_to_category WHERE `information_id` = $informationId) ORDER BY sort_order LIMIT 1")->row['information_id'] ?? null;
     }

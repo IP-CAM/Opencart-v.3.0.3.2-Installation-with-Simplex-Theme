@@ -8,6 +8,21 @@ require_once __DIR__ . '/Exception/InvalidJsonException.php';
 define('MODULE_URL', HTTPS_SERVER . 'index.php?route=api/exchange/getModuleConfig');
 define('LOGIN_URL', HTTPS_SERVER . 'index.php?route=api/login');
 
+if (!function_exists('mb_ucfirst')) {
+	function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false) {
+		$first_letter = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding);
+		$str_end = "";
+		if ($lower_str_end) {
+			$str_end = mb_strtolower(mb_substr($str, 1, mb_strlen($str, $encoding), $encoding), $encoding);
+		}
+		else {
+			$str_end = mb_substr($str, 1, mb_strlen($str, $encoding), $encoding);
+		}
+		$str = $first_letter . $str_end;
+		return $str;
+	}
+}
+
 /**
  * Class Request
  */
@@ -80,17 +95,13 @@ class Request
             if (isset($decoded_json)) {
                 //fwrite($this->file, json_encode($decoded_json));
                 self::rewriteJSONData($decoded_json);
-                //var_dump(count($decoded_json));exit();
                 foreach ($decoded_json as $d_json) {
                     if ($d_json['quantity'] >= 0 && strlen(
                             $d_json['model']
                         ) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] >= 0 && strlen($d_json['sku']) > 0) {
                         $this->model->update($d_json);
                         $this->successful_tasks++;
-                    }else{
-                    	//var_dump($d_json);
-					}
-
+                    }
                     //echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
                 }
             }
@@ -162,7 +173,7 @@ class Request
 
         foreach ($array['#value']['row'] as $index => $arr) {
             $data[$arr[0]['#value']]['category_id'] = $arr[0]['#value'];
-            $data[$arr[0]['#value']]['name'] = $arr[1]['#value'];
+            $data[$arr[0]['#value']]['name'] = mb_ucfirst(trim($arr[1]['#value']),'UTF-8',true);
             $data[$arr[0]['#value']]['parent_id'] = $arr[2]['#value'];
         }
 
@@ -179,7 +190,6 @@ class Request
 
     protected static function getCategoriesAsTree(array $data, $item, array &$tree = [], $depth = 0)
     {
-    	//var_dump($item['category_id'] . ' {} '. $depth );
         $item['depth'] = $depth;
         $tree[$item['category_id']] = $item;
 
@@ -218,10 +228,6 @@ class Request
     {
         $categories = json_decode($this->connection->requestCategories(), true);
         self::rewriteJSONCategories($categories);
-       /*foreach ($categories as $category){
-			var_dump($category['category_id'].' | ' .$category['parent_id'].  ' | '.$category['depth']);
-		}
-        exit;*/
 
         $depth = 0;
         do {
