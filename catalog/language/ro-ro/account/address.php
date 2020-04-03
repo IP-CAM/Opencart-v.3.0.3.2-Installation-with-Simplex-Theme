@@ -21,7 +21,7 @@ $_['entry_address_2']      = 'Adresa 2';
 $_['entry_postcode']       = 'Cod poştal:';
 $_['entry_city']           = 'Oraş / Comună';
 $_['entry_country']        = 'Ţară';
-$_['entry_zone']           = 'Judeţ';
+$_['entry_zone']           = 'Raion';
 $_['entry_default']        = 'Adresa implicită';
 
 // Error
@@ -34,6 +34,6 @@ $_['error_address_1']      = 'Adresa trebuie să conţină între 3 şi 128 cara
 $_['error_postcode']       = 'Codul Postal trebuie să conţină între 2 şi 10 caractere!';
 $_['error_city']           = 'Oraşul trebuie să conţină între 3 şi 128 caractere!';
 $_['error_country']        = 'Te rugăm să selectezi o ţara!';
-$_['error_zone']           = 'Te rugăm să selectezi un judeţ!';
+$_['error_zone']           = 'Te rugăm să selectezi un raion!';
 $_['error_custom_field']   = '%s necesare!';
 $_['error_custom_field_validate'] = '%s este invalid!';
