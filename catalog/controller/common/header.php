@@ -134,6 +134,14 @@ class ControllerCommonHeader extends Controller
         foreach ($data['catalog_tree'] as &$catalog_item) {
             $catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
         }
+        $this->load->language('product/special');
+        $data['catalog_tree']['oferte'] = [
+            'href' => $this->url->link("product/special"),
+            'name' => $this->language->get('offers'),
+            'image' => '',
+            'image_svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g transform="translate(-1304 -1382)"><path d="M1.02-5.58A2.9,2.9,0,0,1,.24-7.725,3.243,3.243,0,0,1,.6-9.3a2.446,2.446,0,0,1,1-1A2.961,2.961,0,0,1,3.03-10.65a2.961,2.961,0,0,1,1.432.345,2.446,2.446,0,0,1,1,1,3.243,3.243,0,0,1,.36,1.575A2.9,2.9,0,0,1,5.04-5.58a2.72,2.72,0,0,1-2.01.78A2.72,2.72,0,0,1,1.02-5.58ZM9.195-10.5H11.73L4.56,0H2.025ZM3.5-6.727a2,2,0,0,0,.188-1,2,2,0,0,0-.187-1A.547.547,0,0,0,3.03-9.03a.547.547,0,0,0-.473.307,2,2,0,0,0-.187,1,2,2,0,0,0,.187,1,.547.547,0,0,0,.473.307A.547.547,0,0,0,3.5-6.727ZM8.715-.63a2.9,2.9,0,0,1-.78-2.145A3.243,3.243,0,0,1,8.3-4.35a2.446,2.446,0,0,1,1-1.005A2.961,2.961,0,0,1,10.725-5.7a2.961,2.961,0,0,1,1.433.345,2.446,2.446,0,0,1,1,1.005,3.243,3.243,0,0,1,.36,1.575,2.9,2.9,0,0,1-.78,2.145,2.72,2.72,0,0,1-2.01.78A2.72,2.72,0,0,1,8.715-.63ZM11.2-1.778a2,2,0,0,0,.188-1,2,2,0,0,0-.187-1,.547.547,0,0,0-.473-.308.547.547,0,0,0-.472.308,2,2,0,0,0-.187,1,2,2,0,0,0,.187,1,.547.547,0,0,0,.472.308A.547.547,0,0,0,11.2-1.778Z" transform="translate(1309.176 1398.636)"/><g transform="translate(1304 1382)" fill="none" stroke="#000" stroke-width="2"><circle cx="12" cy="12" r="12" stroke="none"/><circle cx="12" cy="12" r="11" fill="none"/></g></g></svg>',
+            'parent_id' => 0
+        ];
         /* added by it-lab* start end */
 		/* added by it-lab start */
 		$this->load->model('localisation/location');

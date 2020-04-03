@@ -1053,6 +1053,10 @@ select {
     
     &:hover {
       background-color : $yellow;
+      
+      .image-container {
+        opacity : 1;
+      }
     }
     
     .image-container {
@@ -1060,6 +1064,7 @@ select {
       flex         : 0 0 25px;
       max-width    : 25px;
       margin-right : 12px;
+      opacity      : 0.3;
       
       img, svg {
         vertical-align : middle;
@@ -1077,9 +1082,8 @@ select {
     width     : calc(100% - 320px);
     padding   : 28px 40px;
     z-index   : 1001;
-    left      : 293px !important;
+    left      : 270px !important;
     transform : translate3d(0, 0, 0) !important;
-    //box-shadow : 8px 9px 32px rgba(0, 0, 0, 0.06);
     
     h5 {
       font-size   : 14px;
@@ -2936,7 +2940,6 @@ select {
     
     a {
       color          : #b9b9b9;
-      text-transform : capitalize;
       vertical-align : middle;
       
       img {
