@@ -236,9 +236,6 @@ class ModelExchange
 
     public function editProduct($data)
     {
-    	//if($data['sku']=='BXP32220S'){ var_dump('SKKKKKKKKKKKKKKKKKKKKKKKKKKKUUUUUUUUUUUUU BXP32220S');}
-
-
         $category = $this->query(
             "SELECT category_id, parent_id FROM oc_category WHERE category_1c = '{$data['category_1c']}'"
         )['row'];
@@ -388,8 +385,13 @@ class ModelExchange
 			//var_dump("UPDATE oc_category SET status = $category_status WHERE category_id = {$oc_category['category_id']}");
 
 			$this->query(
-                "UPDATE oc_category_description SET name = '{$data['name']}' WHERE category_id = {$oc_category['category_id']} and language_id = 1"
+                "UPDATE oc_category_description SET name = '{$data['name']}' WHERE category_id = {$oc_category['category_id']} and language_id = 2"
             );
+			if($oc_category['category_id']==325){
+				var_dump("UPDATE oc_category_description SET name = '{$data['name']}' WHERE category_id = {$oc_category['category_id']} and language_id = 1"
+				);
+				var_dump('affected ',$this->connection->affected_rows);
+			}
         } else {
             $this->addCategory($data,$depth);
         }
