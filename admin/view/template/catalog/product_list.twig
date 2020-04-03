@@ -204,6 +204,72 @@
 
           location = 'index.php?route=catalog/product&user_token={{ user_token }}' + url;
       });
+
+      $('input[name=\'filter_manufacturer\']').autocomplete({
+      'source': function(request, response) {
+        $.ajax({
+          url: 'index.php?route=catalog/manufacturer/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+          dataType: 'json',
+          success: function(json) {
+            json.unshift({
+              manufacturer_id: 0,
+              name: '{{ text_none_manufacturer }}'
+            });
+
+            response($.map(json, function(item) {
+              return {
+                label: item['name'],
+                value: item['manufacturer_id']
+              }
+            }));
+          }
+        });
+      },
+      'select': function(item) {
+        $('input[name=\'filter_manufacturer\']').val(item['label']);
+        $('input[name=\'filter_manufacturer_id\']').val(item['value']);
+      }
+    });
+
+    $('input[name=\'filter_manufacturer\']').keyup(function() {
+      var value = $(this).val();
+      if (value == '') {
+        $('input[name=\'filter_manufacturer_id\']').val('')
+      }
+    });
+
+    $('input[name=\'filter_category\']').autocomplete({
+      'source': function(request, response) {
+        $.ajax({
+          url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_information=0&filter_name=' +  encodeURIComponent(request),
+          dataType: 'json',
+          success: function(json) {
+            json.unshift({
+              category_id: 0,
+              name: '{{ text_none_category }}'
+            });
+
+            response($.map(json, function(item) {
+              return {
+                label: item['name'],
+                value: item['category_id']
+              }
+            }));
+          }
+        });
+      },
+      'select': function(item) {
+        $('input[name=\'filter_category\']').val(item['label']);
+        $('input[name=\'filter_category_id\']').val(item['value']);
+      }
+    });
+
+    $('input[name=\'filter_category\']').keyup(function() {
+      var value = $(this).val();
+      if (value == '') {
+        $('input[name=\'filter_category_id\']').val('')
+      }
+    });
       //--></script>
   <script type="text/javascript"><!--
       // IE and Edge fix!
