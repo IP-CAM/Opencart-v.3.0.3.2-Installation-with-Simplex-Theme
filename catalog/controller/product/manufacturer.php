@@ -72,9 +72,9 @@ class ControllerProductManufacturer extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'p.sort_order';
+			$sort = 'p.price';
 		}
-
+		$sort_defined= isset($this->request->get['sort']);
 		if (isset($this->request->get['order'])) {
 			$order = $this->request->get['order'];
 		} else {

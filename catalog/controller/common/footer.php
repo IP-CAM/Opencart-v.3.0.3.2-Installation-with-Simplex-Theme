@@ -63,7 +63,23 @@ class ControllerCommonFooter extends Controller {
         $data['about']=$this->model_extension_menu_megamenu->getSubMenu('about');
         $data['catalog'] = $this->model_extension_menu_megamenu->getSubMenu('catalog');
         $data['telephone'] = $this->config->get('config_telephone');
+		$this->load->model('catalog/category');
+		$catalog_tree = $this->model_catalog_category->getCatalogTree();
+		$catalog_first_level=[];
+		foreach ($catalog_tree as &$catalog_item) {
+			if($catalog_item['depth']==0){
+				$catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
+				$catalog_first_level[]=$catalog_item;
+			}
+		}
 
+		$this->load->language('product/special');
+		$data['catalog_first_level']= $catalog_first_level;
+		$data['catalog_first_level']['oferte'] = [
+			'href' => $this->url->link("product/special"),
+			'name' => $this->language->get('offers'),
+		];
+		/* added by it-lab* start end */
         //$data['locations']=$this->model_localisation_location->getLocationDescriptions();
         $locations = $this->model_localisation_location->getLocationDescriptions();
         foreach ($locations as &$location){

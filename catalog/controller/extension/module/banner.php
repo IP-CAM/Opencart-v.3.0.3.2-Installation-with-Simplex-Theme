@@ -72,7 +72,7 @@ class ControllerExtensionModuleBanner extends Controller
 
         $this->load->model("catalog/category");
 
-        if ($this->request->get['route'] == 'common/home') {
+        if (!isset($this->request->get['route']) || $this->request->get['route'] == 'common/home') {
             $data['catalog_tree'] = $this->model_catalog_category->getCatalogTree();
             foreach ($data['catalog_tree'] as &$catalog_item) {
                 $catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
