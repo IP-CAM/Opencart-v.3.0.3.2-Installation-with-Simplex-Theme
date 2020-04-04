@@ -334,8 +334,7 @@ class ControllerProductProduct extends Controller
                 $category_info
             );
             $data['location_descriptions'] = $location_descriptions;
-            $data["availability_level"] = self::getAvalabilityLevel($total_count, $category_info);
-
+            $data["availability_level"] = self::getAvalabilityLevel($product_info['quantity'], $category_info);
             /* added by it-lab* start end */
 
             if ($product_info['quantity'] <= 0) {
@@ -1235,10 +1234,15 @@ class ControllerProductProduct extends Controller
     }
 
 	static function getAvalabilityLevel($count, $category_info) {
-		$count_few = $category_info['count_few'] ?? 10;
-		$count_medium = $category_info['count_medium'] ?? 50;
+		$count_few = isset($category_info['count_few']) && $category_info['count_few'] ? $category_info['count_few'] : 10;
+		$count_medium = isset($category_info['count_medium']) && $category_info['count_medium'] ? $category_info['count_medium'] : 50;
 
-		if ($count === 0) {
+		if ($count_medium <= $count_few) {
+			$count_few = 10;
+			$count_medium = 50;
+		}
+		
+		if ($count == 0) {
 			return 0;
 		}
 		if ($count < $count_few) {
