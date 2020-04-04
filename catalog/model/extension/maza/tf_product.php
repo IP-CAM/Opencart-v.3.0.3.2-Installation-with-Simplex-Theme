@@ -51,7 +51,7 @@ class ModelExtensionMazaTfProduct extends Model {
                         
                         $sql = 'SELECT product_id FROM ' . DB_PREFIX . 'tf_product_result';
                 } else {
-                        $sql = "SELECT p.product_id";
+                        $sql = "SELECT p.product_id,stock_status_id";
 
                         // Get total overall purchase quantity
                         if(in_array('order_quantity', $sort)){
@@ -226,8 +226,6 @@ class ModelExtensionMazaTfProduct extends Model {
                         'p.viewed' => 'viewed',
                         'random' => 'random'
 		);
-                
-                // sort by multiple sort and order
                 if(isset($data['sort_order'])){
                     $sql_order_by = TRUE;
                     foreach ($data['sort_order'] as $sort_order) {
@@ -235,7 +233,13 @@ class ModelExtensionMazaTfProduct extends Model {
                                 if ($sort_order['sort'] == 'pd.name' || $sort_order['sort'] == 'p.model') {
                                         $sql .= (($sql_order_by)?' ORDER BY ':', ') . "LCASE(" . $sort_data[$sort_order['sort']] . ")";
                                 } elseif ($sort_order['sort'] == 'p.price') {
-                                        $sql .= (($sql_order_by)?' ORDER BY ':', ') . "(CASE WHEN special IS NOT NULL THEN special WHEN discount IS NOT NULL THEN discount ELSE price END)";
+									if (isset($data['order']) && ($data['order'] == 'DESC')) {
+										$price_for_stock_status = 0;
+									}else{
+										$price_for_stock_status = 1000000000;
+									}
+                                        $sql .= (($sql_order_by)?' ORDER BY ':', ') . "(CASE       WHEN (stock_status_id<>7 OR (price=0  OR quantity =0 )) THEN '.  $price_for_stock_status .     ' WHEN special IS NOT NULL THEN special WHEN discount IS NOT NULL THEN discount ELSE price END)";
+									var_dump($sql);exit;
                                 } elseif ($sort_order['sort'] == 'random') {
                                         $sql .= (($sql_order_by)?' ORDER BY ':', ') . "RAND()";
                                 } elseif(isset($sort_data[$sort_order['sort']])) {
@@ -248,7 +252,12 @@ class ModelExtensionMazaTfProduct extends Model {
 			if ($data['sort'] == 'pd.name' || $data['sort'] == 'p.model') {
 				$sql .= ' ORDER BY LCASE(' . $sort_data[$data['sort']] . ')';
 			} elseif ($data['sort'] == 'p.price') {
-				$sql .= ' ORDER BY (CASE WHEN special IS NOT NULL THEN special WHEN discount IS NOT NULL THEN discount ELSE price END)';
+				if (isset($data['order']) && ($data['order'] == 'DESC')) {
+					$price_for_stock_status = 0;
+				}else{
+					$price_for_stock_status = 1000000000;
+				}
+				$sql .= ' ORDER BY (CASE       WHEN (stock_status_id<>7 OR (price=0  OR quantity =0 )) THEN  '.$price_for_stock_status .' WHEN special IS NOT NULL THEN special WHEN discount IS NOT NULL THEN discount ELSE price END)';
 			} elseif ($data['sort'] == 'random') {
 				$sql .= ' ORDER BY RAND()';
 			} else {
@@ -514,7 +523,8 @@ class ModelExtensionMazaTfProduct extends Model {
                 if(in_array('p.sort_order', $additional_field)){
                     $sql .= ", p.sort_order";
                 }
-                
+                $sql .= ", p.stock_status_id";
+                $sql .= ", p.quantity";
                 // Get total overall purchase quantity
                 if($product_table == DB_PREFIX . 'product'){
                     if(in_array('order_quantity', $additional_field)){
