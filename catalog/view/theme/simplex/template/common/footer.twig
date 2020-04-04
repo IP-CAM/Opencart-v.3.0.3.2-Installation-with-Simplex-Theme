@@ -26,13 +26,9 @@
             <div class="catalog-list">
                 <h6>{{ catalog.title }}</h6>
                 <ul>
-                    {% for menu in catalog.children %}
-                        <li><a href="{{ menu.link }}">
-                        {% if menu.description %}
-                            {{ menu.description }}
-                        {% else %}
-                            {{ menu.title }}
-                        {% endif %}
+                    {% for menu in catalog_first_level %}
+                        <li><a href="{{ menu.href }}">
+                            {{ menu.name }}
                         </a></li>
                     {% endfor %}
                 </ul>

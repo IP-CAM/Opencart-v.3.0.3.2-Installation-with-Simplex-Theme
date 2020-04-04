@@ -26,7 +26,7 @@
               <select id="sort" onchange="location = this.value;">
                 {% for sorts in sorts %}
                   {% set hidden = (sorts.value == 'p.sort_order-ASC') ? 'hidden="hidden"' : '' %}
-                  {% if sorts.value == '%s-%s'|format(sort, order) %}
+                  {% if sort_defined and sorts.value == '%s-%s'|format(sort, order) %}
                     <option value="{{ sorts.href }}" selected="selected" {{ hidden }}>{{ sorts.text }}</option>
                   {% else %}
                     <option value="{{ sorts.href }}" {{ hidden }}>{{ sorts.text }}</option>

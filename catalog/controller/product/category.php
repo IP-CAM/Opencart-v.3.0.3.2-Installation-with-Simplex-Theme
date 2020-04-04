@@ -14,8 +14,9 @@ class ControllerProductCategory extends Controller {
 		$this->load->model('tool/image');
 
 		$filter = $this->request->get['filter'] ?? '';
-		$sort = $this->request->get['sort'] ?? 'p.sort_order';
+		$sort = $this->request->get['sort'] ?? 'p.price';
 		$order = $this->request->get['order'] ?? 'ASC';
+		$sort_defined= isset($this->request->get['sort']);
 		$page = $this->request->get['page'] ?? 1;
 		$limit = $this->request->get['limit'] ?? $this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit');
 		$pager_limit = $this->config->get('theme_' . $this->config->get('config_theme') . '_pager_limit') ?? $limit;
@@ -121,7 +122,6 @@ class ControllerProductCategory extends Controller {
 				'start'              => ($page - 1) * $limit,
 				'limit'              => $limit_to_end
 			);
-
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
@@ -314,6 +314,7 @@ class ControllerProductCategory extends Controller {
 			}
 
 			$data['sort'] = $sort;
+			$data['sort_defined'] = $sort_defined;
 			$data['order'] = $order;
 			$data['limit'] = $limit;
 			$data['pager_limit'] = $pager_limit;
