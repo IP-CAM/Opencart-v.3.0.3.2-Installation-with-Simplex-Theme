@@ -131,9 +131,12 @@ class ControllerCommonHeader extends Controller
         $this->load->model('catalog/category');
         $data['catalog_tree'] = $this->model_catalog_category->getCatalogTree();
 
-        foreach ($data['catalog_tree'] as &$catalog_item) {
-            $catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
-        }
+      /*  foreach ($data['catalog_tree'] as &$catalog_item) {
+			$catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
+			if ($catalog_item['depth'] == 0) {
+				$category_images = $this->model_catalog_category->getCategoryImages($catalog_item['category_id']);
+			}
+		}*/
         $this->load->language('product/special');
         $data['catalog_tree']['oferte'] = [
             'href' => $this->url->link("product/special"),
