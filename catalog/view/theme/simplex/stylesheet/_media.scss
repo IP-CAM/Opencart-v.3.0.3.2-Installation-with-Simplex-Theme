@@ -1603,6 +1603,12 @@
 }
 
 @media (max-width : 575.98px) {
+  #checkout {
+    .card-body,.card-submit {
+      padding-left  : 1.5rem;
+      padding-right : 1.5rem;
+    }
+  }
   main {
     &.gallery-bg {
       @include background-gradient(#f5f3ee 270px, $white 0);

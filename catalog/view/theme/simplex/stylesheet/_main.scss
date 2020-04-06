@@ -1257,6 +1257,7 @@ select {
   .card-submit {
     @include flex(none, none, center);
     @include border-radius;
+    flex-wrap: wrap;
     background-color : #f4f4f4;
     padding          : 1.25rem 2.8125rem;
     
@@ -1264,7 +1265,9 @@ select {
       @include flex(none, end, center);
       margin-left  : auto;
       margin-right : 2rem;
-      
+      margin-top: 10px;
+      margin-bottom: 5px;
+
       > span {
         color       : #a4a4a4;
         font-size   : .8125rem;
@@ -1281,6 +1284,18 @@ select {
         font-weight : 500;
       }
     }
+
+    button.next{
+      margin-right: 16px;
+    }
+
+    label{
+      margin-left: 0px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      white-space: normal;
+    }
+
   }
   
   .next {
@@ -3850,13 +3865,14 @@ select {
 
 .item-gallery {
   @include flex;
-  grid-row-end   : 8;
+  grid-row-end   : 9;
   grid-row-start : 1;
   position       : relative;
   
   .gallery-images {
     flex      : 0 0 112px;
     max-width : 112px;
+    max-height: 200px;
     z-index   : 1;
     
     .item-image {

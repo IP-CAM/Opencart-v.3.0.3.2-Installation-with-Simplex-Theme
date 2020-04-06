@@ -61,12 +61,12 @@
         <div class="col-sm-6">
             <fieldset id="address">
                 <legend><p><strong>{{ text_your_address }}</strong></p></legend>
-                <div class="form-group">
+                {#<div class="form-group">
                     <label class="control-label" for="input-payment-company">{{ entry_company }}</label>
                     <input type="text" name="company" value="" placeholder="{{ entry_company }}"
                            id="input-payment-company"
                            />
-                </div>
+                </div>#}
                 <div class="form-group required">
                     <label class="control-label" for="input-payment-address-1">{{ entry_address_1 }}</label>
                     <input type="text" name="address_1" value="" placeholder="{{ entry_address_1 }}"
@@ -82,7 +82,7 @@
                     <input type="text" name="city" value="" placeholder="{{ entry_city }}" id="input-payment-city"
                            />
                 </div>
-                <div class="form-group required">
+                {#<div class="form-group required">
                     <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}</label>
                     <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"
                            id="input-payment-postcode" />
@@ -99,7 +99,7 @@
                         {% endif %}
                         {% endfor %}
                     </select>
-                </div>
+                </div>#}
                 <div class="form-group required">
                     <label class="control-label" for="input-payment-zone">{{ entry_zone }}</label>
                     <select name="zone_id" id="input-payment-zone" >
