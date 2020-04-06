@@ -100,11 +100,20 @@
               <p class="discount-val">-{{ economy }}</p>
               <p class="price">{{ special }}<span class="currency">{{ currency }}</span></p>
             {% else %}
+{#
               <p class="price">{{ price }}<span class="currency">{{ currency }}</span></p>
+#}
+                {% if stock_status_id != 7 or (price == 0 and product.special is not same as(false)) %}
+                    <p class="price">{{ stock }}</p>
+                {% else %}
+                    <p class="price">{{ price }}<span class="currency">{{ currency }}</span></p>
+                {% endif %}
             {% endif %}
           </div>
           <div class="cart-wrapper">
-            <div class="quantity">
+              {% if stock_status_id != 7 or (price == 0 and product.special is not same as(false)) %}
+              {% else %}
+                <div class="quantity">
               <label><input class="quantity" name="quantity" max="100" min="1" step="1" type="text"
                             value="1"></label>
               <button id="button-cart"
@@ -117,6 +126,7 @@
               </button>
               <input type="hidden" name="product_id" value="{{ product_id }}"/>
             </div>
+              {% endif %}
           </div>
         {% endif %}
         <div id="seller-warranties">

@@ -336,7 +336,7 @@ class ControllerProductProduct extends Controller
             $data['location_descriptions'] = $location_descriptions;
             $data["availability_level"] = self::getAvalabilityLevel($product_info['quantity'], $category_info);
             /* added by it-lab* start end */
-
+			$data['stock_status_id']=$product_info['stock_status_id'];
             if ($product_info['quantity'] <= 0) {
                 $data['stock'] = $product_info['stock_status'];
             } elseif ($this->config->get('config_stock_display')) {

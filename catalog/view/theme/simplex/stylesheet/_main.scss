@@ -1134,6 +1134,14 @@ select {
     
     
   }
+
+  label.semi-bold{
+    white-space: normal;
+    display: flex;
+   input[type='checkbox']{
+     margin-right: 15px;
+   }
+  }
   
   p {
     font-size   : 0.875rem;
@@ -1290,10 +1298,18 @@ select {
     }
 
     label{
+      display: flex;
+      align-items: baseline;
       margin-left: 0px;
       margin-top: 10px;
       margin-bottom: 10px;
       white-space: normal;
+      label{
+        display: flex;
+      }
+      input[type='checkbox']{
+        margin-right: 10px;
+      }
     }
 
   }
