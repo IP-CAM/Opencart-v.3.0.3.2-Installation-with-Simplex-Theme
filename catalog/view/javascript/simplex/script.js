@@ -515,7 +515,7 @@ $(document).ready(function () {
                 }
             },
             {
-                breakpoint: 576,
+                breakpoint: 380,
                 settings: {
                     slidesToShow: 2
                 }
