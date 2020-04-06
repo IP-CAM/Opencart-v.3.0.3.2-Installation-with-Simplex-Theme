@@ -233,7 +233,12 @@ var cart = {
 		});
 	}
 }
-
+function isAtRoute(route){
+	if($('#page_route').val()==route){
+		return true;
+	}
+	return false;
+}
 var voucher = {
 	'add': function() {
 
