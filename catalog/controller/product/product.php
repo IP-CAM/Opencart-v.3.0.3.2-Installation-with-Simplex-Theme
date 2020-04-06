@@ -710,6 +710,8 @@ class ControllerProductProduct extends Controller
                     'economy'            => $economy,
                     'hide_price'         => $result['hide_price'] ? false : true,
                     'is_new'             => $is_new,
+					'stock_status'       => $result['stock_status'],
+					'stock_status_id'    => $result['stock_status_id'],
                     /* added by it-lab end */
                     'tax'                => $tax,
                     'minimum'            => $result['minimum'] > 0 ? $result['minimum'] : 1,
@@ -842,6 +844,8 @@ class ControllerProductProduct extends Controller
                         'economy'            => $economy,
                         'hide_price'         => $result['hide_price'] ? false : true,
                         'is_new'             => $is_new,
+						'stock_status'       => $result['stock_status'],
+						'stock_status_id'    => $result['stock_status_id'],
                         /* added by it-lab end */
                         'tax'                => $tax,
                         'minimum'            => $result['minimum'] > 0 ? $result['minimum'] : 1,

@@ -649,6 +649,9 @@ select {
   }
 }
 
+
+
+
 #add:before {
   @include transform(rotate(45deg));
 }
@@ -1099,6 +1102,7 @@ select {
       margin-bottom : 5px;
       
       a {
+        display: block;
         font-size   : 13px;
         font-weight : 500;
         line-height : 18px;
@@ -3041,7 +3045,7 @@ select {
         position : absolute;
         right    : 0;
         z-index  : -1;
-        width    : 90%;
+        width    : 80%;
       }
       
       > p {
@@ -5733,4 +5737,7 @@ select {
 
 .invisible {
   visibility : hidden !important;
+}
+.show-more-limit{
+  color: #fff;
 }
