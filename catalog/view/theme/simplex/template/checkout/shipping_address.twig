@@ -12,7 +12,7 @@
                 {% if address['address_id'] == address_id %}
                     <option value="{{ address.address_id }}"
                             selected="selected">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}
-                        , {{ address.city }}, {{ address.zone }}, {{ address.country }}</option>
+                        , {{ address.city }}, {{ address.zone }}</option>
                 {% else %}
                     <option value="{{ address.address_id }}">{{ address.firstname }} {{ address.lastname }}
                         , {{ address.address_1 }}, {{ address.city }}, {{ address.zone }}
@@ -35,7 +35,7 @@
                        placeholder="{{ entry_lastname }}"
                        type="text" value="">
             </div>
-            <div class="form-group">
+           <div style="display:none"  class="form-group">
                 <label class=" control-label"
                        for="input-shipping-company">{{ entry_company }}</label>
                 <input  id="input-shipping-company" name="company"
@@ -60,13 +60,13 @@
                        placeholder="{{ entry_city }}"
                        type="text" value="">
             </div>
-            <div class="form-group required">
+            <div style="display:none"  class="form-group required">
                 <label class=" control-label" for="input-shipping-postcode">{{ entry_postcode }}</label>
                 <input  id="input-shipping-postcode" name="postcode"
                        placeholder="{{ entry_postcode }}"
                        type="text" value="">
             </div>
-            <div class="form-group required">
+            <div style="display:none" class="form-group required">
                 <label class=" control-label"
                        for="input-shipping-country">{{ entry_country }}</label>
                 <select  id="input-shipping-country" name="country_id">

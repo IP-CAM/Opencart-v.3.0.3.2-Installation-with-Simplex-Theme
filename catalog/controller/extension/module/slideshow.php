@@ -16,13 +16,13 @@ class ControllerExtensionModuleSlideshow extends Controller
         $data['banners'] = array();
 
         $results = $this->model_design_banner->getBanner($setting['banner_id']);
-
         foreach ($results as $result) {
             if (is_file(DIR_IMAGE . $result['image'])) {
                 $data['banners'][] = array(
                     'title' => $result['title'],
                     'link' => $result['link'],
                     'product_id' => $result['product_id'],
+                    'image_original'=>'image/'.$result['image'],
                     'image' => $this->model_tool_image->resize(
                         $result['image'],
                         $setting['width'],
