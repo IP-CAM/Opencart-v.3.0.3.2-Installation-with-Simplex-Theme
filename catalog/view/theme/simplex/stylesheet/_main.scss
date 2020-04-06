@@ -3045,7 +3045,7 @@ select {
         position : absolute;
         right    : 0;
         z-index  : -1;
-        width    : 90%;
+        width    : 80%;
       }
       
       > p {
@@ -5737,4 +5737,7 @@ select {
 
 .invisible {
   visibility : hidden !important;
+}
+.show-more-limit{
+  color: #fff;
 }
