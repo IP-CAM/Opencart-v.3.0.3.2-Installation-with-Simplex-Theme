@@ -270,7 +270,17 @@
           <a class="tel dropdown-toggle" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
              href="#"
              role="button"><span>{{ telephone }}</span></a>
-          <div class="dropdown-menu dropdown-menu-right">
+          <div class=" dropdown-menu dropdown-menu-right phone-popup-top">
+            <span class="delete" style="display: none">
+        <a href="#">
+            <svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
+                      stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
+                <path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
+                      stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
+            </svg>
+        </a>
+    </span>
             <div class="input-telephone top">
               <h6>
                 <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
