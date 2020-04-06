@@ -774,7 +774,6 @@
       color : #dda80e
     }
   }
-  
   #cart-wrapper {
     .panel .panel-heading {
       @include flex-align(col, start);
@@ -1617,7 +1616,10 @@
       @include background-gradient(#f5f3ee 200px, $white 0);
     }
   }
-  
+  #cart-wrapper{
+    margin-top: 96px;
+  }
+
   #account #account-form {
     form {
       justify-content : center;
