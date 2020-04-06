@@ -1604,9 +1604,22 @@
 
 @media (max-width : 575.98px) {
   #checkout {
-    .card-body,.card-submit {
-      padding-left  : 1.5rem;
-      padding-right : 1.5rem;
+    .card-body, .card-submit {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .card-submit {
+      label {
+        display: flex;
+        align-items: center;
+        input[type='checkbox']{
+          margin-right: 15px;
+        }
+      }
+      .total{
+        margin-right: 0px;
+      }
     }
   }
   main {
