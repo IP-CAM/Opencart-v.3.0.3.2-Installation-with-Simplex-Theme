@@ -231,7 +231,11 @@ $('.phone a:not(.tel)').click(function (e) {
     e.preventDefault();
     let div = $(this);
     let divOffset = $(div).offset();
-    $('.phone-popup').css('left', divOffset.left - 130).css('top', divOffset.top - 282).css('display', 'block');
+    if ($(document).width()>700) {
+        $('.phone-popup').css('left', divOffset.left - 130).css('top', divOffset.top - 282).css('display', 'block');
+    }else{
+        $('.phone-popup').css('top', divOffset.top - 282).css('display', 'block').css('width','100%');
+    }
 });
 
 function getCookie(name) {
