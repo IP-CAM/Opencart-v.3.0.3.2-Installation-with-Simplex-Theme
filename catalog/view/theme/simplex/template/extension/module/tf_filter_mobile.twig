@@ -1,0 +1,375 @@
+{#<div id="tf-filter" class="panel tf-filter panel-default">
+<div class="panel-heading clearfix">
+  <h4 class="panel-title pull-left">{{ heading_title }}</h4>
+  {% if reset_all %}
+    <span data-tf-reset="all" class="tf-filter-reset pull-right hide label label-info"><i class="fa fa-refresh"></i> {{ text_reset_all }}</span>
+  {% endif %}
+</div>
+<div class="tf-list-filter-group">#}
+<div id="tf-filter-mobile">
+    {% for key,filter in filters %}
+  {% if (filter['type'] == 'price') %} {# price range #}
+    <div class="card tf-filter-group">
+      <button aria-controls="collapse{{ key }}" aria-expanded="false" class="collapsed"
+              data-target="#collapse{{ key }}" data-toggle="collapse" type="button">
+        {{ text_price }}
+      </button>
+      <div aria-labelledby="heading{{ key }}" class="collapse {{ filter['collapse']?'':'show'}}" data-parent=""
+           id="collapse{{ key }}">
+        <div class="card-body">
+          <div class="input-range">
+            <div class="range"></div>
+            <div class="input-min">
+              <input id="minprice-xl" name="tf_fp[min]" value="{{ filter['selected']['min'] }}"  min="{{ filter['min_price'] }}" max="{{ filter['max_price'] - 1 }}" step="10"
+                     type="number">
+              <label for="minprice-xl">{{ text_from }}</label>
+            </div>
+            <p style="line-height:2.25">&ndash;</p>
+            <div class="input-max">
+              <input id="maxprice-xl" name="tf_fp[max]" value="{{ filter['selected']['max'] }}"  min="{{ filter['min_price'] }}" max="{{ filter['max_price'] - 1 }}" step="10"
+                     type="number">
+              <label for="maxprice-xl">{{ text_to }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% elseif (filter['type'] == 'manufacturer' and filter['values']) %} {# Manufacturer #}
+    <div class="card tf-filter-group">
+      <button aria-controls="collapse{{ key }}" aria-expanded="false" class="collapsed"
+              data-target="#collapse{{ key }}" data-toggle="collapse"
+              type="button">
+        {{ text_manufacturer }}
+      </button>
+      <div aria-labelledby="heading{{ key }}" class="collapse {{ filter['collapse']?'':'show'}}" data-parent=""
+           id="collapse{{ key }}">
+        <div class="card-body">
+          <ul class="checkbox-list">
+            {% for manufacturer in filter['values'] %}
+            <li>
+              <label>
+                {% if (manufacturer['selected']) %}
+                  <input type="checkbox" name="tf_fm" value="{{ manufacturer['manufacturer_id'] }}" class="form-check-input" checked>
+                {% else %}
+                  <input type="checkbox" name="tf_fm" value="{{ manufacturer['manufacturer_id'] }}" class="form-check-input" {{ not manufacturer['status']?'disabled' }}>
+                {% endif %}
+                <span class="checkbox"></span>
+                {{ manufacturer['name'] }}
+              </label>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% elseif (filter['type'] == 'availability') %} {# Availability #}
+  <div class="tf-filter-group">
+    <div class="tf-filter-group-header {{ filter['collapse']?'collapsed' }}" data-toggle="collapse" href="#tf-filter-panel{{ key }}">
+      <span class="tf-filter-group-title">{{ text_availability }}</span>
+      <span class="pull-right"><i class="fa fa-caret-up"></i></span>
+    </div>
+    <div id="tf-filter-panel{{ key }}" class="collapse {{ not filter['collapse']?'in':'' }}" >
+      {% if reset_group %}
+        {% if filter['values']['in_stock']['selected'] or filter['values']['out_of_stock']['selected'] %}
+        <a data-tf-reset="check" class=" tf-filter-reset"><i class="fa fa-window-close" aria-hidden="true"></i> {{ text_reset }}</a>
+        {% else %}
+        <a data-tf-reset="check" class=" tf-filter-reset hide"><i class="fa fa-window-close" aria-hidden="true"></i> {{ text_reset }}</a>
+        {% endif %}
+      {% endif %}
+      <div class="tf-filter-group-content">
+        <div class="form-check tf-filter-value">
+          <label class="form-check-label">
+            {% if (filter['values']['in_stock']['selected']) %} 
+            <input type="radio" value="1" name="tf_fs" class="form-check-input" checked>
+            {% else %} 
+            <input type="radio" value="1" name="tf_fs" class="form-check-input" {{ not filter['values']['in_stock']['status']?'disabled' }}>
+            {% endif %} 
+            {{ text_in_stock }}
+          </label>
+          {% if count_product %}
+            {% if (filter['values']['in_stock']['total']) %} 
+            <span class="label label-info pull-right tf-product-total">{{ filter['values']['in_stock']['total'] }}</span>
+            {% else %}
+            <span class="label label-info label-danger pull-right tf-product-total">{{ filter['values']['in_stock']['total'] }}</span>
+            {% endif %} 
+          {% endif %}
+        </div>
+        <div class="form-check tf-filter-value">
+          <label class="form-check-label">
+            {% if (filter['values']['out_of_stock']['selected']) %} 
+            <input type="radio" value="0" name="tf_fs" class="form-check-input" checked>
+            {% else %} 
+            <input type="radio" value="0" name="tf_fs" class="form-check-input" {{ not filter['values']['out_of_stock']['status']?'disabled' }}>
+            {% endif %} 
+            {{ text_out_of_stock }}
+          </label>
+          {% if count_product %}
+            {% if (filter['values']['out_of_stock']['total']) %} 
+            <span class="label label-info pull-right tf-product-total">{{ filter['values']['out_of_stock']['total'] }}</span>
+            {% else %}
+            <span class="label label-info label-danger pull-right tf-product-total">{{ filter['values']['out_of_stock']['total'] }}</span>
+            {% endif %} 
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% elseif (filter['type'] == 'filter') %} {# Filter #}
+      <div class="card tf-filter-group">
+          <button aria-controls="collapse{{ key }}" aria-expanded="false" class="collapsed"
+                  data-target="#collapse{{ key }}" data-toggle="collapse"
+                  type="button">
+              {{ filter['name'] }}
+          </button>
+          <div aria-labelledby="heading{{ key }}" class="collapse {{ filter['collapse']?'':'show'}}" data-parent=""
+               id="collapse{{ key }}">
+              <div class="card-body">
+                  <ul class="checkbox-list">
+                      {% for value in filter['values'] %}
+                          <li>
+                              <label>
+                                  {% if (value['selected']) %}
+                                      <input type="checkbox" name="tf_ff" value="{{ value['filter_id'] }}" checked>
+                                  {% else %}
+                                      <input type="checkbox" name="tf_ff" value="{{ value['filter_id'] }}" {{ not value['status']?'disabled' }}>
+                                  {% endif %}
+                                  <span class="checkbox"></span>
+                                  {{ value['name'] }}
+                              </label>
+                          </li>
+                      {% endfor %}
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+  {% endif %} 
+{% endfor %}
+    <div class="card">
+        <div class="card-body">
+            <div class="link-group">
+                <a class="apply" >
+                    <p>{{ text_filter }}</p>
+                    <span class="image-container"></span>
+                </a>
+                {% if reset_all %}
+                    <span data-tf-reset="all" class="reset tf-filter-reset pull-right hide label label-info">{{ text_reset_all }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+{#</div>
+</div>#}
+<script>
+$(function(){
+    if(window.innerWidth < 767){ // Collaped all panel in small device
+        $('#tf-filter .collapse.in').collapse("hide");
+    }
+    
+    // Filter
+    $('#tf-filter-mobile').tf_filter({
+        requestURL: "{{ requestURL }}",
+        searchEl: $('.card input'),
+        ajax: false,
+        delay: {{ delay?'true':'false' }},
+        search_in_description: {{ search_in_description?'true':'false' }},
+        onParamChange: function(param){
+            // Show or hide reset all button
+            if($('.tf-filter-group [data-tf-reset]:not(.hide)').length){
+                $('[data-tf-reset="all"]').removeClass('hide');
+            } else {
+                $('[data-tf-reset="all"]').addClass('hide');
+            }
+        },
+        onInputChange: function(e){
+            var filter_group = $(e.target).closest('.tf-filter-group');
+            
+            var is_input_selected = false;
+            
+            // Hide Reset for Checkbox or radio
+            if(filter_group.find('input[type="checkbox"]:checked,input[type="radio"]:checked').length){
+                is_input_selected = true;
+            }
+            
+            // Hide Reset for price
+            if($(e.target).filter('[name="tf_fp[min]"],[name="tf_fp[max]"]').length){
+                if($('[name="tf_fp[min]"]').val() !== $('[name="tf_fp[min]"]').attr('min') || $('[name="tf_fp[max]"]').val() !== $('[name="tf_fp[max]"]').attr('max')){
+                    is_input_selected = true;
+                }
+            }
+            
+            // Hide reset for text
+            if($(e.target).filter('[type="text"]').val()){
+                is_input_selected = true;
+            }
+            
+            // Hide or show reset buton
+            if(is_input_selected){
+                filter_group.find('[data-tf-reset]').removeClass('hide');
+            } else {
+                filter_group.find('[data-tf-reset]').addClass('hide');
+            }
+        },
+        onReset: function(el_reset){
+            var type = $(el_reset).data('tf-reset');
+            
+            // Reset price
+            if(type === 'price' || type === 'all'){
+                price_slider.slider("values", [parseFloat(price_slider.slider("option", 'min')), parseFloat(price_slider.slider("option", 'max'))]);
+            }
+            
+            // Hide reset button
+            if($(el_reset).data('tf-reset') !== 'all'){
+                $(el_reset).addClass('hide');
+            } else {
+                $('[data-tf-reset]').addClass('hide');
+            }
+        }
+    });
+    $(".apply").click(function () {
+        $('#tf-filter').change();
+    })
+    // Price slider
+    var price_slider = $( "#tf-filter-mobile [data-role='rangeslider']").slider({
+        range: true,
+        min: parseFloat($('#tf-filter-mobile [name="tf_fp[min]"]').attr('min')),
+        max: parseFloat($('#tf-filter-mobile [name="tf_fp[max]"]').attr('max')),
+        values: [parseFloat($('#tf-filter-mobile [name="tf_fp[min]"]').val()), parseFloat($('[name="tf_fp[max]"]').val())],
+        slide: function( event, ui ) {
+            $('#tf-filter-mobile [name="tf_fp[min]"]').val(ui.values[0]);
+            $('#tf-filter-mobile [name="tf_fp[max]"]').val(ui.values[1]);
+        },
+        change: function( event, ui ) {
+            // Hide Reset for price
+            if($('#tf-filter-mobile [name="tf_fp[min]"]').val() !== $('[name="tf_fp[min]"]').attr('min') || $('[name="tf_fp[max]"]').val() !== $('[name="tf_fp[max]"]').attr('max')){
+                $('#tf-filter-mobile [data-tf-reset="price"]').removeClass('hide');
+            } else {
+                $('#tf-filter-mobile [data-tf-reset="price"]').addClass('hide');
+            }
+            
+            // Trigger filter change
+            $('#tf-filter-mobile').change();
+        }
+    });
+    $('[name="tf_fp[min]"]').change(function(){
+        price_slider.slider("values", 0, $(this).val());
+    });
+    $('[name="tf_fp[max]"]').change(function(){
+        price_slider.slider("values", 1, $(this).val());
+    });
+    
+    // Show reset all button if filter is selected
+    if($('.tf-filter-group [data-tf-reset]:not(.hide)').length){
+        $('[data-tf-reset="all"]').removeClass('hide');
+    }
+});
+</script>
+<style>
+.tf-filter-group{
+    border-bottom: 1px solid #ddd;
+    background: white;
+}
+.tf-filter-group:last-child{
+    border-bottom: 0px;
+}
+.tf-filter-group-header{
+    /*border-bottom: 1px solid #ddd;*/
+    padding: 15px;
+}
+.tf-filter-group-header.collapsed{
+    border: none;
+}
+.tf-filter-group-title{
+    text-transform: uppercase;
+}
+.tf-filter-group-content, .tf-filter-group-search{
+    padding: 8px 15px;
+    display: block;
+}
+.tf-filter-group-content{
+  max-height: 200px;
+  overflow-y: auto;
+  padding-bottom: 15px;
+}
+.tf-filter-reset{
+    cursor: pointer;
+    margin-left: 15px;
+}
+.tf-filter-group-header.collapsed .fa-caret-up:before{
+    content: "\f0d7";
+}
+.tf-filter-group-content .form-check-input{
+    margin: 0 5px 0 0;
+}
+.tf-filter-group-content .form-check.both input, .tf-filter-group-content .form-check.image input{
+    display: none;
+}
+.tf-filter-group-content .form-check.image{
+    display: inline-block;
+}
+.tf-filter-group-content .form-check img{
+    border: 1px solid transparent;
+    padding: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.tf-filter-group-content .form-check input:checked + img{
+    border-color: #2096c3;
+    box-shadow: 0px 0px 5px #2096c3;
+}
+.tf-filter-group-content .form-check input:disabled + img{
+    opacity: 0.5;
+}
+.tf-filter-group-search{
+    position: relative;
+}
+.tf-filter-group-search .fa{
+    position: absolute;
+    color: #adadad;
+}
+.tf-filter-group-search input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding: 0 0 0 18px;
+    margin: 0;
+    height: auto;
+    border-radius: 0;
+}
+.tf-filter-group-search input:focus{
+    border: none;
+    border-bottom: 1px solid #bdbdbd;
+}
+.tf-loader{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: #ddd;
+    opacity: 0.5;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index: 99;
+}
+.tf-loader > *{
+    margin-top: 50%;
+    font-size: 40px;
+    transform: translateY(-50%);
+}
+.tf-filter-loading{
+    cursor: wait;
+}
+.tf-filter-group-content .ui-slider{
+    margin-bottom: 8px;
+}
+#column-left, #column-right{
+    display: block !important;
+}
+</style>
