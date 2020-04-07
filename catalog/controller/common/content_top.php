@@ -60,7 +60,8 @@ class ControllerCommonContentTop extends Controller {
 				$setting_info = $this->model_setting_module->getModule($part[1]);
 
 				if ($setting_info && $setting_info['status']) {
-					$output = $this->load->controller('extension/module/' . $part[0], $setting_info);
+					$setting_info['parent_template'] = 'content_top';
+					$output = $this->load->controller('extension/module/' . $part[0], $setting_info,);
 
 					if ($output) {
 						$data['modules'][] = $output;

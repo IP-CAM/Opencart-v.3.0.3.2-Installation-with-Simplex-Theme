@@ -10,7 +10,7 @@ class ControllerExtensionModuleTfFilter extends Controller {
         private $filter_param = array(); // Filter parameter
         
         
-        public function index($setting) {
+        public function index($setting,$parent_template='column_left') {
                 $this->load->model('extension/maza/tf_product');
                 $this->load->model('extension/module/tf_filter');
 
@@ -123,6 +123,9 @@ class ControllerExtensionModuleTfFilter extends Controller {
 
                 array_multisort(array_column($data['filters'], 'sort_order'), SORT_ASC, SORT_NUMERIC, $data['filters']);
                 if($data['filters']){
+                	if(isset($setting['parent_template']) && $setting['parent_template']=='content_top'){
+						return $this->load->view('extension/module/tf_filter_mobile', $data);
+					}
                     return $this->load->view('extension/module/tf_filter', $data);
                 }
         }

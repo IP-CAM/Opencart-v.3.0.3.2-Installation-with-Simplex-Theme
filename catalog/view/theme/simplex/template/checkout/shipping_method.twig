@@ -15,7 +15,12 @@
                         {% else %}
                             <input type="radio" name="shipping_method" value="{{ quote.code }}"/>
                         {% endif %}
-                        {{ quote.title }} - {{ quote.text }}{{ currency }}</label>
+                        {{ quote.title }}
+                        {% if loop.parent.loop.first %}
+                        - {{ quote.text }}{{ currency }}
+                        {% endif %}
+                    </label>
+
                 {% endfor %}
             {% else %}
                 <div class="alert alert-danger alert-dismissible">{{ shipping_method.error }}</div>

@@ -11,7 +11,7 @@
                 <input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}"
                        id="input-shipping-lastname" />
             </div>
-            <div class="form-group">
+            <div style="display: none" class="form-group">
                 <label class="control-label" for="input-shipping-company">{{ entry_company }}</label>
                 <input type="text" name="company" value="{{ company }}" placeholder="{{ entry_company }}"
                        id="input-shipping-company" />
@@ -21,7 +21,7 @@
                 <input type="text" name="address_1" value="{{ address_1 }}" placeholder="{{ entry_address_1 }}"
                        id="input-shipping-address-1" />
             </div>
-            <div class="form-group">
+            <div style="display: none" class="form-group">
                 <label class="control-label" for="input-shipping-address-2">{{ entry_address_2 }}</label>
                 <input type="text" name="address_2" value="{{ address_2 }}" placeholder="{{ entry_address_2 }}"
                        id="input-shipping-address-2" />
@@ -32,12 +32,12 @@
                        id="input-shipping-city"
                        />
             </div>
-            <div class="form-group required">
+            <div style="display: none" class="form-group required">
                 <label class="control-label" for="input-shipping-postcode">{{ entry_postcode }}</label>
                 <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"
                        id="input-shipping-postcode" />
             </div>
-            <div class="form-group required">
+            <div style="display: none" class="form-group required">
                 <label class="control-label" for="input-shipping-country">{{ entry_country }}</label>
                 <select name="country_id" id="input-shipping-country" >
                     <option value="">{{ text_select }}</option>
