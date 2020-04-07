@@ -1989,6 +1989,15 @@
       margin-bottom : 15px;
     }
   }
+
+  .card-checkout {
+    display: none; //
+  }
+
+  .card-mobile{
+    display: block!important;
+    margin-top: 1.5rem;
+  }
   
   #cart .quantity, #favorite .quantity {
     top : 0.75rem;
