@@ -35,7 +35,7 @@
                     </button>
                 </div>
             {% endif %}
-            <div class="cards">
+            <div class="cards card-checkout">
                 {{ content_top }}
             </div>
             <div class="cart-table">
@@ -109,12 +109,14 @@
                 </table>
             </div>
             <div class="checkout">
-                <a href="{{ checkout }}">{{ button_checkout }}<span
-                            class="image-container"></span></a>
+                <a href="{{ checkout }}">{{ button_checkout }}<span class="image-container"></span></a>
+            </div>
+
+            <div class="cards card-mobile">
+                {{ content_top }}
             </div>
         </div>
     </div>
-    <hr>
     {{ content_bottom }}
 </main>
 <script>
