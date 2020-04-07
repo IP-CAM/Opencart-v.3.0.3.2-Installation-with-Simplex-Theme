@@ -1082,7 +1082,7 @@ select {
   .dropdown-toggle::after {
     content : none;
   }
-  
+
   .dropright .dropdown-menu {
     height    : 100%;
     flex-flow : column wrap;
@@ -1096,6 +1096,9 @@ select {
       font-size   : 14px;
       font-weight : 700;
       line-height : 26px;
+      a:hover{
+        color: #ffca30;
+      }
     }
     
     ul {
@@ -1110,6 +1113,9 @@ select {
         font-size   : 13px;
         font-weight : 500;
         line-height : 18px;
+      }
+      a:hover{
+        color: #ffca30;
       }
     }
     

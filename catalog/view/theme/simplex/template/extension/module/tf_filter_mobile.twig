@@ -150,7 +150,7 @@
     <div class="card">
         <div class="card-body">
             <div class="link-group">
-                <a class="apply" >
+                <a class="tf-filter-mobile-apply apply" >
                     <p>{{ text_filter }}</p>
                     <span class="image-container"></span>
                 </a>
@@ -219,7 +219,7 @@ $(function(){
             
             // Reset price
             if(type === 'price' || type === 'all'){
-                price_slider.slider("values", [parseFloat(price_slider.slider("option", 'min')), parseFloat(price_slider.slider("option", 'max'))]);
+                price_slider_mobile.slider("values", [parseFloat(price_slider_mobile.slider("option", 'min')), parseFloat(price_slider_mobile.slider("option", 'max'))]);
             }
             
             // Hide reset button
@@ -230,11 +230,11 @@ $(function(){
             }
         }
     });
-    $(".apply").click(function () {
-        $('#tf-filter').change();
+    $(".tf-filter-mobile-apply").click(function () {
+        $('#tf-filter-mobile').change();
     })
     // Price slider
-    var price_slider = $( "#tf-filter-mobile [data-role='rangeslider']").slider({
+    var price_slider_mobile = $( "#tf-filter-mobile [data-role='rangeslider']").slider({
         range: true,
         min: parseFloat($('#tf-filter-mobile [name="tf_fp[min]"]').attr('min')),
         max: parseFloat($('#tf-filter-mobile [name="tf_fp[max]"]').attr('max')),
@@ -245,7 +245,7 @@ $(function(){
         },
         change: function( event, ui ) {
             // Hide Reset for price
-            if($('#tf-filter-mobile [name="tf_fp[min]"]').val() !== $('[name="tf_fp[min]"]').attr('min') || $('[name="tf_fp[max]"]').val() !== $('[name="tf_fp[max]"]').attr('max')){
+            if($('#tf-filter-mobile [name="tf_fp[min]"]').val() !== $('#tf-filter-mobile [name="tf_fp[min]"]').attr('min') || $('#tf-filter-mobile [name="tf_fp[max]"]').val() !== $('#tf-filter-mobile [name="tf_fp[max]"]').attr('max')){
                 $('#tf-filter-mobile [data-tf-reset="price"]').removeClass('hide');
             } else {
                 $('#tf-filter-mobile [data-tf-reset="price"]').addClass('hide');
@@ -255,11 +255,11 @@ $(function(){
             $('#tf-filter-mobile').change();
         }
     });
-    $('[name="tf_fp[min]"]').change(function(){
-        price_slider.slider("values", 0, $(this).val());
+    $('#tf-filter-mobile [name="tf_fp[min]"]').change(function(){
+        price_slider_mobile.slider("values", 0, $(this).val());
     });
-    $('[name="tf_fp[max]"]').change(function(){
-        price_slider.slider("values", 1, $(this).val());
+    $('#tf-filter-mobile [name="tf_fp[max]"]').change(function(){
+        price_slider_mobile.slider("values", 1, $(this).val());
     });
     
     // Show reset all button if filter is selected
