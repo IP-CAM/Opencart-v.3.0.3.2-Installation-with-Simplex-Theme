@@ -205,6 +205,7 @@ footer {
   
   h5 {
     font-size : 1.125rem;
+    padding-right: 50px;
   }
   
   h6 {
@@ -1053,7 +1054,10 @@ select {
     line-height : 1.4;
     padding     : 14px 20px;
     white-space : normal;
-    
+
+
+
+
     &:hover {
       background-color : $yellow;
       
@@ -1082,12 +1086,12 @@ select {
   .dropright .dropdown-menu {
     height    : 100%;
     flex-flow : column wrap;
-    width     : calc(100% - 320px);
+    width     : calc(100% - 292px);
     padding   : 28px 40px;
     z-index   : 1001;
-    left      : 270px !important;
+    left      : 292px !important;
     transform : translate3d(0, 0, 0) !important;
-    
+    box-shadow: 8px 9px 32px rgba(0,0,0,.06);
     h5 {
       font-size   : 14px;
       font-weight : 700;
@@ -3339,12 +3343,13 @@ select {
   #sort, #show-num {
     @include appearance;
     @include border-radius(.375rem);
-    background  : url($image_dir + "arrow_down.svg") no-repeat center right 15px;
+    background  : url($image_dir + "arrow_down.svg") no-repeat center right 10px;
     border      : 1px solid #d4d4d4;
     cursor      : pointer;
     flex        : 1;
     font-size   : 0.8125rem;
     font-weight : 600;
+    background-size: 15px;
   }
   
   .button-group {
