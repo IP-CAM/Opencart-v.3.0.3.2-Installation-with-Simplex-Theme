@@ -238,6 +238,30 @@ $('.phone a:not(.tel)').click(function (e) {
     }
 });
 
+
+$('.phone a.tel').click(function (e) {
+    e.preventDefault();
+    /*if( $('.phone-popup-top').css('display')=='block'){
+        //$('.phone-popup-top').css('display','none');
+        return;
+    }*/
+    var it= $('.phone-popup-top #customer_phone');
+    if(it.length>0) {
+        let div = $(this);
+        let divOffset = $(div).offset();
+        if ($(document).width() > 700) {
+            var offsetLeft = $(div)[0].offsetLeft - 230;
+            $('.phone-popup-top').css('left', offsetLeft + 'px').css('top', div.offsetHeight);//.css('display', 'block');
+        } else {
+            $('.phone-popup-top').css('left', 0).css('top', div.offsetHeight).css('width', '100%');
+        }
+    }
+    else{
+       // $('.phone-popup-top').css('display', 'block');
+    }
+});
+
+
 function getCookie(name) {
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([.$?*|{}()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"
@@ -264,7 +288,12 @@ $('#search .search-button').click(function () {
 });
 $('.phone-popup .delete').click(function (e) {
     e.preventDefault();
-    $(this).parent().css('display', 'none');
+    if($(this).parent().hasClass('phone-popup-top')) {
+        $(this).parent().removeClass('show');
+    }else{
+
+        $(this).parent().css('display', 'none');
+    }
 });
 $('#catalog').append($('#categories'));
 $('.upload').change(function (e) {
