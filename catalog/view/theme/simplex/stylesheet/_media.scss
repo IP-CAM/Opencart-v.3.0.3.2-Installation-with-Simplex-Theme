@@ -286,6 +286,10 @@
   #catalog, #slider .categories {
     display : none;
   }
+
+  #about-us{
+    margin-top: 1rem;
+  }
   
   .main-slider {
     .slick-prev, .slick-next {
@@ -305,7 +309,10 @@
   .slick-dots {
     .main-slider & {
       width    : auto;
-      position : static;
+      position : absolute;
+      right: 0;
+      bottom: 10%;
+      left: 0;
     }
   }
   
@@ -356,6 +363,8 @@
   #slider {
     .container-fluid {
       @include flex-wrap(wrap);
+      padding-left: 0px;
+      padding-right: 0px;
       
       .main-slider {
         flex : 0 0 100%;
@@ -383,6 +392,10 @@
         margin-top : 15px;
         max-width  : none;
       }
+    }
+
+    hr {
+      display: none;
     }
   }
   
@@ -1112,6 +1125,8 @@
   #slider {
     .container-fluid {
       @include flex-wrap(wrap);
+      padding-left: 0px;
+      padding-right: 0px;
       
       .main-slider {
         .item {
