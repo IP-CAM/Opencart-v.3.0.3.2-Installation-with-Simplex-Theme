@@ -2070,6 +2070,22 @@ select {
   padding-top : 2rem;
   
   .main-slider {
+    .slick-dots {
+      width: 100%!important;
+    }
+
+    .slick-prev {
+      left: 10px!important;
+    }
+
+    .slick-next {
+      right: 10px!important;
+    }
+
+    .slick-prev, .slick-next {
+      bottom: calc(50% - 11px)!important;
+    }
+
     .item {
       .brand {
         img {
@@ -2303,10 +2319,6 @@ select {
     height: 12px;
     border: solid 2px #fff;
   }
-}
-
-.main-slider .slick-dots {
-  width: 100% !important;
 }
 
 #slides-counter {
