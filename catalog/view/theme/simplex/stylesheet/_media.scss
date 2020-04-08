@@ -394,6 +394,10 @@
         max-width  : none;
       }
     }
+
+    hr {
+      display: none;
+    }
   }
   
   #steps {
@@ -1627,7 +1631,7 @@
     box-shadow : inset 0 0 10px #fff;
     margin     : 0;
   }
-  
+
   .tab-content button {
     display : block;
   }
