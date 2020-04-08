@@ -805,7 +805,11 @@ $(".categories-main .menu-link").click(function () {
 });
 $(".categories-main .category-toggle").click(function () {
     let children = $('+ .dropdown-menu', this).find('ul').length;
-
+    let is_active=$(this).hasClass('category-toogle-active');
+    $('.category-toogle-active').removeClass('category-toogle-active');
+    if ( !is_active ){
+        $(this).addClass('category-toogle-active');
+    }
     if (!children) {
         $('.categories-main').height('auto');
     } else {
