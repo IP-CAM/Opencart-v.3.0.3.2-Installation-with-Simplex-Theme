@@ -317,7 +317,7 @@ $(document).ready(function () {
         infinite: false,
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: true,
+        arrows: false,
         autoplay: true,
         autoplaySpeed: $('#slider .main-slider').data('interval'),
         prevArrow:
