@@ -103,21 +103,9 @@
         <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
                 class="navbar-toggler collapsed" data-target="#navbarCollapse" data-toggle="collapse"
                 type="button">
-                    <span class="navbar-toggler-icon">
-                        <svg viewBox="0 0 20 15" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.000,1.000 L14.000,1.000 " fill="none" fill-rule="evenodd"
-                                  stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2px"></path>
-                            <path d="M2.000,6.000 L18.000,6.000 " fill="none" fill-rule="evenodd"
-                                  stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2px"></path>
-                            <path d="M2.000,11.000 L14.000,11.000 " fill="none" fill-rule="evenodd"
-                                  stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2px"></path>
-                        </svg>
-                    </span>
+                    <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="collapse navbar-collapse menu-main" id="navbarCollapse">
           <div class="navbar-nav">
             {% if language %}
               <div class="nav-item" id="lang">
@@ -155,7 +143,7 @@
                               </div>
                             {% endif %}
                             <span>
-                                {{ category.name|capitalize }}
+                                {{ category.name }}
                             </span>
                           </a>
                           <div class="dropdown-menu dropdown-submenu">
@@ -178,24 +166,28 @@
                         {% for item in items if item.depth == 2 and item.parent_id == category.category_id %}
                           {% set flag = 1 %}
                         {% endfor %}
-                        <div class="dropdown-item dropdown">
-                          <a class="nav-link{% if flag %} dropdown-toggle{% endif %}"
+                        <div class="dropdown-item category-list dropdown">
+                          <a class="nav-link{% if flag %} dropdown-toggle{% endif %} category-toggle"
                                   {% if flag %}
                                     aria-expanded="false" aria-haspopup="true"
                                     data-toggle="dropdown"
                                   {% endif %}
                              href="{{ category.href }}">
-                            {{ category.name|capitalize }}
+                            {{ category.name }}
                           </a>
                           {% if flag %}
                             <div class="dropdown-menu dropdown-submenu">
-                              {{ _self.catalog_links(items, 2, category.category_id) }}
+                                <ul>
+                                    {{ _self.catalog_links(items, 2, category.category_id) }}
+                                </ul>
                             </div>
                           {% endif %}
                         </div>
                       {% endif %}
                       {% if menu_level == 2 %}
-                        <a href="{{ category.href }}" class="dropdown-item">{{ category.name|capitalize }}</a>
+                        <li>
+                            <a href="{{ category.href }}" class="dropdown-item">{{ category.name|capitalize }}</a>
+                        </li>
                       {% endif %}
                     {% endif %}
                   {% endfor %}
