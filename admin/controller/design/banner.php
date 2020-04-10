@@ -383,11 +383,13 @@ class ControllerDesignBanner extends Controller {
 
 		if (isset($this->request->post['banner_image'])) {
 			foreach ($this->request->post['banner_image'] as $language_id => $value) {
+			    /* // https://github.com/Sanchous98/simplex/issues/85
 				foreach ($value as $banner_image_id => $banner_image) {
 					if ((utf8_strlen($banner_image['title']) < 2) || (utf8_strlen($banner_image['title']) > 64)) {
 						$this->error['banner_image'][$language_id][$banner_image_id] = $this->language->get('error_title');
 					}
 				}
+				*/
 			}
 		}
 
