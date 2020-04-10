@@ -229,6 +229,9 @@ function show_succes_popup(product_id, message, type = 'cart') {
 
 $('.phone a:not(.tel)').click(function (e) {
     e.preventDefault();
+    $(".phone-popup .input-telephone.top").show();
+    $(".phone-popup .timetable").show();
+
     let div = $(this);
     let divOffset = $(div).offset();
     if ($(document).width()>700) {
@@ -241,10 +244,9 @@ $('.phone a:not(.tel)').click(function (e) {
 
 $('.phone a.tel').click(function (e) {
     e.preventDefault();
-    /*if( $('.phone-popup-top').css('display')=='block'){
-        //$('.phone-popup-top').css('display','none');
-        return;
-    }*/
+    $("header .phone .input-telephone.top").show();
+    $("header .phone .timetable").show();
+
     var it= $('.phone-popup-top #customer_phone');
     if(it.length>0) {
         let div = $(this);
@@ -261,6 +263,15 @@ $('.phone a.tel').click(function (e) {
     }
 });
 
+$("header").on("focus", ".phone #customer_phone", function(){
+    $("header .phone .input-telephone.top").slideUp({duration: 400});
+    $("header .phone .timetable").slideUp({duration: 400});
+});
+
+$(".phone-popup").on("focus", ".input-telephone #customer_phone", function(){
+    $(".phone-popup .input-telephone.top").slideUp({duration: 400});
+    $(".phone-popup .timetable").slideUp({duration: 400});
+});
 
 function getCookie(name) {
     let matches = document.cookie.match(new RegExp(

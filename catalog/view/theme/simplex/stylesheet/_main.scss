@@ -4579,6 +4579,7 @@ select {
         color       : #2b2c30;
         font-size   : 0.9375rem;
         font-weight : 600;
+        margin-top: 1rem;
         
         &:before {
           background   : url($image_dir + "phone-gray.svg") no-repeat top center;
