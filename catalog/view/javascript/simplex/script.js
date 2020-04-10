@@ -230,7 +230,7 @@ function show_succes_popup(product_id, message, type = 'cart') {
 $('.phone a:not(.tel)').click(function (e) {
     e.preventDefault();
 
-    if ($(document).width() < 1000) {
+    if ($(window).width() < 1000) {
         $(".phone-popup .input-telephone.top").show();
         $(".phone-popup .timetable").show();
     }
@@ -248,7 +248,7 @@ $('.phone a:not(.tel)').click(function (e) {
 $('.phone a.tel').click(function (e) {
     e.preventDefault();
 
-    if ($(document).width() < 1000) {
+    if ($(window).width() < 1000) {
         $("header .phone .input-telephone.top").show();
         $("header .phone .timetable").show();
     }
@@ -268,7 +268,7 @@ $('.phone a.tel').click(function (e) {
     }
 });
 
-if ($(document).width() < 1000) {
+if ($(window).width() < 1000) {
     $("header").on("focus", ".phone #customer_phone", function () {
         $("header .phone .input-telephone.top").slideUp({duration: 400});
         $("header .phone .timetable").slideUp({duration: 400});
