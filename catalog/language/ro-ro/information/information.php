@@ -9,6 +9,6 @@ $_['text_archive_link']="Articolul precedent";
 $_['text_back_list']="Toate noutățile";
 $_['text_installed']="Au fost instalate:";
 $_['text_used_brands']="Branduri folosite:";
-$_['text_other_projects'] = 'Alte proecte';
+$_['text_other_projects'] = 'Alte articole';
 $_['text_other'] = 'Articole recomadate';
 

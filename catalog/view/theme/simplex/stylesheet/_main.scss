@@ -4579,6 +4579,7 @@ select {
         color       : #2b2c30;
         font-size   : 0.9375rem;
         font-weight : 600;
+        margin-top: 1rem;
         
         &:before {
           background   : url($image_dir + "phone-gray.svg") no-repeat top center;
@@ -4749,6 +4750,7 @@ select {
     font-size     : 0.8125rem;
     font-weight   : 500;
     margin-bottom : 1.25rem;
+    word-break: break-word;
   }
   
   .add-to-cart {
@@ -5248,8 +5250,9 @@ select {
   .image {
     img {
       height     : 100%;
-      object-fit : cover;
-      width      : 100%;
+      object-fit : contain;
+      width      : auto;
+      max-width: 100%;
     }
   }
   
@@ -5262,7 +5265,7 @@ select {
     
     a, .image {
       height : 100%;
-      width  : 100%;
+      width  : auto;
     }
     
     .overlay {
