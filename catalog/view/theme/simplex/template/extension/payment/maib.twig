@@ -27,6 +27,7 @@
 
 <script type="text/javascript">
     $('#button-confirm').on('click', function () {
+        $(this).prop('disabled', true);
         $.ajax({
             url: 'index.php?route=extension/payment/maib/confirmmaib',
             dataType: 'json',
@@ -42,10 +43,12 @@
                     $('input[name="trans_id"]').val(json['TRANSACTION_ID']);
                     redirect();
                 }else{
+                    $(this).prop('disabled', false);
                     alert(json);
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
+                $(this).prop('disabled', false);
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
