@@ -1,0 +1,85 @@
+<div class="card-submit">
+    <button class="next" data-loading-text="{{ text_loading }}" id="button-confirm">
+        {#{{ button_confirm }}#}
+        Оплатить maib
+        <span class="image-container"></span>
+    </button>
+    <div class="total">
+        <span></span>
+        <div class="price">
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    function redirect() {
+        document.returnform.submit();
+    }
+</script>
+</head>
+<form style="display: none" name="returnform" action="https://ecomm.maib.md:7443/ecomm2/ClientHandler" method="POST">
+    <input type="hidden" name="trans_id" value="">
+    <!-- To support javascript unaware/disabled browsers -->
+    <noscript>
+        <center>Please click the submit button below.<br>
+            <input type="submit" name="submit" value="Submit"></center>
+    </noscript>
+</form>
+
+<script type="text/javascript">
+    $('#button-confirm').on('click', function () {
+        $.ajax({
+            url: 'index.php?route=extension/payment/maib/confirmmaib',
+            dataType: 'json',
+            beforeSend: function () {
+                $('#button-confirm').button('loading');
+            },
+            complete: function () {
+                $('#button-confirm').button('reset');
+            },
+            success: function (json) {
+                if (json['TRANSACTION_ID']) {
+                    location = json['redirect'];
+                    $('input[name="trans_id"]').val(json['TRANSACTION_ID']);
+                    redirect();
+                }else{
+                    alert(json);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    $(document).ready(function () {
+        let currency;
+
+        $.ajax({
+            url: 'index.php?route=extension/payment/maib/get_currency',
+            dataType: 'json',
+            success: function (json) {
+                currency = json['currency'];
+
+                $.ajax({
+                    url: 'index.php?route=extension/payment/cod/get_total_price',
+                    dataType: 'json',
+                    beforeSend: function () {
+                        $('#button-confirm').button('loading');
+                    },
+                    complete: function () {
+                        $('#button-confirm').button('reset');
+                    },
+                    success: function (json) {
+                        $('.card-submit .total span').html(json['title']);
+                        $('.card-submit .total .price').html('<h5 style="font-weight: 800; font-size: 1.25rem">' + json['text'] + ' <small style="font-weight: 500; font-size: 10px"> ' + currency + '</small></h5>');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+</script>

@@ -73,39 +73,7 @@
 	* @property ModelToolImage $model_tool_image
 	* @property ModelToolOnline $model_tool_online
 	* @property ModelToolUpload $model_tool_upload
-	* @property ModelCatalogAttribute $model_catalog_attribute
-	* @property ModelCatalogAttributeGroup $model_catalog_attribute_group
-	* @property ModelCatalogDownload $model_catalog_download
-	* @property ModelCatalogFilter $model_catalog_filter
-	* @property ModelCatalogOption $model_catalog_option
-	* @property ModelCatalogRecurring $model_catalog_recurring
-	* @property ModelCustomerCustomField $model_customer_custom_field
-	* @property ModelCustomerCustomer $model_customer_customer
-	* @property ModelCustomerCustomerApproval $model_customer_customer_approval
-	* @property ModelCustomerCustomerGroup $model_customer_customer_group
-	* @property ModelDesignSeoUrl $model_design_seo_url
-	* @property ModelExtensionFooterlink $model_extension_footerlink
-	* @property ModelExtensionFootertitle $model_extension_footertitle
-	* @property ModelLocalisationGeoZone $model_localisation_geo_zone
-	* @property ModelLocalisationLengthClass $model_localisation_length_class
-	* @property ModelLocalisationReturnAction $model_localisation_return_action
-	* @property ModelLocalisationReturnStatus $model_localisation_return_status
-	* @property ModelLocalisationStockStatus $model_localisation_stock_status
-	* @property ModelLocalisationTaxClass $model_localisation_tax_class
-	* @property ModelLocalisationTaxRate $model_localisation_tax_rate
-	* @property ModelLocalisationWeightClass $model_localisation_weight_class
-	* @property ModelMarketingCoupon $model_marketing_coupon
-	* @property ModelReportOnline $model_report_online
-	* @property ModelSaleOrder $model_sale_order
-	* @property ModelSaleRecurring $model_sale_recurring
-	* @property ModelSaleReturn $model_sale_return
-	* @property ModelSaleVoucher $model_sale_voucher
-	* @property ModelSaleVoucherTheme $model_sale_voucher_theme
-	* @property ModelSettingModification $model_setting_modification
-	* @property ModelToolBackup $model_tool_backup
-	* @property ModelUserApi $model_user_api
-	* @property ModelUserUser $model_user_user
-	* @property ModelUserUserGroup $model_user_user_group
+	* @property ModelExtensionPaymentMaibTransaction model_extension_payment_maib_transaction
 	**/
 abstract class Controller {
 	protected $registry;
