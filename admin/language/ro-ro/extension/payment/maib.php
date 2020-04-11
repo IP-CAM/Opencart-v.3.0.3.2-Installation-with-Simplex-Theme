@@ -9,6 +9,11 @@ $_['text_edit']                     = 'Edit Payza';
 
 // Entry
 $_['entry_merchant']				= 'Merchant ID';
+$_['entry_maib_merchant_url']		= 'Maib Merchant Url';
+$_['entry_maib_client_url']			= 'Maib Client Url';
+$_['entry_maib_certificate_folder']	= 'Certificate folder';
+$_['entry_maib_certificate_password']= 'Certificate password';
+$_['entry_order_callback_status']   = 'Statutul dupa achitarea reusita';
 $_['entry_security']				= 'Security Code';
 $_['entry_callback']				= 'Alert URL';
 $_['entry_total']					= 'Total';

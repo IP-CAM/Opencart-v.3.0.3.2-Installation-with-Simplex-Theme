@@ -43,52 +43,41 @@ class ControllerExtensionPaymentMaib extends \Controller {
 		if($this->session->data['payment_method']['code'] == 'maib') {
 			$this->load->model('checkout/order');
 			$this->load->model('extension/payment/maib_transaction');
-			$order_info=$this->model_checkout_order->getOrder($this->session->data['order_id']);
-
-			$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_maib_order_status_id'));
-
-
-
 			$log = new Logger('maib_guzzle_request');
 
-			$verify = str_replace('catalog/', '', DIR_APPLICATION) . '_ccc_/cacert.pem';
-			$cert = str_replace('catalog/', '', DIR_APPLICATION) . '_ccc_/pcert.pem';
-			$ssl_key = str_replace('catalog/', '', DIR_APPLICATION) . '_ccc_/key.pem';
+			$certificate_folder = str_replace('catalog/', '', DIR_APPLICATION) . $this->config->get('payment_maib_certificate_folder');
 
+			$verify = $certificate_folder . '/cacert.pem';
+			$cert =  $certificate_folder . '/pcert.pem';
+			$ssl_key =  $certificate_folder . '/key.pem';
+			$password = $this->config->get('payment_maib_certificate_password');
+			$merchant_url = $this->config->get('payment_maib_merchant_url');
 			$options = [
-				'base_url' => 'https://ecomm.maib.md:4499/ecomm2/MerchantHandler',
+				'base_url' => $merchant_url,
 				'debug' => true,
 				'verify' => false,
 				'defaults' => [
 					'verify' => $verify,
-					'cert' => [$cert, 'Za86DuC$'],
+					'cert' => [$cert, $password],
 					'ssl_key' => $ssl_key,
 					'config' => [
 						'curl' => [
 							CURLOPT_SSL_VERIFYHOST => false,
 							CURLOPT_SSL_VERIFYPEER => false,
-							CURLOPT_TIMEOUT => 50,
 							CURLOPT_VERBOSE => 1
 						]
 					]
 				],
 			];
-
-// init Client
 			$guzzleClient = new Client($options);
-/*			$log->pushHandler(new StreamHandler(__DIR__ . '/logs/maib_guzzle_request.log', Logger::DEBUG));
-			$subscriber = new LogSubscriber($log, Formatter::SHORT);*/
-
 			$client = new MaibClient($guzzleClient);
-//			$client->getHttpClient()->getEmitter()->attach($subscriber);
-// examples
-
 			$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 			$amout = $order_info['total'];
 
 			$smsTransactionResult = $client->registerSmsTransaction($amout, 498, '127.0.0.1', '', 'ru');
 			if (isset($smsTransactionResult['TRANSACTION_ID'])) {
 				$data=[];
+				$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_maib_order_status_id'));
 				$data['TRANSACTION_ID'] = $smsTransactionResult['TRANSACTION_ID'];
 				$data['order_id'] = $this->session->data['order_id'];
 				$data['date_added'] = date('Y-m-d H:i:s');

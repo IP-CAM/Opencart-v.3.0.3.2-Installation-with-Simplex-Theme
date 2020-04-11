@@ -108,6 +108,30 @@ class ControllerExtensionPaymentMaib extends Controller {
 			$data['payment_maib_order_callback_status'] = $this->config->get('payment_maib_order_callback_status');
 		}
 
+		if (isset($this->request->post['payment_maib_merchant_url'])) {
+			$data['payment_maib_merchant_url'] = trim($this->request->post['payment_maib_merchant_url']);
+		} else {
+			$data['payment_maib_merchant_url'] = $this->config->get('payment_maib_merchant_url');
+		}
+
+		if (isset($this->request->post['payment_maib_client_url'])) {
+			$data['payment_maib_client_url'] = trim($this->request->post['payment_maib_client_url']);
+		} else {
+			$data['payment_maib_client_url'] = $this->config->get('payment_maib_client_url');
+		}
+
+		if (isset($this->request->post['payment_maib_certificate_password'])) {
+			$data['payment_maib_certificate_password'] = trim($this->request->post['payment_maib_certificate_password']);
+		} else {
+			$data['payment_maib_certificate_password'] = $this->config->get('payment_maib_certificate_password');
+		}
+
+		if (isset($this->request->post['payment_maib_order_callback_status'])) {
+			$data['payment_maib_certificate_folder'] = trim($this->request->post['entry_maib_certificate_folder']);
+		} else {
+			$data['payment_maib_certificate_folder'] = $this->config->get('payment_maib_certificate_folder');
+		}
+
 		if (isset($this->request->post['payment_maib_sort_order'])) {
 			$data['payment_maib_sort_order'] = $this->request->post['payment_maib_sort_order'];
 		} else {
