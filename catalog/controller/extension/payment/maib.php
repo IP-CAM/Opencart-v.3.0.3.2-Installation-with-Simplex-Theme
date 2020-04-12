@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Validator\RecursiveContextualValidator;
 
 class ControllerExtensionPaymentMaib extends \Controller {
 	public function index() {
-		$data['button_confirm'] = $this->language->get('button_confirm');
+		$this->load->language('extension/payment/maib');
+		//$data['button_confirm_maib'] = $this->language->get('button_confirm_maib');
 
 		$this->load->model('checkout/order');
 

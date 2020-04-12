@@ -10,6 +10,7 @@ class ControllerEventTransaction extends Controller
 
     public function callback()
     {
+    	//var_dump(3123);exit;
     	$this->load->model('checkout/order');
     	$this->load->model('extension/payment/maib_transaction');
     	$TRANSACTION_ID=$this->request->post['trans_id'];
