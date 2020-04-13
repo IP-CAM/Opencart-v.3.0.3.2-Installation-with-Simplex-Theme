@@ -1,4 +1,4 @@
-<div id="about-us">
+{#<div id="about-us">
   <div class="container-fluid">
     <div class="cards">
       {% for banner in banners %}
@@ -14,71 +14,93 @@
       </a>
     </div>
   </div>
+</div>#}
+
+<div id="about-us">
+    <div class="container-fluid">
+
+        <div id="slider-test-wrapper">
+            <section id="slider-test">
+                {% for banner in banners %}
+                    <div class="slider-item">
+                        <a href="{{  banner.link }}">
+                        <img src="{{ banner.image_original }}">
+                        <p></p>
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </section>
+        </div>
+    </div>
 </div>
 {% if catalog_tree %}
-  <div class="categories categories-main">
-    <nav class="menu">
-      <ul>
-        {{ _self.catalog_links(catalog_tree, 0, 0) }}
-        {% macro catalog_links(items, menu_level, parent_id) %}
-          {% for key, category in items %}
-            {% if category.parent_id == parent_id %}
-              {% if menu_level == 0 %}
-                <li class="menu-item dropright">
-                  <a class="menu-link{% if key != 'oferte' %} dropdown-toggle{% endif %}"{% if key != 'oferte' %} aria-expanded="false" aria-haspopup="true"
-                    data-toggle="dropdown"{% endif %}
-                     href="{{ category.href }}">
-                    {% if category.image or category.image_svg %}
-                      <div class="image-container">
-                        {% if category.image_svg %}
-                          {{ category.image_svg }}
-                        {% else %}
-                          <img src="/image/{{ category.image }}" alt="{{ category.name|capitalize }}">
+    <div class="categories categories-main">
+        <nav class="menu">
+            <ul>
+                {{ _self.catalog_links(catalog_tree, 0, 0) }}
+                {% macro catalog_links(items, menu_level, parent_id) %}
+                    {% for key, category in items %}
+                        {% if category.parent_id == parent_id %}
+                            {% if menu_level == 0 %}
+                                <li class="menu-item dropright">
+                                    <a class="menu-link{% if key != 'oferte' %} dropdown-toggle{% endif %}"{% if key != 'oferte' %} aria-expanded="false" aria-haspopup="true"
+                                        data-toggle="dropdown"{% endif %}
+                                       href="{{ category.href }}">
+                                        {% if category.image or category.image_svg %}
+                                            <div class="image-container">
+                                                {% if category.image_svg %}
+                                                    {{ category.image_svg }}
+                                                {% else %}
+                                                    <img src="/image/{{ category.image }}"
+                                                         alt="{{ category.name|capitalize }}">
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                        <span>{{ category.name }}</span>
+                                    </a>
+                                    {% if key != 'oferte' %}
+                                        <div class="dropdown-menu">
+                                            <div class="category-list">
+                                                <a class="dropdown-toggle category-toggle back back-category"
+                                                   href="{{ category.href }}">
+                                                    {{ category.name }}
+                                                </a>
+                                            </div>
+                                            {{ _self.catalog_links(items, 1, category.category_id) }}
+                                        </div>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                            {% if menu_level == 1 %}
+                                <div class="category-list dropdown">
+                                    {% set flag = 0 %}
+                                    {% for item in items if item.depth == 2 and item.parent_id == category.category_id %}
+                                        {% set flag = 1 %}
+                                    {% endfor %}
+                                    <a href="{{ category.href }}"
+                                       class="{% if flag %}dropdown-toggle {% endif %}category-toggle">
+                                        {{ category.name }}
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <ul>
+                                            {{ _self.catalog_links(items, 2, category.category_id) }}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% if menu_level == 2 %}
+                                    <li>
+                                        <a href="{{ category.href }}">
+                                            {{ category.name|capitalize }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
                         {% endif %}
-                      </div>
-                    {% endif %}
-                    <span>{{ category.name }}</span>
-                  </a>
-                  {% if key != 'oferte' %}
-                    <div class="dropdown-menu">
-                      <div class="category-list">
-                        <a class="dropdown-toggle category-toggle back back-category" href="{{ category.href }}">
-                          {{ category.name }}
-                        </a>
-                      </div>
-                      {{ _self.catalog_links(items, 1, category.category_id) }}
-                    </div>
-                  {% endif %}
-                </li>
-              {% endif %}
-              {% if menu_level == 1 %}
-                <div class="category-list dropdown">
-                  {% set flag = 0 %}
-                  {% for item in items if item.depth == 2 and item.parent_id == category.category_id %}
-                    {% set flag = 1 %}
-                  {% endfor %}
-                  <a href="{{ category.href }}" class="{% if flag %}dropdown-toggle {% endif %}category-toggle">
-                    {{ category.name }}
-                  </a>
-                  <div class="dropdown-menu">
-                    <ul>
-                      {{ _self.catalog_links(items, 2, category.category_id) }}
-                    </ul>
-                  </div>
-                </div>
-              {% else %}
-                {% if menu_level == 2 %}
-                  <li>
-                    <a href="{{ category.href }}">
-                      {{ category.name|capitalize }}
-                    </a>
-                  </li>
-                {% endif %}
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        {% endmacro catalog_links %}
-      </ul>
-    </nav>
-  </div>
+                    {% endfor %}
+                {% endmacro catalog_links %}
+            </ul>
+        </nav>
+    </div>
 {% endif %}

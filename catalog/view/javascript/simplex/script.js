@@ -535,11 +535,13 @@ $(document).ready(function () {
             }
         ]
     });
-    $('#about-us .cards').slick({
+
+    $('#about-us #slider-test').slick({
+        centerPadding: '60px',
         dots: false,
         infinite: false,
         speed: 300,
-        slidesToShow: 5,
+        slidesToShow:5,
         slidesToScroll: 1,
         adaptiveHeight: false,
         prevArrow: '<button class="slick-prev" aria-label="Previous" type="button"><svg\n' +
@@ -569,6 +571,7 @@ $(document).ready(function () {
             },
         ]
     });
+
     $('#news .news').slick({
         slidesToShow: 3,
         dots: false,
