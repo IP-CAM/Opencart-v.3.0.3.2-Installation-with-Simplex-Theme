@@ -5235,6 +5235,9 @@ select {
     tbody tr {
       border-bottom : 1px dotted #dedede;
     }
+    tbody tr td.warning a{
+      color: #f6767a
+    }
   }
   
   .image img {
