@@ -275,7 +275,6 @@ class ModelCheckoutOrder extends Model {
 			} else {
 				$safe = false;
 			}
-
 			// Only do the fraud check if the customer is not on the safe list and the order status is changing into the complete or process order status
 			if (!$safe && !$override && in_array($order_status_id, array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) {
 				// Anti-Fraud

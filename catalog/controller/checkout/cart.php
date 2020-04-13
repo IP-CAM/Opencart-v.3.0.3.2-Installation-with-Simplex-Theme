@@ -53,6 +53,7 @@ class ControllerCheckoutCart extends Controller {
 
 			$this->load->model('tool/image');
 			$this->load->model('tool/upload');
+            $this->load->model('catalog/product');
 
 			$data['products'] = array();
 
@@ -105,6 +106,7 @@ class ControllerCheckoutCart extends Controller {
 					$price = $this->currency->format($unit_price, $this->session->data['currency']);
 					$total = $this->currency->format($unit_price * $product['quantity'], $this->session->data['currency']);
 				} else {
+					$unit_price = false;
 					$price = false;
 					$total = false;
 				}
@@ -142,6 +144,8 @@ class ControllerCheckoutCart extends Controller {
 					'stock'     => $product['stock'] ? true : !(!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning')),
 					'reward'    => ($product['reward'] ? sprintf($this->language->get('text_points'), $product['reward']) : ''),
 					'price'     => $price,
+					'available' => $this->model_catalog_product->getProduct($product['product_id'])['quantity'],
+					'unit_price'=> $unit_price,
 					'total'     => $total,
 					'href'      => $this->url->link('product/product', 'product_id=' . $product['product_id'])
 				);

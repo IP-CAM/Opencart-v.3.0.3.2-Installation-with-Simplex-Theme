@@ -32,12 +32,18 @@ class ComposerStaticInit4356ab4fdc794d105db4fa48b241456c
         array (
             'Psr\\Log\\' => 8,
         ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Subscriber\\Oauth\\' => 28,
             'GuzzleHttp\\Subscriber\\Log\\' => 26,
             'GuzzleHttp\\Stream\\' => 18,
             'GuzzleHttp\\Ring\\' => 16,
+            'GuzzleHttp\\Command\\Guzzle\\' => 26,
+            'GuzzleHttp\\Command\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
         'C' => 
@@ -75,6 +81,10 @@ class ComposerStaticInit4356ab4fdc794d105db4fa48b241456c
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
         'GuzzleHttp\\Subscriber\\Oauth\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/oauth-subscriber/src',
@@ -91,6 +101,14 @@ class ComposerStaticInit4356ab4fdc794d105db4fa48b241456c
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/ringphp/src',
         ),
+        'GuzzleHttp\\Command\\Guzzle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle-services/src',
+        ),
+        'GuzzleHttp\\Command\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/command/src',
+        ),
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
@@ -106,6 +124,13 @@ class ComposerStaticInit4356ab4fdc794d105db4fa48b241456c
     );
 
     public static $prefixesPsr0 = array (
+        'F' => 
+        array (
+            'Fruitware\\MaibApi' => 
+            array (
+                0 => __DIR__ . '/..' . '/fruitware/maib-api',
+            ),
+        ),
         'D' => 
         array (
             'Divido' => 

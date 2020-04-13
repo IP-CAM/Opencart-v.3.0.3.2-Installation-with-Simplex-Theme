@@ -204,8 +204,8 @@ footer {
   }
   
   h5 {
-    font-size : 1.125rem;
-    padding-right: 50px;
+    font-size     : 1.125rem;
+    padding-right : 50px;
   }
   
   h6 {
@@ -640,9 +640,9 @@ select {
     max-width : 572px;
     padding   : 2rem;
   }
-
-  .card-mobile{ //
-    display: none;
+  
+  .card-mobile { //
+    display : none;
   }
   
   .input-group-spinner .form-control {
@@ -653,8 +653,6 @@ select {
     overflow : auto;
   }
 }
-
-
 
 
 #add:before {
@@ -1058,7 +1056,8 @@ select {
     line-height : 1.4;
     padding     : 14px 20px;
     white-space : normal;
-    position: relative;
+    position    : relative;
+    
     &:hover, &:active, &[aria-expanded=true] {
       background-color : $yellow;
       
@@ -1079,58 +1078,61 @@ select {
       }
     }
   }
-
+  
   .menu-link:before {
-    content: url("../assets/img/angle-right-solid.svg");
-    opacity: .3;
-    filter: brightness(0);
-    display: inline-block;
-    margin-right: 0px;
-    position: absolute;
-    width: 8px;
-    right: 10px;
+    content      : url("../assets/img/angle-right-solid.svg");
+    opacity      : .3;
+    filter       : brightness(0);
+    display      : inline-block;
+    margin-right : 0px;
+    position     : absolute;
+    width        : 8px;
+    right        : 10px;
   }
-
+  
   .dropdown-toggle::after {
     content : none;
   }
-
+  
   .dropright .dropdown-menu {
-    height    : 100%;
-    flex-flow : column wrap;
-    width     : calc(100% - 267px);
-    padding   : 28px 40px;
-    z-index   : 1001;
-    left      : 275px !important;
-    transform : translate3d(0, 0, 0) !important;
-    box-shadow: 8px 9px 32px rgba(0,0,0,.06);
+    height     : 100%;
+    flex-flow  : column wrap;
+    width      : calc(100% - 267px);
+    padding    : 28px 40px;
+    z-index    : 1001;
+    left       : 275px !important;
+    transform  : translate3d(0, 0, 0) !important;
+    box-shadow : 8px 9px 32px rgba(0, 0, 0, .06);
+    
     h5 {
       font-size   : 14px;
       font-weight : 700;
       line-height : 26px;
-      a:hover{
-        color: #ffca30;
+      
+      a:hover {
+        color : #ffca30;
       }
     }
-
+    
     ul {
       margin-bottom : 18px;
     }
-
+    
     li {
       margin-bottom : 5px;
-
+      
       a {
-        display: block;
+        display     : block;
         font-size   : 13px;
         font-weight : 500;
         line-height : 18px;
       }
-      a:hover{
-        color: #ffca30;
+      
+      a:hover {
+        color : #ffca30;
       }
     }
-
+    
     &.show {
       @include flex;
     }
@@ -1156,13 +1158,14 @@ select {
     
     
   }
-
-  label.semi-bold{
-    white-space: normal;
-    display: flex;
-   input[type='checkbox']{
-     margin-right: 15px;
-   }
+  
+  label.semi-bold {
+    white-space : normal;
+    display     : flex;
+    
+    input[type='checkbox'] {
+      margin-right : 15px;
+    }
   }
   
   p {
@@ -1287,17 +1290,17 @@ select {
   .card-submit {
     @include flex(none, none, center);
     @include border-radius;
-    flex-wrap: wrap;
+    flex-wrap        : wrap;
     background-color : #f4f4f4;
     padding          : 1.25rem 2.8125rem;
     
     .total {
       @include flex(none, end, center);
-      margin-left  : auto;
-      margin-right : 2rem;
-      margin-top: 10px;
-      margin-bottom: 5px;
-
+      margin-left   : auto;
+      margin-right  : 2rem;
+      margin-top    : 10px;
+      margin-bottom : 5px;
+      
       > span {
         color       : #a4a4a4;
         font-size   : .8125rem;
@@ -1314,26 +1317,28 @@ select {
         font-weight : 500;
       }
     }
-
-    button.next{
-      margin-right: 16px;
+    
+    button.next {
+      margin-right : 16px;
     }
-
-    label{
-      display: flex;
-      align-items: baseline;
-      margin-left: 0px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      white-space: normal;
-      label{
-        display: flex;
+    
+    label {
+      display       : flex;
+      align-items   : baseline;
+      margin-left   : 0px;
+      margin-top    : 10px;
+      margin-bottom : 10px;
+      white-space   : normal;
+      
+      label {
+        display : flex;
       }
-      input[type='checkbox']{
-        margin-right: 10px;
+      
+      input[type='checkbox'] {
+        margin-right : 10px;
       }
     }
-
+    
   }
   
   .next {
@@ -1953,52 +1958,53 @@ select {
   }
 }
 
-.main-overlay{
-  width: 100%;
-  height: 100%;
-  background: #000;
-  opacity: 0.7;
-  position: fixed;
-  display: none;
-  z-index: 1001;
+.main-overlay {
+  width      : 100%;
+  height     : 100%;
+  background : #000;
+  opacity    : 0.7;
+  position   : fixed;
+  display    : none;
+  z-index    : 1001;
 }
 
 #navigation {
   box-shadow : 0 0 23px 5px #f4f4f4;
-
+  
   .catalog-item:before {
-    content: url("../assets/img/angle-right-solid.svg") !important;
-    opacity: .3;
-    filter: brightness(0);
-    display: inline-block;
-    margin-right: 0px;
-    position: absolute !important;
-    width: 8px;
-    right: 10px;
-    left: auto !important;
+    content      : url("../assets/img/angle-right-solid.svg") !important;
+    opacity      : .3;
+    filter       : brightness(0);
+    display      : inline-block;
+    margin-right : 0px;
+    position     : absolute !important;
+    width        : 8px;
+    right        : 10px;
+    left         : auto !important;
   }
-
+  
   .catalog-item {
-    padding: 20px !important;
+    padding : 20px !important;
   }
-
+  
   li {
     margin-bottom : 5px;
-
+    
     a {
-      display: block;
+      display     : block;
       font-size   : 13px;
       font-weight : 500;
       line-height : 18px;
     }
-    a:hover{
-      color: #ffca30;
+    
+    a:hover {
+      color : #ffca30;
     }
   }
-
+  
   .image-container {
-    opacity      : 0.3;
-
+    opacity : 0.3;
+    
     img, svg {
       vertical-align : middle;
     }
@@ -2127,21 +2133,21 @@ select {
   
   .main-slider {
     .slick-dots {
-      width: 100%!important;
+      width : 100% !important;
     }
-
+    
     .slick-prev {
-      left: 10px!important;
+      left : 10px !important;
     }
-
+    
     .slick-next {
-      right: 10px!important;
+      right : 10px !important;
     }
-
+    
     .slick-prev, .slick-next {
-      bottom: calc(50% - 11px)!important;
+      bottom : calc(50% - 11px) !important;
     }
-
+    
     .item {
       .brand {
         img {
@@ -2369,11 +2375,11 @@ select {
       transform : translate3d(0, 0, 0) !important;
     }
   }
-
-  .slick-dots li button{
-    width: 12px;
-    height: 12px;
-    border: solid 2px #fff;
+  
+  .slick-dots li button {
+    width  : 12px;
+    height : 12px;
+    border : solid 2px #fff;
   }
 }
 
@@ -3221,6 +3227,7 @@ select {
         > img {
           height   : 75px;
           position : static;
+          width    : auto;
         }
         
         p {
@@ -3431,13 +3438,13 @@ select {
   #sort, #show-num {
     @include appearance;
     @include border-radius(.375rem);
-    background  : url($image_dir + "arrow_down.svg") no-repeat center right 10px;
-    border      : 1px solid #d4d4d4;
-    cursor      : pointer;
-    flex        : 1;
-    font-size   : 0.8125rem;
-    font-weight : 600;
-    background-size: 15px;
+    background      : url($image_dir + "arrow_down.svg") no-repeat center right 10px;
+    border          : 1px solid #d4d4d4;
+    cursor          : pointer;
+    flex            : 1;
+    font-size       : 0.8125rem;
+    font-weight     : 600;
+    background-size : 15px;
   }
   
   .button-group {
@@ -3979,10 +3986,10 @@ select {
   position       : relative;
   
   .gallery-images {
-    flex      : 0 0 112px;
-    max-width : 112px;
-    max-height: 200px;
-    z-index   : 1;
+    flex       : 0 0 112px;
+    max-width  : 112px;
+    max-height : 200px;
+    z-index    : 1;
     
     .item-image {
       background-color : $white;
@@ -4182,8 +4189,8 @@ select {
   }
   
   #search {
-    position : relative;
-    border-right: 0px;
+    position     : relative;
+    border-right : 0px;
     
     .search-form {
       background-color : #f5f4f2;
@@ -4579,7 +4586,7 @@ select {
         color       : #2b2c30;
         font-size   : 0.9375rem;
         font-weight : 600;
-        margin-top: 1rem;
+        margin-top  : 1rem;
         
         &:before {
           background   : url($image_dir + "phone-gray.svg") no-repeat top center;
@@ -4750,7 +4757,7 @@ select {
     font-size     : 0.8125rem;
     font-weight   : 500;
     margin-bottom : 1.25rem;
-    word-break: break-word;
+    word-break    : break-word;
   }
   
   .add-to-cart {
@@ -5235,6 +5242,9 @@ select {
     tbody tr {
       border-bottom : 1px dotted #dedede;
     }
+    tbody tr td.warning a{
+      color: #f6767a
+    }
   }
   
   .image img {
@@ -5252,7 +5262,7 @@ select {
       height     : 100%;
       object-fit : cover;
       width      : auto;
-      max-width: 100%;
+      max-width  : 100%;
     }
   }
   
@@ -5867,6 +5877,7 @@ select {
 .invisible {
   visibility : hidden !important;
 }
-.show-more-limit{
-  color: #fff;
+
+.show-more-limit {
+  color : #fff;
 }
