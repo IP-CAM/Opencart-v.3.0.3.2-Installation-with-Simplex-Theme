@@ -67,11 +67,11 @@ class ControllerCommonFooter extends Controller {
 		$catalog_tree = $this->model_catalog_category->getCatalogTree();
 		$catalog_first_level=[];
 		foreach ($catalog_tree as &$catalog_item) {
-			if($catalog_item['depth']==0){
-				$catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
-				$catalog_first_level[]=$catalog_item;
-			}
-		}
+            if ($catalog_item['depth'] == 0) {
+                $catalog_item['href'] = $this->url->link("product/category", ['path' => $catalog_item['path']]);
+                $catalog_first_level[] = $catalog_item;
+            }
+        }
 
 		$this->load->language('product/special');
 		$data['catalog_first_level']= $catalog_first_level;

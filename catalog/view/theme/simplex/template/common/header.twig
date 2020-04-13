@@ -177,16 +177,16 @@
                           </a>
                           {% if flag %}
                             <div class="dropdown-menu dropdown-submenu">
-                                <ul>
-                                    {{ _self.catalog_links(items, 2, category.category_id) }}
-                                </ul>
+                              <ul>
+                                {{ _self.catalog_links(items, 2, category.category_id) }}
+                              </ul>
                             </div>
                           {% endif %}
                         </div>
                       {% endif %}
                       {% if menu_level == 2 %}
                         <li>
-                            <a href="{{ category.href }}" class="dropdown-item">{{ category.name|capitalize }}</a>
+                          <a href="{{ category.href }}" class="dropdown-item">{{ category.name|capitalize }}</a>
                         </li>
                       {% endif %}
                     {% endif %}

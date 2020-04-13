@@ -16,8 +16,8 @@
 // other navbar variations.
 
 .navbar {
+	@include flex();
 	align-items     : center;
-	display         : flex;
 	justify-content : space-between; // space out brand from logo
 	padding         : $navbar-padding-y $navbar-padding-x;
 	position        : relative;
