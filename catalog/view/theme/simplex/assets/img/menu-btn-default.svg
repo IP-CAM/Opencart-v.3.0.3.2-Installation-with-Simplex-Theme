@@ -1,0 +1,11 @@
+<svg viewBox="0 0 20 15" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2.000,1.000 L14.000,1.000 " fill="none" fill-rule="evenodd"
+          stroke-linecap="round" stroke-linejoin="round"
+          stroke-width="2px" stroke="#000"></path>
+    <path d="M2.000,6.000 L18.000,6.000 " fill="none" fill-rule="evenodd"
+          stroke-linecap="round" stroke-linejoin="round"
+          stroke-width="2px" stroke="#000"></path>
+    <path d="M2.000,11.000 L14.000,11.000 " fill="none" fill-rule="evenodd"
+          stroke-linecap="round" stroke-linejoin="round"
+          stroke-width="2px" stroke="#000"></path>
+</svg>
