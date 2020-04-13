@@ -175,7 +175,17 @@
       height : 45vw;
     }
   }
-  
+  #about-us {
+    #slider-test {
+      width: 100%;
+      .slider-item {
+        margin: 0;
+        padding: 0 10px;
+        margin-bottom: 8px;
+        margin-top: 8px;
+      }
+    }
+  }
   .item-gallery {
     flex-direction : column-reverse;
     
@@ -2191,10 +2201,6 @@
   .card-mobile {
     display    : block !important;
     margin-top : 1.5rem;
-  }
-  
-  .categories-main {
-    margin-top : 0;
   }
   
   #cart .quantity, #favorite .quantity {

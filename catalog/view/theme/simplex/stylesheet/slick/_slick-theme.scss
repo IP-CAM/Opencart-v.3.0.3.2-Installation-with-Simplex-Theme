@@ -211,3 +211,43 @@ aside .product-slider, .main-slider {
     }
   }
 }
+
+#about-us {
+  #slider-test-wrapper {
+    width: 100%;
+    overflow:hidden;
+  }
+  #slider-test {
+    width: 100%;
+    .slider-item {
+      margin:auto;
+      padding: 0 10px;
+      list-style: none;
+      img {
+        margin: auto;
+        max-width: 100%;
+        height: auto;
+        -ms-interpolation-mode: bicubic;
+        display: inline-block;
+        vertical-align: middle;
+        border: 0;
+      }
+    }
+  }
+
+  .slick-list{
+    margin: 0;
+  }
+  .slick-slide {
+
+    text-align: center;
+  }
+  .slick-prev,.slick-next{
+    top:50%;
+  }
+  .slick-dots {
+    bottom: -30px;
+  }
+
+
+}
