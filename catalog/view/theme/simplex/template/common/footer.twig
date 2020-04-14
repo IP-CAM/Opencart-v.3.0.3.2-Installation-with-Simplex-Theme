@@ -301,6 +301,7 @@
     }
 </script>
 <script>
+  console.log($('#page_route').val());
     cart.add = function (product_id, quantity) {
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
@@ -358,7 +359,7 @@
                     //location.reload();
                 }
 
-                if (isAtRoute('checkout/cart') || isAtRoute('checkout/checkout') || getURLVar('route') === 'checkout/cart' || getURLVar('route') === 'checkout/checkout') {
+                if (getURLVar('route') === 'checkout/cart' || getURLVar('route') === 'checkout/checkout') {
                     location = 'index.php?route=checkout/cart';
                 } else {
                     $('#cart .dropdown-menu > ul').load('index.php?route=common/cart/info ul li');

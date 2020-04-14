@@ -164,35 +164,36 @@ $(window).resize(function () {
         $('.navbar-nav #buttons').remove();
     }
 });
-// if ($('main').attr('id') === 'home') {
-//     let height = $(window).scrollTop();
-//
-//     if (height > 585 && $(window).width() > 991) {
-//         $('#catalog').show('fast');
-//     } else {
-//         $('#catalog').hide('fast');
-//     }
-//
-//     $(window).resize(function () {
-//         let height = $(window).scrollTop();
-//
-//         if (height > 585 && $(window).width() > 991) {
-//             $('#catalog').show('fast');
-//         } else {
-//             $('#catalog').hide('fast');
-//         }
-//
-//     }).scroll(function () {
-//         let height = $(window).scrollTop();
-//
-//         if (height > 585 && $(window).width() > 991) {
-//             $('#catalog').show('fast');
-//         } else {
-//             $('#catalog').hide('fast');
-//         }
-//     });
-// }
-$('#catalog').hide();
+if ($('main').attr('id') === 'home') {
+    let height = $(window).scrollTop();
+
+    if (height > 585 && $(window).width() > 991) {
+        $('#catalog').show('fast');
+    } else {
+        $('#catalog').hide('fast');
+    }
+
+    $(window).resize(function () {
+        let height = $(window).scrollTop();
+
+        if (height > 585 && $(window).width() > 991) {
+            $('#catalog').show('fast');
+        } else {
+            $('#catalog').hide('fast');
+        }
+
+    }).scroll(function () {
+        let height = $(window).scrollTop();
+
+        if (height > 585 && $(window).width() > 991) {
+            $('#catalog').show('fast');
+        } else {
+            $('#catalog').hide('fast');
+        }
+    });
+    // $('#catalog').hide();
+}
+
 
 function show_succes_popup(product_id, message, type = 'cart') {
     let button_product_id_selector = "button[data-product_id='" + product_id + "']";
@@ -743,6 +744,7 @@ let $dropdown = $(".categories .dropright");
 $(window).on("load resize", function () {
     if (this.matchMedia("(min-width: 992px)").matches) {
         $dropdown.hover(function () {
+            console.log($dropdown);
             $('.dropdown-toggle', this).dropdown('toggle');
         }).click(function () {
             $('.dropdown-toggle', this).dropdown('destroy');
