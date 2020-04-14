@@ -1,13 +1,13 @@
 function getURLVar(key) {
-	var value = [];
+	let value = [];
 
-	var query = String(document.location).split('?');
+	const query = String(document.location).split('?');
 
 	if (query[1]) {
-		var part = query[1].split('&');
+		const part = query[1].split('&');
 
-		for (i = 0; i < part.length; i++) {
-			var data = part[i].split('=');
+		for (let i = 0; i < part.length; i++) {
+			const data = part[i].split('=');
 
 			if (data[0] && data[1]) {
 				value[data[0]] = data[1];
@@ -232,12 +232,9 @@ var cart = {
 			}
 		});
 	}
-}
+};
 function isAtRoute(route){
-	if($('#page_route').val()==route){
-		return true;
-	}
-	return false;
+	return $('#page_route').val() === route;
 }
 var voucher = {
 	'add': function() {

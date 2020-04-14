@@ -117,7 +117,7 @@
                       class="add-to-cart"
                       role="button"
                       type="submit"
-                      onclick="cart.add({{ product_id }})">{{ button_cart }}
+                      onclick="cart.add({{ product_id }}, $('input[name=quantity]').val())">{{ button_cart }}
                 <span class="image-container"><img alt="Cart"
                                                    src="/catalog/view/theme/simplex/assets/img/cart.png"></span>
               </button>
