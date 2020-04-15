@@ -60,6 +60,7 @@ class ControllerEventTransaction extends Controller
 		$client = new MaibClient($guzzleClient);
 		$transactionResult = $client->getTransactionResult($TRANSACTION_ID,'127.0.0.1');
 		if(isset($transactionResult['RESULT']) && $transactionResult['RESULT'] == 'OK') {
+			$this->model_extension_payment_maib_transaction->setTransactionVerifiedOK($TRANSACTION_ID, 0, $transactionResult);
 			return true;
 		}
 		return false;

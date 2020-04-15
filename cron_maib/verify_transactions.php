@@ -38,12 +38,21 @@ if(isset($config['payment_maib_status']) && $config['payment_maib_status']){
 		],
 	];
 	$guzzleClient = new Client($options);
+	// create a log for client class, if you want (monolog/monolog required)
+	$log = new Logger('maib_guzzle_request');
+	$log->pushHandler(new StreamHandler(__DIR__.'/logs/maib_cron_log.log', Logger::DEBUG));
+	$subscriber = new LogSubscriber($log, Formatter::SHORT);
+
 	$maibClient = new MaibClient($guzzleClient);
+	$maibClient->getHttpClient()->getEmitter()->attach($subscriber);
+
 	//var_dump($maibClient->closeDay());exit;
-	$transactionVerifier=new TransactionVerifier($repository,$maibClient);
+	$transactionVerifier=new TransactionVerifier($repository,$maibClient,$log);
 	echo '------------------VERIFICATION 20----------------------<br>';
+	$log->addInfo( '------------------VERIFICATION 20----------------------<br>');
 	$transactionVerifier->verifyTransactions(20,1);
 	echo '------------------VERIFICATION 40----------------------<br>';
+	$log->addInfo('------------------VERIFICATION 40----------------------<br>');
 	$transactionVerifier->verifyTransactions(40,2);
 	//$transactionVerifier->verifyTransactions(40,2);
 

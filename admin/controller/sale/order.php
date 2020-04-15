@@ -1,4 +1,8 @@
 <?php
+
+use Fruitware\MaibApi\MaibClient;
+use GuzzleHttp\Client;
+
 class ControllerSaleOrder extends Controller {
 	private $error = array();
 
@@ -1247,13 +1251,65 @@ class ControllerSaleOrder extends Controller {
 			$data['header'] = $this->load->controller('common/header');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['footer'] = $this->load->controller('common/footer');
+			/* added by ii-lab start */
+			if($this->config->has('payment_maib_status') && $this->config->get('payment_maib_status')){
+				$this->load->model('extension/payment/maib_transaction');
+				$maib_transactions = $this->model_extension_payment_maib_transaction->getOrderTransactions($order_id);
+				$data['maib_transactions'] = $maib_transactions;
+			}
+			/* added by ii-lab end */
 
 			$this->response->setOutput($this->load->view('sale/order_info', $data));
 		} else {
 			return new Action('error/not_found');
 		}
 	}
-	
+	/* added by ii-lab start */
+	public function verifyTransaction(){
+		try {
+			$TRANSACTION_ID = $this->request->post['transaction_id'];
+			$certificate_folder = str_replace('admin/', '', DIR_APPLICATION) . $this->config->get('payment_maib_certificate_folder');
+			$verify = $certificate_folder . '/cacert.pem';
+			$cert = $certificate_folder . '/pcert.pem';
+			$ssl_key = $certificate_folder . '/key.pem';
+			$password = $this->config->get('payment_maib_certificate_password');
+			$merchant_url = $this->config->get('payment_maib_merchant_url');
+			$options = [
+				'base_url' => $merchant_url,
+				'debug' => true,
+				'verify' => false,
+				'defaults' => [
+					'verify' => $verify,
+					'cert' => [$cert, $password],
+					'ssl_key' => $ssl_key,
+					'config' => [
+						'curl' => [
+							CURLOPT_SSL_VERIFYHOST => false,
+							CURLOPT_SSL_VERIFYPEER => false,
+							CURLOPT_VERBOSE => 1
+						]
+					]
+				],
+			];
+			$guzzleClient = new Client($options);
+			$client = new MaibClient($guzzleClient);
+
+			$transactionResult = $client->getTransactionResult($TRANSACTION_ID, '127.0.0.1');
+			if(isset($transactionResult['RESULT'])) {
+				$this->load->model('extension/payment/maib_transaction');
+				$transaction=$this->model_extension_payment_maib_transaction->getTransaction($TRANSACTION_ID);
+				$this->model_extension_payment_maib_transaction->setTransactionVerified($TRANSACTION_ID,$transaction['verifications_count'],$transactionResult);
+				if($transactionResult['RESULT']== MAIB_TRANSACTION_OK && $transaction['status']!=MAIB_TRANSACTION_OK ){
+					$this->model_checkout_order->addOrderHistory($transaction['order_id'], $this->config->get('payment_maib_order_callback_status'));
+				}
+			}
+			$this->response->setOutput(json_encode($transactionResult));
+		}catch(\Exception $ex){
+			$this->response->setOutput(json_encode($ex));
+		}
+	}
+	/* added by ii-lab end */
+
 	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$this->error['warning'] = $this->language->get('error_permission');
