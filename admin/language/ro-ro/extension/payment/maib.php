@@ -5,7 +5,7 @@ $_['heading_title']					= 'Maib';
 // Text
 $_['text_payment']					= 'Payment';
 $_['text_success']					= 'Success: You have modified Maib account details!';
-$_['text_edit']                     = 'Edit Payza';
+$_['text_edit']                     = 'Edit MAIB';
 
 // Entry
 $_['entry_merchant']				= 'Merchant ID';
