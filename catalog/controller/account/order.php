@@ -283,7 +283,23 @@ class ControllerAccountOrder extends Controller {
                 }else{
 				    $image="";
                 }
-                /* added by it-lab start */
+
+				$this->load->model('extension/payment/maib_transaction');
+				$transaction = $this->model_extension_payment_maib_transaction->getOrderTransaction($order_id);
+				if($transaction){
+					if($transaction['status']==MAIB_TRANSACTION_OK){
+						$verification_result = json_decode($transaction['verification_result'],true);
+						$data['maib_transaction']["CARD_NUMBER"] = $verification_result['CARD_NUMBER'];
+						$data['maib_transaction']["RRN"] = $verification_result['RRN'];
+						$data['maib_transaction']["RESULT"] = $verification_result['RESULT'];
+						$data['maib_transaction']["APPROVAL_CODE"] = $verification_result['APPROVAL_CODE'];
+						//$data['maib_transaction']["status"] = $transaction['status'];
+						$data['maib_transaction']["TRANSACTION_ID"] = $transaction['transaction_id'];
+						//$data['maib_transaction']["date_added"] = $transaction['date_added'];
+					}
+				}
+
+                /* added by it-lab end */
 				$data['products'][] = array(
                     /* added by it-lab start */
                     'image'    => $image,

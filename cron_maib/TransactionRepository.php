@@ -35,16 +35,19 @@ class TransactionRepository {
 		return $config;
 	}
 
-
-
 	public function setOrderPaymentOK($order_id) {
 		$this->registry->get('model_checkout_order')->addOrderHistory($order_id, $this->config['payment_maib_order_callback_status']);
 	}
-	public function setTransactionVerifiedOK($TRANSACTION_ID,$verification_number) {
-		return $this->registry->get('model_extension_payment_maib_transaction')->setTransactionVerifiedOK($TRANSACTION_ID, $verification_number);
+	public function setTransactionVerifiedOK($TRANSACTION_ID,$verification_number, $transactionResult) {
+		return $this->registry->get('model_extension_payment_maib_transaction')->setTransactionVerifiedOK($TRANSACTION_ID, $verification_number, $transactionResult);
 	}
 
-	public function setTransactionVerified($TRANSACTION_ID,$verification_number){
-		return $this->registry->get('model_extension_payment_maib_transaction')->setTransactionVerified($TRANSACTION_ID,$verification_number);
+	public function setTransactionVerified($TRANSACTION_ID,$verification_number, $transactionResult){
+		return $this->registry->get('model_extension_payment_maib_transaction')->setTransactionVerified($TRANSACTION_ID,$verification_number, $transactionResult);
 	}
+
+	public function addTransactionError($data){
+		return $this->registry->get('model_extension_payment_maib_transaction_error')->addTransactionError($data);
+	}
+
 }
