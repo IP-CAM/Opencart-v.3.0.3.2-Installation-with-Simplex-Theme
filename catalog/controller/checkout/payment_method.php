@@ -48,6 +48,9 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			foreach ($results as $result) {
 				if ($this->config->get('payment_' . $result['code'] . '_status')) {
+					if(!$this->customer->isLogged()  && $result['code']=='maib'){
+						continue;
+					}
 					$this->load->model('extension/payment/' . $result['code']);
 
 					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);

@@ -747,7 +747,7 @@ $(window).on("load resize", function () {
             console.log($dropdown);
             $('.dropdown-toggle', this).dropdown('toggle');
         }).click(function () {
-            $('.dropdown-toggle', this).dropdown('destroy');
+            //$('.dropdown-toggle', this).dropdown('destroy');
         });
     } else {
         $dropdown.off("mouseenter mouseleave");
