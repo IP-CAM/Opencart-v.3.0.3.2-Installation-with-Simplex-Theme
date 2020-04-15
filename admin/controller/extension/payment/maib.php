@@ -120,6 +120,13 @@ class ControllerExtensionPaymentMaib extends Controller {
 			$data['payment_maib_client_url'] = $this->config->get('payment_maib_client_url');
 		}
 
+		if (isset($this->request->post['payment_maib_error_mail'])) {
+			$data['payment_maib_error_mail'] = trim($this->request->post['payment_maib_error_mail']);
+		} else {
+			$data['payment_maib_error_mail'] = $this->config->get('payment_maib_error_mail');
+		}
+
+
 		if (isset($this->request->post['payment_maib_certificate_password'])) {
 			$data['payment_maib_certificate_password'] = trim($this->request->post['payment_maib_certificate_password']);
 		} else {
