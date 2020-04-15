@@ -25,34 +25,52 @@ class TransactionVerifier {
 
 	private $log;
 
-	public function __construct(TransactionRepository $repository,MaibClient $maibClient,Logger $log) {
+	private $errorSender;
+
+	public function __construct(TransactionRepository $repository, MaibClient $maibClient, Logger $log, ErrorSender $errorSender) {
 		$this->transactionRepository = $repository;
 		$this->maibClient = $maibClient;
 		$this->log = $log;
+		$this->errorSender = $errorSender;
 	}
 
 	public function verifyTransactions($minutes, $verification_number = 1) {
-		$transaction_for_verification = $this->transactionRepository->getTransactions($minutes, $verification_number);
+		$transaction_for_verification = $this->transactionRepository->getTransactionsForVerification($minutes, $verification_number);
 		foreach ($transaction_for_verification as $transaction) {
-			$this->verifyTransaction($transaction,$verification_number);
+			$this->verifyTransaction($transaction, $verification_number);
 		}
 	}
 
 	public function verifyTransaction($transaction, $verification_number) {
-		echo "<br>verify transaction ($verification_number) : ".$transaction['transaction_id']."<br>";
-		$transactionResult = $this->maibClient->getTransactionResult($transaction['transaction_id'], '127.0.0.1');
-		$this->log->addInfo(print_r($transactionResult,true));
-		if (isset($transactionResult['RESULT'])) {
-			if ($transactionResult['RESULT'] == 'OK') {
-				echo "<br> setOrderPaymentOK setTransactionVerifiedOK<br>";
-				$this->transactionRepository->setOrderPaymentOK($transaction['order_id']);
-				$this->transactionRepository->setTransactionVerifiedOK($transaction['transaction_id'], $verification_number, $transactionResult);
+		try {
+			echo "<br>verify transaction ($verification_number) : " . $transaction['transaction_id'] . "<br>";
+			$transactionResult = $this->maibClient->getTransactionResult($transaction['transaction_id'], '127.0.0.1');
+			$this->log->addInfo(print_r($transactionResult, true));
+			$transactionResult = ['error' => 'test error response'];
+			if (isset($transactionResult['RESULT'])) {
+				if ($transactionResult['RESULT'] == 'OK') {
+					echo "<br> setOrderPaymentOK setTransactionVerifiedOK<br>";
+					$this->transactionRepository->setOrderPaymentOK($transaction['order_id']);
+					$this->transactionRepository->setTransactionVerifiedOK($transaction['transaction_id'], $verification_number, $transactionResult);
+				} else {
+					echo "<br> setTransactionVerified";
+					$this->transactionRepository->setTransactionVerified($transaction['transaction_id'], $verification_number, $transactionResult);
+				}
 			} else {
-			    echo "<br> setTransactionVerified";
-				$this->transactionRepository->setTransactionVerified($transaction['transaction_id'], $verification_number, $transactionResult);
+				$data = [];
+				$data['TRANSACTION_ID'] = $transaction['transaction_id'];
+				$data['error_info'] = $transactionResult;
+				$transaction_error_id = $this->transactionRepository->addTransactionError($data);
+				$this->errorSender->sendErrorMail($transaction_error_id);
 			}
+			echo "<br><br>";
+		}catch (\Exception $ex){
+			$data = [];
+			$data['TRANSACTION_ID'] = $transaction['transaction_id'];
+			$data['error_info'] = ['exception_message'=>$ex->getMessage()];
+			$transaction_error_id = $this->transactionRepository->addTransactionError($data);
+			$this->errorSender->sendErrorMail($transaction_error_id);
 		}
-		echo "<br><br>";
 	}
 
 }

@@ -2,6 +2,7 @@
 require ('../index_cron.php');
 require_once "TransactionRepository.php";
 require_once "TransactionVerifier.php";
+require_once "ErrorSender.php";
 use Fruitware\MaibApi\MaibClient;
 use Fruitware\MaibApi\MaibDescription;
 use GuzzleHttp\Client;
@@ -13,6 +14,7 @@ use Monolog\Handler\PHPConsoleHandler;
 use Symfony\Component\Validator\Validator\RecursiveContextualValidator;
 $repository=new TransactionRepository($registry);
 $config=$repository->getConfig();
+$errorSender=new ErrorSender($registry);
 if(isset($config['payment_maib_status']) && $config['payment_maib_status']){
 	$certificate_folder = str_replace('catalog/', '', DIR_APPLICATION) . $config['payment_maib_certificate_folder'];
 	$verify = $certificate_folder . '/cacert.pem';
@@ -47,7 +49,7 @@ if(isset($config['payment_maib_status']) && $config['payment_maib_status']){
 	$maibClient->getHttpClient()->getEmitter()->attach($subscriber);
 
 	//var_dump($maibClient->closeDay());exit;
-	$transactionVerifier=new TransactionVerifier($repository,$maibClient,$log);
+	$transactionVerifier=new TransactionVerifier($repository,$maibClient,$log,$errorSender);
 	echo '------------------VERIFICATION 20----------------------<br>';
 	$log->addInfo( '------------------VERIFICATION 20----------------------<br>');
 	$transactionVerifier->verifyTransactions(20,1);

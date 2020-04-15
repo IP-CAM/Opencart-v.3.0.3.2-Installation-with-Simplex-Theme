@@ -24,12 +24,16 @@ class ModelExtensionPaymentMaibTransaction extends Model {
 	}
 
 	public function getTransactions (){
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "maib_transaction WHERE 1");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "maib_transaction WHERE 1 LIMIT 1");
 		return $query->rows;
 	}
 	public function getOrderTransactions($order_id){
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "maib_transaction WHERE order_id=".$order_id);
 		return $query->rows;
+	}
+	public function getOrderTransaction($order_id){
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "maib_transaction WHERE order_id=".$order_id );
+		return $query->row;
 	}
 	public function getTransactionsForVerification($minutes, $verification_number) {
 		$now = date('Y-m-d H:i:s');

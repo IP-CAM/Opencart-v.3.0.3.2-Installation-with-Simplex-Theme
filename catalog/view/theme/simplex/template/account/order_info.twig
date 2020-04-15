@@ -113,6 +113,27 @@
                     </tfoot>
                 </table>
             </div>
+            {% if maib_transaction %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <table>
+                            <thead>
+                            <tr >
+                                <th colspan="2">Detalii despre achitarea</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for key,value in maib_transaction %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
             {% if comment %}
                 <div style="overflow: auto">
                     <table style="min-width: 560px">
