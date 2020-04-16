@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Validator\RecursiveContextualValidator;
 $repository=new TransactionRepository($registry);
 $config=$repository->getConfig();
 $errorSender=new ErrorSender($registry);
+
 if(isset($config['payment_maib_status']) && $config['payment_maib_status']){
 	$certificate_folder = str_replace('catalog/', '', DIR_APPLICATION) . $config['payment_maib_certificate_folder'];
 	$verify = $certificate_folder . '/cacert.pem';

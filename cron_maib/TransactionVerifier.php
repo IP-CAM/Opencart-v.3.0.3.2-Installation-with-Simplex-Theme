@@ -46,12 +46,11 @@ class TransactionVerifier {
 			echo "<br>verify transaction ($verification_number) : " . $transaction['transaction_id'] . "<br>";
 			$transactionResult = $this->maibClient->getTransactionResult($transaction['transaction_id'], '127.0.0.1');
 			$this->log->addInfo(print_r($transactionResult, true));
-			$transactionResult = ['error' => 'test error response'];
 			if (isset($transactionResult['RESULT'])) {
 				if ($transactionResult['RESULT'] == 'OK') {
 					echo "<br> setOrderPaymentOK setTransactionVerifiedOK<br>";
-					$this->transactionRepository->setOrderPaymentOK($transaction['order_id']);
 					$this->transactionRepository->setTransactionVerifiedOK($transaction['transaction_id'], $verification_number, $transactionResult);
+					$this->transactionRepository->setOrderPaymentOK($transaction['order_id']);
 				} else {
 					echo "<br> setTransactionVerified";
 					$this->transactionRepository->setTransactionVerified($transaction['transaction_id'], $verification_number, $transactionResult);

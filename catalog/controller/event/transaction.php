@@ -14,8 +14,7 @@ class ControllerEventTransaction extends Controller
 
     public function callback()
     {
-    	//var_dump(3123);exit;
-    	$this->load->model('checkout/order');
+		$this->load->model('checkout/order');
     	$this->load->model('extension/payment/maib_transaction');
     	$TRANSACTION_ID=$this->request->post['trans_id'];
     	$transaction = $this->model_extension_payment_maib_transaction->getTransaction($TRANSACTION_ID);
@@ -24,7 +23,7 @@ class ControllerEventTransaction extends Controller
 				$order_id = $transaction['order_id'];
 				$this->config->get('payment_maib_order_callback_status');
 				$this->model_extension_payment_maib_transaction->setTransactionCallbacked($TRANSACTION_ID);
-				$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_maib_order_callback_status'));
+				$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_maib_order_callback_status'),'',true);
 				$this->response->redirect($this->url->link('checkout/success'));
 			}
     	}
