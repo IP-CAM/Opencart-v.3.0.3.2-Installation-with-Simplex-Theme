@@ -25,6 +25,7 @@ class ModelExchange
      */
 
     private $active_products_ids;
+    private $pructs_from_1C_ids=[];
 
     public function loadActiveProductsIds(){
     	$this->active_products_ids = array_column($this->query("select product_id from oc_product where status=1")['rows'],'product_id');
@@ -172,7 +173,7 @@ class ModelExchange
 			);
 
 			$product_id = $this->getLastId();
-
+			$this->pructs_from_1C_ids[] = $product_id;
 			foreach ($data['product_description'] as $language_id => $value) {
 				$this->query(
 					"INSERT IGNORE INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->escape(
@@ -247,7 +248,7 @@ class ModelExchange
 				"SELECT product_id from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
 			);
 			$product_id = $result['row']['product_id'];
-
+			$this->pructs_from_1C_ids[] = $product_id;
 			$status = in_array($product_id,$this->active_products_ids)?1:0;
 			$this->query(
 				"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
@@ -422,6 +423,15 @@ class ModelExchange
 
 	public function setProductsStatusInactive() {
     	$this->query("UPDATE oc_product SET status=0");
+	}
+
+	public function setStatusInactiveForInexistentProducts(){
+    	$inexistent_ids=array_diff($this->active_products_ids,$this->pructs_from_1C_ids);
+    	var_dump($inexistent_ids);
+    	if(count($inexistent_ids)){
+    		$sql="UPDATE oc_product SET status=0 WHERE product_id IN (". implode(',',$inexistent_ids ).")";
+			$this->query($sql);
+		}
 	}
 
     /**

@@ -86,7 +86,6 @@ class Request
     	$this->model->dropOldCategories();
         $this->updateCategories();
 		$this->model->loadActiveProductsIds();
-		$this->model->setProductsStatusInactive();
 		$decoded_json = json_decode($this->connection->request1C(), true);
         if (!isset($decoded_json)) {
             throw new InvalidJsonException("JSON not received or is invalid");
@@ -145,6 +144,7 @@ class Request
             }
         }
         $this->model->dropHighLevelCategories();
+        $this->model->setStatusInactiveForInexistentProducts();
     }
 
     /**
