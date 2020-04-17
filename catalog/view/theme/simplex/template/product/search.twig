@@ -4,8 +4,8 @@
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -24,7 +24,7 @@
                 <div class="control">
                     <div class="search">
                         <label class="search-field">
-                            <button id="button-search" type="submit"><img alt="Search" src="catalog/view/theme/simplex/assets/img/search.svg"></button>
+                            <button id="button-search" type="submit"><img class="lazyload" alt="Search" data-src="/catalog/view/theme/simplex/assets/img/search.svg"></button>
 
                             <input id="input-search" name="search" placeholder="{{ text_keyword }}" type="text" value="{{ search }}">
                         </label>
@@ -133,7 +133,7 @@
                                             {% endif %}
                                         </ul>
                                         <div class="image-container">
-                                            <img alt="" src="{{ product.thumb }}">
+                                            <img class="lazyload" alt="" src="{{ product.thumb }}">
                                         </div>
                                         <div class="product-body">
                                             <h5 class="title">{{ product.name }}</h5>
@@ -161,7 +161,7 @@
                                             onclick="cart.add('{{ product.product_id }}');">
                                         <p>{{ button_cart }}</p>
                                         <span class="image-container">
-                                                <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+                                                <img class="lazyload" alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
                                     </button>
                                     <div class="float-buttons">

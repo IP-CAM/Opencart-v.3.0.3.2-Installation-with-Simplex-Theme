@@ -2,7 +2,7 @@
   <div id="carousel{{ module }}" class="swiper-container
 ">
     <div class="swiper-wrapper">{% for banner in banners %}
-      <div class="swiper-slide text-center">{% if banner.link %}<a href="{{ banner.link }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" /></a>{% else %}<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />{% endif %}</div>
+      <div class="swiper-slide text-center">{% if banner.link %}<a href="{{ banner.link }}"><img class="lazyload" data-src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" /></a>{% else %}<img class="lazyload" data-src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />{% endif %}</div>
       {% endfor %}</div>
   </div>
   <div class="swiper-pagination carousel{{ module }}"></div>
@@ -21,7 +21,7 @@
       {% for banner in banners %}
         <div class="brand">
           {% if banner.link %}<a href="{{ banner.link }}">{% endif %}
-            <img alt="{{ banner.title }}" src="{{ banner.image }}">
+            <img class="lazyload" alt="{{ banner.title }}" data-src="{{ banner.image }}">
           {% if banner.link %}</a>{% endif %}
         </div>
       {% endfor %}

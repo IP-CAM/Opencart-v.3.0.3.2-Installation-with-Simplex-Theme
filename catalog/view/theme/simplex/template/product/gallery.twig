@@ -5,8 +5,8 @@
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                 {% if loop.first %}
-                    <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                             src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                    <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                             data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                     </li>
                 {% elseif loop.last %}
                     <li>{{ breadcrumb.text }}</li>
@@ -30,7 +30,7 @@
             <div class="slideshow">
                 {% for gallery_image in gallery_images %}
                     <div class="image">
-                        <img alt="Main" src="{{ gallery_image.image }}">
+                        <img class="lazyload" alt="Main" data-src="{{ gallery_image.image }}">
                     </div>
                 {% endfor %}
             </div>
@@ -39,7 +39,7 @@
                 {% for gallery_image in gallery_images %}
 
                 <div class="image {{ loop.first?'active' }} data-slick-index="{{ loop.index0 }}">
-                <img alt="Main" src="{{ gallery_image.image }}">
+                <img class="lazyload" alt="Main" data-src="{{ gallery_image.image }}">
             </div>
             {% endfor %}
         </div>
@@ -104,7 +104,7 @@
             <div class="card">
                 <a href="{{ random_album.link }}" tabindex="0">
                     <div class="image-container">
-                        <img alt="New 1" class="card-img-top" src="{{ random_album.album_image }}">
+                        <img class="lazyload" alt="New 1" class="card-img-top" data-src="{{ random_album.album_image }}">
                     </div>
                     <div class="card-body">
                         <div class="card-text">

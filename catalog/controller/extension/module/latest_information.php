@@ -34,6 +34,7 @@ class ControllerExtensionModuleLatestInformation extends Controller {
 				} else {
 					$image = false;
 				}
+
                 $result_full=$this->model_catalog_information->getInformationFull($result['information_id']);
 
 				$data['informations'][] = array(

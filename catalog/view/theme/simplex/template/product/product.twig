@@ -4,8 +4,8 @@
     <ul class="breadcrumb">
       {% for breadcrumb in breadcrumbs %}
         {% if loop.first %}
-          <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                   src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
           </li>
         {% elseif loop.last %}
           <li>{{ breadcrumb.text }}</li>
@@ -21,13 +21,13 @@
             <div class="gallery-images">
               {% if thumb %}
                 <div class="item-image">
-                  <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"/>
+                  <img class="lazyload" data-src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"/>
                 </div>
               {% endif %}
               {% if images %}
                 {% for image in images %}
                   <div class="item-image">
-                    <img src="{{ image.thumb }}" title="{{ heading_title }}"
+                    <img class="lazyload" data-src="{{ image.thumb }}" title="{{ heading_title }}"
                          alt="{{ heading_title }}"/>
                   </div>
                 {% endfor %}
@@ -37,13 +37,13 @@
             <ul class="gallery-list">
               {% if thumb %}
                 <li class="item-image">
-                  <img src="{{ popup }}" title="{{ heading_title }}" alt="{{ heading_title }}"/>
+                  <img class="lazyload" data-src="{{ popup }}" title="{{ heading_title }}" alt="{{ heading_title }}"/>
                 </li>
               {% endif %}
               {% if images %}
                 {% for image in images %}
                   <li class="item-image">
-                    <img src="{{ image.popup }}" title="{{ heading_title }}"
+                    <img class="lazyload" data-src="{{ image.popup }}" title="{{ heading_title }}"
                          alt="{{ heading_title }}"/>
                   </li>
                 {% endfor %}
@@ -118,8 +118,8 @@
                       role="button"
                       type="submit"
                       onclick="cart.add({{ product_id }}, $('input[name=quantity]').val())">{{ button_cart }}
-                <span class="image-container"><img alt="Cart"
-                                                   src="/catalog/view/theme/simplex/assets/img/cart.png"></span>
+                <span class="image-container"><img class="lazyload" alt="Cart"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/cart.png"></span>
               </button>
               <input type="hidden" name="product_id" value="{{ product_id }}"/>
             </div>
@@ -151,14 +151,14 @@
               </p>
             </div>
             <a class="warranty-item" href="{{ terms_link }}">
-              <img alt="Livrare" src="/catalog/view/theme/simplex/assets/img/car.png">
+              <img class="lazyload" alt="Livrare" data-src="/catalog/view/theme/simplex/assets/img/car.png">
               <p>
                 {{ text_livrarea_miine }}
               </p>
               <span>{{ text_gratuit }}</span>
             </a>
             <div class="warranty-item">
-              <img alt="" src="/catalog/view/theme/simplex/assets/img/warranty.png">
+              <img class="lazyload" alt="" data-src="/catalog/view/theme/simplex/assets/img/warranty.png">
               <p>
                 {{ text_garanty }}
               </p>
@@ -167,7 +167,7 @@
           </div>
         </div>
         <a class="prof-help" href="{{ prof_help_link }}">
-          <img alt="" src="/catalog/view/theme/simplex/assets/img/step4.png">
+          <img class="lazyload" alt="" data-src="/catalog/view/theme/simplex/assets/img/step4.png">
           <p>{{ text_professional_installation }}</p>
         </a>
         <div class="product-code">
@@ -313,8 +313,8 @@
         {#                                    <tr>#}
         {#                                        <td>#}
         {#                                            {% if ld.image_geo %}#}
-        {#                                                <a href="{{ ld.geocode }}" target="_blank"><img#}
-        {#                                                            alt="Map" src="{{ ld.image_geo }}"></a>#}
+        {#                                                <a href="{{ ld.geocode }}" target="_blank"><img class="lazyload"#}
+        {#                                                            alt="Map" data-src="{{ ld.image_geo }}"></a>#}
         {#                                            {% elseif ld.is_online %}#}
         {#                                                <span class="online"></span>#}
         {#                                            {% endif %}#}
@@ -371,8 +371,8 @@
         {#                                    <tr>#}
         {#                                        <td>#}
         {#                                            {% if ld.image_geo %}#}
-        {#                                                <a href="{{ ld.geocode }}" target="_blank"><img#}
-        {#                                                            alt="Map" src="{{ ld.image_geo }}"></a>#}
+        {#                                                <a href="{{ ld.geocode }}" target="_blank"><img class="lazyload"#}
+        {#                                                            alt="Map" data-src="{{ ld.image_geo }}"></a>#}
         {#                                            {% elseif ld.is_online %}#}
         {#                                                <span class="online"></span>#}
         {#                                            {% endif %}#}
@@ -430,7 +430,7 @@
                               {% endif %}
                           </ul>
                           <div class="image-container">
-                              <img alt="" src="{{ product.thumb }}">
+                              <img class="lazyload" alt="" src="{{ product.thumb }}">
                           </div>
                           <div class="product-body">
                               <h5 class="title">{{ product.name }}</h5>
@@ -458,7 +458,7 @@
                               onclick="cart.add('{{ product.product_id }}');">
                           <p>{{ button_cart }}</p>
                           <span class="image-container">
-                                                <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+                                                <img class="lazyload" alt="Cart" data-src="/catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
                       </button>
                       <div class="float-buttons">
@@ -516,7 +516,7 @@
                         {% endif %}
                     </ul>
                     <div class="image-container">
-                        <img alt="" src="{{ product.thumb }}">
+                        <img class="lazyload" alt="" src="{{ product.thumb }}">
                     </div>
                     <div class="product-body">
                         <h5 class="title">{{ product.name }}</h5>
@@ -544,7 +544,7 @@
                         onclick="cart.add('{{ product.product_id }}');">
                     <p>{{ button_cart }}</p>
                     <span class="image-container">
-                                                <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+                                                <img class="lazyload" alt="Cart" data-src="/catalog/view/theme/simplex/assets/img/cart.png">
                                           </span>
                 </button>
                 <div class="float-buttons">

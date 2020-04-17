@@ -6,7 +6,7 @@
                 <div class="item">
                     <a href="{{ information.href }}">
                         <div class="image">
-                            <img alt="1" src="{{ information.original_image }}">
+                            <img class="lazyload" alt="1" data-src="{{ information.original_image }}">
                         </div>
                         <div class="overlay">
                             <div class="city">
@@ -29,7 +29,7 @@
   <div class="information-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
     <div class="information-thumb transition thumbnail">
       {% if information.thumb %}
-      <div class="image"><a href="{{ information.href }}"><img src="{{ information.thumb }}" alt="{{ information.title }}" title="{{ information.title }}" class="img-responsive" /></a></div>
+      <div class="image"><a href="{{ information.href }}"><img class="lazyload" data-src="{{ information.thumb }}" alt="{{ information.title }}" title="{{ information.title }}" class="img-responsive" /></a></div>
       {% endif %}
       <div class="caption">
         <h4><a href="{{ information.href }}">{{ information.title }}</a></h4>

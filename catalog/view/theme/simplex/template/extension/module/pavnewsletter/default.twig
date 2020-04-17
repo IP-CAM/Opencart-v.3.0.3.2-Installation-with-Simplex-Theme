@@ -3,7 +3,7 @@
 	<div class="container-fluid">
 		<form id="abonare"  method="post" action="{{ action }}" class="formNewLestter newsletter-bg"	>
 		<label for="email"><p>{{ description }}</p></label>
-			<input id="email"  name="email" type="text" class="form-control input-md inputNew" {% if customer_email is not defined %} onblur="javascript:if(this.value=='')this.value='{{ default_input_text }}';" onfocus="javascript:if(this.value=='{{ default_input_text }}')this.value='';"{% endif %} placeholder="{{ default_input_text }}"  type="email">
+			<input id="email"  name="email" type="text" class="form-control input-md inputNew" {% if customer_email is not defined %} onblur="if(this.value=='')this.value='{{ default_input_text }}';" onfocus="if(this.value=='{{ default_input_text }}')this.value='';"{% endif %} placeholder="{{ default_input_text }}"  type="email">
 			<button type="submit" name="submitNewsletter">
 				{{ button_subscribe }}
 				<span class="image-container"></span>

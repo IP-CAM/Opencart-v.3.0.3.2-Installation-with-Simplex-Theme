@@ -4,8 +4,8 @@
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-5 offset-md-1 order-md-1">
                         <div class="main-image-container">
-                            <img alt="" src="{{ thumb }}">
+                            <img class="lazyload" alt="" data-src="{{ thumb }}">
                         </div>
                     </div>
                 </div>
@@ -48,15 +48,15 @@
                     </div>
                     <div class="social">
                         <p>{{ share_information }}:</p>
-                        <script src="/catalog/view/javascript/share2/es5-shims.min.js"></script>
-                        <script src="/catalog/view/javascript/share2/share.js"></script>
+                        <script data-src="/catalog/view/javascript/share2/es5-shims.min.js"></script>
+                        <script data-src="/catalog/view/javascript/share2/share.js"></script>
                         <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter"></div>
 
                     </div>
                 </div>
                 <div id="contact-form" {% if error_name or error_email or error_enquiry %} class="active" style="opacity: 1" {% endif %}>
                     <a class="close" role="button">
-                        <img alt="Close" src="/catalog/view/theme/simplex/assets/img/x.png">
+                        <img class="lazyload" alt="Close" data-src="/catalog/view/theme/simplex/assets/img/x.png">
                     </a>
                     <h3>{{ text_contact }}</h3>
                     <form action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
