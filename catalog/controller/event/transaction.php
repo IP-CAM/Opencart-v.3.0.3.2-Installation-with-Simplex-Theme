@@ -7,11 +7,6 @@ use GuzzleHttp\Client;
 class ControllerEventTransaction extends Controller
 {
     //
-    public function redirect()
-    {
-        $this->response->redirect("http://simplex-vasea.dev.it-lab.md/");
-    }
-
     public function callback()
     {
 		$this->load->model('checkout/order');
@@ -27,7 +22,7 @@ class ControllerEventTransaction extends Controller
 				$this->response->redirect($this->url->link('checkout/success'));
 			}
     	}
-		$this->response->setOutput('error');
+		$this->response->redirect($this->url->link('checkout/success'));
     }
 
     public function verifyTransaction($TRANSACTION_ID){
