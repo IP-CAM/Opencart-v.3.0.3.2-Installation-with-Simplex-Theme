@@ -380,18 +380,21 @@ select {
   margin-top : 2.5rem;
 }
 
-//
-
 .nav-button .dropdown-item, #about .dropdown-item {
   white-space : nowrap;
   line-height : calc(20 / 7);
 }
 
 #account {
-  a {
+  a:not(#add):not(.back) {
+    @include transition(color .125s linear);
     color       : #057f9e;
     font-size   : 0.8125rem;
     font-weight : 600;
+    
+    &:hover {
+      color : $yellow;
+    }
   }
   
   li {
@@ -415,6 +418,11 @@ select {
     td {
       line-height    : 2.385;
       vertical-align : middle;
+      
+      &.warning a {
+        color       : #f6767a;
+        font-weight : 800;
+      }
     }
     
     td, th {
@@ -435,9 +443,11 @@ select {
       font-size        : 0.875rem;
       font-weight      : 600;
       text-align       : left;
+      white-space      : nowrap;
       
       &:first-child {
         @include border-radius-left;
+        width : 120px;
       }
       
       &:last-child {
@@ -447,6 +457,10 @@ select {
     
     tbody tr {
       border-bottom : 1px dotted #d6d6d6;
+    }
+    
+    tbody:last-child tr:last-child {
+      border-bottom : 0;
     }
     
     .date {
@@ -487,7 +501,7 @@ select {
       input, textarea, select {
         @include border-radius;
         border        : 1px solid #d4d4d4;
-        flex          : 1 1 calc(100% - 160px);
+        flex          : 1 1 50%;
         font-size     : 0.8125rem;
         margin-bottom : 1.5rem;
       }
@@ -497,7 +511,7 @@ select {
       }
       
       label {
-        flex         : 0 0 125px;
+        flex         : 1 1 125px;
         font-size    : 0.875rem;
         font-weight  : 600;
         line-height  : 2.5rem;
@@ -532,8 +546,9 @@ select {
     .form-submit {
       @include border-radius;
       @include flex;
+      @include transition(all .125s linear);
       align-items      : center;
-      background-color : #ffca30;
+      background-color : $yellow;
       border           : 0;
       cursor           : pointer;
       font-size        : .8125rem;
@@ -554,6 +569,11 @@ select {
         display                 : block;
         margin-left             : 1.5rem;
         padding                 : 10px;
+      }
+      
+      &:hover {
+        background-color : #2b2c30;
+        color            : $white;
       }
     }
     
@@ -618,11 +638,13 @@ select {
   
   .back {
     @include border-radius;
-    border    : 1px solid #f4f4f4;
-    color     : $black;
-    display   : inline-block;
-    font-size : 0.875rem;
-    padding   : 0.75rem 1.5rem 0.75rem 1rem;
+    border      : 1px solid #f4f4f4;
+    color       : $black;
+    display     : inline-block;
+    font-size   : 0.875rem;
+    font-weight : 500;
+    margin-top  : 1rem;
+    padding     : 0.75rem 1.5rem 0.75rem 1rem;
     
     &:before {
       @include transform(rotate(180deg));
@@ -643,10 +665,6 @@ select {
     padding   : 2rem;
   }
   
-  .card-mobile { //
-    display : none;
-  }
-  
   .input-group-spinner .form-control {
     font-size : 0.875rem;
   }
@@ -655,7 +673,6 @@ select {
     overflow : auto;
   }
 }
-
 
 #add:before {
   @include transform(rotate(45deg));
@@ -1107,7 +1124,7 @@ select {
     max-width  : 990px;
     padding    : 28px 0 28px 40px;
     z-index    : 1001;
-    left       : 299px !important;
+    left       : 275px !important;
     transform  : translate3d(0, 0, 0) !important;
     box-shadow : 8px 9px 32px rgba(0, 0, 0, .06);
     position   : absolute;
@@ -1152,9 +1169,6 @@ select {
     }
     
     .category-list {
-      max-width    : 20%;
-      padding-left : 10px;
-      
       h5 a {
         display : block;
         padding : 0;
@@ -1175,6 +1189,11 @@ select {
         height : 100%;
       }
     }
+  }
+  
+  &:not(.categories-main) .category-list{
+    max-width    : 20%;
+    padding-left : 10px;
   }
   
   .show .menu-link .image-container {
