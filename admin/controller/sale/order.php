@@ -1256,6 +1256,7 @@ class ControllerSaleOrder extends Controller {
 				$this->load->model('extension/payment/maib_transaction');
 				$maib_transactions = $this->model_extension_payment_maib_transaction->getOrderTransactions($order_id);
 				$data['maib_transactions'] = $maib_transactions;
+				$data['payment_maib_order_callback_status']=$this->config->get('payment_maib_order_callback_status');
 			}
 			/* added by ii-lab end */
 
@@ -1267,7 +1268,10 @@ class ControllerSaleOrder extends Controller {
 	/* added by ii-lab start */
 	public function verifyTransaction(){
 		try {
+			$json=[];
 			$TRANSACTION_ID = $this->request->post['transaction_id'];
+			$this->load->model('checkout/order');
+			$this->load->model('extension/payment/maib_transaction');
 			$certificate_folder = str_replace('admin/', '', DIR_APPLICATION) . $this->config->get('payment_maib_certificate_folder');
 			$verify = $certificate_folder . '/cacert.pem';
 			$cert = $certificate_folder . '/pcert.pem';
@@ -1293,17 +1297,19 @@ class ControllerSaleOrder extends Controller {
 			];
 			$guzzleClient = new Client($options);
 			$client = new MaibClient($guzzleClient);
-
 			$transactionResult = $client->getTransactionResult($TRANSACTION_ID, '127.0.0.1');
+			$json['transaction_result'] = $transactionResult;
 			if(isset($transactionResult['RESULT'])) {
 				$this->load->model('extension/payment/maib_transaction');
 				$transaction=$this->model_extension_payment_maib_transaction->getTransaction($TRANSACTION_ID);
 				$this->model_extension_payment_maib_transaction->setTransactionVerified($TRANSACTION_ID,$transaction['verifications_count'],$transactionResult);
 				if($transactionResult['RESULT']== MAIB_TRANSACTION_OK && $transaction['status']!=MAIB_TRANSACTION_OK ){
-					$this->model_checkout_order->addOrderHistory($transaction['order_id'], $this->config->get('payment_maib_order_callback_status'));
+					$json['add_oder_history']=1;
+				}else{
+					$json['add_oder_history']=0;
 				}
 			}
-			$this->response->setOutput(json_encode($transactionResult));
+			$this->response->setOutput(json_encode($json));
 		}catch(\Exception $ex){
 			$this->response->setOutput(json_encode($ex));
 		}

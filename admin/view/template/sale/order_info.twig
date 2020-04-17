@@ -510,7 +510,23 @@
                 },
                 success: function (json) {
                     alert(JSON.stringify(json));
-                    location.reload();
+                    if(json.add_oder_history){
+                        $.ajax({
+                            url: '{{ catalog }}index.php?route=api/order/history&api_token={{ api_token }}&store_id={{ store_id }}&order_id={{ order_id }}',
+                            type: 'post',
+                            dataType: 'json',
+                            data: 'order_status_id=' + '{{payment_maib_order_callback_status}}' + '&notify=1&comment=',
+                            success: function (json) {
+                                location.reload();
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                location.reload();
+                            }
+                        });
+
+                    }else{
+                        location.reload();
+                    }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
