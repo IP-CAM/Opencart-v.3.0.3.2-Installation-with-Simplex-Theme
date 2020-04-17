@@ -276,6 +276,7 @@ class ControllerMailOrder extends Controller {
         $mail->setReplyTo($order_info['email']);
 		$mail2->setTo($order_info['email']);
 		$mail->send();
+		usleep(500000);
 		$mail2->send();
 	}
 
