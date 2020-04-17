@@ -25,7 +25,7 @@ class ControllerExtensionPaymentMaib extends \Controller {
 		$data['ap_itemcode'] = $this->session->data['order_id'];
 		$data['ap_returnurl'] = $this->url->link('checkout/success');
 		$data['ap_cancelurl'] = $this->url->link('checkout/checkout', '', true);
-
+		$data['payment_maib_client_url']=$this->config->get('payment_maib_client_url');
 		return $this->load->view('extension/payment/maib', $data);
 	}
 
