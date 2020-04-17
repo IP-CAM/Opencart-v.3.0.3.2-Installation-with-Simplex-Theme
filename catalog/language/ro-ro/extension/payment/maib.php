@@ -1,4 +1,4 @@
 <?php
 // Text
-$_['text_title'] = 'Maib';
-$_['button_confirm_maib'] = 'Achitarea Card';
+$_['text_title'] = 'Plata cu card';
+$_['button_confirm_maib'] = 'Plata cu card';
