@@ -177,12 +177,13 @@
   }
   #about-us {
     #slider-test {
-      width: 100%;
+      width : 100%;
+      
       .slider-item {
-        margin: 0;
-        padding: 0 10px;
-        margin-bottom: 8px;
-        margin-top: 8px;
+        margin        : 0;
+        padding       : 0 10px;
+        margin-bottom : 8px;
+        margin-top    : 8px;
       }
     }
   }
@@ -2130,7 +2131,7 @@
   
   .phone {
     a, &-popup a {
-      height : 85px;
+      height : 60px;
     }
   }
   

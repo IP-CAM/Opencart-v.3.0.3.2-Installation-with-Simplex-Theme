@@ -16,7 +16,7 @@
     }
   }
   
-  &[aria-expanded="true"], &:hover {
+  .show > &, &:hover {
     background-color : #f5f4f2;
     
     .categories & {
