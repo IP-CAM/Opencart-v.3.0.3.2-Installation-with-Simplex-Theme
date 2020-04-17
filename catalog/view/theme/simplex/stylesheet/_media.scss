@@ -479,6 +479,7 @@
         width      : 100%;
         height     : auto;
         min-height : fit-content;
+        min-height : intrinsic;
         left       : 0 !important;
         padding    : 0;
         @include border-radius(0);
@@ -558,11 +559,8 @@
     width    : auto;
     margin   : 20px;
     overflow : hidden;
+    position : relative;
     @include border-radius();
-    
-    .menu {
-      position : relative;
-    }
     
     .dropright {
       &:first-child .dropdown-toggle {
@@ -573,6 +571,7 @@
         width      : 100%;
         height     : auto;
         min-height : fit-content;
+        min-height : intrinsic;
         left       : 0 !important;
         padding    : 0;
         @include border-radius();
@@ -1190,6 +1189,7 @@
         padding-top      : 34px;
         background-color : #fff;
         min-height       : fit-content;
+        min-height       : intrinsic;
         max-height       : calc(100vh - 140px);
         overflow         : auto;
         visibility       : visible;
@@ -1616,6 +1616,7 @@
       background-color : #fff;
       padding-top      : 34px;
       min-height       : fit-content;
+      min-height       : intrinsic;
     }
     
     .dropdown-toggle {

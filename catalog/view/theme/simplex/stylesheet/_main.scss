@@ -130,6 +130,18 @@ input {
   }
 }
 
+@media not all and (min-resolution : .001dpcm) {
+  @supports (-webkit-appearance:none) {
+    input[type="radio"] {
+      opacity : 1;
+      
+      & + .radio {
+        display : none;
+      }
+    }
+  }
+}
+
 textarea {
   .has-error &, &.has-error {
     background   : #ffe9ed !important;
@@ -1191,7 +1203,7 @@ select {
     }
   }
   
-  &:not(.categories-main) .category-list{
+  &:not(.categories-main) .category-list {
     max-width    : 20%;
     padding-left : 10px;
   }

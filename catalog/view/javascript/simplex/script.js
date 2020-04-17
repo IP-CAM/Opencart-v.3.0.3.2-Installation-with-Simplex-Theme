@@ -210,8 +210,8 @@ catalog.append($('#categories'));
 if ($('main').attr('id') === 'home') {
     let height = $(window).scrollTop();
     let categoriesMenu = $('#slider .categories .menu');
-    let categoriesMenuBottom = categoriesMenu.offset().top + categoriesMenu.height() / 2
-    console.log(categoriesMenu.height());
+    let categoriesMenuBottom = categoriesMenu.offset().top + categoriesMenu.height() / 2;
+    
     if (height > categoriesMenuBottom && window.matchMedia("(min-width: 992px)").matches) {
         catalog.show('fast');
     } else {
