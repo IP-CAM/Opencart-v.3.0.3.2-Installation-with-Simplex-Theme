@@ -17,6 +17,7 @@
     left   : unset;
     right  : 135px;
     top    : unset;
+    width  : 14px;
   }
   
   .slick-next {
@@ -39,7 +40,7 @@ aside .product-slider, .main-slider {
     stroke : #b2b5b6;
   }
   
-  .float-buttons button:hover{
+  .float-buttons button:hover {
     svg path {
       stroke : #000;
     }
@@ -214,40 +215,46 @@ aside .product-slider, .main-slider {
 
 #about-us {
   #slider-test-wrapper {
-    width: 100%;
-    overflow:hidden;
+    width    : 100%;
+    overflow : hidden;
   }
+  
   #slider-test {
-    width: 100%;
+    width : 100%;
+    
     .slider-item {
-      margin:auto;
-      padding: 0 10px;
-      list-style: none;
+      margin     : auto;
+      padding    : 0 10px;
+      list-style : none;
+      
       img {
-        margin: auto;
-        max-width: 100%;
-        height: auto;
-        -ms-interpolation-mode: bicubic;
-        display: inline-block;
-        vertical-align: middle;
-        border: 0;
+        margin                 : auto;
+        max-width              : 100%;
+        height                 : auto;
+        -ms-interpolation-mode : bicubic;
+        display                : inline-block;
+        vertical-align         : middle;
+        border                 : 0;
       }
     }
   }
-
-  .slick-list{
-    margin: 0;
+  
+  .slick-list {
+    margin : 0;
   }
+  
   .slick-slide {
-
-    text-align: center;
+    
+    text-align : center;
   }
-  .slick-prev,.slick-next{
-    top:50%;
+  
+  .slick-prev, .slick-next {
+    top : 50%;
   }
+  
   .slick-dots {
-    bottom: -30px;
+    bottom : -30px;
   }
-
-
+  
+  
 }
