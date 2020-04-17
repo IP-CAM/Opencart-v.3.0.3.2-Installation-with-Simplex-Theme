@@ -75,7 +75,8 @@ class ControllerExtensionPaymentMaib extends \Controller {
 			$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 			$amout = $order_info['total'];
 
-			$smsTransactionResult = $client->registerSmsTransaction($amout, 498, '127.0.0.1', '', 'ru');
+			$description="Simplex.md - Comanda #{$this->session->data['order_id']}";
+			$smsTransactionResult = $client->registerSmsTransaction($amout, 498, '127.0.0.1', $description, 'ru');
 			if (isset($smsTransactionResult['TRANSACTION_ID'])) {
 				$data=[];
 				$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_maib_order_status_id'));
