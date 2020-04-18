@@ -32,6 +32,6 @@ $_['column_action']         = 'Acţiune';
 $_['column_date_added']     = 'Data Adaugării';
 $_['column_status']         = 'Statusul comenzii';
 $_['column_comment']        = 'Comentarii';
-
+$_['text_list']             = 'Lista produselor';
 // Error
 $_['error_reorder']         = '%s nu este disponibil momentan pentru comandă.';

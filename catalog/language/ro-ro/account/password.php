@@ -1,7 +1,7 @@
 <?php
 // Heading
 $_['heading_title']  = 'Schimbă-ţi parola';
-
+$_['text_your_details']  = 'Detalii personale';
 // Text
 $_['text_account']   = 'Cont';
 $_['text_password']  = 'Parola ta';

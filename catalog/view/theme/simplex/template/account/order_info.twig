@@ -80,13 +80,13 @@
                 <table style="min-width: 670px">
                     <thead>
                     <tr>
-                        <th colspan="5">List of items</th>
+                        <th colspan="5">{{ text_list }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for product in products %}
                         <tr>
-                            <td style="width: 120px"><img class="lazyload" alt="{{ product.name }}" data-src="{{ product.image }}"></td>
+                            <td style="width: 120px">{% if product.image %}<img class="lazyload" alt="{{ product.name }}" data-src="{{ product.image }}">{% endif %}</td>
                             <td>{{ product.name }}
                             </td>
                             <td style="text-align: right;color: #a4a4a4">{{ product.price }} x</td>
