@@ -1744,6 +1744,7 @@ select {
 	.submit {
 		@include flex(none, none, center, wrap);
 		padding-left : calc(25% + 2.125rem);
+		width: 100%;
 
 		p {
 			color       : #868686;
