@@ -21,13 +21,17 @@
     <div class="container-fluid">
         <div id="account">
             <div class="card">
-                <h5>Your Personal Details</h5>
+                <h5>{{ text_your_details }}</h5>
                 <div id="account-form">
                     <form action="{{ action }}" method="post">
-                        <label class="required" for="name">{{ entry_firstname }}</label><input name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" required type="text">
-                        <label class="required" for="name">{{ entry_lastname }}</label><input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" required >
-                        <label class="required" for="mail">{{ entry_email }}</label><input type="email" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" type="text" required >
-                        <label class="required" for="telephone">{{ entry_telephone }}</label><input type="tel" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone">
+                        <label class="required" for="input-firstname">{{ entry_firstname }}</label>
+                        <input name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" required type="text">
+                        <label class="required" for="input-lastname">{{ entry_lastname }}</label>
+                        <input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" required >
+                        <label class="required" for="input-email">{{ entry_email }}</label>
+                        <input type="email" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" required >
+                        <label class="required" for="input-telephone">{{ entry_telephone }}</label>
+                        <input type="tel" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone">
                         <div class="submit">
                                 <button class="form-submit" type="submit">
                                     {{ button_continue }}<span class="image-container"></span>
