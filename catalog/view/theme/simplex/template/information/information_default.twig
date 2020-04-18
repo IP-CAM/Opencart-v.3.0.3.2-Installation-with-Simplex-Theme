@@ -4,8 +4,8 @@
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -23,7 +23,7 @@
         <div class="project-wrapper ">
             {% if thumb %}
                 <div class="card">
-                    <img alt="Newest" class="card-img-top" src="{{ thumb }}">
+                    <img class="lazyload" alt="Newest" class="card-img-top" src="{{ thumb }}">
                 </div>
             {% endif %}
             <div class="content heading">
@@ -38,7 +38,7 @@
                 <div class="slideshow">
                     {% for image in original_images %}
                         <div class="image">
-                            <img alt="Main" src="{{ image.popup }}">
+                            <img class="lazyload" alt="Main" src="{{ image.popup }}">
                         </div>
                     {% endfor %}
                 </div>

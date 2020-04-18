@@ -5,8 +5,8 @@
     <ul class="breadcrumb">
       {% for breadcrumb in breadcrumbs %}
         {% if loop.first %}
-          <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                   src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
           </li>
         {% elseif loop.last %}
           <li>{{ breadcrumb.text }}</li>
@@ -55,7 +55,7 @@
           <tbody>
           {% for product in products %}
             <tr>
-              <td class="image">{% if product.thumb %} <a href="{{ product.href }}"><img
+              <td class="image">{% if product.thumb %} <a href="{{ product.href }}"><img class="lazyload"
                           src="{{ product.thumb }}" alt="{{ product.name }}"
                           title="{{ product.name }}"></a> {% endif %}</td>
               <td {% if not product.stock %}class="warning"{% endif %}>

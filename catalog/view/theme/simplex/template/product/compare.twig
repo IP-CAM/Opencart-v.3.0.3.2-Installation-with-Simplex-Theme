@@ -7,7 +7,7 @@
                     {% if loop.first %}
                         <li>
                             <a href="{{ breadcrumb.href }}">
-                                <img alt="Home" src="catalog/view/theme/simplex/assets/img/home.svg">
+                                <img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg">
                             </a>
                         </li>
                     {% elseif loop.last %}
@@ -39,7 +39,7 @@
                         {% for product in products %}
                             <td class="text-center">
                                 {% if product.thumb %}
-                                    <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}"
+                                    <img class="lazyload" data-src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}"
                                          class="img-thumbnail">
                                 {% endif %}
                             </td>
@@ -124,8 +124,8 @@
                             <td>
                                 <button onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');">
                                     {{ button_cart }}
-                                    <span class="image-container"><img alt="Cart"
-                                                                       src="catalog/view/theme/simplex/assets/img/cart.svg"></span>
+                                    <span class="image-container"><img class="lazyload" alt="Cart"
+                                                                       data-src="/catalog/view/theme/simplex/assets/img/cart.svg"></span>
                                 </button>
                                 <a href="{{ product.remove }}" class="delete">{{ button_remove }}</a>
                             </td>

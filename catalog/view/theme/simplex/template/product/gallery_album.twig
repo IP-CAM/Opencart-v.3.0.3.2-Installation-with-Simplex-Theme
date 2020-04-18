@@ -4,8 +4,8 @@
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -24,7 +24,7 @@
                 {% for gallery_album in gallery_albums %}
                     <a class="item" href="{{ gallery_album.url }}">
                         <div class="image-container">
-                            <img alt="Foto 1" src="{{ gallery_album.image }}">
+                            <img class="lazyload" alt="Foto 1" data-src="{{ gallery_album.image }}">
                         </div>
                         <div class="item-body">
                             <h3>{{ gallery_album.title }}</h3>

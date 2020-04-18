@@ -4,7 +4,7 @@
     <ul class="breadcrumb">
       {% for breadcrumb in breadcrumbs %}
         {% if loop.first %}
-          <li><a href="{{ breadcrumb.href }}"><img alt="Home" src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
           </li>
         {% elseif loop.last %}
           <li>{{ breadcrumb.text }}</li>
@@ -109,7 +109,7 @@
           <div class="card">
             <a class="anchor-link" role="button" target="#location-{{ location.location_id }}">
               <div class="image-container">
-                <img src="{{ location.image }}" alt="{{ location.city }}">
+                <img class="lazyload" data-src="{{ location.image }}" alt="{{ location.city }}">
               </div>
               <div class="card-body">
                 <p>{{ location.city }} {{ location.district }}</p>
@@ -146,7 +146,7 @@
       </div>
       <div id="contact-form">
         <a class="close" role="button">
-          <img alt="Close" src="/catalog/view/theme/simplex/assets/img/x.png">
+          <img class="lazyload" alt="Close" data-src="/catalog/view/theme/simplex/assets/img/x.png">
         </a>
         <h3>{{ text_contact }}</h3>
         <form action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">

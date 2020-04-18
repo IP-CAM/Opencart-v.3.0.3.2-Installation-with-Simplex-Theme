@@ -4,8 +4,10 @@
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                                 src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+                        <li>
+                            <a href="{{ breadcrumb.href }}">
+                                <img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg">
+                            </a>
                         </li>
                     {% elseif loop.last %}
                         <li>{{ breadcrumb.text }}</li>
@@ -84,7 +86,7 @@
                     <tbody>
                     {% for product in products %}
                         <tr>
-                            <td style="width: 120px"><img alt="" src="{{ product.image }}"></td>
+                            <td style="width: 120px"><img class="lazyload" alt="{{ product.name }}" data-src="{{ product.image }}"></td>
                             <td>{{ product.name }}
                             </td>
                             <td style="text-align: right;color: #a4a4a4">{{ product.price }} x</td>
@@ -92,9 +94,9 @@
                             <td style="width:130px">
                                 {% if product.reorder %}
                                     <a class="add-to-cart" href="{{ product.reorder }}">
-                            <span class="image-container">
-                                    <img alt="Cart" src="catalog/view/theme/simplex/assets/img/cart.png">
-                                </span>
+                                        <span class="image-container">
+                                            <img class="lazyload" alt="Cart" data-src="/catalog/view/theme/simplex/assets/img/cart.png">
+                                        </span>
                                     </a>
                                 {% endif %}
                             </td>

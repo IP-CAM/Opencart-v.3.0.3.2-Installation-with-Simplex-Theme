@@ -4,8 +4,8 @@
     <ul class="breadcrumb">
       {% for breadcrumb in breadcrumbs %}
         {% if loop.first %}
-          <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                   src="catalog/view/theme/simplex/assets/img/home.svg"></a>
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
           </li>
         {% elseif loop.last %}
           <li>{{ breadcrumb.text }}</li>
@@ -28,7 +28,7 @@
           <div class="card-body">
             <span class="card-foot">{{ date_added }}</span>
           </div>
-          <a href="#"><img alt="Newest" class="card-img-top" src="{{ thumb }}"></a>
+          <a href="#"><img class="lazyload" alt="Newest" class="card-img-top" data-src="{{ thumb }}"></a>
         </div>
       </div>
       <div class="content">
@@ -42,7 +42,7 @@
           <div class="items">
             {% for product in products %}
               <div class="card">
-                <div class="image-container"><img alt="" src="{{ product.thumb }}"></div>
+                <div class="image-container"><img class="lazyload" alt="" data-src="{{ product.thumb }}"></div>
                 <div class="card-body"><p>{{ product.name }}</p></div>
               </div>
             {% endfor %}
@@ -64,7 +64,7 @@
               </h6>
               <ul>
                 {% for manufacturer in manufacturers %}
-                  <li><img style="max-height: 50px" alt="{{ manufacturer.name }}" src="{{ manufacturer.image }}"></li>
+                  <li><img class="lazyload" style="max-height: 50px" alt="{{ manufacturer.name }}" data-src="{{ manufacturer.image }}"></li>
                 {% endfor %}
               </ul>
             </div>
@@ -75,7 +75,7 @@
         <div class="slideshow">
           {% for image in original_images %}
             <div class="image">
-              <img alt="Main" src="{{ image.popup }}">
+              <img class="lazyload" alt="Main" data-src="{{ image.popup }}">
             </div>
           {% endfor %}
         </div>

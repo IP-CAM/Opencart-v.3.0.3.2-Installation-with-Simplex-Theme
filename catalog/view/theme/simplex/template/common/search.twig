@@ -2,12 +2,12 @@
     <button aria-controls="formSearch" aria-expanded="false"
             class="search-button collapsed" data-target="#formSearch" data-toggle="collapse"
             type="button">
-        <img alt="Search" src="catalog/view/theme/simplex/assets/img/search.svg">
+        <img class="lazyload" alt="Search" data-src="/catalog/view/theme/simplex/assets/img/search.svg">
         <span class="cross"></span>
     </button>
     <div class="search-form collapse fade" id="formSearch">
         <button class="button-search" >
-            <img alt="Search" src="catalog/view/theme/simplex/assets/img/search.svg">
+            <img class="lazyload" alt="Search" data-src="/catalog/view/theme/simplex/assets/img/search.svg">
         </button>
         <label>
             <input maxlength="128" placeholder="{{ text_search }}" type="text" name="search" value="{{ search }}">

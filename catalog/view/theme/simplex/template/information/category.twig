@@ -3,8 +3,8 @@
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
       {% if loop.first %}
-        <li><a href="{{ breadcrumb.href }}"><img alt="Home"
-                                                 src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
         </li>
       {% elseif loop.last %}
         <li>{{ breadcrumb.text }}</li>
