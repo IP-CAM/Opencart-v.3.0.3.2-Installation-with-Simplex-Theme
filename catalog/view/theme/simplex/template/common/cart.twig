@@ -5,7 +5,9 @@
             {% for product in products %}
                 <li class="product">
                     <a href="{{ product.href }}">
-                        <img class="lazyload" data-src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
+                        {% if product.thumb %}
+                            <img class="lazyload" data-src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
+                        {% endif %}
                         <div class="product-body">
                             <h5 class="title">{{ product.name }}</h5>
                             <div class="price-container">

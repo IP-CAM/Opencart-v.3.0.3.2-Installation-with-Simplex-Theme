@@ -80,6 +80,7 @@ class Request
      * Main action method.
      * Gets data and writes it into database, if changes found
      * @throws InvalidJsonException
+     * @throws Exception
      */
     public function makeRequest()
     {

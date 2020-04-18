@@ -1,6 +1,5 @@
 let accept_cookies = getCookie("accept-cookies");
 let current_slide = 1;
-let total_slides = $('.slideshow .slick-slide').length;
 let catalog = $('#catalog');
 let $dropdown = $("#slider .categories .dropright");
 function show_succes_popup(product_id, message, type = 'cart') {
@@ -119,7 +118,6 @@ $('.tab-content > button').click(function () {
         $('.nav-tabs .nav-link[href="' + attr + '"]').toggleClass('active');
     }
 });
-$('#slides-counter').prepend('<p>' + current_slide + '/' + total_slides + '</p>');
 $('.slick-arrow, .slick-slide').click(function () {
     current_slide = parseInt($('.slideshow .slick-active').attr('data-slick-index')) + 1;
     $('#slides-counter p').remove();
@@ -721,6 +719,9 @@ $(document).ready(function () {
             $(".categories-main").height('auto');
         }
     });
+
+    let total_slides = $('.slideshow .slick-slide').length;
+    $('#slides-counter').prepend('<p>' + current_slide + '/' + total_slides + '</p>');
 });
 $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
     if (!$(this).next().hasClass('show')) {

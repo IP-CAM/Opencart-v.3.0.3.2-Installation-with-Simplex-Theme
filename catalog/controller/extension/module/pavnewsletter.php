@@ -15,8 +15,8 @@ class ControllerExtensionModulePavnewsletter extends Controller {
 	 *
 	 */
 	public function loadScript(){
-		$this->document->addScript('catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
-		$this->document->addStyle('catalog/view/javascript/jquery/magnific/magnific-popup.css');
+//		$this->document->addScript('catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
+//		$this->document->addStyle('catalog/view/javascript/jquery/magnific/magnific-popup.css');
   		$this->document->addScript('catalog/view/javascript/jquery/pavnewsletter.js' );
 	}
 
@@ -57,12 +57,12 @@ class ControllerExtensionModulePavnewsletter extends Controller {
 		}
 
 		$this->loadScript();
-		$this->document->addScript('catalog/view/javascript/jquery/pavnewsletter.js');
-		if ( file_exists( DIR_TEMPLATE . $config_theme  . '/stylesheet/pavnewsletter.css') && isset($setting['loadcss']) && $setting['loadcss'] ) {
-			$this->document->addStyle('catalog/view/theme/' . $config_theme . '/stylesheet/pavnewsletter.css');
-		} else {
-			$this->document->addStyle('catalog/view/theme/default/stylesheet/pavnewsletter.css');
-		}
+//		$this->document->addScript('catalog/view/javascript/jquery/pavnewsletter.js');
+//		if ( file_exists( DIR_TEMPLATE . $config_theme  . '/stylesheet/pavnewsletter.css') && isset($setting['loadcss']) && $setting['loadcss'] ) {
+//			$this->document->addStyle('catalog/view/theme/' . $config_theme . '/stylesheet/pavnewsletter.css');
+//		} else {
+//			$this->document->addStyle('catalog/view/theme/default/stylesheet/pavnewsletter.css');
+//		}
 
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->mdata['base'] = $this->config->get('config_ssl');
