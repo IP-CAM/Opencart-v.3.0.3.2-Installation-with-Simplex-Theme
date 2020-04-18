@@ -657,6 +657,7 @@ select {
 
 	.back {
 		@include border-radius;
+		@include transition(all .125s linear);
 		border      : 1px solid #f4f4f4;
 		color       : $black;
 		display     : inline-block;
@@ -667,12 +668,25 @@ select {
 
 		&:before {
 			@include transform(rotate(180deg));
+			@include border-radius(50%);
+			@include transition(all .125s linear);
 			background   : url($image_dir + "angle-right-solid.svg") no-repeat center;
 			content      : "";
 			float        : left;
 			height       : 0.875rem;
 			margin-right : 0.625rem;
 			width        : 0.875rem;
+		}
+
+		&:hover {
+			background-color : #2b2c30;
+			color            : #fff;
+
+			&:before {
+				background-color        : #fff;
+				-webkit-background-size : 6px;
+				background-size         : 6px;
+			}
 		}
 	}
 
@@ -689,7 +703,8 @@ select {
 	}
 
 	.table {
-		overflow : auto;
+		overflow                   : auto;
+		-webkit-overflow-scrolling : touch;
 	}
 }
 
@@ -989,8 +1004,9 @@ select {
 		width           : 300px;
 
 		ul {
-			max-height : 336px;
-			overflow   : auto;
+			max-height                 : 336px;
+			overflow                   : auto;
+			-webkit-overflow-scrolling : touch;
 
 			&::-webkit-scrollbar {
 				width : 0.25rem;
@@ -2088,7 +2104,7 @@ select {
 	//  }
 	//}
 
-	.image-container {
+	.categories-header .image-container {
 		opacity : 0.3;
 
 		img, svg {
@@ -2666,7 +2682,7 @@ select {
 		font-weight      : 700;
 		height           : 35px;
 		line-height      : 35px;
-		min-width        : 230px;
+		min-width        : 200px;
 		overflow         : hidden;
 		padding          : 0 10px 0 20px;
 		z-index          : 10;
@@ -2716,7 +2732,7 @@ select {
 		@include border-radius(.5rem);
 		border       : 1px solid #d4d4d4;
 		color        : #a4a4a4;
-		flex         : 1 1 percentage(5 / 12);
+		flex         : 1 1 percentage(7 / 12);
 		font-size    : 0.8125rem;
 		font-weight  : 500;
 		height       : 35px;
@@ -2892,12 +2908,25 @@ select {
 	}
 
 	#back {
+		@include transition(all .125s linear);
 		background-color : $yellow;
+		color            : #000;
+
+		&:hover {
+			background-color : #2b2c30;
+			color            : #fff;
+		}
 	}
 
 	#history {
+		@include transition(all .125s linear);
 		background-color : #2b2c30;
 		color            : $white;
+
+		&:hover {
+			background-color : $yellow;
+			color            : #000;
+		}
 	}
 
 	#ok {
@@ -4244,16 +4273,17 @@ select {
 
 .job-item-container {
 	#contact-form {
-		background-color : #f5f3ee;
-		display          : none;
-		height           : calc(100vh - 87px);
-		left             : 0;
-		overflow         : auto;
-		position         : fixed;
-		right            : 0;
-		top              : 44px;
-		width            : 100%;
-		z-index          : 1003;
+		background-color           : #f5f3ee;
+		display                    : none;
+		height                     : calc(100vh - 87px);
+		left                       : 0;
+		overflow                   : auto;
+		-webkit-overflow-scrolling : touch;
+		position                   : fixed;
+		right                      : 0;
+		top                        : 44px;
+		width                      : 100%;
+		z-index                    : 1003;
 
 		&.active {
 			display : block;
@@ -4562,6 +4592,20 @@ select {
 		grid-template-columns : 1fr 1fr;
 
 		.item {
+			.card-img-top, .card-text {
+				@include transition(all .125s linear);
+			}
+
+			a:hover {
+				.card-img-top {
+					opacity : 0.5;
+				}
+
+				.card-text {
+					color : $yellow;
+				}
+			}
+
 			.card-foot {
 				border-top  : 5px solid $yellow;
 				color       : #a4a4a4;
@@ -5303,9 +5347,10 @@ select {
 
 .product-table {
 	@include border-radius;
-	border   : 1px solid #f4f4f4;
-	overflow : auto;
-	padding  : 1.25rem 1.375rem;
+	border                     : 1px solid #f4f4f4;
+	overflow                   : auto;
+	-webkit-overflow-scrolling : touch;
+	padding                    : 1.25rem 1.375rem;
 
 	table {
 		font-size : 0.8125rem;
@@ -5358,7 +5403,8 @@ select {
 
 .cart-table {
 	@include border-radius;
-	overflow : auto;
+	overflow                   : auto;
+	-webkit-overflow-scrolling : touch;
 
 	table {
 		font-size : 0.8125rem;
