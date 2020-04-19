@@ -1235,7 +1235,7 @@ select {
 	}
 
 	&:not(.categories-main) .category-list {
-		max-width    : 20%;
+		width        : 20%;
 		padding-left : 10px;
 	}
 
@@ -6105,6 +6105,7 @@ select {
 }
 
 .invisible {
+	overflow   : visible !important;
 	visibility : hidden !important;
 }
 
