@@ -35,8 +35,7 @@
 </head>
 <body>
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v6.0"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v6.0"></script>
 {% if cookie %}
   {{ cookie }}
 {% endif %}
@@ -44,7 +43,7 @@
   <div id="navigation">
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg">
-        <div class="nav-item dropdown active" id="catalog">
+        <div class="nav-item dropdown" id="catalog">
           <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
              role="button"></a>
           <div class="dropdown-menu categories">
@@ -123,8 +122,7 @@
             {% endif %}
             <div class="nav-item dropright categories-header">
               <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
-                 href="#"
-                 role="button">
+                 href="#" role="button">
                 {{ catalog.title }}
               </a>
               <div class="dropdown-menu">
@@ -180,11 +178,7 @@
                           {% set flag = 1 %}
                         {% endfor %}
                         <div class="dropdown-item category-list dropdown">
-                          <a class="nav-link{% if flag %} dropdown-toggle{% endif %} category-toggle"
-                                  {% if flag %}
-                                    aria-expanded="false" aria-haspopup="true"
-                                    data-toggle="dropdown"
-                                  {% endif %}
+                          <a class="nav-link{% if flag %} dropdown-toggle{% endif %} category-toggle"{% if flag %} aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"{% endif %}
                              href="{{ category.href }}">
                             {{ category.name }}
                           </a>
@@ -214,9 +208,8 @@
         <div class="nav-button" id="profile">
           <div class="dropdown">
             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
-               href="{{ account }}"
-               role="button">
-              <svg baseProfile="tiny" height="21" version="1.2" viewBox="0 0 21 21" width="21"
+               href="{{ account }}" role="button">
+              <svg baseProfile="tiny" height="21" viewBox="0 0 21 21" width="21"
                    xml:space="preserve"
                    xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.5,1C13,1,15,3.1,15,5.5S13,10,10.5,10S6,8,6,5.5S8,1,10.5,1z" fill="none"
@@ -275,17 +268,19 @@
           <a class="tel dropdown-toggle" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
              href="#"
              role="button"><span>{{ telephone }}</span></a>
-          <div class=" dropdown-menu dropdown-menu-right phone-popup-top">
+          <div class="dropdown-menu dropdown-menu-right phone-popup-top">
             <span class="delete" style="display: none">
-        <a href="#">
-            <svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14.877,10.113 L2.076,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
-                      stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
-                <path d="M2.076,10.113 L14.877,1.000 " fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
-                      stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
-            </svg>
-        </a>
-    </span>
+                <a href="#">
+                    <svg height="14px" width="18px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.877,10.113 L2.076,1.000" fill="none" fill-rule="evenodd"
+                              stroke="rgb(178, 181, 182)"
+                              stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
+                        <path d="M2.076,10.113 L14.877,1.000" fill="none" fill-rule="evenodd"
+                              stroke="rgb(178, 181, 182)"
+                              stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2px"></path>
+                    </svg>
+                </a>
+            </span>
             <div class="input-telephone top">
               <h6>
                 <a class="tel" href="tel:{{ telephone }}">{{ telephone }}</a>
