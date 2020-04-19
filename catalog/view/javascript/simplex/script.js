@@ -862,8 +862,7 @@ categoryToggleActive($('.categories-main'));
 $('#navbarCollapse .category-toggle').click(function () {
 	for (let parent of $(this).parents()) {
 		if ($(parent).hasClass('dropdown-menu')) {
-			$(parent).height('auto');
-			$(parent).height($(parent).prop('scrollHeight'));
+			$(parent).height('auto').height($(parent).prop('scrollHeight'));
 			break;
 		}
 	}
