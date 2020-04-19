@@ -121,7 +121,7 @@
   </div>
   <div class="input-telephone">
     <h6>{{ text_phone_callback }}</h6>
-    <label><input id="customer_phone" placeholder="{{ text_your_phone }}" type="tel"></label>
+    <label><input class="customer_phone" placeholder="{{ text_your_phone }}" type="tel"></label>
     <button class="button-call-back" type="submit">
       {{ text_callback }}
       <span class="image-container"></span>
@@ -132,9 +132,9 @@
 <script src="/catalog/view/javascript/simplex/popper.min.js"></script>
 <script src="/catalog/view/javascript/simplex/bootstrap.min.js"></script>
 <script src="/catalog/view/javascript/simplex/bootstrap-input-spinner.js"></script>
-
 <script src="/catalog/view/javascript/simplex/slick.js"></script>
 <script src="/catalog/view/javascript/simplex/grid-animate.js"></script>
+<script src="/catalog/view/javascript/simplex/lazysizes.js" type="text/javascript"></script>
 <script>
     const grid = document.querySelector(".products");
     if (grid != null) {
@@ -233,9 +233,9 @@
         var button_callback = $(this);
         var phone_popup_top = button_callback.closest(".phone-popup-top");
         var input_telephone_block = button_callback.closest(".input-telephone");
-        var phone1 = input_telephone_block.find("#customer_phone").val();
+        var phone1 = input_telephone_block.find(".customer_phone").val();
         var url = $('base').attr('href') + 'index.php?route=information/contact';
-        var phone = input_telephone_block.find("#customer_phone").val();
+        var phone = input_telephone_block.find(".customer_phone").val();
         if (phone.length > 3) {
 
             $.ajax({
@@ -398,7 +398,4 @@
     getCartTable();
 </script>
 <script src="/catalog/view/javascript/simplex/script.js"></script>
-{% for script in scripts %}
-  <script src="{{ script }}" type="text/javascript"></script>
-{% endfor %}
 </body></html>
