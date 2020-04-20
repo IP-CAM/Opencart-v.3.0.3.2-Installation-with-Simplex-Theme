@@ -238,7 +238,6 @@
 	}
 
 	.navbar-nav {
-		outline     : 1px solid #f4f4f4;
 		line-height : 2.5rem;
 
 		#lang {
@@ -989,7 +988,7 @@
 			padding     : 0.5rem 0 !important;
 
 			&:hover, &[aria-expanded=true] {
-				&, &:after {
+				&, &:after, span {
 					color : $dark_yellow;
 				}
 			}
@@ -1011,7 +1010,7 @@
 		order     : 1;
 
 		.dropdown-toggle {
-			line-height : 2.5rem;
+			line-height : 1.5rem;
 
 			&[aria-expanded=true] {
 				background-color : $white;
