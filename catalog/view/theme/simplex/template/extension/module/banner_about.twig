@@ -18,13 +18,12 @@
 
 <div id="about-us">
   <div class="container-fluid">
-
     <div id="slider-test-wrapper">
       <section id="slider-test">
         {% for banner in banners %}
           <div class="slider-item">
             <a href="{{ banner.link }}">
-              <img class="lazyload" data-src="{{ banner.image }}" alt="{{ banner.title }}">
+              <img src="{{ banner.image }}" alt="{{ banner.title }}">
 {#              <p></p>#}
             </a>
           </div>
