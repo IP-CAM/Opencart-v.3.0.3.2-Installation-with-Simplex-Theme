@@ -853,9 +853,14 @@ $('.navbar-toggler').click(function () {
 	$('.category-toggle').removeClass('category-toggle-active');
 });
 $(".categories-main .dropdown, .categories-main .dropright").on("shown.bs.dropdown", function () {
-	$('.categories-main').animate({
-		height: $('> .dropdown-menu', this).height()
+    let categoriesMain = $('.categories-main');
+	categoriesMain.animate({
+		height: $('> .dropdown-menu', this).height(),
 	}, 100);
+	$([document.documentElement, document.body]).animate({
+        scrollTop: categoriesMain.offset().top - 100
+    }, 250);
+
 });
 $("#navbarCollapse .dropdown, #navbarCollapse .dropright").on("shown.bs.dropdown", function () {
 	$('> .dropdown-menu', this).height('auto').height($('> .dropdown-menu', this).prop('scrollHeight'));
