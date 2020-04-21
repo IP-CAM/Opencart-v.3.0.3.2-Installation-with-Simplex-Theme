@@ -13,7 +13,6 @@
 @mixin appearance($value: none) {
 	-webkit-appearance : $value;
 	-moz-appearance    : $value;
-	appearance         : $value;
 }
 
 @mixin background-gradient($color1, $color2) {
