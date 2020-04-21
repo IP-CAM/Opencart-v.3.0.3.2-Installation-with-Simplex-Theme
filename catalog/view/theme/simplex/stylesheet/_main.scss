@@ -539,7 +539,11 @@ select {
       }
       
       input {
-        line-height : 0.375rem;
+        line-height : 1;
+        
+        &[type=radio], &[type=checkbox] {
+          margin-bottom : 0;
+        }
       }
       
       label {
@@ -1518,7 +1522,7 @@ select {
     height           : 35px;
     line-height      : 35px;
     margin           : auto auto 0.5rem;
-    max-width        : 150px;
+    max-width        : 175px;
     overflow         : hidden;
     padding          : 0 10px 0 20px;
     width            : 100%;
