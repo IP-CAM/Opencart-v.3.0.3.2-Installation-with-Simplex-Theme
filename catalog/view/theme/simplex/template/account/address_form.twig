@@ -15,22 +15,24 @@
                 {% endfor %}
         </ul>
         <div class="page-title">
-            <h1>{{ text_address }}</h1>
+            <h1>{{ heading_title }}</h1>
         </div>
     </div>
     <div class="container-fluid">
         <div id="account">
             <div class="card">
-                <h5>{{ text_address }}</h5>
+                <h5>{{ heading_title }}</h5>
                 <div id="account-form">
                     <form action="{{ action }}" method="post">
-                        <label class="required" for="name">{{ entry_firstname }}</label><input  class="{{ error_firstname?"has-error"}}" name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" required type="text">
-                        <label class="required" for="name">{{ entry_lastname }}</label><input class="{{ error_firstname?"has-error"}}" type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" required >
+                        <label class="required" for="input-firstname">{{ entry_firstname }}</label><input class="{{ error_firstname?"has-error"}}" name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" required type="text">
+                        <label class="required" for="input-lastname">{{ entry_lastname }}</label><input class="{{
+	                    error_firstname?"has-error"}}" type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" required >
                         <input type="hidden" name="company" value="{{ company }}" placeholder="{{ entry_company }}" id="input-company"/>
                         <label for="input-address-1">{{ entry_address_1 }}</label><input type="text" class="{{ error_address1?"has-error"}}" name="address_1" value="{{ address_1 }}" placeholder="{{ entry_address_1 }}" id="input-address-1" />
                         <input type="hidden" name="address_2" value="{{ address_2 }}" placeholder="{{ entry_address_2 }}" id="input-address-2"/>
                         <label for="input-city">{{ entry_city }}</label><input class="{{ error_city?"has-error"}}" type="text" name="city" value="{{ city }}" placeholder="{{ entry_city }}" id="input-city"  />
-                        <input type="hidden" class="{{ error_postcode?"has-error"}}" type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-postcode" />
+                        <input type="hidden" class="{{ error_postcode?"has-error"}}" name="postcode" value="{{
+                        postcode }}" placeholder="{{ entry_postcode }}" id="input-postcode" />
                         <label style="display: none" for="input-country">{{ entry_country }}</label>
                             <select style="display: none" class="{{ error_country?"has-error"}}"  name="country_id" id="input-country" >
                                 <option value="">{{ text_select }}</option>
