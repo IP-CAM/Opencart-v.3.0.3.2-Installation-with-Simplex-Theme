@@ -17,14 +17,25 @@ class Exchange {
 	 * @var string
 	 */
 	protected $password = '';
+    /**
+     * @var string
+     */
+    protected $apiId;
+    /**
+     * @var string
+     */
+    protected $categoriesUrl;
 
     /**
      * Exchange constructor.
+     *
      * @param string $module_url Path to 1C module controller
+     *
+     * @throws Exception
      */
     public function __construct($module_url, $login, $password, $loginUrl)
     {
-/*        $this->login($login, $password, $loginUrl);
+        $this->login($login, $password, $loginUrl);
         $ch = curl_init();
         if (!isset($this->apiId)) {
             throw new Exception("Auth failed");
@@ -36,10 +47,8 @@ class Exchange {
 
         $this->url = $return['url'];
         $this->login = $return['login'];
-        $this->password = $return['password'];*/
-		$this->url = 'http://195.22.235.118:4480/simplex/hs/ExportArticles/post';//$return['url'];
-		$this->login = 'ws';// $return['login'];
-		$this->password = 'Simplexws1702';//$return['password'];
+        $this->password = $return['password'];
+        $this->categoriesUrl = $return['categories_import_url'];
     }
 
     /**

@@ -3,6 +3,7 @@
 require_once __DIR__ . '/exchange/exchange.class.php';
 require_once __DIR__ . '/exchange/exchange.model.php';
 require_once dirname(__DIR__) . '/config.php';
+require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/Exception/InvalidJsonException.php';
 
 define('MODULE_URL', HTTPS_SERVER . 'index.php?route=api/exchange/getModuleConfig');
@@ -11,8 +12,7 @@ define('LOGIN_URL', HTTPS_SERVER . 'index.php?route=api/login');
 if (!function_exists('mb_ucfirst')) {
 	function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false) {
 		$first_letter = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding);
-		$str_end = "";
-		if ($lower_str_end) {
+        if ($lower_str_end) {
 			$str_end = mb_strtolower(mb_substr($str, 1, mb_strlen($str, $encoding), $encoding), $encoding);
 		}
 		else {
@@ -28,8 +28,6 @@ if (!function_exists('mb_ucfirst')) {
  */
 class Request
 {
-    const USERNAME = 'exchange';
-    const KEY = 'WWTiMShnGWZQ0iZMOaRtIIrPe36V2Y7ZPRZxOwVKpo2JkQigL1kybLtgRO1JSEG5E28k3HhciY5RntShO51PlXcyBmAFmJ4qh4Jw4zHfCX6RRM7foNsSWfwoU0UOzOqfU6rlVghdAnlWfFifbXRJJBjnwvTcU21iHQH1UmAJFnptNbZaTrnOoASnUnF3LDCv4d86fhbDq6MuSohC2uVP0Ae0IzolKjwjafEdNVqddDVAnXccehVSwYYJ6KpHnTbg';
     /**
      * @var int Successful Task counter
      */
@@ -69,7 +67,7 @@ class Request
      */
     public function __construct()
     {
-        $this->connection = new Exchange(MODULE_URL, self::USERNAME, self::KEY, LOGIN_URL);
+        $this->connection = new Exchange(MODULE_URL, USERNAME, KEY, LOGIN_URL);
         $this->model = new ModelExchange(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
         $this->filename = 'json/previous.json';
         $this->file = fopen($this->filename, 'r+');
@@ -96,9 +94,7 @@ class Request
                 //fwrite($this->file, json_encode($decoded_json));
                 self::rewriteJSONData($decoded_json);
                 foreach ($decoded_json as $d_json) {
-                    if ($d_json['quantity'] >= 0 && strlen(
-                            $d_json['model']
-                        ) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] >= 0 && strlen($d_json['sku']) > 0) {
+                    if ($d_json['quantity'] >= 0 && strlen($d_json['model']) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] >= 0 && strlen($d_json['sku']) > 0) {
                         $this->model->update($d_json);
                         $this->successful_tasks++;
                     }
@@ -113,9 +109,7 @@ class Request
                 self::rewriteJSONData($previous_json);
                 self::rewriteJSONData($decoded_json);
                 foreach ($decoded_json as $d_json) {
-                    if ($d_json['quantity'] >= 0 && strlen($d_json['quantity']) > 0 && strlen(
-                            $d_json['model']
-                        ) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] > 0 && strlen($d_json['sku']) > 0)
+                    if ($d_json['quantity'] >= 0 && strlen($d_json['quantity']) > 0 && strlen($d_json['model']) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] > 0 && strlen($d_json['sku']) > 0)
                     {
                         foreach ($previous_json as $p_json) {
                             if ($d_json['sku'] == $p_json['sku']) {
