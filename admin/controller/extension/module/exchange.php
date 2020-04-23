@@ -60,6 +60,12 @@ class ControllerExtensionModuleExchange extends Controller {
 			$data['module_exchange_send_url'] = $this->config->get('module_exchange_send_url');
 		}
 
+		if(isset($this->request->post['module_exchange_categories_import_url'])) {
+			$data['module_exchange_categories_import_url'] = $this->request->post['module_exchange_categories_import_url'];
+		} else {
+			$data['module_exchange_categories_import_url'] = $this->config->get('module_exchange_categories_import_url');
+		}
+
 		if(isset($this->request->post['module_exchange_login'])) {
 			$data['module_exchange_login'] = $this->request->post['module_exchange_login'];
 		} else {

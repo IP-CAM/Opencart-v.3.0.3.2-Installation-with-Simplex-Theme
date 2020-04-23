@@ -9,6 +9,7 @@ class ControllerApiExchange extends Controller {
             $module_config['url'] = $this->config->get('module_exchange_receive_url');
             $module_config['login'] = $this->config->get('module_exchange_login');
             $module_config['password'] = $this->config->get('module_exchange_password');
+            $module_config['categories_import_url'] = $this->config->get('module_exchange_categories_import_url');
 
             $this->response->setOutput(json_encode($module_config));
         }

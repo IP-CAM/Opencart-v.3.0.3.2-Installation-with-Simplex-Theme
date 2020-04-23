@@ -1276,6 +1276,7 @@ select {
   label.semi-bold {
     white-space : normal;
     display     : flex;
+    font-weight : 600;
     
     input[type='checkbox'] {
       margin-right : 15px;

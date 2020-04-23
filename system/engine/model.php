@@ -8,8 +8,11 @@
 */
 
 /**
-* Model class
-*/
+ * Model class
+ *
+ * @property Cache $cache
+ * @property DB $db
+ */
 abstract class Model {
 	protected $registry;
 
