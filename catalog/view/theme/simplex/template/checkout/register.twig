@@ -82,24 +82,24 @@
                     <input type="text" name="city" value="" placeholder="{{ entry_city }}" id="input-payment-city"
                            />
                 </div>
-                {#<div class="form-group required">
-                    <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}</label>
-                    <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"
-                           id="input-payment-postcode" />
-                </div>
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-country">{{ entry_country }}</label>
-                    <select name="country_id" id="input-payment-country" >
-                        <option value="">{{ text_select }}
-                            {% for country in countries %}
-                            {% if country.country_id == country_id %}
-                        <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
-                        {% else %}
-                            <option value="{{ country.country_id }}">{{ country.name }}</option>
-                        {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>#}
+{#                <div class="form-group required">#}
+{#                    <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}</label>#}
+{#                    <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"#}
+{#                           id="input-payment-postcode" />#}
+{#                </div>#}
+{#                <div class="form-group required">#}
+{#                    <label class="control-label" for="input-payment-country">{{ entry_country }}</label>#}
+{#                    <select type="hidden" name="country_id" id="input-payment-country" >#}
+{#                        <option value="">{{ text_select }}#}
+{#                            {% for country in countries %}#}
+{#                            {% if country.country_id == country_id %}#}
+{#                        <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>#}
+{#                        {% else %}#}
+{#                            <option value="{{ country.country_id }}">{{ country.name }}</option>#}
+{#                        {% endif %}#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </div>#}
                 <div class="form-group required">
                     <label class="control-label" for="input-payment-zone">{{ entry_zone }}</label>
                     <select name="zone_id" id="input-payment-zone" >
@@ -113,14 +113,13 @@
         <li><label for="newsletter">
                 <input type="checkbox" name="newsletter" value="1" id="newsletter"/>
                 {{ entry_newsletter }}</label></li>
-        {% if shipping_required %}
-            <li><label>
-                    <input type="checkbox" name="shipping_address" value="1" checked="checked"/>
-                    {{ entry_shipping }}</label></li>
-        {% endif %}
+{#        {% if shipping_required %}#}
+{#            <li><label>#}
+{#                    <input type="checkbox" name="shipping_address" value="1" checked="checked"/>#}
+{#                    {{ entry_shipping }}</label></li>#}
+{#        {% endif %}#}
         {% if text_agree %}
-            <li><label>
-                    <input type="checkbox" name="agree" value="1"/>{{ text_agree }}</label></li>
+            <li><label><input type="checkbox" name="agree" value="1"/>{{ text_agree }}</label></li>
         {% endif %}
     </ul>
 </div>
@@ -262,46 +261,4 @@
         pickDate: true,
         pickTime: true
     });
-    //--></script>
-<script type="text/javascript"><!--
-    $('#payment-address select[name=\'country_id\']').on('change', function () {
-        $.ajax({
-            url: 'index.php?route=checkout/checkout/country&country_id=' + this.value,
-            dataType: 'json',
-            beforeSend: function () {
-                $('#payment-address select[name=\'country_id\']').prop('disabled', true);
-            },
-            complete: function () {
-                $('#payment-address select[name=\'country_id\']').prop('disabled', false);
-            },
-            success: function (json) {
-                if (json['postcode_required'] == '1') {
-                    $('#payment-address input[name=\'postcode\']').parent().addClass('required');
-                } else {
-                    $('#payment-address input[name=\'postcode\']').parent().removeClass('required');
-                }
-
-                html = '<option value="">{{ text_select }}</option>';
-
-                if (json['zone'] && json['zone'] != '') {
-                    for (i = 0; i < json['zone'].length; i++) {
-                        html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-
-                        if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
-                            html += ' selected="selected"';
-                        }
-
-                        html += '>' + json['zone'][i]['name'] + '</option>';
-                    }
-                } else {
-                    html += '<option value="0" selected="selected">{{ text_none }}</option>';
-                }
-
-                $('#payment-address select[name=\'zone_id\']').html(html);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
-        });
-    }).trigger('change');
     //--></script>

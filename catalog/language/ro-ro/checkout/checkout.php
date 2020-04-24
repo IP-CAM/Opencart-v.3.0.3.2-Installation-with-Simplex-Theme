@@ -5,7 +5,7 @@ $_['heading_title']                  = 'Finalizează comanda';
 // Text
 $_['text_cart']                      = 'Coș de cumpărături';
 $_['text_checkout_option']           = 'Pasul %s: Opțiuni pentru finalizarea comenzii';
-$_['text_checkout_account']          = 'Pasul %s: Cont și facturare';
+$_['text_checkout_account']          = 'Pasul %s: Cont și livrare';
 $_['text_checkout_payment_address']  = 'Pasul %s: Adresa de facturare';
 $_['text_checkout_shipping_address'] = 'Pasul %s: Adresa de livrare';
 $_['text_checkout_shipping_method']  = 'Pasul %s: Metoda de livrare';
