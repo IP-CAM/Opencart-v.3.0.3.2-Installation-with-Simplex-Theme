@@ -100,7 +100,7 @@ class Exchange {
 
     public function requestCategories()
     {
-        $ch = curl_init("http://195.22.235.118:4480/simplex/hs/ExportArticlesGroup/post");
+        $ch = curl_init($this->categoriesUrl);
         curl_setopt($ch, CURLOPT_USERPWD, $this->login . ":" . $this->password);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_POST, 1);
