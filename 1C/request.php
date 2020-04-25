@@ -89,7 +89,7 @@ class Request
         if (!isset($decoded_json)) {
             throw new InvalidJsonException("JSON not received or is invalid");
         }
-        if (filesize($this->filename) == 0) {
+/*        if (filesize($this->filename) == 0) {*/
             if (isset($decoded_json)) {
                 fwrite($this->file, json_encode($decoded_json));
                 self::rewriteJSONData($decoded_json);
@@ -97,47 +97,13 @@ class Request
                     if ($d_json['quantity'] >= 0 && strlen($d_json['model']) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] >= 0 && strlen($d_json['sku']) > 0) {
                         $this->model->update($d_json);
                         $this->successful_tasks++;
-                    }
-                    echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
+                    }else{
+                    	$this->skipped_tasks++;
+                    	//echo $this->skipped_tasks . ' skipped of ' . count($decoded_json) . "\n";
+					}
+                    //echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
                 }
             }
-        } else {
-            $previous_json = json_decode(file_get_contents($this->filename), true);
-
-            if (isset($decoded_json) && isset($previous_json)) {
-                fwrite($this->file, json_encode($decoded_json));
-                self::rewriteJSONData($previous_json);
-                self::rewriteJSONData($decoded_json);
-                foreach ($decoded_json as $d_json) {
-                    if ($d_json['quantity'] >= 0 && strlen($d_json['quantity']) > 0 && strlen($d_json['model']) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] > 0 && strlen($d_json['sku']) > 0)
-                    {
-                        foreach ($previous_json as $p_json) {
-                            if ($d_json['sku'] == $p_json['sku']) {
-                                $this->flag = false;
-
-                                if ($d_json['quantity'] == $p_json['quantity'] && $d_json['price'] == $p_json['price']) {
-                                    $this->skipped_tasks++;
-                                    break;
-                                } else {
-                                    $this->successful_tasks++;
-
-                                    $this->model->update($d_json);
-                                    $this->log($d_json);
-                                }
-                            }
-                        }
-                        if ($this->flag) {
-                            $this->successful_tasks++;
-                            $this->model->update($d_json);
-                            $this->log($d_json);
-                        }
-                    }
-                    echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
-                    echo "Skipped " . $this->skipped_tasks . ' of ' . count($decoded_json) . "\n\n";
-                    $this->flag = true;
-                }
-            }
-        }
         $this->model->dropHighLevelCategories();
         $this->model->setStatusInactiveForInexistentProducts();
     }
