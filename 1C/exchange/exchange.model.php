@@ -163,30 +163,31 @@ class ModelExchange
 		$category = $this->query(
 			"SELECT category_id, parent_id FROM oc_category WHERE category_1c = '{$data['category_1c']}'"
 		)['row'];
-		if(isset($category['category_id']) && strlen($category['category_id'])) {
+		$this->query(
+			"INSERT INTO " . DB_PREFIX . "product SET  model = '" . $this->escape(
+				$data['model']
+			) . "', sku = '" . $this->escape(
+				$data['sku']
+			) . "', quantity = '" . $data['quantity'] . "', price = " . $data['price'] . ", date_added = NOW(), date_modified = NOW() on duplicate key update quantity = '" . $data['quantity'] . "', price =" . $data['price'] . ",  date_modified = NOW()"
+		);
+
+		$product_id = $this->getLastId();
+		$this->pructs_from_1C_ids[] = $product_id;
+		foreach ($data['product_description'] as $language_id => $value) {
 			$this->query(
-				"INSERT INTO " . DB_PREFIX . "product SET  model = '" . $this->escape(
-					$data['model']
-				) . "', sku = '" . $this->escape(
-					$data['sku']
-				) . "', quantity = '" . $data['quantity'] . "', price = " . $data['price'] . ", date_added = NOW(), date_modified = NOW() on duplicate key update quantity = '" . $data['quantity'] . "', price =" . $data['price'] . ",  date_modified = NOW()"
+				"INSERT IGNORE INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->escape(
+					$value['name']
+				) . "'"
 			);
+		}
 
-			$product_id = $this->getLastId();
-			$this->pructs_from_1C_ids[] = $product_id;
-			foreach ($data['product_description'] as $language_id => $value) {
-				$this->query(
-					"INSERT IGNORE INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->escape(
-						$value['name']
-					) . "'"
-				);
-			}
+		if ($data['price'] == 0 || $data['quantity']==0) {
+			$this->setStockStatus($product_id, self::STATUS_OUT_OF_STOCK);
+		}else{
+			$this->setStockStatus($product_id, self::STATUS_IN_STOCK);
+		}
 
-			if ($data['price'] == 0 || $data['quantity']==0) {
-				$this->setStockStatus($product_id, self::STATUS_OUT_OF_STOCK);
-			}else{
-				$this->setStockStatus($product_id, self::STATUS_IN_STOCK);
-			}
+		if(isset($category['category_id']) && strlen($category['category_id'])) {
 
 			$category_id = $category['category_id'];
 			$parent_id = $category['parent_id'];
@@ -215,7 +216,7 @@ class ModelExchange
 			}
 
 		}else{
-			//var_dump("UNDEFINED CATEGORY on  add CATEGORY | {$data['category_1c']} | {$data['sku']}");
+			var_dump("UNDEFINED CATEGORY on  add CATEGORY | {$data['category_1c']} | {$data['sku']}");
 		}
     }
 
@@ -241,22 +242,22 @@ class ModelExchange
             "SELECT category_id, parent_id FROM oc_category WHERE category_1c = '{$data['category_1c']}'"
         )['row'];
 
+		$result = $this->query(
+			"SELECT product_id from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
+		);
+		$product_id = $result['row']['product_id'];
+		$this->pructs_from_1C_ids[] = $product_id;
+		$status = in_array($product_id,$this->active_products_ids)?1:0;
+		$this->query(
+			"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
+				$data['model']
+			) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . ", status = " . $status . " WHERE sku = '" . $this->escape(
+				$data['sku']
+			) . "'"
+		);
         if(isset($category['category_id']) && strlen($category['category_id'])) {
 			$category_id = $category['category_id'];
 			$parent_id = $category['parent_id'];
-			$result = $this->query(
-				"SELECT product_id from " . DB_PREFIX . "product where sku='" . $this->escape($data['sku']) . "'"
-			);
-			$product_id = $result['row']['product_id'];
-			$this->pructs_from_1C_ids[] = $product_id;
-			$status = in_array($product_id,$this->active_products_ids)?1:0;
-			$this->query(
-				"UPDATE " . DB_PREFIX . "product SET model = '" . $this->escape(
-					$data['model']
-				) . "', quantity = " . $data['quantity'] . ", price = " . $data['price'] . ", status = " . $status . " WHERE sku = '" . $this->escape(
-					$data['sku']
-				) . "'"
-			);
 			$main_category = 1;
 			$this->query(
 			"INSERT IGNORE INTO oc_product_to_category SET product_id = $product_id, category_id = $category_id, main_category = $main_category"
@@ -275,7 +276,7 @@ class ModelExchange
 
 			}
 		}else{
-			//var_dump("UNDEFINED CATEGORY on edit | {$data['category_1c']} | {$data['sku']}");
+			var_dump("UNDEFINED CATEGORY on edit | {$data['category_1c']} | {$data['sku']}");
 		}
     }
 
