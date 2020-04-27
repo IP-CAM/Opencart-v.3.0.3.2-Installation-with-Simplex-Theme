@@ -133,7 +133,13 @@ class ControllerInformationContact extends Controller
                             'UTF-8'
                         )
                     );
-                    $mail->send();
+                    try {
+                        $mail->send();
+                    } catch (Exception $e) {
+                        $json['error'] = "Temporary unavailable";
+                        $this->response->setOutput(json_encode($json));
+                        return;
+                    }
                     $json["result"] = $this->language->get('text_phone_succes');
                     $json['config_mail_smtp_usernamel'] = $this->config->get('config_mail_smtp_username');
                 } else {
@@ -306,7 +312,7 @@ class ControllerInformationContact extends Controller
                             ) . '_image_location_height'
                         )
                     );
-                    $image = "image/" . $location_info['image'];
+//                    $image = "image/" . $location_info['image'];
                 } else {
                     $image = false;
                 }
@@ -418,9 +424,7 @@ class ControllerInformationContact extends Controller
 
     protected function validatePhoneNumber()
     {
-        if ((utf8_strlen($this->request->post['customer_phone']) < 6) || (utf8_strlen(
-                    $this->request->post['customer_phone']
-                ) > 15)) {
+        if (!preg_match("/^(?:\+373|0)\d{8}/",$this->request->post['customer_phone'])) {
             $this->error['customer_phone'] = $this->language->get('error_customer_phone');
 
             return false;
