@@ -36,10 +36,12 @@ function show_succes_popup(product_id, message, type = 'cart') {
 		$('#success-popup').css('display', 'none');
 	}, 2000);
 }
+
 function getCookie(name) {
 	let matches = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"));
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+
 function categoryToggleActive(main) {
 	$('.category-toggle', main).click(function () {
 		let children = $('+ .dropdown-menu', this).find('ul').length;
@@ -270,18 +272,13 @@ $('.phone a.tel').click(function (e) {
 		$("header .phone .timetable").show();
 	}
 
-	const it = $('.phone-popup-top .customer_phone');
-	if (it.length > 0) {
-		let div = $(this);
-		$(div).offset();
-		if ($(document).width() > 700) {
-			const offsetLeft = $(div)[0].offsetLeft - 230;
-			$('.phone-popup-top').css('left', offsetLeft + 'px').css('top', div.offsetHeight);//.css('display', 'block');
-		} else {
-			$('.phone-popup-top').css('left', 0).css('top', div.offsetHeight).css('width', '100%');
-		}
+	let div = $(this);
+	$(div).offset();
+	if ($(document).width() > 700) {
+		const offsetLeft = $(div)[0].offsetLeft - 260;
+		$('.phone-popup-top').css('left', offsetLeft + 'px').css('top', div.offsetHeight);//.css('display', 'block');
 	} else {
-		// $('.phone-popup-top').css('display', 'block');
+		$('.phone-popup-top').css('left', 0).css('top', div.offsetHeight).css('width', '100%');
 	}
 });
 if ($(window).width() < 1000) {
@@ -833,11 +830,6 @@ $('#navbarCollapse').on('show.bs.collapse', function () {
 })
 $('.navbar-toggler').click(function () {
 	let navbar = $(this).parent().find("#navbarCollapse");
-	// if ($(this).attr('aria-expanded') === 'false') {
-	// 	$('.main-overlay').show();
-	// } else {
-	// 	$('.main-overlay').hide();
-	// }
 
 	if ($(navbar).hasClass('invisible')) {
 		$(navbar).removeClass('invisible');
