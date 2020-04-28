@@ -1,26 +1,26 @@
 <div class="container-fluid">
-	<div class="interesting">
-		<h4>{{ heading_title }}</h4>
-		<div class="projects-list">
-			{% for information in informations %}
-				{% if loop.index < 4 %}
-					<div class="card">
-						<a href="{{ information.href }}">
-							{% if information.thumb %}
-								<div class="image-container">
-									<img alt="New 1" class="lazyload card-img-top" data-src="{{ information.thumb }}">
-								</div>
-							{% endif %}
-							<div class="card-body">
-								<div class="card-text">
-									{{ information.title }}
-								</div>
-								<span class="card-foot">{{ information.date_added }}</span>
-							</div>
-						</a>
-					</div>
-				{% endif %}
-			{% endfor %}
-		</div>
-	</div>
+  <div class="interesting">
+    <h4>{{ heading_title }}</h4>
+    <div class="projects-list">
+      {% for information in informations %}
+        {% if loop.index < 4 %}
+          <div class="card">
+            <a href="{{ information.href }}">
+              {% if information.thumb %}
+                <div class="image-container">
+                  <img alt="New 1" class="lazyload card-img-top" data-src="{{ information.thumb }}">
+                </div>
+              {% endif %}
+              <div class="card-body">
+                <div class="card-text">
+                  {{ information.title }}
+                </div>
+                <span class="card-foot">{{ information.date_added }}</span>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 </div>

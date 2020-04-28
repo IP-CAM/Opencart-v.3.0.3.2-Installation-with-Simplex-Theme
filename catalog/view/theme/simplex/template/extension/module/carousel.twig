@@ -22,7 +22,7 @@
         <div class="brand">
           {% if banner.link %}<a href="{{ banner.link }}">{% endif %}
             <img class="lazyload" alt="{{ banner.title }}" data-src="{{ banner.image }}">
-          {% if banner.link %}</a>{% endif %}
+            {% if banner.link %}</a>{% endif %}
         </div>
       {% endfor %}
     </div>

@@ -2,18 +2,18 @@
 <main>
   <div class="container-fluid">
     <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
-                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
     <div class="page-title">
       <h1>{{ heading_title }}</h1>
     </div>
@@ -37,18 +37,18 @@
               </select>
               <label for="sort"></label>
             </div>
-              <div class="show-num">
-                  <select id="show-num" onchange="location = this.value;">
-                      {% for limits in limits %}
-                          {% if limits.value == limit %}
-                              <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
-                          {% else %}
-                              <option value="{{ limits.href }}">{{ limits.text }}</option>
-                          {% endif %}
-                      {% endfor %}
-                  </select>
-                  <label for="show-num">{{ text_items_on_page }}</label>
-              </div>
+            <div class="show-num">
+              <select id="show-num" onchange="location = this.value;">
+                {% for limits in limits %}
+                  {% if limits.value == limit %}
+                    <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
+                  {% else %}
+                    <option value="{{ limits.href }}">{{ limits.text }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+              <label for="show-num">{{ text_items_on_page }}</label>
+            </div>
           </div>
           <div class="right">
             <div class="button-group">
@@ -78,96 +78,101 @@
           <div class="products grid">
             {% for product in products %}
               <div class="product-column">
-                  <div class="product">
-                      <a href="{{ product.href }}">
-                          <ul class="sticker">
-                              {% if product.special_percentage %}
-                                  <li>
-                                      <span class="stock">%</span>
-                                  </li>
-                              {% endif %}
-                              {% if product.is_new %}
-                                  <li>
-                                      <span class="new">new</span>
-                                  </li>
-                              {% endif %}
-                          </ul>
-                          <div class="image-container">
-                              <img class="lazyload" alt="" data-src="{{ product.thumb }}">
-                          </div>
-                          <div class="product-body">
-                              <h5 class="title">{{ product.name }}</h5>
-                              {% if product.hide_price %}
-                                  <div class="discount">
-                                      {% if product.special %}
-                                          <p class="old-price">{{ product.price }}</p>
-                                          <p class="discount-percent">-{{ product.special_percentage }}
-                                              %</p>
-                                          <p class="discount-val">-{{ product.economy }}</p>
-                                      {% endif %}
-                                  </div>
-                                  <p class="price">
-                                      {% if product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false)) %}
-                                          <span class="currency">{{ product.stock_status }}</span>
-                                      {% else %}
-                                          {{ product.special ? product.special : product.price }} <span class="currency">{{ currency }}</span>
-                                      {% endif %}
-                                  </p>
-                              {% endif %}
-                          </div>
-                      </a>
-                      <button {% if product.hide_price==false %} style="display: none" {% endif %}
-                              data-product_id="{{ product.product_id }}" class="add-to-cart"
-                              onclick="cart.add('{{ product.product_id }}');">
-                          <p>{{ button_cart }}</p>
-                          <span class="image-container">
-                                                <img class="lazyload" alt="Cart" data-src="/catalog/view/theme/simplex/assets/img/cart.png">
-                                          </span>
-                      </button>
-                      <div class="float-buttons">
-                          <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
-                              <svg height="17" viewBox="0 0 23 24" width="17"
-                                   xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
-                                        fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                              </svg>
-                          </button>
-                          <button class="compare" href="#"
-                                  onclick="compare.add('{{ product.product_id }}');">
-                              <svg height="22px" viewBox="5 -5 22 30" width="30px"
-                                   xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
-                                        fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                                  <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
-                                        fill="none" fill-rule="evenodd" stroke-dasharray="1, 4"
-                                        stroke-linecap="round"
-                                        stroke-width="2px"></path>
-                              </svg>
-                          </button>
-                      </div>
+                <div class="product">
+                  <a href="{{ product.href }}">
+                    <ul class="sticker">
+                      {% if product.special_percentage %}
+                        <li>
+                          <span class="stock">%</span>
+                        </li>
+                      {% endif %}
+                      {% if product.is_new %}
+                        <li>
+                          <span class="new">new</span>
+                        </li>
+                      {% endif %}
+                    </ul>
+                    <div class="image-container">
+                      <img class="lazyload" alt="" data-src="{{ product.thumb }}">
+                    </div>
+                    <div class="product-body">
+                      <h5 class="title">{{ product.name }}</h5>
+                      {% if product.hide_price %}
+                        <div class="discount">
+                          {% if product.special %}
+                            <p class="old-price">{{ product.price }}</p>
+                            <p class="discount-percent">-{{ product.special_percentage }}
+                              %</p>
+                            <p class="discount-val">-{{ product.economy }}</p>
+                          {% endif %}
+                        </div>
+                        <p class="price">
+                          {% if product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false)) %}
+                            <span class="currency">{{ product.stock_status }}</span>
+                          {% else %}
+                            {{ product.special ? product.special : product.price }} <span
+                                  class="currency">{{ currency }}</span>
+                          {% endif %}
+                        </p>
+                      {% endif %}
+                    </div>
+                  </a>
+                  {% if not (product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false))) %}
+                    <button {% if product.hide_price==false %} style="display: none" {% endif %}
+                            data-product_id="{{ product.product_id }}" class="add-to-cart"
+                            onclick="cart.add('{{ product.product_id }}');">
+                      <p>{{ button_cart }}</p>
+                      <span class="image-container">
+                            <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+                          </span>
+                    </button>
+                  {% endif %}
+                  <div class="float-buttons">
+                    <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
+                      <svg height="17" viewBox="0 0 23 24" width="17"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
+                              fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                      </svg>
+                    </button>
+                    <button class="compare" href="#"
+                            onclick="compare.add('{{ product.product_id }}');">
+                      <svg height="22px" viewBox="5 -5 22 30" width="30px"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
+                              fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                        <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
+                              fill="none" fill-rule="evenodd" stroke-dasharray="1, 4"
+                              stroke-linecap="round"
+                              stroke-width="2px"></path>
+                      </svg>
+                    </button>
                   </div>
+                </div>
               </div>
             {% endfor %}
           </div>
-            <div id="pager">
-                <div class="total">
-                    <p>{{ text_total }} {{ product_total }} {{ text_pozitions }}</p>
-                </div>
-                <div class="show-more">
-                    {% if num_pages>1 %}
-                        <button id="show-more-button" type="button" data-page="{{ page }}" data-limit="{{ limit }}" data-total="{{ product_total }}"
-                                data-num_pages="{{ num_pages }}">
-                            <span class="image-container"></span>
-                            <p>{{ text_show_more }} <span class="show-more-limit">{{ show_more_limit }}</span> {{ text_pozitions }}</p>
-                        </button>
-                    {% endif %}
-                </div>
-                {% if products|length == limit %}
-                    <div class="all">
-                        <a id="show-all" href="#">{{ text_show_all }}</a>
-                    </div>
-                {% endif %}
+          <div id="pager">
+            <div class="total">
+              <p>{{ text_total }} {{ product_total }} {{ text_pozitions }}</p>
             </div>
+            <div class="show-more">
+              {% if num_pages>1 %}
+                <button id="show-more-button" type="button" data-page="{{ page }}" data-limit="{{ limit }}"
+                        data-total="{{ product_total }}"
+                        data-num_pages="{{ num_pages }}">
+                  <span class="image-container"></span>
+                  <p>{{ text_show_more }} <span
+                            class="show-more-limit">{{ show_more_limit }}</span> {{ text_pozitions }}</p>
+                </button>
+              {% endif %}
+            </div>
+            {% if products|length == limit %}
+              <div class="all">
+                <a id="show-all" href="#">{{ text_show_all }}</a>
+              </div>
+            {% endif %}
+          </div>
         {% else %}
           <div class="container-fluid">
             <div id="success">
@@ -214,8 +219,8 @@
                     var limit = $show_more_button.data('limit');
                     var total = $show_more_button.data('total');
 
-                    if((total - page*limit)<limit) {
-                        var show_more_limit=total - page*limit;
+                    if ((total - page * limit) < limit) {
+                        var show_more_limit = total - page * limit;
                         $show_more_button.find('.show-more-limit').html(show_more_limit);
                     }
                     if (page == page_num) {

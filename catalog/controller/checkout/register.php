@@ -127,7 +127,7 @@ class ControllerCheckoutRegister extends Controller {
 				$json['error']['warning'] = $this->language->get('error_exists');
 			}
 
-			if (!preg_match("/^(?:\+373|0)\d{8}/",$this->request->post['customer_phone'])) {
+			if (!preg_match("/^(?:\+373|0)\d{8}$/", $this->request->post['telephone'])) {
 				$json['error']['telephone'] = $this->language->get('error_telephone');
 			}
 
@@ -141,15 +141,15 @@ class ControllerCheckoutRegister extends Controller {
 
 			$this->load->model('localisation/country');
 
-			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
+			$country_info = $this->model_localisation_country->getCountry(140);
 
 			if ($country_info && $country_info['postcode_required'] && (utf8_strlen(trim($this->request->post['postcode'])) < 2 || utf8_strlen(trim($this->request->post['postcode'])) > 10)) {
 				$json['error']['postcode'] = $this->language->get('error_postcode');
 			}
 
-			if ($this->request->post['country_id'] == '') {
-				$json['error']['country'] = $this->language->get('error_country');
-			}
+//			if ($this->request->post['country_id'] == '') {
+//				$json['error']['country'] = $this->language->get('error_country');
+//			}
 
 			if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '' || !is_numeric($this->request->post['zone_id'])) {
 				$json['error']['zone'] = $this->language->get('error_zone');

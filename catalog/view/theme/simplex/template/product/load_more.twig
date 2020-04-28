@@ -15,7 +15,7 @@
           {% endif %}
         </ul>
         <div class="image-container">
-          <img class="lazyload" alt="" data-src="{{ product.thumb }}">
+          <img class="lazyload" alt="{{ product.name }}" data-src="{{ product.thumb }}">
         </div>
         <div class="product-body">
           <h5 class="title">{{ product.name }}</h5>
@@ -37,15 +37,16 @@
           {% endif %}
         </div>
       </a>
-
-      <button {% if product.hide_price==false %} style="display: none" {% endif %}
-              data-product_id="{{ product.product_id }}" class="add-to-cart"
-              onclick="cart.add('{{ product.product_id }}');">
-        <p>{{ button_cart }}</p>
-        <span class="image-container">
-                                                <img class="lazyload" alt="Cart" data-src="/catalog/view/theme/simplex/assets/img/cart.png">
-                                          </span>
-      </button>
+      {% if not (product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false))) %}
+        <button {% if product.hide_price==false %} style="display: none" {% endif %}
+                data-product_id="{{ product.product_id }}" class="add-to-cart"
+                onclick="cart.add('{{ product.product_id }}');">
+          <p>{{ button_cart }}</p>
+          <span class="image-container">
+          <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+        </span>
+        </button>
+      {% endif %}
       <div class="float-buttons">
         <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
           <svg height="17" viewBox="0 0 23 24" width="17" xmlns="http://www.w3.org/2000/svg">

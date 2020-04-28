@@ -173,7 +173,7 @@ class ControllerCheckoutGuest extends Controller {
 				$json['error']['email'] = $this->language->get('error_email');
 			}
 
-			if (!preg_match("/^(?:\+373|0)\d{8}/",$this->request->post['telephone'])) {
+			if (!preg_match("/^(?:\+373|0)\d{8}$/",$this->request->post['telephone'])) {
 
 				$json['error']['telephone'] = $this->language->get('error_telephone');
 			}

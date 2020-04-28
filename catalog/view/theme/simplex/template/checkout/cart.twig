@@ -56,8 +56,10 @@
           {% for product in products %}
             <tr>
               <td class="image">{% if product.thumb %} <a href="{{ product.href }}"><img class="lazyload"
-                          src="{{ product.thumb }}" alt="{{ product.name }}"
-                          title="{{ product.name }}"></a> {% endif %}</td>
+                                                                                         src="{{ product.thumb }}"
+                                                                                         alt="{{ product.name }}"
+                                                                                         title="{{ product.name }}"></a> {% endif %}
+              </td>
               <td {% if not product.stock %}class="warning"{% endif %}>
                 <a href="{{ product.href }}">{{ product.name }}</a>
                 {% if product.option %}
@@ -65,13 +67,13 @@
                     <small>{{ option.name }}: {{ option.value }}</small> {% endfor %}
                 {% endif %}
               </td>
-              <td class="price" data-price="{{ product.unit_price}}"
+              <td class="price" data-price="{{ product.unit_price }}"
                   data-product-id="{{ product.cart_id }}">{{ product.price }}</td>
               <td class="multiply"><span>x</span></td>
               <td class="quantity" data-product-id="{{ product.cart_id }}"><label>
                   <input type="number" class="quantity" data-product-id="{{ product.cart_id }}"
                          name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}"
-                         max="{{ product.available }}" min="1" step="1" size="1"></label>
+                         max="{{ product.stock ? product.available : 0 }}" min="1" step="1" size="1"></label>
               </td>
               <td class="equal"><span>=</span></td>
               <td class="total" data-product-id="{{ product.cart_id }}">{{ product.total }}</td>
@@ -133,7 +135,7 @@
 
     $('input.quantity').change(function () {
         var formatter = new Intl.NumberFormat("ru", {});
-        var s=formatter.format(total);
+        var s = formatter.format(total);
         let product_id = $(this).attr('data-product-id');
         subtotal = calcProductTotal();
         total = parseInt(subtotal);

@@ -1,17 +1,17 @@
 {% for information in informations %}
-    <div class="item">
-        <a href="{{ information.href }}">
-            <div class="card">
-                <div class="image-container">
-                    <img class="lazyload" alt="New 1" class="card-img-top" data-src="{{ information.thumb }}">
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        {{ information.title }}
-                    </div>
-                    <span class="card-date">{{ information.date_added }}</span>
-                </div>
-            </div>
-        </a>
-    </div>
+  <div class="item">
+    <a href="{{ information.href }}">
+      <div class="card">
+        <div class="image-container">
+          <img class="lazyload" alt="New 1" class="card-img-top" data-src="{{ information.thumb }}">
+        </div>
+        <div class="card-body">
+          <div class="card-text">
+            {{ information.title }}
+          </div>
+          <span class="card-date">{{ information.date_added }}</span>
+        </div>
+      </div>
+    </a>
+  </div>
 {% endfor %}

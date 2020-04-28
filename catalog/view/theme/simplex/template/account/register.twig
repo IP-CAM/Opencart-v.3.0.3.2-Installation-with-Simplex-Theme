@@ -1,55 +1,75 @@
 {{ header }}
 <main>
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li>
-                            <a href="{{ breadcrumb.href }}">
-                                <img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg">
-                            </a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title">
-            <h1>{{ heading_title }}</h1>
-        </div>
-        {% if error_warning %}
-            <div class="alert alert-danger alert-dismissible"><i
-                        class="fa fa-exclamation-circle">{{ error_message }}</i> {{ error_warning }}</div>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li>
+            <a href="{{ breadcrumb.href }}">
+              <img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg">
+            </a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
         {% endif %}
-        <div id="account">
-            <div class="card">
-                <h5>Your Personal Details</h5>
-                <div id="account-form">
-                    <form action="{{ action }}" method="post">
-                        <label class="required" for="name">{{ entry_firstname }}</label><input name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" required type="text">
-                        <label class="required" for="name">{{ entry_lastname }}</label><input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" required >
-                        <label class="required" for="mail">{{ entry_email }}</label><input type="email" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" required >
-                        <label class="required" for="telephone">{{ entry_telephone }}</label><input type="tel" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone">
-                        <label class="required" for="input-password">{{ entry_password }}</label><input  type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password">
-                        <label class="required" for="input-confirm">{{ entry_confirm }}</label><input  type="password" name="confirm" value="{{ confirm }}" placeholder="{{ entry_confirm }}" id="input-confirm">
-                        <input  type="hidden" name="agree" value="1" checked="checked" />
-                        <div class="submit">
-                            <button class="form-submit" type="submit">
-                                {{ button_continue }}<span class="image-container"></span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+      {% endfor %}
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
     </div>
-    {{ content_bottom }}
+    {% if error_warning %}
+      <div class="alert alert-danger alert-dismissible"><i
+                class="fa fa-exclamation-circle">{{ error_message }}</i> {{ error_warning }}</div>
+    {% endif %}
+    <div id="account">
+      <div class="card">
+        <h5>Your Personal Details</h5>
+        <div id="account-form">
+          <form action="{{ action }}" method="post">
+            <label class="required" for="name">{{ entry_firstname }}</label><input name="firstname"
+                                                                                   value="{{ firstname }}"
+                                                                                   placeholder="{{ entry_firstname }}"
+                                                                                   id="input-firstname" required
+                                                                                   type="text">
+            <label class="required" for="name">{{ entry_lastname }}</label><input type="text" name="lastname"
+                                                                                  value="{{ lastname }}"
+                                                                                  placeholder="{{ entry_lastname }}"
+                                                                                  id="input-lastname" required>
+            <label class="required" for="mail">{{ entry_email }}</label><input type="email" name="email"
+                                                                               value="{{ email }}"
+                                                                               placeholder="{{ entry_email }}"
+                                                                               id="input-email" required>
+            <label class="required" for="telephone">{{ entry_telephone }}</label><input type="tel" name="telephone"
+                                                                                        value="{{ telephone }}"
+                                                                                        placeholder="{{ entry_telephone }}"
+                                                                                        id="input-telephone">
+            <label class="required" for="input-password">{{ entry_password }}</label><input type="password"
+                                                                                            name="password"
+                                                                                            value="{{ password }}"
+                                                                                            placeholder="{{ entry_password }}"
+                                                                                            id="input-password">
+            <label class="required" for="input-confirm">{{ entry_confirm }}</label><input type="password" name="confirm"
+                                                                                          value="{{ confirm }}"
+                                                                                          placeholder="{{ entry_confirm }}"
+                                                                                          id="input-confirm">
+            <input type="hidden" name="agree" value="1" checked="checked"/>
+            <div class="submit">
+              <button class="form-submit" type="submit">
+                {{ button_continue }}<span class="image-container"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ content_bottom }}
 </main>
 <script type="text/javascript"><!--
     // Sort the custom fields
-    $('#account .form-group[data-sort]').detach().each(function() {
+    $('#account .form-group[data-sort]').detach().each(function () {
         if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {
             $('#account .form-group').eq($(this).attr('data-sort')).before(this);
         }
@@ -67,11 +87,11 @@
         }
     });
 
-    $('input[name=\'customer_group_id\']').on('change', function() {
+    $('input[name=\'customer_group_id\']').on('change', function () {
         $.ajax({
             url: 'index.php?route=account/register/customfield&customer_group_id=' + this.value,
             dataType: 'json',
-            success: function(json) {
+            success: function (json) {
                 $('.custom-field').hide();
                 $('.custom-field').removeClass('required');
 
@@ -85,7 +105,7 @@
                     }
                 }
             },
-            error: function(xhr, ajaxOptions, thrownError) {
+            error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
@@ -94,7 +114,7 @@
     $('input[name=\'customer_group_id\']:checked').trigger('change');
     //--></script>
 <script type="text/javascript"><!--
-    $('button[id^=\'button-custom-field\']').on('click', function() {
+    $('button[id^=\'button-custom-field\']').on('click', function () {
         var element = this;
 
         $('#form-upload').remove();
@@ -107,7 +127,7 @@
             clearInterval(timer);
         }
 
-        timer = setInterval(function() {
+        timer = setInterval(function () {
             if ($('#form-upload input[name=\'file\']').val() != '') {
                 clearInterval(timer);
 
@@ -119,13 +139,13 @@
                     cache: false,
                     contentType: false,
                     processData: false,
-                    beforeSend: function() {
+                    beforeSend: function () {
                         $(element).button('loading');
                     },
-                    complete: function() {
+                    complete: function () {
                         $(element).button('reset');
                     },
-                    success: function(json) {
+                    success: function (json) {
                         $(element).parent().find('.text-danger').remove();
 
                         if (json['error']) {
@@ -138,7 +158,7 @@
                             $(element).parent().find('input').val(json['code']);
                         }
                     },
-                    error: function(xhr, ajaxOptions, thrownError) {
+                    error: function (xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 });

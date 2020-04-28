@@ -1,71 +1,71 @@
 {{ header }}
 {{ header }}
 <main>
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li>
-                            <a href="{{ breadcrumb.href }}">
-                                <img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg">
-                            </a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title">
-            <h1>{{ heading_title }}</h1>
-        </div>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li>
+            <a href="{{ breadcrumb.href }}">
+              <img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg">
+            </a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
     </div>
-    <div class="container-fluid">
-        <div id="account">
-            <div style="overflow: auto">
-                <table style="min-width: 620px">
-                    <thead>
-                    <tr>
-                        <th>{{ column_order_id }}</th>
-                        <th>{{ column_customer }}</th>
-                        <th>{{ column_product }}</th>
-                        <th>{{ column_status }}</th>
-                        <th>{{ column_total }}</th>
-                        <th>{{ column_date_added }}</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                    {% for order in orders %}
-                    <tr>
-                        <td>#{{ order.order_id }}</td>
-                        <td>{{ order.name }}</td>
-                        <td>{{ order.products }}</td>
-                        <td>{{ order.status }}</td>
-                        <td>{{ order.total }}</td>
-                        <td>{{ order.date_added }}</td>
-                        <td>
-                            <a href="{{ order.view }}" title="{{ button_view }}">
-                                <svg height="18px" width="28px" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13.500,1.000 C18.747,1.000 26.000,8.500 26.000,8.500 C26.000,8.500 18.747,16.000 13.500,16.000 C8.253,16.000 1.000,8.500 1.000,8.500 C1.000,8.500 8.253,1.000 13.500,1.000 Z"
-                                          fill="none" fill-rule="evenodd" stroke="rgb(0, 0, 0)"
-                                          stroke-linecap="butt" stroke-linejoin="miter"
-                                          stroke-width="2px"></path>
-                                    <path d="M13.500,5.000 C15.433,5.000 17.000,6.567 17.000,8.500 C17.000,10.433 15.433,12.000 13.500,12.000 C11.567,12.000 10.000,10.433 10.000,8.500 C10.000,6.567 11.567,5.000 13.500,5.000 Z"
-                                          fill="none" fill-rule="evenodd" stroke="rgb(0, 0, 0)"
-                                          stroke-linecap="butt" stroke-linejoin="miter"
-                                          stroke-width="2px"></path>
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <a class="back" href="{{ back }}">{#Înapoi la Cont Personal#}{{ button_back }}</a>
-        </div>
+  </div>
+  <div class="container-fluid">
+    <div id="account">
+      <div style="overflow: auto">
+        <table style="min-width: 620px">
+          <thead>
+          <tr>
+            <th>{{ column_order_id }}</th>
+            <th>{{ column_customer }}</th>
+            <th>{{ column_product }}</th>
+            <th>{{ column_status }}</th>
+            <th>{{ column_total }}</th>
+            <th>{{ column_date_added }}</th>
+            <th></th>
+          </thead>
+          <tbody>
+          {% for order in orders %}
+            <tr>
+              <td>#{{ order.order_id }}</td>
+              <td>{{ order.name }}</td>
+              <td>{{ order.products }}</td>
+              <td>{{ order.status }}</td>
+              <td>{{ order.total }}</td>
+              <td>{{ order.date_added }}</td>
+              <td>
+                <a href="{{ order.view }}" title="{{ button_view }}">
+                  <svg height="18px" width="28px" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.500,1.000 C18.747,1.000 26.000,8.500 26.000,8.500 C26.000,8.500 18.747,16.000 13.500,16.000 C8.253,16.000 1.000,8.500 1.000,8.500 C1.000,8.500 8.253,1.000 13.500,1.000 Z"
+                          fill="none" fill-rule="evenodd" stroke="rgb(0, 0, 0)"
+                          stroke-linecap="butt" stroke-linejoin="miter"
+                          stroke-width="2px"></path>
+                    <path d="M13.500,5.000 C15.433,5.000 17.000,6.567 17.000,8.500 C17.000,10.433 15.433,12.000 13.500,12.000 C11.567,12.000 10.000,10.433 10.000,8.500 C10.000,6.567 11.567,5.000 13.500,5.000 Z"
+                          fill="none" fill-rule="evenodd" stroke="rgb(0, 0, 0)"
+                          stroke-linecap="butt" stroke-linejoin="miter"
+                          stroke-width="2px"></path>
+                  </svg>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <a class="back" href="{{ back }}">{#Înapoi la Cont Personal#}{{ button_back }}</a>
     </div>
+  </div>
 </main>
 {#
 

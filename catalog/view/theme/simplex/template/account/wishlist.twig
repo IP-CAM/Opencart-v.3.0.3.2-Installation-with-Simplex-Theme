@@ -1,107 +1,109 @@
 {{ header }}
-<input id="page_route" type="hidden" value="account/wishlist" >
+<input id="page_route" type="hidden" value="account/wishlist">
 
 <main>
-    <div class="container-fluid">
-        {% if products %}
-            <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
-                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-            <div class="page-title" id="wishlist">
-                <h1>{{ heading_title }}</h1>
-            </div>
-            <div class="wish-wrapper wrapper">
-                <button class="delete-all delete-all-from-wishlist" role="button">Sterge toate</button>
-                <div class="wish products">
-                    {% for product in products %}
-                        <div class="product-column">
-                            <div class="product">
-                                <a href="{{ product.href }}">
-                                    <div class="image-container">
-                                        <img class="lazyload" alt="" data-src="{{ product.thumb }}">
-                                    </div>
-                                    <div class="product-body">
-                                        <h5 class="title">{{ product.name }}</h5>
-                                        <div class="price-container">
-                                            {% if product.hide_price %}
-                                                <div class="discount">
-                                                    {% if product.special %}
-                                                        <p class="old-price">{{ product.price }}</p>
-                                                        <p class="discount-percent">-{{ product.special_percentage }}
-                                                            %</p>
-                                                        <p class="discount-val">-{{ product.economy }}</p>
-                                                    {% endif %}
-                                                </div>
-                                                {% if product.special %}
-                                                    <p class="price">{{ product.special }}<span class="currency">{{ currency }}</span></p>
-                                                {% else %}
-                                                    <p class="price">{{ product.price }}<span class="currency">{{ currency }}</span></p>
-                                                {% endif %}
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <button {% if product.hide_price==false %} style="display: none" {% endif %} data-product_id="{{ product.product_id }}" class="add-to-cart" onclick="cart.add('{{ product.product_id }}');">
-                                        <p>{{ button_cart }}</p>
-                                        <span class="image-container">
-                                                <img class="lazyload" alt="Cart" data-src="/catalog/view/theme/simplex/assets/img/cart.png">
-                                          </span>
-                                </button>
-
-                                <div class="float-buttons">
-                                    <button class="compare" href="#"
-                                            onclick="compare.add('{{ product.product_id }}');">
-                                        <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
-                                                  fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                                            <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
-                                                  fill="none" fill-rule="evenodd" stroke-dasharray="1, 4" stroke-linecap="round"
-                                                  stroke-width="2px"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <a class="delete delete-from-wishlist" data-product_id="{{ product.product_id }}"
-                                   role="button"></a>
-                            </div>
+  <div class="container-fluid">
+    {% if products %}
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          {% if loop.first %}
+            <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                     data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+            </li>
+          {% elseif loop.last %}
+            <li>{{ breadcrumb.text }}</li>
+          {% else %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <div class="page-title" id="wishlist">
+        <h1>{{ heading_title }}</h1>
+      </div>
+      <div class="wish-wrapper wrapper">
+        <button class="delete-all delete-all-from-wishlist" role="button">Sterge toate</button>
+        <div class="wish products">
+          {% for product in products %}
+            <div class="product-column">
+              <div class="product">
+                <a href="{{ product.href }}">
+                  <div class="image-container">
+                    <img class="lazyload" alt="" data-src="{{ product.thumb }}">
+                  </div>
+                  <div class="product-body">
+                    <h5 class="title">{{ product.name }}</h5>
+                    <div class="price-container">
+                      {% if product.hide_price %}
+                        <div class="discount">
+                          {% if product.special %}
+                            <p class="old-price">{{ product.price }}</p>
+                            <p class="discount-percent">-{{ product.special_percentage }}
+                              %</p>
+                            <p class="discount-val">-{{ product.economy }}</p>
+                          {% endif %}
                         </div>
-                    {% endfor %}
-                </div>
-            </div>
-        {% else %}
-            <div id="success">
-                <div id="ok">
-                    <svg height="30px" width="38px" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.000,31.000 C1.000,31.000 6.636,21.000 18.000,21.000 C29.364,21.000 36.000,35.000 36.000,35.000 "
-                              fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
-                              stroke-linecap="butt" stroke-linejoin="miter"
-                              stroke-width="2px"></path>
-                        <path d="M28.500,0.000 C30.433,0.000 32.000,1.567 32.000,3.500 C32.000,5.433 30.433,7.000 28.500,7.000 C26.567,7.000 25.000,5.433 25.000,3.500 C25.000,1.567 26.567,0.000 28.500,0.000 Z"
-                              fill="rgb(178, 181, 182)"
-                              fill-rule="evenodd"></path>
-                        <path d="M9.500,0.000 C11.433,0.000 13.000,1.567 13.000,3.500 C13.000,5.433 11.433,7.000 9.500,7.000 C7.567,7.000 6.000,5.433 6.000,3.500 C6.000,1.567 7.567,0.000 9.500,0.000 Z"
-                              fill="rgb(178, 181, 182)"
-                              fill-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <h1>{{ text_empty }}</h1>
-                <a id="history" href="{{ continue }}">
-                    {{ button_continue }}
-                    <span class="image-container"></span>
+                        {% if product.special %}
+                          <p class="price">{{ product.special }}<span class="currency">{{ currency }}</span></p>
+                        {% else %}
+                          <p class="price">{{ product.price }}<span class="currency">{{ currency }}</span></p>
+                        {% endif %}
+                      {% endif %}
+                    </div>
+                  </div>
                 </a>
+                {% if not (product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false))) %}
+                  <button {% if product.hide_price==false %} style="display: none" {% endif %}
+                          data-product_id="{{ product.product_id }}" class="add-to-cart"
+                          onclick="cart.add('{{ product.product_id }}');">
+                    <p>{{ button_cart }}</p>
+                    <span class="image-container">
+                                        <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+                                    </span>
+                  </button>
+                {% endif %}
+                <div class="float-buttons">
+                  <button class="compare" href="#"
+                          onclick="compare.add('{{ product.product_id }}');">
+                    <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
+                            fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                      <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
+                            fill="none" fill-rule="evenodd" stroke-dasharray="1, 4" stroke-linecap="round"
+                            stroke-width="2px"></path>
+                    </svg>
+                  </button>
+                </div>
+                <a class="delete delete-from-wishlist" data-product_id="{{ product.product_id }}"
+                   role="button"></a>
+              </div>
             </div>
-        {% endif %}
-    </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div id="success">
+        <div id="ok">
+          <svg height="30px" width="38px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.000,31.000 C1.000,31.000 6.636,21.000 18.000,21.000 C29.364,21.000 36.000,35.000 36.000,35.000 "
+                  fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
+                  stroke-linecap="butt" stroke-linejoin="miter"
+                  stroke-width="2px"></path>
+            <path d="M28.500,0.000 C30.433,0.000 32.000,1.567 32.000,3.500 C32.000,5.433 30.433,7.000 28.500,7.000 C26.567,7.000 25.000,5.433 25.000,3.500 C25.000,1.567 26.567,0.000 28.500,0.000 Z"
+                  fill="rgb(178, 181, 182)"
+                  fill-rule="evenodd"></path>
+            <path d="M9.500,0.000 C11.433,0.000 13.000,1.567 13.000,3.500 C13.000,5.433 11.433,7.000 9.500,7.000 C7.567,7.000 6.000,5.433 6.000,3.500 C6.000,1.567 7.567,0.000 9.500,0.000 Z"
+                  fill="rgb(178, 181, 182)"
+                  fill-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h1>{{ text_empty }}</h1>
+        <a id="history" href="{{ continue }}">
+          {{ button_continue }}
+          <span class="image-container"></span>
+        </a>
+      </div>
+    {% endif %}
+  </div>
 </main>
 <script>
     wishlist.remove = function (product_id) {

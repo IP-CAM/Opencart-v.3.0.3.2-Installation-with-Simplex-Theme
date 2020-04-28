@@ -1,133 +1,133 @@
 <div class="card-body">
-    <div class="row">
-        <div class="col-sm-6">
-            <fieldset id="account">
-                <legend><p><strong>{{ text_your_details }}</strong></p></legend>
-                <div class="form-group"
-                     style="display: {% if customer_groups|length > 1 %} block {% else %} none {% endif %};">
-                    <label class="control-label">{{ entry_customer_group }}</label>
-                    {% for customer_group in customer_groups %}
-                        {% if customer_group.customer_group_id == customer_group_id %}
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="customer_group_id"
-                                           value="{{ customer_group.customer_group_id }}" checked="checked"/>
-                                    {{ customer_group.name }}</label>
-                            </div>
-                        {% else %}
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="customer_group_id"
-                                           value="{{ customer_group.customer_group_id }}"/>
-                                    {{ customer_group.name }}</label>
-                            </div>
-                        {% endif %}
-                    {% endfor %}</div>
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-firstname">{{ entry_firstname }}</label>
-                    <input type="text" name="firstname" value="" placeholder="{{ entry_firstname }}"
-                           id="input-payment-firstname" />
-                </div>
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-lastname">{{ entry_lastname }}</label>
-                    <input type="text" name="lastname" value="" placeholder="{{ entry_lastname }}"
-                           id="input-payment-lastname" />
-                </div>
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-email">{{ entry_email }}</label>
-                    <input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-payment-email"
-                           />
-                </div>
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-telephone">{{ entry_telephone }}</label>
-                    <input type="text" name="telephone" value="" placeholder="{{ entry_telephone }}"
-                           id="input-payment-telephone" />
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend><p><strong>{{ text_your_password }}</strong></p></legend>
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-password">{{ entry_password }}</label>
-                    <input type="password" name="password" value="" placeholder="{{ entry_password }}"
-                           id="input-payment-password" />
-                </div>
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-confirm">{{ entry_confirm }}</label>
-                    <input type="password" name="confirm" value="" placeholder="{{ entry_confirm }}"
-                           id="input-payment-confirm" />
-                </div>
-            </fieldset>
+  <div class="row">
+    <div class="col-sm-6">
+      <fieldset id="account">
+        <legend><p><strong>{{ text_your_details }}</strong></p></legend>
+        <div class="form-group"
+             style="display: {% if customer_groups|length > 1 %} block {% else %} none {% endif %};">
+          <label class="control-label">{{ entry_customer_group }}</label>
+          {% for customer_group in customer_groups %}
+            {% if customer_group.customer_group_id == customer_group_id %}
+              <div class="radio">
+                <label>
+                  <input type="radio" name="customer_group_id"
+                         value="{{ customer_group.customer_group_id }}" checked="checked"/>
+                  {{ customer_group.name }}</label>
+              </div>
+            {% else %}
+              <div class="radio">
+                <label>
+                  <input type="radio" name="customer_group_id"
+                         value="{{ customer_group.customer_group_id }}"/>
+                  {{ customer_group.name }}</label>
+              </div>
+            {% endif %}
+          {% endfor %}</div>
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-firstname">{{ entry_firstname }}</label>
+          <input type="text" name="firstname" value="" placeholder="{{ entry_firstname }}"
+                 id="input-payment-firstname"/>
         </div>
-        <div class="col-sm-6">
-            <fieldset id="address">
-                <legend><p><strong>{{ text_your_address }}</strong></p></legend>
-                {#<div class="form-group">
-                    <label class="control-label" for="input-payment-company">{{ entry_company }}</label>
-                    <input type="text" name="company" value="" placeholder="{{ entry_company }}"
-                           id="input-payment-company"
-                           />
-                </div>#}
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-address-1">{{ entry_address_1 }}</label>
-                    <input type="text" name="address_1" value="" placeholder="{{ entry_address_1 }}"
-                           id="input-payment-address-1" />
-                </div>
-                <div style="display: none" class="form-group">
-                    <label class="control-label" for="input-payment-address-2">{{ entry_address_2 }}</label>
-                    <input type="text" name="address_2" value="" placeholder="{{ entry_address_2 }}"
-                           id="input-payment-address-2" />
-                </div>
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-city">{{ entry_city }}</label>
-                    <input type="text" name="city" value="" placeholder="{{ entry_city }}" id="input-payment-city"
-                           />
-                </div>
-{#                <div class="form-group required">#}
-{#                    <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}</label>#}
-{#                    <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"#}
-{#                           id="input-payment-postcode" />#}
-{#                </div>#}
-{#                <div class="form-group required">#}
-{#                    <label class="control-label" for="input-payment-country">{{ entry_country }}</label>#}
-{#                    <select type="hidden" name="country_id" id="input-payment-country" >#}
-{#                        <option value="">{{ text_select }}#}
-{#                            {% for country in countries %}#}
-{#                            {% if country.country_id == country_id %}#}
-{#                        <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>#}
-{#                        {% else %}#}
-{#                            <option value="{{ country.country_id }}">{{ country.name }}</option>#}
-{#                        {% endif %}#}
-{#                        {% endfor %}#}
-{#                    </select>#}
-{#                </div>#}
-                <div class="form-group required">
-                    <label class="control-label" for="input-payment-zone">{{ entry_zone }}</label>
-                    <select name="zone_id" id="input-payment-zone" >
-                    </select>
-                </div>
-            </fieldset>
-            {{ captcha }}
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-lastname">{{ entry_lastname }}</label>
+          <input type="text" name="lastname" value="" placeholder="{{ entry_lastname }}"
+                 id="input-payment-lastname"/>
         </div>
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-email">{{ entry_email }}</label>
+          <input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-payment-email"
+          />
+        </div>
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-telephone">{{ entry_telephone }}</label>
+          <input type="text" name="telephone" value="" placeholder="{{ entry_telephone }}"
+                 id="input-payment-telephone"/>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><p><strong>{{ text_your_password }}</strong></p></legend>
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-password">{{ entry_password }}</label>
+          <input type="password" name="password" value="" placeholder="{{ entry_password }}"
+                 id="input-payment-password"/>
+        </div>
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-confirm">{{ entry_confirm }}</label>
+          <input type="password" name="confirm" value="" placeholder="{{ entry_confirm }}"
+                 id="input-payment-confirm"/>
+        </div>
+      </fieldset>
     </div>
-    <ul>
-        <li><label for="newsletter">
-                <input type="checkbox" name="newsletter" value="1" id="newsletter"/>
-                {{ entry_newsletter }}</label></li>
-{#        {% if shipping_required %}#}
-{#            <li><label>#}
-{#                    <input type="checkbox" name="shipping_address" value="1" checked="checked"/>#}
-{#                    {{ entry_shipping }}</label></li>#}
-{#        {% endif %}#}
-        {% if text_agree %}
-            <li><label><input type="checkbox" name="agree" value="1"/>{{ text_agree }}</label></li>
-        {% endif %}
-    </ul>
+    <div class="col-sm-6">
+      <fieldset id="address">
+        <legend><p><strong>{{ text_your_address }}</strong></p></legend>
+        {#<div class="form-group">
+            <label class="control-label" for="input-payment-company">{{ entry_company }}</label>
+            <input type="text" name="company" value="" placeholder="{{ entry_company }}"
+                   id="input-payment-company"
+                   />
+        </div>#}
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-address-1">{{ entry_address_1 }}</label>
+          <input type="text" name="address_1" value="" placeholder="{{ entry_address_1 }}"
+                 id="input-payment-address-1"/>
+        </div>
+        <div style="display: none" class="form-group">
+          <label class="control-label" for="input-payment-address-2">{{ entry_address_2 }}</label>
+          <input type="text" name="address_2" value="" placeholder="{{ entry_address_2 }}"
+                 id="input-payment-address-2"/>
+        </div>
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-city">{{ entry_city }}</label>
+          <input type="text" name="city" value="" placeholder="{{ entry_city }}" id="input-payment-city"
+          />
+        </div>
+        {#                <div class="form-group required">#}
+        {#                    <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}</label>#}
+        {#                    <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"#}
+        {#                           id="input-payment-postcode" />#}
+        {#                </div>#}
+        {#                <div class="form-group required">#}
+        {#                    <label class="control-label" for="input-payment-country">{{ entry_country }}</label>#}
+        {#                    <select type="hidden" name="country_id" id="input-payment-country" >#}
+        {#                        <option value="">{{ text_select }}#}
+        {#                            {% for country in countries %}#}
+        {#                            {% if country.country_id == country_id %}#}
+        {#                        <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>#}
+        {#                        {% else %}#}
+        {#                            <option value="{{ country.country_id }}">{{ country.name }}</option>#}
+        {#                        {% endif %}#}
+        {#                        {% endfor %}#}
+        {#                    </select>#}
+        {#                </div>#}
+        <div class="form-group required">
+          <label class="control-label" for="input-payment-zone">{{ entry_zone }}</label>
+          <select name="zone_id" id="input-payment-zone">
+          </select>
+        </div>
+      </fieldset>
+      {{ captcha }}
+    </div>
+  </div>
+  <ul>
+    <li><label for="newsletter">
+        <input type="checkbox" name="newsletter" value="1" id="newsletter"/>
+        {{ entry_newsletter }}</label></li>
+    {#        {% if shipping_required %}#}
+    {#            <li><label>#}
+    {#                    <input type="checkbox" name="shipping_address" value="1" checked="checked"/>#}
+    {#                    {{ entry_shipping }}</label></li>#}
+    {#        {% endif %}#}
+    {% if text_agree %}
+      <li><label><input type="checkbox" name="agree" value="1"/>{{ text_agree }}</label></li>
+    {% endif %}
+  </ul>
 </div>
 <div class="card-submit">
-    <button class="next" data-loading-text="{{ text_loading }}" id="button-register">
-        {{ button_continue }}
-        <span class="image-container"></span>
-    </button>
+  <button class="next" data-loading-text="{{ text_loading }}" id="button-register">
+    {{ button_continue }}
+    <span class="image-container"></span>
+  </button>
 </div>
 <script type="text/javascript"><!--
     // Sort the custom fields
