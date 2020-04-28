@@ -233,15 +233,16 @@
 		var button_callback = $(this);
 		var phone_popup_top = button_callback.closest(".phone-popup-top");
 		var input_telephone_block = button_callback.closest(".input-telephone");
-		var phone = input_telephone_block.find(".customer_phone").val();
+		var phone = encodeURIComponent(input_telephone_block.find(".customer_phone").val());
+
 		$.ajax({
 			url: '/index.php?route=information/contact',
 			type: 'post',
-			data: 'customer_phone=' + phone.trim(),
+			data: 'customer_phone=' + phone,
 			dataType: 'json',
 			success: function (json) {
 				if (json["phone_error"]) {
-					$(".input-telephone input").addClass('has-error').val('').attr('placeholder', json['phone_error']);
+					$(".input-telephone input").addClass('has-error').val('').attr('placeholder', json['result']);
 				} else if (json['error']) {
 					alert(json['error']);
 				} else {

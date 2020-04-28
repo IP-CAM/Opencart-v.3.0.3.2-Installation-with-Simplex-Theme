@@ -21,7 +21,7 @@ $_['text_asteptam_in_magazinele']       = 'Vă așteptăm în magazinele noastre
 $_['text_browse_file']="Ataşează";
 $_['text_phone_succes']="Telefon obținut";
 $_['text_customer_telephone']="Telefonul clientului pentru sunet";
-$_['text_phone_error']="Telegonul greșit ";
+$_['text_phone_error']="Telefonul greșit";
 
 // Entry
 $_['entry_name']     = 'Nume';
