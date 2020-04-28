@@ -169,7 +169,7 @@ class ControllerAccountEdit extends Controller {
 			$this->error['warning'] = $this->language->get('error_exists');
 		}
 
-		if (!preg_match("/^(?:\+373|0){8}$/", $this->request->post['telephone'])) {
+		if (!preg_match("/^(?:\+373|0)\d{8}$/", $this->request->post['telephone'])) {
 			$this->error['telephone'] = $this->language->get('error_telephone');
 		}
 

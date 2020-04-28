@@ -20,7 +20,7 @@ $_['error_exists']       = 'Eroare: Adresa de e-mail este deja înregistrată!';
 $_['error_firstname']    = 'Prenumele trebuie să conţină intre 1 si 32 caractere!';
 $_['error_lastname']     = 'Numele trebuie să conţină intre 1 si 32 caractere!';
 $_['error_email']        = 'Adresa de e-mail nu este validă!';
-$_['error_telephone']    = 'Numărul de telefon trebuie să conţină intre 7 si 32 caractere!';
+$_['error_telephone']    = 'Numărul de telefon nu este valid!';
 $_['error_custom_field'] = '%s necesare!';
 $_['error_custom_field_validate'] = '%s este invalid!';
 
