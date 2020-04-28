@@ -4461,6 +4461,12 @@ select {
   
   .nav-item {
     position : relative;
+    
+    &#catalog .nav-link {
+      &:hover, &[aria-expanded="true"] {
+        background-color : #fff;
+      }
+    }
   }
   
   .nav-link {

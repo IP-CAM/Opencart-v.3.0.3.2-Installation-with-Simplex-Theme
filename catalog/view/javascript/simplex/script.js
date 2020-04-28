@@ -2,11 +2,11 @@ let mainSlider = $('#slider .main-slider'),
 	current_slide = 1,
 	catalog = $('#catalog'),
 	$dropdown = $('#slider .categories .dropright'),
-	galeryImagesItems = $('.gallery-images .item-image');
+	galleryImagesItems = $('.gallery-images .item-image');
 
-function show_succes_popup(product_id, message, type = 'cart') {
+function show_succes_popup(button, product_id, message, type = 'cart') {
 	let popup = $('#success-popup');
-	let $button = $('button[data-product_id="' + product_id + '"]');
+	let $button = $(button);
 
 	if ($button.length) {
 		$button.parent().parent().width();
@@ -15,7 +15,7 @@ function show_succes_popup(product_id, message, type = 'cart') {
 			divOffset = $(div).offset();
 
 		$('#success-popup .message').html(message);
-		popup.css('left', divOffset.left).css('top', divOffset.top + $(div).height() + 24).css('display', 'block');
+		popup.css('left', divOffset.left + ($button.width() - popup.width()) / 2).css('top', divOffset.top + $(div).height() + 24).css('display', 'block');
 	} else {
 		if (type === 'cart') {
 			$button = $('#button-cart');
@@ -30,7 +30,7 @@ function show_succes_popup(product_id, message, type = 'cart') {
 		let divOffset = $button.offset();
 
 		$('#success-popup .message').html(message);
-		popup.css('left', divOffset.left + $button.width() - popup.width()).css('top', divOffset.top + $button.height() + 24).css('display', 'block');
+		popup.css('left', divOffset.left + ($button.width() - popup.width()) / 2).css('top', divOffset.top + $button.height() + 24).css('display', 'block');
 	}
 	setTimeout(function () {
 		$('#success-popup').css('display', 'none');
@@ -621,7 +621,7 @@ $(document).ready(function () {
 	});
 	$('.gallery-images').slick({
 		asNavFor: '.gallery-list',
-		slidesToShow: galeryImagesItems.length > 5 ? 5 : galeryImagesItems.length,
+		slidesToShow: galleryImagesItems.length > 5 ? 5 : galleryImagesItems.length,
 		dots: false,
 		focusOnSelect: true,
 		vertical: true,

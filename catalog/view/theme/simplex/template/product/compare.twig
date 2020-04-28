@@ -123,7 +123,7 @@
             <td></td>
             {% for product in products %}
               <td>
-                <button onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');">
+                <button onclick="cart.add(this, '{{ product.product_id }}', '{{ product.minimum }}');">
                   {{ button_cart }}
                   <span class="image-container"><img class="lazyload" alt="Cart"
                                                      data-src="/catalog/view/theme/simplex/assets/img/cart.svg"></span>

@@ -45,7 +45,7 @@
           {% if not (product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false))) %}
             <button {% if product.hide_price==false %} style="display: none" {% endif %}
                     data-product_id="{{ product.product_id }}" class="add-to-cart"
-                    onclick="cart.add('{{ product.product_id }}');">
+                    onclick="cart.add(this, '{{ product.product_id }}');">
               <p>{{ button_cart }}</p>
               <span class="image-container">
                            <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
@@ -53,14 +53,14 @@
             </button>
           {% endif %}
           <div class="float-buttons">
-            <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
+            <button class="favorite" onclick="wishlist.add(this, '{{ product.product_id }}');">
               <svg height="17" viewBox="0 0 23 24" width="17" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
                       fill="none" fill-rule="evenodd" stroke-width="2px"></path>
               </svg>
             </button>
             <button class="compare" href="#"
-                    onclick="compare.add('{{ product.product_id }}');">
+                    onclick="compare.add(this, '{{ product.product_id }}');">
               <svg height="22px" viewBox="5 -5 22 30" width="30px" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
                       fill="none" fill-rule="evenodd" stroke-width="2px"></path>

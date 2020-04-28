@@ -145,7 +145,7 @@
     }
 </script>
 <script>
-    wishlist.add = function (product_id) {
+    wishlist.add = function (button, product_id) {
         $.ajax({
             url: '/index.php?route=account/wishlist/add',
             type: 'post',
@@ -158,7 +158,7 @@
                     location = json['redirect'];
                 }
 
-                show_succes_popup(product_id, json['success_message'], 'wishlist');
+                show_succes_popup(button, product_id, json['success_message'], 'wishlist');
 
                 $('#wishlist-total .quantity').removeClass('d-none').html(json['total']);
                 $('#wishlist-total').attr('title', json['total']);
@@ -270,7 +270,7 @@
     })
 </script>
 <script>
-    compare.add = function (product_id) {
+    compare.add = function (button, product_id) {
         $.ajax({
             url: '/index.php?route=product/compare/add',
             type: 'post',
@@ -281,7 +281,7 @@
 
                 if (json['success']) {
                     $('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                    show_succes_popup(product_id, json['success_message'], 'compare');
+                    show_succes_popup(button, product_id, json['success_message'], 'compare');
                     $('#compare-total').html(json['total']);
                     $('#compare .quantity').removeClass('d-none').html(json['total']);
                     //$('html, body').animate({scrollTop: 0}, 'slow');
@@ -294,7 +294,7 @@
     }
 </script>
 <script>
-    cart.add = function (product_id, quantity) {
+    cart.add = function (button, product_id, quantity) {
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
             type: 'post',
@@ -319,8 +319,8 @@
                     $('#cart .quantity').text(json['cart_count']);
                     $('#cart .dropdown-menu > ul').load('index.php?route=common/cart/info .dropdown-menu ul li');
                     $('#cart .total-wrapper').load('index.php?route=common/cart/info .total-wrapper .total');
-
-                    show_succes_popup(product_id, json['success_message'], 'cart');
+                    console.log(button);
+                    show_succes_popup(button, product_id, json['success_message'], 'cart');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
