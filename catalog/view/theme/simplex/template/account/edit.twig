@@ -1,61 +1,61 @@
 {{ header }}
 <main>
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
-                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title">
-            <h1>{{ heading_title }}</h1>
-        </div>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
     </div>
-    <div class="container-fluid">
-        <div id="account">
-            <div class="card">
-                <h5>{{ text_your_details }}</h5>
-                <div id="account-form">
-                    <form action="{{ action }}" method="post">
-                        <label class="required" for="input-firstname">{{ entry_firstname }}</label>
-                        <input name="firstname" value="{{ error_firstname ? '' : firstname }}"
-                               placeholder="{{ error_firstname ? error_firstname : entry_firstname }}"
-                               {% if error_firstname %}class="has-error"{% endif %}
-                               id="input-firstname" required type="text">
-                        <label class="required" for="input-lastname">{{ entry_lastname }}</label>
-                        <input type="text" name="lastname" value="{{ error_lastname ? '' : lastname }}"
-                               placeholder="{{ error_lastname ? error_lastname : entry_lastname }}"
-                               {% if error_lastname %}class="has-error"{% endif %}
-                               id="input-lastname" required>
-                        <label class="required" for="input-email">{{ entry_email }}</label>
-                        <input type="email" name="email" value="{{ error_email ? '' : email }}"
-                               placeholder="{{ error_email ? error_email ? entry_email }}"
-                               {% if error_email %}class="has-error"{% endif %}
-                               id="input-email" required>
-                        <label class="required" for="input-telephone">{{ entry_telephone }}</label>
-                        <input type="tel" name="telephone" value="{{ error_telephone ? '' : telephone }}"
-                               placeholder="{{ error_telephone ? error_telephone : entry_telephone }}"
-                               {% if error_telephone %}class="has-error"{% endif %}
-                               id="input-telephone">
-                        <div class="submit">
-                                <button class="form-submit" type="submit">
-                                    {{ button_continue }}<span class="image-container"></span>
-                                </button>
-                            </div>
-                    </form>
-                </div>
+  </div>
+  <div class="container-fluid">
+    <div id="account">
+      <div class="card">
+        <h5>{{ text_your_details }}</h5>
+        <div id="account-form">
+          <form action="{{ action }}" method="post">
+            <label class="required" for="input-firstname">{{ entry_firstname }}</label>
+            <input name="firstname" value="{{ error_firstname ? '' : firstname }}"
+                   placeholder="{{ error_firstname ? error_firstname : entry_firstname }}"
+                   {% if error_firstname %}class="has-error"{% endif %}
+                   id="input-firstname" required type="text">
+            <label class="required" for="input-lastname">{{ entry_lastname }}</label>
+            <input type="text" name="lastname" value="{{ error_lastname ? '' : lastname }}"
+                   placeholder="{{ error_lastname ? error_lastname : entry_lastname }}"
+                   {% if error_lastname %}class="has-error"{% endif %}
+                   id="input-lastname" required>
+            <label class="required" for="input-email">{{ entry_email }}</label>
+            <input type="email" name="email" value="{{ error_email ? '' : email }}"
+                   placeholder="{{ error_email ? error_email ? entry_email }}"
+                   {% if error_email %}class="has-error"{% endif %}
+                   id="input-email" required>
+            <label class="required" for="input-telephone">{{ entry_telephone }}</label>
+            <input type="tel" name="telephone" value="{{ error_telephone ? '' : telephone }}"
+                   placeholder="{{ error_telephone ? error_telephone : entry_telephone }}"
+                   {% if error_telephone %}class="has-error"{% endif %}
+                   id="input-telephone">
+            <div class="submit">
+              <button class="form-submit" type="submit">
+                {{ button_continue }}<span class="image-container"></span>
+              </button>
             </div>
-            <a class="back" href="{{ back }}">{{ button_back }}</a>
-            {#<a class="back" href="#">Înapoi la Cont Personal</a>#}
+          </form>
         </div>
+      </div>
+      <a class="back" href="{{ back }}">{{ button_back }}</a>
+      {#<a class="back" href="#">Înapoi la Cont Personal</a>#}
     </div>
+  </div>
 </main>
 {{ content_bottom }}
 {#

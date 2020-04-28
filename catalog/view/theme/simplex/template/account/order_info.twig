@@ -1,183 +1,185 @@
 {{ header }}
 <main>
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li>
-                            <a href="{{ breadcrumb.href }}">
-                                <img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg">
-                            </a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title">
-            <h1>{{ heading_title }}</h1>
-        </div>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li>
+            <a href="{{ breadcrumb.href }}">
+              <img class="lazyload" alt="Home" data-src="/catalog/view/theme/simplex/assets/img/home.svg">
+            </a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
     </div>
-    <div class="container-fluid">
-        <div id="account">
-            <div style="overflow: auto">
-                <table style="min-width: 620px">
-                    <thead>
-                    <tr>
-                        <th colspan="2">{{ text_order_detail }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td style="width:50%">
-                            <p><b>{{ text_order_id }}</b> #{{ order_id }}<br></p>
+  </div>
+  <div class="container-fluid">
+    <div id="account">
+      <div style="overflow: auto">
+        <table style="min-width: 620px">
+          <thead>
+          <tr>
+            <th colspan="2">{{ text_order_detail }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td style="width:50%">
+              <p><b>{{ text_order_id }}</b> #{{ order_id }}<br></p>
 
-                            <p><b>{{ text_date_added }}</b> {{ date_added }}</p>
-                        </td>
-                        <td style="width:50%;padding-left: 2.625rem;">
-                            {% if payment_method %}<p><b>{{ text_payment_method }}</b> {{ payment_method }}<br>
-                                </p>{% endif %}
-                            {% if shiping_method %}<p><b>{{ text_shiping_method }}</b> {{ shipping_method }}
-                                </p>{% endif %}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>{{ text_payment_address }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{ payment_address }}</b></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>{{ text_shipping_address }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{ shipping_address }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div style="overflow: auto">
-                <table style="min-width: 670px">
-                    <thead>
-                    <tr>
-                        <th colspan="5">{{ text_list }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for product in products %}
-                        <tr>
-                            <td style="width: 120px">{% if product.image %}<img class="lazyload" alt="{{ product.name }}" data-src="{{ product.image }}">{% endif %}</td>
-                            <td>{{ product.name }}
-                            </td>
-                            <td style="text-align: right;color: #a4a4a4">{{ product.price }} x</td>
-                            <td style="font-weight: 600">{{ product.quantity }} = {{ product.total }}</td>
-                            <td style="width:130px">
-                                {% if product.reorder %}
-                                    <a class="add-to-cart" href="{{ product.reorder }}">
-                                        <span class="image-container">
-                                            <img class="lazyload" alt="Cart" data-src="/catalog/view/theme/simplex/assets/img/cart.png">
-                                        </span>
-                                    </a>
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                    <tfoot>
-                    {% for total in totals %}
-                        <tr>
-                            <td colspan="2"></td>
-                            <td style="text-align: right;width: 150px; color: #a4a4a4">{{ total.title }}</td>
-                            <td style="width: 120px;font-weight: 600">{{ total.text }}</td>
-                            <td></td>
-                        </tr>
-                    {% endfor %}
-                    </tfoot>
-                </table>
-            </div>
-            {% if maib_transaction %}
-                <div class="row">
-                    <div class="col-md-12">
-                        <table>
-                            <thead>
-                            <tr >
-                                <th colspan="2">Detalii despre achitarea</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for key,value in maib_transaction %}
-                                <tr>
-                                    <td>{{ key }}</td>
-                                    <td>{{ value }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            {% endif %}
-            {% if comment %}
-                <div style="overflow: auto">
-                    <table style="min-width: 560px">
-                        <thead>
-                        <tr>
-                            <th>{{ text_comment }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{ comment }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            {% endif %}
-            {% if histories %}
-            <h3>Order History</h3>
-            <div style="overflow: auto">
-                <table style="min-width: 560px">
-                    <thead>
-                    <tr>
-                        <th style="width:160px">{{ column_date_added }}</th>
-                        <th style="width:120px">{{ column_status }}</th>
-                        <th>{{ column_comment }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for history in histories %}
-                        <tr>
-                            <td style="width:160px">{{ history.date_added }}</td>
-                            <td style="width:120px">{{ history.status }}</td>
-                            <td>{{ history.comment }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            {% endif %}
-            <a class="back" href="{{ back }}">{#Înapoi la Cont Personal#}{{ button_back }}</a>
+              <p><b>{{ text_date_added }}</b> {{ date_added }}</p>
+            </td>
+            <td style="width:50%;padding-left: 2.625rem;">
+              {% if payment_method %}<p><b>{{ text_payment_method }}</b> {{ payment_method }}<br>
+                </p>{% endif %}
+              {% if shiping_method %}<p><b>{{ text_shiping_method }}</b> {{ shipping_method }}
+                </p>{% endif %}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <table>
+            <thead>
+            <tr>
+              <th>{{ text_payment_address }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ payment_address }}</b></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
+        <div class="col-md-6">
+          <table>
+            <thead>
+            <tr>
+              <th>{{ text_shipping_address }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ shipping_address }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="overflow: auto">
+        <table style="min-width: 670px">
+          <thead>
+          <tr>
+            <th colspan="5">{{ text_list }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for product in products %}
+            <tr>
+              <td style="width: 120px">{% if product.image %}<img class="lazyload" alt="{{ product.name }}"
+                                                                  data-src="{{ product.image }}">{% endif %}</td>
+              <td>{{ product.name }}
+              </td>
+              <td style="text-align: right;color: #a4a4a4">{{ product.price }} x</td>
+              <td style="font-weight: 600">{{ product.quantity }} = {{ product.total }}</td>
+              <td style="width:130px">
+                {% if product.reorder %}
+                  <a class="add-to-cart" href="{{ product.reorder }}">
+                                        <span class="image-container">
+                                            <img class="lazyload" alt="Cart"
+                                                 data-src="/catalog/view/theme/simplex/assets/img/cart.png">
+                                        </span>
+                  </a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+          <tfoot>
+          {% for total in totals %}
+            <tr>
+              <td colspan="2"></td>
+              <td style="text-align: right;width: 150px; color: #a4a4a4">{{ total.title }}</td>
+              <td style="width: 120px;font-weight: 600">{{ total.text }}</td>
+              <td></td>
+            </tr>
+          {% endfor %}
+          </tfoot>
+        </table>
+      </div>
+      {% if maib_transaction %}
+        <div class="row">
+          <div class="col-md-12">
+            <table>
+              <thead>
+              <tr>
+                <th colspan="2">Detalii despre achitarea</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for key,value in maib_transaction %}
+                <tr>
+                  <td>{{ key }}</td>
+                  <td>{{ value }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endif %}
+      {% if comment %}
+        <div style="overflow: auto">
+          <table style="min-width: 560px">
+            <thead>
+            <tr>
+              <th>{{ text_comment }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ comment }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+      {% if histories %}
+        <h3>Order History</h3>
+        <div style="overflow: auto">
+          <table style="min-width: 560px">
+            <thead>
+            <tr>
+              <th style="width:160px">{{ column_date_added }}</th>
+              <th style="width:120px">{{ column_status }}</th>
+              <th>{{ column_comment }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for history in histories %}
+              <tr>
+                <td style="width:160px">{{ history.date_added }}</td>
+                <td style="width:120px">{{ history.status }}</td>
+                <td>{{ history.comment }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+      <a class="back" href="{{ back }}">{#Înapoi la Cont Personal#}{{ button_back }}</a>
     </div>
+  </div>
 </main>
 
 

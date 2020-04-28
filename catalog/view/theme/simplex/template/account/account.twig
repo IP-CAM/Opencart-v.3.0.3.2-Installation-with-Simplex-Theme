@@ -1,52 +1,52 @@
 {{ header }}
 <main>
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
-                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title">
-            <h1>{{ heading_title }}</h1>
-        </div>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
     </div>
-    <div class="container-fluid">
-{#        {% if success %}#}
-{#            <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>#}
-{#        {% endif %}#}
-        <div id="account">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <h5>{{ text_my_account }}</h5>
-                        <ul>
-                            <li><a href="{{ edit }}">{{ text_edit }}</a></li>
-                            <li><a href="{{ password }}">{{ text_password }}</a></li>
-                            <li><a href="{{ address }}">{{ text_address }}</a></li>
-                            <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-                            <li><a href="{{ order }}">{{ text_order }}</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <h5>{{ text_my_newsletter }}</h5>
-                        <ul>
-                            <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+  </div>
+  <div class="container-fluid">
+    {#        {% if success %}#}
+    {#            <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>#}
+    {#        {% endif %}#}
+    <div id="account">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <h5>{{ text_my_account }}</h5>
+            <ul>
+              <li><a href="{{ edit }}">{{ text_edit }}</a></li>
+              <li><a href="{{ password }}">{{ text_password }}</a></li>
+              <li><a href="{{ address }}">{{ text_address }}</a></li>
+              <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+              <li><a href="{{ order }}">{{ text_order }}</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="col-md-6">
+          <div class="card">
+            <h5>{{ text_my_newsletter }}</h5>
+            <ul>
+              <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </main>
 {{ content_bottom }}
 {{ footer }}

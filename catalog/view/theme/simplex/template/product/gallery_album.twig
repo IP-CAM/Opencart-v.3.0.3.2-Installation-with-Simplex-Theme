@@ -1,48 +1,48 @@
 {{ header }}
 <main class="gallery-bg">
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
-                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title">
-            <h1>{{ heading_title }}</h1>
-        </div>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
     </div>
-    <div class="container-fluid">
-        <div class="gallery-wrapper wrapper">
-            <div class="gallery-items">
-                {% for gallery_album in gallery_albums %}
-                    <a class="item" href="{{ gallery_album.url }}">
-                        <div class="image-container">
-                            <img class="lazyload" alt="Foto 1" data-src="{{ gallery_album.image }}">
-                        </div>
-                        <div class="item-body">
-                            <h3>{{ gallery_album.title }}</h3>
-                            <p>{{ gallery_album.description }}</p>
-                            <div class="photo-num">
-                                <p>{{ gallery_album.count }} {{ gallery_album.photos_msg }}</p>
-                            </div>
-                            <button class="link">{{ visit_gallery_label }}<span class="image-container"></span></button>
-                        </div>
-                    </a>
-                {% endfor %}
+  </div>
+  <div class="container-fluid">
+    <div class="gallery-wrapper wrapper">
+      <div class="gallery-items">
+        {% for gallery_album in gallery_albums %}
+          <a class="item" href="{{ gallery_album.url }}">
+            <div class="image-container">
+              <img class="lazyload" alt="Foto 1" data-src="{{ gallery_album.image }}">
             </div>
-            <aside>
-                {{ column_right }}
-            </aside>
+            <div class="item-body">
+              <h3>{{ gallery_album.title }}</h3>
+              <p>{{ gallery_album.description }}</p>
+              <div class="photo-num">
+                <p>{{ gallery_album.count }} {{ gallery_album.photos_msg }}</p>
+              </div>
+              <button class="link">{{ visit_gallery_label }}<span class="image-container"></span></button>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      <aside>
+        {{ column_right }}
+      </aside>
 
-        </div>
     </div>
-    {{ content_bottom }}
+  </div>
+  {{ content_bottom }}
 </main>
 {{ footer }}

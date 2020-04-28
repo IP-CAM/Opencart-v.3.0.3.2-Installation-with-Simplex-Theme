@@ -1,48 +1,48 @@
 <div class="card-body">
-    <div class="row">
-        <div class="col-sm-6 content">
-            <h4><strong>{{ text_new_customer }}</strong></h4>
-            <p><strong>{{ text_checkout }}</strong></p>
-            <label> {% if account == 'register' %}
-                    <input type="radio" name="account" value="register" checked="checked"/>
-                {% else %}
-                    <input type="radio" name="account" value="register"/>
-                {% endif %}
-                {{ text_register }}</label>
-            {% if checkout_guest %}
-                <label> {% if account == 'guest' %}
-                        <input type="radio" name="account" value="guest" checked="checked"/>
-                    {% else %}
-                        <input type="radio" name="account" value="guest"/>
-                    {% endif %}
-                    {{ text_guest }}</label>
-            {% endif %}
-            <p>{{ text_register_account }}</p>
-            <button class="next" data-loading-text="{{ text_loading }}"
-                    id="button-account">
-                {{ button_continue }}
-                <span class="image-container"></span>
-            </button>
-        </div>
-        <div class="col-sm-6 content">
-            <h4><strong>{{ text_returning_customer }}</strong></h4>
-            <p><strong>{{ text_i_am_returning_customer }}</strong></p>
-            <div class="form-group">
-                <label class="control-label" for="input-email">{{ entry_email }}</label>
-                <input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-email"
-                        autocomplete="username"/>
-            </div>
-            <div class="form-group">
-                <label class="control-label" for="input-password">{{ entry_password }}</label>
-                <input type="password" autocomplete="current-password" name="password" value=""
-                       placeholder="{{ entry_password }}" id="input-password"
-                       />
-            </div>
-            <button class="next" data-loading-text="{{ text_loading }}"
-                    id="button-login">
-                {{ button_login }}
-                <span class="image-container"></span>
-            </button>
-        </div>
+  <div class="row">
+    <div class="col-sm-6 content">
+      <h4><strong>{{ text_new_customer }}</strong></h4>
+      <p><strong>{{ text_checkout }}</strong></p>
+      <label> {% if account == 'register' %}
+          <input type="radio" name="account" value="register" checked="checked"/>
+        {% else %}
+          <input type="radio" name="account" value="register"/>
+        {% endif %}
+        {{ text_register }}</label>
+      {% if checkout_guest %}
+        <label> {% if account == 'guest' %}
+            <input type="radio" name="account" value="guest" checked="checked"/>
+          {% else %}
+            <input type="radio" name="account" value="guest"/>
+          {% endif %}
+          {{ text_guest }}</label>
+      {% endif %}
+      <p>{{ text_register_account }}</p>
+      <button class="next" data-loading-text="{{ text_loading }}"
+              id="button-account">
+        {{ button_continue }}
+        <span class="image-container"></span>
+      </button>
     </div>
+    <div class="col-sm-6 content">
+      <h4><strong>{{ text_returning_customer }}</strong></h4>
+      <p><strong>{{ text_i_am_returning_customer }}</strong></p>
+      <div class="form-group">
+        <label class="control-label" for="input-email">{{ entry_email }}</label>
+        <input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-email"
+               autocomplete="username"/>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="input-password">{{ entry_password }}</label>
+        <input type="password" autocomplete="current-password" name="password" value=""
+               placeholder="{{ entry_password }}" id="input-password"
+        />
+      </div>
+      <button class="next" data-loading-text="{{ text_loading }}"
+              id="button-login">
+        {{ button_login }}
+        <span class="image-container"></span>
+      </button>
+    </div>
+  </div>
 </div>

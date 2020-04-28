@@ -1,43 +1,43 @@
-<input id="page_route" type="hidden" value="checkout/cart" >
+<input id="page_route" type="hidden" value="checkout/cart">
 <div class="dropdown-menu dropdown-menu-right">
-    <ul>
-        {% if products or vouchers %}
-            {% for product in products %}
-                <li class="product">
-                    <a href="{{ product.href }}">
-                        {% if product.thumb %}
-                            <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
-                        {% endif %}
-                        <div class="product-body">
-                            <h5 class="title">{{ product.name }}</h5>
-                            <div class="price-container">
-                                <div class="discount">
-                                    <p class="price"> {{ product.price }} <span> x {{ product.quantity }}</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <button type="button" onclick="cart.remove('{{ product.cart_id }}');" title="{{ button_remove }}"
-                            class="delete"></button>
-                </li>
-            {% endfor %}
-        {% else %}
-            <li><p class="text-center" style="line-height: 3;">{{ text_empty }}</p></li>
-        {% endif %}
-    </ul>
-    <div class="total-wrapper">
-        {% if products or vouchers %}
-            <div class="total">
-                <p>
-                    <span>{{ totals[0].title }}</span>
-                    <br>
-                    <span class="price">{{ totals[0].text }} <span class="currency">MDL</span></span>
-                </p>
-                <a href="{{ cart }}">
-                    {{ text_cart }}
-                    <span class="image-container"></span>
-                </a>
+  <ul>
+    {% if products or vouchers %}
+      {% for product in products %}
+        <li class="product">
+          <a href="{{ product.href }}">
+            {% if product.thumb %}
+              <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
+            {% endif %}
+            <div class="product-body">
+              <h5 class="title">{{ product.name }}</h5>
+              <div class="price-container">
+                <div class="discount">
+                  <p class="price"> {{ product.price }} <span> x {{ product.quantity }}</span></p>
+                </div>
+              </div>
             </div>
-        {% endif %}
-    </div>
+          </a>
+          <button type="button" onclick="cart.remove('{{ product.cart_id }}');" title="{{ button_remove }}"
+                  class="delete"></button>
+        </li>
+      {% endfor %}
+    {% else %}
+      <li><p class="text-center" style="line-height: 3;">{{ text_empty }}</p></li>
+    {% endif %}
+  </ul>
+  <div class="total-wrapper">
+    {% if products or vouchers %}
+      <div class="total">
+        <p>
+          <span>{{ totals[0].title }}</span>
+          <br>
+          <span class="price">{{ totals[0].text }} <span class="currency">MDL</span></span>
+        </p>
+        <a href="{{ cart }}">
+          {{ text_cart }}
+          <span class="image-container"></span>
+        </a>
+      </div>
+    {% endif %}
+  </div>
 </div>

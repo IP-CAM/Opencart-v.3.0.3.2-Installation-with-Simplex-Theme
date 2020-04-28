@@ -1,289 +1,296 @@
 {{ header }}
 <main>
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            {% for breadcrumb in breadcrumbs %}
-                    {% if loop.first %}
-                        <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
-                                                                 data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
-                        </li>
-                    {% elseif loop.last %}
-                        <li>{{ breadcrumb.text }}</li>
-                    {% else %}
-                        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-                    {% endif %}
-                {% endfor %}
-        </ul>
-        <div class="page-title">
-            <h1>{{ heading_title }}</h1>
-        </div>
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.first %}
+          <li><a href="{{ breadcrumb.href }}"><img class="lazyload" alt="Home"
+                                                   data-src="/catalog/view/theme/simplex/assets/img/home.svg"></a>
+          </li>
+        {% elseif loop.last %}
+          <li>{{ breadcrumb.text }}</li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="page-title">
+      <h1>{{ heading_title }}</h1>
     </div>
-    <div class="container-fluid">
-        <div class="catalog-wrapper">
-            <div class="products-wrapper">
-                <div class="control">
-                    <div class="search">
-                        <label class="search-field">
-                            <button id="button-search" type="submit"><img class="lazyload" alt="Search" data-src="/catalog/view/theme/simplex/assets/img/search.svg"></button>
+  </div>
+  <div class="container-fluid">
+    <div class="catalog-wrapper">
+      <div class="products-wrapper">
+        <div class="control">
+          <div class="search">
+            <label class="search-field">
+              <button id="button-search" type="submit"><img class="lazyload" alt="Search"
+                                                            data-src="/catalog/view/theme/simplex/assets/img/search.svg">
+              </button>
 
-                            <input id="input-search" name="search" placeholder="{{ text_keyword }}" type="text" value="{{ search }}">
-                        </label>
-                        <label><select name="category_id">
-                                <option value="0">{{ text_category }}</option>
-                                {% for category_1 in categories %}
-                                    {% if category_1.category_id == category_id %}
-                                        <option value="{{ category_1.category_id }}" selected="selected">{{ category_1.name }}</option>
-                                    {% else %}
-                                        <option value="{{ category_1.category_id }}">{{ category_1.name }}</option>
-                                    {% endif %}
-                                    {% for category_2 in category_1.children %}
-                                        {% if category_2.category_id == category_id %}
-                                            <option value="{{ category_2.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
-                                        {% else %}
-                                            <option value="{{ category_2.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
-                                        {% endif %}
-                                        {% for category_3 in category_2.children %}
-                                            {% if category_3.category_id == category_id %}
-                                                <option value="{{ category_3.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
-                                            {% else %}
-                                                <option value="{{ category_3.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-                                {% endfor %}
-                            </select></label>
-{#                        <button  type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary" >{{ button_search }}</button>#}
-                        {% if sub_category %}
-                            <label ><input name="sub_category" type="checkbox" checked="checked" value="1">{{ text_sub_category }}</label>
-                        {% else %}
-                            <label ><input name="sub_category" type="checkbox"  value="1">{{ text_sub_category }}</label>
-                        {% endif %}
-                    </div>
-                    {% if products %}
-                    <div class="left">
-                        <div class="sort-by">
-                            <select id="sort" onchange="location = this.value;">
-                                {% for sorts in sorts %}
-                                    {% if sorts.value == '%s-%s'|format(sort, order) %}
-                                        <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
-                                    {% else %}
-                                        <option value="{{ sorts.href }}">{{ sorts.text }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                            <label for="sort"></label>
-                        </div>
-                        <div class="show-num">
-                            <select id="show-num" onchange="location = this.value;">
-                                {% for limits in limits %}
-                                    {% if limits.value == limit %}
-                                        <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
-                                    {% else %}
-                                        <option value="{{ limits.href }}">{{ limits.text }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                            <label for="show-num">{{ text_items_on_page }}</label>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="button-group">
-                            <button class="grid active">
-                                <svg baseProfile="tiny" version="1.2" viewBox="0 0 22 16" xml:space="preserve"
-                                     xmlns="http://www.w3.org/2000/svg">
+              <input id="input-search" name="search" placeholder="{{ text_keyword }}" type="text" value="{{ search }}">
+            </label>
+            <label><select name="category_id">
+                <option value="0">{{ text_category }}</option>
+                {% for category_1 in categories %}
+                  {% if category_1.category_id == category_id %}
+                    <option value="{{ category_1.category_id }}" selected="selected">{{ category_1.name }}</option>
+                  {% else %}
+                    <option value="{{ category_1.category_id }}">{{ category_1.name }}</option>
+                  {% endif %}
+                  {% for category_2 in category_1.children %}
+                    {% if category_2.category_id == category_id %}
+                      <option value="{{ category_2.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+                    {% else %}
+                      <option value="{{ category_2.category_id }}">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+                    {% endif %}
+                    {% for category_3 in category_2.children %}
+                      {% if category_3.category_id == category_id %}
+                        <option value="{{ category_3.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+                      {% else %}
+                        <option value="{{ category_3.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                {% endfor %}
+              </select></label>
+            {#                        <button  type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary" >{{ button_search }}</button>#}
+            {% if sub_category %}
+              <label><input name="sub_category" type="checkbox" checked="checked" value="1">{{ text_sub_category }}
+              </label>
+            {% else %}
+              <label><input name="sub_category" type="checkbox" value="1">{{ text_sub_category }}</label>
+            {% endif %}
+          </div>
+          {% if products %}
+            <div class="left">
+              <div class="sort-by">
+                <select id="sort" onchange="location = this.value;">
+                  {% for sorts in sorts %}
+                    {% if sorts.value == '%s-%s'|format(sort, order) %}
+                      <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+                    {% else %}
+                      <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+                <label for="sort"></label>
+              </div>
+              <div class="show-num">
+                <select id="show-num" onchange="location = this.value;">
+                  {% for limits in limits %}
+                    {% if limits.value == limit %}
+                      <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
+                    {% else %}
+                      <option value="{{ limits.href }}">{{ limits.text }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+                <label for="show-num">{{ text_items_on_page }}</label>
+              </div>
+            </div>
+            <div class="right">
+              <div class="button-group">
+                <button class="grid active">
+                  <svg baseProfile="tiny" version="1.2" viewBox="0 0 22 16" xml:space="preserve"
+                       xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12,12h4v4h-4V12z M6,12h4v4H6V12z M0,12h4v4H0V12z M12,6h4v4h-4V6z M6,6h4v4H6V6z M0,6h4v4H0V6z M12,0h4v4
                                     h-4V0z M6,0h4v4H6V0z M0,0h4v4H0V0z"></path>
-                                    <path d="M18,12h4v4h-4V12z M12,12h4v4h-4V12z M6,12h4v4H6V12z M18,6h4v4h-4V6z M12,6h4v4h-4V6z M6,6h4v4H6V6z M18,0
+                    <path d="M18,12h4v4h-4V12z M12,12h4v4h-4V12z M6,12h4v4H6V12z M18,6h4v4h-4V6z M12,6h4v4h-4V6z M6,6h4v4H6V6z M18,0
                                     h4v4h-4V0z M12,0h4v4h-4V0z M6,0h4v4H6V0z"></path>
                                 </svg>
-                            </button>
-                            <button class="inline">
-                                <svg viewBox="0 0 11.938 7"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M89.279,70V69h11.944v1H89.279m0,3V72h11.944v1H89.279m0,3V75h11.944v1H89.279"
-                                          transform="translate(-89.281 -69)"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    {% endif %}
-                </div>
-                {% if products %}
-                    <div class="products grid">
-                        {% for product in products %}
-                            {% if loop.index == '7' and column_right %}
-                                <div class="cards">
-                                    {{ column_right }}
-                                </div>
-                            {% endif %}
-                            <div class="product-column">
-                                <div class="product">
-                                    <a href="{{ product.href }}">
-                                        <ul class="sticker">
-                                            {% if product.special_percentage %}
-                                                <li>
-                                                    <span class="stock">%</span>
-                                                </li>
-                                            {% endif %}
-                                            {% if product.is_new %}
-                                                <li>
-                                                    <span class="new">new</span>
-                                                </li>
-                                            {% endif %}
-                                        </ul>
-                                        <div class="image-container">
-                                            <img class="lazyload" alt="" src="{{ product.thumb }}">
-                                        </div>
-                                        <div class="product-body">
-                                            <h5 class="title">{{ product.name }}</h5>
-                                            {% if product.hide_price %}
-                                                <div class="discount">
-                                                    {% if product.special %}
-                                                        <p class="old-price">{{ product.price }}</p>
-                                                        <p class="discount-percent">-{{ product.special_percentage }}
-                                                            %</p>
-                                                        <p class="discount-val">-{{ product.economy }}</p>
-                                                    {% endif %}
-                                                </div>
-                                                <p class="price">
-                                                    {% if product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false)) %}
-                                                        <span class="currency">{{ product.stock_status }}</span>
-                                                    {% else %}
-                                                        {{ product.special ? product.special : product.price }} <span class="currency">{{ currency }}</span>
-                                                    {% endif %}
-                                                </p>
-                                            {% endif %}
-                                        </div>
-                                    </a>
-                                    <button {% if product.hide_price==false %} style="display: none" {% endif %}
-                                            data-product_id="{{ product.product_id }}" class="add-to-cart"
-                                            onclick="cart.add('{{ product.product_id }}');">
-                                        <p>{{ button_cart }}</p>
-                                        <span class="image-container">
-                                                <img class="lazyload" alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
-                                          </span>
-                                    </button>
-                                    <div class="float-buttons">
-                                        <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
-                                            <svg height="17" viewBox="0 0 23 24" width="17"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
-                                                      fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                                            </svg>
-                                        </button>
-                                        <button class="compare" href="#"
-                                                onclick="compare.add('{{ product.product_id }}');">
-                                            <svg height="22px" viewBox="5 -5 22 30" width="30px"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
-                                                      fill="none" fill-rule="evenodd" stroke-width="2px"></path>
-                                                <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
-                                                      fill="none" fill-rule="evenodd" stroke-dasharray="1, 4"
-                                                      stroke-linecap="round"
-                                                      stroke-width="2px"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                        {% if products|length < 7 %}
-                            {{ column_right }}
-                        {% endif %}
-                    </div>
-                    <div id="pager">
-                        <div class="total">
-                            <p>{{ text_total }} {{ product_total }} {{ text_pozitions }}</p>
-                        </div>
-                        <div class="show-more">
-                            {% if num_pages>1 %}
-                                <button id="show-more-button" type="button" data-page="{{ page }}"
-                                        data-num_pages="{{ num_pages }}">
-                                    <span class="image-container"></span>
-                                    <p>{{ text_show_more }} {{ limit }} {{ text_pozitions }}</p>
-                                </button>
-                            {% endif %}
-                        </div>
-                        {% if product_total>products|length %}
-                        <div class="all">
-                            <a id="show-all" href="#">{{ text_show_all }}</a>
-                        </div>
-                        {% endif %}
-                    </div>
-                {% else %}
-                    <div class="container-fluid">
-                        <div id="success">
-                            <div id="ok">
-                                <svg height="30px" width="38px" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1.000,31.000 C1.000,31.000 6.636,21.000 18.000,21.000 C29.364,21.000 36.000,35.000 36.000,35.000 "
-                                          fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
-                                          stroke-linecap="butt" stroke-linejoin="miter"
-                                          stroke-width="2px"></path>
-                                    <path d="M28.500,0.000 C30.433,0.000 32.000,1.567 32.000,3.500 C32.000,5.433 30.433,7.000 28.500,7.000 C26.567,7.000 25.000,5.433 25.000,3.500 C25.000,1.567 26.567,0.000 28.500,0.000 Z"
-                                          fill="rgb(178, 181, 182)"
-                                          fill-rule="evenodd"></path>
-                                    <path d="M9.500,0.000 C11.433,0.000 13.000,1.567 13.000,3.500 C13.000,5.433 11.433,7.000 9.500,7.000 C7.567,7.000 6.000,5.433 6.000,3.500 C6.000,1.567 7.567,0.000 9.500,0.000 Z"
-                                          fill="rgb(178, 181, 182)"
-                                          fill-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <h1>{{ text_empty }}</h1>
-                        </div>
-                    </div>
-                {% endif %}
+                </button>
+                <button class="inline">
+                  <svg viewBox="0 0 11.938 7"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path d="M89.279,70V69h11.944v1H89.279m0,3V72h11.944v1H89.279m0,3V75h11.944v1H89.279"
+                          transform="translate(-89.281 -69)"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
+
+          {% endif %}
         </div>
+        {% if products %}
+          <div class="products grid">
+            {% for product in products %}
+              {% if loop.index == '7' and column_right %}
+                <div class="cards">
+                  {{ column_right }}
+                </div>
+              {% endif %}
+              <div class="product-column">
+                <div class="product">
+                  <a href="{{ product.href }}">
+                    <ul class="sticker">
+                      {% if product.special_percentage %}
+                        <li>
+                          <span class="stock">%</span>
+                        </li>
+                      {% endif %}
+                      {% if product.is_new %}
+                        <li>
+                          <span class="new">new</span>
+                        </li>
+                      {% endif %}
+                    </ul>
+                    <div class="image-container">
+                      <img class="lazyload" alt="{{ product.name }}" data-src="{{ product.thumb }}">
+                    </div>
+                    <div class="product-body">
+                      <h5 class="title">{{ product.name }}</h5>
+                      {% if product.hide_price %}
+                        <div class="discount">
+                          {% if product.special %}
+                            <p class="old-price">{{ product.price }}</p>
+                            <p class="discount-percent">-{{ product.special_percentage }}
+                              %</p>
+                            <p class="discount-val">-{{ product.economy }}</p>
+                          {% endif %}
+                        </div>
+                        <p class="price">
+                          {% if product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false)) %}
+                            <span class="currency">{{ product.stock_status }}</span>
+                          {% else %}
+                            {{ product.special ? product.special : product.price }} <span
+                                  class="currency">{{ currency }}</span>
+                          {% endif %}
+                        </p>
+                      {% endif %}
+                    </div>
+                  </a>
+                  {% if not (product.stock_status_id != 7 or (product.price == 0 and product.special is not same as(false))) %}
+                    <button {% if product.hide_price==false %} style="display: none" {% endif %}
+                            data-product_id="{{ product.product_id }}" class="add-to-cart"
+                            onclick="cart.add('{{ product.product_id }}');">
+                      <p>{{ button_cart }}</p>
+                      <span class="image-container">
+                                            <img alt="Cart" src="/catalog/view/theme/simplex/assets/img/cart.png">
+                                        </span>
+                    </button>
+                  {% endif %}
+                  <div class="float-buttons">
+                    <button class="favorite" onclick="wishlist.add('{{ product.product_id }}');">
+                      <svg height="17" viewBox="0 0 23 24" width="17"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.500,1.000 L14.960,7.285 L21.999,8.640 L17.099,13.878 L17.989,20.999 L11.500,17.952 L5.011,20.999 L5.901,13.878 L1.001,8.640 L8.039,7.285 L11.500,1.000 "
+                              fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                      </svg>
+                    </button>
+                    <button class="compare" href="#"
+                            onclick="compare.add('{{ product.product_id }}');">
+                      <svg height="22px" viewBox="5 -5 22 30" width="30px"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.500,1.000 C15.747,1.000 20.000,5.253 20.000,10.500 C20.000,15.747 15.747,20.000 10.500,20.000 C5.253,20.000 1.000,15.747 1.000,10.500 C1.000,5.253 5.253,1.000 10.500,1.000 Z"
+                              fill="none" fill-rule="evenodd" stroke-width="2px"></path>
+                        <path d="M18.500,1.000 C23.747,1.000 28.000,5.253 28.000,10.500 C28.000,15.747 23.747,20.000 18.500,20.000 C13.253,20.000 9.000,15.747 9.000,10.500 C9.000,5.253 13.253,1.000 18.500,1.000 Z"
+                              fill="none" fill-rule="evenodd" stroke-dasharray="1, 4"
+                              stroke-linecap="round"
+                              stroke-width="2px"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            {% if products|length < 7 %}
+              {{ column_right }}
+            {% endif %}
+          </div>
+          <div id="pager">
+            <div class="total">
+              <p>{{ text_total }} {{ product_total }} {{ text_pozitions }}</p>
+            </div>
+            <div class="show-more">
+              {% if num_pages>1 %}
+                <button id="show-more-button" type="button" data-page="{{ page }}"
+                        data-num_pages="{{ num_pages }}">
+                  <span class="image-container"></span>
+                  <p>{{ text_show_more }} {{ limit }} {{ text_pozitions }}</p>
+                </button>
+              {% endif %}
+            </div>
+            {% if product_total>products|length %}
+              <div class="all">
+                <a id="show-all" href="#">{{ text_show_all }}</a>
+              </div>
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="container-fluid">
+            <div id="success">
+              <div id="ok">
+                <svg height="30px" width="38px" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.000,31.000 C1.000,31.000 6.636,21.000 18.000,21.000 C29.364,21.000 36.000,35.000 36.000,35.000 "
+                        fill="none" fill-rule="evenodd" stroke="rgb(178, 181, 182)"
+                        stroke-linecap="butt" stroke-linejoin="miter"
+                        stroke-width="2px"></path>
+                  <path d="M28.500,0.000 C30.433,0.000 32.000,1.567 32.000,3.500 C32.000,5.433 30.433,7.000 28.500,7.000 C26.567,7.000 25.000,5.433 25.000,3.500 C25.000,1.567 26.567,0.000 28.500,0.000 Z"
+                        fill="rgb(178, 181, 182)"
+                        fill-rule="evenodd"></path>
+                  <path d="M9.500,0.000 C11.433,0.000 13.000,1.567 13.000,3.500 C13.000,5.433 11.433,7.000 9.500,7.000 C7.567,7.000 6.000,5.433 6.000,3.500 C6.000,1.567 7.567,0.000 9.500,0.000 Z"
+                        fill="rgb(178, 181, 182)"
+                        fill-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h1>{{ text_empty }}</h1>
+            </div>
+          </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
 </main>
 {{ content_bottom }}
 <script type="text/javascript"><!--
-$('#button-search').bind('click', function() {
-	url = 'index.php?route=product/search';
+    $('#button-search').bind('click', function () {
+        url = 'index.php?route=product/search';
 
-	var search = $('.catalog-wrapper input[name=\'search\']').prop('value');
+        var search = $('.catalog-wrapper input[name=\'search\']').prop('value');
 
-	if (search) {
-		url += '&search=' + encodeURIComponent(search);
-	}
+        if (search) {
+            url += '&search=' + encodeURIComponent(search);
+        }
 
-	var category_id = $('.catalog-wrapper select[name=\'category_id\']').prop('value');
+        var category_id = $('.catalog-wrapper select[name=\'category_id\']').prop('value');
 
-	if (category_id > 0) {
-		url += '&category_id=' + encodeURIComponent(category_id);
-	}
+        if (category_id > 0) {
+            url += '&category_id=' + encodeURIComponent(category_id);
+        }
 
-	var sub_category = $('.catalog-wrapper input[name=\'sub_category\']:checked').prop('value');
+        var sub_category = $('.catalog-wrapper input[name=\'sub_category\']:checked').prop('value');
 
-	if (sub_category) {
-		url += '&sub_category=true';
-	}
+        if (sub_category) {
+            url += '&sub_category=true';
+        }
 
-	var filter_description = $('.catalog-wrapper input[name=\'description\']:checked').prop('value');
+        var filter_description = $('.catalog-wrapper input[name=\'description\']:checked').prop('value');
 
-	if (filter_description) {
-		url += '&description=true';
-	}
+        if (filter_description) {
+            url += '&description=true';
+        }
 
-	location = url;
-});
+        location = url;
+    });
 
-$('.catalog-wrapper input[name="search"]').bind('keydown', function(e) {
-	if (e.keyCode == 13) {
-		$('#button-search').trigger('click');
-	}
-});
+    $('.catalog-wrapper input[name="search"]').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+            $('#button-search').trigger('click');
+        }
+    });
 
-$('select[name=\'category_id\']').on('change', function() {
-	if (this.value == '0') {
-		$('input[name=\'sub_category\']').prop('disabled', true);
-	} else {
-		$('input[name=\'sub_category\']').prop('disabled', false);
-	}
-});
+    $('select[name=\'category_id\']').on('change', function () {
+        if (this.value == '0') {
+            $('input[name=\'sub_category\']').prop('disabled', true);
+        } else {
+            $('input[name=\'sub_category\']').prop('disabled', false);
+        }
+    });
 
-$('select[name=\'category_id\']').trigger('change');
---></script>
+    $('select[name=\'category_id\']').trigger('change');
+    --></script>
 <script>
     function urlParam(link, name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(link);

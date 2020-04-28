@@ -1,18 +1,18 @@
 {% for information in informations %}
-    <div class="item">
-        <a href="{{ information.href }}">
-            <div class="image" style="height: 100%">
-                <img class="lazyload" alt="{{ information.title }}" data-src="{{ information.thumb }}">
-            </div>
-            <div class="overlay">
-                <div class="city">
-                    {{ information.description }}
-                </div>
-                <div class="title">
-                    {{ information.title }}
-                </div>
-                <hr>
-            </div>
-        </a>
-    </div>
+  <div class="item">
+    <a href="{{ information.href }}">
+      <div class="image" style="height: 100%">
+        <img class="lazyload" alt="{{ information.title }}" data-src="{{ information.thumb }}">
+      </div>
+      <div class="overlay">
+        <div class="city">
+          {{ information.description }}
+        </div>
+        <div class="title">
+          {{ information.title }}
+        </div>
+        <hr>
+      </div>
+    </a>
+  </div>
 {% endfor %}

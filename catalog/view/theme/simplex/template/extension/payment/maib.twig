@@ -1,14 +1,14 @@
 <div class="card-submit">
-    <button class="next" data-loading-text="{{ text_loading }}" id="button-confirm">
-        {#{{ button_confirm }}#}
-        {{button_confirm_maib}}
-        <span class="image-container"></span>
-    </button>
-    <div class="total">
-        <span></span>
-        <div class="price">
-        </div>
+  <button class="next" data-loading-text="{{ text_loading }}" id="button-confirm">
+    {#{{ button_confirm }}#}
+    {{ button_confirm_maib }}
+    <span class="image-container"></span>
+  </button>
+  <div class="total">
+    <span></span>
+    <div class="price">
     </div>
+  </div>
 </div>
 <script type="text/javascript" language="javascript">
     function redirect() {
@@ -17,12 +17,12 @@
 </script>
 </head>
 <form style="display: none" name="returnform" action="{{ payment_maib_client_url }}" method="POST">
-    <input type="hidden" name="trans_id" value="">
-    <!-- To support javascript unaware/disabled browsers -->
-    <noscript>
-        <center>Please click the submit button below.<br>
-            <input type="submit" name="submit" value="Submit"></center>
-    </noscript>
+  <input type="hidden" name="trans_id" value="">
+  <!-- To support javascript unaware/disabled browsers -->
+  <noscript>
+    <center>Please click the submit button below.<br>
+      <input type="submit" name="submit" value="Submit"></center>
+  </noscript>
 </form>
 
 <script type="text/javascript">
@@ -42,7 +42,7 @@
                     location = json['redirect'];
                     $('input[name="trans_id"]').val(json['TRANSACTION_ID']);
                     redirect();
-                }else{
+                } else {
                     $(this).prop('disabled', false);
                     alert(json);
                 }
