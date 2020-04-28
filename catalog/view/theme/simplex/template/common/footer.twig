@@ -319,7 +319,7 @@
                     $('#cart .quantity').text(json['cart_count']);
                     $('#cart .dropdown-menu > ul').load('index.php?route=common/cart/info .dropdown-menu ul li');
                     $('#cart .total-wrapper').load('index.php?route=common/cart/info .total-wrapper .total');
-                    console.log(button);
+
                     show_succes_popup(button, product_id, json['success_message'], 'cart');
                 }
             },
