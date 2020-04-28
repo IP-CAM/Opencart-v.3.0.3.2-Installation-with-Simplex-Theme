@@ -211,8 +211,7 @@ class Cart {
 				}
 
 				// Stock
-
-				if ($product_query->row['stock_status_id'] !== 7 || !$product_query->row['quantity'] || ($product_query->row['quantity'] < $cart['quantity'])) {
+				if ($product_query->row['stock_status_id'] != 7 || !$product_query->row['quantity'] || ($product_query->row['quantity'] < $cart['quantity'])) {
 					$stock = false;
 				}
 
@@ -379,6 +378,7 @@ class Cart {
 	public function hasStock() {
 		foreach ($this->getProducts() as $product) {
 			if (!$product['stock']) {
+			    var_dump($product);
 				return false;
 			}
 		}
