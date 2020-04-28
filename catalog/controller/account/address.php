@@ -472,7 +472,7 @@ class ControllerAccountAddress extends Controller {
 				}
 			}
 		}
-        var_dump($this->error);
+
 		return !$this->error;
 	}
 
