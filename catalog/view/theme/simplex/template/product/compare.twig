@@ -51,10 +51,10 @@
             {% for product in products %}
               <td>{% if product.price %}
                   {% if not product.special %}
-                    <span class="price">{{ product.price }}-<span class="currency">MDL</span></span>
+                    <span class="price">{{ product.price }}-<span class="currency">{{ currency }}</span></span>
                   {% else %}
                     <s>{{ product.price }}</s> <span class="price">{{ product.price }}-<span
-                            class="currency">MDL</span></span>
+                            class="currency">{{ currency }}</span></span>
                   {% endif %}
                 {% endif %}
               </td>
