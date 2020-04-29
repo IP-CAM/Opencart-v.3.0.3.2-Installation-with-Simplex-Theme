@@ -316,6 +316,18 @@
 }
 
 @media (max-width : 991.98px) {
+  .catalog-wrapper {
+    aside {
+      flex         : 0 0 100%;
+      margin-right : 0;
+      margin-bottom: 20px;
+    }
+  }
+  .catalog-wrapper{
+    flex-direction: column;
+  }
+
+
   main {
     &.gallery-bg {
       @include background-gradient(#f5f3ee 340px, $white 0);
