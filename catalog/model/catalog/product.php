@@ -412,8 +412,9 @@ class ModelCatalogProduct extends Model {
         }
 
         $product_data = array();
-;
+
         $query = $this->db->query($sql);
+
         foreach ($query->rows as $result) {
             $product_data[$result['product_id']] = $this->getProduct($result['product_id']);
         }
@@ -494,17 +495,17 @@ class ModelCatalogProduct extends Model {
 
 	public function getPopularProducts($limit) {
 		$product_data = $this->cache->get('product.popular.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit);
-	
+
 		if (!$product_data) {
 			$query = $this->db->query("SELECT p.product_id FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' ORDER BY p.viewed DESC, p.date_added DESC LIMIT " . (int)$limit);
-	
+
 			foreach ($query->rows as $result) {
 				$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
 			}
-			
+
 			$this->cache->set('product.popular.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit, $product_data);
 		}
-		
+
 		return $product_data;
 	}
 
@@ -787,6 +788,25 @@ class ModelCatalogProduct extends Model {
         }
 
         return $product_location_data;
+    }
+
+    public function getProductBySku($sku)
+    {
+        $data = $this->db->query("SELECT product_id, sku, image as main_image FROM oc_product WHERE sku = '{$this->db->escape($sku)}'")
+            ->row;
+
+        $data['description'] = $this->db->query(
+            "SELECT l.code, description FROM oc_product_description pd LEFT JOIN oc_language l on pd.language_id = l.language_id WHERE product_id = {$data['product_id']}"
+        )->rows;
+
+        if ($images = $this->db->query(
+            "SELECT image FROM oc_product_image WHERE product_id = {$data['product_id']}"
+        )->rows) {
+            $data['images'] = $images;
+        }
+
+
+        return $data;
     }
 
     /* added by it-lab* start end */
