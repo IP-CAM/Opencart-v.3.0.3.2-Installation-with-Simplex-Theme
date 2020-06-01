@@ -95,7 +95,7 @@ class ControllerInformationInformation extends Controller {
 				$json['error'] = $this->language->get('error_upload');
 			}
 
-			if(!$json) {
+			if(!isset($json) || !$json) {
 				$json['file'] = $file = $filename;
 
 				move_uploaded_file($this->request->files['file']['tmp_name'], DIR_UPLOAD . $file);
@@ -108,8 +108,7 @@ class ControllerInformationInformation extends Controller {
 				$json['success'] = $this->language->get('text_upload');
 			}
 
-
-			if(isset($this->request->post['file'])) {
+			if(isset($this->request->files['file'])) {
 				$mail->addAttachment(DIR_UPLOAD . $file);
 			}
 			/* added by it-lab end */
