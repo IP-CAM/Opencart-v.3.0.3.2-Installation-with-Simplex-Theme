@@ -183,6 +183,8 @@ class ControllerInformationInformation extends Controller {
 
 
 			/* added by it-lab start */
+            $data['telephone'] = $this->config->get("config_telephone");
+            $data['fax'] = $this->config->get("config_fax");
 			$this->load->model('catalog/category');
 			$data['thumb'] = (strlen($information_info['image']) > 0) ? $this->model_tool_image->resize
 			($information_info['image'], 1920, 866, "w") : false;
