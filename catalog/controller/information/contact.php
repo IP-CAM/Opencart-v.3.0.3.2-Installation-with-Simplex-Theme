@@ -340,6 +340,7 @@ class ControllerInformationContact extends Controller
                 ];
             }
         }
+
         if (isset($this->request->post['name'])) {
             $data['name'] = $this->request->post['name'];
         } else {
@@ -373,6 +374,9 @@ class ControllerInformationContact extends Controller
             $data['captcha'] = '';
         }
 
+        $data["text_asteptam_in_magazinele"] = sprintf(
+            $this->language->get("text_asteptam_in_magazinele"), $this->getCities($location_descriptions)
+        );
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
         $data['content_top'] = $this->load->controller('common/content_top');
@@ -461,5 +465,28 @@ class ControllerInformationContact extends Controller
         $data['header'] = $this->load->controller('common/header');
 
         $this->response->setOutput($this->load->view('common/success', $data));
+    }
+
+    private function getCities($location_descriptions)
+    {
+        $cities = [];
+
+        foreach ($location_descriptions as $location_description) {
+            if ($location_description['city'] && !in_array($location_description['city'], $cities)) {
+                $cities[] = trim($location_description['city']);
+            }
+        }
+
+        $city_text = "";
+
+        foreach ($cities as $index => $city){
+            if ($index == count($cities) - 2){
+                $city_text .= " $city " . $this->language->get("and");
+            } else {
+                $city_text .= " $city,";
+            }
+        }
+
+        return (count($cities) == 1 ? $this->language->get('city') : "") . " " . trim($city_text, ",");
     }
 }

@@ -16,8 +16,10 @@ $_['text_telephone_fix'] = 'fix';
 $_['text_required_fields']             = 'Required fields';
 $_['text_telephone_consilier_termo']   = 'Consilier termo/hidro';
 $_['text_telephone_consilier_obiecte'] = 'Consilier obiecte sanitar';
-$_['text_asteptam_in_magazinele'] = 'Vă așteptăm în magazinele noastre din Chișinău și Bălți!
+$_['text_asteptam_in_magazinele'] = 'Vă așteptăm în magazinele noastre din %s!
         Suntem întotdeauna bucuroși să vă vedem!';
+$_['city'] = "orașul";
+$_['and'] = "și";
 $_['text_browse_file']="Выбрать";
 $_['text_phone_succes']="Телефон получен";
 $_['text_customer_telephone']="Номер телефона для звонка клиенту";
