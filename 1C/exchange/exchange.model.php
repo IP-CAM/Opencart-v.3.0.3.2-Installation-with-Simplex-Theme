@@ -319,23 +319,8 @@ class ModelExchange
             "INSERT INTO oc_category_to_store SET category_id = $category_id, store_id = 0"
         );
 
-        $depth = $data['depth'];
-        $current_parent = $category_id;
-        $current_category = $category_id;
-       /// var_dump($data['depth']);
-        do {
-            var_dump("INSERT INTO oc_category_path SET category_id = $category_id, path_id = $current_parent, level = $depth");
-            $this->query(
-                "INSERT INTO oc_category_path SET category_id = $category_id, path_id = $current_parent, level = $depth"
-            );
-
-            $current_parent = $this->query(
-                "SELECT parent_id, category_id FROM oc_category WHERE category_id = $current_category"
-            )['row']['parent_id'];
-			$current_category = $current_parent;
-        } while (--$depth >= 0);
-
-        return $category_id;
+		$this->addCategoryPath($data,$category_id);
+		return $category_id;
     }
 
     public function updateCategory($data,$depth)
@@ -362,15 +347,32 @@ class ModelExchange
 			$this->query(
                 "UPDATE oc_category_description SET name = '{$data['name']}' WHERE category_id = {$oc_category['category_id']} and language_id = 2"
             );
-			if($oc_category['category_id']==325){
-				var_dump("UPDATE oc_category_description SET name = '{$data['name']}' WHERE category_id = {$oc_category['category_id']} and language_id = 1"
-				);
-				var_dump('affected ',$this->connection->affected_rows);
-			}
+			$category_id = $oc_category['category_id'];
+			$this->query("DELETE FROM oc_category_path WHERE category_id = $category_id");
+			var_dump("DELETE FROM oc_category_path WHERE category_id = $category_id");
+			$this->addCategoryPath($data,$category_id);
+
         } else {
             $this->addCategory($data,$depth);
         }
     }
+
+    private function addCategoryPath($data,$category_id){
+		$depth = $data['depth'];
+		$current_parent = $category_id;
+		$current_category = $category_id;
+		do {
+			var_dump("INSERT INTO oc_category_path SET category_id = $category_id, path_id = $current_parent, level = $depth");
+			$this->query(
+				"INSERT INTO oc_category_path SET category_id = $category_id, path_id = $current_parent, level = $depth"
+			);
+
+			$current_parent = $this->query(
+				"SELECT parent_id, category_id FROM oc_category WHERE category_id = $current_category"
+			)['row']['parent_id'];
+			$current_category = $current_parent;
+		} while (--$depth >= 0);
+	}
 
     public function dropOldCategories()
     {
@@ -420,6 +422,34 @@ class ModelExchange
             $this->query("DELETE FROM oc_category_to_store WHERE category_id in (" . implode(",", $high_level_categories_to_delete) . ")");
             $this->query("DELETE FROM oc_category_path WHERE category_id in (" . implode(",", $high_level_categories_to_delete) . ")");
         }
+	}
+
+	public function dropInexistentIn1CCategories($categories){
+		$categories_1c = array_column($categories,'category_id');
+		$categories=[];
+		foreach ($categories_1c as $category_1c) {
+			if(strlen($category_1c)) {
+				$categories[] = "'" . $category_1c . "'";
+			}
+		}
+		if(count($categories)) {
+			$sql = "SELECT category_id FROM oc_category WHERE (NOT (category_1c is null)  and information = 0)  AND category_id IN ( SELECT category_id FROM oc_category_path WHERE level<2)  AND category_1c NOT IN (" . implode(',', $categories) . ")";
+			$categories_to_delete = $this->query($sql)['rows'];
+			if(count($categories_to_delete)) {
+				$implode = array_column($categories_to_delete, 'category_id');
+				if (count($implode)) {
+					$this->query("DELETE FROM oc_category_description where category_id in (" . implode(",", $implode) . ")");
+					$this->query("DELETE FROM oc_category where category_id in (" . implode(",", $implode) . ")");
+					$this->query(
+						"DELETE FROM oc_product_to_category WHERE category_id in (" . implode(",", $implode) . ")"
+					);
+					$this->query("DELETE FROM oc_category_to_layout WHERE category_id in (" . implode(",", $implode) . ")");
+					$this->query("DELETE FROM oc_category_to_store WHERE category_id in (" . implode(",", $implode) . ")");
+					$this->query("DELETE FROM oc_category_path WHERE category_id in (" . implode(",", $implode) . ")");
+				}
+			}
+		}
+
 	}
 
 	public function setProductsStatusInactive() {

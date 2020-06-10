@@ -84,6 +84,7 @@ class Request
     {
     	$this->model->dropOldCategories();
         $this->updateCategories();
+        exit;
 		$this->model->loadActiveProductsIds();
 		$decoded_json = json_decode($this->connection->request1C(), true);
         if (!isset($decoded_json)) {
@@ -201,6 +202,7 @@ class Request
             }
             $depth++;
         } while($rewrite);
+        $this->model->dropInexistentIn1CCategories($categories);
     }
 
     /**
