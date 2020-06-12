@@ -449,7 +449,6 @@ class ModelExchange
 				}
 			}
 		}
-
 	}
 
 	public function setProductsStatusInactive() {
