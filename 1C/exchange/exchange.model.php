@@ -342,7 +342,6 @@ class ModelExchange
 			var_dump(
 				"UPDATE oc_category SET status = $category_status, parent_id=$parent_category WHERE category_id = {$oc_category['category_id']}"
 			);
-			//var_dump("UPDATE oc_category SET status = $category_status WHERE category_id = {$oc_category['category_id']}");
 
 			$this->query(
                 "UPDATE oc_category_description SET name = '{$data['name']}' WHERE category_id = {$oc_category['category_id']} and language_id = 2"
