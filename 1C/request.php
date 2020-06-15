@@ -84,27 +84,25 @@ class Request
     {
     	$this->model->dropOldCategories();
         $this->updateCategories();
-        exit;
 		$this->model->loadActiveProductsIds();
 		$decoded_json = json_decode($this->connection->request1C(), true);
         if (!isset($decoded_json)) {
             throw new InvalidJsonException("JSON not received or is invalid");
         }
-/*        if (filesize($this->filename) == 0) {*/
-            if (isset($decoded_json)) {
-                fwrite($this->file, json_encode($decoded_json));
-                self::rewriteJSONData($decoded_json);
-                foreach ($decoded_json as $d_json) {
-                    if ($d_json['quantity'] >= 0 && strlen($d_json['model']) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] >= 0 && strlen($d_json['sku']) > 0) {
-                        $this->model->update($d_json);
-                        $this->successful_tasks++;
-                    }else{
-                    	$this->skipped_tasks++;
-                    	//echo $this->skipped_tasks . ' skipped of ' . count($decoded_json) . "\n";
-					}
-                    //echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
-                }
-            }
+		if (isset($decoded_json)) {
+			fwrite($this->file, json_encode($decoded_json));
+			self::rewriteJSONData($decoded_json);
+			foreach ($decoded_json as $d_json) {
+				if ($d_json['quantity'] >= 0 && strlen($d_json['model']) > 0 && strlen($d_json['price']) > 0 && $d_json['price'] >= 0 && strlen($d_json['sku']) > 0) {
+					$this->model->update($d_json);
+					$this->successful_tasks++;
+				} else {
+					$this->skipped_tasks++;
+					//echo $this->skipped_tasks . ' skipped of ' . count($decoded_json) . "\n";
+				}
+				//echo $this->successful_tasks . ' of ' . count($decoded_json) . "\n";
+			}
+		}
         $this->model->dropHighLevelCategories();
         $this->model->setStatusInactiveForInexistentProducts();
     }
