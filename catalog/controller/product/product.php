@@ -275,14 +275,13 @@ class ControllerProductProduct extends Controller
                 $this->config->get('theme_' . $this->config->get('config_theme') . '_latest_count')
             );
             $data['is_new'] = array_key_exists($product_id, $latest_products);
-            $data['hide_price'] = $product_info['hide_price'] ? false : true;
+            $data['hide_price'] = !$product_info['hide_price'];
             if (!isset($category_info)) {
                 $product_categories = $this->model_catalog_product->getCategories($product_id);
                 if ($product_categories) {
                     $category_info = $this->model_catalog_category->getCategory($product_categories[0]['category_id']);
                 }
             }
-
 
             $data['sku'] = $product_info['sku'];
             $data['garanty'] = $product_info['garanty'];

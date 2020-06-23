@@ -4,7 +4,7 @@ class ControllerApiExport extends Controller
 {
     public function product()
     {
-        if (isset($this->session->data['api_key'])) {
+        if (!isset($this->session->data['api_key'])) {
             $json['error']['warning'] = $this->language->get('error_permission');
         } else if (!isset($this->request->get['sku'])){
             $json['error']['warning'] = "SKU field is obligatory";

@@ -792,15 +792,18 @@ class ModelCatalogProduct extends Model {
 
     public function getProductBySku($sku)
     {
-        $data = $this->db->query("SELECT product_id, sku, image as main_image FROM oc_product WHERE sku = '{$this->db->escape($sku)}'")
-            ->row;
+        $data = $this->db->query("SELECT product_id, sku, image as main_image FROM " . DB_PREFIX . "product WHERE sku = '{$this->db->escape($sku)}'")->row;
 
         $data['description'] = $this->db->query(
-            "SELECT l.code, description FROM oc_product_description pd LEFT JOIN oc_language l on pd.language_id = l.language_id WHERE product_id = {$data['product_id']}"
+            "SELECT l.code, description FROM " . DB_PREFIX . "product_description pd LEFT JOIN " . DB_PREFIX . "language l on pd.language_id = l.language_id WHERE product_id = {$data['product_id']}"
         )->rows;
 
+        foreach ($data['description'] as &$description){
+            $description['description'] = html_entity_decode($description['description']);
+        }
+
         if ($images = $this->db->query(
-            "SELECT image FROM oc_product_image WHERE product_id = {$data['product_id']}"
+            "SELECT image FROM " . DB_PREFIX . "product_image WHERE product_id = {$data['product_id']}"
         )->rows) {
             $data['images'] = $images;
         }
