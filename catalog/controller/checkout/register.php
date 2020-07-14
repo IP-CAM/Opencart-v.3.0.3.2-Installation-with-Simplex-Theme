@@ -127,8 +127,8 @@ class ControllerCheckoutRegister extends Controller {
 				$json['error']['warning'] = $this->language->get('error_exists');
 			}
 
-			if (!preg_match("/^(?:\+373|0)\d{8}|(?:\+40|0)\d{6,14}$/", $this->request->post['telephone'])) {
-				$json['error']['telephone'] = $this->language->get('error_telephone');
+			if (!preg_match("/^(?:\+373|0)\d{8}|(?:\+40|0)\d{9,14}$/", $this->request->post['telephone'])) {
+			    $json['error']['telephone'] = $this->language->get('error_telephone');
 			}
 
 			if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {

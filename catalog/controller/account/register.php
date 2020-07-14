@@ -234,8 +234,8 @@ class ControllerAccountRegister extends Controller {
 			$this->error['warning'] = $this->language->get('error_exists');
 		}
 
-		if (!preg_match("/^(?:\+373|0)\d{8}|(?:\+40|0)\d{6,14}$", $this->request->post['telephone'])) {
-			$this->error['telephone'] = $this->language->get('error_telephone');
+		if (!preg_match("/^(?:\+373|0)\d{8}|(?:\+40|0)\d{9,14}$", $this->request->post['telephone'])) {
+		    $this->error['telephone'] = $this->language->get('error_telephone');
 		}
 
 		// Customer Group

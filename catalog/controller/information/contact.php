@@ -428,7 +428,7 @@ class ControllerInformationContact extends Controller
 
     protected function validatePhoneNumber()
     {
-        if (!preg_match("/^(?:\+373|0)\d{8}|(?:\+40|0)\d{6,14}$", $this->request->post['customer_phone'])) {
+        if (!preg_match("/^(?:\+373|0)\d{8}|(?:\+40|0)\d{9,14}$", $this->request->post['customer_phone'])) {
             $this->error['customer_phone'] = $this->language->get('error_customer_phone');
 
             return false;
