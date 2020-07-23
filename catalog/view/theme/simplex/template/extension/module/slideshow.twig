@@ -57,7 +57,7 @@
         </ul>
       </nav>
     </div>
-    <div class="main-slider">
+    <div class="main-slider d-flex" style="overflow-x: hidden">
       {% for banner in banners %}
         <a href="{{ banner.link }}">
           <img alt="{{ banner.title }}" src="{{ banner.image }}">
