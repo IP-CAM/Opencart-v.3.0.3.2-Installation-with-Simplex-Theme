@@ -20,11 +20,7 @@
   {% if keywords %}
     <meta name="keywords" content="{{ keywords }}"/>
   {% endif %}
-  <link href="/catalog/view/theme/simplex/stylesheet/style.min.css" rel="preload" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link href="/catalog/view/theme/simplex/stylesheet/style.min.css" rel="stylesheet">
-  </noscript>
+  <link href="/catalog/view/theme/simplex/stylesheet/style.min.css" rel="stylesheet">
   <link rel="image_src" href="{{ base }}{{ thumb }}"/>
   {% for style in styles %}
     <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
@@ -33,6 +29,14 @@
           integrity="sha256-+2SfyuYhd9/mPmcIHdzrgwtc4fBaQYTpu7fYesS49OU=" crossorigin="anonymous"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
           integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" defer
+          integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+          integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous" defer></script>
+  <script src="/catalog/view/javascript/simplex/bootstrap-input-spinner.js"></script>
+  <script src="/catalog/view/javascript/simplex/slick.js"></script>
+  <script src="/catalog/view/javascript/simplex/grid-animate.js"></script>
+  <script src="/catalog/view/javascript/simplex/script.js"></script>
   {% for script in scripts %}
     <script src="{{ script }}" type="text/javascript"></script>
   {% endfor %}
