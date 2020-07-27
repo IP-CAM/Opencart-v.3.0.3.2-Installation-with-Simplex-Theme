@@ -8,7 +8,7 @@ $_['text_list']              = 'Listă informaţii';
 $_['text_add']               = 'Adaugă Pagină Informații';
 $_['text_edit']              = 'Editează Pagină Informații';
 $_['text_default']           = 'Implicit';
-$_['text_keyword']           = 'Nu folositi spatii, inlocuiti spatiile cu - si asigurati-va ca seo url-ul este unic in site.';
+$_['text_keyword']           = 'Nu folositi spatii si backslash-uri, inlocuiti-le cu - si asigurati-va ca seo url-ul este unic in site.';
 
 // Column
 $_['column_title']           = 'Titlu Pagini Informații';
