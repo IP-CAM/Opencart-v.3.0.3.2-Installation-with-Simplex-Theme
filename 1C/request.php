@@ -86,6 +86,7 @@ class Request
         $this->updateCategories();
 		$this->model->loadActiveProductsIds();
 		$decoded_json = json_decode($this->connection->request1C(), true);
+		var_dump($this->connection->request1C());
         if (!isset($decoded_json)) {
             throw new InvalidJsonException("JSON not received or is invalid");
         }
@@ -114,6 +115,7 @@ class Request
     protected static function rewriteJSONData(&$array)
     {
         $data = [];
+        var_dump($array);
 
         foreach ($array['#value']['row'] as $index => $arr) {
             $data[$index]['sku'] = $arr[0]['#value'];

@@ -239,7 +239,6 @@ class ModelExtensionMazaTfProduct extends Model {
 										$price_for_stock_status = 1000000000;
 									}
                                         $sql .= (($sql_order_by)?' ORDER BY ':', ') . "(CASE       WHEN (stock_status_id<>7 OR (price=0  OR quantity =0 )) THEN '.  $price_for_stock_status .     ' WHEN special IS NOT NULL THEN special WHEN discount IS NOT NULL THEN discount ELSE price END)";
-									var_dump($sql);exit;
                                 } elseif ($sort_order['sort'] == 'random') {
                                         $sql .= (($sql_order_by)?' ORDER BY ':', ') . "RAND()";
                                 } elseif(isset($sort_data[$sort_order['sort']])) {

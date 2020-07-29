@@ -378,7 +378,6 @@ class Cart {
 	public function hasStock() {
 		foreach ($this->getProducts() as $product) {
 			if (!$product['stock']) {
-			    var_dump($product);
 				return false;
 			}
 		}

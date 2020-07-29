@@ -49,7 +49,7 @@
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 $(this).prop('disabled', false);
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                document.location.href = '/index.php?route=error/not_found'
             }
         });
     });
