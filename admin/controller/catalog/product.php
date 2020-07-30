@@ -1272,10 +1272,12 @@ class ControllerCatalogProduct extends Controller {
 						}
 						
 						$seo_urls = $this->model_design_seo_url->getSeoUrlsByKeyword($keyword);
-      
-						foreach ($this->request->post['product_seo_url'] as $url) {
-                            if (strpos($url, "/") !== false) {
-                                $this->error['keyword'][$store_id][$language_id] = $this->language->get('error_keyword');
+                        
+                        foreach ($this->request->post['product_seo_url'] as $urls) {
+                            foreach ($urls as $url) {
+                                if (strpos($url, "/") !== false) {
+                                    $this->error['keyword'][$store_id][$language_id] = $this->language->get('error_keyword');
+                                }
                             }
                         }
                         
