@@ -40,7 +40,7 @@ class ControllerCheckoutShippingMethod extends Controller
             }
             
             foreach ($method_data as $code => $data) {
-                if ($data['quote'][$code]['cost'] > 0 && $free_shipping) {
+                if ($data['quote'][$code]['cost'] > 0 && $code != 'pickup' && $free_shipping) {
                     unset($method_data[$code]);
                 }
             }
