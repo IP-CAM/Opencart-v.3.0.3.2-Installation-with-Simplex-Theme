@@ -189,7 +189,7 @@ class ControllerProductCategory extends Controller {
 				);
 			}
 			/* added by it-lab start */
-			$data['currency'] = $this->session->data['currency'];
+			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
 			$url = '';
 			$url .= $this->request->get['filter'] ?? '';

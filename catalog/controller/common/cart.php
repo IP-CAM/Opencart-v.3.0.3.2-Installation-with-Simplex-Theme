@@ -133,7 +133,7 @@ class ControllerCommonCart extends Controller {
 		$data['cart'] = $this->url->link('checkout/cart');
 		$data['checkout'] = $this->url->link('checkout/checkout', '', true);
 		/* added by it-lab start */
-		$data['currency'] = $this->session->data['currency'];
+		$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 		/* added by it-lab end */
 		return $this->load->view('common/cart', $data);
 	}

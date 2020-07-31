@@ -141,7 +141,7 @@ class ControllerExtensionModuleSpecial extends Controller
                 }
             }
             /* added by it-lab start */
-            $data['currency'] = $this->session->data['currency'];
+            $data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
             if (isset($setting["template"])) {
                 return $this->load->view('extension/module/' . $setting["template"], $data);
             }

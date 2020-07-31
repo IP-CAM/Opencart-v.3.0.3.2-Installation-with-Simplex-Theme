@@ -134,7 +134,7 @@ class ControllerProductCompare extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 		/* added by it-lab start */
-		$data['currency'] = $this->session->data['currency'];
+		$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 		/* added by it-lab end */
 		$this->response->setOutput($this->load->view('product/compare', $data));
 	}

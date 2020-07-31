@@ -420,7 +420,7 @@ class ControllerCheckoutConfirm extends Controller {
 			}
 
 			/* added by it-lab start */
-			$data['currency'] = $this->session->data['currency'];
+			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
 
 			$data['payment'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);

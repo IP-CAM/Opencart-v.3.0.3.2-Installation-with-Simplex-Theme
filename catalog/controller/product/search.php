@@ -489,7 +489,7 @@ class ControllerProductSearch extends Controller {
 		$data['description'] = $description;
 		$data['category_id'] = $category_id;
 		$data['sub_category'] = $sub_category;
-        $data['currency'] = $this->session->data['currency'];
+        $data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 		$data['limit'] = $limit;

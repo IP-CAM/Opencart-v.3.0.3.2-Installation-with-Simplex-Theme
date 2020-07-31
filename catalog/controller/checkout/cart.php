@@ -246,7 +246,7 @@ class ControllerCheckoutCart extends Controller {
 			$data['header'] = $this->load->controller('common/header');
 
 			/* added by it-lab start */
-			$data['currency'] = $this->session->data['currency'];
+			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
 
 			$this->response->setOutput($this->load->view('checkout/cart', $data));
@@ -255,7 +255,7 @@ class ControllerCheckoutCart extends Controller {
 
 			$data['continue'] = $this->url->link('common/home');
 			/* added by it-lab start */
-			$data['currency'] = $this->session->data['currency'];
+			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
 
 			unset($this->session->data['success']);
@@ -722,7 +722,7 @@ class ControllerCheckoutCart extends Controller {
 			$data['header'] = $this->load->controller('common/header');
 
 			/* added by it-lab start */
-			$data['currency'] = $this->session->data['currency'];
+			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
 
 			$this->response->setOutput(json_encode($data['totals']));
@@ -732,7 +732,7 @@ class ControllerCheckoutCart extends Controller {
 			$data['continue'] = $this->url->link('common/home');
 
 			/* added by it-lab start */
-			$data['currency'] = $this->session->data['currency'];
+			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
 
 			unset($this->session->data['success']);

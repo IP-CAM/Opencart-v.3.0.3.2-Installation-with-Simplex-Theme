@@ -872,7 +872,7 @@ class ControllerProductProduct extends Controller
                 }
             }
             /* added by it-lab start */
-            $data['currency'] = $this->session->data['currency'];
+            $data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
             /* added by it-lab end */
             $data['recurrings'] = $this->model_catalog_product->getProfiles($this->request->get['product_id']);
 

@@ -448,7 +448,7 @@ class ControllerExtensionPaymentCod extends Controller {
 
 	public function get_currency() {
 		/* added by it-lab start */
-		$data['currency'] = $this->session->data['currency'];
+		$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 		/* added by it-lab end */
 
 		$this->response->setOutput(json_encode($data));

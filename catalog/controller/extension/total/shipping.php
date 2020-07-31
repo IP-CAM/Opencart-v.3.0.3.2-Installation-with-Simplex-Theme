@@ -16,7 +16,7 @@ class ControllerExtensionTotalShipping extends Controller {
 			$data['countries'] = $this->model_localisation_country->getCountries();
 
 			/* added by it-lab start */
-			$data['currency'] = $this->session->data['currency'];
+			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
 
 			if(isset($this->session->data['shipping_address']['zone_id'])) {
@@ -38,7 +38,7 @@ class ControllerExtensionTotalShipping extends Controller {
 			}
 
 			/* added by it-lab start */
-			$data['currency'] = $this->session->data['currency'];
+			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
 
 			return $this->load->view('extension/total/shipping', $data);

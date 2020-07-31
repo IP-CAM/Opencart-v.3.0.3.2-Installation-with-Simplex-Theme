@@ -124,7 +124,7 @@ class ControllerExtensionModuleSlideshow extends Controller
         }
         $data['link_specials'] = $this->url->link('product/special');
 
-        $data['currency'] = $this->session->data['currency'];
+        $data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
         $data['interval'] = $setting["interval"];
         $data['catalog'] = $this->model_extension_menu_megamenu->getSubMenu('catalog');
         $data['catalog_tree'] = $this->model_catalog_category->getCatalogTree();
