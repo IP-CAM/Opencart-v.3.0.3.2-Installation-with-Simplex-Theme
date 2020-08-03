@@ -25,7 +25,7 @@ class ControllerCheckoutShippingMethod extends Controller
                     );
                     
                     if (!$free_shipping) {
-                        $free_shipping = $result['code'] != 'pickup' && $quote['quote'][$result['code']]['cost'];
+                        $free_shipping = $result['code'] != 'pickup.pickup' && $quote && !$quote['quote'][$result['code']]['cost'];
                     }
                     
                     if ($quote) {
