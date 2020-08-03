@@ -324,7 +324,7 @@ class ControllerInformationInformation extends Controller {
 			$this->error['email'] = $this->language->get('error_email');
 		}
 
-		if((utf8_strlen($this->request->post['enquiry']) < 10) || (utf8_strlen($this->request->post['enquiry']) > 3000)) {
+		if((utf8_strlen($this->request->post['enquiry']) < 1) || (utf8_strlen($this->request->post['enquiry']) > 3000)) {
 			$this->error['enquiry'] = $this->language->get('error_enquiry');
 		}
 
