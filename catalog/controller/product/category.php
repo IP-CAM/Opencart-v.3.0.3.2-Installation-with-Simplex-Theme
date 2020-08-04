@@ -28,10 +28,10 @@ class ControllerProductCategory extends Controller {
 		);
 
 		if(isset($this->request->get['path'])) {
-			$url = '';
-			$url .= $this->request->get['sort'] ?? '';
-			$url .= $this->request->get['order'] ?? '';
-			$url .= $this->request->get['limit'] ?? '';
+			$url = ['path' => $this->request->get['path']];
+			$url['sort'] = $this->request->get['sort'] ?? '';
+			$url['order'] = $this->request->get['order'] ?? '';
+			$url['limit'] = $this->request->get['limit'] ?? '';
 
 			$path = '';
 
@@ -45,9 +45,10 @@ class ControllerProductCategory extends Controller {
 				$category_info = $this->model_catalog_category->getCategory($path_id);
 
 				if($category_info) {
+				    $url['path'] = $path;
 					$data['breadcrumbs'][] = array(
 						'text' => $category_info['name'],
-						'href' => $this->url->link('product/category', 'path=' . $path . $url)
+						'href' => $this->url->link('product/category', $url)
 					);
 				}
 			}
@@ -81,11 +82,19 @@ class ControllerProductCategory extends Controller {
 			$data['description'] = html_entity_decode($category_info['description'], ENT_QUOTES, 'UTF-8');
 			$data['compare'] = $this->url->link('product/compare');
 
-			$url = '';
-			$url .= $this->request->get['filter'] ?? '';
-			$url .= $this->request->get['sort'] ?? '';
-			$url .= $this->request->get['order'] ?? '';
-			$url .= $this->request->get['limit'] ?? '';
+			$url = [];
+            if (isset($this->request->get['filter'])) {
+                $url['filter'] = $this->request->get['filter'];
+            }
+            if (isset($this->request->get['sort'])) {
+                $url['sort'] = $this->request->get['sort'];
+            }
+            if (isset($this->request->get['order'])) {
+                $url['order'] = $this->request->get['order'];
+            }
+            if (isset($this->request->get['limit'])) {
+                $url['limit'] = $this->request->get['limit'];
+            }
 
 			$data['categories'] = array();
 
@@ -95,10 +104,10 @@ class ControllerProductCategory extends Controller {
 					'filter_category_id'  => $result['category_id'],
 					'filter_sub_category' => true
 				);
-
+				$url['path'] = $this->request->get['path'] . '_' . $result['category_id'];
 				$data['categories'][] = array(
 					'name' => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
-					'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
+					'href' => $this->url->link('product/category', $url)
 				);
 			}
 
@@ -167,6 +176,10 @@ class ControllerProductCategory extends Controller {
 //					$rating = false;
 //				}
 				$is_new = array_key_exists($result['product_id'], $latest_products);
+				
+				$url['path'] = $this->request->get['path'];
+				$url['product_id'] = $result['product_id'];
+				
 				$data['products'][] = array(
 					'product_id'         => $result['product_id'],
 					'thumb'              => $image,
@@ -177,7 +190,7 @@ class ControllerProductCategory extends Controller {
 					/* added by it-lab start */
 					'special_percentage' => $special_percentage,
 					'economy'            => $economy,
-					'hide_price'         => $result['hide_price'] ? false : true,
+					'hide_price'         => !$result['hide_price'],
 					'is_new'             => $is_new,
                     'stock_status'       => $result['stock_status'],
                     'stock_status_id'    => $result['stock_status_id'],
@@ -185,93 +198,114 @@ class ControllerProductCategory extends Controller {
 					'tax'                => $tax,
 					'minimum'            => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'             => $result['rating'],
-					'href'               => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					'href'               => $this->url->link('product/product', $url)
 				);
 			}
 			/* added by it-lab start */
 			$data['currency'] = $this->currency->getSymbolRight($this->session->data['currency']);
 			/* added by it-lab end */
-			$url = '';
-			$url .= $this->request->get['filter'] ?? '';
-			$url .= $this->request->get['limit'] ?? '';
+            if (isset($this->request->get['filter'])) {
+                $url['filter'] = $this->request->get['filter'];
+            }
+            if (isset($this->request->get['limit'])) {
+                $url['limit'] = $this->request->get['limit'];
+            }
+            $url['path'] = $this->request->get['path'];
+            $url['sort'] = 'p.sort_order';
+            $url['order'] = 'ASC';
 
 			$data['sorts'] = array();
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_default'),
 				'value' => 'p.sort_order-ASC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.sort_order&order=ASC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
-
+            
+            $url['sort'] = 'pd.name';
+			
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_name_asc'),
 				'value' => 'pd.name-ASC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=ASC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
+			
+			$url['order'] = 'DESC';
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_name_desc'),
 				'value' => 'pd.name-DESC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=DESC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
+            
+            $url['order'] = 'ASC';
+            $url['sort'] = 'p.price';
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_price_asc'),
 				'value' => 'p.price-ASC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=ASC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
+            
+            $url['order'] = 'DESC';
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_price_desc'),
 				'value' => 'p.price-DESC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=DESC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
 
 			if($this->config->get('config_review_status')) {
+                $url['sort'] = 'p.rating';
 				$data['sorts'][] = array(
 					'text'  => $this->language->get('text_rating_desc'),
 					'value' => 'rating-DESC',
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)
+					'href'  => $this->url->link('product/category', $url)
 				);
+                
+                $url['order'] = 'ASC';
 
 				$data['sorts'][] = array(
 					'text'  => $this->language->get('text_rating_asc'),
 					'value' => 'rating-ASC',
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)
+					'href'  => $this->url->link('product/category', $url)
 				);
 			}
-
+			
+            $url['order'] = 'ASC';
+            $url['sort'] = 'p.model';
+            
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_model_asc'),
 				'value' => 'p.model-ASC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=ASC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
-
+			
+            $url['order'] = 'DESC';
+            
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_model_desc'),
 				'value' => 'p.model-DESC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
 
 			/* added by it-lab start */
+            $url['sort'] = 'p.date_added';
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_date_added_desc'),
 				'value' => 'p.date_added-DESC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.date_added&order=DESC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
+            
+            $url['sort'] = 'order_quantity';
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get("text_popular_desc"),
 				'value' => 'order_quantity-DESC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=order_quantity&order=DESC' . $url)
+				'href'  => $this->url->link('product/category', $url)
 			);
 			/* added by it-lab end */
-
-			$url = '';
-			$url .= $this->request->get['filter'] ?? '';
-			$url .= $this->request->get['sort'] ?? '';
-			$url .= $this->request->get['order'] ?? '';
 
 			$data['limits'] = array();
 			$limits = array_unique(array(
@@ -282,21 +316,37 @@ class ControllerProductCategory extends Controller {
 			));
 
 			sort($limits);
-
+            
+            
+            $url = ['path' => $this->request->get['path']];
+            
+            if (isset($this->request->get['filter'])) {
+                $url['filter'] = $this->request->get['filter'];
+            }
+            if (isset($this->request->get['sort'])) {
+                $url['sort'] = $this->request->get['sort'];
+            }
+            if (isset($this->request->get['order'])) {
+                $url['order'] = $this->request->get['order'];
+            }
+            
 			foreach($limits as $value) {
+			    $url['limit'] = $value;
+			    
 				$data['limits'][] = array(
 					'text'  => $value,
 					'value' => $value,
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&limit=' . $value)
+					'href'  => $this->url->link('product/category', $url)
 				);
 			}
-			$url .= $this->request->get['limit'] ?? '';
+			$url['limit'] = $this->request->get['limit'];
+			$url['page'] = '{page}';
 
 			$pagination = new Pagination();
 			$pagination->total = $product_total;
 			$pagination->page = $page;
 			$pagination->limit = $pager_limit;
-			$pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
+			$pagination->url = $this->url->link('product/category', $url);
 
 			$data['pagination'] = $pagination->render();
 
