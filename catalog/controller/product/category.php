@@ -339,7 +339,8 @@ class ControllerProductCategory extends Controller {
 					'href'  => $this->url->link('product/category', $url)
 				);
 			}
-			$url['limit'] = $this->request->get['limit'];
+			
+			$url['limit'] = $this->request->get['limit'] ?? '';
 			$url['page'] = '{page}';
 
 			$pagination = new Pagination();
